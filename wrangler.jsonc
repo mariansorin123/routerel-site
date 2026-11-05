@@ -1,0 +1,15 @@
+// Cloudflare Worker „routerel” (Workers & Pages → routerel): fișierele statice din rădăcina repo-ului routerel-site.
+// Generat de tools/site/publish.mjs în repo-ul aplicației; nu edita în routerel-site.
+{
+  "name": "routerel",
+  "main": "worker/index.js",
+  "compatibility_date": "2026-10-01",
+  "assets": {
+    "directory": ".",
+    "binding": "ASSETS",
+    "not_found_handling": "404-page",
+    "html_handling": "auto-trailing-slash",
+    "run_worker_first": ["/", "/en/"]
+  },
+  "observability": { "enabled": true }
+}
