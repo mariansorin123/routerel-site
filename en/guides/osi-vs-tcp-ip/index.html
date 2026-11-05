@@ -1,0 +1,437 @@
+<!doctype html>
+<!-- Pagină generată. Nu o edita de mână: vezi tools/site/ (npm run build:guides / npm run sync:tools / npm run build:legal). -->
+<html lang="en" class="play-soon">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>OSI Model vs TCP/IP Model Explained (With Examples) | Routerel</title>
+  <meta name="description" content="The OSI and TCP/IP models made simple: the 7 layers, PDUs, protocols and devices, encapsulation of a real web request, CCNA exam traps and practice questions.">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <link rel="canonical" href="https://routerel.app/en/guides/osi-vs-tcp-ip/">
+  <link rel="alternate" hreflang="ro" href="https://routerel.app/ghiduri/model-osi-vs-tcp-ip/">
+  <link rel="alternate" hreflang="en" href="https://routerel.app/en/guides/osi-vs-tcp-ip/">
+  <link rel="alternate" hreflang="x-default" href="https://routerel.app/en/guides/osi-vs-tcp-ip/">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#12151b" media="(prefers-color-scheme: dark)">
+  <meta name="color-scheme" content="light dark">
+  <link rel="icon" href="../../../assets/favicon-32.png" type="image/png" sizes="32x32">
+  <link rel="icon" href="../../../assets/icon-192.png" type="image/png" sizes="192x192">
+  <link rel="apple-touch-icon" href="../../../assets/apple-touch-icon.png">
+  <link rel="manifest" href="../../../site.webmanifest">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Routerel">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="ro_RO">
+  <meta property="og:title" content="OSI Model vs TCP/IP Model Explained (With Examples) | Routerel">
+  <meta property="og:description" content="The OSI and TCP/IP models made simple: the 7 layers, PDUs, protocols and devices, encapsulation of a real web request, CCNA exam traps and practice questions.">
+  <meta property="og:url" content="https://routerel.app/en/guides/osi-vs-tcp-ip/">
+  <meta property="og:image" content="https://routerel.app/assets/og-en.png">
+  <meta property="og:image:width" content="1024">
+  <meta property="og:image:height" content="500">
+  <meta property="og:image:alt" content="Routerel: the router chick mascot and the app name">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="OSI Model vs TCP/IP Model Explained (With Examples) | Routerel">
+  <meta name="twitter:description" content="The OSI and TCP/IP models made simple: the 7 layers, PDUs, protocols and devices, encapsulation of a real web request, CCNA exam traps and practice questions.">
+  <meta name="twitter:image" content="https://routerel.app/assets/og-en.png">
+  <meta property="article:published_time" content="2026-11-05">
+  <meta property="article:modified_time" content="2026-11-05">
+  <meta name="routerel:updated" content="2026-11-05">
+  <link rel="preload" href="../../../assets/fonts/nunito-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../../../assets/fonts/nunito-latin-ext.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="../../../style.css">
+  <script>(function(d){d.classList.add("js");try{var t=localStorage.getItem("routerel-theme");if(t==="light"||t==="dark")d.setAttribute("data-theme",t)}catch(e){}setTimeout(function(){if(!window.__rtl)d.classList.remove("js")},4000)})(document.documentElement)</script>
+  <script src="../../../assets/site.js" defer></script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Article","@id":"https://routerel.app/en/guides/osi-vs-tcp-ip/#article","headline":"OSI Model vs TCP/IP Model Explained (With Examples)","description":"The OSI and TCP/IP models made simple: the 7 layers, PDUs, protocols and devices, encapsulation of a real web request, CCNA exam traps and practice questions.","inLanguage":"en","datePublished":"2026-11-05","dateModified":"2026-11-05","keywords":"OSI model, TCP/IP model, OSI vs TCP/IP, 7 layers of the OSI model, encapsulation and decapsulation, PDU segment packet frame, OSI model CCNA","author":{"@type":"Organization","name":"Routerel","url":"https://routerel.app/"},"publisher":{"@type":"Organization","name":"Routerel","logo":{"@type":"ImageObject","url":"https://routerel.app/assets/icon-512.png"}},"image":"https://routerel.app/assets/og-en.png","mainEntityOfPage":"https://routerel.app/en/guides/osi-vs-tcp-ip/","isPartOf":{"@id":"https://routerel.app/#website"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://routerel.app/en/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://routerel.app/en/guides/"},{"@type":"ListItem","position":3,"name":"OSI Model vs TCP/IP Model Explained (With Examples)","item":"https://routerel.app/en/guides/osi-vs-tcp-ip/"}]},{"@type":"FAQPage","@id":"https://routerel.app/en/guides/osi-vs-tcp-ip/#faq","inLanguage":"en","mainEntity":[{"@type":"Question","name":"What are the 7 layers of the OSI model?","acceptedAnswer":{"@type":"Answer","text":"From the bottom up: 1 Physical, 2 Data Link, 3 Network, 4 Transport, 5 Session, 6 Presentation and 7 Application."}},{"@type":"Question","name":"What is the difference between the OSI model and the TCP/IP model?","acceptedAnswer":{"@type":"Answer","text":"OSI is a 7-layer reference model used to describe and troubleshoot networks. TCP/IP is the model the Internet actually runs on, and it has 4 layers: Application, Transport, Internet and Network Access. OSI layers 5, 6 and 7 are merged into Application, and layers 1 and 2 into Network Access."}},{"@type":"Question","name":"What is a PDU?","acceptedAnswer":{"@type":"Answer","text":"A PDU (Protocol Data Unit) is the name for the data at a given layer, together with that layer's header: data at the application layer, a segment (TCP) or datagram (UDP) at the transport layer, a packet at the network layer, a frame at the data link layer and bits at the physical layer. If the question doesn't name the protocol, the expected layer 4 PDU is segment."}},{"@type":"Question","name":"Which layer does a switch work at, and which layer does a router work at?","acceptedAnswer":{"@type":"Answer","text":"A regular switch works at Layer 2 and makes decisions based on MAC addresses. A router works at Layer 3 and makes decisions based on IP addresses. A multilayer (Layer 3) switch can also route."}},{"@type":"Question","name":"What changes when a packet passes through a router?","acceptedAnswer":{"@type":"Answer","text":"The router strips the frame, reads the IP packet, decrements the TTL and builds a new frame for the next link. MAC addresses change at every hop, while IP addresses stay the same end to end, unless NAT is performed along the way."}},{"@type":"Question","name":"How often does the OSI model come up in the CCNA exam?","acceptedAnswer":{"@type":"Answer","text":"Rarely as a pure memorization question, but very often indirectly: layer vocabulary shows up in troubleshooting, devices, protocols and the explanations of many questions. It's worth knowing it really well from the start."}}]}]}</script>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs><linearGradient id="rtl-play" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5b8cff"/><stop offset=".55" stop-color="#2f6bff"/><stop offset="1" stop-color="#ffb020"/></linearGradient></defs></svg>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="container header-row">
+    <a class="brand" href="../../../en/" aria-label="Routerel home"><img src="../../../assets/icon-96.webp" alt="" width="36" height="36"><span>Routerel</span></a>
+    <nav class="main-nav" aria-label="Main"><ul><li><a href="../../../en/#features">Features</a></li><li><a href="../../../en/#pricing">Pricing</a></li><li><a href="../../../en/guides/" aria-current="page">Guides</a></li><li><a href="../../../en/tools/">Tools</a></li><li><a href="../../../en/#faq">FAQ</a></li></ul></nav>
+    <div class="header-actions">
+      <div class="lang-switch" role="group" aria-label="Language"><a href="../../../ghiduri/model-osi-vs-tcp-ip/" hreflang="ro" lang="ro" title="Română">RO</a><span aria-current="true" lang="en">EN</span></div>
+      <button class="icon-btn theme-toggle" type="button" data-theme-toggle aria-label="Switch theme"><span class="i-moon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9z"/></svg></span><span class="i-sun"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg></span></button>
+      <a class="btn btn--sm header-cta" data-play data-soon-href="../../../en/#pricing" href="../../../en/#pricing"><span data-when="live">Try free</span><span data-when="soon">See pricing</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      <button class="icon-btn menu-btn" type="button" data-menu-btn aria-expanded="false" aria-controls="mobile-nav" aria-label="Menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+    </div>
+  </div>
+  <nav class="mobile-nav" id="mobile-nav" aria-label="Main" hidden>
+    <div class="container"><ul><li><a href="../../../en/#features">Features</a></li><li><a href="../../../en/#pricing">Pricing</a></li><li><a href="../../../en/guides/" aria-current="page">Guides</a></li><li><a href="../../../en/tools/">Tools</a></li><li><a href="../../../en/#faq">FAQ</a></li></ul></div>
+  </nav>
+</header>
+<main id="main">
+  <div class="container section section--tight">
+    <article class="prose">
+      <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="../../../en/">Home</a></li><li><a href="../../../en/guides/">Guides</a></li><li><span aria-current="page">OSI Model vs TCP/IP Model Explained (With Examples)</span></li></ol></nav>
+      <p class="eyebrow">CCNA guide</p>
+      <h1>OSI Model vs TCP/IP Model Explained (With Examples)</h1>
+      <div class="article-meta">
+        <span class="avatar"><svg class="mascot" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><g class="m-breathe"><path d="M22 14l-5-9M42 14l5-9" stroke="#8a919c" stroke-width="3.4" stroke-linecap="round" fill="none"/><circle class="m-led m-led-l" cx="17" cy="5" r="3.6"/><circle class="m-led m-led-r" cx="47" cy="5" r="3.6"/><path class="m-body" d="M28 12q4-6 8 0"/><rect class="m-body" x="8" y="12" width="48" height="42" rx="18"/><rect class="m-belly" x="8" y="40" width="48" height="14" rx="7"/><circle cx="23" cy="31" r="5.4" fill="#fff"/><circle class="m-pupil" cx="24" cy="31.5" r="3" fill="#1a1d24"/><circle cx="41" cy="31" r="5.4" fill="#fff"/><circle class="m-pupil" cx="42" cy="31.5" r="3" fill="#1a1d24"/><path class="m-led" d="M29 37l3 3.5 3-3.5z"/><circle class="m-ok" cx="18" cy="47" r="2"/><circle class="m-led" cx="24" cy="47" r="2"/><rect x="31" y="45" width="6" height="4" rx="1" fill="#0d1a3a" opacity=".55"/><rect x="39" y="45" width="6" height="4" rx="1" fill="#0d1a3a" opacity=".55"/><rect x="47" y="45" width="5" height="4" rx="1" fill="#0d1a3a" opacity=".55"/><path class="m-leg" d="M20 54v4M44 54v4" stroke-width="3.4" stroke-linecap="round" fill="none"/></g></svg></span>
+        <span>The Routerel team</span><span aria-hidden="true">·</span>
+        <span>Updated: <time datetime="2026-11-05">November 5, 2026</time></span><span aria-hidden="true">·</span>
+        <span>12 min read</span>
+      </div>
+      <p class="lead">Layered models are the first thing you learn in networking and the last thing you stop using for troubleshooting, even after years on the job. &quot;It&#39;s a Layer 1 problem&quot; means &quot;check the cable&quot;; &quot;ping works but the website doesn&#39;t&quot; points you to the upper layers. The model is a shared language.</p>
+<p>In this guide you&#39;ll see the 7 layers of the OSI model and the 4 layers of the TCP/IP model, what the data is called at each layer, which protocols and devices belong to each one, how a request to a website is encapsulated step by step, and which traps show up in the exam. At the end there are 5 practice questions with answers.</p>
+<p>In the Networking Academy CCNA v8 courses, the models are taught in <strong>CCNA 1 · ITN</strong>, module 2 (protocols and models), and the layers are then covered one by one: physical (module 3), data link (module 5), network (module 9), transport (module 14) and application (module 15).</p>
+      <nav class="toc toc--fold" aria-labelledby="toc-title"><h2 id="toc-title">Contents</h2><button type="button" class="toc-toggle" data-toc-toggle aria-expanded="false" aria-controls="toc-list"><span class="toc-toggle-t">Contents</span> <span class="toc-toggle-n">10 sections</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6"/></svg></button><ol id="toc-list"><li><a href="#why-we-use-layered-models">Why we use layered models</a></li><li><a href="#the-osi-model-the-7-layers">The OSI model: the 7 layers</a><ol><li><a href="#the-upper-layers-5-6-7-why-they-feel-fuzzy">The upper layers (5, 6, 7): why they feel fuzzy</a></li></ol></li><li><a href="#the-tcp-ip-model-4-layers-or-5">The TCP/IP model: 4 layers (or 5)</a><ol><li><a href="#osi-vs-tcp-ip-side-by-side">OSI vs TCP/IP side by side</a></li></ol></li><li><a href="#pdus-what-the-data-is-called-at-each-layer">PDUs: what the data is called at each layer</a></li><li><a href="#full-example-what-happens-when-you-open-a-website">Full example: what happens when you open a website</a><ol><li><a href="#step-0-find-the-server-s-ip-address-dns">Step 0: find the server&#39;s IP address (DNS)</a></li><li><a href="#step-1-the-application-layer">Step 1: the application layer</a></li><li><a href="#step-2-the-transport-layer">Step 2: the transport layer</a></li><li><a href="#step-3-the-network-layer">Step 3: the network layer</a></li><li><a href="#step-4-the-data-link-layer">Step 4: the data link layer</a></li><li><a href="#step-5-the-physical-layer">Step 5: the physical layer</a></li><li><a href="#what-the-router-does">What the router does</a></li><li><a href="#what-the-server-does">What the server does</a></li><li><a href="#header-summary">Header summary</a></li></ol></li><li><a href="#common-exam-traps">Common exam traps</a></li><li><a href="#memory-tricks">Memory tricks</a></li><li><a href="#practice-questions">Practice questions</a></li><li><a href="#how-to-use-the-model-in-practice">How to use the model in practice</a></li><li><a href="#frequently-asked-questions">Frequently asked questions</a></li></ol></nav>
+<h2 id="why-we-use-layered-models">Why we use layered models</h2>
+<p>A network does many things at once: it turns bits into signals, finds the recipient on the same segment, picks a path across the Internet, checks that all the data arrived and hands it to the right application. Layered models split that work into pieces, each with its own role:</p>
+<ul>
+<li><strong>each layer does one kind of job</strong> and uses the services of the layer below it;</li>
+<li><strong>vendors can work independently</strong>: one company&#39;s network card works with another company&#39;s operating system, because both follow the same interfaces between layers;</li>
+<li><strong>you can change one layer without touching the others</strong>: you switch from cable to Wi-Fi and the browser doesn&#39;t notice a thing;</li>
+<li><strong>you troubleshoot methodically</strong>: you check the layers one at a time, bottom-up or top-down.</li>
+</ul>
+<h2 id="the-osi-model-the-7-layers">The OSI model: the 7 layers</h2>
+<p><strong>OSI</strong> (Open Systems Interconnection) was published by ISO as a <strong>reference model</strong>. The actual OSI protocols never caught on, but the 7-layer split became the standard vocabulary of the profession.</p>
+<div class="table-scroll"><p class="table-hint" aria-hidden="true">swipe<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></p><div class="table-wrap" role="region" tabindex="0" aria-label="Table (scrolls sideways)"><table>
+<thead>
+<tr>
+<th>No.</th>
+<th>Layer</th>
+<th>What it does, in short</th>
+<th>PDU</th>
+<th>Example protocols and technologies</th>
+<th>Typical devices</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>7</td>
+<td>Application</td>
+<td class="tw">provides network services to applications</td>
+<td>data</td>
+<td class="tw">HTTP, HTTPS, DNS, DHCP, SMTP, IMAP, FTP, SSH, SNMP</td>
+<td>hosts, servers</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Presentation</td>
+<td class="tw">data format: encoding, compression, encryption</td>
+<td>data</td>
+<td>ASCII, UTF-8, JPEG, MPEG</td>
+<td>hosts</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Session</td>
+<td class="tw">opens, maintains and closes the dialog between applications</td>
+<td>data</td>
+<td class="tw">session management, checkpoints for resuming</td>
+<td>hosts</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Transport</td>
+<td class="tw">process-to-process delivery, ports, reliability</td>
+<td>segment (TCP) / datagram (UDP)</td>
+<td>TCP, UDP</td>
+<td>hosts, firewalls</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Network</td>
+<td class="tw">logical addressing and path selection between networks</td>
+<td>packet</td>
+<td>IPv4, IPv6, ICMP, ICMPv6, OSPF</td>
+<td>router, Layer 3 switch</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Data Link</td>
+<td class="tw">delivery on the same segment, MAC addresses, error detection</td>
+<td>frame</td>
+<td>Ethernet, Wi-Fi (802.11), PPP</td>
+<td class="tw">switch, bridge, access point, network card</td>
+</tr>
+<tr>
+<td>1</td>
+<td>Physical</td>
+<td class="tw">transmits bits as electrical, optical or radio signals</td>
+<td>bits</td>
+<td class="tw">UTP cable, fiber, radio, RJ-45 connectors</td>
+<td>hub, repeater, cables, connectors</td>
+</tr>
+</tbody></table></div></div>
+<p>A few clarifications that save you from confusion:</p>
+<ul>
+<li>Layer 2 actually has two sublayers: <strong>LLC</strong> (the link to the network layer) and <strong>MAC</strong> (media access and physical addressing).</li>
+<li><strong>Ethernet and Wi-Fi cover both Layer 1 and Layer 2.</strong> The standard describes both the signals and the frame format.</li>
+<li>At Layer 4, if the question doesn&#39;t name the protocol, the expected PDU is <strong>segment</strong>.</li>
+<li>A <strong>network card</strong> works at Layers 1 and 2, while a <strong>computer</strong> or <strong>server</strong> uses all 7.</li>
+<li>A modern <strong>firewall</strong> can inspect traffic from Layer 3 all the way up to Layer 7, depending on the type.</li>
+</ul>
+<h3 id="the-upper-layers-5-6-7-why-they-feel-fuzzy">The upper layers (5, 6, 7): why they feel fuzzy</h3>
+<p>In practice, applications do the work of Layers 5 and 6 themselves. A browser opens the session, picks the data format and encrypts the connection (with TLS), all inside the same program. That&#39;s why many people treat them together as &quot;the application part&quot;, which is exactly what the TCP/IP model does.</p>
+<h2 id="the-tcp-ip-model-4-layers-or-5">The TCP/IP model: 4 layers (or 5)</h2>
+<p>The <strong>TCP/IP</strong> model came about together with the protocols the Internet uses. It isn&#39;t a theory written up front; it describes how today&#39;s networks actually work. In CCNA materials it has 4 layers:</p>
+<div class="table-scroll"><p class="table-hint" aria-hidden="true">swipe<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></p><div class="table-wrap" role="region" tabindex="0" aria-label="Table (scrolls sideways)"><table>
+<thead>
+<tr>
+<th>TCP/IP layer</th>
+<th>Maps to OSI</th>
+<th>What you find here</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Application</td>
+<td>5, 6, 7</td>
+<td>HTTP, DNS, DHCP, SMTP, SSH, FTP</td>
+</tr>
+<tr>
+<td>Transport</td>
+<td>4</td>
+<td>TCP, UDP</td>
+</tr>
+<tr>
+<td>Internet</td>
+<td>3</td>
+<td>IPv4, IPv6, ICMP</td>
+</tr>
+<tr>
+<td>Network Access</td>
+<td>1, 2</td>
+<td>Ethernet, Wi-Fi, cabling, signals</td>
+</tr>
+</tbody></table></div></div>
+<p>Some books show a <strong>5-layer</strong> TCP/IP model, where Network Access is split into Data Link and Physical. Same idea, just with a clearer bottom boundary. In the exam, read carefully how many layers the model in the question has.</p>
+<h3 id="osi-vs-tcp-ip-side-by-side">OSI vs TCP/IP side by side</h3>
+<div class="table-scroll"><p class="table-hint" aria-hidden="true">swipe<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></p><div class="table-wrap" role="region" tabindex="0" aria-label="Table (scrolls sideways)"><table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th>OSI</th>
+<th>TCP/IP</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Number of layers</td>
+<td>7</td>
+<td>4 (or 5, in the extended version)</td>
+</tr>
+<tr>
+<td>Type</td>
+<td>reference model</td>
+<td>protocol model, actually in use</td>
+</tr>
+<tr>
+<td>Upper layers</td>
+<td class="tw">Application, Presentation, Session kept separate</td>
+<td>all in Application</td>
+</tr>
+<tr>
+<td>Layer 3 is called</td>
+<td>Network</td>
+<td>Internet</td>
+</tr>
+<tr>
+<td>Lower layers</td>
+<td>Data Link and Physical kept separate</td>
+<td>Network Access (or Link)</td>
+</tr>
+<tr>
+<td>What you use it for</td>
+<td class="tw">vocabulary, troubleshooting, classifying devices</td>
+<td class="tw">understanding how data moves across the Internet</td>
+</tr>
+</tbody></table></div></div>
+<p>In short: when you say &quot;Layer 2 switch&quot; or &quot;Layer 1 problem&quot;, you&#39;re speaking OSI. When you explain how a web page gets from the Internet to your phone, you&#39;re thinking in TCP/IP. The two overlap neatly, and in the exam you need to switch between them effortlessly.</p>
+<h2 id="pdus-what-the-data-is-called-at-each-layer">PDUs: what the data is called at each layer</h2>
+<p>On the way down, each layer adds its own <strong>header</strong> in front of the data it gets from above. The result is called a <strong>PDU</strong> (Protocol Data Unit), and it has a different name at each layer:</p>
+<div class="table-scroll"><p class="table-hint" aria-hidden="true">swipe<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></p><div class="table-wrap" role="region" tabindex="0" aria-label="Table (scrolls sideways)"><table>
+<thead>
+<tr>
+<th>Layer</th>
+<th>PDU</th>
+<th>What the layer adds</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Application</td>
+<td>data</td>
+<td class="tw">the actual content, for example the HTTP request</td>
+</tr>
+<tr>
+<td>Transport</td>
+<td>segment (TCP) or datagram (UDP)</td>
+<td class="tw">source and destination ports, plus sequence numbers for TCP</td>
+</tr>
+<tr>
+<td>Network / Internet</td>
+<td>packet</td>
+<td>source and destination IP addresses, TTL</td>
+</tr>
+<tr>
+<td>Data Link</td>
+<td>frame</td>
+<td class="tw">source and destination MAC addresses, type, <strong>plus a trailer</strong> with the FCS</td>
+</tr>
+<tr>
+<td>Physical</td>
+<td>bits</td>
+<td class="tw">adds no header, turns the frame into signals</td>
+</tr>
+</tbody></table></div></div>
+<p>Layer 2 is the only one that also adds something <strong>at the end</strong>: the FCS (Frame Check Sequence), a checksum the receiver uses to verify that the bits arrived intact. A frame with a bad FCS is dropped.</p>
+<p>Adding headers is called <strong>encapsulation</strong>. The reverse process at the receiver, where each layer reads and removes its own header, is called <strong>decapsulation</strong>.</p>
+<h2 id="full-example-what-happens-when-you-open-a-website">Full example: what happens when you open a website</h2>
+<p>Let&#39;s follow a real request. You&#39;re on a laptop, connected to your home router, and you type <code>routerel.app</code> into the browser. The starting data (made up, but realistic):</p>
+<div class="table-scroll"><p class="table-hint" aria-hidden="true">swipe<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></p><div class="table-wrap" role="region" tabindex="0" aria-label="Table (scrolls sideways)"><table>
+<thead>
+<tr>
+<th>What</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>The laptop</td>
+<td class="tw">IP 192.168.1.10/24, MAC AA-AA-AA-11-11-11</td>
+</tr>
+<tr>
+<td>The home router (default gateway)</td>
+<td>IP 192.168.1.1, MAC BB-BB-BB-22-22-22</td>
+</tr>
+<tr>
+<td>The website&#39;s server</td>
+<td class="tw">IP 203.0.113.10 (a documentation address)</td>
+</tr>
+</tbody></table></div></div>
+<h3 id="step-0-find-the-server-s-ip-address-dns">Step 0: find the server&#39;s IP address (DNS)</h3>
+<p>The browser knows a name, but the network works with addresses. The laptop asks a DNS server, usually over <strong>UDP port 53</strong>, and gets back the address <code>203.0.113.10</code>. The DNS request also goes through every layer, exactly as below, just with UDP instead of TCP.</p>
+<h3 id="step-1-the-application-layer">Step 1: the application layer</h3>
+<p>The browser prepares the HTTP request (essentially &quot;give me the home page of routerel.app&quot;). Because the site uses HTTPS, once the TCP connection is established the request is encrypted with TLS. As far as the model is concerned, the result is <strong>data</strong>.</p>
+<h3 id="step-2-the-transport-layer">Step 2: the transport layer</h3>
+<p>HTTPS uses <strong>TCP port 443</strong>. Before any data is sent, TCP sets up the connection with the three-way handshake (SYN, SYN-ACK, ACK). Then the data gets a TCP header with:</p>
+<ul>
+<li><strong>source port</strong>: a number picked temporarily by the operating system, for example 51514, so the reply gets back to the right browser connection;</li>
+<li><strong>destination port</strong>: 443;</li>
+<li>sequence and acknowledgment numbers, so nothing gets lost and everything arrives in order.</li>
+</ul>
+<p>Now you have a <strong>segment</strong>.</p>
+<h3 id="step-3-the-network-layer">Step 3: the network layer</h3>
+<p>The segment gets an IP header: <strong>source 192.168.1.10, destination 203.0.113.10</strong>, a TTL (for example 64 or 128, depending on the operating system) and the field saying there&#39;s TCP inside. Now you have a <strong>packet</strong>.</p>
+<h3 id="step-4-the-data-link-layer">Step 4: the data link layer</h3>
+<p>Here&#39;s the most important idea in the whole example. The laptop compares the destination&#39;s network with its own: <code>203.0.113.10</code> is not in <code>192.168.1.0/24</code>. So the packet can&#39;t be delivered directly; it has to be handed to the <strong>default gateway</strong>.</p>
+<p>The laptop needs the router&#39;s MAC address, not the server&#39;s. If it doesn&#39;t already have it cached, it finds it with <strong>ARP</strong>. Then it builds the Ethernet frame:</p>
+<ul>
+<li><strong>destination MAC: BB-BB-BB-22-22-22</strong> (the home router);</li>
+<li><strong>source MAC: AA-AA-AA-11-11-11</strong> (the laptop);</li>
+<li>type: IPv4;</li>
+<li>at the end, the FCS.</li>
+</ul>
+<p>Now you have a <strong>frame</strong>.</p>
+<h3 id="step-5-the-physical-layer">Step 5: the physical layer</h3>
+<p>The network card turns the frame into <strong>bits</strong>: electrical signals on the cable or radio waves on Wi-Fi.</p>
+<h3 id="what-the-router-does">What the router does</h3>
+<p>The router receives the bits and rebuilds the frame. It checks the FCS, sees that the destination MAC is its own and strips the frame. It reads the IP packet, looks up the destination in its <strong>routing table</strong>, decrements the TTL by 1 and builds a <strong>new frame</strong> with the right MAC addresses for the next link. The home router does one more thing: <strong>NAT</strong>, replacing the private source IP address with the public address it got from the ISP.</p>
+<p>Every router along the path repeats the story: a new frame at every hop, while the IP packet travels on.</p>
+<h3 id="what-the-server-does">What the server does</h3>
+<p>The server does the reverse trip: bits → frame (checks the FCS, strips the Ethernet header) → packet (checks the destination IP, strips the IP header) → segment (sees port 443 and hands the data to the web server) → data. The web server replies, and the reply is encapsulated and sent back with the ports swapped: source 443, destination 51514.</p>
+<h3 id="header-summary">Header summary</h3>
+<div class="table-scroll"><p class="table-hint" aria-hidden="true">swipe<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></p><div class="table-wrap" role="region" tabindex="0" aria-label="Table (scrolls sideways)"><table>
+<thead>
+<tr>
+<th>On the link</th>
+<th>Source → destination MAC</th>
+<th>Source → destination IP</th>
+<th>Ports</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>laptop → home router</td>
+<td>laptop → router</td>
+<td>192.168.1.10 → 203.0.113.10</td>
+<td>51514 → 443</td>
+</tr>
+<tr>
+<td>home router → ISP</td>
+<td>router → next router</td>
+<td>public IP → 203.0.113.10 (after NAT)</td>
+<td class="tw">NAT may change the source port, destination stays 443</td>
+</tr>
+<tr>
+<td>last router → server</td>
+<td>router → server</td>
+<td>public IP → 203.0.113.10</td>
+<td>→ 443</td>
+</tr>
+</tbody></table></div></div>
+<p>The rule to remember: <strong>MAC addresses change at every hop, IP addresses stay the same end to end</strong> (unless NAT steps in).</p>
+<h2 id="common-exam-traps">Common exam traps</h2>
+<ol>
+<li><strong>The switch is Layer 2, the router Layer 3, the hub Layer 1.</strong> The exception: the multilayer (Layer 3) switch, which can route.</li>
+<li><strong>Segment vs. datagram vs. packet vs. frame.</strong> TCP makes segments, UDP datagrams, IP packets, Ethernet frames. If the question says &quot;at Layer 2&quot;, the answer is frame. If the question doesn&#39;t name the protocol, the expected layer 4 PDU is <strong>segment</strong>.</li>
+<li><strong>Who adds which address.</strong> Ports: Layer 4. IP addresses: Layer 3. MAC addresses: Layer 2.</li>
+<li><strong>Only Layer 2 adds a trailer.</strong> Layers 4, 3 and 2 add headers; only Layer 2 adds a trailer (FCS).</li>
+<li><strong>Internet = Network.</strong> The &quot;Internet&quot; layer in TCP/IP maps to OSI Layer 3, not to the Internet as a whole.</li>
+<li><strong>Network Access = Layers 1 and 2.</strong> Not just Layer 1.</li>
+<li><strong>Encryption, compression and formats (JPEG, ASCII) belong to Layer 6, Presentation.</strong> The dialog (opening, closing, resuming) belongs to Layer 5, Session.</li>
+<li><strong>ICMP is at Layer 3,</strong> even though its messages travel inside IP packets. Ping doesn&#39;t use ports.</li>
+<li><strong>ARP sits on the boundary between Layers 2 and 3.</strong> It maps an IP address to a MAC address, and its messages go straight into Ethernet frames, with no IP header. Read carefully what the question is asking: its role, or where its messages are carried.</li>
+<li><strong>The destination MAC of a packet headed for the Internet is the gateway&#39;s</strong>, not the server&#39;s. This is probably the most common trap in the whole topic.</li>
+<li><strong>Encapsulation goes top-down (7 → 1), decapsulation bottom-up (1 → 7).</strong></li>
+</ol>
+<h2 id="memory-tricks">Memory tricks</h2>
+<p>For the OSI layers from the bottom up (<strong>P</strong>hysical, <strong>D</strong>ata Link, <strong>N</strong>etwork, <strong>T</strong>ransport, <strong>S</strong>ession, <strong>P</strong>resentation, <strong>A</strong>pplication):</p>
+<div class="callout callout--info"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg><div><p><strong>P</strong>lease <strong>D</strong>o <strong>N</strong>ot <strong>T</strong>hrow <strong>S</strong>ausage <strong>P</strong>izza <strong>A</strong>way.</p></div></div>
+<p>From the top down (<strong>A</strong>, <strong>P</strong>, <strong>S</strong>, <strong>T</strong>, <strong>N</strong>, <strong>D</strong>, <strong>P</strong>):</p>
+<div class="callout callout--info"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg><div><p><strong>A</strong>ll <strong>P</strong>eople <strong>S</strong>eem <strong>T</strong>o <strong>N</strong>eed <strong>D</strong>ata <strong>P</strong>rocessing.</p></div></div>
+<p>For the PDUs, from the top down (<strong>D</strong>ata, <strong>S</strong>egment, <strong>P</strong>acket, <strong>F</strong>rame, <strong>B</strong>its):</p>
+<div class="callout callout--info"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg><div><p><strong>D</strong>o <strong>S</strong>ome <strong>P</strong>eople <strong>F</strong>ear <strong>B</strong>irthdays?</p></div></div>
+<p>If none of these stick, make up your own: a silly sentence you invented yourself is usually the one you remember best.</p>
+<h2 id="practice-questions">Practice questions</h2>
+<ol>
+<li>A PC sends an email. At which OSI layer is the destination port added, and what is the resulting PDU called if the transport protocol is TCP?</li>
+<li>A switch receives a frame and looks in its address table to decide which port to send it out of. Which address does it decide on, and at which layer is it working in this case?</li>
+<li>A packet leaves PC A, passes through two routers and reaches server B. Without NAT, what changes at each hop: the MAC addresses, the IP addresses or both?</li>
+<li>Which OSI layers does the Network Access layer of the TCP/IP model map to?</li>
+<li>A file is compressed and encrypted before it&#39;s sent. Which OSI layer does the model assign these functions to?</li>
+</ol>
+<details class="reveal-answer">
+<summary><strong>Answers</strong></summary><p><strong>1.</strong> At <strong>Layer 4 (Transport)</strong>. With TCP, the PDU is called a <strong>segment</strong>. (With UDP it would have been a datagram.)</p>
+<p><strong>2.</strong> On the <strong>destination MAC address</strong>, at <strong>Layer 2 (Data Link)</strong>. A regular switch doesn&#39;t look at IP addresses when it switches frames.</p>
+<p><strong>3.</strong> <strong>Only the MAC addresses</strong> change. Each router strips the old frame and builds a new one for the next link, but the source and destination IP addresses stay the same from A to B. (The TTL also changes, dropping by 1 at each router.)</p>
+<p><strong>4.</strong> Layers <strong>1 (Physical) and 2 (Data Link)</strong>.</p>
+<p><strong>5.</strong> Layer <strong>6 (Presentation)</strong>, which handles the format, compression and encryption of data.</p>
+</details><h2 id="how-to-use-the-model-in-practice">How to use the model in practice</h2>
+<p>The model isn&#39;t just for the exam. When &quot;the internet doesn&#39;t work&quot;, an orderly bottom-up troubleshooting pass looks like this:</p>
+<ul>
+<li><strong>Layer 1:</strong> is the cable plugged in, is the port LED on, is Wi-Fi turned on?</li>
+<li><strong>Layer 2:</strong> is the port in the right VLAN, does the MAC address show up in the switch&#39;s table? (For VLANs, see the <a href="../vlans-and-trunks/">guide to VLANs and trunks</a>.)</li>
+<li><strong>Layer 3:</strong> does the device have the right IP address, mask and gateway? Does <code>ping</code> to the gateway work? (For masks and subnets: <a href="../subnetting-step-by-step/">subnetting step by step</a>; for IPv6: <a href="../ipv6-addresses-explained/">IPv6 addresses explained</a>.)</li>
+<li><strong>Layer 4 and above:</strong> does <code>ping</code> to the server work but the website doesn&#39;t? Then check DNS, the port, the firewall, the application.</li>
+</ul>
+<p>The commands you use for these checks on Cisco devices are collected in the <a href="../cisco-ios-basic-commands/">Cisco IOS commands cheat sheet</a>.</p>
+<div class="cta-box cta-box--article"><svg class="mascot" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><g class="m-breathe"><path d="M22 14l-5-9M42 14l5-9" stroke="#8a919c" stroke-width="3.4" stroke-linecap="round" fill="none"/><circle class="m-led m-led-l" cx="17" cy="5" r="3.6"/><circle class="m-led m-led-r" cx="47" cy="5" r="3.6"/><path class="m-body" d="M28 12q4-6 8 0"/><rect class="m-body" x="8" y="12" width="48" height="42" rx="18"/><rect class="m-belly" x="8" y="40" width="48" height="14" rx="7"/><path d="M19 31q4-5 8 0" stroke="#1a1d24" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M37 31q4-5 8 0" stroke="#1a1d24" stroke-width="3" fill="none" stroke-linecap="round"/><path class="m-led" d="M29 37l3 3.5 3-3.5z"/><circle cx="15" cy="38" r="3" fill="#ff8fb1" opacity=".7"/><circle cx="49" cy="38" r="3" fill="#ff8fb1" opacity=".7"/><circle class="m-ok" cx="18" cy="47" r="2"/><circle class="m-led" cx="24" cy="47" r="2"/><rect x="31" y="45" width="6" height="4" rx="1" fill="#0d1a3a" opacity=".55"/><rect x="39" y="45" width="6" height="4" rx="1" fill="#0d1a3a" opacity=".55"/><rect x="47" y="45" width="5" height="4" rx="1" fill="#0d1a3a" opacity=".55"/><path class="m-leg" d="M20 54v4M44 54v4" stroke-width="3.4" stroke-linecap="round" fill="none"/></g></svg><div><h3>Practice the OSI and TCP/IP models in the Routerel app</h3><p>Routerel has over 1,900 questions for CCNA 1 · ITN, CCNA 2 · IEN and CCNA 3 · CEN, each with an explanation right after you answer. Your mistakes come back automatically through spaced repetition until you&#39;ve mastered them, and the timed exam simulation shows you where you stand. Questions are in English, just like the exam (a Romanian version is available too). New subscribers get a 7-day free trial with full access.</p></div><a class="btn" href="../../">Discover the app<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div><h2 id="frequently-asked-questions">Frequently asked questions</h2>
+<div class="faq faq--article"><details><summary>What are the 7 layers of the OSI model?<span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p>From the bottom up: 1 Physical, 2 Data Link, 3 Network, 4 Transport, 5 Session, 6 Presentation and 7 Application.</p></div></details><details><summary>What is the difference between the OSI model and the TCP/IP model?<span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p>OSI is a 7-layer reference model used to describe and troubleshoot networks. TCP/IP is the model the Internet actually runs on, and it has 4 layers: Application, Transport, Internet and Network Access. OSI layers 5, 6 and 7 are merged into Application, and layers 1 and 2 into Network Access.</p></div></details><details><summary>What is a PDU?<span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p>A PDU (Protocol Data Unit) is the name for the data at a given layer, together with that layer&#39;s header: data at the application layer, a segment (TCP) or datagram (UDP) at the transport layer, a packet at the network layer, a frame at the data link layer and bits at the physical layer. If the question doesn&#39;t name the protocol, the expected layer 4 PDU is <strong>segment</strong>.</p></div></details><details><summary>Which layer does a switch work at, and which layer does a router work at?<span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p>A regular switch works at Layer 2 and makes decisions based on MAC addresses. A router works at Layer 3 and makes decisions based on IP addresses. A multilayer (Layer 3) switch can also route.</p></div></details><details><summary>What changes when a packet passes through a router?<span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p>The router strips the frame, reads the IP packet, decrements the TTL and builds a new frame for the next link. MAC addresses change at every hop, while IP addresses stay the same end to end, unless NAT is performed along the way.</p></div></details><details><summary>How often does the OSI model come up in the CCNA exam?<span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p>Rarely as a pure memorization question, but very often indirectly: layer vocabulary shows up in troubleshooting, devices, protocols and the explanations of many questions. It&#39;s worth knowing it really well from the start. For the exam in general, see our <a href="../what-is-ccna/">guide to CCNA</a>.</p></div></details></div>
+<hr>
+<p><em>Routerel is an independent app and is not affiliated with, sponsored by or endorsed by Cisco Systems, Inc. Cisco, CCNA, Cisco IOS and Networking Academy are trademarks of Cisco Systems, Inc.</em></p>
+      
+      <section class="related" aria-labelledby="rel-title">
+        <h2 id="rel-title">Read next</h2>
+        <div class="grid grid--2"><a class="card post-card lift" href="../../../en/guides/cisco-ios-basic-commands/"><span class="tagline">Guide · 13 min</span><h3>Basic Cisco IOS Commands: CCNA Cheat Sheet</h3><p>Basic Cisco IOS commands cheat sheet for CCNA: CLI modes, initial setup, passwords and SSH, interfaces, saving the config, show commands and troubleshooting.</p></a><a class="card post-card lift" href="../../../en/guides/ipv6-addresses-explained/"><span class="tagline">Guide · 13 min</span><h3>IPv6 Addresses Explained: Format, Shortening, Types</h3><p>IPv6 addresses made simple: the 128-bit format, how to shorten and expand them, address types, EUI-64 step by step, SLAAC vs DHCPv6, and exercises with answers.</p></a></div>
+      </section>
+    </article>
+  </div>
+</main>
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="about">
+        <a class="brand" href="../../../en/"><img src="../../../assets/icon-96.webp" alt="" width="36" height="36" loading="lazy"><span>Routerel</span></a>
+        <p>CCNA practice on your phone: questions with explanations, spaced repetition and exam simulations. In English and Romanian.</p>
+      </div>
+      <div><h2>The app</h2><ul><li><a href="../../../en/#features">Features</a></li><li><a href="../../../en/#pricing">Pricing</a></li><li><a href="../../../en/#how-it-works">How it works</a></li><li><a href="../../../en/#faq">FAQ</a></li></ul></div>
+      <div><h2>Resources</h2><ul><li><a href="../../../en/guides/">CCNA guides</a></li><li><a href="../../../en/tools/">Free tools</a></li><li><a href="../../../" hreflang="ro" lang="ro" data-set-lang="ro">Română</a></li></ul></div>
+      <div><h2>Legal & contact</h2><ul><li><a href="../../../en/privacy.html">Privacy policy</a></li><li><a href="../../../en/terms.html">Terms of use</a></li><li><a href="../../../en/delete-account.html">Delete your account</a></li></ul><ul><li><a href="mailto:contact@routerel.app">contact@routerel.app</a></li></ul></div>
+    </div>
+    <div class="disclaimer">
+      <p>Routerel is an independent app, not affiliated with, sponsored or endorsed by Cisco Systems, Inc. Cisco, CCNA and Cisco Networking Academy are trademarks of Cisco Systems, Inc.</p>
+      <p>© 2026 Routerel</p>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

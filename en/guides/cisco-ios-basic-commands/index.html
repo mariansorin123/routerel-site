@@ -1,0 +1,799 @@
+<!doctype html>
+<!-- Pagină generată. Nu o edita de mână: vezi tools/site/ (npm run build:guides / npm run sync:tools / npm run build:legal). -->
+<html lang="en" class="play-soon">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Basic Cisco IOS Commands: CCNA Cheat Sheet | Routerel</title>
+  <meta name="description" content="Basic Cisco IOS commands cheat sheet for CCNA: CLI modes, initial setup, passwords and SSH, interfaces, saving the config, show commands and troubleshooting.">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <link rel="canonical" href="https://routerel.app/en/guides/cisco-ios-basic-commands/">
+  <link rel="alternate" hreflang="ro" href="https://routerel.app/ghiduri/comenzi-cisco-ios/">
+  <link rel="alternate" hreflang="en" href="https://routerel.app/en/guides/cisco-ios-basic-commands/">
+  <link rel="alternate" hreflang="x-default" href="https://routerel.app/en/guides/cisco-ios-basic-commands/">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#12151b" media="(prefers-color-scheme: dark)">
+  <meta name="color-scheme" content="light dark">
+  <link rel="icon" href="../../../assets/favicon-32.png" type="image/png" sizes="32x32">
+  <link rel="icon" href="../../../assets/icon-192.png" type="image/png" sizes="192x192">
+  <link rel="apple-touch-icon" href="../../../assets/apple-touch-icon.png">
+  <link rel="manifest" href="../../../site.webmanifest">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Routerel">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="ro_RO">
+  <meta property="og:title" content="Basic Cisco IOS Commands: CCNA Cheat Sheet | Routerel">
+  <meta property="og:description" content="Basic Cisco IOS commands cheat sheet for CCNA: CLI modes, initial setup, passwords and SSH, interfaces, saving the config, show commands and troubleshooting.">
+  <meta property="og:url" content="https://routerel.app/en/guides/cisco-ios-basic-commands/">
+  <meta property="og:image" content="https://routerel.app/assets/og-en.png">
+  <meta property="og:image:width" content="1024">
+  <meta property="og:image:height" content="500">
+  <meta property="og:image:alt" content="Routerel: the router chick mascot and the app name">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Basic Cisco IOS Commands: CCNA Cheat Sheet | Routerel">
+  <meta name="twitter:description" content="Basic Cisco IOS commands cheat sheet for CCNA: CLI modes, initial setup, passwords and SSH, interfaces, saving the config, show commands and troubleshooting.">
+  <meta name="twitter:image" content="https://routerel.app/assets/og-en.png">
+  <meta property="article:published_time" content="2026-11-05">
+  <meta property="article:modified_time" content="2026-11-05">
+  <meta name="routerel:updated" content="2026-11-05">
+  <link rel="preload" href="../../../assets/fonts/nunito-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../../../assets/fonts/nunito-latin-ext.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../../../assets/fonts/roboto-mono-500-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="../../../style.css">
+  <script>(function(d){d.classList.add("js");try{var t=localStorage.getItem("routerel-theme");if(t==="light"||t==="dark")d.setAttribute("data-theme",t)}catch(e){}setTimeout(function(){if(!window.__rtl)d.classList.remove("js")},4000)})(document.documentElement)</script>
+  <script src="../../../assets/site.js" defer></script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Article","@id":"https://routerel.app/en/guides/cisco-ios-basic-commands/#article","headline":"Basic Cisco IOS Commands: CCNA Cheat Sheet","description":"Basic Cisco IOS commands cheat sheet for CCNA: CLI modes, initial setup, passwords and SSH, interfaces, saving the config, show commands and troubleshooting.","inLanguage":"en","datePublished":"2026-11-05","dateModified":"2026-11-05","keywords":"Cisco IOS commands, basic Cisco commands, Cisco commands cheat sheet, Cisco router configuration, Cisco SSH configuration, Cisco show commands, copy running-config startup-config, Cisco CLI, CCNA commands","author":{"@type":"Organization","name":"Routerel","url":"https://routerel.app/"},"publisher":{"@type":"Organization","name":"Routerel","logo":{"@type":"ImageObject","url":"https://routerel.app/assets/icon-512.png"}},"image":"https://routerel.app/assets/og-en.png","mainEntityOfPage":"https://routerel.app/en/guides/cisco-ios-basic-commands/","isPartOf":{"@id":"https://routerel.app/#website"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://routerel.app/en/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://routerel.app/en/guides/"},{"@type":"ListItem","position":3,"name":"Basic Cisco IOS Commands: CCNA Cheat Sheet","item":"https://routerel.app/en/guides/cisco-ios-basic-commands/"}]},{"@type":"FAQPage","@id":"https://routerel.app/en/guides/cisco-ios-basic-commands/#faq","inLanguage":"en","mainEntity":[{"@type":"Question","name":"What is the difference between running-config and startup-config?","acceptedAnswer":{"@type":"Answer","text":"The running-config is the active configuration, held in RAM; it's lost on reboot unless you save it. The startup-config is the configuration saved in NVRAM and loaded at boot. You sync them with copy running-config startup-config."}},{"@type":"Question","name":"What is the difference between enable password and enable secret?","acceptedAnswer":{"@type":"Answer","text":"Both protect access to privileged mode, but enable secret stores the password as a hash that can't be read back, while enable password keeps it in clear text or with weak encryption. If both are configured, enable secret is used."}},{"@type":"Question","name":"What do I need to configure for SSH access to a Cisco router?","acceptedAnswer":{"@type":"Answer","text":"A hostname other than the default, a domain name (ip domain-name), an RSA key pair (crypto key generate rsa), a local user (username ... secret ...), then on the vty lines: transport input ssh and login local. ip ssh version 2 is also recommended."}},{"@type":"Question","name":"What does service password-encryption do?","acceptedAnswer":{"@type":"Answer","text":"It hides clear-text passwords in the configuration (for example the console and vty passwords) using weak type 7 encryption. It protects you from shoulder surfing, but the passwords are easy to decrypt, so it's no substitute for enable secret and users configured with secret."}},{"@type":"Question","name":"How do I quickly exit configuration mode?","acceptedAnswer":{"@type":"Answer","text":"With end or Ctrl+Z you go straight to privileged EXEC mode (the prompt with #). The exit command only goes up one level."}},{"@type":"Question","name":"How do I run a show command from configuration mode?","acceptedAnswer":{"@type":"Answer","text":"Put do in front of it, for example do show ip interface brief. That way you don't have to leave and re-enter configuration mode."}}]}]}</script>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs><linearGradient id="rtl-play" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5b8cff"/><stop offset=".55" stop-color="#2f6bff"/><stop offset="1" stop-color="#ffb020"/></linearGradient></defs></svg>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="container header-row">
+    <a class="brand" href="../../../en/" aria-label="Routerel home"><img src="../../../assets/icon-96.webp" alt="" width="36" height="36"><span>Routerel</span></a>
+    <nav class="main-nav" aria-label="Main"><ul><li><a href="../../../en/#features">Features</a></li><li><a href="../../../en/#pricing">Pricing</a></li><li><a href="../../../en/guides/" aria-current="page">Guides</a></li><li><a href="../../../en/tools/">Tools</a></li><li><a href="../../../en/#faq">FAQ</a></li></ul></nav>
+    <div class="header-actions">
+      <div class="lang-switch" role="group" aria-label="Language"><a href="../../../ghiduri/comenzi-cisco-ios/" hreflang="ro" lang="ro" title="Română">RO</a><span aria-current="true" lang="en">EN</span></div>
+      <button class="icon-btn theme-toggle" type="button" data-theme-toggle aria-label="Switch theme"><span class="i-moon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9z"/></svg></span><span class="i-sun"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg></span></button>
+      <a class="btn btn--sm header-cta" data-play data-soon-href="../../../en/#pricing" href="../../../en/#pricing"><span data-when="live">Try free</span><span data-when="soon">See pricing</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      <button class="icon-btn menu-btn" type="button" data-menu-btn aria-expanded="false" aria-controls="mobile-nav" aria-label="Menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+    </div>
+  </div>
+  <nav class="mobile-nav" id="mobile-nav" aria-label="Main" hidden>
+    <div class="container"><ul><li><a href="../../../en/#features">Features</a></li><li><a href="../../../en/#pricing">Pricing</a></li><li><a href="../../../en/guides/" aria-current="page">Guides</a></li><li><a href="../../../en/tools/">Tools</a></li><li><a href="../../../en/#faq">FAQ</a></li></ul></div>
+  </nav>
+</header>
+<main id="main">
+  <div class="container section section--tight">
+    <article class="prose">
+      <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="../../../en/">Home</a></li><li><a href="../../../en/guides/">Guides</a></li><li><span aria-current="page">Basic Cisco IOS Commands: CCNA Cheat Sheet</span></li></ol></nav>
+      <p class="eyebrow">CCNA guide</p>
+      <h1>Basic Cisco IOS Commands (CCNA Cheat Sheet)</h1>
+      <div class="article-meta">
+        <span class="avatar"><svg class="mascot" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><g class="m-breathe"><path d="M22 14l-5-9M42 14l5-9" stroke="#8a919c" stroke-width="3.4" stroke-linecap="round" fill="none"/><circle class="m-led m-led-l" cx="17" cy="5" r="3.6"/><circle class="m-led m-led-r" cx="47" cy="5" r="3.6"/><path class="m-body" d="M28 12q4-6 8 0"/><rect class="m-body" x="8" y="12" width="48" height="42" rx="18"/><rect class="m-belly" x="8" y="40" width="48" height="14" rx="7"/><circle cx="23" cy="31" r="5.4" fill="#fff"/><circle class="m-pupil" cx="24" cy="31.5" r="3" fill="#1a1d24"/><circle cx="41" cy="31" r="5.4" fill="#fff"/><circle class="m-pupil" cx="42" cy="31.5" r="3" fill="#1a1d24"/><path class="m-led" d="M29 37l3 3.5 3-3.5z"/><circle class="m-ok" cx="18" cy="47" r="2"/><circle class="m-led" cx="24" cy="47" r="2"/><rect x="31" y="45" width="6" height="4" rx="1" fill="#0d1a3a" opacity=".55"/><rect x="39" y="45" width="6" height="4" rx="1" fill="#0d1a3a" opacity=".55"/><rect x="47" y="45" width="5" height="4" rx="1" fill="#0d1a3a" opacity=".55"/><path class="m-leg" d="M20 54v4M44 54v4" stroke-width="3.4" stroke-linecap="round" fill="none"/></g></svg></span>
+        <span>The Routerel team</span><span aria-hidden="true">·</span>
+        <span>Updated: <time datetime="2026-11-05">November 5, 2026</time></span><span aria-hidden="true">·</span>
+        <span>13 min read</span>
+      </div>
+      <p class="lead">This cheat sheet collects the Cisco IOS commands you need every day in the lab and in the exam: how to move between CLI modes, how to configure a router or switch from scratch, how to set passwords and SSH, how to configure interfaces, how to save, and what each <code>show</code> command tells you. It&#39;s designed for quick scanning: tables, short examples, explanations only where they matter.</p>
+<p>In the Networking Academy CCNA v8 courses, the basic commands are taught in <strong>CCNA 1 · ITN</strong>: initial configuration in module 7, securing access (passwords, SSH) in module 16, connectivity testing in module 13 and troubleshooting in module 17. In <strong>CCNA 2 · IEN</strong>, module 1 revisits switch and router management at a more advanced level.</p>
+<p>All examples use interface names from devices common in labs (for example <code>GigabitEthernet0/0/0</code> on routers and <code>FastEthernet0/1</code> on switches). Numbering may differ on your device; check it with <code>show ip interface brief</code>.</p>
+      <nav class="toc toc--fold" aria-labelledby="toc-title"><h2 id="toc-title">Contents</h2><button type="button" class="toc-toggle" data-toc-toggle aria-expanded="false" aria-controls="toc-list"><span class="toc-toggle-t">Contents</span> <span class="toc-toggle-n">11 sections</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6"/></svg></button><ol id="toc-list"><li><a href="#cli-modes-and-prompts">CLI modes and prompts</a><ol><li><a href="#moving-between-modes">Moving between modes</a></li><li><a href="#help-and-abbreviations">Help and abbreviations</a></li></ol></li><li><a href="#where-the-configuration-lives">Where the configuration lives</a></li><li><a href="#basic-router-or-switch-configuration">Basic router or switch configuration</a></li><li><a href="#remote-access-with-ssh">Remote access with SSH</a><ol><li><a href="#a-switch-s-management-address">A switch&#39;s management address</a></li></ol></li><li><a href="#configuring-interfaces">Configuring interfaces</a></li><li><a href="#saving-and-managing-the-configuration">Saving and managing the configuration</a></li><li><a href="#show-commands-cheat-sheet">Show commands cheat sheet</a><ol><li><a href="#filtering-output">Filtering output</a></li></ol></li><li><a href="#troubleshooting-ping-traceroute-and-interface-status">Troubleshooting: ping, traceroute and interface status</a><ol><li><a href="#ping">ping</a></li><li><a href="#traceroute">traceroute</a></li><li><a href="#interface-status-show-ip-interface-brief">Interface status (show ip interface brief)</a></li><li><a href="#debug-carefully">debug (carefully)</a></li><li><a href="#on-a-pc-windows">On a PC (Windows)</a></li></ol></li><li><a href="#keyboard-shortcuts">Keyboard shortcuts</a></li><li><a href="#how-to-learn-them-without-rote-memorization">How to learn them without rote memorization</a></li><li><a href="#frequently-asked-questions">Frequently asked questions</a></li></ol></nav>
+<h2 id="cli-modes-and-prompts">CLI modes and prompts</h2>
+<p>The prompt always tells you where you are. It&#39;s the first thing to look at when a command doesn&#39;t work.</p>
+<div class="table-scroll"><p class="table-hint" aria-hidden="true">swipe<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></p><div class="table-wrap" role="region" tabindex="0" aria-label="Table (scrolls sideways)"><table>
+<thead>
+<tr>
+<th>Mode</th>
+<th>Prompt</th>
+<th>How you get there</th>
+<th>What you can do</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>User EXEC</td>
+<td><code>R1&gt;</code></td>
+<td>you connect (console, SSH)</td>
+<td>a few <code>show</code> commands, <code>ping</code></td>
+</tr>
+<tr>
+<td>Privileged EXEC</td>
+<td><code>R1#</code></td>
+<td><code>enable</code></td>
+<td>all <code>show</code> commands, <code>copy</code>, <code>reload</code>, <code>debug</code></td>
+</tr>
+<tr>
+<td>Global configuration</td>
+<td><code>R1(config)#</code></td>
+<td><code><span class="nw">configure</span> <span class="nw">terminal</span></code></td>
+<td>device-wide settings</td>
+</tr>
+<tr>
+<td>Interface</td>
+<td><code>R1(config-if)#</code></td>
+<td><code><span class="nw">interface</span> <span class="nw">GigabitEthernet0/0/0</span></code></td>
+<td>settings for one interface</td>
+</tr>
+<tr>
+<td>Subinterface</td>
+<td><code>R1(config-subif)#</code></td>
+<td><code><span class="nw">interface</span> <span class="nw">GigabitEthernet0/0/0.10</span></code></td>
+<td>subinterfaces (for example for VLANs)</td>
+</tr>
+<tr>
+<td>Interface range</td>
+<td><code>S1(config-if-range)#</code></td>
+<td><code><span class="nw">interface</span> <span class="nw">range</span> <span class="nw">FastEthernet0/1</span> <span class="nw">-</span> <span class="nw">10</span></code></td>
+<td>several ports at once</td>
+</tr>
+<tr>
+<td>Line</td>
+<td><code>R1(config-line)#</code></td>
+<td><code><span class="nw">line</span> <span class="nw">console</span> <span class="nw">0</span></code> or <code><span class="nw">line</span> <span class="nw">vty</span> <span class="nw">0</span> <span class="nw">4</span></code></td>
+<td>console or remote access</td>
+</tr>
+<tr>
+<td>VLAN</td>
+<td><code>S1(config-vlan)#</code></td>
+<td><code><span class="nw">vlan</span> <span class="nw">10</span></code></td>
+<td>a VLAN&#39;s name and settings</td>
+</tr>
+<tr>
+<td>Router</td>
+<td><code>R1(config-router)#</code></td>
+<td><code><span class="nw">router</span> <span class="nw">ospf</span> <span class="nw">1</span></code></td>
+<td>the routing protocol</td>
+</tr>
+</tbody></table></div></div>
+<h3 id="moving-between-modes">Moving between modes</h3>
+<div class="table-scroll"><p class="table-hint" aria-hidden="true">swipe<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></p><div class="table-wrap" role="region" tabindex="0" aria-label="Table (scrolls sideways)"><table>
+<thead>
+<tr>
+<th>Command / key</th>
+<th>Effect</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>enable</code></td>
+<td>from user EXEC to privileged EXEC</td>
+</tr>
+<tr>
+<td><code>disable</code></td>
+<td>back to user EXEC</td>
+</tr>
+<tr>
+<td><code><span class="nw">configure</span> <span class="nw">terminal</span></code> (<code><span class="nw">conf</span> <span class="nw">t</span></code>)</td>
+<td>enter global configuration</td>
+</tr>
+<tr>
+<td><code>exit</code></td>
+<td>go up one level (from <code>config-if</code> to <code>config</code>)</td>
+</tr>
+<tr>
+<td><code>end</code> or Ctrl+Z</td>
+<td class="tw">jump straight to privileged EXEC from any configuration mode</td>
+</tr>
+<tr>
+<td><code><span class="nw">do</span> <span class="nw">&lt;command&gt;</span></code></td>
+<td class="tw">run an EXEC command from configuration mode: <code><span class="nw">do</span> <span class="nw">show</span> <span class="nw">ip</span> <span class="nw">interface</span> <span class="nw">brief</span></code></td>
+</tr>
+</tbody></table></div></div>
+<h3 id="help-and-abbreviations">Help and abbreviations</h3>
+<ul>
+<li><code>?</code> shows what you can type at that point: <code>show ?</code> lists every option, <code>cl?</code> lists the commands starting with &quot;cl&quot;.</li>
+<li><code>&lt;cr&gt;</code> in the help list means &quot;the command is complete, you can press Enter&quot;.</li>
+<li><strong>Tab</strong> completes a partially typed word, if it&#39;s unique.</li>
+<li>Any command can be abbreviated as long as it stays unique: <code>sh ip int br</code> = <code>show ip interface brief</code>, <code>copy run start</code> = <code>copy running-config startup-config</code>, <code>no shut</code> = <code>no shutdown</code>.</li>
+<li><code>no</code> in front of a command negates it: <code>no shutdown</code>, <code>no ip address</code>, <code>no vlan 20</code>.</li>
+</ul>
+<p>Error messages you&#39;ll see often:</p>
+<div class="table-scroll"><p class="table-hint" aria-hidden="true">swipe<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></p><div class="table-wrap" role="region" tabindex="0" aria-label="Table (scrolls sideways)"><table>
+<thead>
+<tr>
+<th>Message</th>
+<th>What it means</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code><span class="nw">%</span> <span class="nw">Ambiguous</span> <span class="nw">command</span></code></td>
+<td class="tw">the abbreviation matches several commands; type a few more letters</td>
+</tr>
+<tr>
+<td><code><span class="nw">%</span> <span class="nw">Incomplete</span> <span class="nw">command.</span></code></td>
+<td class="tw">an argument is missing; add <code>?</code> after the command</td>
+</tr>
+<tr>
+<td><code><span class="nw">%</span> <span class="nw">Invalid</span> <span class="nw">input</span> <span class="nw">detected</span> <span class="nw">at</span> <span class="nw">&#39;^&#39;</span> <span class="nw">marker.</span></code></td>
+<td class="tw">you made a mistake where the <code>^</code> points (or you&#39;re in the wrong mode)</td>
+</tr>
+</tbody></table></div></div>
+<h2 id="where-the-configuration-lives">Where the configuration lives</h2>
+<div class="table-scroll"><p class="table-hint" aria-hidden="true">swipe<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></p><div class="table-wrap" role="region" tabindex="0" aria-label="Table (scrolls sideways)"><table>
+<thead>
+<tr>
+<th>Memory</th>
+<th>What it holds</th>
+<th>Lost at power-off?</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>RAM</td>
+<td class="tw">the active configuration (<strong>running-config</strong>), tables (ARP, routing)</td>
+<td>yes</td>
+</tr>
+<tr>
+<td>NVRAM</td>
+<td>the saved configuration (<strong>startup-config</strong>)</td>
+<td>no</td>
+</tr>
+<tr>
+<td>Flash</td>
+<td class="tw">the IOS operating system (and, on switches, <code>vlan.dat</code>)</td>
+<td>no</td>
+</tr>
+<tr>
+<td>ROM</td>
+<td>the bootstrap and diagnostic program</td>
+<td>no</td>
+</tr>
+</tbody></table></div></div>
+<p>Everything you type in configuration mode takes effect <strong>immediately</strong>, in the running-config. If you don&#39;t save, you lose it all on reboot.</p>
+<h2 id="basic-router-or-switch-configuration">Basic router or switch configuration</h2>
+<p>A typical initial configuration (replace the uppercase text with your own values):</p>
+<pre><code class="language-text">Router&gt; enable
+Router# configure terminal
+Router(config)# hostname R1
+R1(config)# no ip domain-lookup
+R1(config)# enable secret ENABLE_PASSWORD
+R1(config)# line console 0
+R1(config-line)# password CONSOLE_PASSWORD
+R1(config-line)# login
+R1(config-line)# logging synchronous
+R1(config-line)# exec-timeout 5 0
+R1(config-line)# exit
+R1(config)# service password-encryption
+R1(config)# security passwords min-length 10
+R1(config)# banner motd # Authorized access only. #
+R1(config)# end
+R1# copy running-config startup-config
+</code></pre>
+<div class="table-scroll"><p class="table-hint" aria-hidden="true">swipe<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></p><div class="table-wrap" role="region" tabindex="0" aria-label="Table (scrolls sideways)"><table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Why you use it</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code><span class="nw">hostname</span> <span class="nw">R1</span></code></td>
+<td class="tw">the device name; it shows in the prompt and is required for SSH</td>
+</tr>
+<tr>
+<td><code><span class="nw">no</span> <span class="nw">ip</span> <span class="nw">domain-lookup</span></code></td>
+<td class="tw">a mistyped command is no longer treated as a name to resolve through DNS (otherwise you wait tens of seconds)</td>
+</tr>
+<tr>
+<td><code><span class="nw">enable</span> <span class="nw">secret</span> <span class="nw">...</span></code></td>
+<td class="tw">the privileged mode password, stored as a hash</td>
+</tr>
+<tr>
+<td><code><span class="nw">line</span> <span class="nw">console</span> <span class="nw">0</span></code> + <code>password</code> + <code>login</code></td>
+<td class="tw">the console port password; without <code>login</code>, the password isn&#39;t requested</td>
+</tr>
+<tr>
+<td><code><span class="nw">logging</span> <span class="nw">synchronous</span></code></td>
+<td class="tw">system messages no longer break up the command you&#39;re typing</td>
+</tr>
+<tr>
+<td><code><span class="nw">exec-timeout</span> <span class="nw">5</span> <span class="nw">0</span></code></td>
+<td class="tw">disconnects after 5 minutes and 0 seconds of inactivity</td>
+</tr>
+<tr>
+<td><code><span class="nw">service</span> <span class="nw">password-encryption</span></code></td>
+<td class="tw">hides clear-text passwords in the configuration (weak type 7 encryption)</td>
+</tr>
+<tr>
+<td><code><span class="nw">security</span> <span class="nw">passwords</span> <span class="nw">min-length</span> <span class="nw">10</span></code></td>
+<td class="tw">minimum length for passwords configured from now on</td>
+</tr>
+<tr>
+<td><code><span class="nw">banner</span> <span class="nw">motd</span> <span class="nw">#</span> <span class="nw">...</span> <span class="nw">#</span></code></td>
+<td class="tw">the message shown at login; <code>#</code> is the delimiter and must not appear in the text</td>
+</tr>
+</tbody></table></div></div>
+<p>Two things the exam asks about often:</p>
+<ul>
+<li><strong><code>enable secret</code> beats <code>enable password</code>.</strong> If you have both, only <code>enable secret</code> is used. Always use it.</li>
+<li><strong><code>service password-encryption</code> isn&#39;t real security.</strong> Type 7 encryption can be cracked in seconds; it only protects you from shoulder surfing.</li>
+</ul>
+<p>To block repeated password-guessing attempts: <code>login block-for 120 attempts 3 within 60</code> (blocks logins for 120 seconds after 3 failed attempts within 60 seconds).</p>
+<h2 id="remote-access-with-ssh">Remote access with SSH</h2>
+<p>Telnet sends everything in clear text, including the password. <strong>SSH</strong> encrypts the session and is the only acceptable option today. The steps, in order:</p>
+<pre><code class="language-text">R1(config)# ip domain-name example.local
+R1(config)# crypto key generate rsa general-keys modulus 2048
+R1(config)# ip ssh version 2
+R1(config)# username admin privilege 15 secret ADMIN_PASSWORD
+R1(config)# line vty 0 4
+R1(config-line)# transport input ssh
+R1(config-line)# login local
+R1(config-line)# exec-timeout 10 0
+R1(config-line)# end
+R1# copy running-config startup-config
+</code></pre>
+<div class="table-scroll"><p class="table-hint" aria-hidden="true">swipe<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></p><div class="table-wrap" role="region" tabindex="0" aria-label="Table (scrolls sideways)"><table>
+<thead>
+<tr>
+<th>Step</th>
+<th>Important detail</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>hostname</code> (if not set yet)</td>
+<td class="tw">must be different from the default; RSA keys can only be generated then</td>
+</tr>
+<tr>
+<td><code><span class="nw">ip</span> <span class="nw">domain-name</span></code></td>
+<td class="tw">the domain name becomes part of the key name; on recent IOS XE the command shows in the configuration as <code><span class="nw">ip</span> <span class="nw">domain</span> <span class="nw">name</span></code>; both forms are accepted (the same goes for <code><span class="nw">no</span> <span class="nw">ip</span> <span class="nw">domain</span> <span class="nw">lookup</span></code>)</td>
+</tr>
+<tr>
+<td><code><span class="nw">crypto</span> <span class="nw">key</span> <span class="nw">generate</span> <span class="nw">rsa</span> <span class="nw">...</span> <span class="nw">modulus</span> <span class="nw">2048</span></code></td>
+<td class="tw">creates the keys and starts the SSH server; SSH v2 needs at least 768-bit keys on classic IOS; use 2048 or more today</td>
+</tr>
+<tr>
+<td><code><span class="nw">ip</span> <span class="nw">ssh</span> <span class="nw">version</span> <span class="nw">2</span></code></td>
+<td class="tw">disables version 1, which is old and insecure</td>
+</tr>
+<tr>
+<td><code><span class="nw">username</span> <span class="nw">...</span> <span class="nw">secret</span> <span class="nw">...</span></code></td>
+<td class="tw">the local user, with the password stored as a hash</td>
+</tr>
+<tr>
+<td><code><span class="nw">transport</span> <span class="nw">input</span> <span class="nw">ssh</span></code></td>
+<td class="tw">the vty lines accept only SSH, not Telnet</td>
+</tr>
+<tr>
+<td><code><span class="nw">login</span> <span class="nw">local</span></code></td>
+<td class="tw">authentication uses the local users, not the line password</td>
+</tr>
+</tbody></table></div></div>
+<p>On switches there are usually 16 vty lines, so you type <code>line vty 0 15</code>. On routers the number varies by model; <code>line vty 0 4</code> is the classic form. See how many vty lines your device has with <code>line vty 0 ?</code> or <code>show running-config | section line vty</code>, and configure all of them.</p>
+<p>Verification: <code>show ip ssh</code> (the SSH version and settings) and <code>show ssh</code> (the sessions currently connected). From another Cisco device you connect with <code>ssh -l admin 192.168.1.1</code>.</p>
+<h3 id="a-switch-s-management-address">A switch&#39;s management address</h3>
+<p>A Layer 2 switch has no IP addresses on its ports. To manage it remotely, you give it an address on a virtual interface (SVI) and a default gateway:</p>
+<pre><code class="language-text">S1(config)# interface vlan 99
+S1(config-if)# ip address 192.168.99.11 255.255.255.0
+S1(config-if)# no shutdown
+S1(config-if)# exit
+S1(config)# ip default-gateway 192.168.99.1
+</code></pre>
+<p>VLANs, access ports and trunks have their own guide: <a href="../vlans-and-trunks/">VLANs and trunks explained</a>.</p>
+<h2 id="configuring-interfaces">Configuring interfaces</h2>
+<pre><code class="language-text">R1(config)# interface GigabitEthernet0/0/0
+R1(config-if)# description To the floor 1 LAN
+R1(config-if)# ip address 192.168.10.1 255.255.255.0
+R1(config-if)# ipv6 address 2001:db8:acad:10::1/64
+R1(config-if)# ipv6 address fe80::1 link-local
+R1(config-if)# no shutdown
+R1(config-if)# exit
+R1(config)# ipv6 unicast-routing
+</code></pre>
+<div class="table-scroll"><p class="table-hint" aria-hidden="true">swipe<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></p><div class="table-wrap" role="region" tabindex="0" aria-label="Table (scrolls sideways)"><table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Effect</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code><span class="nw">description</span> <span class="nw">...</span></code></td>
+<td class="tw">a note for humans; doesn&#39;t change how anything works</td>
+</tr>
+<tr>
+<td><code><span class="nw">ip</span> <span class="nw">address</span> <span class="nw">&lt;address&gt;</span> <span class="nw">&lt;mask&gt;</span></code></td>
+<td class="tw">the IPv4 address; the mask is written in dotted decimal, not as a prefix</td>
+</tr>
+<tr>
+<td><code><span class="nw">ipv6</span> <span class="nw">address</span> <span class="nw">&lt;address&gt;/&lt;prefix&gt;</span></code></td>
+<td class="tw">the IPv6 address; here you do use a prefix</td>
+</tr>
+<tr>
+<td><code><span class="nw">ipv6</span> <span class="nw">address</span> <span class="nw">fe80::1</span> <span class="nw">link-local</span></code></td>
+<td class="tw">replaces the automatically generated link-local address</td>
+</tr>
+<tr>
+<td><code><span class="nw">no</span> <span class="nw">shutdown</span></code></td>
+<td>enables the interface</td>
+</tr>
+<tr>
+<td><code>shutdown</code></td>
+<td>disables the interface</td>
+</tr>
+<tr>
+<td><code><span class="nw">ipv6</span> <span class="nw">unicast-routing</span></code></td>
+<td class="tw">(global) enables IPv6 routing on the router</td>
+</tr>
+</tbody></table></div></div>
+<p>The rule that catches many beginners: <strong>router interfaces are shut down by default</strong> and need <code>no shutdown</code>. Switch ports are enabled by default. For IPv6 addresses and how to abbreviate them, see <a href="../ipv6-addresses-explained/">IPv6 addresses explained</a>; for IPv4 masks and subnets, <a href="../subnetting-step-by-step/">subnetting step by step</a>.</p>
+<h2 id="saving-and-managing-the-configuration">Saving and managing the configuration</h2>
+<div class="table-scroll"><p class="table-hint" aria-hidden="true">swipe<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></p><div class="table-wrap" role="region" tabindex="0" aria-label="Table (scrolls sideways)"><table>
+<thead>
+<tr>
+<th>Command</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code><span class="nw">copy</span> <span class="nw">running-config</span> <span class="nw">startup-config</span></code></td>
+<td>saves the active configuration to NVRAM</td>
+</tr>
+<tr>
+<td><code><span class="nw">write</span> <span class="nw">memory</span></code> (or <code>wr</code>)</td>
+<td class="tw">same effect, the older form, still accepted</td>
+</tr>
+<tr>
+<td><code><span class="nw">show</span> <span class="nw">running-config</span></code></td>
+<td>the active configuration</td>
+</tr>
+<tr>
+<td><code><span class="nw">show</span> <span class="nw">startup-config</span></code></td>
+<td>the saved configuration</td>
+</tr>
+<tr>
+<td><code><span class="nw">erase</span> <span class="nw">startup-config</span></code> or <code><span class="nw">write</span> <span class="nw">erase</span></code></td>
+<td class="tw">erases the saved configuration (after <code>reload</code>, the device boots empty)</td>
+</tr>
+<tr>
+<td><code>reload</code></td>
+<td>restarts the device</td>
+</tr>
+<tr>
+<td><code><span class="nw">copy</span> <span class="nw">running-config</span> <span class="nw">tftp:</span></code></td>
+<td>backup to a TFTP server</td>
+</tr>
+<tr>
+<td><code><span class="nw">copy</span> <span class="nw">startup-config</span> <span class="nw">running-config</span></code></td>
+<td class="tw"><strong>merges</strong> the saved configuration into the active one; it doesn&#39;t replace it</td>
+</tr>
+</tbody></table></div></div>
+<p>Broke something and haven&#39;t saved? A <code>reload</code> without saving (answer &quot;no&quot; when it asks whether to save) takes you back to the last saved configuration. On a switch, VLANs live in <code>vlan.dat</code>, so for a full reset you delete that file too: <code>delete flash:vlan.dat</code>.</p>
+<h2 id="show-commands-cheat-sheet">Show commands cheat sheet</h2>
+<div class="table-scroll"><p class="table-hint" aria-hidden="true">swipe<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></p><div class="table-wrap" role="region" tabindex="0" aria-label="Table (scrolls sideways)"><table>
+<thead>
+<tr>
+<th>Command</th>
+<th>What it shows you</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code><span class="nw">show</span> <span class="nw">version</span></code></td>
+<td class="tw">IOS version, uptime, model, memory, interfaces, configuration register</td>
+</tr>
+<tr>
+<td><code><span class="nw">show</span> <span class="nw">running-config</span></code></td>
+<td>the active configuration</td>
+</tr>
+<tr>
+<td><code><span class="nw">show</span> <span class="nw">startup-config</span></code></td>
+<td>the saved configuration</td>
+</tr>
+<tr>
+<td><code><span class="nw">show</span> <span class="nw">ip</span> <span class="nw">interface</span> <span class="nw">brief</span></code></td>
+<td class="tw">every interface, its IPv4 address and status (Status / Protocol), one per line</td>
+</tr>
+<tr>
+<td><code><span class="nw">show</span> <span class="nw">ipv6</span> <span class="nw">interface</span> <span class="nw">brief</span></code></td>
+<td class="tw">the same for IPv6, with link-local and global addresses</td>
+</tr>
+<tr>
+<td><code><span class="nw">show</span> <span class="nw">interfaces</span> <span class="nw">g0/0/0</span></code></td>
+<td class="tw">Layer 1 and 2 details: MAC, speed, duplex, MTU, errors, CRC, collisions</td>
+</tr>
+<tr>
+<td><code><span class="nw">show</span> <span class="nw">ip</span> <span class="nw">interface</span> <span class="nw">g0/0/0</span></code></td>
+<td class="tw">Layer 3 details: the address, applied ACLs and other IP settings</td>
+</tr>
+<tr>
+<td><code><span class="nw">show</span> <span class="nw">ip</span> <span class="nw">route</span></code></td>
+<td class="tw">the IPv4 routing table (C = connected, L = local address, S = static, O = OSPF)</td>
+</tr>
+<tr>
+<td><code><span class="nw">show</span> <span class="nw">ipv6</span> <span class="nw">route</span></code></td>
+<td>the IPv6 routing table</td>
+</tr>
+<tr>
+<td><code><span class="nw">show</span> <span class="nw">arp</span></code> (or <code><span class="nw">show</span> <span class="nw">ip</span> <span class="nw">arp</span></code>)</td>
+<td>the ARP table: IP → MAC</td>
+</tr>
+<tr>
+<td><code><span class="nw">show</span> <span class="nw">mac</span> <span class="nw">address-table</span></code></td>
+<td class="tw">(switch) learned MAC addresses, per port and per VLAN</td>
+</tr>
+<tr>
+<td><code><span class="nw">show</span> <span class="nw">vlan</span> <span class="nw">brief</span></code></td>
+<td class="tw">(switch) VLANs and the access ports in each</td>
+</tr>
+<tr>
+<td><code><span class="nw">show</span> <span class="nw">interfaces</span> <span class="nw">trunk</span></code></td>
+<td class="tw">(switch) trunks, native VLAN, allowed VLANs</td>
+</tr>
+<tr>
+<td><code><span class="nw">show</span> <span class="nw">cdp</span> <span class="nw">neighbors</span></code></td>
+<td class="tw">directly connected Cisco neighbors: name, local port, remote port, model</td>
+</tr>
+<tr>
+<td><code><span class="nw">show</span> <span class="nw">cdp</span> <span class="nw">neighbors</span> <span class="nw">detail</span></code></td>
+<td class="tw">the same, plus the neighbors&#39; IP addresses and IOS version</td>
+</tr>
+<tr>
+<td><code><span class="nw">show</span> <span class="nw">lldp</span> <span class="nw">neighbors</span></code></td>
+<td class="tw">neighbors via LLDP, the standard protocol (must be enabled with <code><span class="nw">lldp</span> <span class="nw">run</span></code>)</td>
+</tr>
+<tr>
+<td><code><span class="nw">show</span> <span class="nw">ip</span> <span class="nw">protocols</span></code></td>
+<td class="tw">active routing protocols and their settings</td>
+</tr>
+<tr>
+<td><code><span class="nw">show</span> <span class="nw">protocols</span></code></td>
+<td class="tw">interface status and their Layer 3 addresses</td>
+</tr>
+<tr>
+<td><code><span class="nw">show</span> <span class="nw">history</span></code></td>
+<td class="tw">the last commands typed in the current session</td>
+</tr>
+<tr>
+<td><code><span class="nw">show</span> <span class="nw">users</span></code></td>
+<td>who is connected to the device</td>
+</tr>
+<tr>
+<td><code><span class="nw">show</span> <span class="nw">clock</span></code></td>
+<td>the device&#39;s date and time</td>
+</tr>
+<tr>
+<td><code><span class="nw">show</span> <span class="nw">flash:</span></code></td>
+<td class="tw">the files in flash memory, including the IOS image</td>
+</tr>
+<tr>
+<td><code><span class="nw">show</span> <span class="nw">ip</span> <span class="nw">ssh</span></code></td>
+<td class="tw">whether SSH is enabled and which version it uses</td>
+</tr>
+<tr>
+<td><code><span class="nw">show</span> <span class="nw">logging</span></code></td>
+<td>system messages kept in memory</td>
+</tr>
+</tbody></table></div></div>
+<h3 id="filtering-output">Filtering output</h3>
+<p>Long output can be filtered with the pipe:</p>
+<div class="table-scroll"><p class="table-hint" aria-hidden="true">swipe<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></p><div class="table-wrap" role="region" tabindex="0" aria-label="Table (scrolls sideways)"><table>
+<thead>
+<tr>
+<th>Filter</th>
+<th>Example</th>
+<th>Effect</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>include</code></td>
+<td><code><span class="nw">show</span> <span class="nw">running-config</span> <span class="nw">|</span> <span class="nw">include</span> <span class="nw">hostname</span></code></td>
+<td>only lines containing the text</td>
+</tr>
+<tr>
+<td><code>exclude</code></td>
+<td><code><span class="nw">show</span> <span class="nw">ip</span> <span class="nw">interface</span> <span class="nw">brief</span> <span class="nw">|</span> <span class="nw">exclude</span> <span class="nw">unassigned</span></code></td>
+<td>hides lines containing the text</td>
+</tr>
+<tr>
+<td><code>begin</code></td>
+<td><code><span class="nw">show</span> <span class="nw">running-config</span> <span class="nw">|</span> <span class="nw">begin</span> <span class="nw">line</span> <span class="nw">vty</span></code></td>
+<td class="tw">starts output at the first line containing the text</td>
+</tr>
+<tr>
+<td><code>section</code></td>
+<td><code><span class="nw">show</span> <span class="nw">running-config</span> <span class="nw">|</span> <span class="nw">section</span> <span class="nw">interface</span></code></td>
+<td>whole matching blocks</td>
+</tr>
+</tbody></table></div></div>
+<p><code>terminal length 0</code> turns off paging (<code>--More--</code>) for the current session, handy when you&#39;re copying a whole configuration.</p>
+<h2 id="troubleshooting-ping-traceroute-and-interface-status">Troubleshooting: ping, traceroute and interface status</h2>
+<h3 id="ping">ping</h3>
+<pre><code class="language-text">R1# ping 192.168.20.10
+R1# ping 192.168.20.10 source GigabitEthernet0/0/0
+R1# ping 192.168.20.10 repeat 100
+R1# ping
+</code></pre>
+<p>The last form, <code>ping</code> with no arguments, starts an <strong>extended ping</strong>, which asks you step by step for the destination, packet count, size and source address.</p>
+<div class="table-scroll"><p class="table-hint" aria-hidden="true">swipe<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></p><div class="table-wrap" role="region" tabindex="0" aria-label="Table (scrolls sideways)"><table>
+<thead>
+<tr>
+<th>Symbol</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>!</code></td>
+<td>a reply came back</td>
+</tr>
+<tr>
+<td><code>.</code></td>
+<td>timed out, no reply</td>
+</tr>
+<tr>
+<td><code>U</code></td>
+<td class="tw">a router along the path replied that the destination is unreachable</td>
+</tr>
+</tbody></table></div></div>
+<p>The first ping to a new destination often loses the first packet (<code>.!!!!</code>): the device first waits for the ARP reply. That&#39;s normal.</p>
+<h3 id="traceroute">traceroute</h3>
+<p><code>traceroute 203.0.113.10</code> shows every router along the path and the time to reach it. A <code>*</code> means that hop didn&#39;t reply in time. On Windows the equivalent command is <code>tracert</code>. Where the list stops is a good clue to where the problem is.</p>
+<h3 id="interface-status-show-ip-interface-brief">Interface status (show ip interface brief)</h3>
+<div class="table-scroll"><p class="table-hint" aria-hidden="true">swipe<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></p><div class="table-wrap" role="region" tabindex="0" aria-label="Table (scrolls sideways)"><table>
+<thead>
+<tr>
+<th>Status</th>
+<th>Protocol</th>
+<th>What it means</th>
+<th>What you do</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>up</td>
+<td>up</td>
+<td>all good</td>
+<td>nothing</td>
+</tr>
+<tr>
+<td>administratively down</td>
+<td>down</td>
+<td>the interface has <code>shutdown</code></td>
+<td><code><span class="nw">no</span> <span class="nw">shutdown</span></code></td>
+</tr>
+<tr>
+<td>down</td>
+<td>down</td>
+<td class="tw">physical problem: cable unplugged or faulty, the other end shut down</td>
+<td>check the cable and the other end</td>
+</tr>
+<tr>
+<td>up</td>
+<td>down</td>
+<td class="tw">Layer 2 problem (especially on serial links: mismatched encapsulation at the two ends, missing <code><span class="nw">clock</span> <span class="nw">rate</span></code> on the DCE end)</td>
+<td>check the configuration at both ends</td>
+</tr>
+</tbody></table></div></div>
+<p>In <code>show interfaces</code>, the counters help too: lots of <strong>CRC errors</strong> point to a bad cable or interference, while <strong>late collisions</strong> usually point to a duplex mismatch. <code>clear counters</code> resets them to zero so you can see whether they keep climbing.</p>
+<h3 id="debug-carefully">debug (carefully)</h3>
+<pre><code class="language-text">R1# terminal monitor
+R1# debug ip icmp
+R1# undebug all
+</code></pre>
+<p><code>debug</code> shows what the device is doing in real time, but it uses CPU. On a production device it can slow everything down or even hang it. Keep it as targeted and as short as possible, and always turn it off with <code>undebug all</code> (or <code>no debug all</code>). <code>terminal monitor</code> is needed to see the messages when you&#39;re connected over SSH rather than the console. <code>show debugging</code> shows which debugs are active.</p>
+<h3 id="on-a-pc-windows">On a PC (Windows)</h3>
+<div class="table-scroll"><p class="table-hint" aria-hidden="true">swipe<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></p><div class="table-wrap" role="region" tabindex="0" aria-label="Table (scrolls sideways)"><table>
+<thead>
+<tr>
+<th>Command</th>
+<th>What it shows you</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code><span class="nw">ipconfig</span> <span class="nw">/all</span></code></td>
+<td class="tw">IP address, mask, gateway, DNS servers, MAC</td>
+</tr>
+<tr>
+<td><code>ping</code></td>
+<td>connectivity</td>
+</tr>
+<tr>
+<td><code>tracert</code></td>
+<td>the path to the destination</td>
+</tr>
+<tr>
+<td><code><span class="nw">arp</span> <span class="nw">-a</span></code></td>
+<td>the PC&#39;s ARP table</td>
+</tr>
+<tr>
+<td><code>nslookup</code></td>
+<td>resolving a name through DNS</td>
+</tr>
+</tbody></table></div></div>
+<h2 id="keyboard-shortcuts">Keyboard shortcuts</h2>
+<div class="table-scroll"><p class="table-hint" aria-hidden="true">swipe<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></p><div class="table-wrap" role="region" tabindex="0" aria-label="Table (scrolls sideways)"><table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Effect</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Tab</td>
+<td>completes the command</td>
+</tr>
+<tr>
+<td>?</td>
+<td>context-sensitive help</td>
+</tr>
+<tr>
+<td>Up arrow / Ctrl+P</td>
+<td>previous command in history</td>
+</tr>
+<tr>
+<td>Down arrow / Ctrl+N</td>
+<td>next command in history</td>
+</tr>
+<tr>
+<td>Ctrl+A</td>
+<td class="tw">moves the cursor to the start of the line</td>
+</tr>
+<tr>
+<td>Ctrl+E</td>
+<td>moves the cursor to the end of the line</td>
+</tr>
+<tr>
+<td>Ctrl+W</td>
+<td class="tw">deletes the word to the left of the cursor</td>
+</tr>
+<tr>
+<td>Ctrl+R</td>
+<td class="tw">redisplays the current line (useful after a system message)</td>
+</tr>
+<tr>
+<td>Ctrl+Z</td>
+<td class="tw">leaves configuration, straight to privileged EXEC</td>
+</tr>
+<tr>
+<td>Ctrl+C</td>
+<td class="tw">cancels the current line or leaves configuration</td>
+</tr>
+<tr>
+<td>Ctrl+Shift+6</td>
+<td class="tw">interrupts a long-running ping, traceroute or DNS lookup</td>
+</tr>
+<tr>
+<td>Space (at <code>--More--</code>)</td>
+<td>next page</td>
+</tr>
+<tr>
+<td>Enter (at <code>--More--</code>)</td>
+<td>next line</td>
+</tr>
+<tr>
+<td>any other key (at <code>--More--</code>)</td>
+<td>stops the output</td>
+</tr>
+</tbody></table></div></div>
+<h2 id="how-to-learn-them-without-rote-memorization">How to learn them without rote memorization</h2>
+<ul>
+<li><strong>Configure a router and a switch from scratch, from memory:</strong> hostname, passwords, SSH, interfaces, save. Repeat until it takes you under 10 minutes.</li>
+<li><strong>After every configuration command, verify with a <code>show</code> command.</strong> That&#39;s how you learn the pairs: <code>ip address</code> ↔ <code>show ip interface brief</code>, <code>vlan</code> ↔ <code>show vlan brief</code>, SSH ↔ <code>show ip ssh</code>.</li>
+<li><strong>Break things on purpose,</strong> then fix them: a forgotten <code>shutdown</code>, a wrong mask, a missing <code>login</code> on the console.</li>
+<li><strong>Tie commands to the layers:</strong> <code>show interfaces</code> is Layers 1–2, <code>show ip route</code> is Layer 3. See <a href="../osi-vs-tcp-ip/">OSI vs TCP/IP</a>.</li>
+</ul>
+<div class="cta-box cta-box--article"><svg class="mascot" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><g class="m-breathe"><path d="M22 14l-5-9M42 14l5-9" stroke="#8a919c" stroke-width="3.4" stroke-linecap="round" fill="none"/><circle class="m-led m-led-l" cx="17" cy="5" r="3.6"/><circle class="m-led m-led-r" cx="47" cy="5" r="3.6"/><path class="m-body" d="M28 12q4-6 8 0"/><rect class="m-body" x="8" y="12" width="48" height="42" rx="18"/><rect class="m-belly" x="8" y="40" width="48" height="14" rx="7"/><path d="M19 31q4-5 8 0" stroke="#1a1d24" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M37 31q4-5 8 0" stroke="#1a1d24" stroke-width="3" fill="none" stroke-linecap="round"/><path class="m-led" d="M29 37l3 3.5 3-3.5z"/><circle cx="15" cy="38" r="3" fill="#ff8fb1" opacity=".7"/><circle cx="49" cy="38" r="3" fill="#ff8fb1" opacity=".7"/><circle class="m-ok" cx="18" cy="47" r="2"/><circle class="m-led" cx="24" cy="47" r="2"/><rect x="31" y="45" width="6" height="4" rx="1" fill="#0d1a3a" opacity=".55"/><rect x="39" y="45" width="6" height="4" rx="1" fill="#0d1a3a" opacity=".55"/><rect x="47" y="45" width="5" height="4" rx="1" fill="#0d1a3a" opacity=".55"/><path class="m-leg" d="M20 54v4M44 54v4" stroke-width="3.4" stroke-linecap="round" fill="none"/></g></svg><div><h3>Practice Cisco IOS commands in the Routerel app</h3><p>Routerel has over 1,900 questions for CCNA 1 · ITN, CCNA 2 · IEN and CCNA 3 · CEN, including questions with zoomable configurations and <code>show</code> output, each with an explanation right after you answer. Your mistakes come back automatically through spaced repetition until you&#39;ve mastered them, and the timed exam simulation shows you where you stand. New subscribers get a 7-day free trial with full access.</p></div><a class="btn" href="../../">Discover the app<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div><h2 id="frequently-asked-questions">Frequently asked questions</h2>
+<div class="faq faq--article"><details><summary>What is the difference between running-config and startup-config?<span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p>The running-config is the active configuration, held in RAM; it&#39;s lost on reboot unless you save it. The startup-config is the configuration saved in NVRAM and loaded at boot. You sync them with <code>copy running-config startup-config</code>.</p></div></details><details><summary>What is the difference between enable password and enable secret?<span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p>Both protect access to privileged mode, but <code>enable secret</code> stores the password as a hash that can&#39;t be read back, while <code>enable password</code> keeps it in clear text or with weak encryption. If both are configured, <code>enable secret</code> is used.</p></div></details><details><summary>What do I need to configure for SSH access to a Cisco router?<span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p>A hostname other than the default, a domain name (<code>ip domain-name</code>), an RSA key pair (<code>crypto key generate rsa</code>), a local user (<code>username ... secret ...</code>), then on the vty lines: <code>transport input ssh</code> and <code>login local</code>. <code>ip ssh version 2</code> is also recommended.</p></div></details><details><summary>What does service password-encryption do?<span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p>It hides clear-text passwords in the configuration (for example the console and vty passwords) using weak type 7 encryption. It protects you from shoulder surfing, but the passwords are easy to decrypt, so it&#39;s no substitute for <code>enable secret</code> and users configured with <code>secret</code>.</p></div></details><details><summary>How do I quickly exit configuration mode?<span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p>With <code>end</code> or Ctrl+Z you go straight to privileged EXEC mode (the prompt with <code>#</code>). The <code>exit</code> command only goes up one level.</p></div></details><details><summary>How do I run a show command from configuration mode?<span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p>Put <code>do</code> in front of it, for example <code>do show ip interface brief</code>. That way you don&#39;t have to leave and re-enter configuration mode. For a complete study plan, see our <a href="../what-is-ccna/">guide to CCNA</a>.</p></div></details></div>
+<hr>
+<p><em>Routerel is an independent app and is not affiliated with, sponsored by or endorsed by Cisco Systems, Inc. Cisco, CCNA, Cisco IOS and Networking Academy are trademarks of Cisco Systems, Inc.</em></p>
+      
+      <section class="related" aria-labelledby="rel-title">
+        <h2 id="rel-title">Read next</h2>
+        <div class="grid grid--2"><a class="card post-card lift" href="../../../en/guides/ipv6-addresses-explained/"><span class="tagline">Guide · 13 min</span><h3>IPv6 Addresses Explained: Format, Shortening, Types</h3><p>IPv6 addresses made simple: the 128-bit format, how to shorten and expand them, address types, EUI-64 step by step, SLAAC vs DHCPv6, and exercises with answers.</p></a><a class="card post-card lift" href="../../../en/guides/osi-vs-tcp-ip/"><span class="tagline">Guide · 12 min</span><h3>OSI Model vs TCP/IP Model Explained (With Examples)</h3><p>The OSI and TCP/IP models made simple: the 7 layers, PDUs, protocols and devices, encapsulation of a real web request, CCNA exam traps and practice questions.</p></a></div>
+      </section>
+    </article>
+  </div>
+</main>
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="about">
+        <a class="brand" href="../../../en/"><img src="../../../assets/icon-96.webp" alt="" width="36" height="36" loading="lazy"><span>Routerel</span></a>
+        <p>CCNA practice on your phone: questions with explanations, spaced repetition and exam simulations. In English and Romanian.</p>
+      </div>
+      <div><h2>The app</h2><ul><li><a href="../../../en/#features">Features</a></li><li><a href="../../../en/#pricing">Pricing</a></li><li><a href="../../../en/#how-it-works">How it works</a></li><li><a href="../../../en/#faq">FAQ</a></li></ul></div>
+      <div><h2>Resources</h2><ul><li><a href="../../../en/guides/">CCNA guides</a></li><li><a href="../../../en/tools/">Free tools</a></li><li><a href="../../../" hreflang="ro" lang="ro" data-set-lang="ro">Română</a></li></ul></div>
+      <div><h2>Legal & contact</h2><ul><li><a href="../../../en/privacy.html">Privacy policy</a></li><li><a href="../../../en/terms.html">Terms of use</a></li><li><a href="../../../en/delete-account.html">Delete your account</a></li></ul><ul><li><a href="mailto:contact@routerel.app">contact@routerel.app</a></li></ul></div>
+    </div>
+    <div class="disclaimer">
+      <p>Routerel is an independent app, not affiliated with, sponsored or endorsed by Cisco Systems, Inc. Cisco, CCNA and Cisco Networking Academy are trademarks of Cisco Systems, Inc.</p>
+      <p>© 2026 Routerel</p>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

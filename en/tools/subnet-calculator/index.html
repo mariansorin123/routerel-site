@@ -1,0 +1,123 @@
+<!doctype html>
+<!-- Pagină generată. Nu o edita de mână: vezi tools/site/ (npm run build:guides / npm run sync:tools / npm run build:legal). -->
+<html lang="en" class="play-soon">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>IPv4 Subnet Calculator with Step-by-Step Working | Routerel</title>
+  <meta name="description" content="Free subnet calculator: network address, broadcast, first and last host, mask and wildcard, with every step explained. Also splits networks and plans VLSM.">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <link rel="canonical" href="https://routerel.app/en/tools/subnet-calculator/">
+  <link rel="alternate" hreflang="ro" href="https://routerel.app/tools/calculator-subnetting/">
+  <link rel="alternate" hreflang="en" href="https://routerel.app/en/tools/subnet-calculator/">
+  <link rel="alternate" hreflang="x-default" href="https://routerel.app/en/tools/subnet-calculator/">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#12151b" media="(prefers-color-scheme: dark)">
+  <meta name="color-scheme" content="light dark">
+  <link rel="icon" href="../../../assets/favicon-32.png" type="image/png" sizes="32x32">
+  <link rel="icon" href="../../../assets/icon-192.png" type="image/png" sizes="192x192">
+  <link rel="apple-touch-icon" href="../../../assets/apple-touch-icon.png">
+  <link rel="manifest" href="../../../site.webmanifest">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Routerel">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="ro_RO">
+  <meta property="og:title" content="IPv4 Subnet Calculator with Step-by-Step Working | Routerel">
+  <meta property="og:description" content="Free subnet calculator: network address, broadcast, first and last host, mask and wildcard, with every step explained. Also splits networks and plans VLSM.">
+  <meta property="og:url" content="https://routerel.app/en/tools/subnet-calculator/">
+  <meta property="og:image" content="https://routerel.app/assets/og-en.png">
+  <meta property="og:image:width" content="1024">
+  <meta property="og:image:height" content="500">
+  <meta property="og:image:alt" content="Routerel: the router chick mascot and the app name">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="IPv4 Subnet Calculator with Step-by-Step Working | Routerel">
+  <meta name="twitter:description" content="Free subnet calculator: network address, broadcast, first and last host, mask and wildcard, with every step explained. Also splits networks and plans VLSM.">
+  <meta name="twitter:image" content="https://routerel.app/assets/og-en.png">
+  <link rel="stylesheet" href="../../../assets/tools/subnet/subnet.css">
+  <link rel="modulepreload" href="../../../assets/tools/subnet/ui.js">
+  <link rel="preload" href="../../../assets/fonts/nunito-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../../../assets/fonts/nunito-latin-ext.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../../../assets/fonts/roboto-mono-500-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="../../../style.css">
+  <script>(function(d){d.classList.add("js");try{var t=localStorage.getItem("routerel-theme");if(t==="light"||t==="dark")d.setAttribute("data-theme",t)}catch(e){}setTimeout(function(){if(!window.__rtl)d.classList.remove("js")},4000)})(document.documentElement)</script>
+  <script src="../../../assets/site.js" defer></script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebApplication","@id":"https://routerel.app/en/tools/subnet-calculator/#app","name":"IPv4 subnet calculator","url":"https://routerel.app/en/tools/subnet-calculator/","description":"Free subnet calculator: network address, broadcast, first and last host, mask and wildcard, with every step explained. Also splits networks and plans VLSM.","inLanguage":"en","applicationCategory":"EducationalApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"featureList":["Network and broadcast address","First and last host","Host count","Mask and wildcard","Binary view","Step-by-step working","Equal subnets","VLSM"],"publisher":{"@type":"Organization","name":"Routerel","url":"https://routerel.app/"},"isPartOf":{"@id":"https://routerel.app/#website"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://routerel.app/en/"},{"@type":"ListItem","position":2,"name":"Tools","item":"https://routerel.app/en/tools/"},{"@type":"ListItem","position":3,"name":"IPv4 subnet calculator","item":"https://routerel.app/en/tools/subnet-calculator/"}]},{"@type":"FAQPage","@id":"https://routerel.app/en/tools/subnet-calculator/#faq","inLanguage":"en","mainEntity":[{"@type":"Question","name":"What does this subnet calculator do?","acceptedAnswer":{"@type":"Answer","text":"It takes an IPv4 address with a prefix (for example /26) or a mask (255.255.255.192) and works out the network address, broadcast, first and last host, number of usable hosts, wildcard mask and address type. It also shows the address in binary, with the network/host boundary marked."}},{"@type":"Question","name":"Can it split a network into equal subnets or plan VLSM?","acceptedAnswer":{"@type":"Answer","text":"Yes. The “Equal subnets” tab splits a network by the number of subnets or by the hosts you need in each. The “VLSM” tab allocates blocks of different sizes, from the largest requirement to the smallest."}},{"@type":"Question","name":"Why do we subtract 2 addresses in every subnet?","acceptedAnswer":{"@type":"Answer","text":"The first address is the network address and the last one is the broadcast; neither can be given to a device. The exceptions are /31 (point-to-point links, RFC 3021), which has 2 usable addresses, and /32, which is a single host."}},{"@type":"Question","name":"Are the addresses I type sent anywhere?","acceptedAnswer":{"@type":"Answer","text":"No. Everything is calculated in your browser, and the addresses never leave your device."}},{"@type":"Question","name":"Can I use a calculator in the CCNA exam?","acceptedAnswer":{"@type":"Answer","text":"No, you subnet by hand in the exam. Use the calculator to check the exercises you solve yourself; speed comes from a few minutes of practice every day."}}]}]}</script>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs><linearGradient id="rtl-play" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5b8cff"/><stop offset=".55" stop-color="#2f6bff"/><stop offset="1" stop-color="#ffb020"/></linearGradient></defs></svg>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="container header-row">
+    <a class="brand" href="../../../en/" aria-label="Routerel home"><img src="../../../assets/icon-96.webp" alt="" width="36" height="36"><span>Routerel</span></a>
+    <nav class="main-nav" aria-label="Main"><ul><li><a href="../../../en/#features">Features</a></li><li><a href="../../../en/#pricing">Pricing</a></li><li><a href="../../../en/guides/">Guides</a></li><li><a href="../../../en/tools/" aria-current="page">Tools</a></li><li><a href="../../../en/#faq">FAQ</a></li></ul></nav>
+    <div class="header-actions">
+      <div class="lang-switch" role="group" aria-label="Language"><a href="../../../tools/calculator-subnetting/" hreflang="ro" lang="ro" title="Română">RO</a><span aria-current="true" lang="en">EN</span></div>
+      <button class="icon-btn theme-toggle" type="button" data-theme-toggle aria-label="Switch theme"><span class="i-moon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9z"/></svg></span><span class="i-sun"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg></span></button>
+      <a class="btn btn--sm header-cta" data-play data-soon-href="../../../en/#pricing" href="../../../en/#pricing"><span data-when="live">Try free</span><span data-when="soon">See pricing</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      <button class="icon-btn menu-btn" type="button" data-menu-btn aria-expanded="false" aria-controls="mobile-nav" aria-label="Menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+    </div>
+  </div>
+  <nav class="mobile-nav" id="mobile-nav" aria-label="Main" hidden>
+    <div class="container"><ul><li><a href="../../../en/#features">Features</a></li><li><a href="../../../en/#pricing">Pricing</a></li><li><a href="../../../en/guides/">Guides</a></li><li><a href="../../../en/tools/" aria-current="page">Tools</a></li><li><a href="../../../en/#faq">FAQ</a></li></ul></div>
+  </nav>
+</header>
+<main id="main">
+  <section class="page-hero page-hero--tool">
+    <div class="container">
+      <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="../../../en/">Home</a></li><li><a href="../../../en/tools/">Tools</a></li><li><span aria-current="page">IPv4 subnet calculator</span></li></ol></nav>
+      <p class="eyebrow">Free tool</p>
+      <h1>IPv4 subnet calculator</h1>
+      <p class="lead">Enter an IPv4 address with a prefix or a mask. Get the network, broadcast and host range, and see the working step by step with the block-size method. Free, right in your browser.</p>
+    </div>
+  </section>
+  <section class="section section--tight tool-section" aria-label="IPv4 subnet calculator">
+    <div class="container tool-wrap">
+      <h2 class="sr-only">The tool</h2>
+      <div id="subnet-tool" class="tool-mount" data-tool="subnet" style="--tool-min-m:2300px;--tool-min-d:1550px"><noscript><p class="tool-noscript">The calculator needs JavaScript. Turn it on in your browser and reload the page.</p></noscript></div>
+    </div>
+  </section>
+  <section class="section section--tight">
+    <div class="container">
+      <div class="prose tool-prose">
+        <h2 id="how-it-works">How it&#39;s calculated, in short</h2>
+        <ol><li>The prefix tells you how many bits belong to the network. <code>/26</code> means 26 network bits and 6 host bits, so the mask is <code>255.255.255.192</code>.</li><li>Find the interesting octet, where the mask ends (the fourth one here), and the block size: 256 − 192 = <strong>64</strong>.</li><li>Subnets start every 64: .0, .64, .128, .192. For <code>192.168.10.77</code>, 77 sits between 64 and 128, so the network is <code>192.168.10.64</code>.</li><li>The broadcast is the address just before the next network: <code>192.168.10.127</code>. Hosts run from .65 to .126, which is 2^6 − 2 = <strong>62</strong>.</li></ol>
+        <p>The full method, with /20, /22 and /30 examples, VLSM and practice exercises with answers, is in the guide <a href="../../../en/guides/subnetting-step-by-step/">Subnetting explained step by step</a>.</p>
+      </div>
+      <div class="section-head" style="margin-top:48px"><h2 id="faq">Frequently asked questions</h2></div>
+      <div class="faq">
+        <details><summary>What does this subnet calculator do?<span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p>It takes an IPv4 address with a prefix (for example /26) or a mask (255.255.255.192) and works out the network address, broadcast, first and last host, number of usable hosts, wildcard mask and address type. It also shows the address in binary, with the network/host boundary marked.</p></div></details>
+        <details><summary>Can it split a network into equal subnets or plan VLSM?<span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p>Yes. The “Equal subnets” tab splits a network by the number of subnets or by the hosts you need in each. The “VLSM” tab allocates blocks of different sizes, from the largest requirement to the smallest.</p></div></details>
+        <details><summary>Why do we subtract 2 addresses in every subnet?<span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p>The first address is the network address and the last one is the broadcast; neither can be given to a device. The exceptions are /31 (point-to-point links, RFC 3021), which has 2 usable addresses, and /32, which is a single host.</p></div></details>
+        <details><summary>Are the addresses I type sent anywhere?<span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p>No. Everything is calculated in your browser, and the addresses never leave your device.</p></div></details>
+        <details><summary>Can I use a calculator in the CCNA exam?<span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p>No, you subnet by hand in the exam. Use the calculator to check the exercises you solve yourself; speed comes from a few minutes of practice every day.</p></div></details>
+      </div>
+      <div class="cta-box reveal"><svg class="mascot" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><g class="m-breathe"><path d="M22 14l-5-9M42 14l5-9" stroke="#8a919c" stroke-width="3.4" stroke-linecap="round" fill="none"/><circle class="m-led m-led-l" cx="17" cy="5" r="3.6"/><circle class="m-led m-led-r" cx="47" cy="5" r="3.6"/><path class="m-body" d="M28 12q4-6 8 0"/><rect class="m-body" x="8" y="12" width="48" height="42" rx="18"/><rect class="m-belly" x="8" y="40" width="48" height="14" rx="7"/><path d="M19 31q4-5 8 0" stroke="#1a1d24" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M37 31q4-5 8 0" stroke="#1a1d24" stroke-width="3" fill="none" stroke-linecap="round"/><path class="m-led" d="M29 37l3 3.5 3-3.5z"/><circle cx="15" cy="38" r="3" fill="#ff8fb1" opacity=".7"/><circle cx="49" cy="38" r="3" fill="#ff8fb1" opacity=".7"/><circle class="m-ok" cx="18" cy="47" r="2"/><circle class="m-led" cx="24" cy="47" r="2"/><rect x="31" y="45" width="6" height="4" rx="1" fill="#0d1a3a" opacity=".55"/><rect x="39" y="45" width="6" height="4" rx="1" fill="#0d1a3a" opacity=".55"/><rect x="47" y="45" width="5" height="4" rx="1" fill="#0d1a3a" opacity=".55"/><path class="m-leg" d="M20 54v4M44 54v4" stroke-width="3.4" stroke-linecap="round" fill="none"/></g></svg><div><h2>Make subnetting second nature</h2><p>The Routerel trainer gives you endless subnetting exercises with worked answers, plus 1,900+ CCNA questions with explanations.</p></div><a class="btn" data-play data-soon-href="../../../en/" href="../../../en/"><span data-when="live">Try 7 days free</span><span data-when="soon">See the app</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div>
+    </div>
+  </section>
+</main>
+<script type="module">
+  import { mountSubnetCalculator } from "../../../assets/tools/subnet/ui.js";
+  var el = document.getElementById("subnet-tool");
+  var q = new URLSearchParams(location.search).get("ip");
+  mountSubnetCalculator(el, { lang: "en", initial: q && q.length <= 64 ? q : undefined });
+  el.classList.add("is-ready");
+</script>
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="about">
+        <a class="brand" href="../../../en/"><img src="../../../assets/icon-96.webp" alt="" width="36" height="36" loading="lazy"><span>Routerel</span></a>
+        <p>CCNA practice on your phone: questions with explanations, spaced repetition and exam simulations. In English and Romanian.</p>
+      </div>
+      <div><h2>The app</h2><ul><li><a href="../../../en/#features">Features</a></li><li><a href="../../../en/#pricing">Pricing</a></li><li><a href="../../../en/#how-it-works">How it works</a></li><li><a href="../../../en/#faq">FAQ</a></li></ul></div>
+      <div><h2>Resources</h2><ul><li><a href="../../../en/guides/">CCNA guides</a></li><li><a href="../../../en/tools/">Free tools</a></li><li><a href="../../../" hreflang="ro" lang="ro" data-set-lang="ro">Română</a></li></ul></div>
+      <div><h2>Legal & contact</h2><ul><li><a href="../../../en/privacy.html">Privacy policy</a></li><li><a href="../../../en/terms.html">Terms of use</a></li><li><a href="../../../en/delete-account.html">Delete your account</a></li></ul><ul><li><a href="mailto:contact@routerel.app">contact@routerel.app</a></li></ul></div>
+    </div>
+    <div class="disclaimer">
+      <p>Routerel is an independent app, not affiliated with, sponsored or endorsed by Cisco Systems, Inc. Cisco, CCNA and Cisco Networking Academy are trademarks of Cisco Systems, Inc.</p>
+      <p>© 2026 Routerel</p>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

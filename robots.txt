@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /_template-articol.html
+
+Sitemap: https://routerel.app/sitemap.xml

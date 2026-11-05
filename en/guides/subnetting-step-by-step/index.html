@@ -1,0 +1,687 @@
+<!doctype html>
+<!-- Pagină generată. Nu o edita de mână: vezi tools/site/ (npm run build:guides / npm run sync:tools / npm run build:legal). -->
+<html lang="en" class="play-soon">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Subnetting Step by Step: IPv4, CIDR and VLSM Explained | Routerel</title>
+  <meta name="description" content="Learn subnetting step by step: subnet masks, CIDR, the magic number method, worked /26, /20 and /30 examples, a VLSM example and exercises with answers.">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <link rel="canonical" href="https://routerel.app/en/guides/subnetting-step-by-step/">
+  <link rel="alternate" hreflang="ro" href="https://routerel.app/ghiduri/subnetting-pas-cu-pas/">
+  <link rel="alternate" hreflang="en" href="https://routerel.app/en/guides/subnetting-step-by-step/">
+  <link rel="alternate" hreflang="x-default" href="https://routerel.app/en/guides/subnetting-step-by-step/">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#12151b" media="(prefers-color-scheme: dark)">
+  <meta name="color-scheme" content="light dark">
+  <link rel="icon" href="../../../assets/favicon-32.png" type="image/png" sizes="32x32">
+  <link rel="icon" href="../../../assets/icon-192.png" type="image/png" sizes="192x192">
+  <link rel="apple-touch-icon" href="../../../assets/apple-touch-icon.png">
+  <link rel="manifest" href="../../../site.webmanifest">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Routerel">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="ro_RO">
+  <meta property="og:title" content="Subnetting Step by Step: IPv4, CIDR and VLSM Explained | Routerel">
+  <meta property="og:description" content="Learn subnetting step by step: subnet masks, CIDR, the magic number method, worked /26, /20 and /30 examples, a VLSM example and exercises with answers.">
+  <meta property="og:url" content="https://routerel.app/en/guides/subnetting-step-by-step/">
+  <meta property="og:image" content="https://routerel.app/assets/og-en.png">
+  <meta property="og:image:width" content="1024">
+  <meta property="og:image:height" content="500">
+  <meta property="og:image:alt" content="Routerel: the router chick mascot and the app name">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Subnetting Step by Step: IPv4, CIDR and VLSM Explained | Routerel">
+  <meta name="twitter:description" content="Learn subnetting step by step: subnet masks, CIDR, the magic number method, worked /26, /20 and /30 examples, a VLSM example and exercises with answers.">
+  <meta name="twitter:image" content="https://routerel.app/assets/og-en.png">
+  <meta property="article:published_time" content="2026-11-05">
+  <meta property="article:modified_time" content="2026-11-05">
+  <meta name="routerel:updated" content="2026-11-05">
+  <link rel="preload" href="../../../assets/fonts/nunito-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../../../assets/fonts/nunito-latin-ext.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../../../assets/fonts/roboto-mono-500-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="../../../style.css">
+  <script>(function(d){d.classList.add("js");try{var t=localStorage.getItem("routerel-theme");if(t==="light"||t==="dark")d.setAttribute("data-theme",t)}catch(e){}setTimeout(function(){if(!window.__rtl)d.classList.remove("js")},4000)})(document.documentElement)</script>
+  <script src="../../../assets/site.js" defer></script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Article","@id":"https://routerel.app/en/guides/subnetting-step-by-step/#article","headline":"Subnetting Step by Step: IPv4, CIDR and VLSM Explained","description":"Learn subnetting step by step: subnet masks, CIDR, the magic number method, worked /26, /20 and /30 examples, a VLSM example and exercises with answers.","inLanguage":"en","datePublished":"2026-11-05","dateModified":"2026-11-05","keywords":"subnetting step by step, how to subnet, subnetting explained, subnet mask cheat sheet, CIDR notation, VLSM example, network and broadcast address, CCNA subnetting","author":{"@type":"Organization","name":"Routerel","url":"https://routerel.app/"},"publisher":{"@type":"Organization","name":"Routerel","logo":{"@type":"ImageObject","url":"https://routerel.app/assets/icon-512.png"}},"image":"https://routerel.app/assets/og-en.png","mainEntityOfPage":"https://routerel.app/en/guides/subnetting-step-by-step/","isPartOf":{"@id":"https://routerel.app/#website"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://routerel.app/en/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://routerel.app/en/guides/"},{"@type":"ListItem","position":3,"name":"Subnetting Step by Step: IPv4, CIDR and VLSM Explained","item":"https://routerel.app/en/guides/subnetting-step-by-step/"}]},{"@type":"FAQPage","@id":"https://routerel.app/en/guides/subnetting-step-by-step/#faq","inLanguage":"en","mainEntity":[{"@type":"Question","name":"What is subnetting?","acceptedAnswer":{"@type":"Answer","text":"Subnetting means splitting an IP network into smaller networks called subnets. You do it by borrowing bits from the host part of the address, which moves the boundary between network and host to the right, using the subnet mask."}},{"@type":"Question","name":"How do I quickly find the network address for an IP address?","acceptedAnswer":{"@type":"Answer","text":"Find the octet where the mask ends (the interesting octet), work out the block size as 256 minus the mask value in that octet, then take the largest multiple of the block size that does not exceed the address value in that octet. That is where the subnet starts."}},{"@type":"Question","name":"How many hosts fit in a /26 subnet?","acceptedAnswer":{"@type":"Answer","text":"A /26 leaves 6 host bits: 2^6 = 64 addresses, minus the network address and the broadcast address. That leaves 62 usable addresses."}},{"@type":"Question","name":"What is the difference between CIDR and VLSM?","acceptedAnswer":{"@type":"Answer","text":"CIDR is the notation and the rule that lets a prefix be any length (for example /20), with no fixed classes. VLSM means using subnets with different prefix lengths inside the same network, each sized to the number of hosts it actually needs."}},{"@type":"Question","name":"Why do we subtract 2 from the number of hosts?","acceptedAnswer":{"@type":"Answer","text":"The first address in a subnet identifies the network and the last one is the broadcast address. Neither can be assigned to a device, so out of 2^n addresses you get 2^n − 2 usable ones. The exceptions are /31 point-to-point links and /32 host routes."}},{"@type":"Question","name":"How well do I need to know subnetting for the CCNA exam?","acceptedAnswer":{"@type":"Answer","text":"Very well, and fast. Subnetting shows up directly in addressing questions and indirectly in routing, ACL and troubleshooting questions. A realistic target: find the network, broadcast and host range for any address in under a minute, without a calculator."}}]}]}</script>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs><linearGradient id="rtl-play" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5b8cff"/><stop offset=".55" stop-color="#2f6bff"/><stop offset="1" stop-color="#ffb020"/></linearGradient></defs></svg>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="container header-row">
+    <a class="brand" href="../../../en/" aria-label="Routerel home"><img src="../../../assets/icon-96.webp" alt="" width="36" height="36"><span>Routerel</span></a>
+    <nav class="main-nav" aria-label="Main"><ul><li><a href="../../../en/#features">Features</a></li><li><a href="../../../en/#pricing">Pricing</a></li><li><a href="../../../en/guides/" aria-current="page">Guides</a></li><li><a href="../../../en/tools/">Tools</a></li><li><a href="../../../en/#faq">FAQ</a></li></ul></nav>
+    <div class="header-actions">
+      <div class="lang-switch" role="group" aria-label="Language"><a href="../../../ghiduri/subnetting-pas-cu-pas/" hreflang="ro" lang="ro" title="Română">RO</a><span aria-current="true" lang="en">EN</span></div>
+      <button class="icon-btn theme-toggle" type="button" data-theme-toggle aria-label="Switch theme"><span class="i-moon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9z"/></svg></span><span class="i-sun"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg></span></button>
+      <a class="btn btn--sm header-cta" data-play data-soon-href="../../../en/#pricing" href="../../../en/#pricing"><span data-when="live">Try free</span><span data-when="soon">See pricing</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      <button class="icon-btn menu-btn" type="button" data-menu-btn aria-expanded="false" aria-controls="mobile-nav" aria-label="Menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+    </div>
+  </div>
+  <nav class="mobile-nav" id="mobile-nav" aria-label="Main" hidden>
+    <div class="container"><ul><li><a href="../../../en/#features">Features</a></li><li><a href="../../../en/#pricing">Pricing</a></li><li><a href="../../../en/guides/" aria-current="page">Guides</a></li><li><a href="../../../en/tools/">Tools</a></li><li><a href="../../../en/#faq">FAQ</a></li></ul></div>
+  </nav>
+</header>
+<main id="main">
+  <div class="container section section--tight">
+    <article class="prose">
+      <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="../../../en/">Home</a></li><li><a href="../../../en/guides/">Guides</a></li><li><span aria-current="page">Subnetting Step by Step: IPv4, CIDR and VLSM Explained</span></li></ol></nav>
+      <p class="eyebrow">CCNA guide</p>
+      <h1>Subnetting Step by Step (IPv4, CIDR and VLSM Explained)</h1>
+      <div class="article-meta">
+        <span class="avatar"><svg class="mascot" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><g class="m-breathe"><path d="M22 14l-5-9M42 14l5-9" stroke="#8a919c" stroke-width="3.4" stroke-linecap="round" fill="none"/><circle class="m-led m-led-l" cx="17" cy="5" r="3.6"/><circle class="m-led m-led-r" cx="47" cy="5" r="3.6"/><path class="m-body" d="M28 12q4-6 8 0"/><rect class="m-body" x="8" y="12" width="48" height="42" rx="18"/><rect class="m-belly" x="8" y="40" width="48" height="14" rx="7"/><circle cx="23" cy="31" r="5.4" fill="#fff"/><circle class="m-pupil" cx="24" cy="31.5" r="3" fill="#1a1d24"/><circle cx="41" cy="31" r="5.4" fill="#fff"/><circle class="m-pupil" cx="42" cy="31.5" r="3" fill="#1a1d24"/><path class="m-led" d="M29 37l3 3.5 3-3.5z"/><circle class="m-ok" cx="18" cy="47" r="2"/><circle class="m-led" cx="24" cy="47" r="2"/><rect x="31" y="45" width="6" height="4" rx="1" fill="#0d1a3a" opacity=".55"/><rect x="39" y="45" width="6" height="4" rx="1" fill="#0d1a3a" opacity=".55"/><rect x="47" y="45" width="5" height="4" rx="1" fill="#0d1a3a" opacity=".55"/><path class="m-leg" d="M20 54v4M44 54v4" stroke-width="3.4" stroke-linecap="round" fill="none"/></g></svg></span>
+        <span>The Routerel team</span><span aria-hidden="true">·</span>
+        <span>Updated: <time datetime="2026-11-05">November 5, 2026</time></span><span aria-hidden="true">·</span>
+        <span>14 min read</span>
+      </div>
+      <p class="lead">Subnetting scares almost everyone at first, and then it turns into a mental-math game. You don&#39;t need advanced math: just a little binary, one rule (the magic number) and practice.</p>
+<p>In this guide you start from zero and finish able to solve any CCNA subnetting question: the network address, the broadcast address, the first and last host, how many hosts fit, how to split a network into N subnets and how to build a VLSM plan. Every example is fully worked out, and at the end you get 5 practice questions with answers.</p>
+      <nav class="toc toc--fold" aria-labelledby="toc-title"><h2 id="toc-title">Contents</h2><button type="button" class="toc-toggle" data-toc-toggle aria-expanded="false" aria-controls="toc-list"><span class="toc-toggle-t">Contents</span> <span class="toc-toggle-n">12 sections</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6"/></svg></button><ol id="toc-list"><li><a href="#what-subnetting-is-and-why-it-matters">What subnetting is and why it matters</a></li><li><a href="#binary-refresher-just-what-you-need">Binary refresher (just what you need)</a></li><li><a href="#network-bits-host-bits-and-the-subnet-mask">Network bits, host bits and the subnet mask</a><ol><li><a href="#dotted-decimal-mask-vs-prefix-length-cidr-notation">Dotted-decimal mask vs. prefix length (CIDR notation)</a></li><li><a href="#the-core-formulas">The core formulas</a></li></ol></li><li><a href="#the-magic-number-method-block-size">The magic number method (block size)</a></li><li><a href="#worked-subnetting-examples">Worked subnetting examples</a><ol><li><a href="#example-1-192-168-10-77-26">Example 1: 192.168.10.77/26</a></li><li><a href="#example-2-10-20-45-200-20">Example 2: 10.20.45.200/20</a></li><li><a href="#example-3-10-1-1-9-30">Example 3: 10.1.1.9/30</a></li><li><a href="#example-4-class-b-address-172-18-77-10-22">Example 4 (class B address): 172.18.77.10/22</a></li></ol></li><li><a href="#how-to-subnet-a-network">How to subnet a network</a><ol><li><a href="#option-a-you-need-a-certain-number-of-subnets">Option A: you need a certain number of subnets</a></li><li><a href="#option-b-you-need-a-certain-number-of-hosts-per-subnet">Option B: you need a certain number of hosts per subnet</a></li></ol></li><li><a href="#vlsm-subnets-of-different-sizes-full-example">VLSM: subnets of different sizes (full example)</a></li><li><a href="#common-mistakes-and-how-to-avoid-them">Common mistakes (and how to avoid them)</a></li><li><a href="#subnet-mask-cheat-sheet-24-to-30">Subnet mask cheat sheet: /24 to /30</a></li><li><a href="#practice-questions-try-them-without-a-calculator">Practice questions (try them without a calculator)</a></li><li><a href="#how-to-get-fast-at-subnetting">How to get fast at subnetting</a></li><li><a href="#frequently-asked-questions">Frequently asked questions</a></li></ol></nav>
+<h2 id="what-subnetting-is-and-why-it-matters">What subnetting is and why it matters</h2>
+<p>An IPv4 address is 32 bits long, written as four numbers (octets) from 0 to 255, for example <code>192.168.10.77</code>. Some of those bits say <strong>which network</strong> the device is on (the network part), and the rest say <strong>which device</strong> it is within that network (the host part).</p>
+<p><strong>Subnetting</strong> means taking one network and splitting it into smaller networks called <strong>subnets</strong>. Why would you do that?</p>
+<ul>
+<li><strong>Organization:</strong> each department, floor or VLAN gets its own subnet.</li>
+<li><strong>Less broadcast traffic:</strong> a broadcast stays inside its own subnet (VLAN) instead of flooding the whole network.</li>
+<li><strong>Security:</strong> traffic between subnets passes through a router or firewall, where you can apply rules (ACLs).</li>
+<li><strong>No wasted addresses:</strong> you don&#39;t hand 254 addresses to a router-to-router link that needs 2.</li>
+</ul>
+<h2 id="binary-refresher-just-what-you-need">Binary refresher (just what you need)</h2>
+<p>Each octet has 8 bits. Each bit position has a fixed value:</p>
+<pre><code class="language-text">Position:  bit7  bit6  bit5  bit4  bit3  bit2  bit1  bit0
+Value:      128    64    32    16     8     4     2     1
+</code></pre>
+<p>A decimal number is the sum of the positions set to <code>1</code>. For example:</p>
+<pre><code class="language-text">77  = 64 + 8 + 4 + 1          = 01001101
+192 = 128 + 64                = 11000000
+240 = 128 + 64 + 32 + 16      = 11110000
+</code></pre>
+<p>For subnetting, it pays to memorize the values a mask octet can take. These are the only possible values, because the <code>1</code> bits always fill in from left to right:</p>
+<div class="table-scroll"><p class="table-hint" aria-hidden="true">swipe<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></p><div class="table-wrap" role="region" tabindex="0" aria-label="Table (scrolls sideways)"><table>
+<thead>
+<tr>
+<th>1 bits in the octet</th>
+<th>Binary</th>
+<th>Decimal</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>10000000</td>
+<td>128</td>
+</tr>
+<tr>
+<td>2</td>
+<td>11000000</td>
+<td>192</td>
+</tr>
+<tr>
+<td>3</td>
+<td>11100000</td>
+<td>224</td>
+</tr>
+<tr>
+<td>4</td>
+<td>11110000</td>
+<td>240</td>
+</tr>
+<tr>
+<td>5</td>
+<td>11111000</td>
+<td>248</td>
+</tr>
+<tr>
+<td>6</td>
+<td>11111100</td>
+<td>252</td>
+</tr>
+<tr>
+<td>7</td>
+<td>11111110</td>
+<td>254</td>
+</tr>
+<tr>
+<td>8</td>
+<td>11111111</td>
+<td>255</td>
+</tr>
+</tbody></table></div></div>
+<p>If you can recognize the sequence 128, 192, 224, 240, 248, 252, 254, 255 instantly, you&#39;re already halfway there. To drill decimal-to-binary conversions, use the <a href="../../tools/binary-converter/">binary converter</a>.</p>
+<h2 id="network-bits-host-bits-and-the-subnet-mask">Network bits, host bits and the subnet mask</h2>
+<p>The <strong>subnet mask</strong> tells you which bits of the address belong to the network. The rule is simple: network bits are <code>1</code> in the mask, host bits are <code>0</code>. The <code>1</code> bits are always contiguous, on the left.</p>
+<pre><code class="language-text">Address: 192.168.10.77    11000000.10101000.00001010.01|001101
+Mask:    255.255.255.192  11111111.11111111.11111111.11|000000
+                          &lt;------ 26 network bits ----&gt;|6 host
+</code></pre>
+<h3 id="dotted-decimal-mask-vs-prefix-length-cidr-notation">Dotted-decimal mask vs. prefix length (CIDR notation)</h3>
+<p>The same mask can be written two ways:</p>
+<ul>
+<li><strong>dotted decimal:</strong> <code>255.255.255.192</code></li>
+<li><strong>prefix (CIDR):</strong> <code>/26</code>, meaning &quot;the first 26 bits are network bits&quot;</li>
+</ul>
+<p>To go from prefix to mask: every 8 bits make a <code>255</code>, and you read the remainder from the table above. <code>/26</code> = 8 + 8 + 8 + 2 → <code>255.255.255.192</code>. <code>/20</code> = 8 + 8 + 4 → <code>255.255.240.0</code>.</p>
+<p>The other way around, just count the <code>1</code> bits. <code>255.255.252.0</code> = 8 + 8 + 6 + 0 = <code>/22</code>.</p>
+<p><strong>CIDR</strong> (Classless Inter-Domain Routing) is also the rule behind the notation: a prefix can be any length from /0 to /32. The old classes (A = /8, B = /16, C = /24) still show up as vocabulary (&quot;a class B address&quot;), but modern networks are no longer tied to them.</p>
+<h3 id="the-core-formulas">The core formulas</h3>
+<p>If you have <code>h</code> host bits (h = 32 − prefix):</p>
+<ul>
+<li>number of addresses in the subnet = <strong>2^h</strong></li>
+<li>number of usable hosts = <strong>2^h − 2</strong> (subtract the network and broadcast addresses)</li>
+</ul>
+<p>If you borrow <code>s</code> bits for subnets from a larger network:</p>
+<ul>
+<li>number of subnets = <strong>2^s</strong></li>
+</ul>
+<h2 id="the-magic-number-method-block-size">The magic number method (block size)</h2>
+<p>This is the trick that saves you from converting to binary on every question. The steps:</p>
+<ol>
+<li><strong>Find the interesting octet:</strong> the octet where the mask is neither 255 nor 0 (that&#39;s where the network part ends). If the mask only contains 255s and 0s (/8, /16, /24), the boundary falls exactly between octets: the 255 octets are copied from the address, and the 0 octets become 0 in the network address and 255 in the broadcast (equivalently, a block of 256 in the first 0 octet). With /32 there&#39;s nothing to calculate: it&#39;s a single host.</li>
+<li><strong>Work out the block size (the magic number):</strong> <code>256 − mask value in the interesting octet</code>.</li>
+<li><strong>Find where the subnet starts:</strong> the largest multiple of the block size that is ≤ the address value in the interesting octet. That&#39;s the <strong>network address</strong> (octets to the left stay the same, octets to the right become 0).</li>
+<li><strong>Broadcast address:</strong> the start of the next subnet minus 1 (in the interesting octet), with the octets to the right set to 255.</li>
+<li><strong>First host</strong> = network address + 1. <strong>Last host</strong> = broadcast − 1.</li>
+</ol>
+<p>Subnets &quot;step through in blocks&quot;: if the block size is 64, subnets start at 0, 64, 128 and 192. That&#39;s really all there is to it. Let&#39;s see the method in action.</p>
+<h2 id="worked-subnetting-examples">Worked subnetting examples</h2>
+<h3 id="example-1-192-168-10-77-26">Example 1: 192.168.10.77/26</h3>
+<p><strong>Step 1.</strong> <code>/26</code> → mask <code>255.255.255.192</code>. The interesting octet is the fourth one (192).</p>
+<p><strong>Step 2.</strong> Block size = 256 − 192 = <strong>64</strong>. Subnets start at .0, .64, .128, .192.</p>
+<p><strong>Step 3.</strong> 77 falls between 64 and 128, so the subnet starts at 64.</p>
+<p>Checking it in binary (a bitwise AND of address and mask, in the interesting octet only):</p>
+<pre><code class="language-text">77   = 01001101
+192  = 11000000
+AND  = 01000000 = 64
+</code></pre>
+<p><strong>Steps 4–5.</strong> The next subnet starts at 128, so the broadcast is 127.</p>
+<div class="table-scroll"><p class="table-hint" aria-hidden="true">swipe<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></p><div class="table-wrap" role="region" tabindex="0" aria-label="Table (scrolls sideways)"><table>
+<thead>
+<tr>
+<th>What you need</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Network address</td>
+<td>192.168.10.64</td>
+</tr>
+<tr>
+<td>First host</td>
+<td>192.168.10.65</td>
+</tr>
+<tr>
+<td>Last host</td>
+<td>192.168.10.126</td>
+</tr>
+<tr>
+<td>Broadcast</td>
+<td>192.168.10.127</td>
+</tr>
+<tr>
+<td>Usable hosts</td>
+<td>2^6 − 2 = 62</td>
+</tr>
+</tbody></table></div></div>
+<h3 id="example-2-10-20-45-200-20">Example 2: 10.20.45.200/20</h3>
+<p>Here the interesting octet is no longer the last one, and this is where many people get confused. Take it slowly.</p>
+<p><strong>Step 1.</strong> <code>/20</code> = 8 + 8 + 4 → mask <code>255.255.240.0</code>. The interesting octet is the <strong>third</strong> one (240).</p>
+<p><strong>Step 2.</strong> Block size = 256 − 240 = <strong>16</strong>. In the third octet, subnets start at 0, 16, 32, 48, 64…</p>
+<p><strong>Step 3.</strong> The address value in the third octet is 45. The largest multiple of 16 that doesn&#39;t exceed 45 is <strong>32</strong>.</p>
+<pre><code class="language-text">45   = 00101101
+240  = 11110000
+AND  = 00100000 = 32
+</code></pre>
+<p>The fourth octet is in the host part, so it becomes 0 in the network address.</p>
+<p><strong>Step 4.</strong> The next subnet starts at <code>10.20.48.0</code>, so the broadcast is one address lower: <code>10.20.47.255</code>.</p>
+<div class="table-scroll"><p class="table-hint" aria-hidden="true">swipe<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></p><div class="table-wrap" role="region" tabindex="0" aria-label="Table (scrolls sideways)"><table>
+<thead>
+<tr>
+<th>What you need</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Network address</td>
+<td>10.20.32.0</td>
+</tr>
+<tr>
+<td>First host</td>
+<td>10.20.32.1</td>
+</tr>
+<tr>
+<td>Last host</td>
+<td>10.20.47.254</td>
+</tr>
+<tr>
+<td>Broadcast</td>
+<td>10.20.47.255</td>
+</tr>
+<tr>
+<td>Usable hosts</td>
+<td>2^12 − 2 = 4,094</td>
+</tr>
+</tbody></table></div></div>
+<p>Notice: when the interesting octet isn&#39;t the last one, the broadcast has <strong>255</strong> in the octets to the right, and the last host ends in <strong>.254</strong>. Addresses such as <code>10.20.40.0</code> or <code>10.20.40.255</code> are perfectly valid hosts in this subnet, even though they &quot;look like&quot; a network or broadcast address.</p>
+<h3 id="example-3-10-1-1-9-30">Example 3: 10.1.1.9/30</h3>
+<p><code>/30</code> is the classic mask for router-to-router links: exactly 2 usable addresses.</p>
+<p><strong>Step 1.</strong> <code>/30</code> → <code>255.255.255.252</code>. Interesting octet: the fourth.</p>
+<p><strong>Step 2.</strong> Block size = 256 − 252 = <strong>4</strong>. Subnets: .0, .4, .8, .12…</p>
+<p><strong>Step 3.</strong> 9 is between 8 and 12 → the subnet starts at 8.</p>
+<div class="table-scroll"><p class="table-hint" aria-hidden="true">swipe<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></p><div class="table-wrap" role="region" tabindex="0" aria-label="Table (scrolls sideways)"><table>
+<thead>
+<tr>
+<th>What you need</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Network address</td>
+<td>10.1.1.8</td>
+</tr>
+<tr>
+<td>First host</td>
+<td>10.1.1.9</td>
+</tr>
+<tr>
+<td>Last host</td>
+<td>10.1.1.10</td>
+</tr>
+<tr>
+<td>Broadcast</td>
+<td>10.1.1.11</td>
+</tr>
+<tr>
+<td>Usable hosts</td>
+<td>2^2 − 2 = 2</td>
+</tr>
+</tbody></table></div></div>
+<h3 id="example-4-class-b-address-172-18-77-10-22">Example 4 (class B address): 172.18.77.10/22</h3>
+<p><code>172.18.x.x</code> is in the old class B range, where the default mask was <code>/16</code>. Here the network has been subnetted: 6 bits were borrowed (from /16 to /22).</p>
+<p><strong>Step 1.</strong> <code>/22</code> = 8 + 8 + 6 → <code>255.255.252.0</code>. Interesting octet: the third (252).</p>
+<p><strong>Step 2.</strong> Block size = 256 − 252 = <strong>4</strong>. In the third octet: 0, 4, 8… 72, 76, 80…</p>
+<p><strong>Step 3.</strong> 77 is between 76 and 80 → the subnet starts at 76.</p>
+<pre><code class="language-text">77   = 01001101
+252  = 11111100
+AND  = 01001100 = 76
+</code></pre>
+<div class="table-scroll"><p class="table-hint" aria-hidden="true">swipe<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></p><div class="table-wrap" role="region" tabindex="0" aria-label="Table (scrolls sideways)"><table>
+<thead>
+<tr>
+<th>What you need</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Network address</td>
+<td>172.18.76.0</td>
+</tr>
+<tr>
+<td>First host</td>
+<td>172.18.76.1</td>
+</tr>
+<tr>
+<td>Last host</td>
+<td>172.18.79.254</td>
+</tr>
+<tr>
+<td>Broadcast</td>
+<td>172.18.79.255</td>
+</tr>
+<tr>
+<td>Usable hosts</td>
+<td>2^10 − 2 = 1,022</td>
+</tr>
+<tr>
+<td class="tw">How many /22 subnets fit in 172.18.0.0/16</td>
+<td>2^6 = 64</td>
+</tr>
+</tbody></table></div></div>
+<h2 id="how-to-subnet-a-network">How to subnet a network</h2>
+<p>In real life (and in the exam) you usually get a requirement: &quot;I need N subnets&quot; or &quot;each subnet must have at least H hosts&quot;. Both are solved with powers of 2.</p>
+<h3 id="option-a-you-need-a-certain-number-of-subnets">Option A: you need a certain number of subnets</h3>
+<p><strong>Requirement:</strong> you have <code>192.168.1.0/24</code> and need <strong>6 subnets</strong>.</p>
+<ol>
+<li>The smallest <code>s</code> with 2^s ≥ 6 is <strong>s = 3</strong> (2^3 = 8 subnets).</li>
+<li>New prefix: /24 + 3 = <strong>/27</strong> → mask <code>255.255.255.224</code>.</li>
+<li>Block size: 256 − 224 = <strong>32</strong>. Each subnet has 2^5 − 2 = <strong>30</strong> hosts.</li>
+</ol>
+<div class="table-scroll"><p class="table-hint" aria-hidden="true">swipe<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></p><div class="table-wrap" role="region" tabindex="0" aria-label="Table (scrolls sideways)"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>Network</th>
+<th>First host</th>
+<th>Last host</th>
+<th>Broadcast</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>192.168.1.0/27</td>
+<td>.1</td>
+<td>.30</td>
+<td>.31</td>
+</tr>
+<tr>
+<td>2</td>
+<td>192.168.1.32/27</td>
+<td>.33</td>
+<td>.62</td>
+<td>.63</td>
+</tr>
+<tr>
+<td>3</td>
+<td>192.168.1.64/27</td>
+<td>.65</td>
+<td>.94</td>
+<td>.95</td>
+</tr>
+<tr>
+<td>4</td>
+<td>192.168.1.96/27</td>
+<td>.97</td>
+<td>.126</td>
+<td>.127</td>
+</tr>
+<tr>
+<td>5</td>
+<td>192.168.1.128/27</td>
+<td>.129</td>
+<td>.158</td>
+<td>.159</td>
+</tr>
+<tr>
+<td>6</td>
+<td>192.168.1.160/27</td>
+<td>.161</td>
+<td>.190</td>
+<td>.191</td>
+</tr>
+<tr>
+<td>7</td>
+<td>192.168.1.192/27</td>
+<td>.193</td>
+<td>.222</td>
+<td>.223</td>
+</tr>
+<tr>
+<td>8</td>
+<td>192.168.1.224/27</td>
+<td>.225</td>
+<td>.254</td>
+<td>.255</td>
+</tr>
+</tbody></table></div></div>
+<p>You use 6 and keep 2 spare for later.</p>
+<h3 id="option-b-you-need-a-certain-number-of-hosts-per-subnet">Option B: you need a certain number of hosts per subnet</h3>
+<p><strong>Requirement:</strong> you have <code>172.16.0.0/16</code> and every subnet needs <strong>at least 500 hosts</strong>.</p>
+<ol>
+<li>The smallest <code>h</code> with 2^h − 2 ≥ 500 is <strong>h = 9</strong> (2^9 − 2 = 510). With h = 8 you only get 254, which is too few.</li>
+<li>Prefix: 32 − 9 = <strong>/23</strong> → mask <code>255.255.254.0</code>.</li>
+<li>How many subnets you get: going from /16 to /23 you borrowed 7 bits → 2^7 = <strong>128</strong> subnets, each with 510 hosts.</li>
+<li>The block size is 256 − 254 = <strong>2</strong> in the third octet: <code>172.16.0.0/23</code>, <code>172.16.2.0/23</code>, <code>172.16.4.0/23</code> and so on.</li>
+</ol>
+<p>The golden rule: <strong>more subnet bits = fewer hosts per subnet</strong>, and vice versa. It&#39;s always the same 32 bits; you&#39;re just moving the boundary.</p>
+<h2 id="vlsm-subnets-of-different-sizes-full-example">VLSM: subnets of different sizes (full example)</h2>
+<p>With one fixed mask for every subnet you waste addresses: a link between two routers doesn&#39;t need 30 addresses. <strong>VLSM</strong> (Variable Length Subnet Masking) lets you give each subnet exactly what it needs.</p>
+<p><strong>Requirement:</strong> you have <code>192.168.50.0/24</code> and need to address:</p>
+<ul>
+<li>LAN A: 100 hosts</li>
+<li>LAN B: 50 hosts</li>
+<li>LAN C: 25 hosts</li>
+<li>LAN D: 10 hosts</li>
+<li>two WAN links between routers (2 hosts each)</li>
+</ul>
+<p><strong>The VLSM rule: allocate the largest subnet first</strong>, then work your way down. That way every block starts on a proper boundary and you don&#39;t end up with unusable &quot;holes&quot;.</p>
+<p>For each requirement, pick the smallest block that fits:</p>
+<ul>
+<li>100 hosts → 2^7 − 2 = 126 → <strong>/25</strong> (block 128)</li>
+<li>50 → 2^6 − 2 = 62 → <strong>/26</strong> (block 64)</li>
+<li>25 → 2^5 − 2 = 30 → <strong>/27</strong> (block 32)</li>
+<li>10 → 2^4 − 2 = 14 → <strong>/28</strong> (block 16)</li>
+<li>2 → 2^2 − 2 = 2 → <strong>/30</strong> (block 4)</li>
+</ul>
+<p>Then lay them out one after another, each starting where the previous one ended:</p>
+<div class="table-scroll"><p class="table-hint" aria-hidden="true">swipe<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></p><div class="table-wrap" role="region" tabindex="0" aria-label="Table (scrolls sideways)"><table>
+<thead>
+<tr>
+<th>Subnet</th>
+<th>Needed</th>
+<th>Prefix</th>
+<th>Network</th>
+<th>Host range</th>
+<th>Broadcast</th>
+<th>Hosts</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>LAN A</td>
+<td>100</td>
+<td>/25</td>
+<td>192.168.50.0</td>
+<td>.1 – .126</td>
+<td>.127</td>
+<td>126</td>
+</tr>
+<tr>
+<td>LAN B</td>
+<td>50</td>
+<td>/26</td>
+<td>192.168.50.128</td>
+<td>.129 – .190</td>
+<td>.191</td>
+<td>62</td>
+</tr>
+<tr>
+<td>LAN C</td>
+<td>25</td>
+<td>/27</td>
+<td>192.168.50.192</td>
+<td>.193 – .222</td>
+<td>.223</td>
+<td>30</td>
+</tr>
+<tr>
+<td>LAN D</td>
+<td>10</td>
+<td>/28</td>
+<td>192.168.50.224</td>
+<td>.225 – .238</td>
+<td>.239</td>
+<td>14</td>
+</tr>
+<tr>
+<td>WAN 1</td>
+<td>2</td>
+<td>/30</td>
+<td>192.168.50.240</td>
+<td>.241 – .242</td>
+<td>.243</td>
+<td>2</td>
+</tr>
+<tr>
+<td>WAN 2</td>
+<td>2</td>
+<td>/30</td>
+<td>192.168.50.244</td>
+<td>.245 – .246</td>
+<td>.247</td>
+<td>2</td>
+</tr>
+</tbody></table></div></div>
+<p>The block <code>192.168.50.248/29</code> (.248 – .255) is left free, handy for one or two more links later.</p>
+<p>What if you had started with the WAN links? You&#39;d have put the <code>/30</code>s at .0 and .4, and LAN A (a block of 128) could no longer start at .8, only at .128. The .8 – .127 range would be fragmented and would have to be filled carefully (here B still fits at .64, C at .32 and D at .16), but in a tighter plan a large block may have nowhere left to go. Hence: <strong>largest to smallest</strong>.</p>
+<h2 id="common-mistakes-and-how-to-avoid-them">Common mistakes (and how to avoid them)</h2>
+<ol>
+<li><strong>Forgetting to subtract 2.</strong> A /27 has 32 addresses but 30 hosts. For &quot;how many hosts&quot; questions, you almost always need the −2.</li>
+<li><strong>Calculating the block size in the wrong octet.</strong> With /20 the block of 16 is in the <strong>third</strong> octet, not the fourth. Find the interesting octet first.</li>
+<li><strong>Rounding up for the network address.</strong> The network address is the multiple of the block size that is <strong>less than or equal to</strong> your value, not the next one up.</li>
+<li><strong>Mixing up .0 and .255 when the interesting octet isn&#39;t the last one.</strong> With /20 the last host is <code>x.x.47.254</code> (not .255), but <code>x.x.40.255</code> is a normal host.</li>
+<li><strong>Choosing a block that&#39;s too small.</strong> 30 hosts fit in a /27 (30), but 31 don&#39;t: you need a /26. Always check 2^h − 2 ≥ the requirement.</li>
+<li><strong>Not sorting largest to smallest in VLSM.</strong> The result is overlapping subnets or wasted addresses.</li>
+<li><strong>Confusing the mask with the wildcard mask.</strong> The wildcard (used in ACLs and OSPF) is the inverse of the mask: for <code>255.255.255.192</code> it&#39;s <code>0.0.0.63</code>. It&#39;s a separate topic; you calculate it octet by octet as 255 − mask (careful: not 256 −, as with the block size).</li>
+</ol>
+<h2 id="subnet-mask-cheat-sheet-24-to-30">Subnet mask cheat sheet: /24 to /30</h2>
+<p>Learn this by heart; in the exam it saves you whole minutes.</p>
+<div class="table-scroll"><p class="table-hint" aria-hidden="true">swipe<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></p><div class="table-wrap" role="region" tabindex="0" aria-label="Table (scrolls sideways)"><table>
+<thead>
+<tr>
+<th>Prefix</th>
+<th>Mask</th>
+<th>Block (last octet)</th>
+<th>Addresses</th>
+<th>Usable hosts</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>/24</td>
+<td>255.255.255.0</td>
+<td>256</td>
+<td>256</td>
+<td>254</td>
+</tr>
+<tr>
+<td>/25</td>
+<td>255.255.255.128</td>
+<td>128</td>
+<td>128</td>
+<td>126</td>
+</tr>
+<tr>
+<td>/26</td>
+<td>255.255.255.192</td>
+<td>64</td>
+<td>64</td>
+<td>62</td>
+</tr>
+<tr>
+<td>/27</td>
+<td>255.255.255.224</td>
+<td>32</td>
+<td>32</td>
+<td>30</td>
+</tr>
+<tr>
+<td>/28</td>
+<td>255.255.255.240</td>
+<td>16</td>
+<td>16</td>
+<td>14</td>
+</tr>
+<tr>
+<td>/29</td>
+<td>255.255.255.248</td>
+<td>8</td>
+<td>8</td>
+<td>6</td>
+</tr>
+<tr>
+<td>/30</td>
+<td>255.255.255.252</td>
+<td>4</td>
+<td>4</td>
+<td>2</td>
+</tr>
+</tbody></table></div></div>
+<p>The same pattern repeats in the third octet: /16–/23 have block sizes of 256, 128, 64, 32, 16, 8, 4, 2, except that there each &quot;step&quot; is worth 256 addresses.</p>
+<p>Two special cases worth knowing: <strong>/31</strong> can be used on point-to-point links (two addresses, no network or broadcast address, per RFC 3021), and <strong>/32</strong> identifies a single host (for example a loopback interface or a static route to one device).</p>
+<div class="callout callout--info"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg><div><p><strong>Calculate and check the steps:</strong> this site has a <a href="../../tools/subnet-calculator/">free subnet calculator</a> that shows you not just the result but the steps too (interesting octet, block size, the binary AND). Use it to check your practice answers, not to skip them.</p></div></div>
+<h2 id="practice-questions-try-them-without-a-calculator">Practice questions (try them without a calculator)</h2>
+<ol>
+<li>For <code>192.168.100.200/27</code>: what are the network address, broadcast address, first host and last host?</li>
+<li>For <code>172.16.99.5/21</code>: what are the mask, network address, broadcast address and number of hosts?</li>
+<li>You need a subnet with at least <strong>300</strong> hosts. Which prefix and mask do you choose?</li>
+<li>Are <code>10.10.10.62/26</code> and <code>10.10.10.66/26</code> in the same subnet?</li>
+<li>Build a VLSM plan from <code>192.168.20.0/24</code> for: a LAN with 60 hosts, one with 28, one with 12 and a link between two routers.</li>
+</ol>
+<details class="reveal-answer">
+<summary><strong>Answers</strong></summary><p><strong>1.</strong> <code>/27</code> → mask <code>255.255.255.224</code>, block size 32. Subnets: 0, 32, 64… 160, 192, 224. 200 is between 192 and 224.
+Network <code>192.168.100.192</code>, first host <code>.193</code>, last host <code>.222</code>, broadcast <code>192.168.100.223</code> (30 hosts).</p>
+<p><strong>2.</strong> <code>/21</code> = 8 + 8 + 5 → mask <code>255.255.248.0</code>, block size 8 in the third octet. 99 is between 96 and 104.
+Network <code>172.16.96.0</code>, broadcast <code>172.16.103.255</code>, hosts from <code>172.16.96.1</code> to <code>172.16.103.254</code>. Number of hosts: 2^11 − 2 = <strong>2,046</strong>.</p>
+<p><strong>3.</strong> 2^8 − 2 = 254 (not enough), 2^9 − 2 = 510 (enough). 9 host bits → <strong>/23</strong>, mask <code>255.255.254.0</code>.</p>
+<p><strong>4.</strong> <strong>No.</strong> Block size 64: <code>.62</code> is in subnet <code>10.10.10.0/26</code> (.0 – .63), while <code>.66</code> is in <code>10.10.10.64/26</code> (.64 – .127). To talk to each other, they need a router.</p>
+<p><strong>5.</strong> Largest to smallest:</p>
+<div class="table-scroll"><p class="table-hint" aria-hidden="true">swipe<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></p><div class="table-wrap" role="region" tabindex="0" aria-label="Table (scrolls sideways)"><table>
+<thead>
+<tr>
+<th>Subnet</th>
+<th>Needed</th>
+<th>Prefix</th>
+<th>Network</th>
+<th>Hosts</th>
+<th>Broadcast</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>LAN 1</td>
+<td>60</td>
+<td>/26</td>
+<td>192.168.20.0</td>
+<td>.1 – .62</td>
+<td>.63</td>
+</tr>
+<tr>
+<td>LAN 2</td>
+<td>28</td>
+<td>/27</td>
+<td>192.168.20.64</td>
+<td>.65 – .94</td>
+<td>.95</td>
+</tr>
+<tr>
+<td>LAN 3</td>
+<td>12</td>
+<td>/28</td>
+<td>192.168.20.96</td>
+<td>.97 – .110</td>
+<td>.111</td>
+</tr>
+<tr>
+<td>Link</td>
+<td>2</td>
+<td>/30</td>
+<td>192.168.20.112</td>
+<td>.113 – .114</td>
+<td>.115</td>
+</tr>
+</tbody></table></div></div>
+<p>Everything from <code>192.168.20.116</code> upward stays free.</p>
+</details><h2 id="how-to-get-fast-at-subnetting">How to get fast at subnetting</h2>
+<p>You can understand the theory in an evening; speed only comes from repetition. A few tips that actually work:</p>
+<ul>
+<li><strong>10 minutes a day beats 2 hours once a week.</strong> Do 5–10 addresses daily, with mixed prefixes.</li>
+<li><strong>Write the cheat sheet above from memory</strong> at the start of every study session, until you no longer need to.</li>
+<li><strong>Time yourself.</strong> Target: network + broadcast + host range in under a minute.</li>
+<li><strong>Vary the interesting octet.</strong> Most people only practice /24–/30 and then freeze on /19 or /22.</li>
+</ul>
+<div class="cta-box cta-box--article"><svg class="mascot" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><g class="m-breathe"><path d="M22 14l-5-9M42 14l5-9" stroke="#8a919c" stroke-width="3.4" stroke-linecap="round" fill="none"/><circle class="m-led m-led-l" cx="17" cy="5" r="3.6"/><circle class="m-led m-led-r" cx="47" cy="5" r="3.6"/><path class="m-body" d="M28 12q4-6 8 0"/><rect class="m-body" x="8" y="12" width="48" height="42" rx="18"/><rect class="m-belly" x="8" y="40" width="48" height="14" rx="7"/><path d="M19 31q4-5 8 0" stroke="#1a1d24" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M37 31q4-5 8 0" stroke="#1a1d24" stroke-width="3" fill="none" stroke-linecap="round"/><path class="m-led" d="M29 37l3 3.5 3-3.5z"/><circle cx="15" cy="38" r="3" fill="#ff8fb1" opacity=".7"/><circle cx="49" cy="38" r="3" fill="#ff8fb1" opacity=".7"/><circle class="m-ok" cx="18" cy="47" r="2"/><circle class="m-led" cx="24" cy="47" r="2"/><rect x="31" y="45" width="6" height="4" rx="1" fill="#0d1a3a" opacity=".55"/><rect x="39" y="45" width="6" height="4" rx="1" fill="#0d1a3a" opacity=".55"/><rect x="47" y="45" width="5" height="4" rx="1" fill="#0d1a3a" opacity=".55"/><path class="m-leg" d="M20 54v4M44 54v4" stroke-width="3.4" stroke-linecap="round" fill="none"/></g></svg><div><h3>Practice subnetting in the Routerel app</h3><p>Routerel has a subnetting, conversion and IPv6 trainer with endlessly generated exercises, plus questions with explanations for all three parts of CCNA. Your mistakes come back automatically until you&#39;ve mastered them. New subscribers get a 7-day free trial with full access.</p></div><a class="btn" href="../../">Discover the app<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div><h2 id="frequently-asked-questions">Frequently asked questions</h2>
+<div class="faq faq--article"><details><summary>What is subnetting?<span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p>It&#39;s splitting an IP network into smaller networks called subnets. You do it by borrowing bits from the host part of the address, which moves the boundary between network and host to the right, using the mask.</p></div></details><details><summary>How do I quickly find the network address for an IP address?<span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p>Find the octet where the mask ends, work out the block size as 256 minus the mask value in that octet, then take the largest multiple of the block size that doesn&#39;t exceed the address value in that octet. That&#39;s where the subnet starts.</p></div></details><details><summary>How many hosts fit in a /26 subnet?<span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p>A /26 leaves 6 host bits: 2^6 = 64 addresses, minus the network and broadcast addresses. That leaves <strong>62</strong> usable addresses.</p></div></details><details><summary>What is the difference between CIDR and VLSM?<span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p>CIDR is the notation and the rule that lets a prefix be any length (for example /20), with no fixed classes. VLSM means using subnets with different prefix lengths inside the same network, each sized to the number of hosts it needs.</p></div></details><details><summary>Why do we subtract 2 from the number of hosts?<span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p>The first address identifies the network and the last one is the broadcast address; neither can be assigned to a device. The exceptions are /31 (point-to-point links) and /32 (a single host).</p></div></details><details><summary>How well do I need to know subnetting for the CCNA exam?<span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p>Very well, and fast. It shows up directly in addressing questions and indirectly in routing, ACL and troubleshooting questions. A realistic target: network, broadcast and host range for any address in under a minute, without a calculator. See also our <a href="../what-is-ccna/">guide to the CCNA exam</a>.</p></div></details></div>
+<hr>
+<p><em>Routerel is an independent app and is not affiliated with, sponsored by or endorsed by Cisco Systems, Inc. Cisco and CCNA are trademarks of Cisco Systems, Inc.</em></p>
+      
+      <section class="related" aria-labelledby="rel-title">
+        <h2 id="rel-title">Read next</h2>
+        <div class="grid grid--2"><a class="card post-card lift" href="../../../en/guides/cisco-ios-basic-commands/"><span class="tagline">Guide · 13 min</span><h3>Basic Cisco IOS Commands: CCNA Cheat Sheet</h3><p>Basic Cisco IOS commands cheat sheet for CCNA: CLI modes, initial setup, passwords and SSH, interfaces, saving the config, show commands and troubleshooting.</p></a><a class="card post-card lift" href="../../../en/guides/ipv6-addresses-explained/"><span class="tagline">Guide · 13 min</span><h3>IPv6 Addresses Explained: Format, Shortening, Types</h3><p>IPv6 addresses made simple: the 128-bit format, how to shorten and expand them, address types, EUI-64 step by step, SLAAC vs DHCPv6, and exercises with answers.</p></a></div>
+      </section>
+    </article>
+  </div>
+</main>
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="about">
+        <a class="brand" href="../../../en/"><img src="../../../assets/icon-96.webp" alt="" width="36" height="36" loading="lazy"><span>Routerel</span></a>
+        <p>CCNA practice on your phone: questions with explanations, spaced repetition and exam simulations. In English and Romanian.</p>
+      </div>
+      <div><h2>The app</h2><ul><li><a href="../../../en/#features">Features</a></li><li><a href="../../../en/#pricing">Pricing</a></li><li><a href="../../../en/#how-it-works">How it works</a></li><li><a href="../../../en/#faq">FAQ</a></li></ul></div>
+      <div><h2>Resources</h2><ul><li><a href="../../../en/guides/">CCNA guides</a></li><li><a href="../../../en/tools/">Free tools</a></li><li><a href="../../../" hreflang="ro" lang="ro" data-set-lang="ro">Română</a></li></ul></div>
+      <div><h2>Legal & contact</h2><ul><li><a href="../../../en/privacy.html">Privacy policy</a></li><li><a href="../../../en/terms.html">Terms of use</a></li><li><a href="../../../en/delete-account.html">Delete your account</a></li></ul><ul><li><a href="mailto:contact@routerel.app">contact@routerel.app</a></li></ul></div>
+    </div>
+    <div class="disclaimer">
+      <p>Routerel is an independent app, not affiliated with, sponsored or endorsed by Cisco Systems, Inc. Cisco, CCNA and Cisco Networking Academy are trademarks of Cisco Systems, Inc.</p>
+      <p>© 2026 Routerel</p>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

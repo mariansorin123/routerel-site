@@ -1,0 +1,103 @@
+/* Generat de tools/site/sync-tools.mjs din web-tools/subnet/demo.html. Nu-l edita aici. */
+/* ───── Componenta (clase snc-*) ───── */
+.snc { --radius: 14px; }
+.snc-tabs { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 16px; }
+.snc-tab {
+  font: 900 0.875rem/1 Nunito, sans-serif; letter-spacing: .03em; padding: 12px 16px; min-height: 44px; border-radius: 12px; cursor: pointer;
+  border: 2px solid var(--line-strong); border-bottom-width: 4px; background: var(--surface); color: var(--ink);
+}
+.snc-tab[aria-selected="true"] { background: var(--brand-soft); border-color: var(--brand); color: var(--ink-strong); }
+.snc-panel { background: var(--surface); border: 2px solid var(--line); border-radius: var(--radius); padding: 20px 16px; }
+.snc-panel:focus-visible, .snc-scroll:focus-visible { outline: 3px solid var(--brand); outline-offset: 2px; }
+.snc-form { display: grid; grid-template-columns: minmax(0, 1fr); gap: 8px; margin-bottom: 12px; }
+.snc-form > * { min-width: 0; }
+.snc-label { font-weight: 900; font-size: 0.8125rem; letter-spacing: .05em; text-transform: uppercase; color: var(--ink-strong); padding: 0; }
+.snc-inputrow { display: flex; gap: 8px; flex-wrap: wrap; }
+.snc-input {
+  flex: 1 1 220px; min-width: 0; min-height: 48px; padding: 10px 12px; border-radius: 12px; border: 2px solid var(--line-strong);
+  background: var(--surface2); color: var(--ink-strong); font: 700 1rem/1.3 Nunito, sans-serif;
+}
+.snc-input.snc-mono { font: 600 1rem/1.3 "Roboto Mono", ui-monospace, monospace; }
+.snc-input:focus { outline: 3px solid var(--brand); outline-offset: 1px; border-color: var(--brand); }
+.snc-input[aria-invalid="true"] { border-color: var(--bad-ink); }
+.snc-num { flex: 0 1 140px; }
+.snc-btn {
+  font: 900 0.9375rem/1 Nunito, sans-serif; letter-spacing: .05em; text-transform: uppercase; min-height: 48px; padding: 0 20px; cursor: pointer;
+  border: 0; border-radius: 12px; background: var(--brand); color: var(--on-brand); box-shadow: 0 4px 0 var(--brand-dark); justify-self: start;
+}
+.snc-btn:active { transform: translateY(2px); box-shadow: 0 2px 0 var(--brand-dark); }
+.snc-btn:focus-visible, .snc-chip:focus-visible, .snc-tab:focus-visible, .snc-icon-btn:focus-visible { outline: 3px solid var(--led); outline-offset: 2px; }
+.snc-btn-ghost { background: var(--surface); color: var(--brand-ink, var(--brand)); border: 2px solid var(--line-strong); box-shadow: 0 3px 0 var(--line-strong); text-transform: none; letter-spacing: 0; }
+.snc-btn-ghost:active { box-shadow: 0 1px 0 var(--line-strong); }
+.snc-hint { margin: 0; color: var(--muted); font-size: 0.9375rem; overflow-wrap: break-word; }
+.snc-error { margin: 0; padding: 8px 12px; border-radius: 10px; background: var(--bad-soft); color: var(--bad-ink); font-weight: 800; }
+.snc-examples { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-top: 4px; }
+.snc-examples-label { color: var(--muted); font-size: 0.9375rem; margin-right: 2px; }
+.snc-chip { font-size: 0.8125rem; padding: 6px 12px; min-height: 44px; min-width: 44px; border-radius: 999px; border: 2px solid var(--line-strong); background: var(--surface2); color: var(--ink-strong); cursor: pointer; }
+.snc-mono { font-family: "Roboto Mono", ui-monospace, monospace; font-weight: 500; }
+.snc-summary { margin: 4px 0 12px; font-weight: 800; color: var(--ink-strong); }
+.snc-summary:empty { display: none; }
+.snc-h { font-weight: 900; font-size: 0.8125rem; letter-spacing: .05em; text-transform: uppercase; color: var(--ink-strong); text-align: left; margin: 0 0 8px; }
+.snc-block { margin-top: 24px; }
+.snc-scroll { overflow-x: auto; border-radius: 10px; }
+.snc-table { border-collapse: collapse; width: 100%; font-size: 0.9375rem; }
+.snc-table th, .snc-table td { padding: 8px 10px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+.snc-table thead th { font-size: 0.75rem; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); font-weight: 900; white-space: nowrap; }
+.snc-kv th { width: 42%; font-weight: 800; color: var(--muted); }
+.snc-kv td { color: var(--ink-strong); font-weight: 800; overflow-wrap: break-word; }
+.snc-kv td.snc-mono { font-weight: 600; }
+.snc-list td, .snc-list th[scope="row"] { white-space: nowrap; }
+.snc-gap td { color: var(--muted); text-align: center; }
+.snc-bin { width: auto; }
+.snc-bin th { font-weight: 800; color: var(--muted); white-space: nowrap; }
+.snc-bits { white-space: nowrap; font-size: 0.9375rem; letter-spacing: .02em; }
+.snc-net { color: var(--brand); font-weight: 600; }
+.snc-host { color: var(--led-ink); font-weight: 600; border-left: 3px solid var(--led); padding-left: 3px; margin-left: 3px; }
+.snc-legend { display: flex; flex-wrap: wrap; gap: 6px 12px; align-items: center; font-size: 0.875rem; color: var(--muted); margin: 8px 0 0; }
+.snc-swatch { display: inline-block; width: 12px; height: 12px; border-radius: 3px; margin-right: 4px; vertical-align: -1px; }
+.snc-swatch-net { background: var(--brand); }
+.snc-swatch-host { background: var(--led); }
+.snc-steps { margin: 0; padding-left: 1.4em; display: grid; gap: 10px; }
+.snc-steps li::marker { color: var(--brand); font-weight: 900; }
+.snc-steps strong { color: var(--ink-strong); font-weight: 900; }
+.snc-fieldset { border: 0; padding: 0; margin: 8px 0 4px; display: grid; gap: 8px; min-width: 0; }
+.snc-radio { display: flex; gap: 8px; align-items: center; min-height: 36px; cursor: pointer; }
+.snc-radio input { width: 20px; height: 20px; accent-color: var(--brand); }
+.snc-vlsm-rows { display: grid; gap: 8px; grid-template-columns: minmax(0, 1fr); }
+.snc-vlsm-row { display: flex; gap: 8px; align-items: center; min-width: 0; }
+.snc-vlsm-row .snc-input { flex: 1 1 0; min-width: 0; width: 100%; }
+.snc-vlsm-row .snc-num { flex: 0 0 96px; }
+.snc-icon-btn { flex: 0 0 44px; height: 44px; border-radius: 12px; border: 2px solid var(--line-strong); background: var(--surface); color: var(--ink); font: 900 1.25rem/1 Nunito, sans-serif; cursor: pointer; }
+.snc-icon-btn:disabled { opacity: .4; cursor: not-allowed; }
+.snc-free { margin: 12px 0 0; }
+@media (max-width: 350px) { .snc-bin td.snc-bits { font-size: 0.7188rem; } }
+/* sub ~380 px eticheta stă deasupra valorii, ca adresele să nu se rupă */
+@media (max-width: 380px) {
+  .snc-kv th, .snc-kv td { display: block; width: auto; padding: 0; border: 0; }
+  .snc-kv th { font-size: 0.875rem; }
+  .snc-kv tr { display: block; padding: 8px 0; border-bottom: 1px solid var(--line); }
+  .snc-vlsm-row { gap: 6px; }
+  .snc-vlsm-row .snc-num { flex-basis: 72px; }
+  /* cele trei file rămân pe un singur rând */
+  .snc-tabs { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 6px; }
+  .snc-tab { padding: 8px 10px; font-size: 0.8125rem; line-height: 1.15; }
+}
+.snc [hidden] { display: none !important; }
+@media (max-width: 480px) {
+  .snc-kv th { width: 46%; }
+  .snc-panel { padding: 16px 12px; }
+  /* pe telefon eticheta stă deasupra biților, ca granița rețea/host să fie vizibilă fără derulare */
+  .snc-bin, .snc-bin tbody, .snc-bin tr, .snc-bin th, .snc-bin td { display: block; }
+  .snc-bin tr { padding: 6px 0; border-bottom: 1px solid var(--line); }
+  .snc-bin th, .snc-bin td { padding: 0; border: 0; }
+  .snc-bin th { font-size: 0.8125rem; }
+  .snc-bits { font-size: 0.8125rem; letter-spacing: 0; }
+  /* tabelele cu liste devin carduri: fiecare celulă își arată eticheta coloanei */
+  .snc-list thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  .snc-list, .snc-list tbody, .snc-list tr, .snc-list th[scope="row"], .snc-list td { display: block; }
+  .snc-list tr { padding: 8px 0; border-bottom: 1px solid var(--line); }
+  .snc-list th[scope="row"], .snc-list td { display: flex; justify-content: space-between; gap: 12px; padding: 3px 0; border: 0; white-space: normal; }
+  .snc-list th[scope="row"] { font-weight: 900; color: var(--ink-strong); }
+  .snc-list [data-label]::before { content: attr(data-label); font: 800 0.8125rem/1.6 Nunito, sans-serif; color: var(--muted); }
+  .snc-list .snc-gap td { justify-content: center; }
+}

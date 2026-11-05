@@ -1,0 +1,437 @@
+<!doctype html>
+<!-- Pagină generată. Nu o edita de mână: vezi tools/site/ (npm run build:guides / npm run sync:tools / npm run build:legal). -->
+<html lang="ro" class="play-soon">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Modelul OSI vs TCP/IP explicat (cu exemple) | Routerel</title>
+  <meta name="description" content="Modelul OSI și TCP/IP pe înțelesul tău: cele 7 straturi, PDU-uri, protocoale și echipamente, încapsularea unei cereri web, capcane de examen și exerciții.">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <link rel="canonical" href="https://routerel.app/ghiduri/model-osi-vs-tcp-ip/">
+  <link rel="alternate" hreflang="ro" href="https://routerel.app/ghiduri/model-osi-vs-tcp-ip/">
+  <link rel="alternate" hreflang="en" href="https://routerel.app/en/guides/osi-vs-tcp-ip/">
+  <link rel="alternate" hreflang="x-default" href="https://routerel.app/en/guides/osi-vs-tcp-ip/">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#12151b" media="(prefers-color-scheme: dark)">
+  <meta name="color-scheme" content="light dark">
+  <link rel="icon" href="../../assets/favicon-32.png" type="image/png" sizes="32x32">
+  <link rel="icon" href="../../assets/icon-192.png" type="image/png" sizes="192x192">
+  <link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
+  <link rel="manifest" href="../../site.webmanifest">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Routerel">
+  <meta property="og:locale" content="ro_RO">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta property="og:title" content="Modelul OSI vs TCP/IP explicat (cu exemple) | Routerel">
+  <meta property="og:description" content="Modelul OSI și TCP/IP pe înțelesul tău: cele 7 straturi, PDU-uri, protocoale și echipamente, încapsularea unei cereri web, capcane de examen și exerciții.">
+  <meta property="og:url" content="https://routerel.app/ghiduri/model-osi-vs-tcp-ip/">
+  <meta property="og:image" content="https://routerel.app/assets/og-ro.png">
+  <meta property="og:image:width" content="1024">
+  <meta property="og:image:height" content="500">
+  <meta property="og:image:alt" content="Routerel: mascota puiul de router și numele aplicației">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Modelul OSI vs TCP/IP explicat (cu exemple) | Routerel">
+  <meta name="twitter:description" content="Modelul OSI și TCP/IP pe înțelesul tău: cele 7 straturi, PDU-uri, protocoale și echipamente, încapsularea unei cereri web, capcane de examen și exerciții.">
+  <meta name="twitter:image" content="https://routerel.app/assets/og-ro.png">
+  <meta property="article:published_time" content="2026-11-05">
+  <meta property="article:modified_time" content="2026-11-05">
+  <meta name="routerel:updated" content="2026-11-05">
+  <link rel="preload" href="../../assets/fonts/nunito-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../../assets/fonts/nunito-latin-ext.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="../../style.css">
+  <script>(function(d){d.classList.add("js");try{var t=localStorage.getItem("routerel-theme");if(t==="light"||t==="dark")d.setAttribute("data-theme",t)}catch(e){}setTimeout(function(){if(!window.__rtl)d.classList.remove("js")},4000)})(document.documentElement)</script>
+  <script src="../../assets/site.js" defer></script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Article","@id":"https://routerel.app/ghiduri/model-osi-vs-tcp-ip/#article","headline":"Modelul OSI vs TCP/IP explicat (cu exemple)","description":"Modelul OSI și TCP/IP pe înțelesul tău: cele 7 straturi, PDU-uri, protocoale și echipamente, încapsularea unei cereri web, capcane de examen și exerciții.","inLanguage":"ro","datePublished":"2026-11-05","dateModified":"2026-11-05","keywords":"modelul OSI, modelul TCP/IP, OSI vs TCP/IP, straturile modelului OSI, încapsulare, PDU segment pachet cadru, modelul OSI CCNA","author":{"@type":"Organization","name":"Routerel","url":"https://routerel.app/"},"publisher":{"@type":"Organization","name":"Routerel","logo":{"@type":"ImageObject","url":"https://routerel.app/assets/icon-512.png"}},"image":"https://routerel.app/assets/og-ro.png","mainEntityOfPage":"https://routerel.app/ghiduri/model-osi-vs-tcp-ip/","isPartOf":{"@id":"https://routerel.app/#website"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Acasă","item":"https://routerel.app/"},{"@type":"ListItem","position":2,"name":"Ghiduri","item":"https://routerel.app/ghiduri/"},{"@type":"ListItem","position":3,"name":"Modelul OSI vs TCP/IP explicat (cu exemple)","item":"https://routerel.app/ghiduri/model-osi-vs-tcp-ip/"}]},{"@type":"FAQPage","@id":"https://routerel.app/ghiduri/model-osi-vs-tcp-ip/#faq","inLanguage":"ro","mainEntity":[{"@type":"Question","name":"Care sunt cele 7 straturi ale modelului OSI?","acceptedAnswer":{"@type":"Answer","text":"De jos în sus: 1 Physical (fizic), 2 Data Link (legătură de date), 3 Network (rețea), 4 Transport, 5 Session (sesiune), 6 Presentation (prezentare) și 7 Application (aplicație)."}},{"@type":"Question","name":"Care e diferența dintre modelul OSI și modelul TCP/IP?","acceptedAnswer":{"@type":"Answer","text":"OSI este un model de referință cu 7 straturi, folosit pentru a descrie și a depana rețelele. TCP/IP este modelul după care funcționează efectiv Internetul și are 4 straturi: Application, Transport, Internet și Network Access. Straturile 5, 6 și 7 din OSI sunt unite în Application, iar 1 și 2 în Network Access."}},{"@type":"Question","name":"Ce este un PDU?","acceptedAnswer":{"@type":"Answer","text":"PDU (Protocol Data Unit) este numele datelor la un anumit strat, împreună cu antetul acelui strat: date la aplicație, segment (TCP) sau datagramă (UDP) la transport, packet (pachet) la rețea, frame (cadru) la legătura de date și biți la nivelul fizic. Dacă întrebarea nu precizează protocolul, la stratul 4 răspunsul așteptat e segment."}},{"@type":"Question","name":"La ce strat lucrează un switch și la ce strat lucrează un router?","acceptedAnswer":{"@type":"Answer","text":"Un switch obișnuit lucrează la stratul 2 și decide după adresele MAC. Un router lucrează la stratul 3 și decide după adresele IP. Un switch multilayer (Layer 3) poate face și rutare."}},{"@type":"Question","name":"Ce se schimbă când un packet trece printr-un router?","acceptedAnswer":{"@type":"Answer","text":"Routerul scoate frame-ul, citește packet-ul IP, scade TTL-ul și construiește un frame nou pentru legătura următoare. Adresele MAC se schimbă la fiecare hop, iar adresele IP rămân aceleași de la un capăt la altul, cu excepția cazului în care pe drum se face NAT."}},{"@type":"Question","name":"Cât de des apare modelul OSI la examenul CCNA?","acceptedAnswer":{"@type":"Answer","text":"Rar ca întrebare de memorare pură, dar foarte des indirect: vocabularul straturilor apare la depanare, la echipamente, la protocoale și la explicațiile multor întrebări. Merită să-l știi foarte bine de la început."}}]}]}</script>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs><linearGradient id="rtl-play" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5b8cff"/><stop offset=".55" stop-color="#2f6bff"/><stop offset="1" stop-color="#ffb020"/></linearGradient></defs></svg>
+<a class="skip-link" href="#main">Sari la conținut</a>
+<header class="site-header">
+  <div class="container header-row">
+    <a class="brand" href="../../" aria-label="Routerel, acasă"><img src="../../assets/icon-96.webp" alt="" width="36" height="36"><span>Routerel</span></a>
+    <nav class="main-nav" aria-label="Principal"><ul><li><a href="../../#functii">Funcții</a></li><li><a href="../../#preturi">Prețuri</a></li><li><a href="../../ghiduri/" aria-current="page">Ghiduri</a></li><li><a href="../../tools/">Tools</a></li><li><a href="../../#faq">FAQ</a></li></ul></nav>
+    <div class="header-actions">
+      <div class="lang-switch" role="group" aria-label="Limba"><span aria-current="true" lang="ro">RO</span><a href="../../en/guides/osi-vs-tcp-ip/" hreflang="en" lang="en" title="English">EN</a></div>
+      <button class="icon-btn theme-toggle" type="button" data-theme-toggle aria-label="Schimbă tema"><span class="i-moon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9z"/></svg></span><span class="i-sun"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg></span></button>
+      <a class="btn btn--sm header-cta" data-play data-soon-href="../../#preturi" href="../../#preturi"><span data-when="live">Încearcă gratuit</span><span data-when="soon">Vezi prețurile</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      <button class="icon-btn menu-btn" type="button" data-menu-btn aria-expanded="false" aria-controls="mobile-nav" aria-label="Meniu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+    </div>
+  </div>
+  <nav class="mobile-nav" id="mobile-nav" aria-label="Principal" hidden>
+    <div class="container"><ul><li><a href="../../#functii">Funcții</a></li><li><a href="../../#preturi">Prețuri</a></li><li><a href="../../ghiduri/" aria-current="page">Ghiduri</a></li><li><a href="../../tools/">Tools</a></li><li><a href="../../#faq">FAQ</a></li></ul></div>
+  </nav>
+</header>
+<main id="main">
+  <div class="container section section--tight">
+    <article class="prose">
+      <nav class="crumbs" aria-label="Firimituri"><ol><li><a href="../../">Acasă</a></li><li><a href="../../ghiduri/">Ghiduri</a></li><li><span aria-current="page">Modelul OSI vs TCP/IP explicat (cu exemple)</span></li></ol></nav>
+      <p class="eyebrow">Ghid CCNA</p>
+      <h1>Modelul OSI vs TCP/IP explicat (cu exemple)</h1>
+      <div class="article-meta">
+        <span class="avatar"><svg class="mascot" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><g class="m-breathe"><path d="M22 14l-5-9M42 14l5-9" stroke="#8a919c" stroke-width="3.4" stroke-linecap="round" fill="none"/><circle class="m-led m-led-l" cx="17" cy="5" r="3.6"/><circle class="m-led m-led-r" cx="47" cy="5" r="3.6"/><path class="m-body" d="M28 12q4-6 8 0"/><rect class="m-body" x="8" y="12" width="48" height="42" rx="18"/><rect class="m-belly" x="8" y="40" width="48" height="14" rx="7"/><circle cx="23" cy="31" r="5.4" fill="#fff"/><circle class="m-pupil" cx="24" cy="31.5" r="3" fill="#1a1d24"/><circle cx="41" cy="31" r="5.4" fill="#fff"/><circle class="m-pupil" cx="42" cy="31.5" r="3" fill="#1a1d24"/><path class="m-led" d="M29 37l3 3.5 3-3.5z"/><circle class="m-ok" cx="18" cy="47" r="2"/><circle class="m-led" cx="24" cy="47" r="2"/><rect x="31" y="45" width="6" height="4" rx="1" fill="#0d1a3a" opacity=".55"/><rect x="39" y="45" width="6" height="4" rx="1" fill="#0d1a3a" opacity=".55"/><rect x="47" y="45" width="5" height="4" rx="1" fill="#0d1a3a" opacity=".55"/><path class="m-leg" d="M20 54v4M44 54v4" stroke-width="3.4" stroke-linecap="round" fill="none"/></g></svg></span>
+        <span>Echipa Routerel</span><span aria-hidden="true">·</span>
+        <span>Actualizat: <time datetime="2026-11-05">5 noiembrie 2026</time></span><span aria-hidden="true">·</span>
+        <span>12 min de citit</span>
+      </div>
+      <p class="lead">Modelele pe straturi sunt primul lucru pe care îl înveți în rețelistică și ultimul pe care îl mai folosești la depanare, după ani de meserie. „E o problemă de nivel 1” înseamnă „verifică cablul”; „merge ping-ul, dar nu merge site-ul” te duce spre straturile de sus. Modelul e un limbaj comun.</p>
+<p>În ghidul ăsta vezi cele 7 straturi ale modelului OSI și cele 4 ale modelului TCP/IP, cum se numesc datele la fiecare strat, ce protocoale și echipamente aparțin fiecăruia, cum se încapsulează pas cu pas o cerere către un site și ce capcane apar la examen. La final ai 5 întrebări cu răspunsuri.</p>
+<p>În cursurile CCNA v8 de la Networking Academy, modelele se predau în <strong>CCNA 1 · ITN</strong>, modulul 2 (protocoale și modele), iar straturile sunt apoi detaliate pe rând: fizic (modulul 3), legătura de date (modulul 5), rețea (modulul 9), transport (modulul 14) și aplicație (modulul 15).</p>
+      <nav class="toc toc--fold" aria-labelledby="toc-title"><h2 id="toc-title">Cuprins</h2><button type="button" class="toc-toggle" data-toc-toggle aria-expanded="false" aria-controls="toc-list"><span class="toc-toggle-t">Cuprins</span> <span class="toc-toggle-n">10 secțiuni</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6"/></svg></button><ol id="toc-list"><li><a href="#de-ce-avem-modele-pe-straturi">De ce avem modele pe straturi</a></li><li><a href="#modelul-osi-cele-7-straturi">Modelul OSI: cele 7 straturi</a><ol><li><a href="#straturile-de-sus-5-6-7-de-ce-par-neclare">Straturile de sus (5, 6, 7): de ce par neclare</a></li></ol></li><li><a href="#modelul-tcp-ip-4-straturi-sau-5">Modelul TCP/IP: 4 straturi (sau 5)</a><ol><li><a href="#comparatie-directa-osi-vs-tcp-ip">Comparație directă OSI vs TCP/IP</a></li></ol></li><li><a href="#pdu-urile-cum-se-numesc-datele-la-fiecare-strat">PDU-urile: cum se numesc datele la fiecare strat</a></li><li><a href="#exemplu-complet-ce-se-intampla-cand-deschizi-un-site">Exemplu complet: ce se întâmplă când deschizi un site</a><ol><li><a href="#pasul-0-afli-adresa-ip-a-serverului-dns">Pasul 0: afli adresa IP a serverului (DNS)</a></li><li><a href="#pasul-1-stratul-aplicatie">Pasul 1: stratul aplicație</a></li><li><a href="#pasul-2-stratul-transport">Pasul 2: stratul transport</a></li><li><a href="#pasul-3-stratul-retea">Pasul 3: stratul rețea</a></li><li><a href="#pasul-4-stratul-legatura-de-date">Pasul 4: stratul legătură de date</a></li><li><a href="#pasul-5-stratul-fizic">Pasul 5: stratul fizic</a></li><li><a href="#ce-face-routerul">Ce face routerul</a></li><li><a href="#ce-face-serverul">Ce face serverul</a></li><li><a href="#rezumatul-anteturilor">Rezumatul anteturilor</a></li></ol></li><li><a href="#capcane-frecvente-la-examen">Capcane frecvente la examen</a></li><li><a href="#trucuri-de-memorare-in-romana">Trucuri de memorare (în română)</a></li><li><a href="#intrebari-de-exersat">Întrebări de exersat</a></li><li><a href="#cum-folosesti-modelul-in-practica">Cum folosești modelul în practică</a></li><li><a href="#intrebari-frecvente">Întrebări frecvente</a></li></ol></nav>
+<h2 id="de-ce-avem-modele-pe-straturi">De ce avem modele pe straturi</h2>
+<p>O rețea face multe lucruri deodată: transformă biți în semnale, găsește destinatarul pe același segment, alege drumul prin Internet, verifică dacă au ajuns toate datele, le livrează aplicației potrivite. Modelele pe straturi împart munca asta în bucăți, fiecare cu rolul ei:</p>
+<ul>
+<li><strong>fiecare strat face un singur tip de treabă</strong> și folosește serviciile stratului de dedesubt;</li>
+<li><strong>producătorii pot lucra independent</strong>: placa de rețea a unei firme merge cu sistemul de operare al alteia, pentru că amândouă respectă aceleași interfețe între straturi;</li>
+<li><strong>poți schimba un strat fără să le atingi pe celelalte</strong>: treci de la cablu la Wi-Fi, iar browserul nu observă nimic;</li>
+<li><strong>depanezi metodic</strong>: verifici straturile pe rând, de jos în sus sau de sus în jos.</li>
+</ul>
+<h2 id="modelul-osi-cele-7-straturi">Modelul OSI: cele 7 straturi</h2>
+<p><strong>OSI</strong> (Open Systems Interconnection) a fost publicat de ISO ca <strong>model de referință</strong>. Protocoalele OSI propriu-zise nu s-au impus, dar împărțirea în 7 straturi a rămas vocabularul standard al meseriei.</p>
+<div class="table-scroll"><p class="table-hint" aria-hidden="true">glisează<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></p><div class="table-wrap" role="region" tabindex="0" aria-label="Tabel (se derulează pe orizontală)"><table>
+<thead>
+<tr>
+<th>Nr.</th>
+<th>Strat</th>
+<th>Ce face, pe scurt</th>
+<th>PDU</th>
+<th>Exemple de protocoale și tehnologii</th>
+<th>Echipamente tipice</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>7</td>
+<td>Application (aplicație)</td>
+<td>oferă servicii de rețea aplicațiilor</td>
+<td>date</td>
+<td class="tw">HTTP, HTTPS, DNS, DHCP, SMTP, IMAP, FTP, SSH, SNMP</td>
+<td>host-uri, servere</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Presentation (prezentare)</td>
+<td class="tw">formatul datelor: codificare, compresie, criptare</td>
+<td>date</td>
+<td>ASCII, UTF-8, JPEG, MPEG</td>
+<td>host-uri</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Session (sesiune)</td>
+<td class="tw">deschide, menține și închide dialogul dintre aplicații</td>
+<td>date</td>
+<td class="tw">gestionarea sesiunilor, puncte de reluare</td>
+<td>host-uri</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Transport</td>
+<td class="tw">livrare de la proces la proces, porturi, fiabilitate</td>
+<td>segment (TCP) / datagramă (UDP)</td>
+<td>TCP, UDP</td>
+<td>host-uri, firewall-uri</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Network (rețea)</td>
+<td class="tw">adresare logică și alegerea drumului între rețele</td>
+<td>packet (pachet)</td>
+<td>IPv4, IPv6, ICMP, ICMPv6, OSPF</td>
+<td>router, switch Layer 3</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Data Link (legătură de date)</td>
+<td class="tw">livrare pe același segment, adrese MAC, detectarea erorilor</td>
+<td>frame (cadru)</td>
+<td>Ethernet, Wi-Fi (802.11), PPP</td>
+<td class="tw">switch, bridge, access point, placa de rețea</td>
+</tr>
+<tr>
+<td>1</td>
+<td>Physical (fizic)</td>
+<td class="tw">transmite biții ca semnale electrice, optice sau radio</td>
+<td>biți</td>
+<td>cablu UTP, fibră, radio, conectori RJ-45</td>
+<td>hub, repetor, cabluri, conectori</td>
+</tr>
+</tbody></table></div></div>
+<p>Câteva precizări care te scapă de confuzii:</p>
+<ul>
+<li>Stratul 2 are în realitate două sub-straturi: <strong>LLC</strong> (legătura cu stratul de rețea) și <strong>MAC</strong> (accesul la mediu și adresarea fizică).</li>
+<li><strong>Ethernet și Wi-Fi acoperă și stratul 1, și stratul 2.</strong> Standardul descrie atât semnalele, cât și formatul frame-ului.</li>
+<li>La stratul 4, dacă întrebarea nu precizează protocolul, răspunsul așteptat pentru PDU e <strong>segment</strong>.</li>
+<li>O <strong>placă de rețea</strong> lucrează la straturile 1 și 2, iar un <strong>calculator</strong> sau un <strong>server</strong> folosește toate cele 7.</li>
+<li>Un <strong>firewall</strong> modern poate inspecta trafic de la stratul 3 până la 7, în funcție de tip.</li>
+</ul>
+<h3 id="straturile-de-sus-5-6-7-de-ce-par-neclare">Straturile de sus (5, 6, 7): de ce par neclare</h3>
+<p>În practică, aplicațiile fac singure munca straturilor 5 și 6. Un browser deschide sesiunea, alege formatul datelor și criptează conexiunea (prin TLS), toate în același program. De aceea mulți le tratează împreună ca „partea de aplicație”, exact cum face modelul TCP/IP.</p>
+<h2 id="modelul-tcp-ip-4-straturi-sau-5">Modelul TCP/IP: 4 straturi (sau 5)</h2>
+<p>Modelul <strong>TCP/IP</strong> a apărut odată cu protocoalele pe care le folosește Internetul. Nu e o teorie scrisă înainte, ci descrierea modului în care funcționează efectiv rețelele de azi. În materialele CCNA are 4 straturi:</p>
+<div class="table-scroll"><p class="table-hint" aria-hidden="true">glisează<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></p><div class="table-wrap" role="region" tabindex="0" aria-label="Tabel (se derulează pe orizontală)"><table>
+<thead>
+<tr>
+<th>Strat TCP/IP</th>
+<th>Corespunde în OSI</th>
+<th>Ce găsești aici</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Application</td>
+<td>5, 6, 7</td>
+<td>HTTP, DNS, DHCP, SMTP, SSH, FTP</td>
+</tr>
+<tr>
+<td>Transport</td>
+<td>4</td>
+<td>TCP, UDP</td>
+</tr>
+<tr>
+<td>Internet</td>
+<td>3</td>
+<td>IPv4, IPv6, ICMP</td>
+</tr>
+<tr>
+<td>Network Access</td>
+<td>1, 2</td>
+<td>Ethernet, Wi-Fi, cablul, semnalele</td>
+</tr>
+</tbody></table></div></div>
+<p>În unele cărți vei vedea un model TCP/IP <strong>cu 5 straturi</strong>: stratul Network Access e despărțit în Data Link și Physical. E aceeași idee, doar cu granița de jos mai clară. La examen, citește atent câte straturi are modelul din întrebare.</p>
+<h3 id="comparatie-directa-osi-vs-tcp-ip">Comparație directă OSI vs TCP/IP</h3>
+<div class="table-scroll"><p class="table-hint" aria-hidden="true">glisează<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></p><div class="table-wrap" role="region" tabindex="0" aria-label="Tabel (se derulează pe orizontală)"><table>
+<thead>
+<tr>
+<th>Criteriu</th>
+<th>OSI</th>
+<th>TCP/IP</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Număr de straturi</td>
+<td>7</td>
+<td>4 (sau 5, în varianta extinsă)</td>
+</tr>
+<tr>
+<td>Tip</td>
+<td>model de referință</td>
+<td>model de protocoale, folosit efectiv</td>
+</tr>
+<tr>
+<td>Straturile de sus</td>
+<td class="tw">Application, Presentation, Session separate</td>
+<td>toate în Application</td>
+</tr>
+<tr>
+<td>Stratul 3 se numește</td>
+<td>Network</td>
+<td>Internet</td>
+</tr>
+<tr>
+<td>Straturile de jos</td>
+<td>Data Link și Physical separate</td>
+<td>Network Access (sau Link)</td>
+</tr>
+<tr>
+<td>La ce îl folosești</td>
+<td class="tw">vocabular, depanare, clasificarea echipamentelor</td>
+<td class="tw">să înțelegi cum circulă datele pe Internet</td>
+</tr>
+</tbody></table></div></div>
+<p>Pe scurt: când spui „switch de nivel 2” sau „problemă de nivel 1” vorbești în OSI. Când explici cum ajunge o pagină web din Internet pe telefon, gândești în TCP/IP. Cele două se suprapun ușor, iar la examen trebuie să treci dintr-unul în altul fără efort.</p>
+<h2 id="pdu-urile-cum-se-numesc-datele-la-fiecare-strat">PDU-urile: cum se numesc datele la fiecare strat</h2>
+<p>Pe drumul în jos, fiecare strat adaugă propriul <strong>antet</strong> (header) în fața datelor primite de sus. Rezultatul se numește <strong>PDU</strong> (Protocol Data Unit) și are alt nume la fiecare strat:</p>
+<div class="table-scroll"><p class="table-hint" aria-hidden="true">glisează<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></p><div class="table-wrap" role="region" tabindex="0" aria-label="Tabel (se derulează pe orizontală)"><table>
+<thead>
+<tr>
+<th>Strat</th>
+<th>PDU</th>
+<th>Ce adaugă stratul</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Application</td>
+<td>date (data)</td>
+<td class="tw">conținutul propriu-zis, de exemplu cererea HTTP</td>
+</tr>
+<tr>
+<td>Transport</td>
+<td>segment (TCP) sau datagramă (UDP)</td>
+<td class="tw">portul sursă și destinație, plus numere de secvență la TCP</td>
+</tr>
+<tr>
+<td>Network / Internet</td>
+<td>packet</td>
+<td>adresa IP sursă și destinație, TTL</td>
+</tr>
+<tr>
+<td>Data Link</td>
+<td>frame</td>
+<td class="tw">adresa MAC sursă și destinație, tipul, <strong>plus o coadă (trailer)</strong> cu FCS</td>
+</tr>
+<tr>
+<td>Physical</td>
+<td>biți</td>
+<td class="tw">nu adaugă antet, transformă frame-ul în semnale</td>
+</tr>
+</tbody></table></div></div>
+<p>Stratul 2 e singurul care pune ceva și <strong>la final</strong>: FCS (Frame Check Sequence), o sumă de control cu care destinatarul verifică dacă biții au ajuns nealterați. Un frame cu FCS greșit e aruncat.</p>
+<p>Procesul de adăugare a anteturilor se numește <strong>încapsulare</strong>. Procesul invers, la destinatar, când fiecare strat își citește și își scoate antetul, se numește <strong>decapsulare</strong>.</p>
+<h2 id="exemplu-complet-ce-se-intampla-cand-deschizi-un-site">Exemplu complet: ce se întâmplă când deschizi un site</h2>
+<p>Hai să urmărim o cerere reală. Ești pe laptop, conectat la routerul de acasă, și scrii în browser <code>routerel.app</code>. Datele de pornire (inventate, dar realiste):</p>
+<div class="table-scroll"><p class="table-hint" aria-hidden="true">glisează<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></p><div class="table-wrap" role="region" tabindex="0" aria-label="Tabel (se derulează pe orizontală)"><table>
+<thead>
+<tr>
+<th>Ce</th>
+<th>Valoare</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Laptopul</td>
+<td class="tw">IP 192.168.1.10/24, MAC AA-AA-AA-11-11-11</td>
+</tr>
+<tr>
+<td>Routerul de acasă (default gateway)</td>
+<td>IP 192.168.1.1, MAC BB-BB-BB-22-22-22</td>
+</tr>
+<tr>
+<td>Serverul site-ului</td>
+<td>IP 203.0.113.10 (adresă de documentație)</td>
+</tr>
+</tbody></table></div></div>
+<h3 id="pasul-0-afli-adresa-ip-a-serverului-dns">Pasul 0: afli adresa IP a serverului (DNS)</h3>
+<p>Browserul știe un nume, dar rețeaua lucrează cu adrese. Laptopul întreabă un server DNS, de obicei prin <strong>UDP, portul 53</strong>, și primește adresa <code>203.0.113.10</code>. Și cererea DNS trece prin toate straturile, exact ca mai jos, doar cu UDP în loc de TCP.</p>
+<h3 id="pasul-1-stratul-aplicatie">Pasul 1: stratul aplicație</h3>
+<p>Browserul pregătește cererea HTTP (în esență „dă-mi pagina principală de la routerel.app”). Pentru că site-ul folosește HTTPS, după ce se stabilește conexiunea TCP, cererea e criptată cu TLS. Pentru model, rezultatul sunt <strong>datele</strong>.</p>
+<h3 id="pasul-2-stratul-transport">Pasul 2: stratul transport</h3>
+<p>HTTPS folosește <strong>TCP, portul 443</strong>. Înainte de orice date, TCP stabilește conexiunea prin acel „handshake” în trei pași (SYN, SYN-ACK, ACK). Apoi datele primesc un antet TCP cu:</p>
+<ul>
+<li><strong>portul sursă</strong>: un număr ales temporar de sistemul de operare, de exemplu 51514, ca răspunsul să ajungă înapoi la conexiunea corectă a browserului;</li>
+<li><strong>portul destinație</strong>: 443;</li>
+<li>numere de secvență și de confirmare, ca nimic să nu se piardă și totul să ajungă în ordine.</li>
+</ul>
+<p>Acum ai un <strong>segment</strong>.</p>
+<h3 id="pasul-3-stratul-retea">Pasul 3: stratul rețea</h3>
+<p>Segmentul primește un antet IP: <strong>sursa 192.168.1.10, destinația 203.0.113.10</strong>, un TTL (de exemplu 64 sau 128, în funcție de sistemul de operare) și câmpul care spune că înăuntru e TCP. Acum ai un <strong>packet</strong>.</p>
+<h3 id="pasul-4-stratul-legatura-de-date">Pasul 4: stratul legătură de date</h3>
+<p>Aici apare cea mai importantă idee a exemplului. Laptopul compară rețeaua destinației cu a sa: <code>203.0.113.10</code> nu e în <code>192.168.1.0/24</code>. Deci packet-ul nu poate fi livrat direct, ci trebuie dat <strong>default gateway-ului</strong>.</p>
+<p>Laptopul are nevoie de MAC-ul routerului, nu al serverului. Dacă nu îl are deja în cache, îl află prin <strong>ARP</strong>. Apoi construiește frame-ul Ethernet:</p>
+<ul>
+<li><strong>MAC destinație: BB-BB-BB-22-22-22</strong> (routerul de acasă);</li>
+<li><strong>MAC sursă: AA-AA-AA-11-11-11</strong> (laptopul);</li>
+<li>tipul: IPv4;</li>
+<li>la final, FCS-ul.</li>
+</ul>
+<p>Acum ai un <strong>frame</strong>.</p>
+<h3 id="pasul-5-stratul-fizic">Pasul 5: stratul fizic</h3>
+<p>Placa de rețea transformă frame-ul în <strong>biți</strong>: semnale electrice pe cablu sau unde radio pe Wi-Fi.</p>
+<h3 id="ce-face-routerul">Ce face routerul</h3>
+<p>Routerul primește biții, refăcând frame-ul. Verifică FCS-ul, vede că MAC-ul destinație e al lui și scoate frame-ul. Citește packet-ul IP, caută destinația în <strong>tabela de rutare</strong>, scade TTL-ul cu 1 și construiește un <strong>frame nou</strong>, cu adresele MAC potrivite pentru legătura următoare. Routerul de acasă mai face ceva: <strong>NAT</strong>, adică înlocuiește adresa IP sursă privată cu adresa publică primită de la furnizor.</p>
+<p>Fiecare router de pe drum repetă povestea: frame nou la fiecare hop, packet-ul IP merge mai departe.</p>
+<h3 id="ce-face-serverul">Ce face serverul</h3>
+<p>Serverul face drumul invers: biți → frame (verifică FCS, scoate antetul Ethernet) → packet (verifică IP-ul destinație, scoate antetul IP) → segment (vede portul 443 și dă datele serverului web) → date. Serverul web răspunde, iar răspunsul se încapsulează și pleacă înapoi, cu porturile inversate: sursa 443, destinația 51514.</p>
+<h3 id="rezumatul-anteturilor">Rezumatul anteturilor</h3>
+<div class="table-scroll"><p class="table-hint" aria-hidden="true">glisează<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></p><div class="table-wrap" role="region" tabindex="0" aria-label="Tabel (se derulează pe orizontală)"><table>
+<thead>
+<tr>
+<th>Pe legătura</th>
+<th>MAC sursă → destinație</th>
+<th>IP sursă → destinație</th>
+<th>Porturi</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>laptop → router de acasă</td>
+<td>laptop → router</td>
+<td>192.168.1.10 → 203.0.113.10</td>
+<td>51514 → 443</td>
+</tr>
+<tr>
+<td>router de acasă → furnizor</td>
+<td>router → următorul router</td>
+<td>IP public → 203.0.113.10 (după NAT)</td>
+<td class="tw">portul sursă poate fi schimbat de NAT, destinația rămâne 443</td>
+</tr>
+<tr>
+<td>ultimul router → server</td>
+<td>router → server</td>
+<td>IP public → 203.0.113.10</td>
+<td>→ 443</td>
+</tr>
+</tbody></table></div></div>
+<p>Regula de reținut: <strong>MAC-urile se schimbă la fiecare hop, adresele IP rămân de la un capăt la altul</strong> (dacă nu intervine NAT).</p>
+<h2 id="capcane-frecvente-la-examen">Capcane frecvente la examen</h2>
+<ol>
+<li><strong>Switch-ul e de nivel 2, routerul de nivel 3, hub-ul de nivel 1.</strong> Excepția: switch-ul multilayer (Layer 3), care poate ruta.</li>
+<li><strong>Segment vs. datagramă vs. packet vs. frame.</strong> TCP face segmente, UDP datagrame, IP packet-uri, Ethernet frame-uri. Dacă întrebarea zice „la stratul 2”, răspunsul e frame. Dacă întrebarea nu precizează protocolul, răspunsul așteptat pentru stratul 4 e <strong>segment</strong>.</li>
+<li><strong>Cine adaugă ce adresă.</strong> Porturi: stratul 4. Adrese IP: stratul 3. Adrese MAC: stratul 2.</li>
+<li><strong>Doar stratul 2 adaugă trailer.</strong> Antet adaugă straturile 4, 3 și 2; coadă (FCS) doar stratul 2.</li>
+<li><strong>Internet = Network.</strong> Stratul „Internet” din TCP/IP corespunde stratului 3 din OSI, nu întregului Internet.</li>
+<li><strong>Network Access = straturile 1 și 2.</strong> Nu doar stratul 1.</li>
+<li><strong>Criptarea, compresia și formatele (JPEG, ASCII) țin de stratul 6, Presentation.</strong> Dialogul (deschidere, închidere, reluare) ține de stratul 5, Session.</li>
+<li><strong>ICMP e la stratul 3,</strong> chiar dacă mesajele lui călătoresc în interiorul packet-urilor IP. Ping-ul nu folosește porturi.</li>
+<li><strong>ARP e la granița dintre straturile 2 și 3.</strong> Leagă o adresă IP de una MAC, iar mesajele lui sunt puse direct în frame-uri Ethernet, fără antet IP. Citește atent ce cere întrebarea: rolul lui sau unde sunt transportate mesajele.</li>
+<li><strong>MAC-ul destinație al unui packet spre Internet e al gateway-ului</strong>, nu al serverului. E poate cea mai frecventă capcană din tot capitolul.</li>
+<li><strong>Ordinea la încapsulare e de sus în jos (7 → 1), la decapsulare de jos în sus (1 → 7).</strong></li>
+</ol>
+<h2 id="trucuri-de-memorare-in-romana">Trucuri de memorare (în română)</h2>
+<p>Pentru straturile OSI de jos în sus (<strong>P</strong>hysical, <strong>D</strong>ata Link, <strong>N</strong>etwork, <strong>T</strong>ransport, <strong>S</strong>ession, <strong>P</strong>resentation, <strong>A</strong>pplication):</p>
+<div class="callout callout--info"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg><div><p><strong>P</strong>isica <strong>D</strong>oarme <strong>N</strong>oaptea <strong>T</strong>oată <strong>S</strong>ăptămâna <strong>P</strong>e <strong>A</strong>coperiș.</p></div></div>
+<p>De sus în jos (<strong>A</strong>, <strong>P</strong>, <strong>S</strong>, <strong>T</strong>, <strong>N</strong>, <strong>D</strong>, <strong>P</strong>):</p>
+<div class="callout callout--info"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg><div><p><strong>A</strong>m <strong>P</strong>rins <strong>S</strong>ardine <strong>T</strong>oată <strong>N</strong>oaptea, <strong>D</strong>ar <strong>P</strong>uține.</p></div></div>
+<p>Pentru PDU-uri, de sus în jos (<strong>D</strong>ata, <strong>S</strong>egment, <strong>P</strong>acket, <strong>F</strong>rame, <strong>B</strong>its):</p>
+<div class="callout callout--info"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg><div><p><strong>D</strong>acă <strong>S</strong>tudiezi <strong>P</strong>erseverent, <strong>F</strong>aci <strong>B</strong>ine.</p></div></div>
+<p>Cuvintele încep cu literele termenilor în engleză, pentru că la examen vei vedea Physical, Frame și Packet, nu traducerile lor.</p>
+<h2 id="intrebari-de-exersat">Întrebări de exersat</h2>
+<ol>
+<li>Un PC trimite un e-mail. La ce strat OSI se adaugă portul destinație și cum se numește PDU-ul rezultat, dacă protocolul de transport este TCP?</li>
+<li>Un switch primește un frame și se uită în tabela lui de adrese ca să decidă pe ce port îl trimite. După ce adresă decide și la ce strat lucrează în acest caz?</li>
+<li>Un packet pleacă de la PC-ul A, trece prin două routere și ajunge la serverul B. Fără NAT, ce se schimbă la fiecare hop: adresele MAC, adresele IP sau amândouă?</li>
+<li>Căror straturi din modelul OSI le corespunde stratul Network Access din modelul TCP/IP?</li>
+<li>Un fișier e comprimat și criptat înainte de a fi trimis. Cărui strat OSI îi atribuie modelul aceste funcții?</li>
+</ol>
+<details class="reveal-answer">
+<summary><strong>Răspunsuri</strong></summary><p><strong>1.</strong> La <strong>stratul 4 (Transport)</strong>. Cu TCP, PDU-ul se numește <strong>segment</strong>. (Cu UDP ar fi fost datagramă.)</p>
+<p><strong>2.</strong> După <strong>adresa MAC destinație</strong>, la <strong>stratul 2 (Data Link)</strong>. Un switch obișnuit nu se uită la adresele IP când comută frame-uri.</p>
+<p><strong>3.</strong> Se schimbă <strong>doar adresele MAC</strong>. Fiecare router scoate frame-ul vechi și construiește unul nou pentru legătura următoare, dar adresele IP sursă și destinație rămân aceleași de la A la B. (Se mai schimbă TTL-ul, care scade cu 1 la fiecare router.)</p>
+<p><strong>4.</strong> Straturilor <strong>1 (Physical) și 2 (Data Link)</strong>.</p>
+<p><strong>5.</strong> Stratului <strong>6 (Presentation)</strong>, care se ocupă de formatul, compresia și criptarea datelor.</p>
+</details><h2 id="cum-folosesti-modelul-in-practica">Cum folosești modelul în practică</h2>
+<p>Modelul nu e doar pentru examen. Când „nu merge internetul”, o depanare ordonată de jos în sus arată așa:</p>
+<ul>
+<li><strong>Stratul 1:</strong> e cablul conectat, ledul portului aprins, Wi-Fi-ul pornit?</li>
+<li><strong>Stratul 2:</strong> e portul în VLAN-ul corect, apare MAC-ul în tabela switch-ului? (Despre VLAN-uri ai <a href="../vlan-si-trunk/">ghidul despre VLAN-uri și trunk-uri</a>.)</li>
+<li><strong>Stratul 3:</strong> are dispozitivul adresă IP, mască și gateway corecte? Merge <code>ping</code> spre gateway? (Pentru măști și subrețele: <a href="../subnetting-pas-cu-pas/">subnetting pas cu pas</a>; pentru IPv6: <a href="../adrese-ipv6/">adresele IPv6 explicate</a>.)</li>
+<li><strong>Stratul 4 și peste:</strong> merge <code>ping</code> spre server, dar nu și site-ul? Atunci verifici DNS-ul, portul, firewall-ul, aplicația.</li>
+</ul>
+<p>Comenzile cu care faci aceste verificări pe echipamentele Cisco sunt adunate în <a href="../comenzi-cisco-ios/">fișa cu comenzile Cisco IOS</a>.</p>
+<div class="cta-box cta-box--article"><svg class="mascot" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><g class="m-breathe"><path d="M22 14l-5-9M42 14l5-9" stroke="#8a919c" stroke-width="3.4" stroke-linecap="round" fill="none"/><circle class="m-led m-led-l" cx="17" cy="5" r="3.6"/><circle class="m-led m-led-r" cx="47" cy="5" r="3.6"/><path class="m-body" d="M28 12q4-6 8 0"/><rect class="m-body" x="8" y="12" width="48" height="42" rx="18"/><rect class="m-belly" x="8" y="40" width="48" height="14" rx="7"/><path d="M19 31q4-5 8 0" stroke="#1a1d24" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M37 31q4-5 8 0" stroke="#1a1d24" stroke-width="3" fill="none" stroke-linecap="round"/><path class="m-led" d="M29 37l3 3.5 3-3.5z"/><circle cx="15" cy="38" r="3" fill="#ff8fb1" opacity=".7"/><circle cx="49" cy="38" r="3" fill="#ff8fb1" opacity=".7"/><circle class="m-ok" cx="18" cy="47" r="2"/><circle class="m-led" cx="24" cy="47" r="2"/><rect x="31" y="45" width="6" height="4" rx="1" fill="#0d1a3a" opacity=".55"/><rect x="39" y="45" width="6" height="4" rx="1" fill="#0d1a3a" opacity=".55"/><rect x="47" y="45" width="5" height="4" rx="1" fill="#0d1a3a" opacity=".55"/><path class="m-leg" d="M20 54v4M44 54v4" stroke-width="3.4" stroke-linecap="round" fill="none"/></g></svg><div><h3>Exersează modelele OSI și TCP/IP în aplicația Routerel</h3><p>Routerel are peste 1.900 de întrebări pentru CCNA 1 · ITN, CCNA 2 · IEN și CCNA 3 · CEN, fiecare cu explicație imediat după răspuns. Greșelile revin singure prin repetiție spațiată până le stăpânești, iar simularea de examen cu timp îți arată unde stai. Întrebările sunt în engleză, ca la examen, sau în română. Abonații noi au 7 zile gratuite, cu acces la tot.</p></div><a class="btn" href="../../">Descoperă aplicația<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div><h2 id="intrebari-frecvente">Întrebări frecvente</h2>
+<div class="faq faq--article"><details><summary>Care sunt cele 7 straturi ale modelului OSI?<span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p>De jos în sus: 1 Physical (fizic), 2 Data Link (legătură de date), 3 Network (rețea), 4 Transport, 5 Session (sesiune), 6 Presentation (prezentare) și 7 Application (aplicație).</p></div></details><details><summary>Care e diferența dintre modelul OSI și modelul TCP/IP?<span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p>OSI e un model de referință cu 7 straturi, folosit pentru a descrie și a depana rețelele. TCP/IP e modelul după care funcționează efectiv Internetul și are 4 straturi: Application, Transport, Internet și Network Access. Straturile 5, 6 și 7 din OSI sunt unite în Application, iar 1 și 2 în Network Access.</p></div></details><details><summary>Ce este un PDU?<span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p>PDU (Protocol Data Unit) e numele datelor la un anumit strat, împreună cu antetul acelui strat: date la aplicație, segment (TCP) sau datagramă (UDP) la transport, packet la rețea, frame la legătura de date și biți la nivelul fizic. Dacă întrebarea nu precizează protocolul, la stratul 4 răspunsul așteptat e <strong>segment</strong>.</p></div></details><details><summary>La ce strat lucrează un switch și la ce strat lucrează un router?<span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p>Un switch obișnuit lucrează la stratul 2 și decide după adresele MAC. Un router lucrează la stratul 3 și decide după adresele IP. Un switch multilayer (Layer 3) poate face și rutare.</p></div></details><details><summary>Ce se schimbă când un packet trece printr-un router?<span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p>Routerul scoate frame-ul, citește packet-ul IP, scade TTL-ul și construiește un frame nou pentru legătura următoare. Adresele MAC se schimbă la fiecare hop, iar adresele IP rămân aceleași de la un capăt la altul, cu excepția cazului în care pe drum se face NAT.</p></div></details><details><summary>Cât de des apare modelul OSI la examenul CCNA?<span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p>Rar ca întrebare de memorare pură, dar foarte des indirect: vocabularul straturilor apare la depanare, la echipamente, la protocoale și în explicațiile multor întrebări. Merită să-l știi foarte bine de la început. Despre examen în general, vezi <a href="../ce-este-ccna/">ghidul despre CCNA</a>.</p></div></details></div>
+<hr>
+<p><em>Routerel este o aplicație independentă și nu este afiliată, sponsorizată sau aprobată de Cisco Systems, Inc. Cisco, CCNA, Cisco IOS și Networking Academy sunt mărci înregistrate ale Cisco Systems, Inc.</em></p>
+      
+      <section class="related" aria-labelledby="rel-title">
+        <h2 id="rel-title">Citește și</h2>
+        <div class="grid grid--2"><a class="card post-card lift" href="../../ghiduri/adrese-ipv6/"><span class="tagline">Ghid · 13 min</span><h3>Adresele IPv6 explicate (format, prescurtare, tipuri)</h3><p>Adresele IPv6 pe înțelesul tău: formatul pe 128 de biți, regulile de prescurtare, tipurile de adrese, EUI-64 pas cu pas, SLAAC și DHCPv6, plus exerciții.</p></a><a class="card post-card lift" href="../../ghiduri/ce-este-ccna/"><span class="tagline">Ghid · 12 min</span><h3>Ce este CCNA și cum te pregătești (ghid 2026)</h3><p>Ce este CCNA, cum arată examenul 200-301, cât costă, cât e valabil și un plan de pregătire pe 12 săptămâni, cu tehnici de studiu și greșeli de evitat.</p></a></div>
+      </section>
+    </article>
+  </div>
+</main>
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="about">
+        <a class="brand" href="../../"><img src="../../assets/icon-96.webp" alt="" width="36" height="36" loading="lazy"><span>Routerel</span></a>
+        <p>Exersezi CCNA pe telefon: întrebări cu explicații, repetiția greșelilor și simulări de examen. În română și engleză.</p>
+      </div>
+      <div><h2>Aplicația</h2><ul><li><a href="../../#functii">Funcții</a></li><li><a href="../../#preturi">Prețuri</a></li><li><a href="../../#cum-functioneaza">Cum funcționează</a></li><li><a href="../../#faq">Întrebări frecvente</a></li></ul></div>
+      <div><h2>Resurse</h2><ul><li><a href="../../ghiduri/">Ghiduri CCNA</a></li><li><a href="../../tools/">Tools gratuite</a></li><li><a href="../../en/" hreflang="en" lang="en" data-set-lang="en">English</a></li></ul></div>
+      <div><h2>Legal și contact</h2><ul><li><a href="../../privacy.html">Confidențialitate</a></li><li><a href="../../terms.html">Termeni de utilizare</a></li><li><a href="../../delete-account.html">Ștergerea contului</a></li></ul><ul><li><a href="mailto:contact@routerel.app">contact@routerel.app</a></li></ul></div>
+    </div>
+    <div class="disclaimer">
+      <p>Routerel este o aplicație independentă și nu este afiliată, sponsorizată sau aprobată de Cisco Systems, Inc. Cisco, CCNA și Cisco Networking Academy sunt mărci ale Cisco Systems, Inc.</p>
+      <p>© 2026 Routerel</p>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

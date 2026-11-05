@@ -1,0 +1,799 @@
+<!doctype html>
+<!-- Pagină generată. Nu o edita de mână: vezi tools/site/ (npm run build:guides / npm run sync:tools / npm run build:legal). -->
+<html lang="ro" class="play-soon">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Comenzile Cisco IOS de bază (fișă pentru CCNA) | Routerel</title>
+  <meta name="description" content="Fișa comenzilor Cisco IOS de bază pentru CCNA: modurile CLI, configurarea inițială, parole și SSH, interfețe, salvarea configurației, comenzi show și depanare.">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <link rel="canonical" href="https://routerel.app/ghiduri/comenzi-cisco-ios/">
+  <link rel="alternate" hreflang="ro" href="https://routerel.app/ghiduri/comenzi-cisco-ios/">
+  <link rel="alternate" hreflang="en" href="https://routerel.app/en/guides/cisco-ios-basic-commands/">
+  <link rel="alternate" hreflang="x-default" href="https://routerel.app/en/guides/cisco-ios-basic-commands/">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#12151b" media="(prefers-color-scheme: dark)">
+  <meta name="color-scheme" content="light dark">
+  <link rel="icon" href="../../assets/favicon-32.png" type="image/png" sizes="32x32">
+  <link rel="icon" href="../../assets/icon-192.png" type="image/png" sizes="192x192">
+  <link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
+  <link rel="manifest" href="../../site.webmanifest">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Routerel">
+  <meta property="og:locale" content="ro_RO">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta property="og:title" content="Comenzile Cisco IOS de bază (fișă pentru CCNA) | Routerel">
+  <meta property="og:description" content="Fișa comenzilor Cisco IOS de bază pentru CCNA: modurile CLI, configurarea inițială, parole și SSH, interfețe, salvarea configurației, comenzi show și depanare.">
+  <meta property="og:url" content="https://routerel.app/ghiduri/comenzi-cisco-ios/">
+  <meta property="og:image" content="https://routerel.app/assets/og-ro.png">
+  <meta property="og:image:width" content="1024">
+  <meta property="og:image:height" content="500">
+  <meta property="og:image:alt" content="Routerel: mascota puiul de router și numele aplicației">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Comenzile Cisco IOS de bază (fișă pentru CCNA) | Routerel">
+  <meta name="twitter:description" content="Fișa comenzilor Cisco IOS de bază pentru CCNA: modurile CLI, configurarea inițială, parole și SSH, interfețe, salvarea configurației, comenzi show și depanare.">
+  <meta name="twitter:image" content="https://routerel.app/assets/og-ro.png">
+  <meta property="article:published_time" content="2026-11-05">
+  <meta property="article:modified_time" content="2026-11-05">
+  <meta name="routerel:updated" content="2026-11-05">
+  <link rel="preload" href="../../assets/fonts/nunito-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../../assets/fonts/nunito-latin-ext.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../../assets/fonts/roboto-mono-500-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="../../style.css">
+  <script>(function(d){d.classList.add("js");try{var t=localStorage.getItem("routerel-theme");if(t==="light"||t==="dark")d.setAttribute("data-theme",t)}catch(e){}setTimeout(function(){if(!window.__rtl)d.classList.remove("js")},4000)})(document.documentElement)</script>
+  <script src="../../assets/site.js" defer></script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Article","@id":"https://routerel.app/ghiduri/comenzi-cisco-ios/#article","headline":"Comenzile Cisco IOS de bază (fișă pentru CCNA)","description":"Fișa comenzilor Cisco IOS de bază pentru CCNA: modurile CLI, configurarea inițială, parole și SSH, interfețe, salvarea configurației, comenzi show și depanare.","inLanguage":"ro","datePublished":"2026-11-05","dateModified":"2026-11-05","keywords":"comenzi Cisco IOS, comenzi Cisco de bază, configurare router Cisco, configurare SSH Cisco, comenzi show Cisco, copy running-config startup-config, Cisco CLI, comenzi CCNA","author":{"@type":"Organization","name":"Routerel","url":"https://routerel.app/"},"publisher":{"@type":"Organization","name":"Routerel","logo":{"@type":"ImageObject","url":"https://routerel.app/assets/icon-512.png"}},"image":"https://routerel.app/assets/og-ro.png","mainEntityOfPage":"https://routerel.app/ghiduri/comenzi-cisco-ios/","isPartOf":{"@id":"https://routerel.app/#website"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Acasă","item":"https://routerel.app/"},{"@type":"ListItem","position":2,"name":"Ghiduri","item":"https://routerel.app/ghiduri/"},{"@type":"ListItem","position":3,"name":"Comenzile Cisco IOS de bază (fișă pentru CCNA)","item":"https://routerel.app/ghiduri/comenzi-cisco-ios/"}]},{"@type":"FAQPage","@id":"https://routerel.app/ghiduri/comenzi-cisco-ios/#faq","inLanguage":"ro","mainEntity":[{"@type":"Question","name":"Care e diferența dintre running-config și startup-config?","acceptedAnswer":{"@type":"Answer","text":"Running-config este configurația activă, din memoria RAM; se pierde la repornire dacă nu o salvezi. Startup-config este configurația salvată în NVRAM, încărcată la pornire. Le sincronizezi cu copy running-config startup-config."}},{"@type":"Question","name":"Care e diferența dintre enable password și enable secret?","acceptedAnswer":{"@type":"Answer","text":"Ambele protejează accesul în modul privilegiat, dar enable secret stochează parola ca hash, care nu poate fi citit înapoi, iar enable password o păstrează în clar sau cu o criptare slabă. Dacă sunt configurate amândouă, se folosește enable secret."}},{"@type":"Question","name":"Ce trebuie să configurez ca să am acces SSH la un router Cisco?","acceptedAnswer":{"@type":"Answer","text":"Un hostname diferit de cel implicit, un nume de domeniu (ip domain-name), o pereche de chei RSA (crypto key generate rsa), un utilizator local (username ... secret ...), apoi pe liniile vty: transport input ssh și login local. Recomandat și ip ssh version 2."}},{"@type":"Question","name":"Ce face service password-encryption?","acceptedAnswer":{"@type":"Answer","text":"Ascunde parolele scrise în clar în configurație (de exemplu cele de pe consolă și vty) cu o criptare slabă, de tip 7. Te ferește de cineva care se uită peste umăr, dar parolele pot fi decriptate ușor, deci nu înlocuiește enable secret și utilizatorii cu secret."}},{"@type":"Question","name":"Cum ies rapid din modul de configurare?","acceptedAnswer":{"@type":"Answer","text":"Cu end sau Ctrl+Z ajungi direct în modul privileged EXEC (promptul cu #). Comanda exit urcă doar un nivel."}},{"@type":"Question","name":"Cum rulez o comandă show din modul de configurare?","acceptedAnswer":{"@type":"Answer","text":"Pui do în fața ei, de exemplu do show ip interface brief. Așa nu mai ieși și reintri în modul de configurare."}}]}]}</script>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs><linearGradient id="rtl-play" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5b8cff"/><stop offset=".55" stop-color="#2f6bff"/><stop offset="1" stop-color="#ffb020"/></linearGradient></defs></svg>
+<a class="skip-link" href="#main">Sari la conținut</a>
+<header class="site-header">
+  <div class="container header-row">
+    <a class="brand" href="../../" aria-label="Routerel, acasă"><img src="../../assets/icon-96.webp" alt="" width="36" height="36"><span>Routerel</span></a>
+    <nav class="main-nav" aria-label="Principal"><ul><li><a href="../../#functii">Funcții</a></li><li><a href="../../#preturi">Prețuri</a></li><li><a href="../../ghiduri/" aria-current="page">Ghiduri</a></li><li><a href="../../tools/">Tools</a></li><li><a href="../../#faq">FAQ</a></li></ul></nav>
+    <div class="header-actions">
+      <div class="lang-switch" role="group" aria-label="Limba"><span aria-current="true" lang="ro">RO</span><a href="../../en/guides/cisco-ios-basic-commands/" hreflang="en" lang="en" title="English">EN</a></div>
+      <button class="icon-btn theme-toggle" type="button" data-theme-toggle aria-label="Schimbă tema"><span class="i-moon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9z"/></svg></span><span class="i-sun"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg></span></button>
+      <a class="btn btn--sm header-cta" data-play data-soon-href="../../#preturi" href="../../#preturi"><span data-when="live">Încearcă gratuit</span><span data-when="soon">Vezi prețurile</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      <button class="icon-btn menu-btn" type="button" data-menu-btn aria-expanded="false" aria-controls="mobile-nav" aria-label="Meniu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+    </div>
+  </div>
+  <nav class="mobile-nav" id="mobile-nav" aria-label="Principal" hidden>
+    <div class="container"><ul><li><a href="../../#functii">Funcții</a></li><li><a href="../../#preturi">Prețuri</a></li><li><a href="../../ghiduri/" aria-current="page">Ghiduri</a></li><li><a href="../../tools/">Tools</a></li><li><a href="../../#faq">FAQ</a></li></ul></div>
+  </nav>
+</header>
+<main id="main">
+  <div class="container section section--tight">
+    <article class="prose">
+      <nav class="crumbs" aria-label="Firimituri"><ol><li><a href="../../">Acasă</a></li><li><a href="../../ghiduri/">Ghiduri</a></li><li><span aria-current="page">Comenzile Cisco IOS de bază (fișă pentru CCNA)</span></li></ol></nav>
+      <p class="eyebrow">Ghid CCNA</p>
+      <h1>Comenzile Cisco IOS de bază (fișă pentru CCNA)</h1>
+      <div class="article-meta">
+        <span class="avatar"><svg class="mascot" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><g class="m-breathe"><path d="M22 14l-5-9M42 14l5-9" stroke="#8a919c" stroke-width="3.4" stroke-linecap="round" fill="none"/><circle class="m-led m-led-l" cx="17" cy="5" r="3.6"/><circle class="m-led m-led-r" cx="47" cy="5" r="3.6"/><path class="m-body" d="M28 12q4-6 8 0"/><rect class="m-body" x="8" y="12" width="48" height="42" rx="18"/><rect class="m-belly" x="8" y="40" width="48" height="14" rx="7"/><circle cx="23" cy="31" r="5.4" fill="#fff"/><circle class="m-pupil" cx="24" cy="31.5" r="3" fill="#1a1d24"/><circle cx="41" cy="31" r="5.4" fill="#fff"/><circle class="m-pupil" cx="42" cy="31.5" r="3" fill="#1a1d24"/><path class="m-led" d="M29 37l3 3.5 3-3.5z"/><circle class="m-ok" cx="18" cy="47" r="2"/><circle class="m-led" cx="24" cy="47" r="2"/><rect x="31" y="45" width="6" height="4" rx="1" fill="#0d1a3a" opacity=".55"/><rect x="39" y="45" width="6" height="4" rx="1" fill="#0d1a3a" opacity=".55"/><rect x="47" y="45" width="5" height="4" rx="1" fill="#0d1a3a" opacity=".55"/><path class="m-leg" d="M20 54v4M44 54v4" stroke-width="3.4" stroke-linecap="round" fill="none"/></g></svg></span>
+        <span>Echipa Routerel</span><span aria-hidden="true">·</span>
+        <span>Actualizat: <time datetime="2026-11-05">5 noiembrie 2026</time></span><span aria-hidden="true">·</span>
+        <span>13 min de citit</span>
+      </div>
+      <p class="lead">Fișa asta adună comenzile Cisco IOS de care ai nevoie zilnic în laborator și la examen: cum te miști prin modurile CLI, cum configurezi de la zero un router sau un switch, cum pui parole și SSH, cum configurezi interfețele, cum salvezi și ce îți arată fiecare comandă <code>show</code>. E gândită să fie parcursă rapid: tabele, exemple scurte, explicații doar unde contează.</p>
+<p>În cursurile CCNA v8 de la Networking Academy, comenzile de bază se învață în <strong>CCNA 1 · ITN</strong>: configurarea inițială în modulul 7, securizarea accesului (parole, SSH) în modulul 16, testarea conectivității în modulul 13 și depanarea în modulul 17. În <strong>CCNA 2 · IEN</strong>, modulul 1 reia administrarea switch-urilor și a routerelor la un nivel mai avansat.</p>
+<p>Toate exemplele folosesc nume de interfețe de pe echipamente des întâlnite în laboratoare (de exemplu <code>GigabitEthernet0/0/0</code> pe routere și <code>FastEthernet0/1</code> pe switch-uri). Pe echipamentul tău numerotarea poate diferi; verifică-o cu <code>show ip interface brief</code>.</p>
+      <nav class="toc toc--fold" aria-labelledby="toc-title"><h2 id="toc-title">Cuprins</h2><button type="button" class="toc-toggle" data-toc-toggle aria-expanded="false" aria-controls="toc-list"><span class="toc-toggle-t">Cuprins</span> <span class="toc-toggle-n">11 secțiuni</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6"/></svg></button><ol id="toc-list"><li><a href="#modurile-cli-si-prompturile">Modurile CLI și prompturile</a><ol><li><a href="#cum-te-misti-intre-moduri">Cum te miști între moduri</a></li><li><a href="#ajutorul-si-prescurtarile">Ajutorul și prescurtările</a></li></ol></li><li><a href="#unde-sta-configuratia">Unde stă configurația</a></li><li><a href="#configurarea-de-baza-a-unui-router-sau-switch">Configurarea de bază a unui router sau switch</a></li><li><a href="#accesul-de-la-distanta-prin-ssh">Accesul de la distanță prin SSH</a><ol><li><a href="#adresa-de-management-a-unui-switch">Adresa de management a unui switch</a></li></ol></li><li><a href="#configurarea-interfetelor">Configurarea interfețelor</a></li><li><a href="#salvarea-si-gestionarea-configuratiei">Salvarea și gestionarea configurației</a></li><li><a href="#comenzile-show-fisa-rapida">Comenzile show: fișa rapidă</a><ol><li><a href="#filtrarea-iesirii">Filtrarea ieșirii</a></li></ol></li><li><a href="#depanarea-ping-traceroute-si-starea-interfetelor">Depanarea: ping, traceroute și starea interfețelor</a><ol><li><a href="#ping">ping</a></li><li><a href="#traceroute">traceroute</a></li><li><a href="#starea-interfetelor-show-ip-interface-brief">Starea interfețelor (show ip interface brief)</a></li><li><a href="#debug-cu-grija">debug (cu grijă)</a></li><li><a href="#pe-calculator-windows">Pe calculator (Windows)</a></li></ol></li><li><a href="#scurtaturi-de-tastatura">Scurtături de tastatură</a></li><li><a href="#cum-le-inveti-fara-sa-le-tocesti">Cum le înveți fără să le tocești</a></li><li><a href="#intrebari-frecvente">Întrebări frecvente</a></li></ol></nav>
+<h2 id="modurile-cli-si-prompturile">Modurile CLI și prompturile</h2>
+<p>Promptul îți spune mereu unde ești. E primul lucru la care te uiți când o comandă nu merge.</p>
+<div class="table-scroll"><p class="table-hint" aria-hidden="true">glisează<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></p><div class="table-wrap" role="region" tabindex="0" aria-label="Tabel (se derulează pe orizontală)"><table>
+<thead>
+<tr>
+<th>Mod</th>
+<th>Prompt</th>
+<th>Cum intri</th>
+<th>Ce poți face</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>User EXEC</td>
+<td><code>R1&gt;</code></td>
+<td>te conectezi (consolă, SSH)</td>
+<td>câteva comenzi <code>show</code>, <code>ping</code></td>
+</tr>
+<tr>
+<td>Privileged EXEC</td>
+<td><code>R1#</code></td>
+<td><code>enable</code></td>
+<td>toate comenzile <code>show</code>, <code>copy</code>, <code>reload</code>, <code>debug</code></td>
+</tr>
+<tr>
+<td>Global configuration</td>
+<td><code>R1(config)#</code></td>
+<td><code><span class="nw">configure</span> <span class="nw">terminal</span></code></td>
+<td>setări pentru tot echipamentul</td>
+</tr>
+<tr>
+<td>Interface</td>
+<td><code>R1(config-if)#</code></td>
+<td><code><span class="nw">interface</span> <span class="nw">GigabitEthernet0/0/0</span></code></td>
+<td>setările unei interfețe</td>
+</tr>
+<tr>
+<td>Subinterface</td>
+<td><code>R1(config-subif)#</code></td>
+<td><code><span class="nw">interface</span> <span class="nw">GigabitEthernet0/0/0.10</span></code></td>
+<td class="tw">subinterfețe (de exemplu pentru VLAN-uri)</td>
+</tr>
+<tr>
+<td>Interface range</td>
+<td><code>S1(config-if-range)#</code></td>
+<td><code><span class="nw">interface</span> <span class="nw">range</span> <span class="nw">FastEthernet0/1</span> <span class="nw">-</span> <span class="nw">10</span></code></td>
+<td>mai multe porturi deodată</td>
+</tr>
+<tr>
+<td>Line</td>
+<td><code>R1(config-line)#</code></td>
+<td><code><span class="nw">line</span> <span class="nw">console</span> <span class="nw">0</span></code> sau <code><span class="nw">line</span> <span class="nw">vty</span> <span class="nw">0</span> <span class="nw">4</span></code></td>
+<td>accesul prin consolă sau de la distanță</td>
+</tr>
+<tr>
+<td>VLAN</td>
+<td><code>S1(config-vlan)#</code></td>
+<td><code><span class="nw">vlan</span> <span class="nw">10</span></code></td>
+<td>numele și setările unui VLAN</td>
+</tr>
+<tr>
+<td>Router</td>
+<td><code>R1(config-router)#</code></td>
+<td><code><span class="nw">router</span> <span class="nw">ospf</span> <span class="nw">1</span></code></td>
+<td>protocolul de rutare</td>
+</tr>
+</tbody></table></div></div>
+<h3 id="cum-te-misti-intre-moduri">Cum te miști între moduri</h3>
+<div class="table-scroll"><p class="table-hint" aria-hidden="true">glisează<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></p><div class="table-wrap" role="region" tabindex="0" aria-label="Tabel (se derulează pe orizontală)"><table>
+<thead>
+<tr>
+<th>Comandă / tastă</th>
+<th>Efect</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>enable</code></td>
+<td>din user EXEC în privileged EXEC</td>
+</tr>
+<tr>
+<td><code>disable</code></td>
+<td>înapoi în user EXEC</td>
+</tr>
+<tr>
+<td><code><span class="nw">configure</span> <span class="nw">terminal</span></code> (<code><span class="nw">conf</span> <span class="nw">t</span></code>)</td>
+<td>intri în configurarea globală</td>
+</tr>
+<tr>
+<td><code>exit</code></td>
+<td>urci un singur nivel (din <code>config-if</code> în <code>config</code>)</td>
+</tr>
+<tr>
+<td><code>end</code> sau Ctrl+Z</td>
+<td class="tw">sari direct în privileged EXEC, din orice mod de configurare</td>
+</tr>
+<tr>
+<td><code><span class="nw">do</span> <span class="nw">&lt;comandă&gt;</span></code></td>
+<td>rulezi o comandă EXEC din configurare: <code><span class="nw">do</span> <span class="nw">show</span> <span class="nw">ip</span> <span class="nw">interface</span> <span class="nw">brief</span></code></td>
+</tr>
+</tbody></table></div></div>
+<h3 id="ajutorul-si-prescurtarile">Ajutorul și prescurtările</h3>
+<ul>
+<li><code>?</code> afișează ce poți scrie în locul acela: <code>show ?</code> listează toate variantele, <code>cl?</code> listează comenzile care încep cu „cl”.</li>
+<li><code>&lt;cr&gt;</code> în lista de ajutor înseamnă „comanda e completă, poți apăsa Enter”.</li>
+<li><strong>Tab</strong> completează un cuvânt început, dacă e unic.</li>
+<li>Orice comandă poate fi prescurtată cât timp rămâne unică: <code>sh ip int br</code> = <code>show ip interface brief</code>, <code>copy run start</code> = <code>copy running-config startup-config</code>, <code>no shut</code> = <code>no shutdown</code>.</li>
+<li><code>no</code> în fața unei comenzi o anulează: <code>no shutdown</code>, <code>no ip address</code>, <code>no vlan 20</code>.</li>
+</ul>
+<p>Mesajele de eroare pe care le vei vedea des:</p>
+<div class="table-scroll"><p class="table-hint" aria-hidden="true">glisează<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></p><div class="table-wrap" role="region" tabindex="0" aria-label="Tabel (se derulează pe orizontală)"><table>
+<thead>
+<tr>
+<th>Mesaj</th>
+<th>Ce înseamnă</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code><span class="nw">%</span> <span class="nw">Ambiguous</span> <span class="nw">command</span></code></td>
+<td class="tw">prescurtarea se potrivește cu mai multe comenzi; mai scrie câteva litere</td>
+</tr>
+<tr>
+<td><code><span class="nw">%</span> <span class="nw">Incomplete</span> <span class="nw">command.</span></code></td>
+<td>lipsește un argument; pune <code>?</code> după comandă</td>
+</tr>
+<tr>
+<td><code><span class="nw">%</span> <span class="nw">Invalid</span> <span class="nw">input</span> <span class="nw">detected</span> <span class="nw">at</span> <span class="nw">&#39;^&#39;</span> <span class="nw">marker.</span></code></td>
+<td class="tw">ai greșit acolo unde arată <code>^</code> (sau ești în modul greșit)</td>
+</tr>
+</tbody></table></div></div>
+<h2 id="unde-sta-configuratia">Unde stă configurația</h2>
+<div class="table-scroll"><p class="table-hint" aria-hidden="true">glisează<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></p><div class="table-wrap" role="region" tabindex="0" aria-label="Tabel (se derulează pe orizontală)"><table>
+<thead>
+<tr>
+<th>Memorie</th>
+<th>Ce conține</th>
+<th>Se pierde la oprire?</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>RAM</td>
+<td class="tw">configurația activă (<strong>running-config</strong>), tabelele (ARP, rutare)</td>
+<td>da</td>
+</tr>
+<tr>
+<td>NVRAM</td>
+<td>configurația salvată (<strong>startup-config</strong>)</td>
+<td>nu</td>
+</tr>
+<tr>
+<td>Flash</td>
+<td class="tw">sistemul de operare IOS (și, la switch-uri, <code>vlan.dat</code>)</td>
+<td>nu</td>
+</tr>
+<tr>
+<td>ROM</td>
+<td>programul de pornire și diagnosticare</td>
+<td>nu</td>
+</tr>
+</tbody></table></div></div>
+<p>Tot ce scrii în modul de configurare se aplică <strong>imediat</strong>, în running-config. Dacă nu salvezi, la repornire pierzi totul.</p>
+<h2 id="configurarea-de-baza-a-unui-router-sau-switch">Configurarea de bază a unui router sau switch</h2>
+<p>O configurare inițială tipică (înlocuiește textele scrise cu majuscule cu valorile tale):</p>
+<pre><code class="language-text">Router&gt; enable
+Router# configure terminal
+Router(config)# hostname R1
+R1(config)# no ip domain-lookup
+R1(config)# enable secret PAROLA_ENABLE
+R1(config)# line console 0
+R1(config-line)# password PAROLA_CONSOLA
+R1(config-line)# login
+R1(config-line)# logging synchronous
+R1(config-line)# exec-timeout 5 0
+R1(config-line)# exit
+R1(config)# service password-encryption
+R1(config)# security passwords min-length 10
+R1(config)# banner motd # Acces permis doar persoanelor autorizate. #
+R1(config)# end
+R1# copy running-config startup-config
+</code></pre>
+<div class="table-scroll"><p class="table-hint" aria-hidden="true">glisează<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></p><div class="table-wrap" role="region" tabindex="0" aria-label="Tabel (se derulează pe orizontală)"><table>
+<thead>
+<tr>
+<th>Comandă</th>
+<th>De ce o folosești</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code><span class="nw">hostname</span> <span class="nw">R1</span></code></td>
+<td class="tw">numele echipamentului; apare în prompt și e necesar pentru SSH</td>
+</tr>
+<tr>
+<td><code><span class="nw">no</span> <span class="nw">ip</span> <span class="nw">domain-lookup</span></code></td>
+<td class="tw">o comandă scrisă greșit nu mai e tratată ca nume de rezolvat prin DNS (altfel aștepți zeci de secunde)</td>
+</tr>
+<tr>
+<td><code><span class="nw">enable</span> <span class="nw">secret</span> <span class="nw">...</span></code></td>
+<td class="tw">parola pentru modul privilegiat, stocată ca hash</td>
+</tr>
+<tr>
+<td><code><span class="nw">line</span> <span class="nw">console</span> <span class="nw">0</span></code> + <code>password</code> + <code>login</code></td>
+<td class="tw">parola pe portul de consolă; fără <code>login</code>, parola nu e cerută</td>
+</tr>
+<tr>
+<td><code><span class="nw">logging</span> <span class="nw">synchronous</span></code></td>
+<td class="tw">mesajele de sistem nu-ți mai rup comanda pe care o scrii</td>
+</tr>
+<tr>
+<td><code><span class="nw">exec-timeout</span> <span class="nw">5</span> <span class="nw">0</span></code></td>
+<td class="tw">deconectare după 5 minute și 0 secunde de inactivitate</td>
+</tr>
+<tr>
+<td><code><span class="nw">service</span> <span class="nw">password-encryption</span></code></td>
+<td class="tw">ascunde parolele în clar din configurație (criptare slabă, tip 7)</td>
+</tr>
+<tr>
+<td><code><span class="nw">security</span> <span class="nw">passwords</span> <span class="nw">min-length</span> <span class="nw">10</span></code></td>
+<td class="tw">lungimea minimă pentru parolele configurate de acum înainte</td>
+</tr>
+<tr>
+<td><code><span class="nw">banner</span> <span class="nw">motd</span> <span class="nw">#</span> <span class="nw">...</span> <span class="nw">#</span></code></td>
+<td class="tw">mesajul afișat la conectare; <code>#</code> e delimitatorul și nu trebuie să apară în text</td>
+</tr>
+</tbody></table></div></div>
+<p>Două lucruri pe care le întreabă des examenul:</p>
+<ul>
+<li><strong><code>enable secret</code> bate <code>enable password</code>.</strong> Dacă le ai pe amândouă, se folosește doar <code>enable secret</code>. Folosește-l mereu pe el.</li>
+<li><strong><code>service password-encryption</code> nu e securitate adevărată.</strong> Criptarea de tip 7 se decriptează în câteva secunde; doar te ferește de privirile de peste umăr.</li>
+</ul>
+<p>Pentru a bloca încercările repetate de ghicire a parolei: <code>login block-for 120 attempts 3 within 60</code> (blochează autentificarea 120 de secunde după 3 încercări eșuate în 60 de secunde).</p>
+<h2 id="accesul-de-la-distanta-prin-ssh">Accesul de la distanță prin SSH</h2>
+<p>Telnet trimite totul în clar, inclusiv parola. <strong>SSH</strong> criptează sesiunea și e singura variantă acceptabilă azi. Pașii, în ordine:</p>
+<pre><code class="language-text">R1(config)# ip domain-name exemplu.local
+R1(config)# crypto key generate rsa general-keys modulus 2048
+R1(config)# ip ssh version 2
+R1(config)# username admin privilege 15 secret PAROLA_ADMIN
+R1(config)# line vty 0 4
+R1(config-line)# transport input ssh
+R1(config-line)# login local
+R1(config-line)# exec-timeout 10 0
+R1(config-line)# end
+R1# copy running-config startup-config
+</code></pre>
+<div class="table-scroll"><p class="table-hint" aria-hidden="true">glisează<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></p><div class="table-wrap" role="region" tabindex="0" aria-label="Tabel (se derulează pe orizontală)"><table>
+<thead>
+<tr>
+<th>Pas</th>
+<th>Detaliu important</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>hostname</code> (dacă nu l-ai setat deja)</td>
+<td class="tw">trebuie să fie diferit de cel implicit; cheile RSA se generează doar așa</td>
+</tr>
+<tr>
+<td><code><span class="nw">ip</span> <span class="nw">domain-name</span></code></td>
+<td class="tw">numele de domeniu intră în numele cheii; pe IOS XE recent comanda apare în configurație ca <code><span class="nw">ip</span> <span class="nw">domain</span> <span class="nw">name</span></code>; ambele forme sunt acceptate (la fel <code><span class="nw">no</span> <span class="nw">ip</span> <span class="nw">domain</span> <span class="nw">lookup</span></code>)</td>
+</tr>
+<tr>
+<td><code><span class="nw">crypto</span> <span class="nw">key</span> <span class="nw">generate</span> <span class="nw">rsa</span> <span class="nw">...</span> <span class="nw">modulus</span> <span class="nw">2048</span></code></td>
+<td class="tw">creează cheile și pornește serverul SSH; SSH v2 cere cel puțin 768 de biți pe IOS clasic; azi folosești minimum 2048</td>
+</tr>
+<tr>
+<td><code><span class="nw">ip</span> <span class="nw">ssh</span> <span class="nw">version</span> <span class="nw">2</span></code></td>
+<td class="tw">dezactivează versiunea 1, veche și nesigură</td>
+</tr>
+<tr>
+<td><code><span class="nw">username</span> <span class="nw">...</span> <span class="nw">secret</span> <span class="nw">...</span></code></td>
+<td class="tw">utilizatorul local, cu parola stocată ca hash</td>
+</tr>
+<tr>
+<td><code><span class="nw">transport</span> <span class="nw">input</span> <span class="nw">ssh</span></code></td>
+<td class="tw">pe liniile vty se acceptă doar SSH, nu și Telnet</td>
+</tr>
+<tr>
+<td><code><span class="nw">login</span> <span class="nw">local</span></code></td>
+<td class="tw">autentificarea se face cu utilizatorii locali, nu cu parola liniei</td>
+</tr>
+</tbody></table></div></div>
+<p>Pe switch-uri, liniile vty sunt de obicei 16, deci scrii <code>line vty 0 15</code>. Pe routere, numărul lor diferă de la model la model; <code>line vty 0 4</code> e varianta clasică. Câte linii are echipamentul tău vezi cu <code>line vty 0 ?</code> sau <code>show running-config | section line vty</code>; configurează-le pe toate.</p>
+<p>Verificarea: <code>show ip ssh</code> (versiunea și setările SSH) și <code>show ssh</code> (sesiunile conectate acum). De pe alt echipament Cisco te conectezi cu <code>ssh -l admin 192.168.1.1</code>.</p>
+<h3 id="adresa-de-management-a-unui-switch">Adresa de management a unui switch</h3>
+<p>Un switch Layer 2 nu are adrese IP pe porturi. Ca să-l administrezi de la distanță, îi dai o adresă pe o interfață virtuală (SVI) și un gateway:</p>
+<pre><code class="language-text">S1(config)# interface vlan 99
+S1(config-if)# ip address 192.168.99.11 255.255.255.0
+S1(config-if)# no shutdown
+S1(config-if)# exit
+S1(config)# ip default-gateway 192.168.99.1
+</code></pre>
+<p>Despre VLAN-uri, porturi access și trunk ai un ghid separat: <a href="../vlan-si-trunk/">VLAN-uri și trunk-uri explicate</a>.</p>
+<h2 id="configurarea-interfetelor">Configurarea interfețelor</h2>
+<pre><code class="language-text">R1(config)# interface GigabitEthernet0/0/0
+R1(config-if)# description Spre LAN-ul de la etajul 1
+R1(config-if)# ip address 192.168.10.1 255.255.255.0
+R1(config-if)# ipv6 address 2001:db8:acad:10::1/64
+R1(config-if)# ipv6 address fe80::1 link-local
+R1(config-if)# no shutdown
+R1(config-if)# exit
+R1(config)# ipv6 unicast-routing
+</code></pre>
+<div class="table-scroll"><p class="table-hint" aria-hidden="true">glisează<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></p><div class="table-wrap" role="region" tabindex="0" aria-label="Tabel (se derulează pe orizontală)"><table>
+<thead>
+<tr>
+<th>Comandă</th>
+<th>Efect</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code><span class="nw">description</span> <span class="nw">...</span></code></td>
+<td class="tw">o notă pentru oameni; nu schimbă funcționarea</td>
+</tr>
+<tr>
+<td><code><span class="nw">ip</span> <span class="nw">address</span> <span class="nw">&lt;adresă&gt;</span> <span class="nw">&lt;mască&gt;</span></code></td>
+<td class="tw">adresa IPv4; masca se scrie în format zecimal, nu cu prefix</td>
+</tr>
+<tr>
+<td><code><span class="nw">ipv6</span> <span class="nw">address</span> <span class="nw">&lt;adresă&gt;/&lt;prefix&gt;</span></code></td>
+<td>adresa IPv6; aici se scrie cu prefix</td>
+</tr>
+<tr>
+<td><code><span class="nw">ipv6</span> <span class="nw">address</span> <span class="nw">fe80::1</span> <span class="nw">link-local</span></code></td>
+<td class="tw">înlocuiește adresa link-local generată automat</td>
+</tr>
+<tr>
+<td><code><span class="nw">no</span> <span class="nw">shutdown</span></code></td>
+<td>pornește interfața</td>
+</tr>
+<tr>
+<td><code>shutdown</code></td>
+<td>oprește interfața</td>
+</tr>
+<tr>
+<td><code><span class="nw">ipv6</span> <span class="nw">unicast-routing</span></code></td>
+<td class="tw">(globală) pornește rutarea IPv6 pe router</td>
+</tr>
+</tbody></table></div></div>
+<p>Regula care prinde mulți începători: <strong>interfețele routerelor sunt oprite implicit</strong> și au nevoie de <code>no shutdown</code>. Porturile switch-urilor sunt pornite implicit. Pentru adresele IPv6 și prescurtarea lor, vezi <a href="../adrese-ipv6/">adresele IPv6 explicate</a>; pentru măști și subrețele IPv4, <a href="../subnetting-pas-cu-pas/">subnetting pas cu pas</a>.</p>
+<h2 id="salvarea-si-gestionarea-configuratiei">Salvarea și gestionarea configurației</h2>
+<div class="table-scroll"><p class="table-hint" aria-hidden="true">glisează<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></p><div class="table-wrap" role="region" tabindex="0" aria-label="Tabel (se derulează pe orizontală)"><table>
+<thead>
+<tr>
+<th>Comandă</th>
+<th>Ce face</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code><span class="nw">copy</span> <span class="nw">running-config</span> <span class="nw">startup-config</span></code></td>
+<td>salvează configurația activă în NVRAM</td>
+</tr>
+<tr>
+<td><code><span class="nw">write</span> <span class="nw">memory</span></code> (sau <code>wr</code>)</td>
+<td class="tw">același efect, forma veche, încă acceptată</td>
+</tr>
+<tr>
+<td><code><span class="nw">show</span> <span class="nw">running-config</span></code></td>
+<td>configurația activă</td>
+</tr>
+<tr>
+<td><code><span class="nw">show</span> <span class="nw">startup-config</span></code></td>
+<td>configurația salvată</td>
+</tr>
+<tr>
+<td><code><span class="nw">erase</span> <span class="nw">startup-config</span></code> sau <code><span class="nw">write</span> <span class="nw">erase</span></code></td>
+<td class="tw">șterge configurația salvată (după <code>reload</code>, echipamentul pornește gol)</td>
+</tr>
+<tr>
+<td><code>reload</code></td>
+<td>repornește echipamentul</td>
+</tr>
+<tr>
+<td><code><span class="nw">copy</span> <span class="nw">running-config</span> <span class="nw">tftp:</span></code></td>
+<td>copie de siguranță pe un server TFTP</td>
+</tr>
+<tr>
+<td><code><span class="nw">copy</span> <span class="nw">startup-config</span> <span class="nw">running-config</span></code></td>
+<td class="tw"><strong>combină</strong> configurația salvată cu cea activă; nu o înlocuiește</td>
+</tr>
+</tbody></table></div></div>
+<p>Ai stricat ceva și nu ai salvat? <code>reload</code> fără să salvezi (răspunzi „no” când te întreabă dacă salvezi) te întoarce la ultima configurație salvată. Pe un switch, VLAN-urile stau în <code>vlan.dat</code>, deci pentru o resetare completă ștergi și acel fișier: <code>delete flash:vlan.dat</code>.</p>
+<h2 id="comenzile-show-fisa-rapida">Comenzile show: fișa rapidă</h2>
+<div class="table-scroll"><p class="table-hint" aria-hidden="true">glisează<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></p><div class="table-wrap" role="region" tabindex="0" aria-label="Tabel (se derulează pe orizontală)"><table>
+<thead>
+<tr>
+<th>Comandă</th>
+<th>Ce îți arată</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code><span class="nw">show</span> <span class="nw">version</span></code></td>
+<td class="tw">versiunea IOS, timpul de funcționare, modelul, memoria, interfețele, registrul de configurare</td>
+</tr>
+<tr>
+<td><code><span class="nw">show</span> <span class="nw">running-config</span></code></td>
+<td>configurația activă</td>
+</tr>
+<tr>
+<td><code><span class="nw">show</span> <span class="nw">startup-config</span></code></td>
+<td>configurația salvată</td>
+</tr>
+<tr>
+<td><code><span class="nw">show</span> <span class="nw">ip</span> <span class="nw">interface</span> <span class="nw">brief</span></code></td>
+<td class="tw">toate interfețele, adresa IPv4 și starea (Status / Protocol), pe câte un rând</td>
+</tr>
+<tr>
+<td><code><span class="nw">show</span> <span class="nw">ipv6</span> <span class="nw">interface</span> <span class="nw">brief</span></code></td>
+<td class="tw">același lucru pentru IPv6, cu adresele link-local și globale</td>
+</tr>
+<tr>
+<td><code><span class="nw">show</span> <span class="nw">interfaces</span> <span class="nw">g0/0/0</span></code></td>
+<td class="tw">detalii de nivel 1 și 2: MAC, viteză, duplex, MTU, erori, CRC, coliziuni</td>
+</tr>
+<tr>
+<td><code><span class="nw">show</span> <span class="nw">ip</span> <span class="nw">interface</span> <span class="nw">g0/0/0</span></code></td>
+<td class="tw">detalii de nivel 3: adresa, ACL-urile aplicate și alte setări IP</td>
+</tr>
+<tr>
+<td><code><span class="nw">show</span> <span class="nw">ip</span> <span class="nw">route</span></code></td>
+<td class="tw">tabela de rutare IPv4 (C = conectată, L = adresa locală, S = statică, O = OSPF)</td>
+</tr>
+<tr>
+<td><code><span class="nw">show</span> <span class="nw">ipv6</span> <span class="nw">route</span></code></td>
+<td>tabela de rutare IPv6</td>
+</tr>
+<tr>
+<td><code><span class="nw">show</span> <span class="nw">arp</span></code> (sau <code><span class="nw">show</span> <span class="nw">ip</span> <span class="nw">arp</span></code>)</td>
+<td>tabela ARP: IP → MAC</td>
+</tr>
+<tr>
+<td><code><span class="nw">show</span> <span class="nw">mac</span> <span class="nw">address-table</span></code></td>
+<td class="tw">(switch) adresele MAC învățate, pe port și pe VLAN</td>
+</tr>
+<tr>
+<td><code><span class="nw">show</span> <span class="nw">vlan</span> <span class="nw">brief</span></code></td>
+<td class="tw">(switch) VLAN-urile și porturile access din fiecare</td>
+</tr>
+<tr>
+<td><code><span class="nw">show</span> <span class="nw">interfaces</span> <span class="nw">trunk</span></code></td>
+<td class="tw">(switch) trunk-urile, native VLAN, VLAN-urile permise</td>
+</tr>
+<tr>
+<td><code><span class="nw">show</span> <span class="nw">cdp</span> <span class="nw">neighbors</span></code></td>
+<td class="tw">vecinii Cisco direct conectați: nume, port local, port la distanță, model</td>
+</tr>
+<tr>
+<td><code><span class="nw">show</span> <span class="nw">cdp</span> <span class="nw">neighbors</span> <span class="nw">detail</span></code></td>
+<td class="tw">același lucru, plus adresele IP și versiunea IOS ale vecinilor</td>
+</tr>
+<tr>
+<td><code><span class="nw">show</span> <span class="nw">lldp</span> <span class="nw">neighbors</span></code></td>
+<td class="tw">vecinii prin LLDP, protocolul standard (trebuie pornit cu <code><span class="nw">lldp</span> <span class="nw">run</span></code>)</td>
+</tr>
+<tr>
+<td><code><span class="nw">show</span> <span class="nw">ip</span> <span class="nw">protocols</span></code></td>
+<td class="tw">protocoalele de rutare active și setările lor</td>
+</tr>
+<tr>
+<td><code><span class="nw">show</span> <span class="nw">protocols</span></code></td>
+<td class="tw">starea interfețelor și adresele lor de nivel 3</td>
+</tr>
+<tr>
+<td><code><span class="nw">show</span> <span class="nw">history</span></code></td>
+<td class="tw">ultimele comenzi scrise în sesiunea curentă</td>
+</tr>
+<tr>
+<td><code><span class="nw">show</span> <span class="nw">users</span></code></td>
+<td>cine e conectat la echipament</td>
+</tr>
+<tr>
+<td><code><span class="nw">show</span> <span class="nw">clock</span></code></td>
+<td>data și ora echipamentului</td>
+</tr>
+<tr>
+<td><code><span class="nw">show</span> <span class="nw">flash:</span></code></td>
+<td class="tw">fișierele din memoria flash, inclusiv imaginea IOS</td>
+</tr>
+<tr>
+<td><code><span class="nw">show</span> <span class="nw">ip</span> <span class="nw">ssh</span></code></td>
+<td class="tw">dacă SSH e activ și ce versiune folosește</td>
+</tr>
+<tr>
+<td><code><span class="nw">show</span> <span class="nw">logging</span></code></td>
+<td>mesajele de sistem păstrate în memorie</td>
+</tr>
+</tbody></table></div></div>
+<h3 id="filtrarea-iesirii">Filtrarea ieșirii</h3>
+<p>Ieșirile lungi le filtrezi cu bara verticală:</p>
+<div class="table-scroll"><p class="table-hint" aria-hidden="true">glisează<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></p><div class="table-wrap" role="region" tabindex="0" aria-label="Tabel (se derulează pe orizontală)"><table>
+<thead>
+<tr>
+<th>Filtru</th>
+<th>Exemplu</th>
+<th>Efect</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>include</code></td>
+<td><code><span class="nw">show</span> <span class="nw">running-config</span> <span class="nw">|</span> <span class="nw">include</span> <span class="nw">hostname</span></code></td>
+<td>doar rândurile care conțin textul</td>
+</tr>
+<tr>
+<td><code>exclude</code></td>
+<td><code><span class="nw">show</span> <span class="nw">ip</span> <span class="nw">interface</span> <span class="nw">brief</span> <span class="nw">|</span> <span class="nw">exclude</span> <span class="nw">unassigned</span></code></td>
+<td>ascunde rândurile care conțin textul</td>
+</tr>
+<tr>
+<td><code>begin</code></td>
+<td><code><span class="nw">show</span> <span class="nw">running-config</span> <span class="nw">|</span> <span class="nw">begin</span> <span class="nw">line</span> <span class="nw">vty</span></code></td>
+<td class="tw">începe afișarea de la primul rând care conține textul</td>
+</tr>
+<tr>
+<td><code>section</code></td>
+<td><code><span class="nw">show</span> <span class="nw">running-config</span> <span class="nw">|</span> <span class="nw">section</span> <span class="nw">interface</span></code></td>
+<td>blocurile întregi care se potrivesc</td>
+</tr>
+</tbody></table></div></div>
+<p><code>terminal length 0</code> oprește paginarea (<code>--More--</code>) pentru sesiunea curentă, util când copiezi o configurație întreagă.</p>
+<h2 id="depanarea-ping-traceroute-si-starea-interfetelor">Depanarea: ping, traceroute și starea interfețelor</h2>
+<h3 id="ping">ping</h3>
+<pre><code class="language-text">R1# ping 192.168.20.10
+R1# ping 192.168.20.10 source GigabitEthernet0/0/0
+R1# ping 192.168.20.10 repeat 100
+R1# ping
+</code></pre>
+<p>Ultima formă, <code>ping</code> fără argumente, pornește <strong>ping-ul extins</strong>, care te întreabă pas cu pas destinația, numărul de packet-uri (pachete), dimensiunea și adresa sursă.</p>
+<div class="table-scroll"><p class="table-hint" aria-hidden="true">glisează<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></p><div class="table-wrap" role="region" tabindex="0" aria-label="Tabel (se derulează pe orizontală)"><table>
+<thead>
+<tr>
+<th>Simbol</th>
+<th>Înseamnă</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>!</code></td>
+<td>a venit răspuns</td>
+</tr>
+<tr>
+<td><code>.</code></td>
+<td>a expirat timpul, niciun răspuns</td>
+</tr>
+<tr>
+<td><code>U</code></td>
+<td class="tw">un router de pe drum a răspuns că destinația nu poate fi atinsă</td>
+</tr>
+</tbody></table></div></div>
+<p>Primul ping spre o destinație nouă pierde adesea primul packet (<code>.!!!!</code>): echipamentul așteaptă întâi răspunsul ARP. E normal.</p>
+<h3 id="traceroute">traceroute</h3>
+<p><code>traceroute 203.0.113.10</code> arată fiecare router de pe drum și timpul până la el. Un <code>*</code> înseamnă că acel hop nu a răspuns în timp. Pe Windows, comanda echivalentă e <code>tracert</code>. Locul unde se oprește lista e un indiciu bun pentru unde e problema.</p>
+<h3 id="starea-interfetelor-show-ip-interface-brief">Starea interfețelor (show ip interface brief)</h3>
+<div class="table-scroll"><p class="table-hint" aria-hidden="true">glisează<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></p><div class="table-wrap" role="region" tabindex="0" aria-label="Tabel (se derulează pe orizontală)"><table>
+<thead>
+<tr>
+<th>Status</th>
+<th>Protocol</th>
+<th>Ce înseamnă</th>
+<th>Ce faci</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>up</td>
+<td>up</td>
+<td>totul e în regulă</td>
+<td>nimic</td>
+</tr>
+<tr>
+<td>administratively down</td>
+<td>down</td>
+<td>interfața are <code>shutdown</code></td>
+<td><code><span class="nw">no</span> <span class="nw">shutdown</span></code></td>
+</tr>
+<tr>
+<td>down</td>
+<td>down</td>
+<td class="tw">problemă fizică: cablu deconectat sau defect, celălalt capăt oprit</td>
+<td>verifici cablul și celălalt capăt</td>
+</tr>
+<tr>
+<td>up</td>
+<td>down</td>
+<td class="tw">problemă de nivel 2 (mai ales pe legături seriale: încapsulare diferită la cele două capete, lipsa <code><span class="nw">clock</span> <span class="nw">rate</span></code> pe capătul DCE)</td>
+<td>verifici configurația ambelor capete</td>
+</tr>
+</tbody></table></div></div>
+<p>În <code>show interfaces</code>, contoarele ajută și ele: multe <strong>erori CRC</strong> indică un cablu defect sau interferențe, iar <strong>coliziunile întârziate (late collisions)</strong> indică de obicei o nepotrivire de duplex. Cu <code>clear counters</code> le aduci la zero și vezi dacă mai cresc.</p>
+<h3 id="debug-cu-grija">debug (cu grijă)</h3>
+<pre><code class="language-text">R1# terminal monitor
+R1# debug ip icmp
+R1# undebug all
+</code></pre>
+<p><code>debug</code> afișează în timp real ce face echipamentul, dar consumă procesor. Pe un echipament în producție poate încetini sau chiar bloca totul. Folosește-l cât mai țintit, cât mai scurt și oprește-l mereu cu <code>undebug all</code> (sau <code>no debug all</code>). <code>terminal monitor</code> e necesar ca să vezi mesajele când ești conectat prin SSH, nu pe consolă. <code>show debugging</code> îți arată ce debug-uri sunt active.</p>
+<h3 id="pe-calculator-windows">Pe calculator (Windows)</h3>
+<div class="table-scroll"><p class="table-hint" aria-hidden="true">glisează<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></p><div class="table-wrap" role="region" tabindex="0" aria-label="Tabel (se derulează pe orizontală)"><table>
+<thead>
+<tr>
+<th>Comandă</th>
+<th>Ce îți arată</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code><span class="nw">ipconfig</span> <span class="nw">/all</span></code></td>
+<td class="tw">adresa IP, masca, gateway-ul, serverele DNS, MAC-ul</td>
+</tr>
+<tr>
+<td><code>ping</code></td>
+<td>conectivitatea</td>
+</tr>
+<tr>
+<td><code>tracert</code></td>
+<td>drumul până la destinație</td>
+</tr>
+<tr>
+<td><code><span class="nw">arp</span> <span class="nw">-a</span></code></td>
+<td>tabela ARP a calculatorului</td>
+</tr>
+<tr>
+<td><code>nslookup</code></td>
+<td>rezolvarea unui nume prin DNS</td>
+</tr>
+</tbody></table></div></div>
+<h2 id="scurtaturi-de-tastatura">Scurtături de tastatură</h2>
+<div class="table-scroll"><p class="table-hint" aria-hidden="true">glisează<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></p><div class="table-wrap" role="region" tabindex="0" aria-label="Tabel (se derulează pe orizontală)"><table>
+<thead>
+<tr>
+<th>Tastă</th>
+<th>Efect</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Tab</td>
+<td>completează comanda</td>
+</tr>
+<tr>
+<td>?</td>
+<td>ajutor contextual</td>
+</tr>
+<tr>
+<td>Săgeată sus / Ctrl+P</td>
+<td>comanda anterioară din istoric</td>
+</tr>
+<tr>
+<td>Săgeată jos / Ctrl+N</td>
+<td>comanda următoare din istoric</td>
+</tr>
+<tr>
+<td>Ctrl+A</td>
+<td>mută cursorul la începutul liniei</td>
+</tr>
+<tr>
+<td>Ctrl+E</td>
+<td>mută cursorul la sfârșitul liniei</td>
+</tr>
+<tr>
+<td>Ctrl+W</td>
+<td>șterge cuvântul din stânga cursorului</td>
+</tr>
+<tr>
+<td>Ctrl+R</td>
+<td class="tw">reafișează linia curentă (util după un mesaj de sistem)</td>
+</tr>
+<tr>
+<td>Ctrl+Z</td>
+<td class="tw">ieși din configurare, direct în privileged EXEC</td>
+</tr>
+<tr>
+<td>Ctrl+C</td>
+<td class="tw">anulează linia curentă sau ieși din configurare</td>
+</tr>
+<tr>
+<td>Ctrl+Shift+6</td>
+<td class="tw">întrerupe un ping, un traceroute sau o căutare DNS care durează</td>
+</tr>
+<tr>
+<td>Spațiu (la <code>--More--</code>)</td>
+<td>pagina următoare</td>
+</tr>
+<tr>
+<td>Enter (la <code>--More--</code>)</td>
+<td>rândul următor</td>
+</tr>
+<tr>
+<td>orice altă tastă (la <code>--More--</code>)</td>
+<td>oprește afișarea</td>
+</tr>
+</tbody></table></div></div>
+<h2 id="cum-le-inveti-fara-sa-le-tocesti">Cum le înveți fără să le tocești</h2>
+<ul>
+<li><strong>Configurează de la zero, din memorie,</strong> un router și un switch: hostname, parole, SSH, interfețe, salvare. Repetă până îți ia sub 10 minute.</li>
+<li><strong>După fiecare comandă de configurare, verifică cu o comandă <code>show</code>.</strong> Așa înveți perechile: <code>ip address</code> ↔ <code>show ip interface brief</code>, <code>vlan</code> ↔ <code>show vlan brief</code>, SSH ↔ <code>show ip ssh</code>.</li>
+<li><strong>Strică intenționat,</strong> apoi repară: un <code>shutdown</code> uitat, o mască greșită, <code>login</code> lipsă pe consolă.</li>
+<li><strong>Leagă comenzile de straturi:</strong> <code>show interfaces</code> e nivelul 1–2, <code>show ip route</code> e nivelul 3. Vezi <a href="../model-osi-vs-tcp-ip/">modelul OSI vs TCP/IP</a>.</li>
+</ul>
+<div class="cta-box cta-box--article"><svg class="mascot" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><g class="m-breathe"><path d="M22 14l-5-9M42 14l5-9" stroke="#8a919c" stroke-width="3.4" stroke-linecap="round" fill="none"/><circle class="m-led m-led-l" cx="17" cy="5" r="3.6"/><circle class="m-led m-led-r" cx="47" cy="5" r="3.6"/><path class="m-body" d="M28 12q4-6 8 0"/><rect class="m-body" x="8" y="12" width="48" height="42" rx="18"/><rect class="m-belly" x="8" y="40" width="48" height="14" rx="7"/><path d="M19 31q4-5 8 0" stroke="#1a1d24" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M37 31q4-5 8 0" stroke="#1a1d24" stroke-width="3" fill="none" stroke-linecap="round"/><path class="m-led" d="M29 37l3 3.5 3-3.5z"/><circle cx="15" cy="38" r="3" fill="#ff8fb1" opacity=".7"/><circle cx="49" cy="38" r="3" fill="#ff8fb1" opacity=".7"/><circle class="m-ok" cx="18" cy="47" r="2"/><circle class="m-led" cx="24" cy="47" r="2"/><rect x="31" y="45" width="6" height="4" rx="1" fill="#0d1a3a" opacity=".55"/><rect x="39" y="45" width="6" height="4" rx="1" fill="#0d1a3a" opacity=".55"/><rect x="47" y="45" width="5" height="4" rx="1" fill="#0d1a3a" opacity=".55"/><path class="m-leg" d="M20 54v4M44 54v4" stroke-width="3.4" stroke-linecap="round" fill="none"/></g></svg><div><h3>Exersează comenzile Cisco IOS în aplicația Routerel</h3><p>Routerel are peste 1.900 de întrebări pentru CCNA 1 · ITN, CCNA 2 · IEN și CCNA 3 · CEN, inclusiv întrebări cu configurații și ieșiri <code>show</code> pe care le poți mări, fiecare cu explicație imediat după răspuns. Greșelile revin singure prin repetiție spațiată până le stăpânești, iar simularea de examen cu timp îți arată unde stai. Abonații noi au 7 zile gratuite, cu acces la tot.</p></div><a class="btn" href="../../">Descoperă aplicația<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div><h2 id="intrebari-frecvente">Întrebări frecvente</h2>
+<div class="faq faq--article"><details><summary>Care e diferența dintre running-config și startup-config?<span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p>Running-config e configurația activă, din RAM; se pierde la repornire dacă nu o salvezi. Startup-config e configurația salvată în NVRAM, încărcată la pornire. Le sincronizezi cu <code>copy running-config startup-config</code>.</p></div></details><details><summary>Care e diferența dintre enable password și enable secret?<span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p>Ambele protejează accesul în modul privilegiat, dar <code>enable secret</code> stochează parola ca hash, care nu poate fi citit înapoi, iar <code>enable password</code> o păstrează în clar sau cu o criptare slabă. Dacă sunt configurate amândouă, se folosește <code>enable secret</code>.</p></div></details><details><summary>Ce trebuie să configurez ca să am acces SSH la un router Cisco?<span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p>Un hostname diferit de cel implicit, un nume de domeniu (<code>ip domain-name</code>), o pereche de chei RSA (<code>crypto key generate rsa</code>), un utilizator local (<code>username ... secret ...</code>), apoi pe liniile vty: <code>transport input ssh</code> și <code>login local</code>. Recomandat și <code>ip ssh version 2</code>.</p></div></details><details><summary>Ce face service password-encryption?<span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p>Ascunde parolele scrise în clar în configurație (de exemplu cele de pe consolă și vty) cu o criptare slabă, de tip 7. Te ferește de cineva care se uită peste umăr, dar parolele pot fi decriptate ușor, deci nu înlocuiește <code>enable secret</code> și utilizatorii cu <code>secret</code>.</p></div></details><details><summary>Cum ies rapid din modul de configurare?<span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p>Cu <code>end</code> sau Ctrl+Z ajungi direct în modul privileged EXEC (promptul cu <code>#</code>). Comanda <code>exit</code> urcă doar un nivel.</p></div></details><details><summary>Cum rulez o comandă show din modul de configurare?<span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p>Pui <code>do</code> în fața ei, de exemplu <code>do show ip interface brief</code>. Așa nu mai ieși și reintri în configurare. Pentru planul complet de pregătire, vezi <a href="../ce-este-ccna/">ghidul despre CCNA</a>.</p></div></details></div>
+<hr>
+<p><em>Routerel este o aplicație independentă și nu este afiliată, sponsorizată sau aprobată de Cisco Systems, Inc. Cisco, CCNA, Cisco IOS și Networking Academy sunt mărci înregistrate ale Cisco Systems, Inc.</em></p>
+      
+      <section class="related" aria-labelledby="rel-title">
+        <h2 id="rel-title">Citește și</h2>
+        <div class="grid grid--2"><a class="card post-card lift" href="../../ghiduri/adrese-ipv6/"><span class="tagline">Ghid · 13 min</span><h3>Adresele IPv6 explicate (format, prescurtare, tipuri)</h3><p>Adresele IPv6 pe înțelesul tău: formatul pe 128 de biți, regulile de prescurtare, tipurile de adrese, EUI-64 pas cu pas, SLAAC și DHCPv6, plus exerciții.</p></a><a class="card post-card lift" href="../../ghiduri/ce-este-ccna/"><span class="tagline">Ghid · 12 min</span><h3>Ce este CCNA și cum te pregătești (ghid 2026)</h3><p>Ce este CCNA, cum arată examenul 200-301, cât costă, cât e valabil și un plan de pregătire pe 12 săptămâni, cu tehnici de studiu și greșeli de evitat.</p></a></div>
+      </section>
+    </article>
+  </div>
+</main>
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="about">
+        <a class="brand" href="../../"><img src="../../assets/icon-96.webp" alt="" width="36" height="36" loading="lazy"><span>Routerel</span></a>
+        <p>Exersezi CCNA pe telefon: întrebări cu explicații, repetiția greșelilor și simulări de examen. În română și engleză.</p>
+      </div>
+      <div><h2>Aplicația</h2><ul><li><a href="../../#functii">Funcții</a></li><li><a href="../../#preturi">Prețuri</a></li><li><a href="../../#cum-functioneaza">Cum funcționează</a></li><li><a href="../../#faq">Întrebări frecvente</a></li></ul></div>
+      <div><h2>Resurse</h2><ul><li><a href="../../ghiduri/">Ghiduri CCNA</a></li><li><a href="../../tools/">Tools gratuite</a></li><li><a href="../../en/" hreflang="en" lang="en" data-set-lang="en">English</a></li></ul></div>
+      <div><h2>Legal și contact</h2><ul><li><a href="../../privacy.html">Confidențialitate</a></li><li><a href="../../terms.html">Termeni de utilizare</a></li><li><a href="../../delete-account.html">Ștergerea contului</a></li></ul><ul><li><a href="mailto:contact@routerel.app">contact@routerel.app</a></li></ul></div>
+    </div>
+    <div class="disclaimer">
+      <p>Routerel este o aplicație independentă și nu este afiliată, sponsorizată sau aprobată de Cisco Systems, Inc. Cisco, CCNA și Cisco Networking Academy sunt mărci ale Cisco Systems, Inc.</p>
+      <p>© 2026 Routerel</p>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

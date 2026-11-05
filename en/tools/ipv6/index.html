@@ -1,0 +1,123 @@
+<!doctype html>
+<!-- Pagină generată. Nu o edita de mână: vezi tools/site/ (npm run build:guides / npm run sync:tools / npm run build:legal). -->
+<html lang="en" class="play-soon">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>IPv6 Tool: Compress, Expand, Address Type and EUI-64 | Routerel</title>
+  <meta name="description" content="Free IPv6 tool: compress and expand addresses per RFC 5952, find the address type and prefix network, and build EUI-64 from a MAC, with the steps shown.">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <link rel="canonical" href="https://routerel.app/en/tools/ipv6/">
+  <link rel="alternate" hreflang="ro" href="https://routerel.app/tools/ipv6/">
+  <link rel="alternate" hreflang="en" href="https://routerel.app/en/tools/ipv6/">
+  <link rel="alternate" hreflang="x-default" href="https://routerel.app/en/tools/ipv6/">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#12151b" media="(prefers-color-scheme: dark)">
+  <meta name="color-scheme" content="light dark">
+  <link rel="icon" href="../../../assets/favicon-32.png" type="image/png" sizes="32x32">
+  <link rel="icon" href="../../../assets/icon-192.png" type="image/png" sizes="192x192">
+  <link rel="apple-touch-icon" href="../../../assets/apple-touch-icon.png">
+  <link rel="manifest" href="../../../site.webmanifest">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Routerel">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="ro_RO">
+  <meta property="og:title" content="IPv6 Tool: Compress, Expand, Address Type and EUI-64 | Routerel">
+  <meta property="og:description" content="Free IPv6 tool: compress and expand addresses per RFC 5952, find the address type and prefix network, and build EUI-64 from a MAC, with the steps shown.">
+  <meta property="og:url" content="https://routerel.app/en/tools/ipv6/">
+  <meta property="og:image" content="https://routerel.app/assets/og-en.png">
+  <meta property="og:image:width" content="1024">
+  <meta property="og:image:height" content="500">
+  <meta property="og:image:alt" content="Routerel: the router chick mascot and the app name">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="IPv6 Tool: Compress, Expand, Address Type and EUI-64 | Routerel">
+  <meta name="twitter:description" content="Free IPv6 tool: compress and expand addresses per RFC 5952, find the address type and prefix network, and build EUI-64 from a MAC, with the steps shown.">
+  <meta name="twitter:image" content="https://routerel.app/assets/og-en.png">
+  <link rel="stylesheet" href="../../../assets/tools/ipv6/ipv6.css">
+  <link rel="modulepreload" href="../../../assets/tools/ipv6/ui.js">
+  <link rel="preload" href="../../../assets/fonts/nunito-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../../../assets/fonts/nunito-latin-ext.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../../../assets/fonts/roboto-mono-500-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="../../../style.css">
+  <script>(function(d){d.classList.add("js");try{var t=localStorage.getItem("routerel-theme");if(t==="light"||t==="dark")d.setAttribute("data-theme",t)}catch(e){}setTimeout(function(){if(!window.__rtl)d.classList.remove("js")},4000)})(document.documentElement)</script>
+  <script src="../../../assets/site.js" defer></script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebApplication","@id":"https://routerel.app/en/tools/ipv6/#app","name":"IPv6 tool: compress, type and EUI-64","url":"https://routerel.app/en/tools/ipv6/","description":"Free IPv6 tool: compress and expand addresses per RFC 5952, find the address type and prefix network, and build EUI-64 from a MAC, with the steps shown.","inLanguage":"en","applicationCategory":"EducationalApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"featureList":["Compression per RFC 5952","Expansion to the full form","Address type","Prefix network","EUI-64 from a MAC address","Step-by-step working"],"publisher":{"@type":"Organization","name":"Routerel","url":"https://routerel.app/"},"isPartOf":{"@id":"https://routerel.app/#website"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://routerel.app/en/"},{"@type":"ListItem","position":2,"name":"Tools","item":"https://routerel.app/en/tools/"},{"@type":"ListItem","position":3,"name":"IPv6 tool: compress, type and EUI-64","item":"https://routerel.app/en/tools/ipv6/"}]},{"@type":"FAQPage","@id":"https://routerel.app/en/tools/ipv6/#faq","inLanguage":"en","mainEntity":[{"@type":"Question","name":"How do I compress an IPv6 address?","acceptedAnswer":{"@type":"Answer","text":"Drop the leading zeros in every group, then replace the longest run of all-zero groups (at least two in a row) with ::. The :: can appear only once in an address."}},{"@type":"Question","name":"Why can I not use :: twice?","acceptedAnswer":{"@type":"Answer","text":"Because an address always has exactly 8 groups. With one :: you know how many zero groups are missing; with two, you could not tell how many each one hides."}},{"@type":"Question","name":"What is EUI-64?","acceptedAnswer":{"@type":"Answer","text":"A way for a device to build its own interface ID (the last 64 bits) from its MAC address: insert FFFE in the middle and flip the seventh bit of the first byte. It is used, for example, for link-local addresses and SLAAC."}},{"@type":"Question","name":"Which address types does the tool recognise?","acceptedAnswer":{"@type":"Answer","text":"Global unicast, link-local (fe80::/10), unique local (fc00::/7), multicast (ff00::/8), loopback (::1), the unspecified address (::), documentation addresses (2001:db8::/32), IPv4-mapped addresses and reserved ranges."}},{"@type":"Question","name":"Are the addresses I type sent anywhere?","acceptedAnswer":{"@type":"Answer","text":"No. Everything is calculated in your browser, and the addresses never leave your device."}}]}]}</script>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs><linearGradient id="rtl-play" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5b8cff"/><stop offset=".55" stop-color="#2f6bff"/><stop offset="1" stop-color="#ffb020"/></linearGradient></defs></svg>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="container header-row">
+    <a class="brand" href="../../../en/" aria-label="Routerel home"><img src="../../../assets/icon-96.webp" alt="" width="36" height="36"><span>Routerel</span></a>
+    <nav class="main-nav" aria-label="Main"><ul><li><a href="../../../en/#features">Features</a></li><li><a href="../../../en/#pricing">Pricing</a></li><li><a href="../../../en/guides/">Guides</a></li><li><a href="../../../en/tools/" aria-current="page">Tools</a></li><li><a href="../../../en/#faq">FAQ</a></li></ul></nav>
+    <div class="header-actions">
+      <div class="lang-switch" role="group" aria-label="Language"><a href="../../../tools/ipv6/" hreflang="ro" lang="ro" title="Română">RO</a><span aria-current="true" lang="en">EN</span></div>
+      <button class="icon-btn theme-toggle" type="button" data-theme-toggle aria-label="Switch theme"><span class="i-moon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9z"/></svg></span><span class="i-sun"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg></span></button>
+      <a class="btn btn--sm header-cta" data-play data-soon-href="../../../en/#pricing" href="../../../en/#pricing"><span data-when="live">Try free</span><span data-when="soon">See pricing</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      <button class="icon-btn menu-btn" type="button" data-menu-btn aria-expanded="false" aria-controls="mobile-nav" aria-label="Menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+    </div>
+  </div>
+  <nav class="mobile-nav" id="mobile-nav" aria-label="Main" hidden>
+    <div class="container"><ul><li><a href="../../../en/#features">Features</a></li><li><a href="../../../en/#pricing">Pricing</a></li><li><a href="../../../en/guides/">Guides</a></li><li><a href="../../../en/tools/" aria-current="page">Tools</a></li><li><a href="../../../en/#faq">FAQ</a></li></ul></div>
+  </nav>
+</header>
+<main id="main">
+  <section class="page-hero page-hero--tool">
+    <div class="container">
+      <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="../../../en/">Home</a></li><li><a href="../../../en/tools/">Tools</a></li><li><span aria-current="page">IPv6 tool: compress, type and EUI-64</span></li></ol></nav>
+      <p class="eyebrow">Free tool</p>
+      <h1>IPv6 tool: compress, type and EUI-64</h1>
+      <p class="lead">Enter an IPv6 address in any form. Get the shortest and the full form, the address type and the network for a prefix, and the EUI-64 interface ID from a MAC address. Every result comes with the steps.</p>
+    </div>
+  </section>
+  <section class="section section--tight tool-section" aria-label="IPv6 tool: compress, type and EUI-64">
+    <div class="container tool-wrap">
+      <h2 class="sr-only">The tool</h2>
+      <div id="ipv6-tool" class="tool-mount" data-tool="ipv6" style="--tool-min-m:1850px;--tool-min-d:1080px"><noscript><p class="tool-noscript">The tool needs JavaScript. Turn it on in your browser and reload the page.</p></noscript></div>
+    </div>
+  </section>
+  <section class="section section--tight">
+    <div class="container">
+      <div class="prose tool-prose">
+        <h2 id="how-it-works">The compression rules, in short</h2>
+        <ol><li>An IPv6 address has 128 bits, written as 8 groups of 4 hexadecimal digits separated by colons.</li><li>In each group you can drop the leading zeros: <code>0db8</code> becomes <code>db8</code> and <code>0000</code> becomes <code>0</code>.</li><li>The longest run of all-zero groups (at least two in a row) is replaced once with <code>::</code>. On a tie, the first run is shortened.</li><li>Example: <code>2001:0db8:0000:0000:0000:ff00:0042:8329</code> becomes <code>2001:db8::ff00:42:8329</code>.</li></ol>
+        <p>All the rules, address types, EUI-64 and SLAAC are explained in the guide <a href="../../../en/guides/ipv6-addresses-explained/">IPv6 addresses explained</a>.</p>
+      </div>
+      <div class="section-head" style="margin-top:48px"><h2 id="faq">Frequently asked questions</h2></div>
+      <div class="faq">
+        <details><summary>How do I compress an IPv6 address?<span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p>Drop the leading zeros in every group, then replace the longest run of all-zero groups (at least two in a row) with ::. The :: can appear only once in an address.</p></div></details>
+        <details><summary>Why can I not use :: twice?<span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p>Because an address always has exactly 8 groups. With one :: you know how many zero groups are missing; with two, you could not tell how many each one hides.</p></div></details>
+        <details><summary>What is EUI-64?<span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p>A way for a device to build its own interface ID (the last 64 bits) from its MAC address: insert FFFE in the middle and flip the seventh bit of the first byte. It is used, for example, for link-local addresses and SLAAC.</p></div></details>
+        <details><summary>Which address types does the tool recognise?<span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p>Global unicast, link-local (fe80::/10), unique local (fc00::/7), multicast (ff00::/8), loopback (::1), the unspecified address (::), documentation addresses (2001:db8::/32), IPv4-mapped addresses and reserved ranges.</p></div></details>
+        <details><summary>Are the addresses I type sent anywhere?<span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p>No. Everything is calculated in your browser, and the addresses never leave your device.</p></div></details>
+      </div>
+      <div class="cta-box reveal"><svg class="mascot" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><g class="m-breathe"><path d="M22 14l-5-9M42 14l5-9" stroke="#8a919c" stroke-width="3.4" stroke-linecap="round" fill="none"/><circle class="m-led m-led-l" cx="17" cy="5" r="3.6"/><circle class="m-led m-led-r" cx="47" cy="5" r="3.6"/><path class="m-body" d="M28 12q4-6 8 0"/><rect class="m-body" x="8" y="12" width="48" height="42" rx="18"/><rect class="m-belly" x="8" y="40" width="48" height="14" rx="7"/><path d="M19 31q4-5 8 0" stroke="#1a1d24" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M37 31q4-5 8 0" stroke="#1a1d24" stroke-width="3" fill="none" stroke-linecap="round"/><path class="m-led" d="M29 37l3 3.5 3-3.5z"/><circle cx="15" cy="38" r="3" fill="#ff8fb1" opacity=".7"/><circle cx="49" cy="38" r="3" fill="#ff8fb1" opacity=".7"/><circle class="m-ok" cx="18" cy="47" r="2"/><circle class="m-led" cx="24" cy="47" r="2"/><rect x="31" y="45" width="6" height="4" rx="1" fill="#0d1a3a" opacity=".55"/><rect x="39" y="45" width="6" height="4" rx="1" fill="#0d1a3a" opacity=".55"/><rect x="47" y="45" width="5" height="4" rx="1" fill="#0d1a3a" opacity=".55"/><path class="m-leg" d="M20 54v4M44 54v4" stroke-width="3.4" stroke-linecap="round" fill="none"/></g></svg><div><h2>Make IPv6 simple</h2><p>Routerel has endless generated IPv6 exercises and 1,900+ CCNA questions with explanations, in English or Romanian.</p></div><a class="btn" data-play data-soon-href="../../../en/" href="../../../en/"><span data-when="live">Try 7 days free</span><span data-when="soon">See the app</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div>
+    </div>
+  </section>
+</main>
+<script type="module">
+  import { mountIpv6Tool } from "../../../assets/tools/ipv6/ui.js";
+  var el = document.getElementById("ipv6-tool");
+  var q = new URLSearchParams(location.search).get("addr");
+  mountIpv6Tool(el, { lang: "en", initial: q && q.length <= 64 ? q : undefined });
+  el.classList.add("is-ready");
+</script>
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="about">
+        <a class="brand" href="../../../en/"><img src="../../../assets/icon-96.webp" alt="" width="36" height="36" loading="lazy"><span>Routerel</span></a>
+        <p>CCNA practice on your phone: questions with explanations, spaced repetition and exam simulations. In English and Romanian.</p>
+      </div>
+      <div><h2>The app</h2><ul><li><a href="../../../en/#features">Features</a></li><li><a href="../../../en/#pricing">Pricing</a></li><li><a href="../../../en/#how-it-works">How it works</a></li><li><a href="../../../en/#faq">FAQ</a></li></ul></div>
+      <div><h2>Resources</h2><ul><li><a href="../../../en/guides/">CCNA guides</a></li><li><a href="../../../en/tools/">Free tools</a></li><li><a href="../../../" hreflang="ro" lang="ro" data-set-lang="ro">Română</a></li></ul></div>
+      <div><h2>Legal & contact</h2><ul><li><a href="../../../en/privacy.html">Privacy policy</a></li><li><a href="../../../en/terms.html">Terms of use</a></li><li><a href="../../../en/delete-account.html">Delete your account</a></li></ul><ul><li><a href="mailto:contact@routerel.app">contact@routerel.app</a></li></ul></div>
+    </div>
+    <div class="disclaimer">
+      <p>Routerel is an independent app, not affiliated with, sponsored or endorsed by Cisco Systems, Inc. Cisco, CCNA and Cisco Networking Academy are trademarks of Cisco Systems, Inc.</p>
+      <p>© 2026 Routerel</p>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,471 @@
+<!doctype html>
+<!-- Pagină generată. Nu o edita de mână: vezi tools/site/ (npm run build:guides / npm run sync:tools / npm run build:legal). -->
+<html lang="en" class="play-soon">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>IPv6 Addresses Explained: Format, Shortening, Types | Routerel</title>
+  <meta name="description" content="IPv6 addresses made simple: the 128-bit format, how to shorten and expand them, address types, EUI-64 step by step, SLAAC vs DHCPv6, and exercises with answers.">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <link rel="canonical" href="https://routerel.app/en/guides/ipv6-addresses-explained/">
+  <link rel="alternate" hreflang="ro" href="https://routerel.app/ghiduri/adrese-ipv6/">
+  <link rel="alternate" hreflang="en" href="https://routerel.app/en/guides/ipv6-addresses-explained/">
+  <link rel="alternate" hreflang="x-default" href="https://routerel.app/en/guides/ipv6-addresses-explained/">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#12151b" media="(prefers-color-scheme: dark)">
+  <meta name="color-scheme" content="light dark">
+  <link rel="icon" href="../../../assets/favicon-32.png" type="image/png" sizes="32x32">
+  <link rel="icon" href="../../../assets/icon-192.png" type="image/png" sizes="192x192">
+  <link rel="apple-touch-icon" href="../../../assets/apple-touch-icon.png">
+  <link rel="manifest" href="../../../site.webmanifest">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Routerel">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="ro_RO">
+  <meta property="og:title" content="IPv6 Addresses Explained: Format, Shortening, Types | Routerel">
+  <meta property="og:description" content="IPv6 addresses made simple: the 128-bit format, how to shorten and expand them, address types, EUI-64 step by step, SLAAC vs DHCPv6, and exercises with answers.">
+  <meta property="og:url" content="https://routerel.app/en/guides/ipv6-addresses-explained/">
+  <meta property="og:image" content="https://routerel.app/assets/og-en.png">
+  <meta property="og:image:width" content="1024">
+  <meta property="og:image:height" content="500">
+  <meta property="og:image:alt" content="Routerel: the router chick mascot and the app name">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="IPv6 Addresses Explained: Format, Shortening, Types | Routerel">
+  <meta name="twitter:description" content="IPv6 addresses made simple: the 128-bit format, how to shorten and expand them, address types, EUI-64 step by step, SLAAC vs DHCPv6, and exercises with answers.">
+  <meta name="twitter:image" content="https://routerel.app/assets/og-en.png">
+  <meta property="article:published_time" content="2026-11-05">
+  <meta property="article:modified_time" content="2026-11-05">
+  <meta name="routerel:updated" content="2026-11-05">
+  <link rel="preload" href="../../../assets/fonts/nunito-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../../../assets/fonts/nunito-latin-ext.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../../../assets/fonts/roboto-mono-500-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="../../../style.css">
+  <script>(function(d){d.classList.add("js");try{var t=localStorage.getItem("routerel-theme");if(t==="light"||t==="dark")d.setAttribute("data-theme",t)}catch(e){}setTimeout(function(){if(!window.__rtl)d.classList.remove("js")},4000)})(document.documentElement)</script>
+  <script src="../../../assets/site.js" defer></script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Article","@id":"https://routerel.app/en/guides/ipv6-addresses-explained/#article","headline":"IPv6 Addresses Explained: Format, Shortening, Types","description":"IPv6 addresses made simple: the 128-bit format, how to shorten and expand them, address types, EUI-64 step by step, SLAAC vs DHCPv6, and exercises with answers.","inLanguage":"en","datePublished":"2026-11-05","dateModified":"2026-11-05","keywords":"IPv6 addresses, IPv6 address explained, how to shorten IPv6 address, IPv6 address compression, IPv6 address types, link-local fe80, EUI-64 example, SLAAC vs DHCPv6, IPv6 CCNA","author":{"@type":"Organization","name":"Routerel","url":"https://routerel.app/"},"publisher":{"@type":"Organization","name":"Routerel","logo":{"@type":"ImageObject","url":"https://routerel.app/assets/icon-512.png"}},"image":"https://routerel.app/assets/og-en.png","mainEntityOfPage":"https://routerel.app/en/guides/ipv6-addresses-explained/","isPartOf":{"@id":"https://routerel.app/#website"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://routerel.app/en/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://routerel.app/en/guides/"},{"@type":"ListItem","position":3,"name":"IPv6 Addresses Explained: Format, Shortening, Types","item":"https://routerel.app/en/guides/ipv6-addresses-explained/"}]},{"@type":"FAQPage","@id":"https://routerel.app/en/guides/ipv6-addresses-explained/#faq","inLanguage":"en","mainEntity":[{"@type":"Question","name":"How many bits are in an IPv6 address?","acceptedAnswer":{"@type":"Answer","text":"An IPv6 address has 128 bits, written as 8 groups of 4 hexadecimal digits separated by colons. Each group (hextet) is 16 bits."}},{"@type":"Question","name":"What are the rules for shortening an IPv6 address?","acceptedAnswer":{"@type":"Answer","text":"There are two: in each group you can drop the leading zeros (0db8 becomes db8), and one single run of all-zero groups can be replaced with ::. The :: can appear only once in an address, otherwise you can't tell how many zeros each one hides."}},{"@type":"Question","name":"What is a link-local address in IPv6?","acceptedAnswer":{"@type":"Answer","text":"It's an address from fe80::/10 that every IPv6-enabled interface gets automatically. It's valid only on the local link, routers don't forward it, and among other things it's used as the default gateway that the router advertises."}},{"@type":"Question","name":"Does IPv6 have a broadcast address?","acceptedAnswer":{"@type":"Answer","text":"No. IPv6 has no broadcast. It uses multicast instead, for example ff02::1 for all nodes on the link and ff02::2 for all routers."}},{"@type":"Question","name":"What is EUI-64?","acceptedAnswer":{"@type":"Answer","text":"It's a method a device uses to build its own interface ID (the last 64 bits) from its MAC address: split the MAC in two, insert FFFE in the middle and flip the seventh bit of the first byte."}},{"@type":"Question","name":"What is the difference between SLAAC and DHCPv6?","acceptedAnswer":{"@type":"Answer","text":"With SLAAC the device builds its own address from the prefix the router advertises. With stateless DHCPv6 the address still comes from SLAAC, but other information (for example DNS) comes from a DHCPv6 server. With stateful DHCPv6 the address itself is assigned by the server. The default gateway always comes from the router's advertisement."}}]}]}</script>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs><linearGradient id="rtl-play" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5b8cff"/><stop offset=".55" stop-color="#2f6bff"/><stop offset="1" stop-color="#ffb020"/></linearGradient></defs></svg>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="container header-row">
+    <a class="brand" href="../../../en/" aria-label="Routerel home"><img src="../../../assets/icon-96.webp" alt="" width="36" height="36"><span>Routerel</span></a>
+    <nav class="main-nav" aria-label="Main"><ul><li><a href="../../../en/#features">Features</a></li><li><a href="../../../en/#pricing">Pricing</a></li><li><a href="../../../en/guides/" aria-current="page">Guides</a></li><li><a href="../../../en/tools/">Tools</a></li><li><a href="../../../en/#faq">FAQ</a></li></ul></nav>
+    <div class="header-actions">
+      <div class="lang-switch" role="group" aria-label="Language"><a href="../../../ghiduri/adrese-ipv6/" hreflang="ro" lang="ro" title="Română">RO</a><span aria-current="true" lang="en">EN</span></div>
+      <button class="icon-btn theme-toggle" type="button" data-theme-toggle aria-label="Switch theme"><span class="i-moon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9z"/></svg></span><span class="i-sun"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg></span></button>
+      <a class="btn btn--sm header-cta" data-play data-soon-href="../../../en/#pricing" href="../../../en/#pricing"><span data-when="live">Try free</span><span data-when="soon">See pricing</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      <button class="icon-btn menu-btn" type="button" data-menu-btn aria-expanded="false" aria-controls="mobile-nav" aria-label="Menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+    </div>
+  </div>
+  <nav class="mobile-nav" id="mobile-nav" aria-label="Main" hidden>
+    <div class="container"><ul><li><a href="../../../en/#features">Features</a></li><li><a href="../../../en/#pricing">Pricing</a></li><li><a href="../../../en/guides/" aria-current="page">Guides</a></li><li><a href="../../../en/tools/">Tools</a></li><li><a href="../../../en/#faq">FAQ</a></li></ul></div>
+  </nav>
+</header>
+<main id="main">
+  <div class="container section section--tight">
+    <article class="prose">
+      <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="../../../en/">Home</a></li><li><a href="../../../en/guides/">Guides</a></li><li><span aria-current="page">IPv6 Addresses Explained: Format, Shortening, Types</span></li></ol></nav>
+      <p class="eyebrow">CCNA guide</p>
+      <h1>IPv6 Addresses Explained (Format, Shortening, Types)</h1>
+      <div class="article-meta">
+        <span class="avatar"><svg class="mascot" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><g class="m-breathe"><path d="M22 14l-5-9M42 14l5-9" stroke="#8a919c" stroke-width="3.4" stroke-linecap="round" fill="none"/><circle class="m-led m-led-l" cx="17" cy="5" r="3.6"/><circle class="m-led m-led-r" cx="47" cy="5" r="3.6"/><path class="m-body" d="M28 12q4-6 8 0"/><rect class="m-body" x="8" y="12" width="48" height="42" rx="18"/><rect class="m-belly" x="8" y="40" width="48" height="14" rx="7"/><circle cx="23" cy="31" r="5.4" fill="#fff"/><circle class="m-pupil" cx="24" cy="31.5" r="3" fill="#1a1d24"/><circle cx="41" cy="31" r="5.4" fill="#fff"/><circle class="m-pupil" cx="42" cy="31.5" r="3" fill="#1a1d24"/><path class="m-led" d="M29 37l3 3.5 3-3.5z"/><circle class="m-ok" cx="18" cy="47" r="2"/><circle class="m-led" cx="24" cy="47" r="2"/><rect x="31" y="45" width="6" height="4" rx="1" fill="#0d1a3a" opacity=".55"/><rect x="39" y="45" width="6" height="4" rx="1" fill="#0d1a3a" opacity=".55"/><rect x="47" y="45" width="5" height="4" rx="1" fill="#0d1a3a" opacity=".55"/><path class="m-leg" d="M20 54v4M44 54v4" stroke-width="3.4" stroke-linecap="round" fill="none"/></g></svg></span>
+        <span>The Routerel team</span><span aria-hidden="true">·</span>
+        <span>Updated: <time datetime="2026-11-05">November 5, 2026</time></span><span aria-hidden="true">·</span>
+        <span>13 min read</span>
+      </div>
+      <p class="lead">The first time you see an address like <code>2001:db8:acad:1::1</code>, it looks like secret code. The good news: IPv6 has fewer, more logical rules than it seems. Once you understand the format and the two shortening rules, the rest is vocabulary.</p>
+<p>In this guide you&#39;ll learn what an IPv6 address looks like, how to shorten it and how to write it back out in full, what address types exist and how to recognize them from the first few digits, how to calculate an EUI-64 address, what SLAAC and DHCPv6 mean and how to configure IPv6 on a Cisco router. At the end there are exercises with answers.</p>
+<p>In the Networking Academy CCNA v8 courses, IPv6 addressing is taught in <strong>CCNA 1 · ITN</strong> (module 11, IPv6 addressing, plus module 8 for Neighbor Discovery), and automatic address configuration (SLAAC and DHCPv6) is covered in more depth in <strong>CCNA 2 · IEN</strong> (module 9).</p>
+      <nav class="toc toc--fold" aria-labelledby="toc-title"><h2 id="toc-title">Contents</h2><button type="button" class="toc-toggle" data-toc-toggle aria-expanded="false" aria-controls="toc-list"><span class="toc-toggle-t">Contents</span> <span class="toc-toggle-n">12 sections</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6"/></svg></button><ol id="toc-list"><li><a href="#why-we-need-ipv6">Why we need IPv6</a></li><li><a href="#what-an-ipv6-address-looks-like">What an IPv6 address looks like</a></li><li><a href="#the-shortening-rules">The shortening rules</a><ol><li><a href="#rule-1-drop-the-leading-zeros-in-each-hextet">Rule 1: drop the leading zeros in each hextet</a></li><li><a href="#rule-2-replace-one-run-of-all-zero-groups-with">Rule 2: replace one run of all-zero groups with ::</a></li><li><a href="#worked-examples">Worked examples</a></li><li><a href="#how-to-expand-an-address-back-to-full-form">How to expand an address back to full form</a></li><li><a href="#invalid-addresses-and-why">Invalid addresses (and why)</a></li></ol></li><li><a href="#the-prefix-network-part-and-interface-part">The prefix: network part and interface part</a></li><li><a href="#ipv6-address-types">IPv6 address types</a><ol><li><a href="#global-unicast-gua">Global unicast (GUA)</a></li><li><a href="#link-local-lla">Link-local (LLA)</a></li><li><a href="#unique-local-ula">Unique local (ULA)</a></li><li><a href="#multicast">Multicast</a></li></ol></li><li><a href="#eui-64-an-address-built-from-the-mac">EUI-64: an address built from the MAC</a><ol><li><a href="#example-1-mac-00-1a-2b-3c-4d-5e">Example 1: MAC 00:1A:2B:3C:4D:5E</a></li><li><a href="#example-2-mac-7a-3b-10-c4-22-9f">Example 2: MAC 7A:3B:10:C4:22:9F</a></li></ol></li><li><a href="#how-a-device-gets-its-address-slaac-and-dhcpv6">How a device gets its address: SLAAC and DHCPv6</a></li><li><a href="#ipv6-on-a-cisco-router">IPv6 on a Cisco router</a></li><li><a href="#common-mistakes">Common mistakes</a></li><li><a href="#exercises">Exercises</a></li><li><a href="#how-to-learn-ipv6-and-make-it-stick">How to learn IPv6 and make it stick</a></li><li><a href="#frequently-asked-questions">Frequently asked questions</a></li></ol></nav>
+<h2 id="why-we-need-ipv6">Why we need IPv6</h2>
+<p>IPv4 has 32 bits, which is nearly 4.3 billion addresses. That sounds like a lot, but they&#39;ve run out: almost every regional registry exhausted its free blocks long ago, and networks have survived with NAT and private addresses. IPv6 fixes the problem at the root: it has <strong>128 bits</strong>, which is 2^128 addresses, a 39-digit number (roughly 3.4 × 10^38).</p>
+<p>Besides the space, IPv6 brings a few simplifications:</p>
+<ul>
+<li><strong>no broadcast</strong>: what broadcast used to do is now done by multicast, which is far more targeted;</li>
+<li><strong>automatic configuration</strong>: a device can build its own address (SLAAC);</li>
+<li><strong>no ARP</strong>: its role is taken over by Neighbor Discovery (NDP), which uses ICMPv6 messages;</li>
+<li><strong>a simpler header</strong>, with a fixed length of 40 bytes.</li>
+</ul>
+<h2 id="what-an-ipv6-address-looks-like">What an IPv6 address looks like</h2>
+<p>The 128 bits are written in <strong>hexadecimal</strong>, because in binary they&#39;d be impossible to read. One hex digit (0–9, a–f) represents exactly 4 bits, so 128 bits means 32 hex digits. They&#39;re split into groups of 4, giving <strong>8 groups</strong> separated by colons. A group is 16 bits and is called a <strong>hextet</strong>.</p>
+<pre><code class="language-text">2001:0db8:0000:0000:0000:0c1a:00f0:0005
+ |    |    |    |    |    |    |    |
+ 1    2    3    4    5    6    7    8    ← 8 hextets × 16 bits = 128 bits
+</code></pre>
+<p>Letters can be upper or lower case, but the recommended form (RFC 5952) is lower case. If hexadecimal is still new to you, just remember this: <code>a</code>=10, <code>b</code>=11, <code>c</code>=12, <code>d</code>=13, <code>e</code>=14, <code>f</code>=15, and <code>f</code> means four 1 bits (<code>1111</code>). To practice conversions, try the <a href="../../tools/binary-converter/">binary and hex converter</a>.</p>
+<h2 id="the-shortening-rules">The shortening rules</h2>
+<p>The address above is correct, but long. There are <strong>two rules</strong> that shorten it, and only two.</p>
+<h3 id="rule-1-drop-the-leading-zeros-in-each-hextet">Rule 1: drop the leading zeros in each hextet</h3>
+<p>In each group you can delete the zeros <strong>on the left</strong>. A group made up only of zeros becomes a single <code>0</code>.</p>
+<pre><code class="language-text">0db8 → db8      0042 → 42      0000 → 0      ff00 → ff00 (stays)
+</code></pre>
+<p>Watch out for the classic trap: zeros <strong>on the right</strong> are never removed. <code>db80</code> is not the same as <code>db8</code>. If you wrote <code>2001:db8::</code> instead of <code>2001:db80::</code>, you&#39;d change the address.</p>
+<h3 id="rule-2-replace-one-run-of-all-zero-groups-with">Rule 2: replace one run of all-zero groups with <code>::</code></h3>
+<p>A continuous run of one or more all-zero groups can be replaced with <code>::</code>. The important rule: <strong><code>::</code> appears only once</strong> in an address. When it reads the address, the device counts the visible groups and fills in zeros up to 8. If there were two <code>::</code>, it wouldn&#39;t know how to split the zeros between them.</p>
+<p>For the canonical form (the one modern devices display), RFC 5952 adds three more recommendations:</p>
+<ul>
+<li>if there are several runs of zeros, compress <strong>the longest</strong> one;</li>
+<li>if they&#39;re the same length, compress <strong>the first</strong> one (from the left);</li>
+<li>a single zero group stays <code>0</code>; it isn&#39;t replaced with <code>::</code>.</li>
+</ul>
+<h3 id="worked-examples">Worked examples</h3>
+<p><strong>Example 1.</strong> <code>2001:0db8:0000:0000:0000:0c1a:00f0:0005</code></p>
+<ol>
+<li>Leading zeros: <code>2001:db8:0:0:0:c1a:f0:5</code></li>
+<li>The three consecutive zero groups become <code>::</code> → <strong><code>2001:db8::c1a:f0:5</code></strong></li>
+</ol>
+<p><strong>Example 2.</strong> <code>2001:0db8:0000:0001:0000:0000:0000:0001</code></p>
+<ol>
+<li>Leading zeros: <code>2001:db8:0:1:0:0:0:1</code></li>
+<li>There are two runs of zeros: one of a single group (the 3rd) and one of three groups (5–7). Compress the longest → <strong><code>2001:db8:0:1::1</code></strong></li>
+</ol>
+<p><strong>Example 3 (a tie).</strong> <code>2001:0db8:0000:0000:abcd:0000:0000:1234</code></p>
+<p>Two runs of two groups each. You could compress either one, and both forms are valid, but the canonical form picks the first: <strong><code>2001:db8::abcd:0:0:1234</code></strong>.</p>
+<p><strong>Example 4.</strong> <code>ff02:0000:0000:0000:0000:0000:0000:0001</code> → <strong><code>ff02::1</code></strong>, and the address made of all zeros with a 1 at the end becomes <strong><code>::1</code></strong>. The all-zeros address becomes <strong><code>::</code></strong>.</p>
+<div class="table-scroll"><p class="table-hint" aria-hidden="true">swipe<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></p><div class="table-wrap" role="region" tabindex="0" aria-label="Table (scrolls sideways)"><table>
+<thead>
+<tr>
+<th>Full form</th>
+<th>Shortened form</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>2001:0db8:0000:0000:0000:0c1a:00f0:0005</td>
+<td>2001:db8::c1a:f0:5</td>
+</tr>
+<tr>
+<td>fe80:0000:0000:0000:0a1b:22ff:fe3c:0d07</td>
+<td>fe80::a1b:22ff:fe3c:d07</td>
+</tr>
+<tr>
+<td>2001:0db8:0000:0001:0001:0001:0001:0001</td>
+<td>2001:db8:0:1:1:1:1:1</td>
+</tr>
+<tr>
+<td>2001:0db8:acad:0001:0000:0000:0000:0000</td>
+<td>2001:db8:acad:1::</td>
+</tr>
+<tr>
+<td>0000:0000:0000:0000:0000:0000:0000:0001</td>
+<td>::1</td>
+</tr>
+</tbody></table></div></div>
+<h3 id="how-to-expand-an-address-back-to-full-form">How to expand an address back to full form</h3>
+<p>The reverse process is just counting. Take <code>2001:db8:a::12</code>:</p>
+<ol>
+<li>Count the visible groups: <code>2001</code>, <code>db8</code>, <code>a</code>, <code>12</code> → 4 groups.</li>
+<li>8 − 4 = <strong>4 groups</strong> are missing, and they sit where the <code>::</code> is.</li>
+<li>Pad every group to 4 digits with leading zeros.</li>
+</ol>
+<pre><code class="language-text">2001:db8:a::12
+2001:0db8:000a:0000:0000:0000:0000:0012
+</code></pre>
+<h3 id="invalid-addresses-and-why">Invalid addresses (and why)</h3>
+<div class="table-scroll"><p class="table-hint" aria-hidden="true">swipe<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></p><div class="table-wrap" role="region" tabindex="0" aria-label="Table (scrolls sideways)"><table>
+<thead>
+<tr>
+<th>Address</th>
+<th>Why it&#39;s wrong</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>2001:db8::1::5</td>
+<td><code>::</code> appears twice</td>
+</tr>
+<tr>
+<td>2001:db8:0:0:0:0:0:0:1</td>
+<td>9 groups; an address has exactly 8</td>
+</tr>
+<tr>
+<td>2001:db8:12345::1</td>
+<td>a group has at most 4 hex digits</td>
+</tr>
+<tr>
+<td>2001:db8:g::1</td>
+<td><code>g</code> isn&#39;t a hex digit</td>
+</tr>
+<tr>
+<td>2001:db8:acad:1:0:0:0</td>
+<td>only 7 groups and no <code>::</code> to fill the gap</td>
+</tr>
+</tbody></table></div></div>
+<h2 id="the-prefix-network-part-and-interface-part">The prefix: network part and interface part</h2>
+<p>As with IPv4, an IPv6 address has a network part and a host part, except that IPv6 no longer uses a dotted-decimal mask, only the <strong>prefix length</strong>: <code>2001:db8:acad:1::1/64</code>.</p>
+<p>For a regular subnet (a LAN), the standard prefix is <strong>/64</strong>:</p>
+<pre><code class="language-text">2001:0db8:acad:0001 : 0000:0000:0000:0001
+|---- /64 prefix ---| |-- interface ID (64 bits) --|
+</code></pre>
+<ul>
+<li>The <strong>global routing prefix</strong> is what the organization gets from its ISP (for example a /48).</li>
+<li>The <strong>subnet ID</strong> is the bits between the prefix you received and /64. From /48 to /64 there are 16 bits left, which means <strong>65,536 /64 subnets</strong>. From a /56 there are 8 bits left, which means 256 subnets.</li>
+<li>The <strong>interface ID</strong> is the last 64 bits, the equivalent of the host part.</li>
+</ul>
+<p>Subnetting in IPv6 is much more relaxed than in IPv4: you usually don&#39;t calculate how many hosts fit anymore (a /64 has 2^64 addresses); you just number the subnets in the fourth hextet: <code>2001:db8:acad:1::/64</code>, <code>2001:db8:acad:2::/64</code> and so on, up to <code>2001:db8:acad:ffff::/64</code>. For IPv4, where every bit counts, there&#39;s the <a href="../subnetting-step-by-step/">subnetting step-by-step guide</a>.</p>
+<p>Don&#39;t forget: in IPv6 you <strong>no longer subtract 2</strong>. There&#39;s no broadcast address, and the address with all zeros in the interface part (for example <code>2001:db8:acad:1::</code>) is the anycast address reserved for the routers on the subnet (Subnet-Router anycast), so you don&#39;t assign it to a host.</p>
+<h2 id="ipv6-address-types">IPv6 address types</h2>
+<p>IPv6 has three broad categories: <strong>unicast</strong> (a single recipient), <strong>multicast</strong> (a group) and <strong>anycast</strong> (the nearest of several devices sharing the same address). There is no broadcast.</p>
+<div class="table-scroll"><p class="table-hint" aria-hidden="true">swipe<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></p><div class="table-wrap" role="region" tabindex="0" aria-label="Table (scrolls sideways)"><table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Prefix</th>
+<th>How to recognize it</th>
+<th>What it&#39;s for</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Global unicast (GUA)</td>
+<td>2000::/3</td>
+<td>starts with 2 or 3</td>
+<td>public address, routable on the Internet</td>
+</tr>
+<tr>
+<td>Link-local (LLA)</td>
+<td>fe80::/10</td>
+<td class="tw">starts with fe80 through febf (in practice fe80)</td>
+<td>communication on the local link only</td>
+</tr>
+<tr>
+<td>Unique local (ULA)</td>
+<td>fc00::/7</td>
+<td>starts with fc or fd (in practice fd)</td>
+<td class="tw">internal networks, not routed on the Internet</td>
+</tr>
+<tr>
+<td>Multicast</td>
+<td>ff00::/8</td>
+<td>starts with ff</td>
+<td>sending to a group</td>
+</tr>
+<tr>
+<td>Loopback</td>
+<td>::1/128</td>
+<td>exactly <code>::1</code></td>
+<td>testing your own IP stack</td>
+</tr>
+<tr>
+<td>Unspecified</td>
+<td>::/128</td>
+<td>exactly <code>::</code></td>
+<td class="tw">&quot;I don&#39;t have an address yet&quot; (the source of some messages at startup)</td>
+</tr>
+</tbody></table></div></div>
+<h3 id="global-unicast-gua">Global unicast (GUA)</h3>
+<p>IPv6&#39;s public addresses, the equivalent of public IPv4 addresses. Anything starting with hex digit <strong>2</strong> or <strong>3</strong> is a GUA. The prefix <code>2001:db8::/32</code> is reserved for documentation and examples, which is why you see it in every textbook (and in this guide): it will never appear on the Internet.</p>
+<h3 id="link-local-lla">Link-local (LLA)</h3>
+<p>Every interface with IPv6 enabled <strong>automatically</strong> creates a link-local address, even if it has no GUA. It&#39;s valid only on the local segment: routers don&#39;t forward packets with a link-local source or destination. LLAs are used a lot:</p>
+<ul>
+<li>OSPFv3 neighbors talk to each other using their link-local addresses;</li>
+<li>the router announces itself on the network from its link-local address, and hosts use it as their <strong>default gateway</strong>;</li>
+<li>Neighbor Discovery (the ARP equivalent) uses them constantly.</li>
+</ul>
+<p>Because the same link-local address can exist on several interfaces of a router, when you <code>ping</code> an LLA, the router also asks you for the outgoing interface.</p>
+<h3 id="unique-local-ula">Unique local (ULA)</h3>
+<p>These resemble IPv4 private addresses (10.0.0.0/8 and the others): they&#39;re for internal use and aren&#39;t routed on the Internet. The block is <code>fc00::/7</code>, but in practice only the <code>fd00::/8</code> half is used, with a randomly generated identifier, so the networks of two companies that merge don&#39;t overlap.</p>
+<h3 id="multicast">Multicast</h3>
+<p>These start with <code>ff</code>. A few you need to recognize instantly:</p>
+<div class="table-scroll"><p class="table-hint" aria-hidden="true">swipe<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></p><div class="table-wrap" role="region" tabindex="0" aria-label="Table (scrolls sideways)"><table>
+<thead>
+<tr>
+<th>Address</th>
+<th>Who listens to it</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>ff02::1</td>
+<td class="tw">all nodes on the link (the closest thing to a broadcast)</td>
+</tr>
+<tr>
+<td>ff02::2</td>
+<td>all routers on the link</td>
+</tr>
+<tr>
+<td>ff02::5 and ff02::6</td>
+<td>OSPFv3 routers (all / DR and BDR)</td>
+</tr>
+<tr>
+<td>ff02::1:ffXX:XXXX</td>
+<td class="tw">solicited-node: built from the last 24 bits of a unicast address</td>
+</tr>
+</tbody></table></div></div>
+<p>The <strong>solicited-node</strong> address is the reason IPv6 doesn&#39;t need broadcast. When a device wants to find the MAC address of <code>2001:db8:acad:1::1</code>, it doesn&#39;t ask the whole network; it sends the question to <code>ff02::1:ff00:1</code>, which only devices whose addresses end the same way listen to.</p>
+<h2 id="eui-64-an-address-built-from-the-mac">EUI-64: an address built from the MAC</h2>
+<p>A device needs the last 64 bits (the interface ID). A classic way to get them on its own is <strong>EUI-64</strong>, which starts from the 48-bit MAC address. That&#39;s 16 bits short, and the recipe is:</p>
+<ol>
+<li>Split the MAC into two halves of 24 bits each.</li>
+<li>Insert <code>FFFE</code> in the middle (the 16 missing bits).</li>
+<li>Flip the <strong>seventh bit</strong> of the first byte (the &quot;universal/local&quot; bit). If it&#39;s 0 it becomes 1; if it&#39;s 1 it becomes 0. In practice, you add or subtract 2 in the first byte.</li>
+</ol>
+<h3 id="example-1-mac-00-1a-2b-3c-4d-5e">Example 1: MAC 00:1A:2B:3C:4D:5E</h3>
+<pre><code class="language-text">1. Split:            001A2B | 3C4D5E
+2. Insert FFFE:      001A2B FFFE 3C4D5E
+3. First byte:       00 = 00000000
+   Flip bit 7:            00000010 = 02
+   Result:           021A:2BFF:FE3C:4D5E
+</code></pre>
+<p>With the prefix <code>2001:db8:acad:1::/64</code>, the full address is <strong><code>2001:db8:acad:1:21a:2bff:fe3c:4d5e</code></strong>, and the link-local address built the same way is <strong><code>fe80::21a:2bff:fe3c:4d5e</code></strong>. (The leading zero of <code>021a</code> disappears when you shorten it.)</p>
+<h3 id="example-2-mac-7a-3b-10-c4-22-9f">Example 2: MAC 7A:3B:10:C4:22:9F</h3>
+<pre><code class="language-text">1. Split:            7A3B10 | C4229F
+2. Insert FFFE:      7A3B10 FFFE C4229F
+3. First byte:       7A = 01111010
+   Flip bit 7:            01111000 = 78
+   Result:           783B:10FF:FEC4:229F
+</code></pre>
+<p>Here the bit was 1 and became 0, so the first byte went down by 2. The full address with the same prefix: <strong><code>2001:db8:acad:1:783b:10ff:fec4:229f</code></strong>.</p>
+<p>How to spot an EUI-64 address: <strong><code>ff:fe</code></strong> in the middle of the interface ID (<code>xxff:fexx</code>). Cisco routers build their link-local addresses with EUI-64 by default. Modern operating systems (Windows, Android, iOS, macOS and many Linux distributions), however, prefer a <strong>randomly generated</strong> interface ID (stable within a network, plus temporary addresses that change periodically), so a device can&#39;t be tracked from network to network by its MAC address.</p>
+<h2 id="how-a-device-gets-its-address-slaac-and-dhcpv6">How a device gets its address: SLAAC and DHCPv6</h2>
+<p>In IPv6, the router periodically (and on request) sends a <strong>Router Advertisement (RA)</strong> message, an ICMPv6 type. A device that has just booted can speed things up by sending a <strong>Router Solicitation (RS)</strong> to all routers (<code>ff02::2</code>). The RA contains the network prefix, its length, the router&#39;s link-local address (which becomes the default gateway) and a few flags that tell the host how to get the rest. There are three options:</p>
+<div class="table-scroll"><p class="table-hint" aria-hidden="true">swipe<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></p><div class="table-wrap" role="region" tabindex="0" aria-label="Table (scrolls sideways)"><table>
+<thead>
+<tr>
+<th>Method</th>
+<th>The address comes from</th>
+<th>DNS and other options come from</th>
+<th>RA flags</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>SLAAC</td>
+<td class="tw">the host (prefix from the RA + its own interface ID)</td>
+<td>the RA (DNS option, if sent)</td>
+<td>A = 1, O = 0, M = 0</td>
+</tr>
+<tr>
+<td>SLAAC + stateless DHCPv6</td>
+<td>the host, via SLAAC</td>
+<td>a DHCPv6 server</td>
+<td>A = 1, O = 1, M = 0</td>
+</tr>
+<tr>
+<td>Stateful DHCPv6</td>
+<td>a DHCPv6 server</td>
+<td>a DHCPv6 server</td>
+<td>M = 1 (usually also A = 0)</td>
+</tr>
+</tbody></table></div></div>
+<p>What to remember:</p>
+<ul>
+<li><strong>SLAAC</strong> (Stateless Address Autoconfiguration): nobody keeps track of the addresses. The host takes the prefix and adds its own interface ID (EUI-64 or random).</li>
+<li><strong>Stateless</strong> means the DHCPv6 server doesn&#39;t remember who has which address; it only hands out extra information.</li>
+<li><strong>Stateful</strong> means the DHCPv6 server assigns addresses and keeps track of them, like DHCPv4.</li>
+<li><strong>DHCPv6 doesn&#39;t provide the default gateway.</strong> The gateway always comes from the RA. This is a favorite exam question.</li>
+<li>Before using a new address, the host checks that nobody else has it: <strong>DAD</strong> (Duplicate Address Detection), a Neighbor Solicitation sent to the solicited-node address of its own address.</li>
+</ul>
+<p>On a Cisco router, the flags are changed per interface: <code>ipv6 nd other-config-flag</code> sets O = 1 (stateless), <code>ipv6 nd managed-config-flag</code> sets M = 1 (stateful), and <code>ipv6 nd prefix default no-autoconfig</code> turns off SLAAC (A = 0).</p>
+<h2 id="ipv6-on-a-cisco-router">IPv6 on a Cisco router</h2>
+<p>By default, a Cisco router doesn&#39;t route IPv6 and doesn&#39;t send RAs. You turn both on with a single global command, then address the interfaces:</p>
+<pre><code class="language-text">R1(config)# ipv6 unicast-routing
+R1(config)# interface GigabitEthernet0/0/0
+R1(config-if)# ipv6 address 2001:db8:acad:1::1/64
+R1(config-if)# ipv6 address fe80::1 link-local
+R1(config-if)# no shutdown
+R1(config-if)# exit
+R1(config)# interface GigabitEthernet0/0/1
+R1(config-if)# ipv6 address 2001:db8:acad:2::/64 eui-64
+R1(config-if)# no shutdown
+</code></pre>
+<ul>
+<li><code>ipv6 unicast-routing</code> makes the router route IPv6 and send Router Advertisements; without it, hosts don&#39;t get the prefix via SLAAC.</li>
+<li><code>ipv6 address fe80::1 link-local</code> replaces the EUI-64 link-local address with a short, easy-to-recognize one. It only needs to be unique on each link.</li>
+<li><code>eui-64</code> at the end tells the router to fill in the interface ID from its MAC address.</li>
+<li><code>ipv6 enable</code> enables IPv6 and creates only the link-local address, with no GUA.</li>
+</ul>
+<p>Verification:</p>
+<div class="table-scroll"><p class="table-hint" aria-hidden="true">swipe<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></p><div class="table-wrap" role="region" tabindex="0" aria-label="Table (scrolls sideways)"><table>
+<thead>
+<tr>
+<th>Command</th>
+<th>What it shows you</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code><span class="nw">show</span> <span class="nw">ipv6</span> <span class="nw">interface</span> <span class="nw">brief</span></code></td>
+<td class="tw">interfaces, their status, link-local and global addresses</td>
+</tr>
+<tr>
+<td><code><span class="nw">show</span> <span class="nw">ipv6</span> <span class="nw">interface</span> <span class="nw">g0/0/0</span></code></td>
+<td class="tw">interface details, including the multicast groups it has joined</td>
+</tr>
+<tr>
+<td><code><span class="nw">show</span> <span class="nw">ipv6</span> <span class="nw">route</span></code></td>
+<td class="tw">the IPv6 routing table (C = connected network, L = local /128 address)</td>
+</tr>
+<tr>
+<td><code><span class="nw">show</span> <span class="nw">ipv6</span> <span class="nw">neighbors</span></code></td>
+<td class="tw">neighbors learned through Neighbor Discovery (the ARP table equivalent)</td>
+</tr>
+<tr>
+<td><code><span class="nw">ping</span> <span class="nw">2001:db8:acad:2::10</span></code></td>
+<td>the connectivity test, same as with IPv4</td>
+</tr>
+</tbody></table></div></div>
+<p>The basic router configuration commands (hostname, passwords, SSH, saving the configuration) are in the <a href="../cisco-ios-basic-commands/">Cisco IOS commands cheat sheet</a>.</p>
+<div class="callout callout--info"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg><div><p><strong>Check your exercises:</strong> this site also has an <a href="../../tools/ipv6/">IPv6 tool</a> that shortens and expands addresses and calculates EUI-64 step by step. Do the exercises on paper first, then check.</p></div></div>
+<h2 id="common-mistakes">Common mistakes</h2>
+<ol>
+<li><strong>Using <code>::</code> twice.</strong> The address becomes ambiguous, and therefore invalid.</li>
+<li><strong>Removing the trailing zeros of a group.</strong> <code>db80</code> can&#39;t become <code>db8</code>.</li>
+<li><strong>Forgetting to count the groups when expanding.</strong> Always count the visible groups and fill in exactly up to 8.</li>
+<li><strong>Flipping the wrong bit in EUI-64.</strong> It&#39;s the seventh bit from the left of the first byte (value 2), not the first and not the last.</li>
+<li><strong>Thinking DHCPv6 provides the gateway.</strong> It doesn&#39;t; the gateway is the router&#39;s link-local address, learned from the RA.</li>
+<li><strong>Looking for the broadcast address.</strong> IPv6 doesn&#39;t have one; &quot;all nodes&quot; means the multicast address <code>ff02::1</code>.</li>
+<li><strong>Forgetting <code>ipv6 unicast-routing</code>.</strong> The interfaces have addresses, but the router doesn&#39;t route IPv6 and hosts don&#39;t get the prefix via SLAAC.</li>
+</ol>
+<h2 id="exercises">Exercises</h2>
+<ol>
+<li>Shorten: <code>2001:0db8:0000:00a0:0000:0000:0000:0bad</code></li>
+<li>Shorten to canonical form: <code>fd12:3400:0000:0000:0001:0000:0000:0000</code></li>
+<li>Write out in full: <code>2001:db8:acad::f:1</code></li>
+<li>Which addresses are valid? a) <code>2001:db8::5::1</code> b) <code>fe80::a:b:c:d</code> c) <code>2001:db8:0:1:1:1:1:1</code></li>
+<li>What type is each address? a) <code>fe80::1</code> b) <code>fd00:ab::1</code> c) <code>ff02::2</code> d) <code>2001:db8:1::5</code> e) <code>::1</code></li>
+<li>Calculate the EUI-64 address for MAC <code>D2:1C:44:9A:7B:01</code> and prefix <code>2001:db8:cafe:5::/64</code>.</li>
+<li>How many /64 subnets do you get from a /48? And from a /56?</li>
+</ol>
+<details class="reveal-answer">
+<summary><strong>Answers</strong></summary><p><strong>1.</strong> Leading zeros: <code>2001:db8:0:a0:0:0:0:bad</code>. The longest run of zeros is the three groups at the end → <strong><code>2001:db8:0:a0::bad</code></strong>. (Careful: <code>00a0</code> becomes <code>a0</code>, not <code>a</code>.)</p>
+<p><strong>2.</strong> Without leading zeros: <code>fd12:3400:0:0:1:0:0:0</code>. There&#39;s one run of two groups and one of three; compress the longest → <strong><code>fd12:3400:0:0:1::</code></strong>. (<code>3400</code> stays as it is: trailing zeros are never removed.)</p>
+<p><strong>3.</strong> Visible groups: <code>2001</code>, <code>db8</code>, <code>acad</code>, <code>f</code>, <code>1</code> = 5. 3 are missing → <strong><code>2001:0db8:acad:0000:0000:0000:000f:0001</code></strong>.</p>
+<p><strong>4.</strong> a) <strong>invalid</strong>, <code>::</code> appears twice. b) <strong>valid</strong>. c) <strong>valid</strong>, all 8 groups are written out, and the single zero group stays <code>0</code>.</p>
+<p><strong>5.</strong> a) link-local. b) unique local (ULA). c) multicast, all routers on the link. d) global unicast (from the documentation block). e) loopback.</p>
+<p><strong>6.</strong> <code>D21C44 | 9A7B01</code> → <code>D21C44 FFFE 9A7B01</code>. First byte: <code>D2</code> = <code>11010010</code>; bit 7 is 1 and becomes 0 → <code>11010000</code> = <code>D0</code>. Interface ID: <code>D01C:44FF:FE9A:7B01</code>. Address: <strong><code>2001:db8:cafe:5:d01c:44ff:fe9a:7b01</code></strong>.</p>
+<p><strong>7.</strong> From /48 to /64 there are 16 bits → 2^16 = <strong>65,536</strong> subnets. From /56 to /64 there are 8 bits → 2^8 = <strong>256</strong>.</p>
+</details><h2 id="how-to-learn-ipv6-and-make-it-stick">How to learn IPv6 and make it stick</h2>
+<ul>
+<li><strong>Shorten and expand a few addresses every day</strong> until it&#39;s a reflex. In the exam there&#39;s no time to think about the rules.</li>
+<li><strong>Learn the types table like dialing codes:</strong> 2 or 3 = global, fe80 = link-local, fd = ULA, ff = multicast.</li>
+<li><strong>Do one complete EUI-64 on paper, in binary.</strong> After that you&#39;ll see &quot;+2 / −2 on the first byte&quot; without writing out the bits.</li>
+<li><strong>Configure dual-stack in a lab:</strong> IPv4 and IPv6 on the same interfaces, then verify with <code>show ipv6 interface brief</code> and <code>ping</code>.</li>
+<li><strong>Tie IPv6 to the layered models:</strong> IPv6 is at Layer 3, and so is ICMPv6. If the layers are still fuzzy, see <a href="../osi-vs-tcp-ip/">OSI vs TCP/IP</a>.</li>
+</ul>
+<div class="cta-box cta-box--article"><svg class="mascot" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><g class="m-breathe"><path d="M22 14l-5-9M42 14l5-9" stroke="#8a919c" stroke-width="3.4" stroke-linecap="round" fill="none"/><circle class="m-led m-led-l" cx="17" cy="5" r="3.6"/><circle class="m-led m-led-r" cx="47" cy="5" r="3.6"/><path class="m-body" d="M28 12q4-6 8 0"/><rect class="m-body" x="8" y="12" width="48" height="42" rx="18"/><rect class="m-belly" x="8" y="40" width="48" height="14" rx="7"/><path d="M19 31q4-5 8 0" stroke="#1a1d24" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M37 31q4-5 8 0" stroke="#1a1d24" stroke-width="3" fill="none" stroke-linecap="round"/><path class="m-led" d="M29 37l3 3.5 3-3.5z"/><circle cx="15" cy="38" r="3" fill="#ff8fb1" opacity=".7"/><circle cx="49" cy="38" r="3" fill="#ff8fb1" opacity=".7"/><circle class="m-ok" cx="18" cy="47" r="2"/><circle class="m-led" cx="24" cy="47" r="2"/><rect x="31" y="45" width="6" height="4" rx="1" fill="#0d1a3a" opacity=".55"/><rect x="39" y="45" width="6" height="4" rx="1" fill="#0d1a3a" opacity=".55"/><rect x="47" y="45" width="5" height="4" rx="1" fill="#0d1a3a" opacity=".55"/><path class="m-leg" d="M20 54v4M44 54v4" stroke-width="3.4" stroke-linecap="round" fill="none"/></g></svg><div><h3>Practice IPv6 in the Routerel app</h3><p>Routerel has a subnetting, conversion and IPv6 trainer with endlessly generated exercises, plus over 1,900 questions with explanations for CCNA 1 · ITN, CCNA 2 · IEN and CCNA 3 · CEN. Your mistakes come back automatically through spaced repetition until you&#39;ve mastered them, and the timed exam simulation shows you where you stand. New subscribers get a 7-day free trial with full access.</p></div><a class="btn" href="../../">Discover the app<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div><h2 id="frequently-asked-questions">Frequently asked questions</h2>
+<div class="faq faq--article"><details><summary>How many bits are in an IPv6 address?<span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p><strong>128 bits</strong>, written as 8 groups of 4 hexadecimal digits separated by colons. Each group (hextet) is 16 bits.</p></div></details><details><summary>What are the rules for shortening an IPv6 address?<span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p>Two: in each group you drop the leading zeros (<code>0db8</code> → <code>db8</code>), and you replace one single run of all-zero groups with <code>::</code>. The <code>::</code> appears only once in an address.</p></div></details><details><summary>What is a link-local address in IPv6?<span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p>An address from <code>fe80::/10</code> that every IPv6-enabled interface gets automatically. It&#39;s valid only on the local link, routers don&#39;t forward it, and among other things it&#39;s used as the default gateway that the router advertises.</p></div></details><details><summary>Does IPv6 have a broadcast address?<span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p>No. Instead of broadcast, IPv6 uses multicast, for example <code>ff02::1</code> for all nodes on the link and <code>ff02::2</code> for all routers.</p></div></details><details><summary>What is EUI-64?<span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p>A method a device uses to build its own interface ID (the last 64 bits) from its MAC address: split the MAC in two, insert <code>FFFE</code> in the middle and flip the seventh bit of the first byte.</p></div></details><details><summary>What is the difference between SLAAC and DHCPv6?<span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p>With SLAAC the device builds its own address from the prefix the router advertises. With stateless DHCPv6 the address still comes from SLAAC, but other information (for example DNS) comes from a DHCPv6 server. With stateful DHCPv6 the address itself is assigned by the server. The default gateway always comes from the router&#39;s advertisement (RA). For the exam context, see also our <a href="../what-is-ccna/">guide to CCNA</a>.</p></div></details></div>
+<hr>
+<p><em>Routerel is an independent app and is not affiliated with, sponsored by or endorsed by Cisco Systems, Inc. Cisco, CCNA, Cisco IOS and Networking Academy are trademarks of Cisco Systems, Inc.</em></p>
+      
+      <section class="related" aria-labelledby="rel-title">
+        <h2 id="rel-title">Read next</h2>
+        <div class="grid grid--2"><a class="card post-card lift" href="../../../en/guides/cisco-ios-basic-commands/"><span class="tagline">Guide · 13 min</span><h3>Basic Cisco IOS Commands: CCNA Cheat Sheet</h3><p>Basic Cisco IOS commands cheat sheet for CCNA: CLI modes, initial setup, passwords and SSH, interfaces, saving the config, show commands and troubleshooting.</p></a><a class="card post-card lift" href="../../../en/guides/osi-vs-tcp-ip/"><span class="tagline">Guide · 12 min</span><h3>OSI Model vs TCP/IP Model Explained (With Examples)</h3><p>The OSI and TCP/IP models made simple: the 7 layers, PDUs, protocols and devices, encapsulation of a real web request, CCNA exam traps and practice questions.</p></a></div>
+      </section>
+    </article>
+  </div>
+</main>
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="about">
+        <a class="brand" href="../../../en/"><img src="../../../assets/icon-96.webp" alt="" width="36" height="36" loading="lazy"><span>Routerel</span></a>
+        <p>CCNA practice on your phone: questions with explanations, spaced repetition and exam simulations. In English and Romanian.</p>
+      </div>
+      <div><h2>The app</h2><ul><li><a href="../../../en/#features">Features</a></li><li><a href="../../../en/#pricing">Pricing</a></li><li><a href="../../../en/#how-it-works">How it works</a></li><li><a href="../../../en/#faq">FAQ</a></li></ul></div>
+      <div><h2>Resources</h2><ul><li><a href="../../../en/guides/">CCNA guides</a></li><li><a href="../../../en/tools/">Free tools</a></li><li><a href="../../../" hreflang="ro" lang="ro" data-set-lang="ro">Română</a></li></ul></div>
+      <div><h2>Legal & contact</h2><ul><li><a href="../../../en/privacy.html">Privacy policy</a></li><li><a href="../../../en/terms.html">Terms of use</a></li><li><a href="../../../en/delete-account.html">Delete your account</a></li></ul><ul><li><a href="mailto:contact@routerel.app">contact@routerel.app</a></li></ul></div>
+    </div>
+    <div class="disclaimer">
+      <p>Routerel is an independent app, not affiliated with, sponsored or endorsed by Cisco Systems, Inc. Cisco, CCNA and Cisco Networking Academy are trademarks of Cisco Systems, Inc.</p>
+      <p>© 2026 Routerel</p>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

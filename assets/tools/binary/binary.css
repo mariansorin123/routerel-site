@@ -1,0 +1,86 @@
+/* Generat de tools/site/sync-tools.mjs din web-tools/binary/demo.html. Nu-l edita aici. */
+/* ───── Componenta (clase bnc-*) ───── */
+.bnc { --radius: 14px; }
+.bnc-panel { background: var(--surface); border: 2px solid var(--line); border-radius: var(--radius); padding: 20px 16px; }
+.bnc-form { display: grid; grid-template-columns: minmax(0, 1fr); gap: 8px; margin-bottom: 12px; }
+.bnc-form > * { min-width: 0; }
+.bnc-label { font-weight: 900; font-size: 0.8125rem; letter-spacing: .05em; text-transform: uppercase; color: var(--ink-strong); padding: 0; }
+.bnc-inputrow { display: flex; gap: 8px; flex-wrap: wrap; }
+.bnc-input {
+  flex: 1 1 220px; min-width: 0; min-height: 48px; padding: 10px 12px; border-radius: 12px; border: 2px solid var(--line-strong);
+  background: var(--surface2); color: var(--ink-strong); font: 700 1rem/1.3 Nunito, sans-serif;
+}
+.bnc-input.bnc-mono { font: 600 1rem/1.3 "Roboto Mono", ui-monospace, monospace; }
+.bnc-input:focus { outline: 3px solid var(--brand); outline-offset: 1px; border-color: var(--brand); }
+.bnc-input[aria-invalid="true"] { border-color: var(--bad-ink); }
+.bnc-btn {
+  font: 900 0.9375rem/1 Nunito, sans-serif; letter-spacing: .05em; text-transform: uppercase; min-height: 48px; padding: 0 20px; cursor: pointer;
+  border: 0; border-radius: 12px; background: var(--brand); color: var(--on-brand); box-shadow: 0 4px 0 var(--brand-dark);
+}
+.bnc-btn:active { transform: translateY(2px); box-shadow: 0 2px 0 var(--brand-dark); }
+.bnc-btn:focus-visible, .bnc-chip:focus-visible { outline: 3px solid var(--led); outline-offset: 2px; }
+.bnc-fieldset { border: 0; padding: 0; margin: 0 0 8px; display: grid; gap: 8px; min-width: 0; }
+/* bazele: butoane radio arătate ca un comutator cu trei poziții */
+.bnc-seg { display: flex; flex-wrap: wrap; gap: 6px; }
+.bnc-segbtn { position: relative; flex: 1 1 auto; }
+.bnc-segbtn input { position: absolute; opacity: 0; inset: 0; width: 100%; height: 100%; margin: 0; cursor: pointer; }
+.bnc-segbtn span {
+  display: flex; align-items: center; justify-content: center; min-height: 44px; padding: 8px 6px; border-radius: 12px; text-align: center;
+  border: 2px solid var(--line-strong); border-bottom-width: 4px; background: var(--surface); color: var(--ink);
+  font: 900 0.875rem/1.1 Nunito, sans-serif; letter-spacing: .02em; white-space: nowrap;
+}
+.bnc-segbtn input:checked + span { background: var(--brand-soft); border-color: var(--brand); color: var(--ink-strong); }
+.bnc-segbtn input:focus-visible + span { outline: 3px solid var(--led); outline-offset: 2px; }
+.bnc-hint { margin: 0; color: var(--muted); font-size: 0.9375rem; overflow-wrap: break-word; }
+.bnc-note { margin-top: 8px; }
+.bnc-error { margin: 0; padding: 8px 12px; border-radius: 10px; background: var(--bad-soft); color: var(--bad-ink); font-weight: 800; }
+.bnc-examples { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-top: 4px; }
+.bnc-examples-label { color: var(--muted); font-size: 0.9375rem; margin-right: 2px; }
+.bnc-chip { font-size: 0.8125rem; padding: 6px 12px; min-height: 44px; min-width: 44px; border-radius: 999px; border: 2px solid var(--line-strong); background: var(--surface2); color: var(--ink-strong); cursor: pointer; max-width: 100%; overflow-wrap: break-word; text-align: left; }
+.bnc-mono { font-family: "Roboto Mono", ui-monospace, monospace; font-weight: 500; }
+.bnc-summary { margin: 4px 0 12px; font-weight: 800; color: var(--ink-strong); overflow-wrap: anywhere; }
+.bnc-summary:empty { display: none; }
+.bnc-h { font-weight: 900; font-size: 0.8125rem; letter-spacing: .05em; text-transform: uppercase; color: var(--ink-strong); text-align: left; margin: 0 0 8px; }
+.bnc-block { margin-top: 24px; }
+.bnc-table { border-collapse: collapse; width: 100%; font-size: 0.9375rem; }
+.bnc-table th, .bnc-table td { padding: 8px 10px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+.bnc-kv th { width: 36%; font-weight: 800; color: var(--muted); }
+.bnc-kv td { color: var(--ink-strong); font-weight: 600; overflow-wrap: break-word; }
+/* tabelul pozițiilor: biții de 1 sunt „aprinși” (chihlimbariu, ca LED-urile mascotei) */
+.bnc-octets { display: grid; gap: 16px; grid-template-columns: minmax(0, 1fr); margin-top: 12px; }
+@media (min-width: 720px) { .bnc-octets-4 { grid-template-columns: repeat(2, minmax(0, 1fr)); } .bnc-octets:not(.bnc-octets-4) { max-width: 420px; } }
+.bnc-octet { margin: 0; min-width: 0; }
+.bnc-places { border-collapse: separate; border-spacing: 3px; width: 100%; table-layout: fixed; }
+.bnc-octet-cap { text-align: left; font-weight: 900; color: var(--ink-strong); padding: 0 3px 4px; }
+.bnc-places th { font: 800 0.75rem/1 Nunito, sans-serif; color: var(--muted); padding: 4px 0; text-align: center; }
+.bnc-places td { text-align: center; }
+.bnc-bit {
+  font: 600 1.0625rem/1 "Roboto Mono", ui-monospace, monospace; height: 40px; border-radius: 9px;
+  background: var(--surface2); color: var(--muted); border: 2px solid var(--line);
+}
+.bnc-bit.bnc-on { background: var(--led-soft); color: var(--led-ink); border-color: var(--led); border-bottom-width: 4px; font-weight: 700; }
+.bnc-places .bnc-nibstart { position: relative; }
+.bnc-places th.bnc-nibstart::before, .bnc-places td.bnc-bit.bnc-nibstart::before {
+  content: ""; position: absolute; left: -4px; top: 2px; bottom: 2px; width: 2px; border-radius: 2px; background: var(--brand); opacity: .55;
+}
+.bnc-nib td { font: 600 0.9375rem/1 "Roboto Mono", ui-monospace, monospace; color: var(--brand); padding: 6px 0 0; border-top: 2px solid var(--brand-soft); }
+.bnc-sum { color: var(--ink-strong); font-size: 0.875rem; padding: 4px 3px 0; }
+.bnc-steps { margin: 0; padding-left: 1.4em; display: grid; gap: 10px; }
+.bnc-steps li { overflow-wrap: anywhere; }
+.bnc-steps li::marker { color: var(--brand); font-weight: 900; }
+.bnc-steps strong { color: var(--ink-strong); font-weight: 900; }
+.bnc [hidden] { display: none !important; }
+@media (max-width: 480px) {
+  .bnc-panel { padding: 16px 12px; }
+  .bnc-kv th { width: 40%; }
+  .bnc-places { border-spacing: 2px; }
+  .bnc-bit { height: 36px; font-size: 0.9375rem; }
+  .bnc-places th { font-size: 0.6875rem; }
+}
+@media (max-width: 350px) {
+  .bnc-segbtn span { font-size: 0.8125rem; padding: 8px 4px; letter-spacing: 0; }
+  .bnc-kv th, .bnc-kv td { display: block; width: auto; padding: 4px 0; border: 0; }
+  .bnc-kv tr { display: block; padding: 6px 0; border-bottom: 1px solid var(--line); }
+  .bnc-places th { font-size: 0.625rem; letter-spacing: -.02em; }
+}
+@media (prefers-reduced-motion: reduce) { .bnc-btn:active { transform: none; } }

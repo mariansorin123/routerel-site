@@ -1,0 +1,548 @@
+<!doctype html>
+<!-- Pagină generată. Nu o edita de mână: vezi tools/site/ (npm run build:guides / npm run sync:tools / npm run build:legal). -->
+<html lang="en" class="play-soon">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>VLANs and Trunks Explained: 802.1Q, Native VLAN, Inter-VLAN | Routerel</title>
+  <meta name="description" content="VLANs and trunks explained: access vs trunk ports, the 802.1Q tag, native VLAN, DTP, inter-VLAN routing, Cisco IOS configuration, troubleshooting and exercises.">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <link rel="canonical" href="https://routerel.app/en/guides/vlans-and-trunks/">
+  <link rel="alternate" hreflang="ro" href="https://routerel.app/ghiduri/vlan-si-trunk/">
+  <link rel="alternate" hreflang="en" href="https://routerel.app/en/guides/vlans-and-trunks/">
+  <link rel="alternate" hreflang="x-default" href="https://routerel.app/en/guides/vlans-and-trunks/">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#12151b" media="(prefers-color-scheme: dark)">
+  <meta name="color-scheme" content="light dark">
+  <link rel="icon" href="../../../assets/favicon-32.png" type="image/png" sizes="32x32">
+  <link rel="icon" href="../../../assets/icon-192.png" type="image/png" sizes="192x192">
+  <link rel="apple-touch-icon" href="../../../assets/apple-touch-icon.png">
+  <link rel="manifest" href="../../../site.webmanifest">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Routerel">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="ro_RO">
+  <meta property="og:title" content="VLANs and Trunks Explained: 802.1Q, Native VLAN, Inter-VLAN | Routerel">
+  <meta property="og:description" content="VLANs and trunks explained: access vs trunk ports, the 802.1Q tag, native VLAN, DTP, inter-VLAN routing, Cisco IOS configuration, troubleshooting and exercises.">
+  <meta property="og:url" content="https://routerel.app/en/guides/vlans-and-trunks/">
+  <meta property="og:image" content="https://routerel.app/assets/og-en.png">
+  <meta property="og:image:width" content="1024">
+  <meta property="og:image:height" content="500">
+  <meta property="og:image:alt" content="Routerel: the router chick mascot and the app name">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="VLANs and Trunks Explained: 802.1Q, Native VLAN, Inter-VLAN | Routerel">
+  <meta name="twitter:description" content="VLANs and trunks explained: access vs trunk ports, the 802.1Q tag, native VLAN, DTP, inter-VLAN routing, Cisco IOS configuration, troubleshooting and exercises.">
+  <meta name="twitter:image" content="https://routerel.app/assets/og-en.png">
+  <meta property="article:published_time" content="2026-11-05">
+  <meta property="article:modified_time" content="2026-11-05">
+  <meta name="routerel:updated" content="2026-11-05">
+  <link rel="preload" href="../../../assets/fonts/nunito-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../../../assets/fonts/nunito-latin-ext.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../../../assets/fonts/roboto-mono-500-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="../../../style.css">
+  <script>(function(d){d.classList.add("js");try{var t=localStorage.getItem("routerel-theme");if(t==="light"||t==="dark")d.setAttribute("data-theme",t)}catch(e){}setTimeout(function(){if(!window.__rtl)d.classList.remove("js")},4000)})(document.documentElement)</script>
+  <script src="../../../assets/site.js" defer></script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Article","@id":"https://routerel.app/en/guides/vlans-and-trunks/#article","headline":"VLANs and Trunks Explained: 802.1Q, Native VLAN, Inter-VLAN","description":"VLANs and trunks explained: access vs trunk ports, the 802.1Q tag, native VLAN, DTP, inter-VLAN routing, Cisco IOS configuration, troubleshooting and exercises.","inLanguage":"en","datePublished":"2026-11-05","dateModified":"2026-11-05","keywords":"VLAN, what is a VLAN, 802.1Q trunk, native VLAN, Cisco VLAN configuration, router-on-a-stick, inter-VLAN routing, DTP","author":{"@type":"Organization","name":"Routerel","url":"https://routerel.app/"},"publisher":{"@type":"Organization","name":"Routerel","logo":{"@type":"ImageObject","url":"https://routerel.app/assets/icon-512.png"}},"image":"https://routerel.app/assets/og-en.png","mainEntityOfPage":"https://routerel.app/en/guides/vlans-and-trunks/","isPartOf":{"@id":"https://routerel.app/#website"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://routerel.app/en/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://routerel.app/en/guides/"},{"@type":"ListItem","position":3,"name":"VLANs and Trunks Explained: 802.1Q, Native VLAN, Inter-VLAN","item":"https://routerel.app/en/guides/vlans-and-trunks/"}]},{"@type":"FAQPage","@id":"https://routerel.app/en/guides/vlans-and-trunks/#faq","inLanguage":"en","mainEntity":[{"@type":"Question","name":"What is a VLAN?","acceptedAnswer":{"@type":"Answer","text":"A VLAN (Virtual LAN) is a logical local network created on a switch. Ports in different VLANs are separated as if they were on different switches: each VLAN has its own broadcast domain and, usually, its own IP subnet."}},{"@type":"Question","name":"What is the difference between an access port and a trunk port?","acceptedAnswer":{"@type":"Answer","text":"An access port belongs to a single data VLAN and sends untagged frames; that's where you connect PCs, printers or servers. A trunk port carries multiple VLANs over the same cable, marking frames with an 802.1Q tag; you use it between switches or between a switch and a router."}},{"@type":"Question","name":"What is the native VLAN?","acceptedAnswer":{"@type":"Answer","text":"The native VLAN is the VLAN that untagged frames on an 802.1Q trunk belong to. By default it's VLAN 1. It must match at both ends of the trunk, and it's best to make it a VLAN that no users are in."}},{"@type":"Question","name":"Why is it recommended to disable DTP?","acceptedAnswer":{"@type":"Answer","text":"DTP automatically negotiates whether a port becomes a trunk. An attacker connected to a port that negotiates could turn the link into a trunk and receive traffic from every VLAN. That's why ports are explicitly configured as access or trunk, and negotiation is turned off on trunks with switchport nonegotiate."}},{"@type":"Question","name":"How do two VLANs communicate with each other?","acceptedAnswer":{"@type":"Answer","text":"Only through a Layer 3 device: a router with subinterfaces on a trunk (router-on-a-stick) or a Layer 3 switch with SVIs (switch virtual interfaces) and routing enabled with ip routing."}},{"@type":"Question","name":"How many VLANs can there be?","acceptedAnswer":{"@type":"Answer","text":"The VLAN ID field in the 802.1Q tag is 12 bits, so it has 4,096 values. Values 0 and 4095 are reserved, which leaves VLANs 1–4094: the normal range 1–1005 and the extended range 1006–4094."}}]}]}</script>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs><linearGradient id="rtl-play" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5b8cff"/><stop offset=".55" stop-color="#2f6bff"/><stop offset="1" stop-color="#ffb020"/></linearGradient></defs></svg>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="container header-row">
+    <a class="brand" href="../../../en/" aria-label="Routerel home"><img src="../../../assets/icon-96.webp" alt="" width="36" height="36"><span>Routerel</span></a>
+    <nav class="main-nav" aria-label="Main"><ul><li><a href="../../../en/#features">Features</a></li><li><a href="../../../en/#pricing">Pricing</a></li><li><a href="../../../en/guides/" aria-current="page">Guides</a></li><li><a href="../../../en/tools/">Tools</a></li><li><a href="../../../en/#faq">FAQ</a></li></ul></nav>
+    <div class="header-actions">
+      <div class="lang-switch" role="group" aria-label="Language"><a href="../../../ghiduri/vlan-si-trunk/" hreflang="ro" lang="ro" title="Română">RO</a><span aria-current="true" lang="en">EN</span></div>
+      <button class="icon-btn theme-toggle" type="button" data-theme-toggle aria-label="Switch theme"><span class="i-moon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9z"/></svg></span><span class="i-sun"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg></span></button>
+      <a class="btn btn--sm header-cta" data-play data-soon-href="../../../en/#pricing" href="../../../en/#pricing"><span data-when="live">Try free</span><span data-when="soon">See pricing</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      <button class="icon-btn menu-btn" type="button" data-menu-btn aria-expanded="false" aria-controls="mobile-nav" aria-label="Menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+    </div>
+  </div>
+  <nav class="mobile-nav" id="mobile-nav" aria-label="Main" hidden>
+    <div class="container"><ul><li><a href="../../../en/#features">Features</a></li><li><a href="../../../en/#pricing">Pricing</a></li><li><a href="../../../en/guides/" aria-current="page">Guides</a></li><li><a href="../../../en/tools/">Tools</a></li><li><a href="../../../en/#faq">FAQ</a></li></ul></div>
+  </nav>
+</header>
+<main id="main">
+  <div class="container section section--tight">
+    <article class="prose">
+      <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="../../../en/">Home</a></li><li><a href="../../../en/guides/">Guides</a></li><li><span aria-current="page">VLANs and Trunks Explained: 802.1Q, Native VLAN, Inter-VLAN</span></li></ol></nav>
+      <p class="eyebrow">CCNA guide</p>
+      <h1>VLANs and Trunks Explained (802.1Q, Native VLAN, Inter-VLAN Routing)</h1>
+      <div class="article-meta">
+        <span class="avatar"><svg class="mascot" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><g class="m-breathe"><path d="M22 14l-5-9M42 14l5-9" stroke="#8a919c" stroke-width="3.4" stroke-linecap="round" fill="none"/><circle class="m-led m-led-l" cx="17" cy="5" r="3.6"/><circle class="m-led m-led-r" cx="47" cy="5" r="3.6"/><path class="m-body" d="M28 12q4-6 8 0"/><rect class="m-body" x="8" y="12" width="48" height="42" rx="18"/><rect class="m-belly" x="8" y="40" width="48" height="14" rx="7"/><circle cx="23" cy="31" r="5.4" fill="#fff"/><circle class="m-pupil" cx="24" cy="31.5" r="3" fill="#1a1d24"/><circle cx="41" cy="31" r="5.4" fill="#fff"/><circle class="m-pupil" cx="42" cy="31.5" r="3" fill="#1a1d24"/><path class="m-led" d="M29 37l3 3.5 3-3.5z"/><circle class="m-ok" cx="18" cy="47" r="2"/><circle class="m-led" cx="24" cy="47" r="2"/><rect x="31" y="45" width="6" height="4" rx="1" fill="#0d1a3a" opacity=".55"/><rect x="39" y="45" width="6" height="4" rx="1" fill="#0d1a3a" opacity=".55"/><rect x="47" y="45" width="5" height="4" rx="1" fill="#0d1a3a" opacity=".55"/><path class="m-leg" d="M20 54v4M44 54v4" stroke-width="3.4" stroke-linecap="round" fill="none"/></g></svg></span>
+        <span>The Routerel team</span><span aria-hidden="true">·</span>
+        <span>Updated: <time datetime="2026-11-05">November 5, 2026</time></span><span aria-hidden="true">·</span>
+        <span>14 min read</span>
+      </div>
+      <p class="lead">VLANs are a simple idea, but they come with a few details (native VLAN, the allowed VLAN list, DTP) that break a lot of labs and generate a lot of exam questions.</p>
+<p>In this guide you&#39;ll learn why VLANs exist, how access and trunk ports work, what&#39;s inside the 802.1Q tag, what the native VLAN is, why you turn DTP off, how inter-VLAN routing works and which Cisco IOS commands you use to configure and verify it all. At the end there&#39;s a troubleshooting table and exercises with answers.</p>
+<p>In the Networking Academy CCNA v8 courses, these topics are in <strong>CCNA 2 · IEN</strong>: VLANs and trunks in module 3, inter-VLAN routing in module 4, and VLAN hopping attacks in module 11 (access and Layer 2 security).</p>
+      <nav class="toc toc--fold" aria-labelledby="toc-title"><h2 id="toc-title">Contents</h2><button type="button" class="toc-toggle" data-toc-toggle aria-expanded="false" aria-controls="toc-list"><span class="toc-toggle-t">Contents</span> <span class="toc-toggle-n">14 sections</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6"/></svg></button><ol id="toc-list"><li><a href="#why-we-use-vlans">Why we use VLANs</a><ol><li><a href="#vlan-types-and-ranges">VLAN types and ranges</a></li></ol></li><li><a href="#access-ports-and-trunk-ports">Access ports and trunk ports</a></li><li><a href="#the-802-1q-tag">The 802.1Q tag</a></li><li><a href="#the-native-vlan">The native VLAN</a></li><li><a href="#the-allowed-vlan-list">The allowed VLAN list</a></li><li><a href="#dtp-and-why-you-turn-it-off">DTP and why you turn it off</a></li><li><a href="#the-voice-vlan">The voice VLAN</a></li><li><a href="#full-switch-configuration">Full switch configuration</a></li><li><a href="#verification">Verification</a></li><li><a href="#inter-vlan-routing">Inter-VLAN routing</a><ol><li><a href="#1-the-legacy-option-one-router-interface-per-vlan">1. The legacy option: one router interface per VLAN</a></li><li><a href="#2-router-on-a-stick">2. Router-on-a-stick</a></li><li><a href="#3-layer-3-switch-with-svis">3. Layer 3 switch with SVIs</a></li></ol></li><li><a href="#troubleshooting-common-mistakes">Troubleshooting: common mistakes</a></li><li><a href="#exercises">Exercises</a></li><li><a href="#the-fastest-way-to-learn-this">The fastest way to learn this</a></li><li><a href="#frequently-asked-questions">Frequently asked questions</a></li></ol></nav>
+<h2 id="why-we-use-vlans">Why we use VLANs</h2>
+<p>Without VLANs, every port on a switch is in the same local network and the same <strong>broadcast domain</strong>. A broadcast sent by one PC (for example an ARP or DHCP request) reaches all the others. In a company with hundreds of devices, that means pointless traffic and no separation between departments.</p>
+<p>A <strong>VLAN</strong> (Virtual LAN) logically splits the switch into several separate networks: ports in VLAN 10 don&#39;t see frames from VLAN 20. What you gain:</p>
+<ul>
+<li><strong>smaller broadcast domains</strong>: a broadcast stays inside its own VLAN;</li>
+<li><strong>security</strong>: traffic between VLANs passes through a Layer 3 device, where you can apply rules (ACLs);</li>
+<li><strong>organization</strong>: the VLAN follows the function (Sales, Accounting, Voice), not the physical location;</li>
+<li><strong>lower cost</strong>: the same switches serve several networks.</li>
+</ul>
+<p>The basic rule: <strong>one VLAN = one broadcast domain = one IP subnet</strong>. If you need help splitting up the addresses, see the <a href="../subnetting-step-by-step/">subnetting step-by-step guide</a>.</p>
+<h3 id="vlan-types-and-ranges">VLAN types and ranges</h3>
+<div class="table-scroll"><p class="table-hint" aria-hidden="true">swipe<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></p><div class="table-wrap" role="region" tabindex="0" aria-label="Table (scrolls sideways)"><table>
+<thead>
+<tr>
+<th>Term</th>
+<th>What it means</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Default VLAN</td>
+<td class="tw">VLAN 1. All ports start out in it. It can&#39;t be deleted or renamed.</td>
+</tr>
+<tr>
+<td>Data VLAN</td>
+<td>A VLAN for user traffic (PCs, printers).</td>
+</tr>
+<tr>
+<td>Voice VLAN</td>
+<td class="tw">A separate VLAN for IP phones, so voice traffic can be prioritized.</td>
+</tr>
+<tr>
+<td>Management VLAN</td>
+<td class="tw">The VLAN you use to reach the switch (SSH, SNMP), with an IP address on its virtual interface.</td>
+</tr>
+<tr>
+<td>Native VLAN</td>
+<td class="tw">The VLAN of untagged frames on a trunk (VLAN 1 by default).</td>
+</tr>
+<tr>
+<td>Normal range</td>
+<td class="tw">VLANs 1–1005 (1002–1005 are reserved for legacy technologies and can&#39;t be deleted).</td>
+</tr>
+<tr>
+<td>Extended range</td>
+<td>VLANs 1006–4094.</td>
+</tr>
+</tbody></table></div></div>
+<p>On most Catalyst switches, normal-range VLANs are stored in the <code>vlan.dat</code> file in flash memory, separately from the running configuration.</p>
+<h2 id="access-ports-and-trunk-ports">Access ports and trunk ports</h2>
+<p>An <strong>access port</strong> belongs to a single data VLAN. Frames leave and arrive on it <strong>untagged</strong>, so the connected device (a PC, for example) doesn&#39;t even know VLANs exist. The switch keeps track internally of which VLAN each port is in.</p>
+<p>A <strong>trunk port</strong> carries <strong>multiple VLANs over the same cable</strong>. So that the switch at the other end knows which VLAN each frame came from, frames are marked with a tag. Trunks usually connect switches to each other, a switch to a router, or a switch to a virtualization server.</p>
+<pre><code class="language-text">PC-A (VLAN 10) ---access---+        802.1Q trunk         +---access--- PC-C (VLAN 10)
+                           S1 ======================== S2
+PC-B (VLAN 20) ---access---+  (carries VLANs 10 and 20)  +---access--- PC-D (VLAN 20)
+</code></pre>
+<p>PC-A and PC-C are in the same network even though they&#39;re on different switches. PC-A and PC-B are on the same switch but in different networks: without a router or a Layer 3 switch, they can&#39;t communicate.</p>
+<h2 id="the-802-1q-tag">The 802.1Q tag</h2>
+<p>The <strong>IEEE 802.1Q</strong> standard inserts a <strong>4-byte</strong> tag into the Ethernet frame, between the source MAC address and the type field (EtherType):</p>
+<pre><code class="language-text">Untagged:   | Dest. MAC | Source MAC |          | Type | Data | FCS |
+802.1Q:     | Dest. MAC | Source MAC | 4-B tag  | Type | Data | FCS |
+</code></pre>
+<div class="table-scroll"><p class="table-hint" aria-hidden="true">swipe<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></p><div class="table-wrap" role="region" tabindex="0" aria-label="Table (scrolls sideways)"><table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Bits</th>
+<th>Role</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>TPID</td>
+<td>16</td>
+<td class="tw">the value 0x8100, which says &quot;an 802.1Q tag follows&quot;</td>
+</tr>
+<tr>
+<td>PCP (priority)</td>
+<td>3</td>
+<td class="tw">the frame&#39;s priority (CoS, 0–7), used for QoS, for example for voice</td>
+</tr>
+<tr>
+<td>DEI</td>
+<td>1</td>
+<td class="tw">marks frames that can be dropped first during congestion</td>
+</tr>
+<tr>
+<td>VLAN ID</td>
+<td>12</td>
+<td class="tw">the VLAN number: 2^12 = 4,096 values, of which 1–4094 are usable</td>
+</tr>
+</tbody></table></div></div>
+<p>Because the tag changes the frame&#39;s contents, the switch <strong>recalculates the FCS</strong>. The maximum frame size grows from 1,518 to 1,522 bytes. There used to be a Cisco-proprietary method too, ISL, which is no longer used on current equipment.</p>
+<h2 id="the-native-vlan">The native VLAN</h2>
+<p>On an 802.1Q trunk, exactly one VLAN travels <strong>untagged</strong>: the <strong>native VLAN</strong>. Any frame received untagged on a trunk is treated as belonging to the native VLAN. By default, the native VLAN is <strong>VLAN 1</strong>.</p>
+<p>Three practical rules:</p>
+<ol>
+<li><strong>The native VLAN must match at both ends.</strong> If one end has 1 and the other has 99, untagged frames &quot;jump&quot; from one VLAN to another. CDP notices this and logs a message like <code>%CDP-4-NATIVE_VLAN_MISMATCH</code>.</li>
+<li><strong>Move the native VLAN off VLAN 1</strong> to a dedicated VLAN with no users in it (for example 999). This reduces the risk of a <strong>double-tagging</strong> attack: an attacker connected to a port in the native VLAN sends a frame with two tags; the first switch strips the outer one (the native VLAN&#39;s, which leaves on the trunk untagged), and the second switch reads the inner one and delivers the frame into a different VLAN.</li>
+<li><strong>Don&#39;t use the native VLAN for data or management.</strong></li>
+</ol>
+<h2 id="the-allowed-vlan-list">The allowed VLAN list</h2>
+<p>By default, a trunk lets <strong>all</strong> VLANs through. It&#39;s safer and cleaner to allow only what you need:</p>
+<pre><code class="language-text">S1(config-if)# switchport trunk allowed vlan 10,20,99,999
+S1(config-if)# switchport trunk allowed vlan add 30
+S1(config-if)# switchport trunk allowed vlan remove 20
+</code></pre>
+<p>The classic trap: <code>switchport trunk allowed vlan 30</code> <strong>without <code>add</code></strong> replaces the whole list. The trunk that carried 10, 20 and 99 will now carry only 30, and users in the other VLANs suddenly lose their network. When adding, always type <code>add</code>.</p>
+<h2 id="dtp-and-why-you-turn-it-off">DTP and why you turn it off</h2>
+<p><strong>DTP</strong> (Dynamic Trunking Protocol) is a Cisco protocol that automatically negotiates whether a link becomes a trunk. The port modes:</p>
+<div class="table-scroll"><p class="table-hint" aria-hidden="true">swipe<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></p><div class="table-wrap" role="region" tabindex="0" aria-label="Table (scrolls sideways)"><table>
+<thead>
+<tr>
+<th>Command</th>
+<th>What the port does</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code><span class="nw">switchport</span> <span class="nw">mode</span> <span class="nw">access</span></code></td>
+<td class="tw">stays access, whatever the other end does</td>
+</tr>
+<tr>
+<td><code><span class="nw">switchport</span> <span class="nw">mode</span> <span class="nw">trunk</span></code></td>
+<td class="tw">becomes a trunk and announces via DTP that it wants to trunk</td>
+</tr>
+<tr>
+<td><code><span class="nw">switchport</span> <span class="nw">mode</span> <span class="nw">dynamic</span> <span class="nw">desirable</span></code></td>
+<td class="tw">actively asks to trunk; becomes a trunk if the neighbor is trunk, desirable or auto</td>
+</tr>
+<tr>
+<td><code><span class="nw">switchport</span> <span class="nw">mode</span> <span class="nw">dynamic</span> <span class="nw">auto</span></code></td>
+<td class="tw">waits; becomes a trunk only if the neighbor asks (trunk or desirable)</td>
+</tr>
+<tr>
+<td><code><span class="nw">switchport</span> <span class="nw">nonegotiate</span></code></td>
+<td class="tw">stops DTP messages (used with access or trunk mode)</td>
+</tr>
+</tbody></table></div></div>
+<p>The result of each combination:</p>
+<div class="table-scroll"><p class="table-hint" aria-hidden="true">swipe<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></p><div class="table-wrap" role="region" tabindex="0" aria-label="Table (scrolls sideways)"><table>
+<thead>
+<tr>
+<th>End A \ End B</th>
+<th>dynamic auto</th>
+<th>dynamic desirable</th>
+<th>trunk</th>
+<th>access</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>dynamic auto</strong></td>
+<td>access</td>
+<td>trunk</td>
+<td>trunk</td>
+<td>access</td>
+</tr>
+<tr>
+<td><strong>dynamic desirable</strong></td>
+<td>trunk</td>
+<td>trunk</td>
+<td>trunk</td>
+<td>access</td>
+</tr>
+<tr>
+<td><strong>trunk</strong></td>
+<td>trunk</td>
+<td>trunk</td>
+<td>trunk</td>
+<td>limited connectivity</td>
+</tr>
+<tr>
+<td><strong>access</strong></td>
+<td>access</td>
+<td>access</td>
+<td>limited connectivity</td>
+<td>access</td>
+</tr>
+</tbody></table></div></div>
+<p>On many Catalyst switches (for example the 2960 series), the default mode is <strong>dynamic auto</strong>. Two new switches connected to each other do <strong>not</strong> form a trunk on their own, because both are waiting. This is a very common exam question.</p>
+<p>Why you turn DTP off: if a user port negotiates, an attacker can pretend to be a switch (<strong>switch spoofing</strong>), form a trunk and receive traffic from every VLAN. Recommended practice:</p>
+<ul>
+<li>user ports: <code>switchport mode access</code> (optionally also <code>switchport nonegotiate</code>);</li>
+<li>trunks: <code>switchport mode trunk</code> and <code>switchport nonegotiate</code>;</li>
+<li>unused ports: <code>shutdown</code> and moved into an unused VLAN.</li>
+</ul>
+<h2 id="the-voice-vlan">The voice VLAN</h2>
+<p>When the PC is connected through an IP phone, two traffic flows share the same port. The solution is an access port with a voice VLAN:</p>
+<pre><code class="language-text">S1(config)# interface FastEthernet0/5
+S1(config-if)# switchport mode access
+S1(config-if)# switchport access vlan 10
+S1(config-if)# switchport voice vlan 150
+</code></pre>
+<p>The phone learns the voice VLAN from the switch via CDP (or LLDP-MED) and tags its traffic with the 802.1Q tag for VLAN 150, including the priority in the PCP field. The PC&#39;s traffic stays untagged, in VLAN 10.</p>
+<h2 id="full-switch-configuration">Full switch configuration</h2>
+<p>The example below creates two data VLANs, a management VLAN and a native VLAN, puts the ports into VLANs and configures the trunk to another switch.</p>
+<pre><code class="language-text">S1# configure terminal
+S1(config)# vlan 10
+S1(config-vlan)# name SALES
+S1(config-vlan)# exit
+S1(config)# vlan 20
+S1(config-vlan)# name ACCOUNTING
+S1(config-vlan)# exit
+S1(config)# vlan 99
+S1(config-vlan)# name MANAGEMENT
+S1(config-vlan)# exit
+S1(config)# vlan 999
+S1(config-vlan)# name NATIVE
+S1(config-vlan)# exit
+S1(config)# interface range FastEthernet0/1 - 10
+S1(config-if-range)# switchport mode access
+S1(config-if-range)# switchport access vlan 10
+S1(config-if-range)# exit
+S1(config)# interface range FastEthernet0/11 - 20
+S1(config-if-range)# switchport mode access
+S1(config-if-range)# switchport access vlan 20
+S1(config-if-range)# exit
+S1(config)# interface GigabitEthernet0/1
+S1(config-if)# switchport mode trunk
+S1(config-if)# switchport trunk native vlan 999
+S1(config-if)# switchport trunk allowed vlan 10,20,99,999
+S1(config-if)# switchport nonegotiate
+S1(config-if)# exit
+S1(config)# interface vlan 99
+S1(config-if)# ip address 192.168.99.11 255.255.255.0
+S1(config-if)# no shutdown
+S1(config-if)# exit
+S1(config)# ip default-gateway 192.168.99.1
+S1(config)# end
+S1# copy running-config startup-config
+</code></pre>
+<p>A few useful details:</p>
+<ul>
+<li>On switches that also support ISL (Cisco&#39;s legacy trunking method), you must choose the encapsulation before <code>switchport mode trunk</code>: <code>switchport trunk encapsulation dot1q</code>. On the 2960 series the command doesn&#39;t exist, because it only knows 802.1Q.</li>
+<li>If you assign a port to a VLAN that doesn&#39;t exist, the switch creates it automatically and tells you.</li>
+<li><code>no vlan 20</code> deletes the VLAN, but the ports stay assigned to it and become <strong>inactive</strong>. Move them to another VLAN first.</li>
+<li>The <code>vlan 99</code> interface (an SVI) and <code>ip default-gateway</code> let you manage the switch remotely. A Layer 2 switch doesn&#39;t route, so it needs a gateway to reply to devices in other networks.</li>
+</ul>
+<h2 id="verification">Verification</h2>
+<div class="table-scroll"><p class="table-hint" aria-hidden="true">swipe<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></p><div class="table-wrap" role="region" tabindex="0" aria-label="Table (scrolls sideways)"><table>
+<thead>
+<tr>
+<th>Command</th>
+<th>What you see</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code><span class="nw">show</span> <span class="nw">vlan</span> <span class="nw">brief</span></code></td>
+<td class="tw">existing VLANs, their names, status and the <strong>access ports</strong> in each (trunks don&#39;t appear here)</td>
+</tr>
+<tr>
+<td><code><span class="nw">show</span> <span class="nw">interfaces</span> <span class="nw">trunk</span></code></td>
+<td class="tw">trunk ports, mode, encapsulation, native VLAN, allowed VLANs and active VLANs</td>
+</tr>
+<tr>
+<td><code><span class="nw">show</span> <span class="nw">interfaces</span> <span class="nw">FastEthernet0/5</span> <span class="nw">switchport</span></code></td>
+<td class="tw">administrative and operational mode, access VLAN, native VLAN, voice VLAN, whether it negotiates</td>
+</tr>
+</tbody></table></div></div>
+<p>Sample output for the trunk configured above:</p>
+<pre><code class="language-text">S1# show interfaces trunk
+
+Port        Mode         Encapsulation  Status        Native vlan
+Gi0/1       on           802.1q         trunking      999
+
+Port        Vlans allowed on trunk
+Gi0/1       10,20,99,999
+
+Port        Vlans allowed and active in management domain
+Gi0/1       10,20,99,999
+
+Port        Vlans in spanning tree forwarding state and not pruned
+Gi0/1       10,20,99,999
+</code></pre>
+<p>&quot;Mode on&quot; = static trunk. A VLAN listed under &quot;allowed&quot; but missing from &quot;allowed and active&quot; probably hasn&#39;t been created on the switch.</p>
+<h2 id="inter-vlan-routing">Inter-VLAN routing</h2>
+<p>VLANs are separate networks, so they need a Layer 3 device to communicate. There are three options.</p>
+<h3 id="1-the-legacy-option-one-router-interface-per-vlan">1. The legacy option: one router interface per VLAN</h3>
+<p>Each VLAN uses its own cable and a separate router interface. It doesn&#39;t scale.</p>
+<h3 id="2-router-on-a-stick">2. Router-on-a-stick</h3>
+<p>A single cable, configured as a <strong>trunk</strong> on the switch, while on the router the physical interface is split into <strong>subinterfaces</strong>, one per VLAN. Each subinterface knows which tag to read and apply (<code>encapsulation dot1Q</code>) and holds the gateway address for its VLAN.</p>
+<pre><code class="language-text">R1(config)# interface GigabitEthernet0/0/1.10
+R1(config-subif)# description Gateway VLAN 10
+R1(config-subif)# encapsulation dot1Q 10
+R1(config-subif)# ip address 192.168.10.1 255.255.255.0
+R1(config-subif)# exit
+R1(config)# interface GigabitEthernet0/0/1.20
+R1(config-subif)# description Gateway VLAN 20
+R1(config-subif)# encapsulation dot1Q 20
+R1(config-subif)# ip address 192.168.20.1 255.255.255.0
+R1(config-subif)# exit
+R1(config)# interface GigabitEthernet0/0/1.99
+R1(config-subif)# encapsulation dot1Q 99
+R1(config-subif)# ip address 192.168.99.1 255.255.255.0
+R1(config-subif)# exit
+R1(config)# interface GigabitEthernet0/0/1.999
+R1(config-subif)# encapsulation dot1Q 999 native
+R1(config-subif)# exit
+R1(config)# interface GigabitEthernet0/0/1
+R1(config-if)# no shutdown
+</code></pre>
+<p>Things to remember:</p>
+<ul>
+<li>the subinterface number (<code>.10</code>) is just a name; what counts is the VLAN in <code>encapsulation dot1Q 10</code> (keep them identical);</li>
+<li><strong>the physical interface gets no IP address</strong>, but it must be brought up with <code>no shutdown</code>; the subinterfaces follow its state;</li>
+<li><code>encapsulation dot1Q 999 native</code> tells the router that the native VLAN is 999, just like on the switch;</li>
+<li>the router doesn&#39;t negotiate DTP, so the switch port facing the router must be set manually with <code>switchport mode trunk</code>;</li>
+<li>PCs in VLAN 10 use gateway <code>192.168.10.1</code>, and PCs in VLAN 20 use <code>192.168.20.1</code>.</li>
+</ul>
+<p>Verification: <code>show ip interface brief</code> (subinterfaces must be up/up), <code>show ip route</code> (one connected &quot;C&quot; network per VLAN) and <code>show vlans</code> on the router (with an &quot;s&quot;; on the switch the command is <code>show vlan brief</code>).</p>
+<p>The limitation: traffic between VLANs crosses the same cable twice, so in a large network it becomes the bottleneck.</p>
+<h3 id="3-layer-3-switch-with-svis">3. Layer 3 switch with SVIs</h3>
+<p>A multilayer switch can route by itself. For each VLAN you create an <strong>SVI</strong> (Switch Virtual Interface), that is, a virtual <code>interface vlan X</code> with the VLAN&#39;s gateway address, and you enable routing:</p>
+<pre><code class="language-text">D1(config)# ip routing
+D1(config)# interface vlan 10
+D1(config-if)# ip address 192.168.10.1 255.255.255.0
+D1(config-if)# no shutdown
+D1(config-if)# exit
+D1(config)# interface vlan 20
+D1(config-if)# ip address 192.168.20.1 255.255.255.0
+D1(config-if)# no shutdown
+D1(config-if)# exit
+D1(config)# interface GigabitEthernet1/0/24
+D1(config-if)# no switchport
+D1(config-if)# ip address 10.0.0.1 255.255.255.252
+D1(config-if)# no shutdown
+</code></pre>
+<ul>
+<li><code>ip routing</code> is mandatory; without it the switch has an address in each VLAN but doesn&#39;t route between them.</li>
+<li>An SVI is <strong>up/up</strong> only if the VLAN exists, at least one port in that VLAN (an access port, or a trunk carrying it) is up and in the STP forwarding state, and the SVI itself isn&#39;t <code>shutdown</code>.</li>
+<li><code>no switchport</code> turns a physical port into a <strong>routed port</strong>, like a router interface, which is useful toward a router or another Layer 3 switch.</li>
+</ul>
+<div class="table-scroll"><p class="table-hint" aria-hidden="true">swipe<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></p><div class="table-wrap" role="region" tabindex="0" aria-label="Table (scrolls sideways)"><table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Pros</th>
+<th>Cons</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>One router interface per VLAN</td>
+<td>easy to understand</td>
+<td class="tw">lots of cables and interfaces, doesn&#39;t scale</td>
+</tr>
+<tr>
+<td>Router-on-a-stick</td>
+<td>a single cable, cheap</td>
+<td>all routing over one link, bottleneck</td>
+</tr>
+<tr>
+<td>Layer 3 switch with SVIs</td>
+<td>fast (hardware routing), scales</td>
+<td>more expensive switch</td>
+</tr>
+</tbody></table></div></div>
+<h2 id="troubleshooting-common-mistakes">Troubleshooting: common mistakes</h2>
+<div class="table-scroll"><p class="table-hint" aria-hidden="true">swipe<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></p><div class="table-wrap" role="region" tabindex="0" aria-label="Table (scrolls sideways)"><table>
+<thead>
+<tr>
+<th>Symptom</th>
+<th>Likely cause</th>
+<th>How to check and fix</th>
+</tr>
+</thead>
+<tbody><tr>
+<td class="tw">A PC can&#39;t talk to others in the &quot;same&quot; VLAN</td>
+<td>the port is in the wrong VLAN</td>
+<td><code><span class="nw">show</span> <span class="nw">vlan</span> <span class="nw">brief</span></code>, then <code><span class="nw">switchport</span> <span class="nw">access</span> <span class="nw">vlan</span> <span class="nw">X</span></code></td>
+</tr>
+<tr>
+<td class="tw">A group of ports suddenly stopped working</td>
+<td>their VLAN was deleted</td>
+<td class="tw"><code><span class="nw">show</span> <span class="nw">vlan</span> <span class="nw">brief</span></code> (the ports no longer appear) → recreate the VLAN or move the ports</td>
+</tr>
+<tr>
+<td class="tw">The link between switches isn&#39;t a trunk</td>
+<td>both ends are <code><span class="nw">dynamic</span> <span class="nw">auto</span></code>, or one end is access</td>
+<td><code><span class="nw">show</span> <span class="nw">interfaces</span> <span class="nw">trunk</span></code>, <code><span class="nw">show</span> <span class="nw">interfaces</span> <span class="nw">g0/1</span> <span class="nw">switchport</span></code> → <code><span class="nw">switchport</span> <span class="nw">mode</span> <span class="nw">trunk</span></code></td>
+</tr>
+<tr>
+<td class="tw">&quot;Native VLAN mismatch&quot; messages</td>
+<td>different native VLAN at the two ends</td>
+<td><code><span class="nw">show</span> <span class="nw">interfaces</span> <span class="nw">trunk</span></code> on both switches → the same <code><span class="nw">switchport</span> <span class="nw">trunk</span> <span class="nw">native</span> <span class="nw">vlan</span></code></td>
+</tr>
+<tr>
+<td class="tw">A VLAN works on one switch but doesn&#39;t cross the trunk</td>
+<td class="tw">the VLAN isn&#39;t in the allowed list or isn&#39;t created on the other switch</td>
+<td><code><span class="nw">show</span> <span class="nw">interfaces</span> <span class="nw">trunk</span></code> → <code><span class="nw">switchport</span> <span class="nw">trunk</span> <span class="nw">allowed</span> <span class="nw">vlan</span> <span class="nw">add</span> <span class="nw">X</span></code>, <code><span class="nw">vlan</span> <span class="nw">X</span></code></td>
+</tr>
+<tr>
+<td>Router-on-a-stick: nothing works</td>
+<td class="tw">the physical interface is shut down or the switch port isn&#39;t a trunk</td>
+<td><code><span class="nw">show</span> <span class="nw">ip</span> <span class="nw">interface</span> <span class="nw">brief</span></code>, <code><span class="nw">no</span> <span class="nw">shutdown</span></code>, <code><span class="nw">switchport</span> <span class="nw">mode</span> <span class="nw">trunk</span></code></td>
+</tr>
+<tr>
+<td>Just one VLAN can&#39;t reach the router</td>
+<td>wrong VLAN in <code><span class="nw">encapsulation</span> <span class="nw">dot1Q</span></code></td>
+<td><code><span class="nw">show</span> <span class="nw">vlans</span></code> on the router (with an &quot;s&quot;), <code><span class="nw">show</span> <span class="nw">running-config</span></code></td>
+</tr>
+<tr>
+<td class="tw">The PC reaches its gateway but not another VLAN</td>
+<td class="tw"><code><span class="nw">ip</span> <span class="nw">routing</span></code> missing on the Layer 3 switch, or wrong gateway on the PC</td>
+<td><code><span class="nw">show</span> <span class="nw">ip</span> <span class="nw">route</span></code>, the PC&#39;s configuration</td>
+</tr>
+<tr>
+<td>SVI is down/down</td>
+<td class="tw">the VLAN doesn&#39;t exist or has no active ports</td>
+<td><code><span class="nw">show</span> <span class="nw">vlan</span> <span class="nw">brief</span></code>, <code><span class="nw">show</span> <span class="nw">ip</span> <span class="nw">interface</span> <span class="nw">brief</span></code></td>
+</tr>
+</tbody></table></div></div>
+<h2 id="exercises">Exercises</h2>
+<ol>
+<li>PCs in VLAN 10 on S1 and S2 can&#39;t talk to each other. On the trunk, <code>show interfaces trunk</code> shows &quot;Vlans allowed on trunk: 1,20,30&quot;. What&#39;s the problem, and which command fixes it without affecting the other VLANs?</li>
+<li>You connect two new 2960 switches with the default configuration (dynamic auto on both). Does a trunk form? What do you do to make it a trunk?</li>
+<li>Write the router-on-a-stick configuration for VLAN 30, with network <code>192.168.30.0/24</code> and gateway <code>.1</code>, on interface <code>GigabitEthernet0/0/0</code>.</li>
+<li>How many values does the 802.1Q VLAN ID field have, and how many VLANs can you actually use? Why?</li>
+<li>On a trunk that carried VLANs 10, 20 and 30, someone typed <code>switchport trunk allowed vlan 40</code>. What happens, and how should the command have been written?</li>
+</ol>
+<details class="reveal-answer">
+<summary><strong>Answers</strong></summary><p><strong>1.</strong> VLAN 10 isn&#39;t allowed on the trunk. On the trunk interface, at both ends if needed: <code>switchport trunk allowed vlan add 10</code>. Without <code>add</code>, you&#39;d replace the list and cut off VLANs 1, 20 and 30.</p>
+<p><strong>2.</strong> <strong>No.</strong> Two <code>dynamic auto</code> ports each wait for the other to ask for a trunk, so the link stays access. Set at least one end (ideally both) to <code>switchport mode trunk</code>, then <code>switchport nonegotiate</code>.</p>
+<p><strong>3.</strong></p>
+<pre><code class="language-text">R1(config)# interface GigabitEthernet0/0/0.30
+R1(config-subif)# encapsulation dot1Q 30
+R1(config-subif)# ip address 192.168.30.1 255.255.255.0
+R1(config-subif)# exit
+R1(config)# interface GigabitEthernet0/0/0
+R1(config-if)# no shutdown
+</code></pre>
+<p>The switch port facing the router must be a trunk and must allow VLAN 30.</p>
+<p><strong>4.</strong> The field is <strong>12 bits</strong>, so 2^12 = <strong>4,096</strong> values. 0 and 4095 are reserved, leaving <strong>4,094</strong> VLANs (1–4094).</p>
+<p><strong>5.</strong> The allowed list becomes <strong>only VLAN 40</strong>; VLANs 10, 20 and 30 no longer cross the trunk. Correct: <code>switchport trunk allowed vlan add 40</code>.</p>
+</details><h2 id="the-fastest-way-to-learn-this">The fastest way to learn this</h2>
+<ul>
+<li><strong>Build the same lab three times:</strong> with router-on-a-stick, with a Layer 3 switch, and deliberately broken (mismatched native VLAN, a VLAN missing from the trunk), then fixed using only <code>show</code> commands.</li>
+<li><strong>Memorize the DTP table.</strong></li>
+<li><strong>Tie VLANs to the layers:</strong> trunks are Layer 2, inter-VLAN routing is Layer 3. See <a href="../osi-vs-tcp-ip/">OSI vs TCP/IP</a>.</li>
+<li><strong>Master the basic commands</strong> in the <a href="../cisco-ios-basic-commands/">Cisco IOS commands cheat sheet</a>.</li>
+</ul>
+<div class="cta-box cta-box--article"><svg class="mascot" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><g class="m-breathe"><path d="M22 14l-5-9M42 14l5-9" stroke="#8a919c" stroke-width="3.4" stroke-linecap="round" fill="none"/><circle class="m-led m-led-l" cx="17" cy="5" r="3.6"/><circle class="m-led m-led-r" cx="47" cy="5" r="3.6"/><path class="m-body" d="M28 12q4-6 8 0"/><rect class="m-body" x="8" y="12" width="48" height="42" rx="18"/><rect class="m-belly" x="8" y="40" width="48" height="14" rx="7"/><path d="M19 31q4-5 8 0" stroke="#1a1d24" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M37 31q4-5 8 0" stroke="#1a1d24" stroke-width="3" fill="none" stroke-linecap="round"/><path class="m-led" d="M29 37l3 3.5 3-3.5z"/><circle cx="15" cy="38" r="3" fill="#ff8fb1" opacity=".7"/><circle cx="49" cy="38" r="3" fill="#ff8fb1" opacity=".7"/><circle class="m-ok" cx="18" cy="47" r="2"/><circle class="m-led" cx="24" cy="47" r="2"/><rect x="31" y="45" width="6" height="4" rx="1" fill="#0d1a3a" opacity=".55"/><rect x="39" y="45" width="6" height="4" rx="1" fill="#0d1a3a" opacity=".55"/><rect x="47" y="45" width="5" height="4" rx="1" fill="#0d1a3a" opacity=".55"/><path class="m-leg" d="M20 54v4M44 54v4" stroke-width="3.4" stroke-linecap="round" fill="none"/></g></svg><div><h3>Practice VLANs in the Routerel app</h3><p>Routerel has over 1,900 questions for CCNA 1 · ITN, CCNA 2 · IEN and CCNA 3 · CEN, with zoomable network diagrams and configurations, and an explanation right after every answer. Your mistakes come back automatically through spaced repetition until you&#39;ve mastered them, and the timed exam simulation shows you where you stand. New subscribers get a 7-day free trial with full access.</p></div><a class="btn" href="../../">Discover the app<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div><h2 id="frequently-asked-questions">Frequently asked questions</h2>
+<div class="faq faq--article"><details><summary>What is a VLAN?<span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p>A logical local network created on a switch. Ports in different VLANs are separated as if they were on different switches: each VLAN has its own broadcast domain and, usually, its own IP subnet.</p></div></details><details><summary>What is the difference between an access port and a trunk port?<span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p>An access port belongs to a single data VLAN and sends untagged frames; that&#39;s where you connect PCs, printers or servers. A trunk port carries multiple VLANs over the same cable, marking frames with an 802.1Q tag; you use it between switches or between a switch and a router.</p></div></details><details><summary>What is the native VLAN?<span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p>The VLAN that untagged frames on an 802.1Q trunk belong to. By default it&#39;s VLAN 1. It must match at both ends of the trunk, and it&#39;s best to make it a VLAN that no users are in.</p></div></details><details><summary>Why is it recommended to disable DTP?<span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p>DTP automatically negotiates whether a port becomes a trunk. An attacker connected to a port that negotiates could form a trunk and receive traffic from every VLAN. That&#39;s why ports are explicitly configured as access or trunk, and negotiation is turned off on trunks with <code>switchport nonegotiate</code>.</p></div></details><details><summary>How do two VLANs communicate with each other?<span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p>Only through a Layer 3 device: a router with subinterfaces on a trunk (router-on-a-stick) or a Layer 3 switch with SVIs and routing enabled with <code>ip routing</code>.</p></div></details><details><summary>How many VLANs can there be?<span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p>The VLAN ID field is 12 bits, so it has 4,096 values. 0 and 4095 are reserved, which leaves VLANs 1–4094: the normal range 1–1005 and the extended range 1006–4094. For where VLANs fit in the exam, see our <a href="../what-is-ccna/">guide to CCNA</a>.</p></div></details></div>
+<hr>
+<p><em>Routerel is an independent app and is not affiliated with, sponsored by or endorsed by Cisco Systems, Inc. Cisco, CCNA, Cisco IOS, Catalyst and Networking Academy are trademarks of Cisco Systems, Inc.</em></p>
+      
+      <section class="related" aria-labelledby="rel-title">
+        <h2 id="rel-title">Read next</h2>
+        <div class="grid grid--2"><a class="card post-card lift" href="../../../en/guides/cisco-ios-basic-commands/"><span class="tagline">Guide · 13 min</span><h3>Basic Cisco IOS Commands: CCNA Cheat Sheet</h3><p>Basic Cisco IOS commands cheat sheet for CCNA: CLI modes, initial setup, passwords and SSH, interfaces, saving the config, show commands and troubleshooting.</p></a><a class="card post-card lift" href="../../../en/guides/ipv6-addresses-explained/"><span class="tagline">Guide · 13 min</span><h3>IPv6 Addresses Explained: Format, Shortening, Types</h3><p>IPv6 addresses made simple: the 128-bit format, how to shorten and expand them, address types, EUI-64 step by step, SLAAC vs DHCPv6, and exercises with answers.</p></a></div>
+      </section>
+    </article>
+  </div>
+</main>
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="about">
+        <a class="brand" href="../../../en/"><img src="../../../assets/icon-96.webp" alt="" width="36" height="36" loading="lazy"><span>Routerel</span></a>
+        <p>CCNA practice on your phone: questions with explanations, spaced repetition and exam simulations. In English and Romanian.</p>
+      </div>
+      <div><h2>The app</h2><ul><li><a href="../../../en/#features">Features</a></li><li><a href="../../../en/#pricing">Pricing</a></li><li><a href="../../../en/#how-it-works">How it works</a></li><li><a href="../../../en/#faq">FAQ</a></li></ul></div>
+      <div><h2>Resources</h2><ul><li><a href="../../../en/guides/">CCNA guides</a></li><li><a href="../../../en/tools/">Free tools</a></li><li><a href="../../../" hreflang="ro" lang="ro" data-set-lang="ro">Română</a></li></ul></div>
+      <div><h2>Legal & contact</h2><ul><li><a href="../../../en/privacy.html">Privacy policy</a></li><li><a href="../../../en/terms.html">Terms of use</a></li><li><a href="../../../en/delete-account.html">Delete your account</a></li></ul><ul><li><a href="mailto:contact@routerel.app">contact@routerel.app</a></li></ul></div>
+    </div>
+    <div class="disclaimer">
+      <p>Routerel is an independent app, not affiliated with, sponsored or endorsed by Cisco Systems, Inc. Cisco, CCNA and Cisco Networking Academy are trademarks of Cisco Systems, Inc.</p>
+      <p>© 2026 Routerel</p>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

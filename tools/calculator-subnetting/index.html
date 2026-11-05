@@ -1,0 +1,123 @@
+<!doctype html>
+<!-- Pagină generată. Nu o edita de mână: vezi tools/site/ (npm run build:guides / npm run sync:tools / npm run build:legal). -->
+<html lang="ro" class="play-soon">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Calculator de subnetting IPv4 cu pași explicați | Routerel</title>
+  <meta name="description" content="Calculator de subnetting gratuit: adresa de rețea, broadcastul, primul și ultimul host, masca și wildcardul, cu pașii explicați. Plus subrețele egale și VLSM.">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <link rel="canonical" href="https://routerel.app/tools/calculator-subnetting/">
+  <link rel="alternate" hreflang="ro" href="https://routerel.app/tools/calculator-subnetting/">
+  <link rel="alternate" hreflang="en" href="https://routerel.app/en/tools/subnet-calculator/">
+  <link rel="alternate" hreflang="x-default" href="https://routerel.app/en/tools/subnet-calculator/">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#12151b" media="(prefers-color-scheme: dark)">
+  <meta name="color-scheme" content="light dark">
+  <link rel="icon" href="../../assets/favicon-32.png" type="image/png" sizes="32x32">
+  <link rel="icon" href="../../assets/icon-192.png" type="image/png" sizes="192x192">
+  <link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
+  <link rel="manifest" href="../../site.webmanifest">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Routerel">
+  <meta property="og:locale" content="ro_RO">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta property="og:title" content="Calculator de subnetting IPv4 cu pași explicați | Routerel">
+  <meta property="og:description" content="Calculator de subnetting gratuit: adresa de rețea, broadcastul, primul și ultimul host, masca și wildcardul, cu pașii explicați. Plus subrețele egale și VLSM.">
+  <meta property="og:url" content="https://routerel.app/tools/calculator-subnetting/">
+  <meta property="og:image" content="https://routerel.app/assets/og-ro.png">
+  <meta property="og:image:width" content="1024">
+  <meta property="og:image:height" content="500">
+  <meta property="og:image:alt" content="Routerel: mascota puiul de router și numele aplicației">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Calculator de subnetting IPv4 cu pași explicați | Routerel">
+  <meta name="twitter:description" content="Calculator de subnetting gratuit: adresa de rețea, broadcastul, primul și ultimul host, masca și wildcardul, cu pașii explicați. Plus subrețele egale și VLSM.">
+  <meta name="twitter:image" content="https://routerel.app/assets/og-ro.png">
+  <link rel="stylesheet" href="../../assets/tools/subnet/subnet.css">
+  <link rel="modulepreload" href="../../assets/tools/subnet/ui.js">
+  <link rel="preload" href="../../assets/fonts/nunito-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../../assets/fonts/nunito-latin-ext.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../../assets/fonts/roboto-mono-500-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="../../style.css">
+  <script>(function(d){d.classList.add("js");try{var t=localStorage.getItem("routerel-theme");if(t==="light"||t==="dark")d.setAttribute("data-theme",t)}catch(e){}setTimeout(function(){if(!window.__rtl)d.classList.remove("js")},4000)})(document.documentElement)</script>
+  <script src="../../assets/site.js" defer></script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebApplication","@id":"https://routerel.app/tools/calculator-subnetting/#app","name":"Calculator de subnetting IPv4","url":"https://routerel.app/tools/calculator-subnetting/","description":"Calculator de subnetting gratuit: adresa de rețea, broadcastul, primul și ultimul host, masca și wildcardul, cu pașii explicați. Plus subrețele egale și VLSM.","inLanguage":"ro","applicationCategory":"EducationalApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"RON"},"featureList":["Adresa de rețea și broadcast","Primul și ultimul host","Număr de host-uri","Mască și wildcard","Adresa în binar","Pași explicați","Subrețele egale","VLSM"],"publisher":{"@type":"Organization","name":"Routerel","url":"https://routerel.app/"},"isPartOf":{"@id":"https://routerel.app/#website"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Acasă","item":"https://routerel.app/"},{"@type":"ListItem","position":2,"name":"Tools","item":"https://routerel.app/tools/"},{"@type":"ListItem","position":3,"name":"Calculator de subnetting IPv4","item":"https://routerel.app/tools/calculator-subnetting/"}]},{"@type":"FAQPage","@id":"https://routerel.app/tools/calculator-subnetting/#faq","inLanguage":"ro","mainEntity":[{"@type":"Question","name":"Ce face calculatorul de subnetting?","acceptedAnswer":{"@type":"Answer","text":"Primește o adresă IPv4 cu prefix (de exemplu /26) sau cu mască (255.255.255.192) și calculează adresa de rețea, broadcastul, primul și ultimul host, numărul de host-uri utilizabile, masca wildcard și tipul adresei. Arată și adresa în binar, cu granița dintre rețea și host."}},{"@type":"Question","name":"Pot împărți o rețea în subrețele egale sau face un plan VLSM?","acceptedAnswer":{"@type":"Answer","text":"Da. Fila „Subrețele egale” împarte o rețea după numărul de subrețele sau după host-urile de care ai nevoie în fiecare. Fila „VLSM” alocă blocuri de mărimi diferite, de la cea mai mare cerință la cea mai mică."}},{"@type":"Question","name":"De ce scad 2 adrese din fiecare subrețea?","acceptedAnswer":{"@type":"Answer","text":"Prima adresă e adresa de rețea, iar ultima e broadcastul; niciuna nu se dă unui dispozitiv. Excepții: un /31 (legătură punct la punct, RFC 3021) are 2 adrese utilizabile, iar un /32 desemnează un singur host."}},{"@type":"Question","name":"Se trimit undeva adresele pe care le scriu?","acceptedAnswer":{"@type":"Answer","text":"Nu. Calculul se face în browserul tău, iar adresele nu pleacă spre niciun server."}},{"@type":"Question","name":"Pot folosi un calculator la examenul CCNA?","acceptedAnswer":{"@type":"Answer","text":"Nu, la examen calculezi de mână. Folosește calculatorul ca să-ți verifici exercițiile; viteza vine din câteva minute de exercițiu în fiecare zi."}}]}]}</script>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs><linearGradient id="rtl-play" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5b8cff"/><stop offset=".55" stop-color="#2f6bff"/><stop offset="1" stop-color="#ffb020"/></linearGradient></defs></svg>
+<a class="skip-link" href="#main">Sari la conținut</a>
+<header class="site-header">
+  <div class="container header-row">
+    <a class="brand" href="../../" aria-label="Routerel, acasă"><img src="../../assets/icon-96.webp" alt="" width="36" height="36"><span>Routerel</span></a>
+    <nav class="main-nav" aria-label="Principal"><ul><li><a href="../../#functii">Funcții</a></li><li><a href="../../#preturi">Prețuri</a></li><li><a href="../../ghiduri/">Ghiduri</a></li><li><a href="../../tools/" aria-current="page">Tools</a></li><li><a href="../../#faq">FAQ</a></li></ul></nav>
+    <div class="header-actions">
+      <div class="lang-switch" role="group" aria-label="Limba"><span aria-current="true" lang="ro">RO</span><a href="../../en/tools/subnet-calculator/" hreflang="en" lang="en" title="English">EN</a></div>
+      <button class="icon-btn theme-toggle" type="button" data-theme-toggle aria-label="Schimbă tema"><span class="i-moon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9z"/></svg></span><span class="i-sun"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg></span></button>
+      <a class="btn btn--sm header-cta" data-play data-soon-href="../../#preturi" href="../../#preturi"><span data-when="live">Încearcă gratuit</span><span data-when="soon">Vezi prețurile</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      <button class="icon-btn menu-btn" type="button" data-menu-btn aria-expanded="false" aria-controls="mobile-nav" aria-label="Meniu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+    </div>
+  </div>
+  <nav class="mobile-nav" id="mobile-nav" aria-label="Principal" hidden>
+    <div class="container"><ul><li><a href="../../#functii">Funcții</a></li><li><a href="../../#preturi">Prețuri</a></li><li><a href="../../ghiduri/">Ghiduri</a></li><li><a href="../../tools/" aria-current="page">Tools</a></li><li><a href="../../#faq">FAQ</a></li></ul></div>
+  </nav>
+</header>
+<main id="main">
+  <section class="page-hero page-hero--tool">
+    <div class="container">
+      <nav class="crumbs" aria-label="Firimituri"><ol><li><a href="../../">Acasă</a></li><li><a href="../../tools/">Tools</a></li><li><span aria-current="page">Calculator de subnetting IPv4</span></li></ol></nav>
+      <p class="eyebrow">Tool gratuit</p>
+      <h1>Calculator de subnetting IPv4</h1>
+      <p class="lead">Scrie o adresă IPv4 cu prefix sau cu mască. Afli rețeaua, broadcastul și intervalul de host-uri și vezi calculul pas cu pas, prin metoda blocului. Gratuit, direct în browser.</p>
+    </div>
+  </section>
+  <section class="section section--tight tool-section" aria-label="Calculator de subnetting IPv4">
+    <div class="container tool-wrap">
+      <h2 class="sr-only">Tool-ul</h2>
+      <div id="subnet-tool" class="tool-mount" data-tool="subnet" style="--tool-min-m:2300px;--tool-min-d:1550px"><noscript><p class="tool-noscript">Calculatorul are nevoie de JavaScript. Pornește-l în browser și reîncarcă pagina.</p></noscript></div>
+    </div>
+  </section>
+  <section class="section section--tight">
+    <div class="container">
+      <div class="prose tool-prose">
+        <h2 id="cum-se-calculeaza">Cum se calculează, pe scurt</h2>
+        <ol><li>Prefixul spune câți biți sunt de rețea. <code>/26</code> înseamnă 26 de biți de rețea și 6 de host, adică masca <code>255.255.255.192</code>.</li><li>Găsești octetul interesant, cel în care se termină masca (aici al patrulea), și blocul: 256 − 192 = <strong>64</strong>.</li><li>Subrețelele încep din 64 în 64: .0, .64, .128, .192. Pentru <code>192.168.10.77</code>, 77 e între 64 și 128, deci rețeaua e <code>192.168.10.64</code>.</li><li>Broadcastul e chiar înaintea rețelei următoare: <code>192.168.10.127</code>. Host-urile merg de la .65 la .126, adică 2^6 − 2 = <strong>62</strong>.</li></ol>
+        <p>Tot raționamentul, cu exemple pe /20, /22 și /30, VLSM și exerciții cu răspunsuri, e în ghidul <a href="../../ghiduri/subnetting-pas-cu-pas/">Subnetting explicat pas cu pas</a>.</p>
+      </div>
+      <div class="section-head" style="margin-top:48px"><h2 id="faq">Întrebări frecvente</h2></div>
+      <div class="faq">
+        <details><summary>Ce face calculatorul de subnetting?<span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p>Primește o adresă IPv4 cu prefix (de exemplu /26) sau cu mască (255.255.255.192) și calculează adresa de rețea, broadcastul, primul și ultimul host, numărul de host-uri utilizabile, masca wildcard și tipul adresei. Arată și adresa în binar, cu granița dintre rețea și host.</p></div></details>
+        <details><summary>Pot împărți o rețea în subrețele egale sau face un plan VLSM?<span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p>Da. Fila „Subrețele egale” împarte o rețea după numărul de subrețele sau după host-urile de care ai nevoie în fiecare. Fila „VLSM” alocă blocuri de mărimi diferite, de la cea mai mare cerință la cea mai mică.</p></div></details>
+        <details><summary>De ce scad 2 adrese din fiecare subrețea?<span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p>Prima adresă e adresa de rețea, iar ultima e broadcastul; niciuna nu se dă unui dispozitiv. Excepții: un /31 (legătură punct la punct, RFC 3021) are 2 adrese utilizabile, iar un /32 desemnează un singur host.</p></div></details>
+        <details><summary>Se trimit undeva adresele pe care le scriu?<span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p>Nu. Calculul se face în browserul tău, iar adresele nu pleacă spre niciun server.</p></div></details>
+        <details><summary>Pot folosi un calculator la examenul CCNA?<span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p>Nu, la examen calculezi de mână. Folosește calculatorul ca să-ți verifici exercițiile; viteza vine din câteva minute de exercițiu în fiecare zi.</p></div></details>
+      </div>
+      <div class="cta-box reveal"><svg class="mascot" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><g class="m-breathe"><path d="M22 14l-5-9M42 14l5-9" stroke="#8a919c" stroke-width="3.4" stroke-linecap="round" fill="none"/><circle class="m-led m-led-l" cx="17" cy="5" r="3.6"/><circle class="m-led m-led-r" cx="47" cy="5" r="3.6"/><path class="m-body" d="M28 12q4-6 8 0"/><rect class="m-body" x="8" y="12" width="48" height="42" rx="18"/><rect class="m-belly" x="8" y="40" width="48" height="14" rx="7"/><path d="M19 31q4-5 8 0" stroke="#1a1d24" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M37 31q4-5 8 0" stroke="#1a1d24" stroke-width="3" fill="none" stroke-linecap="round"/><path class="m-led" d="M29 37l3 3.5 3-3.5z"/><circle cx="15" cy="38" r="3" fill="#ff8fb1" opacity=".7"/><circle cx="49" cy="38" r="3" fill="#ff8fb1" opacity=".7"/><circle class="m-ok" cx="18" cy="47" r="2"/><circle class="m-led" cx="24" cy="47" r="2"/><rect x="31" y="45" width="6" height="4" rx="1" fill="#0d1a3a" opacity=".55"/><rect x="39" y="45" width="6" height="4" rx="1" fill="#0d1a3a" opacity=".55"/><rect x="47" y="45" width="5" height="4" rx="1" fill="#0d1a3a" opacity=".55"/><path class="m-leg" d="M20 54v4M44 54v4" stroke-width="3.4" stroke-linecap="round" fill="none"/></g></svg><div><h2>Fă subnetting-ul reflex</h2><p>Antrenorul din Routerel îți dă exerciții de subnetting la nesfârșit, cu rezolvare, plus 1.900+ întrebări CCNA cu explicații.</p></div><a class="btn" data-play data-soon-href="../../" href="../../"><span data-when="live">Încearcă 7 zile gratuit</span><span data-when="soon">Vezi aplicația</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div>
+    </div>
+  </section>
+</main>
+<script type="module">
+  import { mountSubnetCalculator } from "../../assets/tools/subnet/ui.js";
+  var el = document.getElementById("subnet-tool");
+  var q = new URLSearchParams(location.search).get("ip");
+  mountSubnetCalculator(el, { lang: "ro", initial: q && q.length <= 64 ? q : undefined });
+  el.classList.add("is-ready");
+</script>
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="about">
+        <a class="brand" href="../../"><img src="../../assets/icon-96.webp" alt="" width="36" height="36" loading="lazy"><span>Routerel</span></a>
+        <p>Exersezi CCNA pe telefon: întrebări cu explicații, repetiția greșelilor și simulări de examen. În română și engleză.</p>
+      </div>
+      <div><h2>Aplicația</h2><ul><li><a href="../../#functii">Funcții</a></li><li><a href="../../#preturi">Prețuri</a></li><li><a href="../../#cum-functioneaza">Cum funcționează</a></li><li><a href="../../#faq">Întrebări frecvente</a></li></ul></div>
+      <div><h2>Resurse</h2><ul><li><a href="../../ghiduri/">Ghiduri CCNA</a></li><li><a href="../../tools/">Tools gratuite</a></li><li><a href="../../en/" hreflang="en" lang="en" data-set-lang="en">English</a></li></ul></div>
+      <div><h2>Legal și contact</h2><ul><li><a href="../../privacy.html">Confidențialitate</a></li><li><a href="../../terms.html">Termeni de utilizare</a></li><li><a href="../../delete-account.html">Ștergerea contului</a></li></ul><ul><li><a href="mailto:contact@routerel.app">contact@routerel.app</a></li></ul></div>
+    </div>
+    <div class="disclaimer">
+      <p>Routerel este o aplicație independentă și nu este afiliată, sponsorizată sau aprobată de Cisco Systems, Inc. Cisco, CCNA și Cisco Networking Academy sunt mărci ale Cisco Systems, Inc.</p>
+      <p>© 2026 Routerel</p>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

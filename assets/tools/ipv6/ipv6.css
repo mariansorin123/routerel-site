@@ -1,0 +1,95 @@
+/* Generat de tools/site/sync-tools.mjs din web-tools/ipv6/demo.html. Nu-l edita aici. */
+/* ───── Componenta (clase v6t-*) ───── */
+.v6t { --radius: 14px; }
+.v6t-tabs { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 16px; }
+.v6t-tab {
+  font: 900 0.875rem/1.15 Nunito, sans-serif; letter-spacing: .03em; padding: 10px 14px; min-height: 44px; border-radius: 12px; cursor: pointer;
+  border: 2px solid var(--line-strong); border-bottom-width: 4px; background: var(--surface); color: var(--ink);
+}
+.v6t-tab[aria-selected="true"] { background: var(--brand-soft); border-color: var(--brand); color: var(--ink-strong); }
+.v6t-panel { background: var(--surface); border: 2px solid var(--line); border-radius: var(--radius); padding: 20px 16px; }
+.v6t-panel:focus-visible { outline: 3px solid var(--brand); outline-offset: 2px; }
+.v6t-form { display: grid; grid-template-columns: minmax(0, 1fr); gap: 8px; margin-bottom: 12px; }
+.v6t-form > * { min-width: 0; }
+.v6t-label { font-weight: 900; font-size: 0.8125rem; letter-spacing: .05em; text-transform: uppercase; color: var(--ink-strong); padding: 0; margin-top: 4px; }
+.v6t-input {
+  width: 100%; min-width: 0; min-height: 48px; padding: 10px 12px; border-radius: 12px; border: 2px solid var(--line-strong);
+  background: var(--surface2); color: var(--ink-strong); font: 600 1rem/1.3 "Roboto Mono", ui-monospace, monospace;
+}
+.v6t-input:focus { outline: 3px solid var(--brand); outline-offset: 1px; border-color: var(--brand); }
+.v6t-input[aria-invalid="true"] { border-color: var(--bad-ink); }
+.v6t-btn {
+  font: 900 0.9375rem/1 Nunito, sans-serif; letter-spacing: .05em; text-transform: uppercase; min-height: 48px; padding: 0 20px; cursor: pointer;
+  border: 0; border-radius: 12px; background: var(--brand); color: var(--on-brand); box-shadow: 0 4px 0 var(--brand-dark); justify-self: start; margin-top: 4px;
+}
+.v6t-btn:active { transform: translateY(2px); box-shadow: 0 2px 0 var(--brand-dark); }
+.v6t-btn:focus-visible, .v6t-chip:focus-visible, .v6t-tab:focus-visible { outline: 3px solid var(--led); outline-offset: 2px; }
+.v6t-hint { margin: 0; color: var(--muted); font-size: 0.9375rem; overflow-wrap: break-word; }
+.v6t-note { margin-top: 10px; }
+.v6t-error { margin: 0; padding: 8px 12px; border-radius: 10px; background: var(--bad-soft); color: var(--bad-ink); font-weight: 800; }
+.v6t-examples { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-top: 4px; }
+.v6t-examples-label { color: var(--muted); font-size: 0.9375rem; margin-right: 2px; }
+.v6t-chip { font-size: 0.8125rem; padding: 6px 12px; min-height: 44px; min-width: 44px; border-radius: 999px; border: 2px solid var(--line-strong); background: var(--surface2); color: var(--ink-strong); cursor: pointer; max-width: 100%; overflow-wrap: break-word; text-align: left; }
+.v6t-mono { font-family: "Roboto Mono", ui-monospace, monospace; font-weight: 500; }
+.v6t-summary { margin: 4px 0 12px; font-weight: 800; color: var(--ink-strong); overflow-wrap: anywhere; }
+.v6t-summary:empty { display: none; }
+.v6t-h { font-weight: 900; font-size: 0.8125rem; letter-spacing: .05em; text-transform: uppercase; color: var(--ink-strong); text-align: left; margin: 0 0 8px; }
+.v6t-subh { margin-top: 16px; }
+.v6t-block { margin-top: 24px; }
+.v6t-table { border-collapse: collapse; width: 100%; font-size: 0.9375rem; }
+.v6t-table th, .v6t-table td { padding: 8px 10px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+.v6t-kv th { width: 36%; font-weight: 800; color: var(--muted); }
+.v6t-kv td { color: var(--ink-strong); font-weight: 800; overflow-wrap: break-word; }
+.v6t-kv td.v6t-mono { font-weight: 600; }
+/* cele 8 grupuri: cele înlocuite de „::” sunt aprinse (chihlimbariu) */
+.v6t-groups { list-style: none; margin: 10px 0 0; padding: 0; display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); gap: 6px; }
+.v6t-g { display: grid; justify-items: center; gap: 2px; padding: 6px 2px; border-radius: 10px; border: 2px solid var(--line); background: var(--surface2); min-width: 0; }
+.v6t-g-i { font: 800 0.6875rem/1 Nunito, sans-serif; color: var(--muted); }
+.v6t-g-v { font-size: 0.875rem; color: var(--ink-strong); }
+.v6t-g-run { background: var(--led-soft); border-color: var(--led); border-bottom-width: 4px; }
+.v6t-g-run .v6t-g-v { color: var(--led-ink); font-weight: 600; }
+.v6t-g-zero { border-style: dashed; border-color: var(--line-strong); }
+.v6t-legend { display: flex; flex-wrap: wrap; gap: 6px 14px; align-items: center; font-size: 0.875rem; color: var(--muted); margin: 8px 0 0; }
+.v6t-swatch { display: inline-block; width: 12px; height: 12px; border-radius: 3px; margin-right: 5px; vertical-align: -1px; }
+.v6t-swatch-run, .v6t-swatch-host { background: var(--led); }
+.v6t-swatch-zero { border: 2px dashed var(--line-strong); }
+.v6t-swatch-net { background: var(--brand); }
+.v6t-swatch-split { background: linear-gradient(90deg, var(--brand) 50%, var(--led) 50%); }
+/* adresa completă colorată după prefix */
+.v6t-prefixline { margin: 10px 0 0; font-size: 1rem; line-height: 1.9; overflow-wrap: anywhere; word-break: break-all; padding: 8px 10px; border-radius: 10px; background: var(--surface2); }
+.v6t-pg { white-space: nowrap; }
+.v6t-net { color: var(--brand); font-weight: 600; }
+.v6t-host { color: var(--led-ink); }
+.v6t-split { color: var(--ink-strong); font-weight: 600; text-decoration: underline 3px var(--led); text-underline-offset: 4px; }
+.v6t-colon { color: var(--muted); }
+/* EUI-64: octeții și bitul inversat */
+.v6t-bytes { list-style: none; margin: 10px 0 0; padding: 0; display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); gap: 6px; }
+.v6t-b { display: grid; justify-items: center; align-content: start; gap: 2px; padding: 8px 2px; border-radius: 10px; border: 2px solid var(--line); background: var(--surface2); color: var(--ink-strong); font-size: 0.9375rem; min-width: 0; }
+.v6t-b-ins { background: var(--brand-soft); border-color: var(--brand); }
+.v6t-b-flip { background: var(--led-soft); border-color: var(--led); border-bottom-width: 4px; color: var(--led-ink); }
+.v6t-b-tag { font: 800 0.625rem/1.1 Nunito, sans-serif; color: var(--brand); text-transform: uppercase; letter-spacing: .03em; text-align: center; overflow-wrap: anywhere; }
+.v6t-flip { display: grid; grid-template-columns: auto auto 1fr; gap: 8px 10px; align-items: center; margin-top: 8px; }
+.v6t-flip-l { font-weight: 800; color: var(--muted); font-size: 0.875rem; }
+.v6t-flip-h { color: var(--ink-strong); }
+.v6t-bits { display: inline-flex; gap: 3px; }
+.v6t-bit { display: inline-grid; place-items: center; width: 24px; height: 30px; border-radius: 7px; background: var(--surface2); border: 2px solid var(--line); color: var(--ink-strong); font-size: 0.9375rem; }
+.v6t-bit-flip { background: var(--led-soft); border-color: var(--led); color: var(--led-ink); font-weight: 700; }
+.v6t-steps { margin: 0; padding-left: 1.4em; display: grid; gap: 10px; }
+.v6t-steps li { overflow-wrap: anywhere; }
+.v6t-steps li::marker { color: var(--brand); font-weight: 900; }
+.v6t-steps strong { color: var(--ink-strong); font-weight: 900; }
+.v6t [hidden] { display: none !important; }
+@media (max-width: 560px) {
+  .v6t-groups, .v6t-bytes { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+@media (max-width: 480px) {
+  .v6t-panel { padding: 16px 12px; }
+  .v6t-tab { flex: 1 1 auto; padding: 10px 10px; font-size: 0.8125rem; }
+  .v6t-kv th, .v6t-kv td { display: block; width: auto; padding: 4px 0; border: 0; }
+  .v6t-kv tr { display: block; padding: 6px 0; border-bottom: 1px solid var(--line); }
+  .v6t-bit { width: 20px; height: 28px; font-size: 0.8125rem; }
+  .v6t-bits { gap: 2px; }
+  .v6t-flip { grid-template-columns: auto 1fr; }
+  .v6t-flip-h { grid-column: 2; margin-top: -6px; }
+}
+@media (prefers-reduced-motion: reduce) { .v6t-btn:active { transform: none; } }

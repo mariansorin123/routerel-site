@@ -1,38 +1,412 @@
 <!doctype html>
-<html lang="ro">
+<html lang="ro" class="play-soon">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Routerel</title>
-  <meta name="description" content="Routerel: întrebări de exersat pentru examenele CCNA, cu repetiție și statistici.">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Routerel: aplicație CCNA cu întrebări în română și engleză</title>
+  <meta name="description" content="Pregătire pentru examenul CCNA pe telefon: 1.900+ întrebări CCNA în română și engleză, cu explicații, repetiția greșelilor, simulare de examen și subnetting.">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <link rel="canonical" href="https://routerel.app/">
+  <link rel="alternate" hreflang="ro" href="https://routerel.app/">
+  <link rel="alternate" hreflang="en" href="https://routerel.app/en/">
+  <link rel="alternate" hreflang="x-default" href="https://routerel.app/en/">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#12151b" media="(prefers-color-scheme: dark)">
+  <meta name="color-scheme" content="light dark">
+  <link rel="icon" href="assets/favicon-32.png" type="image/png" sizes="32x32">
+  <link rel="icon" href="assets/icon-192.png" type="image/png" sizes="192x192">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+  <link rel="manifest" href="site.webmanifest">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Routerel">
+  <meta property="og:locale" content="ro_RO">
+  <meta property="og:title" content="Routerel: intră la examenul CCNA sigur pe tine">
+  <meta property="og:description" content="Pregătire pentru examenul CCNA pe telefon: 1.900+ întrebări CCNA în română și engleză, cu explicații, repetiția greșelilor, simulare de examen și subnetting.">
+  <meta property="og:url" content="https://routerel.app/">
+  <meta property="og:image" content="https://routerel.app/assets/og-ro.png">
+  <meta property="og:image:width" content="1024">
+  <meta property="og:image:height" content="500">
+  <meta property="og:image:alt" content="Routerel: mascota puiul de router și numele aplicației">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Routerel: intră la examenul CCNA sigur pe tine">
+  <meta name="twitter:description" content="Pregătire pentru examenul CCNA pe telefon: 1.900+ întrebări CCNA în română și engleză, cu explicații, repetiția greșelilor, simulare de examen și subnetting.">
+  <meta name="twitter:image" content="https://routerel.app/assets/og-ro.png">
+  <link rel="preload" href="assets/fonts/nunito-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/nunito-latin-ext.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/screen-explanation-ro.webp" imagesrcset="assets/screen-explanation-ro-360.webp 360w, assets/screen-explanation-ro.webp 600w" imagesizes="(max-width: 959px) 52vw, 254px" as="image" type="image/webp" fetchpriority="high">
   <link rel="stylesheet" href="style.css">
+  <script>(function(d){d.classList.add("js");try{var t=localStorage.getItem("routerel-theme");if(t==="light"||t==="dark")d.setAttribute("data-theme",t)}catch(e){}setTimeout(function(){if(!window.__rtl)d.classList.remove("js")},4000)})(document.documentElement)</script>
+  <script src="assets/site.js" defer></script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","@id":"https://routerel.app/#website","url":"https://routerel.app/","name":"Routerel","inLanguage":["ro","en"]},{"@type":"MobileApplication","@id":"https://routerel.app/#app","name":"Routerel: exersează CCNA","url":"https://routerel.app/","operatingSystem":"Android","applicationCategory":"EducationalApplication","inLanguage":["ro","en"],"image":"https://routerel.app/assets/icon-512.png","description":"Pregătire pentru examenul CCNA pe telefon: 1.900+ întrebări CCNA în română și engleză, cu explicații, repetiția greșelilor, simulare de examen și subnetting.","offers":{"@type":"Offer","price":"0","priceCurrency":"RON","description":"Descărcare gratuită; abonament cu 7 zile gratuite pentru abonații noi."},"author":{"@type":"Person","name":"Sorin-Marian Macău"}},{"@type":"FAQPage","@id":"https://routerel.app/#faq","inLanguage":"ro","mainEntity":[{"@type":"Question","name":"Pot încerca gratuit?","acceptedAnswer":{"@type":"Answer","text":"Da: primele 7 zile ale abonamentului sunt gratuite, cu acces la tot, dacă n-ai mai avut un abonament în Routerel. Iar dacă vrei doar să arunci o privire înainte, poți răspunde la câteva întrebări și fără să pornești proba."}},{"@type":"Question","name":"Cum anulez? Chiar nu plătesc nimic în cele 7 zile?","acceptedAnswer":{"@type":"Answer","text":"În perioada de probă nu plătești nimic. Dacă anulezi înainte să se termine, nu plătești deloc. Anularea se face din Google Play: Play Store → profilul tău → Plăți și abonamente → Abonamente → Routerel → Anulează. După anulare, accesul rămâne până la finalul perioadei plătite."}},{"@type":"Question","name":"N-am timp. Merge cu câteva minute pe zi?","acceptedAnswer":{"@type":"Answer","text":"Da, pentru asta e făcută. O sesiune are 10 întrebări și o termini în câteva minute. Îți alegi obiectivul zilnic (10, 20, 30 sau 50 de întrebări), iar aplicația îți amintește la ora aleasă de tine. Contează să revii zilnic, nu să stai ore întregi."}},{"@type":"Question","name":"Merge fără internet?","acceptedAnswer":{"@type":"Answer","text":"Da. Întrebările se păstrează pe telefon, iar răspunsurile date fără internet se sincronizează singure când revii online. Ai nevoie de internet la crearea contului, la abonare (atunci se descarcă întrebările) și, din când în când, ca să se verifice abonamentul."}},{"@type":"Question","name":"Întrebările sunt în română?","acceptedAnswer":{"@type":"Answer","text":"În română sau în engleză, cum vrei. Butonul EN / RO din dreapta sus schimbă toată aplicația, oricând. Poți exersa în română ca să înțelegi și în engleză ca să te obișnuiești cu formularea de la examen. Termenii tehnici rămân în engleză."}},{"@type":"Question","name":"Sunt întrebările de la examen?","acceptedAnswer":{"@type":"Answer","text":"Nu. Le scriem noi, ca exerciții în stilul examenului, pe subiectele din CCNA 1, 2 și 3, fiecare cu explicație. Nu copiem întrebări din examene, cărți sau alte surse. Ca să treci, trebuie să înțelegi, iar aici exersezi exact asta."}},{"@type":"Question","name":"Îmi garantați că iau examenul?","acceptedAnswer":{"@type":"Answer","text":"Nu, și nimeni cinstit nu poate promite asta. Routerel te ajută să exersezi constant, să-ți repari greșelile și să vezi, din scorul de pregătire și din simulare, unde mai ai de lucru."}},{"@type":"Question","name":"Routerel are legătură cu Cisco?","acceptedAnswer":{"@type":"Answer","text":"Nu. Routerel este o aplicație independentă și nu este afiliată, sponsorizată sau aprobată de Cisco Systems, Inc. Cisco și CCNA sunt mărci ale Cisco Systems, Inc."}},{"@type":"Question","name":"Ce date colectați?","acceptedAnswer":{"@type":"Answer","text":"Doar ce trebuie ca să meargă contul și progresul: emailul, numele afișat, răspunsurile, setările și starea abonamentului. Fără reclame, fără urmărire și fără date de plată (cardul îl vede doar Google Play). Totul e explicat în politica de confidențialitate."}},{"@type":"Question","name":"Cum îmi șterg contul?","acceptedAnswer":{"@type":"Answer","text":"Din aplicație: Cont → Șterge contul. Sau ne scrii la contact@routerel.app. Atenție: ștergerea contului nu oprește abonamentul; pe acela îl anulezi din Google Play. Pașii compleți sunt pe pagina ștergerea contului."}},{"@type":"Question","name":"Am iPhone. Merge?","acceptedAnswer":{"@type":"Answer","text":"Deocamdată Routerel e doar pentru Android."}}]}]}</script>
 </head>
 <body>
-<main>
-  <header><img src="icon.png" alt=""><a href="./">Routerel</a></header>
-  <nav>
-    <a href="privacy.html">Confidențialitate / Privacy</a>
-    <a href="terms.html">Termeni / Terms</a>
-    <a href="delete-account.html">Ștergerea contului / Delete account</a>
-  </nav>
-
-  <h1>Exersează pentru CCNA, câte puțin în fiecare zi.</h1>
-  <p>Routerel este o aplicație Android cu întrebări de exersat pentru cele trei părți ale CCNA (Introduction to Networks;
-    Switching, Routing and Wireless Essentials; Enterprise Networking, Security and Automation), cu explicații,
-    repetiție a greșelilor, statistici și simulări de examen. Întrebările sunt scrise de noi, în română și în engleză.</p>
-
-  <div class="card">
-    <h2 class="lang">English</h2>
-    <p>Routerel is an Android app with practice questions for the three CCNA courses, with explanations, spaced
-      repetition of mistakes, statistics and exam simulations. The questions are our own, in English and Romanian.</p>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs><linearGradient id="rtl-play" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5b8cff"/><stop offset=".55" stop-color="#2f6bff"/><stop offset="1" stop-color="#ffb020"/></linearGradient></defs></svg>
+<a class="skip-link" href="#main">Sari la conținut</a>
+<header class="site-header">
+  <div class="container header-row">
+    <a class="brand" href="./" aria-label="Routerel, acasă"><img src="assets/icon-96.webp" alt="" width="36" height="36"><span>Routerel</span></a>
+    <nav class="main-nav" aria-label="Principal"><ul><li><a href="#functii">Funcții</a></li><li><a href="#preturi">Prețuri</a></li><li><a href="ghiduri/">Ghiduri</a></li><li><a href="tools/">Tools</a></li><li><a href="#faq">FAQ</a></li></ul></nav>
+    <div class="header-actions">
+      <div class="lang-switch" role="group" aria-label="Limba"><span aria-current="true" lang="ro">RO</span><a href="en/" hreflang="en" lang="en" title="English">EN</a></div>
+      <button class="icon-btn theme-toggle" type="button" data-theme-toggle aria-label="Schimbă tema"><span class="i-moon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9z"/></svg></span><span class="i-sun"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg></span></button>
+      <a class="btn btn--sm header-cta" data-play data-soon-href="#preturi" href="#preturi"><span data-when="live">Încearcă gratuit</span><span data-when="soon">Vezi prețurile</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      <button class="icon-btn menu-btn" type="button" data-menu-btn aria-expanded="false" aria-controls="mobile-nav" aria-label="Meniu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+    </div>
   </div>
+  <nav class="mobile-nav" id="mobile-nav" aria-label="Principal" hidden>
+    <div class="container"><ul><li><a href="#functii">Funcții</a></li><li><a href="#preturi">Prețuri</a></li><li><a href="ghiduri/">Ghiduri</a></li><li><a href="tools/">Tools</a></li><li><a href="#faq">FAQ</a></li></ul></div>
+  </nav>
+</header>
+<main id="main">
 
-  <footer>
-    Routerel este o aplicație independentă și nu este afiliată, sponsorizată sau aprobată de Cisco Systems, Inc.
-    Cisco, CCNA și Cisco Networking Academy sunt mărci ale Cisco Systems, Inc.<br>
-    Routerel is an independent app, not affiliated with, sponsored or endorsed by Cisco Systems, Inc.
-    Cisco, CCNA and Cisco Networking Academy are trademarks of Cisco Systems, Inc.
-  </footer>
+<section class="hero" data-hero aria-labelledby="hero-title">
+  <div class="blobs" aria-hidden="true"><span class="blob blob--a"></span><span class="blob blob--b"></span><span class="blob blob--c"></span></div>
+  <div class="container hero-grid">
+    <div class="hero-copy">
+      <p class="eyebrow"><span class="dot" aria-hidden="true"></span>Aplicație CCNA pentru Android</p>
+      <h1 id="hero-title">Intră la examenul CCNA <span class="mark">sigur pe tine</span>.</h1>
+      <p class="lead">Întrebări CCNA în română și engleză, cu explicație la fiecare răspuns. Greșelile revin până le știi. Câteva minute pe zi, pe telefon, chiar și fără internet.</p>
+      <div class="cta-row">
+        <a class="play" data-play aria-disabled="true"><svg viewBox="0 0 26 28" aria-hidden="true" focusable="false"><path d="M3 2.6v22.8c0 1.2 1.3 1.9 2.3 1.3l19.4-11.4c1-.6 1-2 0-2.6L5.3 1.3C4.3.7 3 1.4 3 2.6z" fill="url(#rtl-play)"/><path d="M3 2.6v22.8c0 .5.2.9.5 1.1L15 14 3.5 1.5c-.3.2-.5.6-.5 1.1z" fill="#fff" opacity=".18"/></svg><span><small data-when="live">7 zile gratuite pe</small><small data-when="soon">În curând pe</small><strong>Google Play</strong></span></a>
+        <a class="btn btn--ghost" href="#cum-functioneaza">Vezi cum funcționează</a>
+      </div>
+      <p class="microcopy"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg>7 zile gratuite</span><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg>Anulezi oricând<span class="m-hide"> din Google Play</span></span><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg>Fără reclame</span></p>
+    </div>
+    <div class="hero-visual">
+      <div class="phones" data-tilt>
+        <div class="phone phone--back"><div class="screen"><img class="is-on" src="assets/screen-trainer-ro.webp" srcset="assets/screen-trainer-ro-360.webp 360w, assets/screen-trainer-ro.webp 600w" sizes="(max-width: 959px) 46vw, 226px" width="600" height="1298" alt="Antrenorul de subnetting în tema întunecată: adresa de broadcast a unei subrețele /24, cu rezolvarea" decoding="async"></div></div>
+        <div class="phone phone--front"><div class="screen" data-cycle><img class="is-on" fetchpriority="high" src="assets/screen-explanation-ro.webp" srcset="assets/screen-explanation-ro-360.webp 360w, assets/screen-explanation-ro.webp 600w" sizes="(max-width: 959px) 52vw, 254px" width="600" height="1298" alt="Ecranul cu explicația: răspunsul corect e verde, iar mascota spune ce trebuie reținut" decoding="async"><img loading="lazy" src="assets/screen-home-ro.webp" srcset="assets/screen-home-ro-360.webp 360w, assets/screen-home-ro.webp 600w" sizes="(max-width: 959px) 52vw, 254px" width="600" height="1298" alt="Ecranul Acasă: obiectivul zilei și cele trei părți CCNA" decoding="async"><img loading="lazy" src="assets/screen-question-ro.webp" srcset="assets/screen-question-ro-360.webp 360w, assets/screen-question-ro.webp 600w" sizes="(max-width: 959px) 52vw, 254px" width="600" height="1298" alt="O întrebare CCNA cu patru variante de răspuns" decoding="async"></div></div>
+        <div class="hero-mascot"><svg class="mascot mascot--live" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><g class="m-breathe"><path d="M22 14l-5-9M42 14l5-9" stroke="#8a919c" stroke-width="3.4" stroke-linecap="round" fill="none"/><circle class="m-led m-led-l" cx="17" cy="5" r="3.6"/><circle class="m-led m-led-r" cx="47" cy="5" r="3.6"/><path class="m-body" d="M28 12q4-6 8 0"/><rect class="m-body" x="8" y="12" width="48" height="42" rx="18"/><rect class="m-belly" x="8" y="40" width="48" height="14" rx="7"/><circle cx="23" cy="31" r="5.4" fill="#fff"/><circle class="m-pupil" cx="24" cy="31.5" r="3" fill="#1a1d24"/><circle cx="41" cy="31" r="5.4" fill="#fff"/><circle class="m-pupil" cx="42" cy="31.5" r="3" fill="#1a1d24"/><path class="m-led" d="M29 37l3 3.5 3-3.5z"/><circle class="m-ok" cx="18" cy="47" r="2"/><circle class="m-led" cx="24" cy="47" r="2"/><rect x="31" y="45" width="6" height="4" rx="1" fill="#0d1a3a" opacity=".55"/><rect x="39" y="45" width="6" height="4" rx="1" fill="#0d1a3a" opacity=".55"/><rect x="47" y="45" width="5" height="4" rx="1" fill="#0d1a3a" opacity=".55"/><path class="m-leg" d="M20 54v4M44 54v4" stroke-width="3.4" stroke-linecap="round" fill="none"/></g></svg></div>
+        <span class="chip-float chip-float--ok" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg>Corect! +10 XP</span>
+        <span class="chip-float chip-float--led" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3" y="4" width="18" height="18" rx="3"/><path d="M16 2v4M8 2v4M3 10h18"/><path d="m9 16 2 2 4-4"/></svg>12 zile la rând</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="trust" aria-label="Routerel în cifre">
+  <div class="container"><ul class="stagger">
+    <li class="reveal"><span class="ti t-brand"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M2 4h6a4 4 0 0 1 4 4v12a3 3 0 0 0-3-3H2z"/><path d="M22 4h-6a4 4 0 0 0-4 4v12a3 3 0 0 1 3-3h7z"/></svg></span><span class="tt"><span class="tnum" data-count="1900" data-suffix="+">1.900+</span><strong>întrebări CCNA</strong><span class="tsub">scrise de noi</span></span></li>
+    <li class="reveal"><span class="ti t-tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="16" y="16" width="6" height="6" rx="1"/><rect x="2" y="16" width="6" height="6" rx="1"/><rect x="9" y="2" width="6" height="6" rx="1"/><path d="M5 16v-3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3"/><path d="M12 12V8"/></svg></span><span class="tt"><span class="tnum" data-count="3" data-suffix="">3</span><strong>părți CCNA</strong><span class="tsub">CCNA 1, 2 și 3</span></span></li>
+    <li class="reveal"><span class="ti t-led"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m5 8 6 6"/><path d="m4 14 6-6 2-3"/><path d="M2 5h12"/><path d="M7 2h1"/><path d="m22 22-5-10-5 10"/><path d="M14 18h6"/></svg></span><span class="tt"><span class="tnum" data-count="2" data-suffix="">2</span><strong>limbi</strong><span class="tsub">română și engleză</span></span></li>
+    <li class="reveal"><span class="ti t-ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.3h6c0-1 .4-1.8 1-2.3A7 7 0 0 0 12 2z"/></svg></span><span class="tt"><span class="tnum" data-count="100" data-suffix="%">100%</span><strong>cu explicație</strong><span class="tsub">fiecare întrebare</span></span></li>
+    <li class="reveal"><span class="ti t-bad"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="10"/><path d="m4.9 4.9 14.2 14.2"/></svg></span><span class="tt"><span class="tnum" data-count="0" data-suffix="">0</span><strong>reclame</strong><span class="tsub">și fără urmărire</span></span></li>
+  </ul></div>
+</section>
+
+<section class="section" id="demo" aria-labelledby="demo-title">
+  <div class="container demo-wrap">
+    <div class="section-head section-head--left reveal">
+      <p class="eyebrow">Încearcă acum</p>
+      <h2 id="demo-title">Răspunde la o întrebare. Chiar aici.</h2>
+      <p>Exact ca în aplicație: alegi o variantă, apeși <strong>Verifică</strong> și vezi pe loc de ce e corect sau greșit. Este una dintre întrebările gratuite din CCNA 1.</p>
+      <ul class="checklist yes" style="margin-top:20px"><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg><span>Explicație pentru fiecare variantă</span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg><span>Comuți întrebarea între română și engleză</span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg><span>+XP la fiecare răspuns corect</span></li></ul>
+    </div>
+    <div class="demo reveal" data-demo data-no-sticky>
+      <noscript><p class="demo-noscript">Pornește JavaScript ca să răspunzi la întrebare.</p></noscript>
+      <div class="demo-top">
+        <span class="demo-type" data-demo-type>Alege răspunsul</span>
+        <span class="demo-topic" data-demo-topic>CCNA 1 · Application layer</span>
+        <span class="leds" role="img" aria-label="Dificultate 1 din 3"><i class="on"></i><i></i><i></i></span>
+        <span class="seg" role="group" aria-label="Limba întrebării"><button type="button" data-demo-lang="en" aria-pressed="false" lang="en">EN</button><button type="button" data-demo-lang="ro" aria-pressed="true" lang="ro">RO</button></span>
+      </div>
+      <p class="demo-stem" data-demo-stem>O aplicație video convertește frame-urile în MPEG, le micșorează ca să economisească bandwidth și le criptează înainte de trimitere. Ce nivel OSI îndeplinește aceste trei funcții?</p>
+      <ul class="opts" data-demo-options><li><button type="button" class="opt" data-id="a" aria-pressed="false" disabled><span class="opt-num" aria-hidden="true">1</span><span class="opt-body"><span class="opt-text">Nivelul application</span></span></button></li><li><button type="button" class="opt" data-id="b" aria-pressed="false" disabled><span class="opt-num" aria-hidden="true">2</span><span class="opt-body"><span class="opt-text">Nivelul presentation</span></span></button></li><li><button type="button" class="opt" data-id="c" aria-pressed="false" disabled><span class="opt-num" aria-hidden="true">3</span><span class="opt-body"><span class="opt-text">Nivelul session</span></span></button></li><li><button type="button" class="opt" data-id="d" aria-pressed="false" disabled><span class="opt-num" aria-hidden="true">4</span><span class="opt-body"><span class="opt-text">Nivelul transport</span></span></button></li></ul>
+      <div class="demo-actions">
+        <button type="button" class="btn" data-demo-check disabled aria-disabled="true"><span>Verifică</span></button>
+        <button type="button" class="btn btn--ghost" data-demo-retry hidden>Încearcă din nou</button>
+      </div>
+      <div class="demo-result" data-demo-result hidden>
+        <div class="demo-result-head">
+          <svg class="mascot demo-mascot--happy" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><g class="m-breathe"><path d="M22 14l-5-9M42 14l5-9" stroke="#8a919c" stroke-width="3.4" stroke-linecap="round" fill="none"/><circle class="m-led m-led-l" cx="17" cy="5" r="3.6"/><circle class="m-led m-led-r" cx="47" cy="5" r="3.6"/><path class="m-body" d="M28 12q4-6 8 0"/><rect class="m-body" x="8" y="12" width="48" height="42" rx="18"/><rect class="m-belly" x="8" y="40" width="48" height="14" rx="7"/><path d="M19 31q4-5 8 0" stroke="#1a1d24" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M37 31q4-5 8 0" stroke="#1a1d24" stroke-width="3" fill="none" stroke-linecap="round"/><path class="m-led" d="M29 37l3 3.5 3-3.5z"/><circle cx="15" cy="38" r="3" fill="#ff8fb1" opacity=".7"/><circle cx="49" cy="38" r="3" fill="#ff8fb1" opacity=".7"/><circle class="m-ok" cx="18" cy="47" r="2"/><circle class="m-led" cx="24" cy="47" r="2"/><rect x="31" y="45" width="6" height="4" rx="1" fill="#0d1a3a" opacity=".55"/><rect x="39" y="45" width="6" height="4" rx="1" fill="#0d1a3a" opacity=".55"/><rect x="47" y="45" width="5" height="4" rx="1" fill="#0d1a3a" opacity=".55"/><path class="m-leg" d="M20 54v4M44 54v4" stroke-width="3.4" stroke-linecap="round" fill="none"/></g></svg><svg class="mascot demo-mascot--sad" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><g class="m-breathe"><path d="M22 14l-5-9M42 14l5-9" stroke="#8a919c" stroke-width="3.4" stroke-linecap="round" fill="none"/><circle class="m-led m-led-l" cx="17" cy="5" r="3.6"/><circle class="m-led m-led-r" cx="47" cy="5" r="3.6"/><path class="m-body" d="M28 12q4-6 8 0"/><rect class="m-body" x="8" y="12" width="48" height="42" rx="18"/><rect class="m-belly" x="8" y="40" width="48" height="14" rx="7"/><circle cx="23" cy="32" r="5" fill="#fff"/><circle cx="23" cy="34" r="2.8" fill="#1a1d24"/><path d="M18 26l9-2.5" stroke="#1a1d24" stroke-width="2.6" stroke-linecap="round"/><circle cx="41" cy="32" r="5" fill="#fff"/><circle cx="41" cy="34" r="2.8" fill="#1a1d24"/><path d="M37 23.5l9 2.5" stroke="#1a1d24" stroke-width="2.6" stroke-linecap="round"/><path class="m-led" d="M29 37l3 3.5 3-3.5z"/><circle class="m-bad" cx="18" cy="47" r="2"/><circle class="m-led" cx="24" cy="47" r="2"/><rect x="31" y="45" width="6" height="4" rx="1" fill="#0d1a3a" opacity=".55"/><rect x="39" y="45" width="6" height="4" rx="1" fill="#0d1a3a" opacity=".55"/><rect x="47" y="45" width="5" height="4" rx="1" fill="#0d1a3a" opacity=".55"/><path class="m-leg" d="M20 54v4M44 54v4" stroke-width="3.4" stroke-linecap="round" fill="none"/></g></svg>
+          <div><p class="demo-result-title" data-demo-title></p><span class="xp"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg><span data-demo-xp></span></span></div>
+        </div>
+        <p class="demo-label" data-demo-label>De reținut</p>
+        <p class="demo-expl" data-demo-expl></p>
+      </div>
+      <div class="demo-after" data-demo-after hidden>
+        <p>Mai sunt 1.900+ întrebări ca asta.<span>Fiecare cu explicație, în română sau engleză.</span></p>
+        <a class="btn" data-play data-soon-href="#preturi" href="#preturi"><span data-when="live">Încearcă 7 zile gratuit</span><span data-when="soon">Vezi oferta</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      </div>
+      <p class="sr-only" aria-live="polite" data-demo-live></p>
+      <p class="demo-note">Întrebarea, variantele și explicația sunt luate din aplicație, neschimbate.</p>
+      <script type="application/json" id="demo-data">{"id":"itn-m15-q003","difficulty":1,"xp":10,"xpWrong":2,"topic":{"en":"CCNA 1 · Application Layer","ro":"CCNA 1 · Application layer"},"stem":{"en":"A video app converts frames to MPEG, shrinks them to save bandwidth and encrypts them before they are sent. Which OSI layer performs these three functions?","ro":"O aplicație video convertește frame-urile în MPEG, le micșorează ca să economisească bandwidth și le criptează înainte de trimitere. Ce nivel OSI îndeplinește aceste trei funcții?"},"options":[{"id":"a","correct":false,"text":{"en":"Application layer","ro":"Nivelul application"},"why":{"en":"The application layer is the interface between the user's program and the network; formatting, compression and encryption belong to the layer below it.","ro":"Nivelul application e interfața dintre programul utilizatorului și rețea; formatarea, compresia și criptarea țin de nivelul de sub el."}},{"id":"b","correct":true,"text":{"en":"Presentation layer","ro":"Nivelul presentation"},"why":{"en":"Correct: the presentation layer formats, compresses and encrypts data.","ro":"Corect: nivelul presentation formatează, comprimă și criptează datele."}},{"id":"c","correct":false,"text":{"en":"Session layer","ro":"Nivelul session"},"why":{"en":"The session layer creates, keeps alive and restarts dialogs between applications; it does not change the data format.","ro":"Nivelul session creează, menține și repornește dialogurile dintre aplicații; nu schimbă formatul datelor."}},{"id":"d","correct":false,"text":{"en":"Transport layer","ro":"Nivelul transport"},"why":{"en":"The transport layer segments data and uses port numbers; it does not encode video formats.","ro":"Nivelul transport segmentează datele și folosește numere de port; nu codează formate video."}}],"explanation":{"en":"The presentation layer has three jobs: format the data (MPEG, JPEG, PNG, GIF), compress it and encrypt it. In the TCP/IP model these functions, together with those of the session layer, are part of the single application layer.","ro":"Nivelul presentation are trei sarcini: formatează datele (MPEG, JPEG, PNG, GIF), le comprimă și le criptează. În modelul TCP/IP aceste funcții, împreună cu cele ale nivelului session, fac parte din singurul nivel application."},"ui":{"ro":{"type":"Alege răspunsul","check":"Verifică","good":"Corect!","bad":"Nu chiar.","remember":"De reținut"},"en":{"type":"Pick the answer","check":"Check","good":"Correct!","bad":"Not quite.","remember":"Remember"}}}</script>
+    </div>
+  </div>
+</section>
+
+<section class="section section--alt pain" aria-labelledby="pain-title">
+  <div class="container">
+    <div class="section-head reveal">
+      <p class="eyebrow">Problema</p>
+      <h2 id="pain-title">Nu ești tu problema. E&nbsp;felul în care se învață.</h2>
+      <p class="m-hide">Dacă ai încercat deja să înveți pentru CCNA, probabil știi senzația.</p>
+    </div>
+    <div class="grid grid--4 stagger">
+      <article class="card lift reveal"><span class="icon-tile t-bad"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M2 4h6a4 4 0 0 1 4 4v12a3 3 0 0 0-3-3H2z"/><path d="M22 4h-6a4 4 0 0 0-4 4v12a3 3 0 0 1 3-3h7z"/></svg></span><h3>Sute de pagini, zero claritate</h3><p>Citești capitol după capitol și tot nu știi ce contează cu adevărat la examen.</p></article>
+      <article class="card lift reveal"><span class="icon-tile t-led"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg></span><h3>Uiți ce ai citit</h3><p>Ce nu repeți se șterge. După o săptămână nu mai știi sigur nici ce credeai că ai înțeles.</p></article>
+      <article class="card lift reveal"><span class="icon-tile t-tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="10"/><path d="M9.1 9a3 3 0 0 1 5.8 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg></span><h3>Nu știi dacă ești gata</h3><p>Te programezi la examen pe ghicite. Sau amâni. Din nou.</p></article>
+      <article class="card lift reveal"><span class="icon-tile t-brand"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="8" cy="8" r="6"/><path d="M18.1 10.4A6 6 0 1 1 10.3 18"/><path d="M7 6h1v4"/><path d="m16.7 13.9.7.7-2.8 2.8"/></svg></span><h3>Fiecare încercare costă</h3><p>Examenul CCNA (200-301) costă în jur de 300 USD, după prețul afișat de Cisco. Să-l dai de două ori doare.</p></article>
+    </div>
+    <p class="pain-note reveal">Soluția nu e să citești mai mult. E să exersezi mai inteligent.</p>
+  </div>
+</section>
+
+<section class="section" id="cum-functioneaza" aria-labelledby="how-title">
+  <div class="container">
+    <div class="mech-grid">
+      <div>
+        <div class="section-head section-head--left reveal">
+          <p class="eyebrow">Cum funcționează</p>
+          <h2 id="how-title">Metoda Routerel: exersezi, înțelegi, repeți, te verifici.</h2>
+          <p class="m-hide">Patru pași simpli, făcuți puțin în fiecare zi. Fiecare rezolvă una dintre problemele de mai sus.</p>
+        </div>
+        <ol class="steps" data-steps>
+          <li class="steps-line" aria-hidden="true"><span class="steps-fill"></span></li>
+          <li class="step reveal"><span class="step-num" aria-hidden="true">1</span><div><h3>Exersezi puțin, dar zilnic</h3><p>Sesiuni de 10 întrebări. Le faci în pauză, în autobuz sau seara, înainte de culcare.</p></div></li>
+          <li class="step reveal"><span class="step-num" aria-hidden="true">2</span><div><h3>Înțelegi pe loc</h3><p>După fiecare răspuns vezi explicația și de ce celelalte variante sunt greșite. Afli de ce, nu doar ce.</p></div></li>
+          <li class="step reveal"><span class="step-num" aria-hidden="true">3</span><div><h3>Greșelile revin până le știi</h3><p>Ce greșești apare din nou după câteva întrebări, apoi peste o zi, trei zile, o săptămână. Ce știi revine rar, ca să nu uiți.</p></div></li>
+          <li class="step reveal"><span class="step-num" aria-hidden="true">4</span><div><h3>Te verifici ca la examen</h3><p>Simulare cu 100 de întrebări și 120 de minute, din CCNA 1, 2 și 3. Vezi scorul pe părți și pe subiecte și știi unde mai ai de lucru.</p></div></li>
+        </ol>
+      </div>
+      <div class="mech-visual reveal">
+        <div class="phone"><div class="screen"><img class="is-on" src="assets/screen-progress-ro.webp" srcset="assets/screen-progress-ro-360.webp 360w, assets/screen-progress-ro.webp 600w" sizes="(max-width: 400px) 78vw, 300px" width="600" height="1298" alt="Ecranul Progres: zilele până la examen, nivelul și statisticile săptămânii" loading="lazy" decoding="async"></div></div>
+        <div class="streak" data-animate aria-hidden="true">
+          <div class="streak-head"><span>Zile la rând</span><span class="pill-led"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3" y="4" width="18" height="18" rx="3"/><path d="M16 2v4M8 2v4M3 10h18"/><path d="m9 16 2 2 4-4"/></svg>Obiectiv bifat</span></div>
+          <ul class="days"><li><span class="cell"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg></span>L</li><li><span class="cell"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg></span>Ma</li><li><span class="cell"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg></span>Mi</li><li><span class="cell"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg></span>J</li><li><span class="cell"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg></span>V</li><li><span class="cell"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg></span>S</li><li><span class="cell"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg></span>D</li></ul>
+        </div>
+      </div>
+    </div>
+    <div class="timeline">
+      <h3 class="reveal">Drumul unei greșeli</h3>
+      <ol class="track" data-animate>
+        <li><span class="node node--bad">Greșit</span><svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></li><li><span class="node">după 5–10 întrebări</span><svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></li><li><span class="node">1 zi</span><svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></li><li><span class="node">3 zile</span><svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></li><li><span class="node">7 zile</span><svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></li><li><span class="node">21 de zile</span><svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></li><li><span class="node node--ok">60 de zile</span></li>
+      </ol>
+      <p class="track-note reveal">Un răspuns corect o urcă o treaptă, o greșeală nouă o readuce la început. Asta e repetiția spațiată.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section section--alt" aria-labelledby="cmp-title">
+  <div class="container">
+    <div class="section-head reveal">
+      <p class="eyebrow">Înainte și după</p>
+      <h2 id="cmp-title">Cum arată pregătirea fără Routerel și cu Routerel</h2>
+    </div>
+    <div class="seg-toggle" role="group" aria-label="Comparație" data-seg="cmp-table"><button type="button" data-seg-val="without" aria-pressed="false">Fără Routerel</button><button type="button" data-seg-val="with" aria-pressed="true">Cu Routerel</button></div>
+    <table class="compare reveal" id="cmp-table">
+      <caption class="sr-only">Comparație: pregătirea pentru CCNA fără și cu Routerel</caption>
+      <thead><tr><td></td><th scope="col">Fără Routerel</th><th scope="col" class="with">Cu Routerel</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">Cum înveți</th><td class="without" data-label="Fără Routerel"><span class="cell"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M18 6 6 18M6 6l12 12"/></svg><span>Citești ore întregi și speri să rămână ceva</span></span></td><td class="with" data-label="Cu Routerel"><span class="cell"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg><span>10 întrebări pe zi, fiecare cu explicație</span></span></td></tr>
+        <tr><th scope="row">Greșelile</th><td class="without" data-label="Fără Routerel"><span class="cell"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M18 6 6 18M6 6l12 12"/></svg><span>Le uiți și le repeți la examen</span></span></td><td class="with" data-label="Cu Routerel"><span class="cell"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg><span>Revin singure până le știi</span></span></td></tr>
+        <tr><th scope="row">Subnetting</th><td class="without" data-label="Fără Routerel"><span class="cell"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M18 6 6 18M6 6l12 12"/></svg><span>Cauți exerciții pe internet</span></span></td><td class="with" data-label="Cu Routerel"><span class="cell"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg><span>Exerciții generate la nesfârșit, cu rezolvare</span></span></td></tr>
+        <tr><th scope="row">Ești gata?</th><td class="without" data-label="Fără Routerel"><span class="cell"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M18 6 6 18M6 6l12 12"/></svg><span>Ghicești</span></span></td><td class="with" data-label="Cu Routerel"><span class="cell"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg><span>Scor de pregătire pe CCNA 1, 2, 3 și simulare cu timp</span></span></td></tr>
+        <tr><th scope="row">Limba</th><td class="without" data-label="Fără Routerel"><span class="cell"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M18 6 6 18M6 6l12 12"/></svg><span>Termeni noi în engleză, fără nicio explicație în română</span></span></td><td class="with" data-label="Cu Routerel"><span class="cell"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg><span>Întrebări în română sau engleză, schimbi oricând</span></span></td></tr>
+        <tr><th scope="row">Unde</th><td class="without" data-label="Fără Routerel"><span class="cell"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M18 6 6 18M6 6l12 12"/></svg><span>La birou, cu notițele în față</span></span></td><td class="with" data-label="Cu Routerel"><span class="cell"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg><span>Pe telefon, oriunde, chiar și offline</span></span></td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="gal-title">
+  <div class="container gallery-head">
+    <div class="section-head section-head--left reveal">
+      <p class="eyebrow">Aplicația</p>
+      <h2 id="gal-title">Vezi cum arată Routerel</h2>
+      <p>Capturi reale din aplicație.</p>
+    </div>
+    <div class="gallery-nav">
+      <button class="icon-btn" type="button" data-gallery-prev aria-label="Captura anterioară" aria-controls="gallery"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m15 18-6-6 6-6"/></svg></button>
+      <button class="icon-btn" type="button" data-gallery-next aria-label="Captura următoare" aria-controls="gallery"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m9 18 6-6-6-6"/></svg></button>
+    </div>
+  </div>
+  <div role="region" aria-label="Capturi de ecran din aplicație"><ul class="gallery" id="gallery" data-gallery tabindex="0" aria-label="Capturi de ecran din aplicație">
+    <li><figure><img src="assets/shots/ro-1-home.webp" width="540" height="960" alt="Ecranul Acasă cu obiectivul zilei și cele trei părți CCNA" loading="lazy" decoding="async"><figcaption>Acasă: alegi ce exersezi</figcaption></figure></li>
+    <li><figure><img src="assets/shots/ro-2-questions.webp" width="540" height="960" alt="O întrebare CCNA cu variante de răspuns" loading="lazy" decoding="async"><figcaption>Întrebări ca la examen</figcaption></figure></li>
+    <li><figure><img src="assets/shots/ro-3-explanations.webp" width="540" height="960" alt="Explicația unui răspuns corect, cu mascota" loading="lazy" decoding="async"><figcaption>Explicație la fiecare răspuns</figcaption></figure></li>
+    <li><figure><img src="assets/shots/ro-4-subnetting.webp" width="540" height="960" alt="Un exercițiu de subnetting cu rezolvarea pas cu pas" loading="lazy" decoding="async"><figcaption>Antrenorul de subnetting</figcaption></figure></li>
+    <li><figure><img src="assets/shots/ro-5-exam.webp" width="540" height="960" alt="Simularea de examen cu cronometru" loading="lazy" decoding="async"><figcaption>Simulare de examen cu timp</figcaption></figure></li>
+    <li><figure><img src="assets/shots/ro-6-progress.webp" width="540" height="960" alt="Ecranul Progres cu zilele până la examen" loading="lazy" decoding="async"><figcaption>Progresul și data examenului</figcaption></figure></li>
+    <li><figure><img src="assets/shots/ro-7-mistakes.webp" width="540" height="960" alt="Lista greșelilor de reluat, pe subiecte" loading="lazy" decoding="async"><figcaption>Greșelile tale, la un loc</figcaption></figure></li>
+    <li><figure><img src="assets/shots/ro-8-collection.webp" width="540" height="960" alt="Colecția de insigne și accesoriile mascotei" loading="lazy" decoding="async"><figcaption>Insigne și accesorii</figcaption></figure></li>
+  </ul></div>
+</section>
+
+<section class="section section--alt" id="functii" aria-labelledby="stack-title">
+  <div class="container">
+    <div class="section-head reveal">
+      <p class="eyebrow">Ce primești</p>
+      <h2 id="stack-title">Tot ce-ți trebuie ca să ajungi pregătit la examenul CCNA</h2>
+      <p class="m-hide">Fiecare parte rezolvă o problemă concretă. Toate intră în abonament.</p>
+    </div>
+    <div class="stack stagger" id="stack-list">
+      <article class="card lift reveal stack-item"><span class="icon-tile t-brand"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M2 4h6a4 4 0 0 1 4 4v12a3 3 0 0 0-3-3H2z"/><path d="M22 4h-6a4 4 0 0 0-4 4v12a3 3 0 0 1 3-3h7z"/></svg></span><div><h3>1.900+ întrebări CCNA 1, 2 și 3</h3><p>Toate cele trei părți, împărțite pe subiecte. Lista crește constant.</p><p class="solves"><svg width="16" height="16" style="width:16px;height:16px;flex:none;align-self:center" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg><span>Rezolvă: nu mai cauți material.</span></p></div></article>
+      <article class="card lift reveal stack-item"><span class="icon-tile t-ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.3h6c0-1 .4-1.8 1-2.3A7 7 0 0 0 12 2z"/></svg></span><div><h3>Explicație la fiecare întrebare</h3><p>Și pentru varianta aleasă greșit. Scheme de rețea și configurații pe care le poți mări.</p><p class="solves"><svg width="16" height="16" style="width:16px;height:16px;flex:none;align-self:center" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg><span>Rezolvă: înțelegi, nu tocești.</span></p></div></article>
+      <article class="card lift reveal stack-item"><span class="icon-tile t-tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m17 2 4 4-4 4"/><path d="M3 11v-1a4 4 0 0 1 4-4h14"/><path d="m7 22-4-4 4-4"/><path d="M21 13v1a4 4 0 0 1-4 4H3"/></svg></span><div><h3>Motorul de greșeli</h3><p>Repetiție spațiată: greșelile revin la momentul potrivit, până le stăpânești.</p><p class="solves"><svg width="16" height="16" style="width:16px;height:16px;flex:none;align-self:center" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg><span>Rezolvă: nu mai uiți ce ai învățat.</span></p></div></article>
+      <article class="card lift reveal stack-item"><span class="icon-tile t-bad"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M10 2h4"/><path d="m12 14 3-3"/><circle cx="12" cy="14" r="8"/></svg></span><div><h3>Simulare de examen cu timp</h3><p>100 de întrebări, 120 de minute, fără ajutor până la final. Apoi rezultatul pe părți și pe subiecte.</p><p class="solves"><svg width="16" height="16" style="width:16px;height:16px;flex:none;align-self:center" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg><span>Rezolvă: știi cum e la examen înainte să ajungi acolo.</span></p></div></article>
+      <article class="card lift reveal stack-item"><span class="icon-tile t-brand"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="16" y="16" width="6" height="6" rx="1"/><rect x="2" y="16" width="6" height="6" rx="1"/><rect x="9" y="2" width="6" height="6" rx="1"/><path d="M5 16v-3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3"/><path d="M12 12V8"/></svg></span><div><h3>Antrenor de subnetting</h3><p>Subnetting, conversii binar și hex, adrese IPv6, cu exerciții generate la nesfârșit.</p><p class="solves"><svg width="16" height="16" style="width:16px;height:16px;flex:none;align-self:center" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg><span>Rezolvă: calculele devin reflex.</span></p></div></article>
+      <article class="card lift reveal stack-item"><span class="icon-tile t-ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 3v18h18"/><path d="M8 17v-4"/><path d="M13 17V8"/><path d="M18 17v-7"/></svg></span><div><h3>Scor de pregătire și statistici</h3><p>Pe CCNA 1, 2 și 3 și pe fiecare subiect, cu cele mai slabe primele.</p><p class="solves"><svg width="16" height="16" style="width:16px;height:16px;flex:none;align-self:center" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg><span>Rezolvă: știi exact ce mai ai de lucrat.</span></p></div></article>
+      <article class="card lift reveal stack-item"><span class="icon-tile t-led"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2z"/></svg></span><div><h3>Zile la rând, XP, niveluri, insigne</h3><p>De la Începător la Maestru al rețelelor, cu accesorii pentru mascotă.</p><p class="solves"><svg width="16" height="16" style="width:16px;height:16px;flex:none;align-self:center" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg><span>Rezolvă: rămâi constant fără să te forțezi.</span></p></div></article>
+      <article class="card lift reveal stack-item"><span class="icon-tile t-tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m5 8 6 6"/><path d="m4 14 6-6 2-3"/><path d="M2 5h12"/><path d="M7 2h1"/><path d="m22 22-5-10-5 10"/><path d="M14 18h6"/></svg></span><div><h3>Română și engleză</h3><p>Toată aplicația, cu un singur buton. Termenii tehnici rămân în engleză.</p><p class="solves"><svg width="16" height="16" style="width:16px;height:16px;flex:none;align-self:center" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg><span>Rezolvă: înțelegi în română, te obișnuiești cu engleza de la examen.</span></p></div></article>
+      <article class="card lift reveal stack-item"><span class="icon-tile t-brand"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 20h.01"/><path d="M8.5 16.43a5 5 0 0 1 7 0"/><path d="M2 8.82a15 15 0 0 1 4.17-2.65"/><path d="M10.66 5c4.01-.36 8.14.9 11.34 3.76"/><path d="M16.85 11.25a10 10 0 0 1 2.22 1.68"/><path d="M5 13a10 10 0 0 1 5.24-2.76"/><path d="m2 2 20 20"/></svg></span><div><h3>Merge și offline</h3><p>Exersezi și fără semnal; progresul se sincronizează când revii online, pe orice telefon Android cu același cont.</p><p class="solves"><svg width="16" height="16" style="width:16px;height:16px;flex:none;align-self:center" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg><span>Rezolvă: exersezi oriunde.</span></p></div></article>
+    </div>
+    <button type="button" class="stack-more" data-stack-more aria-expanded="false" aria-controls="stack-list">Vezi toate cele 9 funcții<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6"/></svg></button>
+    <div class="stack-total reveal">
+      <div><h3>Toate, într-un singur abonament.</h3><p>De la <strong data-from-permonth>33,33 lei</strong> pe lună, cu 7 zile gratuite la început.</p><p class="anchor">Pentru comparație: o singură încercare la examenul CCNA costă în jur de 300 USD.</p></div>
+      <a class="btn" href="#preturi">Vezi prețurile<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+    </div>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="fit-title">
+  <div class="container">
+    <div class="section-head reveal">
+      <p class="eyebrow">Pentru cine</p>
+      <h2 id="fit-title">Pentru cine este Routerel (și pentru cine nu)</h2>
+    </div>
+    <div class="seg-toggle" role="group" aria-label="Pentru cine" data-seg="fit-cards"><button type="button" data-seg-val="yes" aria-pressed="true">Este pentru tine</button><button type="button" data-seg-val="no" aria-pressed="false">Nu este pentru tine</button></div>
+    <div class="fit stagger" id="fit-cards">
+      <div class="card yes-card reveal"><h3><span class="icon-tile t-ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg></span>Este pentru tine dacă</h3><ul class="checklist yes"><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg><span>Ești la CCNA 1, 2 sau 3 și vrei să fixezi materia, nu doar s-o citești.</span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg><span>Te pregătești pentru examenul CCNA și vrei să știi când ești gata.</span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg><span>Ai puțin timp și vrei să înveți în pauze scurte, de pe telefon.</span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg><span>Vrei explicații clare în română, dar și să te obișnuiești cu engleza de la examen.</span></li></ul></div>
+      <div class="card reveal"><h3><span class="icon-tile t-bad"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M18 6 6 18M6 6l12 12"/></svg></span>Nu este pentru tine dacă</h3><ul class="checklist no"><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M18 6 6 18M6 6l12 12"/></svg><span>Vrei să memorezi răspunsuri fără să înțelegi de ce. Aici înveți de ce.</span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M18 6 6 18M6 6l12 12"/></svg><span>Cauți teorie de la zero, capitol cu capitol. Routerel e pentru exersat și fixat materia.</span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M18 6 6 18M6 6l12 12"/></svg><span>Vrei să exersezi configurări pe echipamente. Routerel nu înlocuiește laboratorul.</span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M18 6 6 18M6 6l12 12"/></svg><span>Ai iPhone. Deocamdată Routerel e doar pentru Android.</span></li></ul></div>
+    </div>
+  </div>
+</section>
+
+<section class="section section--alt" id="preturi" data-no-sticky aria-labelledby="price-title">
+  <div class="container">
+    <div class="section-head reveal">
+      <p class="eyebrow">Prețuri</p>
+      <h2 id="price-title">Alege cum exersezi</h2>
+      <p>Toate planurile au tot conținutul și toate funcțiile. Diferă doar cât plătești și cât de des.</p>
+    </div>
+    <ul class="free-strip reveal" role="list" style="list-style:none;padding:0"><li class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg>Fără reclame</li><li class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg>7 zile gratuite pentru abonații noi</li><li class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg>Anulezi oricând din Google Play</li></ul>
+    <!-- Prețurile de aici sunt doar textul de rezervă: valorile reale se schimbă într-un singur loc, în assets/site.js (PRICES pentru română). -->
+    <div class="plans stagger">
+      <article class="card plan reveal lift" aria-labelledby="plan-monthly">
+        <button type="button" class="plan-pick" data-plan-pick="monthly" aria-pressed="false" aria-label="Alege planul Lunar"></button>
+
+        <h3 id="plan-monthly">Lunar</h3>
+        <div class="price" data-price="monthly">49,99 lei</div>
+        <div class="period">pe lună</div>
+        <div class="permonth"><span>Flexibil, anulezi oricând.</span></div>
+
+        <ul class="checklist"><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg><span>7 zile gratuite pentru abonații noi</span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg><span>Toate întrebările și funcțiile</span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg><span>Anulezi oricând din Google Play</span></li></ul>
+        <a class="btn btn--block btn--ghost" data-play aria-disabled="true"><span data-when="live">Începe 7 zile gratuite</span><span data-when="soon" class="soon-lbl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>În curând pe Google Play</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      </article>
+      <article class="card plan reveal plan--featured is-selected" aria-labelledby="plan-quarterly">
+        <button type="button" class="plan-pick" data-plan-pick="quarterly" aria-pressed="true" aria-label="Alege planul 3 luni"></button>
+        <span class="ribbon">Recomandat</span>
+        <h3 id="plan-quarterly">3 luni</h3>
+        <div class="price" data-price="quarterly">124,99 lei</div>
+        <div class="period">la fiecare 3 luni</div>
+        <div class="permonth"><span>adică <span data-permonth="quarterly">41,66 lei</span>/lună</span><span class="save" data-save="quarterly"></span></div>
+
+        <ul class="checklist"><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg><span>7 zile gratuite pentru abonații noi</span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg><span>Toate întrebările și funcțiile</span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg><span>Anulezi oricând din Google Play</span></li></ul>
+        <a class="btn btn--block" data-play aria-disabled="true"><span data-when="live">Începe 7 zile gratuite</span><span data-when="soon" class="soon-lbl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>În curând pe Google Play</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      </article>
+      <article class="card plan reveal lift" aria-labelledby="plan-yearly">
+        <button type="button" class="plan-pick" data-plan-pick="yearly" aria-pressed="false" aria-label="Alege planul Anual"></button>
+
+        <h3 id="plan-yearly">Anual</h3>
+        <div class="price" data-price="yearly">399,99 lei</div>
+        <div class="period">pe an</div>
+        <div class="permonth"><span>adică <span data-permonth="yearly">33,33 lei</span>/lună</span><span class="save" data-save="yearly"></span></div>
+        <div class="period" style="margin-top:4px">Cel mai mic preț pe lună</div>
+        <ul class="checklist"><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg><span>7 zile gratuite pentru abonații noi</span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg><span>Toate întrebările și funcțiile</span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg><span>Anulezi oricând din Google Play</span></li></ul>
+        <a class="btn btn--block btn--ghost" data-play aria-disabled="true"><span data-when="live">Începe 7 zile gratuite</span><span data-when="soon" class="soon-lbl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>În curând pe Google Play</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      </article>
+    </div>
+    <div class="plan-sum" data-plan-sum>
+      <p class="plan-sum-line"><span class="sr-only">Planul ales: </span><strong data-sum-name>3 luni</strong>: <span data-sum-price>124,99 lei</span> <span data-sum-period>la fiecare 3 luni</span></p>
+      <a class="btn btn--block" data-play aria-disabled="true"><span data-when="live">Începe 7 zile gratuite</span><span data-when="soon" class="soon-lbl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>În curând pe Google Play</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+    </div>
+    <p class="legal-note">Prețuri în lei, pentru România. Prețul final e cel afișat în Google Play înainte să confirmi. Abonamentul se reînnoiește automat la finalul fiecărei perioade, până îl anulezi din Google Play. Perioada de probă de 7 zile se acordă o singură dată, celor care n-au avut abonament. Detalii în <a href="terms.html">termenii de utilizare</a>.</p>
+    <div class="risk reveal">
+      <span class="shield"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg></span>
+      <div><h3>Încearcă fără niciun risc</h3><ul><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg><span><strong>7 zile gratuite.</strong> În perioada de probă nu plătești nimic.</span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg><span><strong>Anulezi oricând</strong> din Google Play, în câteva atingeri: profilul tău → Plăți și abonamente → Abonamente.</span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg><span><strong>Dacă anulezi înainte să se termine proba, nu plătești nimic.</strong> Fără obligații.</span></li></ul></div>
+    </div>
+  </div>
+</section>
+
+<!--
+  RECENZII: ascunse până avem recenzii REALE (de exemplu de la testerii din Google Play, cu acordul lor).
+  Ca să le afișezi: scoate atributul „hidden” de pe <section> de mai jos și înlocuiește cardurile-model
+  cu textul real, prenumele și ce parte CCNA face persoana. Nu inventa recenzii, note sau cifre.
+-->
+<section class="section" id="recenzii" aria-labelledby="rev-title" hidden>
+  <div class="container">
+    <div class="section-head">
+      <p class="eyebrow">Păreri</p>
+      <h2 id="rev-title">Ce spun cei care exersează cu Routerel</h2>
+    </div>
+    <div class="grid grid--3 reviews">
+      <figure class="card review-card"><blockquote><p>[Textul recenziei reale]</p></blockquote><footer>[Prenume, partea CCNA]</footer></figure>
+      <figure class="card review-card"><blockquote><p>[Textul recenziei reale]</p></blockquote><footer>[Prenume, partea CCNA]</footer></figure>
+      <figure class="card review-card"><blockquote><p>[Textul recenziei reale]</p></blockquote><footer>[Prenume, partea CCNA]</footer></figure>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="faq" aria-labelledby="faq-title">
+  <div class="container">
+    <div class="section-head reveal">
+      <p class="eyebrow">Întrebări frecvente</p>
+      <h2 id="faq-title">Întrebări înainte să începi</h2>
+    </div>
+    <div class="faq">
+      <details class="reveal"><summary>Pot încerca gratuit?<span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p>Da: primele 7 zile ale abonamentului sunt gratuite, cu acces la tot, dacă n-ai mai avut un abonament în Routerel. Iar dacă vrei doar să arunci o privire înainte, poți răspunde la câteva întrebări și fără să pornești proba.</p></div></details>
+      <details class="reveal"><summary>Cum anulez? Chiar nu plătesc nimic în cele 7 zile?<span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p>În perioada de probă nu plătești nimic. Dacă anulezi înainte să se termine, nu plătești deloc. Anularea se face din Google Play: Play Store → profilul tău → Plăți și abonamente → Abonamente → Routerel → Anulează. După anulare, accesul rămâne până la finalul perioadei plătite.</p></div></details>
+      <details class="reveal"><summary>N-am timp. Merge cu câteva minute pe zi?<span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p>Da, pentru asta e făcută. O sesiune are 10 întrebări și o termini în câteva minute. Îți alegi obiectivul zilnic (10, 20, 30 sau 50 de întrebări), iar aplicația îți amintește la ora aleasă de tine. Contează să revii zilnic, nu să stai ore întregi.</p></div></details>
+      <details class="reveal"><summary>Merge fără internet?<span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p>Da. Întrebările se păstrează pe telefon, iar răspunsurile date fără internet se sincronizează singure când revii online. Ai nevoie de internet la crearea contului, la abonare (atunci se descarcă întrebările) și, din când în când, ca să se verifice abonamentul.</p></div></details>
+      <details class="reveal"><summary>Întrebările sunt în română?<span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p>În română sau în engleză, cum vrei. Butonul EN / RO din dreapta sus schimbă toată aplicația, oricând. Poți exersa în română ca să înțelegi și în engleză ca să te obișnuiești cu formularea de la examen. Termenii tehnici rămân în engleză.</p></div></details>
+      <details class="reveal"><summary>Sunt întrebările de la examen?<span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p>Nu. Le scriem noi, ca exerciții în stilul examenului, pe subiectele din CCNA 1, 2 și 3, fiecare cu explicație. Nu copiem întrebări din examene, cărți sau alte surse. Ca să treci, trebuie să înțelegi, iar aici exersezi exact asta.</p></div></details>
+      <details class="reveal"><summary>Îmi garantați că iau examenul?<span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p>Nu, și nimeni cinstit nu poate promite asta. Routerel te ajută să exersezi constant, să-ți repari greșelile și să vezi, din scorul de pregătire și din simulare, unde mai ai de lucru.</p></div></details>
+      <details class="reveal"><summary>Routerel are legătură cu Cisco?<span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p>Nu. Routerel este o aplicație independentă și nu este afiliată, sponsorizată sau aprobată de Cisco Systems, Inc. Cisco și CCNA sunt mărci ale Cisco Systems, Inc.</p></div></details>
+      <details class="reveal"><summary>Ce date colectați?<span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p>Doar ce trebuie ca să meargă contul și progresul: emailul, numele afișat, răspunsurile, setările și starea abonamentului. Fără reclame, fără urmărire și fără date de plată (cardul îl vede doar Google Play). Totul e explicat în <a href="privacy.html">politica de confidențialitate</a>.</p></div></details>
+      <details class="reveal"><summary>Cum îmi șterg contul?<span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p>Din aplicație: Cont → Șterge contul. Sau ne scrii la <a href="mailto:contact@routerel.app">contact@routerel.app</a>. Atenție: ștergerea contului nu oprește abonamentul; pe acela îl anulezi din Google Play. Pașii compleți sunt pe pagina <a href="delete-account.html">ștergerea contului</a>.</p></div></details>
+      <details class="reveal"><summary>Am iPhone. Merge?<span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p>Deocamdată Routerel e doar pentru Android.</p></div></details>
+    </div>
+    <p class="faq-more reveal">Vrei să aprofundezi? Ghiduri gratuite: <a href="ghiduri/subnetting-pas-cu-pas/">Subnetting pas cu pas</a> și <a href="ghiduri/ce-este-ccna/">Ce este CCNA și cum te pregătești</a>, plus un <a href="tools/calculator-subnetting/">calculator de subnetting</a> gratuit. <a href="ghiduri/">Toate ghidurile</a></p>
+  </div>
+</section>
+
+<section class="section section--tight" aria-labelledby="final-title">
+  <div class="container">
+    <div class="final reveal" data-final>
+      <div>
+        <h2 id="final-title">Începe azi, cu 10 întrebări.</h2>
+        <p>Câteva minute pe zi, greșelile care revin până le știi și o simulare care îți arată când ești gata.</p>
+        <ul class="recap"><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg>1.900+ întrebări</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg>Explicații</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg>Repetiție spațiată</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg>Simulare cu timp</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg>Subnetting</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg>Română + engleză</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg>Offline</li></ul>
+        <a class="play" data-play aria-disabled="true"><svg viewBox="0 0 26 28" aria-hidden="true" focusable="false"><path d="M3 2.6v22.8c0 1.2 1.3 1.9 2.3 1.3l19.4-11.4c1-.6 1-2 0-2.6L5.3 1.3C4.3.7 3 1.4 3 2.6z" fill="url(#rtl-play)"/><path d="M3 2.6v22.8c0 .5.2.9.5 1.1L15 14 3.5 1.5c-.3.2-.5.6-.5 1.1z" fill="#fff" opacity=".18"/></svg><span><small data-when="live">7 zile gratuite pe</small><small data-when="soon">În curând pe</small><strong>Google Play</strong></span></a>
+        <p class="microcopy"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg>7 zile gratuite</span><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg>Anulezi oricând din Google Play</span></p>
+      </div>
+      <div class="mascot-wrap bounce-hover float float--slow"><svg class="mascot" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><g class="m-breathe"><path d="M22 14l-5-9M42 14l5-9" stroke="#8a919c" stroke-width="3.4" stroke-linecap="round" fill="none"/><circle class="m-led m-led-l" cx="17" cy="5" r="3.6"/><circle class="m-led m-led-r" cx="47" cy="5" r="3.6"/><path class="m-body" d="M28 12q4-6 8 0"/><rect class="m-body" x="8" y="12" width="48" height="42" rx="18"/><rect class="m-belly" x="8" y="40" width="48" height="14" rx="7"/><path d="M19 31q4-5 8 0" stroke="#1a1d24" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M37 31q4-5 8 0" stroke="#1a1d24" stroke-width="3" fill="none" stroke-linecap="round"/><path class="m-led" d="M29 37l3 3.5 3-3.5z"/><circle cx="15" cy="38" r="3" fill="#ff8fb1" opacity=".7"/><circle cx="49" cy="38" r="3" fill="#ff8fb1" opacity=".7"/><circle class="m-ok" cx="18" cy="47" r="2"/><circle class="m-led" cx="24" cy="47" r="2"/><rect x="31" y="45" width="6" height="4" rx="1" fill="#0d1a3a" opacity=".55"/><rect x="39" y="45" width="6" height="4" rx="1" fill="#0d1a3a" opacity=".55"/><rect x="47" y="45" width="5" height="4" rx="1" fill="#0d1a3a" opacity=".55"/><path class="m-leg" d="M20 54v4M44 54v4" stroke-width="3.4" stroke-linecap="round" fill="none"/></g></svg></div>
+    </div>
+  </div>
+</section>
 </main>
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="about">
+        <a class="brand" href="./"><img src="assets/icon-96.webp" alt="" width="36" height="36" loading="lazy"><span>Routerel</span></a>
+        <p>Exersezi CCNA pe telefon: întrebări cu explicații, repetiția greșelilor și simulări de examen. În română și engleză.</p>
+      </div>
+      <div><h2>Aplicația</h2><ul><li><a href="./#functii">Funcții</a></li><li><a href="./#preturi">Prețuri</a></li><li><a href="./#cum-functioneaza">Cum funcționează</a></li><li><a href="./#faq">Întrebări frecvente</a></li></ul></div>
+      <div><h2>Resurse</h2><ul><li><a href="ghiduri/">Ghiduri CCNA</a></li><li><a href="ghiduri/subnetting-pas-cu-pas/">Subnetting pas cu pas</a></li><li><a href="tools/calculator-subnetting/">Calculator de subnetting</a></li><li><a href="tools/">Tools gratuite</a></li><li><a href="en/" hreflang="en" lang="en" data-set-lang="en">English</a></li></ul></div>
+      <div><h2>Legal și contact</h2><ul><li><a href="privacy.html">Confidențialitate</a></li><li><a href="terms.html">Termeni de utilizare</a></li><li><a href="delete-account.html">Ștergerea contului</a></li></ul><ul><li><a href="mailto:contact@routerel.app">contact@routerel.app</a></li></ul></div>
+    </div>
+    <div class="disclaimer">
+      <p>Routerel este o aplicație independentă și nu este afiliată, sponsorizată sau aprobată de Cisco Systems, Inc. Cisco, CCNA și Cisco Networking Academy sunt mărci ale Cisco Systems, Inc.</p>
+      <p>© 2026 Routerel</p>
+    </div>
+  </div>
+</footer>
+
+<div class="sticky-cta" aria-hidden="true">
+  <p>7 zile gratuite<span>Anulezi oricând din Google Play</span></p>
+  <a class="btn" data-play data-soon-href="#preturi" href="#preturi"><span data-when="live">Încearcă gratuit</span><span data-when="soon">Vezi prețurile</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+</div>
 </body>
 </html>

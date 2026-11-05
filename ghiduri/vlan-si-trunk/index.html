@@ -1,0 +1,548 @@
+<!doctype html>
+<!-- Pagină generată. Nu o edita de mână: vezi tools/site/ (npm run build:guides / npm run sync:tools / npm run build:legal). -->
+<html lang="ro" class="play-soon">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>VLAN-uri și trunk-uri: 802.1Q, native VLAN, inter-VLAN | Routerel</title>
+  <meta name="description" content="VLAN-uri și trunk-uri explicate: porturi access și trunk, tag-ul 802.1Q, native VLAN, DTP, rutarea între VLAN-uri, comenzi Cisco IOS, depanare și exerciții.">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <link rel="canonical" href="https://routerel.app/ghiduri/vlan-si-trunk/">
+  <link rel="alternate" hreflang="ro" href="https://routerel.app/ghiduri/vlan-si-trunk/">
+  <link rel="alternate" hreflang="en" href="https://routerel.app/en/guides/vlans-and-trunks/">
+  <link rel="alternate" hreflang="x-default" href="https://routerel.app/en/guides/vlans-and-trunks/">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#12151b" media="(prefers-color-scheme: dark)">
+  <meta name="color-scheme" content="light dark">
+  <link rel="icon" href="../../assets/favicon-32.png" type="image/png" sizes="32x32">
+  <link rel="icon" href="../../assets/icon-192.png" type="image/png" sizes="192x192">
+  <link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
+  <link rel="manifest" href="../../site.webmanifest">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Routerel">
+  <meta property="og:locale" content="ro_RO">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta property="og:title" content="VLAN-uri și trunk-uri: 802.1Q, native VLAN, inter-VLAN | Routerel">
+  <meta property="og:description" content="VLAN-uri și trunk-uri explicate: porturi access și trunk, tag-ul 802.1Q, native VLAN, DTP, rutarea între VLAN-uri, comenzi Cisco IOS, depanare și exerciții.">
+  <meta property="og:url" content="https://routerel.app/ghiduri/vlan-si-trunk/">
+  <meta property="og:image" content="https://routerel.app/assets/og-ro.png">
+  <meta property="og:image:width" content="1024">
+  <meta property="og:image:height" content="500">
+  <meta property="og:image:alt" content="Routerel: mascota puiul de router și numele aplicației">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="VLAN-uri și trunk-uri: 802.1Q, native VLAN, inter-VLAN | Routerel">
+  <meta name="twitter:description" content="VLAN-uri și trunk-uri explicate: porturi access și trunk, tag-ul 802.1Q, native VLAN, DTP, rutarea între VLAN-uri, comenzi Cisco IOS, depanare și exerciții.">
+  <meta name="twitter:image" content="https://routerel.app/assets/og-ro.png">
+  <meta property="article:published_time" content="2026-11-05">
+  <meta property="article:modified_time" content="2026-11-05">
+  <meta name="routerel:updated" content="2026-11-05">
+  <link rel="preload" href="../../assets/fonts/nunito-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../../assets/fonts/nunito-latin-ext.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../../assets/fonts/roboto-mono-500-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="../../style.css">
+  <script>(function(d){d.classList.add("js");try{var t=localStorage.getItem("routerel-theme");if(t==="light"||t==="dark")d.setAttribute("data-theme",t)}catch(e){}setTimeout(function(){if(!window.__rtl)d.classList.remove("js")},4000)})(document.documentElement)</script>
+  <script src="../../assets/site.js" defer></script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Article","@id":"https://routerel.app/ghiduri/vlan-si-trunk/#article","headline":"VLAN-uri și trunk-uri: 802.1Q, native VLAN, inter-VLAN","description":"VLAN-uri și trunk-uri explicate: porturi access și trunk, tag-ul 802.1Q, native VLAN, DTP, rutarea între VLAN-uri, comenzi Cisco IOS, depanare și exerciții.","inLanguage":"ro","datePublished":"2026-11-05","dateModified":"2026-11-05","keywords":"VLAN, ce este un VLAN, trunk 802.1Q, native VLAN, configurare VLAN Cisco, router-on-a-stick, inter-VLAN routing, DTP","author":{"@type":"Organization","name":"Routerel","url":"https://routerel.app/"},"publisher":{"@type":"Organization","name":"Routerel","logo":{"@type":"ImageObject","url":"https://routerel.app/assets/icon-512.png"}},"image":"https://routerel.app/assets/og-ro.png","mainEntityOfPage":"https://routerel.app/ghiduri/vlan-si-trunk/","isPartOf":{"@id":"https://routerel.app/#website"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Acasă","item":"https://routerel.app/"},{"@type":"ListItem","position":2,"name":"Ghiduri","item":"https://routerel.app/ghiduri/"},{"@type":"ListItem","position":3,"name":"VLAN-uri și trunk-uri: 802.1Q, native VLAN, inter-VLAN","item":"https://routerel.app/ghiduri/vlan-si-trunk/"}]},{"@type":"FAQPage","@id":"https://routerel.app/ghiduri/vlan-si-trunk/#faq","inLanguage":"ro","mainEntity":[{"@type":"Question","name":"Ce este un VLAN?","acceptedAnswer":{"@type":"Answer","text":"Un VLAN (Virtual LAN) este o rețea locală logică creată pe un switch. Porturile din VLAN-uri diferite sunt separate ca și cum ar fi pe switch-uri diferite: fiecare VLAN are propriul domeniu de broadcast și, de obicei, propria subrețea IP."}},{"@type":"Question","name":"Care e diferența dintre un port access și un port trunk?","acceptedAnswer":{"@type":"Answer","text":"Un port access aparține unui singur VLAN de date și trimite frame-uri fără tag; acolo conectezi PC-uri, imprimante sau servere. Un port trunk transportă mai multe VLAN-uri pe același cablu, marcând frame-urile cu un tag 802.1Q; îl folosești între switch-uri sau între switch și router."}},{"@type":"Question","name":"Ce este native VLAN?","acceptedAnswer":{"@type":"Answer","text":"Native VLAN este VLAN-ul căruia îi aparțin frame-urile trimise fără tag pe un trunk 802.1Q. Implicit este VLAN 1. Trebuie să fie același la ambele capete ale trunk-ului și e bine să fie un VLAN nefolosit de utilizatori."}},{"@type":"Question","name":"De ce se recomandă dezactivarea DTP?","acceptedAnswer":{"@type":"Answer","text":"DTP negociază automat dacă un port devine trunk. Un atacator conectat la un port care negociază ar putea transforma legătura într-un trunk și ar primi trafic din toate VLAN-urile. De aceea porturile se configurează explicit ca access sau trunk, iar pe trunk-uri se oprește negocierea cu switchport nonegotiate."}},{"@type":"Question","name":"Cum comunică două VLAN-uri între ele?","acceptedAnswer":{"@type":"Answer","text":"Doar printr-un dispozitiv de nivel 3: un router cu subinterfețe pe un trunk (router-on-a-stick) sau un switch Layer 3 cu interfețe virtuale SVI și rutarea activată cu ip routing."}},{"@type":"Question","name":"Câte VLAN-uri pot exista?","acceptedAnswer":{"@type":"Answer","text":"Câmpul VLAN ID din tag-ul 802.1Q are 12 biți, deci 4.096 de valori. Valorile 0 și 4095 sunt rezervate, așa că rămân VLAN-urile 1–4094: intervalul normal 1–1005 și intervalul extins 1006–4094."}}]}]}</script>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs><linearGradient id="rtl-play" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5b8cff"/><stop offset=".55" stop-color="#2f6bff"/><stop offset="1" stop-color="#ffb020"/></linearGradient></defs></svg>
+<a class="skip-link" href="#main">Sari la conținut</a>
+<header class="site-header">
+  <div class="container header-row">
+    <a class="brand" href="../../" aria-label="Routerel, acasă"><img src="../../assets/icon-96.webp" alt="" width="36" height="36"><span>Routerel</span></a>
+    <nav class="main-nav" aria-label="Principal"><ul><li><a href="../../#functii">Funcții</a></li><li><a href="../../#preturi">Prețuri</a></li><li><a href="../../ghiduri/" aria-current="page">Ghiduri</a></li><li><a href="../../tools/">Tools</a></li><li><a href="../../#faq">FAQ</a></li></ul></nav>
+    <div class="header-actions">
+      <div class="lang-switch" role="group" aria-label="Limba"><span aria-current="true" lang="ro">RO</span><a href="../../en/guides/vlans-and-trunks/" hreflang="en" lang="en" title="English">EN</a></div>
+      <button class="icon-btn theme-toggle" type="button" data-theme-toggle aria-label="Schimbă tema"><span class="i-moon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9z"/></svg></span><span class="i-sun"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg></span></button>
+      <a class="btn btn--sm header-cta" data-play data-soon-href="../../#preturi" href="../../#preturi"><span data-when="live">Încearcă gratuit</span><span data-when="soon">Vezi prețurile</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      <button class="icon-btn menu-btn" type="button" data-menu-btn aria-expanded="false" aria-controls="mobile-nav" aria-label="Meniu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+    </div>
+  </div>
+  <nav class="mobile-nav" id="mobile-nav" aria-label="Principal" hidden>
+    <div class="container"><ul><li><a href="../../#functii">Funcții</a></li><li><a href="../../#preturi">Prețuri</a></li><li><a href="../../ghiduri/" aria-current="page">Ghiduri</a></li><li><a href="../../tools/">Tools</a></li><li><a href="../../#faq">FAQ</a></li></ul></div>
+  </nav>
+</header>
+<main id="main">
+  <div class="container section section--tight">
+    <article class="prose">
+      <nav class="crumbs" aria-label="Firimituri"><ol><li><a href="../../">Acasă</a></li><li><a href="../../ghiduri/">Ghiduri</a></li><li><span aria-current="page">VLAN-uri și trunk-uri: 802.1Q, native VLAN, inter-VLAN</span></li></ol></nav>
+      <p class="eyebrow">Ghid CCNA</p>
+      <h1>VLAN-uri și trunk-uri explicate (802.1Q, native VLAN, inter-VLAN)</h1>
+      <div class="article-meta">
+        <span class="avatar"><svg class="mascot" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><g class="m-breathe"><path d="M22 14l-5-9M42 14l5-9" stroke="#8a919c" stroke-width="3.4" stroke-linecap="round" fill="none"/><circle class="m-led m-led-l" cx="17" cy="5" r="3.6"/><circle class="m-led m-led-r" cx="47" cy="5" r="3.6"/><path class="m-body" d="M28 12q4-6 8 0"/><rect class="m-body" x="8" y="12" width="48" height="42" rx="18"/><rect class="m-belly" x="8" y="40" width="48" height="14" rx="7"/><circle cx="23" cy="31" r="5.4" fill="#fff"/><circle class="m-pupil" cx="24" cy="31.5" r="3" fill="#1a1d24"/><circle cx="41" cy="31" r="5.4" fill="#fff"/><circle class="m-pupil" cx="42" cy="31.5" r="3" fill="#1a1d24"/><path class="m-led" d="M29 37l3 3.5 3-3.5z"/><circle class="m-ok" cx="18" cy="47" r="2"/><circle class="m-led" cx="24" cy="47" r="2"/><rect x="31" y="45" width="6" height="4" rx="1" fill="#0d1a3a" opacity=".55"/><rect x="39" y="45" width="6" height="4" rx="1" fill="#0d1a3a" opacity=".55"/><rect x="47" y="45" width="5" height="4" rx="1" fill="#0d1a3a" opacity=".55"/><path class="m-leg" d="M20 54v4M44 54v4" stroke-width="3.4" stroke-linecap="round" fill="none"/></g></svg></span>
+        <span>Echipa Routerel</span><span aria-hidden="true">·</span>
+        <span>Actualizat: <time datetime="2026-11-05">5 noiembrie 2026</time></span><span aria-hidden="true">·</span>
+        <span>14 min de citit</span>
+      </div>
+      <p class="lead">VLAN-urile sunt simple ca idee, dar au câteva detalii (native VLAN, lista de VLAN-uri permise, DTP) care strică multe laboratoare și dau multe întrebări de examen.</p>
+<p>În ghidul ăsta afli de ce există VLAN-uri, cum lucrează porturile access și trunk, ce conține tag-ul (eticheta) 802.1Q, ce e native VLAN, de ce DTP se oprește, cum se face rutarea între VLAN-uri și ce comenzi Cisco IOS configurezi și verifici. La final ai un tabel de depanare și exerciții cu răspunsuri.</p>
+<p>În cursurile CCNA v8 de la Networking Academy, subiectele astea sunt în <strong>CCNA 2 · IEN</strong>: VLAN-urile și trunk-urile în modulul 3, rutarea între VLAN-uri în modulul 4, iar atacurile de tip VLAN hopping în modulul 11 (securitatea accesului și la nivelul 2).</p>
+      <nav class="toc toc--fold" aria-labelledby="toc-title"><h2 id="toc-title">Cuprins</h2><button type="button" class="toc-toggle" data-toc-toggle aria-expanded="false" aria-controls="toc-list"><span class="toc-toggle-t">Cuprins</span> <span class="toc-toggle-n">14 secțiuni</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6"/></svg></button><ol id="toc-list"><li><a href="#de-ce-avem-vlan-uri">De ce avem VLAN-uri</a><ol><li><a href="#tipuri-si-intervale-de-vlan-uri">Tipuri și intervale de VLAN-uri</a></li></ol></li><li><a href="#porturi-access-si-porturi-trunk">Porturi access și porturi trunk</a></li><li><a href="#tag-ul-802-1q">Tag-ul 802.1Q</a></li><li><a href="#native-vlan">Native VLAN</a></li><li><a href="#lista-de-vlan-uri-permise">Lista de VLAN-uri permise</a></li><li><a href="#dtp-si-de-ce-il-opresti">DTP și de ce îl oprești</a></li><li><a href="#vlan-ul-de-voce">VLAN-ul de voce</a></li><li><a href="#configurare-completa-pe-un-switch">Configurare completă pe un switch</a></li><li><a href="#verificarea">Verificarea</a></li><li><a href="#rutarea-intre-vlan-uri">Rutarea între VLAN-uri</a><ol><li><a href="#1-varianta-veche-cate-o-interfata-de-router-pentru-fiecare-vlan">1. Varianta veche: câte o interfață de router pentru fiecare VLAN</a></li><li><a href="#2-router-on-a-stick">2. Router-on-a-stick</a></li><li><a href="#3-switch-layer-3-cu-svi">3. Switch Layer 3 cu SVI</a></li></ol></li><li><a href="#depanare-greseli-frecvente">Depanare: greșeli frecvente</a></li><li><a href="#exercitii">Exerciții</a></li><li><a href="#cum-le-inveti-cel-mai-repede">Cum le înveți cel mai repede</a></li><li><a href="#intrebari-frecvente">Întrebări frecvente</a></li></ol></nav>
+<h2 id="de-ce-avem-vlan-uri">De ce avem VLAN-uri</h2>
+<p>Fără VLAN-uri, toate porturile unui switch sunt în aceeași rețea locală și în același <strong>domeniu de broadcast</strong>. Un broadcast trimis de un PC (de exemplu o cerere ARP sau DHCP) ajunge la toate celelalte. Într-o firmă cu sute de dispozitive asta înseamnă trafic inutil și nicio separare între departamente.</p>
+<p>Un <strong>VLAN</strong> (Virtual LAN) împarte switch-ul, logic, în mai multe rețele separate: porturile din VLAN 10 nu văd frame-urile (cadrele) din VLAN 20. Ce câștigi:</p>
+<ul>
+<li><strong>domenii de broadcast mai mici</strong>: un broadcast rămâne în VLAN-ul lui;</li>
+<li><strong>securitate</strong>: între VLAN-uri traficul trece printr-un dispozitiv de nivel 3, unde poți pune reguli (ACL-uri);</li>
+<li><strong>organizare</strong>: VLAN-ul urmează funcția (Vânzări, Contabilitate, Telefonie), nu locul fizic;</li>
+<li><strong>cost mai mic</strong>: aceleași switch-uri servesc mai multe rețele.</li>
+</ul>
+<p>Regula de bază: <strong>un VLAN = un domeniu de broadcast = o subrețea IP</strong>. Dacă ai nevoie de ajutor la împărțirea adreselor, vezi <a href="../subnetting-pas-cu-pas/">ghidul de subnetting pas cu pas</a>.</p>
+<h3 id="tipuri-si-intervale-de-vlan-uri">Tipuri și intervale de VLAN-uri</h3>
+<div class="table-scroll"><p class="table-hint" aria-hidden="true">glisează<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></p><div class="table-wrap" role="region" tabindex="0" aria-label="Tabel (se derulează pe orizontală)"><table>
+<thead>
+<tr>
+<th>Termen</th>
+<th>Ce înseamnă</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>VLAN implicit (default)</td>
+<td class="tw">VLAN 1. La început toate porturile sunt în el. Nu poate fi șters sau redenumit.</td>
+</tr>
+<tr>
+<td>VLAN de date</td>
+<td class="tw">VLAN pentru traficul utilizatorilor (PC-uri, imprimante).</td>
+</tr>
+<tr>
+<td>VLAN de voce</td>
+<td class="tw">VLAN separat pentru telefoanele IP, ca vocea să poată primi prioritate.</td>
+</tr>
+<tr>
+<td>VLAN de management</td>
+<td class="tw">VLAN prin care accesezi switch-ul (SSH, SNMP), cu o adresă IP pe interfața lui virtuală.</td>
+</tr>
+<tr>
+<td>Native VLAN</td>
+<td class="tw">VLAN-ul frame-urilor fără tag de pe un trunk (implicit VLAN 1).</td>
+</tr>
+<tr>
+<td>Interval normal</td>
+<td class="tw">VLAN 1–1005 (1002–1005 sunt rezervate pentru tehnologii vechi și nu pot fi șterse).</td>
+</tr>
+<tr>
+<td>Interval extins</td>
+<td>VLAN 1006–4094.</td>
+</tr>
+</tbody></table></div></div>
+<p>Pe majoritatea switch-urilor Catalyst, VLAN-urile din intervalul normal se salvează în fișierul <code>vlan.dat</code> din memoria flash, separat de configurația de rulare.</p>
+<h2 id="porturi-access-si-porturi-trunk">Porturi access și porturi trunk</h2>
+<p><strong>Portul access</strong> aparține unui singur VLAN de date. Frame-urile ies și intră pe el <strong>fără tag</strong>, deci dispozitivul conectat (un PC, de exemplu) nici nu știe că există VLAN-uri. Switch-ul ține minte, intern, în ce VLAN e fiecare port.</p>
+<p><strong>Portul trunk</strong> duce <strong>mai multe VLAN-uri pe același cablu</strong>. Ca switch-ul de la celălalt capăt să știe din ce VLAN vine fiecare frame, frame-urile sunt marcate cu un tag. Trunk-urile leagă de obicei switch-uri între ele sau un switch de un router.</p>
+<pre><code class="language-text">PC-A (VLAN 10) ---access---+        trunk 802.1Q         +---access--- PC-C (VLAN 10)
+                           S1 ======================== S2
+PC-B (VLAN 20) ---access---+    (duce VLAN 10 și 20)     +---access--- PC-D (VLAN 20)
+</code></pre>
+<p>PC-A și PC-C sunt în aceeași rețea, deși sunt pe switch-uri diferite. PC-A și PC-B sunt pe același switch, dar în rețele diferite: fără un router sau un switch Layer 3 nu pot comunica.</p>
+<h2 id="tag-ul-802-1q">Tag-ul 802.1Q</h2>
+<p>Standardul <strong>IEEE 802.1Q</strong> inserează în frame-ul Ethernet un tag de <strong>4 octeți</strong>, între adresa MAC sursă și câmpul tip (EtherType):</p>
+<pre><code class="language-text">Fără tag:   | MAC dest. | MAC sursă |        | Tip | Date | FCS |
+Cu 802.1Q:  | MAC dest. | MAC sursă | Tag 4B | Tip | Date | FCS |
+</code></pre>
+<div class="table-scroll"><p class="table-hint" aria-hidden="true">glisează<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></p><div class="table-wrap" role="region" tabindex="0" aria-label="Tabel (se derulează pe orizontală)"><table>
+<thead>
+<tr>
+<th>Câmp</th>
+<th>Biți</th>
+<th>Rol</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>TPID</td>
+<td>16</td>
+<td class="tw">valoarea 0x8100, care spune „urmează un tag 802.1Q”</td>
+</tr>
+<tr>
+<td>PCP (prioritate)</td>
+<td>3</td>
+<td class="tw">prioritatea frame-ului (CoS, 0–7), folosită la QoS, de exemplu pentru voce</td>
+</tr>
+<tr>
+<td>DEI</td>
+<td>1</td>
+<td class="tw">marchează frame-urile care pot fi aruncate primele la congestie</td>
+</tr>
+<tr>
+<td>VLAN ID</td>
+<td>12</td>
+<td class="tw">numărul VLAN-ului: 2^12 = 4.096 de valori, din care 1–4094 utilizabile</td>
+</tr>
+</tbody></table></div></div>
+<p>Pentru că tag-ul schimbă conținutul frame-ului, switch-ul <strong>recalculează FCS-ul</strong>. Frame-ul maxim crește de la 1.518 la 1.522 de octeți.</p>
+<h2 id="native-vlan">Native VLAN</h2>
+<p>Pe un trunk 802.1Q, un singur VLAN circulă <strong>fără tag</strong>: <strong>native VLAN</strong>. Orice frame primit fără tag pe un trunk e considerat al VLAN-ului nativ. Implicit, native VLAN e <strong>VLAN 1</strong>.</p>
+<p>Trei reguli practice:</p>
+<ol>
+<li><strong>Native VLAN trebuie să fie același la ambele capete.</strong> Dacă un capăt are 1 și celălalt 99, frame-urile fără tag „sar” dintr-un VLAN în altul. CDP observă asta și afișează un mesaj de tip <code>%CDP-4-NATIVE_VLAN_MISMATCH</code>.</li>
+<li><strong>Schimbă native VLAN de pe VLAN 1</strong> pe un VLAN dedicat, în care nu pui niciun utilizator (de exemplu 999). Asta reduce riscul atacului <strong>double tagging</strong>: un atacator conectat la un port din VLAN-ul nativ trimite un frame cu două tag-uri; primul switch îl scoate pe cel exterior (al VLAN-ului nativ, care pleacă pe trunk fără tag), iar al doilea switch îl citește pe cel interior și livrează frame-ul într-un alt VLAN.</li>
+<li><strong>Nu folosi native VLAN pentru date sau management.</strong></li>
+</ol>
+<h2 id="lista-de-vlan-uri-permise">Lista de VLAN-uri permise</h2>
+<p>Implicit, un trunk lasă să treacă <strong>toate</strong> VLAN-urile. E mai sigur și mai curat să permiți doar ce ai nevoie:</p>
+<pre><code class="language-text">S1(config-if)# switchport trunk allowed vlan 10,20,99,999
+S1(config-if)# switchport trunk allowed vlan add 30
+S1(config-if)# switchport trunk allowed vlan remove 20
+</code></pre>
+<p>Capcana clasică: <code>switchport trunk allowed vlan 30</code> <strong>fără <code>add</code></strong> înlocuiește toată lista. Trunk-ul care ducea 10, 20 și 99 va duce doar 30, iar utilizatorii din celelalte VLAN-uri rămân brusc fără rețea. Când adaugi, scrie mereu <code>add</code>.</p>
+<h2 id="dtp-si-de-ce-il-opresti">DTP și de ce îl oprești</h2>
+<p><strong>DTP</strong> (Dynamic Trunking Protocol) e un protocol Cisco care negociază automat dacă o legătură devine trunk. Modurile portului:</p>
+<div class="table-scroll"><p class="table-hint" aria-hidden="true">glisează<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></p><div class="table-wrap" role="region" tabindex="0" aria-label="Tabel (se derulează pe orizontală)"><table>
+<thead>
+<tr>
+<th>Comandă</th>
+<th>Ce face portul</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code><span class="nw">switchport</span> <span class="nw">mode</span> <span class="nw">access</span></code></td>
+<td class="tw">rămâne access, indiferent de celălalt capăt</td>
+</tr>
+<tr>
+<td><code><span class="nw">switchport</span> <span class="nw">mode</span> <span class="nw">trunk</span></code></td>
+<td class="tw">devine trunk și anunță prin DTP că vrea trunk</td>
+</tr>
+<tr>
+<td><code><span class="nw">switchport</span> <span class="nw">mode</span> <span class="nw">dynamic</span> <span class="nw">desirable</span></code></td>
+<td class="tw">cere activ trunk; devine trunk dacă vecinul e trunk, desirable sau auto</td>
+</tr>
+<tr>
+<td><code><span class="nw">switchport</span> <span class="nw">mode</span> <span class="nw">dynamic</span> <span class="nw">auto</span></code></td>
+<td class="tw">așteaptă; devine trunk doar dacă vecinul cere (trunk sau desirable)</td>
+</tr>
+<tr>
+<td><code><span class="nw">switchport</span> <span class="nw">nonegotiate</span></code></td>
+<td class="tw">oprește mesajele DTP (se folosește cu modul access sau trunk)</td>
+</tr>
+</tbody></table></div></div>
+<p>Rezultatul combinațiilor:</p>
+<div class="table-scroll"><p class="table-hint" aria-hidden="true">glisează<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></p><div class="table-wrap" role="region" tabindex="0" aria-label="Tabel (se derulează pe orizontală)"><table>
+<thead>
+<tr>
+<th>Capătul A \ Capătul B</th>
+<th>dynamic auto</th>
+<th>dynamic desirable</th>
+<th>trunk</th>
+<th>access</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>dynamic auto</strong></td>
+<td>access</td>
+<td>trunk</td>
+<td>trunk</td>
+<td>access</td>
+</tr>
+<tr>
+<td><strong>dynamic desirable</strong></td>
+<td>trunk</td>
+<td>trunk</td>
+<td>trunk</td>
+<td>access</td>
+</tr>
+<tr>
+<td><strong>trunk</strong></td>
+<td>trunk</td>
+<td>trunk</td>
+<td>trunk</td>
+<td>conectivitate limitată</td>
+</tr>
+<tr>
+<td><strong>access</strong></td>
+<td>access</td>
+<td>access</td>
+<td>conectivitate limitată</td>
+<td>access</td>
+</tr>
+</tbody></table></div></div>
+<p>Pe multe switch-uri Catalyst (de exemplu seria 2960), modul implicit e <strong>dynamic auto</strong>. Două switch-uri noi legate între ele <strong>nu</strong> formează singure un trunk, pentru că amândouă așteaptă. E o întrebare foarte des întâlnită.</p>
+<p>De ce oprești DTP: dacă un port de utilizator negociază, un atacator poate pretinde că e switch (<strong>switch spoofing</strong>), formează un trunk și primește trafic din toate VLAN-urile. Practica recomandată:</p>
+<ul>
+<li>porturile de utilizator: <code>switchport mode access</code> (opțional și <code>switchport nonegotiate</code>);</li>
+<li>trunk-urile: <code>switchport mode trunk</code> și <code>switchport nonegotiate</code>;</li>
+<li>porturile nefolosite: <code>shutdown</code> și mutate într-un VLAN nefolosit.</li>
+</ul>
+<h2 id="vlan-ul-de-voce">VLAN-ul de voce</h2>
+<p>Când PC-ul e legat prin telefonul IP, pe același port trec două fluxuri. Soluția e un port access cu VLAN de voce:</p>
+<pre><code class="language-text">S1(config)# interface FastEthernet0/5
+S1(config-if)# switchport mode access
+S1(config-if)# switchport access vlan 10
+S1(config-if)# switchport voice vlan 150
+</code></pre>
+<p>Telefonul află VLAN-ul de voce de la switch prin CDP (sau LLDP-MED) și își marchează traficul cu tag-ul 802.1Q al VLAN-ului 150, inclusiv cu prioritatea din câmpul PCP. Traficul PC-ului rămâne fără tag, în VLAN 10.</p>
+<h2 id="configurare-completa-pe-un-switch">Configurare completă pe un switch</h2>
+<p>Exemplul de mai jos creează două VLAN-uri de date, un VLAN de management și un VLAN nativ, pune porturile în VLAN-uri și configurează trunk-ul spre alt switch.</p>
+<pre><code class="language-text">S1# configure terminal
+S1(config)# vlan 10
+S1(config-vlan)# name VANZARI
+S1(config-vlan)# exit
+S1(config)# vlan 20
+S1(config-vlan)# name CONTABILITATE
+S1(config-vlan)# exit
+S1(config)# vlan 99
+S1(config-vlan)# name MANAGEMENT
+S1(config-vlan)# exit
+S1(config)# vlan 999
+S1(config-vlan)# name NATIV
+S1(config-vlan)# exit
+S1(config)# interface range FastEthernet0/1 - 10
+S1(config-if-range)# switchport mode access
+S1(config-if-range)# switchport access vlan 10
+S1(config-if-range)# exit
+S1(config)# interface range FastEthernet0/11 - 20
+S1(config-if-range)# switchport mode access
+S1(config-if-range)# switchport access vlan 20
+S1(config-if-range)# exit
+S1(config)# interface GigabitEthernet0/1
+S1(config-if)# switchport mode trunk
+S1(config-if)# switchport trunk native vlan 999
+S1(config-if)# switchport trunk allowed vlan 10,20,99,999
+S1(config-if)# switchport nonegotiate
+S1(config-if)# exit
+S1(config)# interface vlan 99
+S1(config-if)# ip address 192.168.99.11 255.255.255.0
+S1(config-if)# no shutdown
+S1(config-if)# exit
+S1(config)# ip default-gateway 192.168.99.1
+S1(config)# end
+S1# copy running-config startup-config
+</code></pre>
+<p>Câteva detalii utile:</p>
+<ul>
+<li>Pe switch-urile care suportă și ISL (vechea metodă Cisco de trunking), înainte de <code>switchport mode trunk</code> trebuie să alegi încapsularea: <code>switchport trunk encapsulation dot1q</code>. Pe seria 2960 comanda nu există, pentru că știe doar 802.1Q.</li>
+<li>Dacă atribui un port unui VLAN care nu există, switch-ul îl creează automat și te anunță.</li>
+<li><code>no vlan 20</code> șterge VLAN-ul, dar porturile rămân atribuite lui și devin <strong>inactive</strong>. Mută-le întâi în alt VLAN.</li>
+<li>Interfața <code>vlan 99</code> (o SVI) și <code>ip default-gateway</code> îți permit să administrezi switch-ul de la distanță. Un switch Layer 2 nu rutează, deci are nevoie de gateway ca să răspundă dispozitivelor din alte rețele.</li>
+</ul>
+<h2 id="verificarea">Verificarea</h2>
+<div class="table-scroll"><p class="table-hint" aria-hidden="true">glisează<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></p><div class="table-wrap" role="region" tabindex="0" aria-label="Tabel (se derulează pe orizontală)"><table>
+<thead>
+<tr>
+<th>Comandă</th>
+<th>Ce vezi</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code><span class="nw">show</span> <span class="nw">vlan</span> <span class="nw">brief</span></code></td>
+<td class="tw">VLAN-urile existente, numele, starea și <strong>porturile access</strong> din fiecare (trunk-urile nu apar aici)</td>
+</tr>
+<tr>
+<td><code><span class="nw">show</span> <span class="nw">interfaces</span> <span class="nw">trunk</span></code></td>
+<td class="tw">porturile trunk, modul, încapsularea, native VLAN, VLAN-urile permise și cele active</td>
+</tr>
+<tr>
+<td><code><span class="nw">show</span> <span class="nw">interfaces</span> <span class="nw">FastEthernet0/5</span> <span class="nw">switchport</span></code></td>
+<td class="tw">modul administrativ și operațional, VLAN-ul access, native VLAN, VLAN-ul de voce, dacă negociază</td>
+</tr>
+</tbody></table></div></div>
+<p>Un exemplu de ieșire pentru trunk-ul configurat mai sus:</p>
+<pre><code class="language-text">S1# show interfaces trunk
+
+Port        Mode         Encapsulation  Status        Native vlan
+Gi0/1       on           802.1q         trunking      999
+
+Port        Vlans allowed on trunk
+Gi0/1       10,20,99,999
+
+Port        Vlans allowed and active in management domain
+Gi0/1       10,20,99,999
+
+Port        Vlans in spanning tree forwarding state and not pruned
+Gi0/1       10,20,99,999
+</code></pre>
+<p>„Mode on” = trunk static. Un VLAN prezent la „allowed”, dar absent din „allowed and active”, probabil nu e creat pe switch.</p>
+<h2 id="rutarea-intre-vlan-uri">Rutarea între VLAN-uri</h2>
+<p>VLAN-urile sunt rețele separate, deci au nevoie de un dispozitiv de nivel 3 ca să comunice. Sunt trei variante.</p>
+<h3 id="1-varianta-veche-cate-o-interfata-de-router-pentru-fiecare-vlan">1. Varianta veche: câte o interfață de router pentru fiecare VLAN</h3>
+<p>Fiecare VLAN folosește un cablu și o interfață separată a routerului. Nu scalează.</p>
+<h3 id="2-router-on-a-stick">2. Router-on-a-stick</h3>
+<p>Un singur cablu, configurat <strong>trunk</strong> pe switch, iar pe router interfața fizică se împarte în <strong>subinterfețe</strong>, câte una pentru fiecare VLAN. Fiecare subinterfață știe ce tag să citească și să pună (<code>encapsulation dot1Q</code>) și are adresa de gateway a VLAN-ului ei.</p>
+<pre><code class="language-text">R1(config)# interface GigabitEthernet0/0/1.10
+R1(config-subif)# description Gateway VLAN 10
+R1(config-subif)# encapsulation dot1Q 10
+R1(config-subif)# ip address 192.168.10.1 255.255.255.0
+R1(config-subif)# exit
+R1(config)# interface GigabitEthernet0/0/1.20
+R1(config-subif)# description Gateway VLAN 20
+R1(config-subif)# encapsulation dot1Q 20
+R1(config-subif)# ip address 192.168.20.1 255.255.255.0
+R1(config-subif)# exit
+R1(config)# interface GigabitEthernet0/0/1.99
+R1(config-subif)# encapsulation dot1Q 99
+R1(config-subif)# ip address 192.168.99.1 255.255.255.0
+R1(config-subif)# exit
+R1(config)# interface GigabitEthernet0/0/1.999
+R1(config-subif)# encapsulation dot1Q 999 native
+R1(config-subif)# exit
+R1(config)# interface GigabitEthernet0/0/1
+R1(config-if)# no shutdown
+</code></pre>
+<p>De reținut:</p>
+<ul>
+<li>numărul subinterfeței (<code>.10</code>) e doar un nume; contează VLAN-ul din <code>encapsulation dot1Q 10</code> (ține-le identice);</li>
+<li><strong>interfața fizică nu primește adresă IP</strong>, dar trebuie pornită cu <code>no shutdown</code>; subinterfețele urmează starea ei;</li>
+<li><code>encapsulation dot1Q 999 native</code> spune routerului că VLAN-ul nativ e 999, la fel ca pe switch;</li>
+<li>routerul nu negociază DTP, deci portul switch-ului spre router trebuie pus manual <code>switchport mode trunk</code>;</li>
+<li>PC-urile din VLAN 10 au gateway <code>192.168.10.1</code>, iar cele din VLAN 20 au <code>192.168.20.1</code>.</li>
+</ul>
+<p>Verificarea: <code>show ip interface brief</code> (subinterfețele trebuie să fie up/up), <code>show ip route</code> (câte o rețea conectată „C” pentru fiecare VLAN) și <code>show vlans</code> pe router (cu „s”; pe switch comanda e <code>show vlan brief</code>).</p>
+<p>Limita: traficul dintre VLAN-uri trece de două ori prin același cablu, deci într-o rețea mare devine gâtul sticlei.</p>
+<h3 id="3-switch-layer-3-cu-svi">3. Switch Layer 3 cu SVI</h3>
+<p>Un switch multilayer poate ruta singur. Pentru fiecare VLAN creezi o <strong>SVI</strong> (Switch Virtual Interface), adică o interfață virtuală <code>interface vlan X</code>, cu adresa de gateway a VLAN-ului, și pornești rutarea:</p>
+<pre><code class="language-text">D1(config)# ip routing
+D1(config)# interface vlan 10
+D1(config-if)# ip address 192.168.10.1 255.255.255.0
+D1(config-if)# no shutdown
+D1(config-if)# exit
+D1(config)# interface vlan 20
+D1(config-if)# ip address 192.168.20.1 255.255.255.0
+D1(config-if)# no shutdown
+D1(config-if)# exit
+D1(config)# interface GigabitEthernet1/0/24
+D1(config-if)# no switchport
+D1(config-if)# ip address 10.0.0.1 255.255.255.252
+D1(config-if)# no shutdown
+</code></pre>
+<ul>
+<li><code>ip routing</code> e obligatoriu; fără el switch-ul are adrese în fiecare VLAN, dar nu rutează între ele.</li>
+<li>O SVI e <strong>up/up</strong> doar dacă VLAN-ul există și cel puțin un port din acel VLAN (access sau trunk care îl duce) e activ și în starea STP forwarding, iar SVI-ul nu are <code>shutdown</code>.</li>
+<li><code>no switchport</code> transformă un port fizic într-un <strong>port rutat</strong>, ca o interfață de router, util spre un router sau spre alt switch Layer 3.</li>
+</ul>
+<div class="table-scroll"><p class="table-hint" aria-hidden="true">glisează<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></p><div class="table-wrap" role="region" tabindex="0" aria-label="Tabel (se derulează pe orizontală)"><table>
+<thead>
+<tr>
+<th>Variantă</th>
+<th>Avantaje</th>
+<th>Dezavantaje</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>O interfață de router pe VLAN</td>
+<td>simplu de înțeles</td>
+<td>multe cabluri și interfețe, nu scalează</td>
+</tr>
+<tr>
+<td>Router-on-a-stick</td>
+<td>un singur cablu, ieftin</td>
+<td class="tw">toată rutarea pe o singură legătură, gâtuire</td>
+</tr>
+<tr>
+<td>Switch Layer 3 cu SVI</td>
+<td>rapid (rutare în hardware), scalează</td>
+<td>switch mai scump</td>
+</tr>
+</tbody></table></div></div>
+<h2 id="depanare-greseli-frecvente">Depanare: greșeli frecvente</h2>
+<div class="table-scroll"><p class="table-hint" aria-hidden="true">glisează<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></p><div class="table-wrap" role="region" tabindex="0" aria-label="Tabel (se derulează pe orizontală)"><table>
+<thead>
+<tr>
+<th>Simptom</th>
+<th>Cauza probabilă</th>
+<th>Cum verifici și repari</th>
+</tr>
+</thead>
+<tbody><tr>
+<td class="tw">Un PC nu comunică cu altele din „același” VLAN</td>
+<td>portul e în VLAN-ul greșit</td>
+<td><code><span class="nw">show</span> <span class="nw">vlan</span> <span class="nw">brief</span></code>, apoi <code><span class="nw">switchport</span> <span class="nw">access</span> <span class="nw">vlan</span> <span class="nw">X</span></code></td>
+</tr>
+<tr>
+<td>Un grup de porturi s-a oprit brusc</td>
+<td>VLAN-ul lor a fost șters</td>
+<td class="tw"><code><span class="nw">show</span> <span class="nw">vlan</span> <span class="nw">brief</span></code> (porturile nu mai apar) → recreezi VLAN-ul sau muți porturile</td>
+</tr>
+<tr>
+<td>Legătura dintre switch-uri nu e trunk</td>
+<td class="tw">ambele capete sunt <code><span class="nw">dynamic</span> <span class="nw">auto</span></code> sau un capăt e access</td>
+<td><code><span class="nw">show</span> <span class="nw">interfaces</span> <span class="nw">trunk</span></code>, <code><span class="nw">show</span> <span class="nw">interfaces</span> <span class="nw">g0/1</span> <span class="nw">switchport</span></code> → <code><span class="nw">switchport</span> <span class="nw">mode</span> <span class="nw">trunk</span></code></td>
+</tr>
+<tr>
+<td>Mesaje „native VLAN mismatch”</td>
+<td>native VLAN diferit la cele două capete</td>
+<td><code><span class="nw">show</span> <span class="nw">interfaces</span> <span class="nw">trunk</span></code> pe ambele switch-uri → același <code><span class="nw">switchport</span> <span class="nw">trunk</span> <span class="nw">native</span> <span class="nw">vlan</span></code></td>
+</tr>
+<tr>
+<td class="tw">Un VLAN merge pe un switch, dar nu trece pe trunk</td>
+<td class="tw">VLAN-ul nu e în lista permisă sau nu e creat pe celălalt switch</td>
+<td><code><span class="nw">show</span> <span class="nw">interfaces</span> <span class="nw">trunk</span></code> → <code><span class="nw">switchport</span> <span class="nw">trunk</span> <span class="nw">allowed</span> <span class="nw">vlan</span> <span class="nw">add</span> <span class="nw">X</span></code>, <code><span class="nw">vlan</span> <span class="nw">X</span></code></td>
+</tr>
+<tr>
+<td>Router-on-a-stick: nimic nu merge</td>
+<td class="tw">interfața fizică e oprită sau portul switch-ului nu e trunk</td>
+<td><code><span class="nw">show</span> <span class="nw">ip</span> <span class="nw">interface</span> <span class="nw">brief</span></code>, <code><span class="nw">no</span> <span class="nw">shutdown</span></code>, <code><span class="nw">switchport</span> <span class="nw">mode</span> <span class="nw">trunk</span></code></td>
+</tr>
+<tr>
+<td>Un singur VLAN nu ajunge la router</td>
+<td>VLAN greșit în <code><span class="nw">encapsulation</span> <span class="nw">dot1Q</span></code></td>
+<td><code><span class="nw">show</span> <span class="nw">vlans</span></code> pe router (cu „s”), <code><span class="nw">show</span> <span class="nw">running-config</span></code></td>
+</tr>
+<tr>
+<td class="tw">PC-ul își vede gateway-ul, dar nu alt VLAN</td>
+<td class="tw"><code><span class="nw">ip</span> <span class="nw">routing</span></code> lipsă pe switch-ul Layer 3 sau gateway greșit pe PC</td>
+<td><code><span class="nw">show</span> <span class="nw">ip</span> <span class="nw">route</span></code>, configurația PC-ului</td>
+</tr>
+<tr>
+<td>SVI în starea down/down</td>
+<td class="tw">VLAN inexistent sau niciun port activ în VLAN</td>
+<td><code><span class="nw">show</span> <span class="nw">vlan</span> <span class="nw">brief</span></code>, <code><span class="nw">show</span> <span class="nw">ip</span> <span class="nw">interface</span> <span class="nw">brief</span></code></td>
+</tr>
+</tbody></table></div></div>
+<h2 id="exercitii">Exerciții</h2>
+<ol>
+<li>PC-urile din VLAN 10 de pe S1 și S2 nu comunică între ele. Pe trunk, <code>show interfaces trunk</code> arată „Vlans allowed on trunk: 1,20,30”. Care e problema și ce comandă o rezolvă fără să afecteze celelalte VLAN-uri?</li>
+<li>Legi două switch-uri 2960 noi, cu configurația implicită (dynamic auto pe ambele). Se formează trunk? Ce faci ca să fie trunk?</li>
+<li>Scrie configurația de router-on-a-stick pentru VLAN 30, cu rețeaua <code>192.168.30.0/24</code> și gateway-ul <code>.1</code>, pe interfața <code>GigabitEthernet0/0/0</code>.</li>
+<li>Câte valori are câmpul VLAN ID din 802.1Q și câte VLAN-uri poți folosi efectiv? De ce?</li>
+<li>Pe un trunk care ducea VLAN-urile 10, 20 și 30 cineva a scris <code>switchport trunk allowed vlan 40</code>. Ce se întâmplă și cum trebuia scrisă comanda?</li>
+</ol>
+<details class="reveal-answer">
+<summary><strong>Răspunsuri</strong></summary><p><strong>1.</strong> VLAN 10 nu e permis pe trunk. Pe interfața trunk, la ambele capete dacă e nevoie: <code>switchport trunk allowed vlan add 10</code>. Fără <code>add</code>, ai înlocui lista și ai tăia VLAN-urile 1, 20 și 30.</p>
+<p><strong>2.</strong> <strong>Nu.</strong> Două porturi <code>dynamic auto</code> așteaptă fiecare ca celălalt să ceară trunk, deci legătura rămâne access. Pui cel puțin un capăt (ideal ambele) pe <code>switchport mode trunk</code>, apoi <code>switchport nonegotiate</code>.</p>
+<p><strong>3.</strong></p>
+<pre><code class="language-text">R1(config)# interface GigabitEthernet0/0/0.30
+R1(config-subif)# encapsulation dot1Q 30
+R1(config-subif)# ip address 192.168.30.1 255.255.255.0
+R1(config-subif)# exit
+R1(config)# interface GigabitEthernet0/0/0
+R1(config-if)# no shutdown
+</code></pre>
+<p>Portul switch-ului spre router trebuie să fie trunk și să permită VLAN 30.</p>
+<p><strong>4.</strong> Câmpul are <strong>12 biți</strong>, deci 2^12 = <strong>4.096</strong> valori. 0 și 4095 sunt rezervate, deci rămân <strong>4.094</strong> VLAN-uri (1–4094).</p>
+<p><strong>5.</strong> Lista permisă devine <strong>doar VLAN 40</strong>; VLAN-urile 10, 20 și 30 nu mai trec pe trunk. Corect: <code>switchport trunk allowed vlan add 40</code>.</p>
+</details><h2 id="cum-le-inveti-cel-mai-repede">Cum le înveți cel mai repede</h2>
+<ul>
+<li><strong>Construiește același laborator de trei ori:</strong> cu router-on-a-stick, cu switch Layer 3 și stricat intenționat (native VLAN diferit, VLAN lipsă de pe trunk), apoi reparat doar cu comenzi <code>show</code>.</li>
+<li><strong>Învață pe de rost tabelul DTP.</strong></li>
+<li><strong>Leagă VLAN-urile de straturi:</strong> trunk-urile sunt stratul 2, rutarea între VLAN-uri e stratul 3. Vezi <a href="../model-osi-vs-tcp-ip/">modelul OSI vs TCP/IP</a>.</li>
+<li><strong>Stăpânește comenzile de bază</strong> din <a href="../comenzi-cisco-ios/">fișa cu comenzile Cisco IOS</a>.</li>
+</ul>
+<div class="cta-box cta-box--article"><svg class="mascot" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><g class="m-breathe"><path d="M22 14l-5-9M42 14l5-9" stroke="#8a919c" stroke-width="3.4" stroke-linecap="round" fill="none"/><circle class="m-led m-led-l" cx="17" cy="5" r="3.6"/><circle class="m-led m-led-r" cx="47" cy="5" r="3.6"/><path class="m-body" d="M28 12q4-6 8 0"/><rect class="m-body" x="8" y="12" width="48" height="42" rx="18"/><rect class="m-belly" x="8" y="40" width="48" height="14" rx="7"/><path d="M19 31q4-5 8 0" stroke="#1a1d24" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M37 31q4-5 8 0" stroke="#1a1d24" stroke-width="3" fill="none" stroke-linecap="round"/><path class="m-led" d="M29 37l3 3.5 3-3.5z"/><circle cx="15" cy="38" r="3" fill="#ff8fb1" opacity=".7"/><circle cx="49" cy="38" r="3" fill="#ff8fb1" opacity=".7"/><circle class="m-ok" cx="18" cy="47" r="2"/><circle class="m-led" cx="24" cy="47" r="2"/><rect x="31" y="45" width="6" height="4" rx="1" fill="#0d1a3a" opacity=".55"/><rect x="39" y="45" width="6" height="4" rx="1" fill="#0d1a3a" opacity=".55"/><rect x="47" y="45" width="5" height="4" rx="1" fill="#0d1a3a" opacity=".55"/><path class="m-leg" d="M20 54v4M44 54v4" stroke-width="3.4" stroke-linecap="round" fill="none"/></g></svg><div><h3>Exersează VLAN-urile în aplicația Routerel</h3><p>Routerel are peste 1.900 de întrebări pentru CCNA 1 · ITN, CCNA 2 · IEN și CCNA 3 · CEN, cu scheme de rețea și configurații pe care le poți mări și cu explicație imediat după răspuns. Greșelile revin singure prin repetiție spațiată până le stăpânești, iar simularea de examen cu timp îți arată unde stai. Abonații noi au 7 zile gratuite, cu acces la tot.</p></div><a class="btn" href="../../">Descoperă aplicația<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div><h2 id="intrebari-frecvente">Întrebări frecvente</h2>
+<div class="faq faq--article"><details><summary>Ce este un VLAN?<span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p>O rețea locală logică creată pe un switch. Porturile din VLAN-uri diferite sunt separate ca și cum ar fi pe switch-uri diferite: fiecare VLAN are propriul domeniu de broadcast și, de obicei, propria subrețea IP.</p></div></details><details><summary>Care e diferența dintre un port access și un port trunk?<span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p>Un port access aparține unui singur VLAN de date și trimite frame-uri fără tag; acolo conectezi PC-uri, imprimante sau servere. Un port trunk transportă mai multe VLAN-uri pe același cablu, marcând frame-urile cu un tag 802.1Q; îl folosești între switch-uri sau între switch și router.</p></div></details><details><summary>Ce este native VLAN?<span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p>VLAN-ul căruia îi aparțin frame-urile trimise fără tag pe un trunk 802.1Q. Implicit e VLAN 1. Trebuie să fie același la ambele capete ale trunk-ului și e bine să fie un VLAN nefolosit de utilizatori.</p></div></details><details><summary>De ce se recomandă dezactivarea DTP?<span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p>DTP negociază automat dacă un port devine trunk. Un atacator conectat la un port care negociază ar putea forma un trunk și ar primi trafic din toate VLAN-urile. De aceea porturile se configurează explicit ca access sau trunk, iar pe trunk-uri se oprește negocierea cu <code>switchport nonegotiate</code>.</p></div></details><details><summary>Cum comunică două VLAN-uri între ele?<span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p>Doar printr-un dispozitiv de nivel 3: un router cu subinterfețe pe un trunk (router-on-a-stick) sau un switch Layer 3 cu interfețe SVI și rutarea pornită cu <code>ip routing</code>.</p></div></details><details><summary>Câte VLAN-uri pot exista?<span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p>Câmpul VLAN ID are 12 biți, deci 4.096 de valori. 0 și 4095 sunt rezervate, așa că rămân VLAN-urile 1–4094: intervalul normal 1–1005 și cel extins 1006–4094. Pentru locul VLAN-urilor în examen, vezi <a href="../ce-este-ccna/">ghidul despre CCNA</a>.</p></div></details></div>
+<hr>
+<p><em>Routerel este o aplicație independentă și nu este afiliată, sponsorizată sau aprobată de Cisco Systems, Inc. Cisco, CCNA, Cisco IOS, Catalyst și Networking Academy sunt mărci înregistrate ale Cisco Systems, Inc.</em></p>
+      
+      <section class="related" aria-labelledby="rel-title">
+        <h2 id="rel-title">Citește și</h2>
+        <div class="grid grid--2"><a class="card post-card lift" href="../../ghiduri/adrese-ipv6/"><span class="tagline">Ghid · 13 min</span><h3>Adresele IPv6 explicate (format, prescurtare, tipuri)</h3><p>Adresele IPv6 pe înțelesul tău: formatul pe 128 de biți, regulile de prescurtare, tipurile de adrese, EUI-64 pas cu pas, SLAAC și DHCPv6, plus exerciții.</p></a><a class="card post-card lift" href="../../ghiduri/ce-este-ccna/"><span class="tagline">Ghid · 12 min</span><h3>Ce este CCNA și cum te pregătești (ghid 2026)</h3><p>Ce este CCNA, cum arată examenul 200-301, cât costă, cât e valabil și un plan de pregătire pe 12 săptămâni, cu tehnici de studiu și greșeli de evitat.</p></a></div>
+      </section>
+    </article>
+  </div>
+</main>
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="about">
+        <a class="brand" href="../../"><img src="../../assets/icon-96.webp" alt="" width="36" height="36" loading="lazy"><span>Routerel</span></a>
+        <p>Exersezi CCNA pe telefon: întrebări cu explicații, repetiția greșelilor și simulări de examen. În română și engleză.</p>
+      </div>
+      <div><h2>Aplicația</h2><ul><li><a href="../../#functii">Funcții</a></li><li><a href="../../#preturi">Prețuri</a></li><li><a href="../../#cum-functioneaza">Cum funcționează</a></li><li><a href="../../#faq">Întrebări frecvente</a></li></ul></div>
+      <div><h2>Resurse</h2><ul><li><a href="../../ghiduri/">Ghiduri CCNA</a></li><li><a href="../../tools/">Tools gratuite</a></li><li><a href="../../en/" hreflang="en" lang="en" data-set-lang="en">English</a></li></ul></div>
+      <div><h2>Legal și contact</h2><ul><li><a href="../../privacy.html">Confidențialitate</a></li><li><a href="../../terms.html">Termeni de utilizare</a></li><li><a href="../../delete-account.html">Ștergerea contului</a></li></ul><ul><li><a href="mailto:contact@routerel.app">contact@routerel.app</a></li></ul></div>
+    </div>
+    <div class="disclaimer">
+      <p>Routerel este o aplicație independentă și nu este afiliată, sponsorizată sau aprobată de Cisco Systems, Inc. Cisco, CCNA și Cisco Networking Academy sunt mărci ale Cisco Systems, Inc.</p>
+      <p>© 2026 Routerel</p>
+    </div>
+  </div>
+</footer>
+</body>
+</html>
