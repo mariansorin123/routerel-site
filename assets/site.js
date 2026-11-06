@@ -20,11 +20,11 @@ var PRICES = {
 };
 
 // 3) Prețurile în dolari (USD), afișate pe paginile în engleză.
-//    DE CONFIRMAT de Sorin din Play Console (prețurile pentru Statele Unite). Valorile de acum sunt provizorii.
+//    Din Play Console, prețurile pentru Statele Unite (confirmate de Sorin, 2026-11-06).
 var PRICES_USD = {
-  monthly: 9.99,     // Monthly
-  quarterly: 24.99,  // Every 3 months (Recommended)
-  yearly: 79.99      // Yearly
+  monthly: 10.99,    // Monthly
+  quarterly: 25.99,  // Every 3 months (Recommended)
+  yearly: 84.99      // Yearly
 };
 
 /* ===================================================================== */
