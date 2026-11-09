@@ -322,7 +322,10 @@ html.play-soon [data-when="live"], html.play-live [data-when="soon"] { display: 
 }
 .phone img { border-radius: 33px; width: 100%; aspect-ratio: 1170 / 2532; object-fit: cover; object-position: top; background: #fff; }
 .phone--front { width: 54%; left: 10%; top: 4%; z-index: 2; }
-.phone--back { width: 48%; right: 2%; top: 14%; z-index: 1; transform: rotate(6deg); }
+/* Telefonul din spate: rotirea e statică pe telefon (se desenează direct din pixelii capturii, deci rămâne clară),
+   iar plutirea e pe învelitoare și e doar o translație (un strat animat rotit s-ar desena estompat). */
+.phone-float--back { position: absolute; width: 48%; right: 2%; top: 14%; z-index: 1; }
+.phone-float--back > .phone--back { position: relative; width: 100%; transform: rotate(6deg); }
 .phone--back img { background: #12151b; }
 .hero-mascot { position: absolute; z-index: 3; width: 22%; left: -2%; top: 58%; filter: drop-shadow(0 14px 18px rgba(20, 40, 110, 0.28)); }
 .chip-float {
@@ -719,17 +722,19 @@ body { padding-top: 68px; }
 @keyframes blob-a { to { transform: translate3d(120px, 60px, 0) scale(1.12); } }
 @keyframes blob-b { to { transform: translate3d(-110px, 90px, 0) scale(0.9); } }
 
-/* Telefonul din hero: capturile se schimbă; înclinare la mouse */
-.phones { transform: perspective(1400px) translate3d(0, var(--sy, 0px), 0) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)); transition: transform 260ms cubic-bezier(0.2, 0.7, 0.2, 1); transform-style: preserve-3d; will-change: transform; }
+/* Telefonul din hero: capturile se schimbă; paralaxă ușoară la mouse */
+/* Fără 3D și fără will-change permanent: doar translații în pixeli întregi (site.js), ca stratul să nu fie redesenat estompat. */
+.phones { translate: var(--tx, 0px) var(--ty, 0px); transition: translate 260ms cubic-bezier(0.2, 0.7, 0.2, 1); }
+.phone-float--back { translate: var(--bx, 0px) var(--by, 0px); transition: translate 420ms cubic-bezier(0.2, 0.7, 0.2, 1); }
 .screen { position: relative; aspect-ratio: 1170 / 2532; border-radius: 33px; overflow: hidden; background: #fff; }
 .screen img { position: absolute; inset: 0; width: 100%; height: 100%; border-radius: 0; opacity: 0; transition: opacity 700ms ease; }
 .screen img.is-on { opacity: 1; }
 .phone--back .screen { background: #12151b; }
 @media (prefers-reduced-motion: no-preference) {
   .phone--front { animation: float 7s ease-in-out infinite; }
-  .phone--back { animation: float-tilt 9s ease-in-out -3s infinite; }
+  .phone-float--back { animation: float-back 9s ease-in-out -3s infinite; }
 }
-@keyframes float-tilt { 0%, 100% { transform: rotate(6deg); } 50% { transform: rotate(6deg) translateY(-12px); } }
+@keyframes float-back { 50% { transform: translateY(-12px); } }
 .hero-mascot .mascot { transition: transform 200ms ease; }
 @media (prefers-reduced-motion: no-preference) {
   .hero-mascot:hover .mascot, .bounce-hover:hover .mascot { animation: hop 650ms cubic-bezier(0.3, 0.7, 0.3, 1); }
@@ -738,7 +743,7 @@ body { padding-top: 68px; }
 
 /* Intrarea elementelor din hero (fără să ascundă textul principal) */
 @media (prefers-reduced-motion: no-preference) {
-  .hero-visual { animation: rise 900ms cubic-bezier(0.2, 0.7, 0.2, 1) both; }
+  .hero-visual { animation: rise 900ms cubic-bezier(0.2, 0.7, 0.2, 1) backwards; }
   .chip-float--ok { animation: pop-in 500ms 700ms cubic-bezier(0.3, 1.4, 0.5, 1) both, float 6s 1.2s ease-in-out infinite; }
   .chip-float--led { animation: pop-in 500ms 1000ms cubic-bezier(0.3, 1.4, 0.5, 1) both, float 7s 1.5s ease-in-out infinite; }
 }
@@ -900,7 +905,7 @@ html:not(.js) .steps-fill { transform: none; }
 .review-card footer { color: var(--muted); font-weight: 800; font-size: 0.92rem; }
 
 @media (prefers-reduced-motion: reduce) {
-  .phones { transform: none !important; }
+  .phones, .phone-float--back { translate: none !important; }
 }
 .prose .post-card h3, .prose .cta-box h3 { margin: 0 0 4px; }
 .prose .post-card p { margin: 0; }
@@ -1004,6 +1009,24 @@ html:not(.js) .steps-fill { transform: none; }
   .chip-float--ok { left: auto; right: -5%; top: 0; }
   .chip-float--led { right: -8%; bottom: -8%; }
   .hero-mascot { width: 19%; left: -12%; top: auto; bottom: 4%; }
+}
+
+/* Hero pe ecrane mari: telefoane mai mari (capturile au 900w/1170w pentru ecranele dense). Lățimea ține cont și de
+   înălțimea ferestrei, ca macheta să încapă pe primul ecran; compoziția iese puțin spre dreapta coloanei, iar
+   mascota rămâne în spațiul dintre coloane. „sizes” din index.html (ro + en) = 1,5 × lățimea reală a capturii
+   (aceeași formulă; pe telefon, cât să rămână 600w la DPR 3). Chrome ia cea mai mică variantă ≥ sizes × DPR, deci una
+   de 1,5–2 × mai mare decât pe ecran: așa textul din captură iese cel mai clar (sub 1,3 × sau peste 2 × iese moale).
+   Dacă schimbi lățimile de aici, actualizează și „sizes”/„imagesizes”. */
+@media (min-width: 1360px) {
+  .hero-grid { grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr); }
+  .hero-visual { justify-content: flex-start; }
+  .phones { --pw: clamp(470px, min(41.6vw - 50px, 84vh - 170px), 630px); flex: none; width: var(--pw); margin-left: max(0px, calc(var(--pw) * 0.12 - 40px)); }
+  .phones .phone { padding: calc(var(--pw) * 0.019); border-radius: calc(var(--pw) * 0.089); }
+  .phones .screen { border-radius: calc(var(--pw) * 0.07); }
+}
+@media (min-width: 1600px) and (min-height: 820px) {
+  .chip-float { gap: 9px; padding: 11px 17px; border-radius: 16px; font-size: 1.02rem; }
+  .chip-float svg { width: 20px; height: 20px; }
 }
 
 /* Macheta „Progres”: capturile au pastila de sus tăiată („12 zi…”), așa că ascundem bara de sus a capturii. */
@@ -1307,4 +1330,41 @@ a.btn[aria-disabled="true"] > svg { display: none; }
   .article-meta > span:nth-child(2) { flex: 1 0 calc(100% - 50px); }
   .article-meta > span:nth-child(3) { display: none; }
   .prose h2 { margin-top: 1.7em; }
+}
+/* ---------- Scheme de rețea în ghiduri: blocul ```topology → SVG (tools/site/diagram.mjs, docs/SITE-CONTENT.md) ---------- */
+/* Culorile vin din variabilele temei, deci schema arată bine în ambele teme. Schema se scalează la lățimea articolului:
+   cel mult 1,35× mărimea ei naturală pe ecranele mari, cel puțin 0,88× pe telefon (textul rămâne de ~10 px; dacă nu încape, cadrul se derulează). */
+.prose figure.topology { margin: 1.4em 0 1.7em; }
+.prose .topology figcaption { text-wrap: balance; }
+.topology figcaption .nw { white-space: nowrap; }
+.topology-frame { background: var(--surface); border: 2px solid var(--line); border-bottom-width: 4px; border-radius: 18px; padding: 14px 10px; overflow-x: auto; }
+.topology-svg { display: block; width: 100%; height: auto; margin-inline: auto; max-width: calc(var(--topo-w) * 1.35px); min-width: calc(var(--topo-w) * 0.88px); overflow: visible; }
+.topology .tl { stroke: var(--muted); stroke-opacity: 0.55; }
+.topology .tl--blocked { stroke: var(--bad); stroke-opacity: 0.7; }
+.topology .ti-br { fill: var(--brand); }
+.topology .ti-dk { fill: var(--brand-dark); }
+.topology .ti-bg { fill: var(--surface2); }
+.topology .ti-st { stroke: var(--brand); }
+.topology .ti-bad { stroke: var(--bad); }
+.topology .tn { fill: var(--ink-strong); font-family: "Nunito", system-ui, sans-serif; }
+.topology .ta { fill: var(--ink); }
+.topology .tn, .topology .ta { paint-order: stroke; stroke: var(--surface); stroke-width: 4px; stroke-linejoin: round; }
+.topology .tk rect { fill: var(--brand-soft); stroke: var(--brand); }
+.topology .tk text { fill: var(--brand-ink); }
+.topology .tk-lead { stroke: var(--brand); }
+.topology .tk--net rect { fill: var(--surface2); stroke: var(--line-strong); }
+.topology .tk--net text { fill: var(--ink); }
+.topology .tk--bad rect { fill: var(--bad-soft); stroke: var(--bad); }
+.topology .tk--bad text { fill: var(--bad-ink); }
+.topology .tx circle { fill: var(--bad); }
+.topology .tx path { stroke: var(--surface); }
+.topology .tg rect { stroke: var(--line-strong); }
+.topology .tg text { fill: var(--muted); }
+.topology .tg--brand rect { stroke: var(--brand); } .topology .tg--brand text { fill: var(--brand-ink); }
+.topology .tg--ok rect { stroke: var(--ok); } .topology .tg--ok text { fill: var(--ok-ink); }
+.topology .tg--led rect { stroke: var(--led); } .topology .tg--led text { fill: var(--led-ink); }
+.topology .tg--tag rect { stroke: var(--tag); } .topology .tg--tag text { fill: var(--tag-ink); }
+.topology .tg--brand rect, .topology .tg--ok rect, .topology .tg--led rect, .topology .tg--tag rect { stroke-opacity: 0.8; }
+@media (max-width: 479px) {
+  .topology-frame { padding: 12px 8px; border-radius: 16px; }
 }

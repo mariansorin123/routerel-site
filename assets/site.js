@@ -255,28 +255,29 @@ var PRICES_USD = {
         if (document.hidden) { clearInterval(timer); timer = null; } else if (!timer) run();
       });
     }
+    // Paralaxă 2D (nu 3D): telefoanele se mută câțiva pixeli după mouse, cel din spate în sens opus, ca adâncime.
+    // Doar pixeli întregi, fără perspectivă: un strat 3D sau deplasat cu fracțiuni de pixel se vede estompat.
     var vis = document.querySelector("[data-tilt]");
     if (!vis || reduceMotion) return;
     var fine = window.matchMedia && window.matchMedia("(pointer: fine)").matches;
-    var rx = 0, ry = 0, sy = 0, raf = 0;
+    var px = 0, py = 0, sy = 0, raf = 0;
     function apply() {
       raf = 0;
-      vis.style.setProperty("--rx", rx.toFixed(2) + "deg");
-      vis.style.setProperty("--ry", ry.toFixed(2) + "deg");
-      vis.style.setProperty("--sy", sy.toFixed(1) + "px");
+      vis.style.setProperty("--tx", Math.round(px * 8) + "px");
+      vis.style.setProperty("--ty", Math.round(py * 6 + sy) + "px");
+      vis.style.setProperty("--bx", Math.round(px * -6) + "px");
+      vis.style.setProperty("--by", Math.round(py * -4) + "px");
     }
     function queue() { if (!raf) raf = requestAnimationFrame(apply); }
     if (fine) {
       var host = vis.closest("[data-hero]") || vis;
       host.addEventListener("pointermove", function (e) {
         var r = vis.getBoundingClientRect();
-        var x = (e.clientX - (r.left + r.width / 2)) / r.width;
-        var y = (e.clientY - (r.top + r.height / 2)) / r.height;
-        ry = Math.max(-1, Math.min(1, x)) * 7;
-        rx = Math.max(-1, Math.min(1, y)) * -5;
+        px = Math.max(-1, Math.min(1, (e.clientX - (r.left + r.width / 2)) / r.width));
+        py = Math.max(-1, Math.min(1, (e.clientY - (r.top + r.height / 2)) / r.height));
         queue();
       });
-      host.addEventListener("pointerleave", function () { rx = 0; ry = 0; queue(); });
+      host.addEventListener("pointerleave", function () { px = 0; py = 0; queue(); });
     }
     window.addEventListener("scroll", function () {
       var y = window.scrollY;
