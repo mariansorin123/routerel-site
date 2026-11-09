@@ -381,7 +381,7 @@ D1(config-if)# spanning-tree guard root
 <pre><code class="language-text">SW4(config)# spanning-tree portfast default
 SW4(config)# spanning-tree portfast bpduguard default
 </code></pre>
-<p>The first enables PortFast on every access port. The second enables BPDU Guard on every PortFast port. On newer IOS and IOS XE releases these commands include the keyword <code>edge</code> (<code>spanning-tree portfast edge</code>, <code>spanning-tree portfast edge default</code>, <code>spanning-tree portfast edge bpduguard default</code>), but they do the same job.</p>
+<p>The first enables PortFast on every access port. The second enables BPDU Guard on every PortFast port. On some IOS releases (for example 15.2E on a Catalyst 2960-X) these commands include the keyword <code>edge</code> (<code>spanning-tree portfast edge</code>, <code>spanning-tree portfast edge default</code>, <code>spanning-tree portfast edge bpduguard default</code>), but they do the same job. Catalyst 9000 switches running IOS XE use the plain forms shown above.</p>
 <h2 id="verification">Verification</h2>
 <div class="table-scroll"><p class="table-hint" aria-hidden="true">swipe<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></p><div class="table-wrap" role="region" tabindex="0" aria-label="Table (scrolls sideways)"><table>
 <thead>

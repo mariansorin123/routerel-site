@@ -381,7 +381,7 @@ D1(config-if)# spanning-tree guard root
 <pre><code class="language-text">SW4(config)# spanning-tree portfast default
 SW4(config)# spanning-tree portfast bpduguard default
 </code></pre>
-<p>Prima activează PortFast pe toate porturile access. A doua activează BPDU Guard pe toate porturile care au PortFast. Pe versiunile mai noi de IOS și IOS XE comenzile apar cu cuvântul <code>edge</code> (<code>spanning-tree portfast edge</code>, <code>spanning-tree portfast edge default</code>, <code>spanning-tree portfast edge bpduguard default</code>), dar fac același lucru.</p>
+<p>Prima activează PortFast pe toate porturile access. A doua activează BPDU Guard pe toate porturile care au PortFast. Pe unele versiuni de IOS (de exemplu 15.2E pe Catalyst 2960-X) comenzile apar cu cuvântul <code>edge</code> (<code>spanning-tree portfast edge</code>, <code>spanning-tree portfast edge default</code>, <code>spanning-tree portfast edge bpduguard default</code>), dar fac același lucru. Pe Catalyst 9000 cu IOS XE se folosesc formele fără <code>edge</code>, ca mai sus.</p>
 <h2 id="verificarea">Verificarea</h2>
 <div class="table-scroll"><p class="table-hint" aria-hidden="true">glisează<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></p><div class="table-wrap" role="region" tabindex="0" aria-label="Tabel (se derulează pe orizontală)"><table>
 <thead>
