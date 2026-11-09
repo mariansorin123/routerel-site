@@ -1,0 +1,541 @@
+<!doctype html>
+<!-- Pagină generată. Nu o edita de mână: vezi tools/site/ (npm run build:guides / npm run sync:tools / npm run build:legal). -->
+<html lang="ro" class="play-soon" data-utm-medium="guide" data-utm-campaign="dhcp-cisco">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Configurare DHCP pe Cisco: server, relay, depanare (2026)</title>
+  <meta name="description" content="DHCPv4 pe Cisco explicat: procesul DORA, porturile UDP 67/68, lease, routerul ca server și client, ip helper-address, DHCP snooping, depanare și exerciții.">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <link rel="canonical" href="https://routerel.app/ghiduri/dhcp-cisco/">
+  <link rel="alternate" hreflang="ro" href="https://routerel.app/ghiduri/dhcp-cisco/">
+  <link rel="alternate" hreflang="en" href="https://routerel.app/en/guides/dhcp-on-cisco/">
+  <link rel="alternate" hreflang="x-default" href="https://routerel.app/en/guides/dhcp-on-cisco/">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#12151b" media="(prefers-color-scheme: dark)">
+  <meta name="color-scheme" content="light dark">
+  <link rel="icon" href="../../assets/favicon-32.png" type="image/png" sizes="32x32">
+  <link rel="icon" href="../../assets/icon-192.png" type="image/png" sizes="192x192">
+  <link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
+  <link rel="manifest" href="../../site.webmanifest">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Routerel">
+  <meta property="og:locale" content="ro_RO">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta property="og:title" content="Configurare DHCP pe Cisco: server, relay, depanare (2026)">
+  <meta property="og:description" content="DHCPv4 pe Cisco explicat: procesul DORA, porturile UDP 67/68, lease, routerul ca server și client, ip helper-address, DHCP snooping, depanare și exerciții.">
+  <meta property="og:url" content="https://routerel.app/ghiduri/dhcp-cisco/">
+  <meta property="og:image" content="https://routerel.app/assets/og-ro.png">
+  <meta property="og:image:width" content="1024">
+  <meta property="og:image:height" content="500">
+  <meta property="og:image:alt" content="Routerel: mascota puiul de router și numele aplicației">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Configurare DHCP pe Cisco: server, relay, depanare (2026)">
+  <meta name="twitter:description" content="DHCPv4 pe Cisco explicat: procesul DORA, porturile UDP 67/68, lease, routerul ca server și client, ip helper-address, DHCP snooping, depanare și exerciții.">
+  <meta name="twitter:image" content="https://routerel.app/assets/og-ro.png">
+  <meta property="article:published_time" content="2026-11-09">
+  <meta property="article:modified_time" content="2026-11-09">
+  <meta name="routerel:updated" content="2026-11-09">
+  <link rel="preload" href="../../assets/fonts/nunito-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../../assets/fonts/nunito-latin-ext.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../../assets/fonts/roboto-mono-500-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="../../style.css">
+  <script>(function(d){d.classList.add("js");try{var t=localStorage.getItem("routerel-theme");if(t==="light"||t==="dark")d.setAttribute("data-theme",t)}catch(e){}setTimeout(function(){if(!window.__rtl)d.classList.remove("js")},4000)})(document.documentElement)</script>
+  <script src="../../assets/site.js" defer></script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Article","@id":"https://routerel.app/ghiduri/dhcp-cisco/#article","headline":"Configurare DHCP pe Cisco: server, relay, depanare (2026)","description":"DHCPv4 pe Cisco explicat: procesul DORA, porturile UDP 67/68, lease, routerul ca server și client, ip helper-address, DHCP snooping, depanare și exerciții.","inLanguage":"ro","datePublished":"2026-11-09","dateModified":"2026-11-09","keywords":"configurare DHCP Cisco, DHCP router Cisco, ce este DHCP, procesul DORA, ip helper-address, DHCP relay, ip dhcp excluded-address, DHCP snooping, adresa 169.254","author":{"@type":"Organization","name":"Routerel","url":"https://routerel.app/"},"publisher":{"@type":"Organization","name":"Routerel","logo":{"@type":"ImageObject","url":"https://routerel.app/assets/icon-512.png"}},"image":"https://routerel.app/assets/og-ro.png","mainEntityOfPage":"https://routerel.app/ghiduri/dhcp-cisco/","isPartOf":{"@id":"https://routerel.app/#website"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Acasă","item":"https://routerel.app/"},{"@type":"ListItem","position":2,"name":"Ghiduri","item":"https://routerel.app/ghiduri/"},{"@type":"ListItem","position":3,"name":"Configurare DHCP pe Cisco: server, relay, depanare (2026)","item":"https://routerel.app/ghiduri/dhcp-cisco/"}]},{"@type":"FAQPage","@id":"https://routerel.app/ghiduri/dhcp-cisco/#faq","inLanguage":"ro","mainEntity":[{"@type":"Question","name":"Ce este DHCP?","acceptedAnswer":{"@type":"Answer","text":"DHCP (Dynamic Host Configuration Protocol) este protocolul prin care un dispozitiv primește automat de la un server adresa IPv4, masca, gateway-ul implicit, serverele DNS și alte setări, pentru o perioadă limitată numită lease."}},{"@type":"Question","name":"Ce porturi folosește DHCP?","acceptedAnswer":{"@type":"Answer","text":"DHCPv4 folosește UDP. Serverul ascultă pe portul 67, iar clientul pe portul 68. Pentru DHCPv6 porturile sunt altele: 547 pentru server și 546 pentru client."}},{"@type":"Question","name":"Ce înseamnă DORA?","acceptedAnswer":{"@type":"Answer","text":"DORA vine de la cele patru mesaje prin care un client obține o adresă: Discover (clientul caută servere), Offer (serverul propune o adresă), Request (clientul cere adresa aleasă) și Acknowledgment (serverul confirmă)."}},{"@type":"Question","name":"De ce am nevoie de ip helper-address?","acceptedAnswer":{"@type":"Answer","text":"Mesajele DHCP Discover sunt broadcast, iar routerele nu trimit broadcast-urile mai departe. Dacă serverul DHCP e în altă subrețea sau în alt VLAN, comanda ip helper-address pe interfața routerului dinspre clienți transformă broadcast-ul într-un unicast trimis spre server."}},{"@type":"Question","name":"De ce primește PC-ul o adresă 169.254.x.x?","acceptedAnswer":{"@type":"Answer","text":"Adresa 169.254.x.x (APIPA, link-local IPv4) apare când clientul nu primește niciun răspuns de la un server DHCP. Cauzele obișnuite sunt un helper lipsă, un VLAN greșit, un pool epuizat, o rută lipsă spre rețeaua clientului sau DHCP snooping care blochează răspunsurile."}},{"@type":"Question","name":"Cât durează implicit un lease pe un router Cisco?","acceptedAnswer":{"@type":"Answer","text":"Pe serverul DHCP din Cisco IOS lease-ul implicit este de o zi. Îl schimbi în pool cu comanda lease, de exemplu lease 7 pentru șapte zile sau lease 0 8 pentru opt ore."}},{"@type":"Question","name":"Ce face DHCP snooping?","acceptedAnswer":{"@type":"Answer","text":"DHCP snooping este o funcție a switch-ului care lasă mesajele de server DHCP (Offer, Ack) să intre doar pe porturile marcate trusted. Așa un server DHCP neautorizat, conectat pe un port de utilizator, nu poate da adrese și gateway-uri false."}}]}]}</script>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs><linearGradient id="rtl-play" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5b8cff"/><stop offset=".55" stop-color="#2f6bff"/><stop offset="1" stop-color="#ffb020"/></linearGradient></defs></svg>
+<a class="skip-link" href="#main">Sari la conținut</a>
+<header class="site-header">
+  <div class="container header-row">
+    <a class="brand" href="../../" aria-label="Routerel, acasă"><img src="../../assets/icon-96.webp" alt="" width="36" height="36"><span>Routerel</span></a>
+    <nav class="main-nav" aria-label="Principal"><ul><li><a href="../../#functii">Funcții</a></li><li><a href="../../#preturi">Prețuri</a></li><li><a href="../../ghiduri/" aria-current="page">Ghiduri</a></li><li><a href="../../articole/">Articole</a></li><li><a href="../../tools/">Tools</a></li><li><a href="../../#faq">FAQ</a></li></ul></nav>
+    <div class="header-actions">
+      <div class="lang-switch" role="group" aria-label="Limba"><span aria-current="true" lang="ro">RO</span><a href="../../en/guides/dhcp-on-cisco/" hreflang="en" lang="en" title="English">EN</a></div>
+      <button class="icon-btn theme-toggle" type="button" data-theme-toggle aria-label="Schimbă tema"><span class="i-moon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9z"/></svg></span><span class="i-sun"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg></span></button>
+      <a class="btn btn--sm header-cta" data-play data-soon-href="../../#preturi" href="../../#preturi"><span data-when="live">Încearcă gratuit</span><span data-when="soon">Vezi prețurile</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      <button class="icon-btn menu-btn" type="button" data-menu-btn aria-expanded="false" aria-controls="mobile-nav" aria-label="Meniu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+    </div>
+  </div>
+  <nav class="mobile-nav" id="mobile-nav" aria-label="Principal" hidden>
+    <div class="container"><ul><li><a href="../../#functii">Funcții</a></li><li><a href="../../#preturi">Prețuri</a></li><li><a href="../../ghiduri/" aria-current="page">Ghiduri</a></li><li><a href="../../articole/">Articole</a></li><li><a href="../../tools/">Tools</a></li><li><a href="../../#faq">FAQ</a></li></ul></div>
+  </nav>
+</header>
+<main id="main">
+  <div class="container section section--tight">
+    <article class="prose">
+      <nav class="crumbs" aria-label="Firimituri"><ol><li><a href="../../">Acasă</a></li><li><a href="../../ghiduri/">Ghiduri</a></li><li><span aria-current="page">Configurare DHCP pe Cisco: server, relay, depanare (2026)</span></li></ol></nav>
+      <p class="eyebrow">Ghid CCNA</p>
+      <h1>Configurare DHCP pe Cisco: server, relay și depanare</h1>
+      <div class="article-meta">
+        <span class="avatar"><svg class="mascot" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><g class="m-breathe"><path d="M22 14l-5-9M42 14l5-9" stroke="#8a919c" stroke-width="3.4" stroke-linecap="round" fill="none"/><circle class="m-led m-led-l" cx="17" cy="5" r="3.6"/><circle class="m-led m-led-r" cx="47" cy="5" r="3.6"/><path class="m-body" d="M28 12q4-6 8 0"/><rect class="m-body" x="8" y="12" width="48" height="42" rx="18"/><rect class="m-belly" x="8" y="40" width="48" height="14" rx="7"/><circle cx="23" cy="31" r="5.4" fill="#fff"/><circle class="m-pupil" cx="24" cy="31.5" r="3" fill="#1a1d24"/><circle cx="41" cy="31" r="5.4" fill="#fff"/><circle class="m-pupil" cx="42" cy="31.5" r="3" fill="#1a1d24"/><path class="m-led" d="M29 37l3 3.5 3-3.5z"/><circle class="m-ok" cx="18" cy="47" r="2"/><circle class="m-led" cx="24" cy="47" r="2"/><rect x="31" y="45" width="6" height="4" rx="1" fill="#0d1a3a" opacity=".55"/><rect x="39" y="45" width="6" height="4" rx="1" fill="#0d1a3a" opacity=".55"/><rect x="47" y="45" width="5" height="4" rx="1" fill="#0d1a3a" opacity=".55"/><path class="m-leg" d="M20 54v4M44 54v4" stroke-width="3.4" stroke-linecap="round" fill="none"/></g></svg></span>
+        <span>Echipa Routerel</span><span aria-hidden="true">·</span>
+        <span>Actualizat: <time datetime="2026-11-09">9 noiembrie 2026</time></span><span aria-hidden="true">·</span>
+        <span>16 min de citit</span>
+      </div>
+      <p class="lead">Fără DHCP, fiecare laptop, telefon și imprimantă din rețea ar trebui configurate de mână. Cu DHCP, un dispozitiv se conectează, cere o adresă și în câteva clipe are tot ce îi trebuie ca să ajungă pe internet.</p>
+<p>În ghidul ăsta vezi ce primește clientul de la DHCP, cum arată schimbul de mesaje DORA la nivel de broadcast și unicast, cum funcționează lease-ul, cum configurezi un router Cisco ca server, ca relay și ca client, ce comenzi <code>show</code> folosești, cum depanezi o adresă 169.254.x.x și ce rol are DHCP snooping. La final ai exerciții cu răspunsuri.</p>
+<p>În cursurile CCNA v8 de la Networking Academy, DHCPv4 e modulul 8 din <strong>CCNA 2 · IEN</strong>, SLAAC și DHCPv6 sunt modulul 9, iar DHCP snooping apare în modulul 11 (securitatea accesului și la nivelul 2).</p>
+      <nav class="toc toc--fold" aria-labelledby="toc-title"><h2 id="toc-title">Cuprins</h2><button type="button" class="toc-toggle" data-toc-toggle aria-expanded="false" aria-controls="toc-list"><span class="toc-toggle-t">Cuprins</span> <span class="toc-toggle-n">14 secțiuni</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6"/></svg></button><ol id="toc-list"><li><a href="#ce-ofera-dhcp-unui-client">Ce oferă DHCP unui client</a></li><li><a href="#procesul-dora-pas-cu-pas">Procesul DORA pas cu pas</a></li><li><a href="#lease-ul-si-reinnoirea-t1-si-t2">Lease-ul și reînnoirea (T1 și T2)</a></li><li><a href="#topologia-folosita-in-ghid">Topologia folosită în ghid</a></li><li><a href="#routerul-ca-server-dhcp">Routerul ca server DHCP</a><ol><li><a href="#pasul-1-excluzi-adresele-statice">Pasul 1: excluzi adresele statice</a></li><li><a href="#pasul-2-creezi-pool-ul">Pasul 2: creezi pool-ul</a></li><li><a href="#pool-ul-pentru-reteaua-de-dupa-relay">Pool-ul pentru rețeaua de după relay</a></li></ol></li><li><a href="#dhcp-relay-cu-ip-helper-address">DHCP relay cu ip helper-address</a><ol><li><a href="#relay-in-retele-cu-vlan-uri">Relay în rețele cu VLAN-uri</a></li><li><a href="#ce-mai-trimite-ip-helper-address">Ce mai trimite ip helper-address</a></li></ol></li><li><a href="#routerul-ca-client-dhcp">Routerul ca client DHCP</a></li><li><a href="#verificarea-serverului">Verificarea serverului</a><ol><li><a href="#debug-ip-dhcp-server-events-cu-grija">debug ip dhcp server events, cu grijă</a></li></ol></li><li><a href="#depanare-de-la-169-254-la-cauza">Depanare: de la 169.254 la cauză</a></li><li><a href="#dhcp-snooping-pe-scurt">DHCP snooping, pe scurt</a></li><li><a href="#ipv6-alta-poveste">IPv6: altă poveste</a></li><li><a href="#exercitii">Exerciții</a></li><li><a href="#cum-inveti-dhcp-cel-mai-repede">Cum înveți DHCP cel mai repede</a></li><li><a href="#intrebari-frecvente">Întrebări frecvente</a></li></ol></nav>
+<h2 id="ce-ofera-dhcp-unui-client">Ce oferă DHCP unui client</h2>
+<p>DHCP (Dynamic Host Configuration Protocol) lucrează la nivelul aplicație și folosește <strong>UDP</strong>: serverul ascultă pe portul <strong>67</strong>, clientul pe portul <strong>68</strong>. Protocolul se trage din BOOTP, de aceea în ACL-uri portul 67 apare ca <code>bootps</code>, iar 68 ca <code>bootpc</code>.</p>
+<p>Un server DHCP îi dă clientului, de obicei:</p>
+<div class="table-scroll"><p class="table-hint" aria-hidden="true">glisează<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></p><div class="table-wrap" role="region" tabindex="0" aria-label="Tabel (se derulează pe orizontală)"><table>
+<thead>
+<tr>
+<th>Ce primește clientul</th>
+<th>Opțiunea DHCP</th>
+<th>Comanda din pool-ul Cisco</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Adresa IPv4 și masca</td>
+<td>câmpul <code>yiaddr</code> + opțiunea 1</td>
+<td><code>network</code></td>
+</tr>
+<tr>
+<td>Gateway-ul implicit</td>
+<td>opțiunea 3</td>
+<td><code>default-router</code></td>
+</tr>
+<tr>
+<td>Serverele DNS</td>
+<td>opțiunea 6</td>
+<td><code>dns-server</code></td>
+</tr>
+<tr>
+<td>Numele de domeniu</td>
+<td>opțiunea 15</td>
+<td><code>domain-name</code></td>
+</tr>
+<tr>
+<td>Durata lease-ului</td>
+<td>opțiunea 51</td>
+<td><code>lease</code></td>
+</tr>
+</tbody></table></div></div>
+<p>Cuvântul important e <strong>lease</strong> (închiriere). Adresa nu devine a clientului pentru totdeauna; o primește pentru o perioadă și trebuie să o reînnoiască. Așa, adresele dispozitivelor care pleacă se întorc singure în pool.</p>
+<p>Pe un router Cisco, serverul DHCP e potrivit pentru o filială sau un birou mic. În rețelele mari serverul e de obicei un Windows Server, un server Linux sau un sistem dedicat de management al adreselor, iar routerele și switch-urile Layer 3 fac doar relay. Pentru examen trebuie să le știi pe amândouă.</p>
+<h2 id="procesul-dora-pas-cu-pas">Procesul DORA pas cu pas</h2>
+<p>Clientul pornește fără adresă IP. Știe doar adresa lui MAC. De aici vine tot farmecul: trebuie să vorbească cu un server pe care nu-l cunoaște, fără să aibă o adresă proprie.</p>
+<div class="table-scroll"><p class="table-hint" aria-hidden="true">glisează<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></p><div class="table-wrap" role="region" tabindex="0" aria-label="Tabel (se derulează pe orizontală)"><table>
+<thead>
+<tr>
+<th>Pas</th>
+<th>Mesaj</th>
+<th>IP sursă → IP destinație</th>
+<th>Porturi</th>
+<th>Cum circulă</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td><strong>Discover</strong> (clientul caută servere)</td>
+<td>0.0.0.0 → 255.255.255.255</td>
+<td>68 → 67</td>
+<td class="tw">broadcast (MAC destinație ff:ff:ff:ff:ff:ff)</td>
+</tr>
+<tr>
+<td>2</td>
+<td><strong>Offer</strong> (serverul propune o adresă)</td>
+<td>server → adresa oferită</td>
+<td>67 → 68</td>
+<td class="tw">unicast la nivelul 2, spre MAC-ul clientului</td>
+</tr>
+<tr>
+<td>3</td>
+<td><strong>Request</strong> (clientul cere adresa aleasă)</td>
+<td>0.0.0.0 → 255.255.255.255</td>
+<td>68 → 67</td>
+<td>broadcast</td>
+</tr>
+<tr>
+<td>4</td>
+<td><strong>Acknowledgment</strong> (serverul confirmă)</td>
+<td>server → adresa oferită</td>
+<td>67 → 68</td>
+<td class="tw">unicast la nivelul 2, spre MAC-ul clientului</td>
+</tr>
+</tbody></table></div></div>
+<p>Câteva detalii care apar des în întrebări:</p>
+<ul>
+<li><strong>De ce Request e tot broadcast?</strong> Pot răspunde mai multe servere la același Discover. Clientul alege o ofertă (de obicei prima), iar prin broadcast le anunță pe toate: în Request apare identificatorul serverului ales (opțiunea 54). Celelalte servere înțeleg că oferta lor a fost refuzată și își păstrează adresele.</li>
+<li><strong>Offer și Ack nu sunt mereu unicast.</strong> Dacă clientul a pus în Discover flag-ul de broadcast (unele sisteme nu pot primi unicast înainte să aibă o adresă), serverul răspunde prin broadcast. La CCNA reține varianta de bază: Discover și Request sunt broadcast, Offer și Ack ajung la MAC-ul clientului.</li>
+<li><strong>Înainte să ofere o adresă</strong>, serverul Cisco IOS trimite implicit 2 ping-uri spre ea. Dacă cineva răspunde, adresa e marcată ca <strong>conflict</strong> și nu e oferită.</li>
+<li><strong>După Ack</strong>, clientul poate verifica și el prin ARP că nimeni nu folosește adresa. Dacă o găsește ocupată, trimite <strong>DHCPDECLINE</strong> și o ia de la capăt.</li>
+</ul>
+<p>Alte mesaje de știut: <strong>DHCPNAK</strong> (serverul refuză cererea, de exemplu când clientul cere o adresă dintr-o rețea în care nu mai e), <strong>DHCPRELEASE</strong> (clientul eliberează adresa, ca la <code>ipconfig /release</code>) și <strong>DHCPINFORM</strong> (clientul are deja adresă și cere doar alte setări).</p>
+<h2 id="lease-ul-si-reinnoirea-t1-si-t2">Lease-ul și reînnoirea (T1 și T2)</h2>
+<p>Fiecare adresă vine cu un timp de lease. Clientul nu așteaptă să expire ca să ceară alta:</p>
+<ul>
+<li><strong>T1, la 50% din lease:</strong> clientul trimite un Request direct (unicast) serverului care i-a dat adresa. Dacă serverul răspunde cu Ack, lease-ul o ia de la zero și clientul își păstrează adresa.</li>
+<li><strong>T2, la 87,5% din lease:</strong> dacă serverul inițial n-a răspuns, clientul trimite un Request prin broadcast, către orice server care îl poate ajuta (rebinding).</li>
+<li><strong>La expirare:</strong> fără niciun răspuns, clientul renunță la adresă și reîncepe cu Discover.</li>
+</ul>
+<p>Exemplu: cu lease-ul implicit Cisco de o zi (24 de ore), T1 vine după 12 ore, iar T2 după 21 de ore.</p>
+<p>Pe serverul Cisco IOS lease-ul se setează în pool cu <code>lease zile [ore [minute]]</code> sau <code>lease infinite</code>. <code>lease 7</code> înseamnă șapte zile, iar <code>lease 0 8</code> înseamnă opt ore. Un lease scurt eliberează repede adresele într-o rețea de oaspeți; unul lung reduce traficul într-un birou cu aceleași calculatoare zi de zi.</p>
+<h2 id="topologia-folosita-in-ghid">Topologia folosită în ghid</h2>
+<pre><code class="language-text">   PC-uri LAN 10                                         PC-uri LAN 20
+   192.168.10.0/24                                       192.168.20.0/24
+   DNS intern 192.168.10.10                                    |
+         |                                                     |
+       [S1]                                                  [S2]
+         | G0/0/0 .1                                           | G0/0/0 .1
+        [R1] G0/0/1 .1 -------- 10.1.1.0/30 -------- .2 G0/0/1 [R2]
+         | G0/0/2
+         | (client DHCP, adresă de la ISP)
+       [ISP]
+</code></pre>
+<ul>
+<li><strong>R1</strong> este serverul DHCP pentru ambele LAN-uri.</li>
+<li><strong>R2</strong> nu are server; face relay pentru LAN 20 spre R1.</li>
+<li><strong>R1</strong> primește adresa de pe interfața spre ISP tot prin DHCP.</li>
+</ul>
+<p>Dacă vrei să verifici singur intervalele de adrese de mai jos, folosește <a href="../../tools/calculator-subnetting/">calculatorul de subnetting</a>.</p>
+<h2 id="routerul-ca-server-dhcp">Routerul ca server DHCP</h2>
+<h3 id="pasul-1-excluzi-adresele-statice">Pasul 1: excluzi adresele statice</h3>
+<p>Gateway-ul, serverele, imprimantele și alte dispozitive cu adresă fixă nu trebuie să ajungă în pool. Le excluzi <strong>în modul de configurare globală</strong>, nu în pool:</p>
+<pre><code class="language-text">R1(config)# ip dhcp excluded-address 192.168.10.1 192.168.10.20
+R1(config)# ip dhcp excluded-address 192.168.20.1 192.168.20.10
+</code></pre>
+<p>Sintaxa e <code>ip dhcp excluded-address adresa-de-început [adresa-de-final]</code>. Cu o singură adresă excluzi doar acea adresă. Configurează excluderile <strong>înaintea</strong> pool-ului: altfel routerul poate apuca să dea unui PC o adresă rezervată pentru un server sau o imprimantă.</p>
+<h3 id="pasul-2-creezi-pool-ul">Pasul 2: creezi pool-ul</h3>
+<pre><code class="language-text">R1(config)# ip dhcp pool LAN10
+R1(dhcp-config)# network 192.168.10.0 255.255.255.0
+R1(dhcp-config)# default-router 192.168.10.1
+R1(dhcp-config)# dns-server 192.168.10.10
+R1(dhcp-config)# domain-name example.com
+R1(dhcp-config)# lease 2
+R1(dhcp-config)# exit
+</code></pre>
+<p>Ce face fiecare comandă:</p>
+<ul>
+<li><code>ip dhcp pool LAN10</code> creează pool-ul și intră în modul <code>dhcp-config</code>. Numele e la alegerea ta.</li>
+<li><code>network</code> dă rețeaua din care se împart adrese. Merge și cu prefix: <code>network 192.168.10.0 /24</code>.</li>
+<li><code>default-router</code> e gateway-ul pe care îl vor folosi clienții. Poți da până la 8 adrese, în ordinea preferinței.</li>
+<li><code>dns-server</code> acceptă și el până la 8 adrese.</li>
+<li><code>domain-name</code> e sufixul DNS adăugat numelor scurte (<code>srv1</code> devine <code>srv1.example.com</code>).</li>
+<li><code>lease 2</code> înseamnă două zile. Fără comanda asta, lease-ul e de o zi.</li>
+</ul>
+<p>Cum alege routerul pool-ul potrivit? Pentru un client conectat direct, după adresa interfeței pe care a venit Discover-ul: Discover-ul de pe G0/0/0 (192.168.10.1) se potrivește cu pool-ul <code>LAN10</code>. Dacă nicio rețea din pool-uri nu se potrivește cu interfața, routerul nu răspunde deloc.</p>
+<h3 id="pool-ul-pentru-reteaua-de-dupa-relay">Pool-ul pentru rețeaua de după relay</h3>
+<p>R1 servește și LAN 20, deși nu e conectat direct la ea:</p>
+<pre><code class="language-text">R1(config)# ip dhcp pool LAN20
+R1(dhcp-config)# network 192.168.20.0 255.255.255.0
+R1(dhcp-config)# default-router 192.168.20.1
+R1(dhcp-config)# dns-server 192.168.10.10
+R1(dhcp-config)# domain-name example.com
+R1(dhcp-config)# exit
+R1(config)# ip route 192.168.20.0 255.255.255.0 10.1.1.2
+</code></pre>
+<p>Ultima linie e ușor de uitat. R1 trimite răspunsurile spre adresa relay-ului din LAN 20 (192.168.20.1), deci trebuie să știe cum ajunge la 192.168.20.0/24. În rețele reale ruta poate veni din OSPF; important e să existe.</p>
+<p>Serviciul DHCP e pornit implicit în IOS. Dacă cineva a scris <code>no service dhcp</code>, routerul nu mai e nici server, nici relay. Îl repornești cu <code>service dhcp</code>.</p>
+<h2 id="dhcp-relay-cu-ip-helper-address">DHCP relay cu ip helper-address</h2>
+<p>Routerele <strong>nu trimit mai departe broadcast-urile</strong>. Discover-ul unui PC din LAN 20 se oprește pe R2 și nu ajunge niciodată la R1. Fără o soluție, ai avea nevoie de câte un server DHCP în fiecare subrețea și în fiecare VLAN.</p>
+<p>Soluția e <strong>DHCP relay</strong>: pe interfața routerului <strong>dinspre clienți</strong> configurezi adresa serverului.</p>
+<pre><code class="language-text">R2(config)# interface GigabitEthernet0/0/0
+R2(config-if)# ip address 192.168.20.1 255.255.255.0
+R2(config-if)# ip helper-address 10.1.1.1
+R2(config-if)# no shutdown
+</code></pre>
+<p>Ce se întâmplă cu un Discover din LAN 20:</p>
+<ol>
+<li>PC-ul trimite Discover prin broadcast. R2 îl primește pe G0/0/0.</li>
+<li>R2 completează câmpul <strong>giaddr</strong> (gateway IP address) cu adresa interfeței pe care a primit cererea: 192.168.20.1.</li>
+<li>R2 trimite mesajul <strong>unicast</strong> spre 10.1.1.1, pe portul UDP 67.</li>
+<li>R1 vede <code>giaddr = 192.168.20.1</code> și alege pool-ul <code>LAN20</code>, cel care conține această adresă.</li>
+<li>R1 răspunde unicast spre 192.168.20.1 (de aceea are nevoie de ruta spre LAN 20).</li>
+<li>R2 livrează răspunsul clientului în LAN 20, pe portul UDP 68.</li>
+</ol>
+<p>Greșeala clasică: helper-ul pus pe interfața spre server (G0/0/1 la R2). Comanda trebuie să stea acolo unde <strong>ajung broadcast-urile clienților</strong>.</p>
+<h3 id="relay-in-retele-cu-vlan-uri">Relay în rețele cu VLAN-uri</h3>
+<p>Fiecare VLAN e o subrețea separată, cu propriul domeniu de broadcast. Dacă serverul DHCP e într-un VLAN de servere, pui <code>ip helper-address</code> pe <strong>fiecare</strong> interfață de gateway: pe fiecare subinterfață la router-on-a-stick sau pe fiecare SVI la un switch Layer 3.</p>
+<pre><code class="language-text">D1(config)# interface vlan 30
+D1(config-if)# ip address 192.168.30.1 255.255.255.0
+D1(config-if)# ip helper-address 192.168.99.50
+D1(config-if)# exit
+D1(config)# interface vlan 40
+D1(config-if)# ip address 192.168.40.1 255.255.255.0
+D1(config-if)# ip helper-address 192.168.99.50
+</code></pre>
+<p>Dacă VLAN-urile și trunk-urile nu-ți sunt încă clare, citește întâi <a href="../vlan-si-trunk/">ghidul despre VLAN-uri și trunk-uri</a>.</p>
+<h3 id="ce-mai-trimite-ip-helper-address">Ce mai trimite ip helper-address</h3>
+<p>Comanda nu e doar pentru DHCP. Implicit, routerul trimite spre adresa din helper și broadcast-urile UDP ale altor câteva servicii, de exemplu DNS (53), TFTP (69), TACACS (49), Time (37) și NetBIOS (137, 138). Lista se schimbă cu <code>ip forward-protocol udp port</code> sau <code>no ip forward-protocol udp port</code>.</p>
+<h2 id="routerul-ca-client-dhcp">Routerul ca client DHCP</h2>
+<p>Multe conexiuni de internet pentru firme mici primesc adresa de la furnizor prin DHCP. Pe router, interfața spre ISP devine client:</p>
+<pre><code class="language-text">R1(config)# interface GigabitEthernet0/0/2
+R1(config-if)# ip address dhcp
+R1(config-if)# no shutdown
+</code></pre>
+<p>Verificarea:</p>
+<pre><code class="language-text">R1# show ip interface brief | include 0/0/2
+GigabitEthernet0/0/2   203.0.113.45    YES DHCP   up                    up
+
+R1# show ip route static | include 0.0.0.0
+S*    0.0.0.0/0 [254/0] via 203.0.113.1
+</code></pre>
+<p>Coloana „Method” arată <code>DHCP</code>. Dacă serverul furnizorului trimite și un gateway (opțiunea 3), IOS instalează singur o rută implicită statică cu <strong>distanța administrativă 254</strong>. Valoarea mare e intenționată: orice rută implicită configurată de tine are prioritate. Detaliile lease-ului (server, timp rămas) le vezi cu <code>show dhcp lease</code>.</p>
+<h2 id="verificarea-serverului">Verificarea serverului</h2>
+<div class="table-scroll"><p class="table-hint" aria-hidden="true">glisează<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></p><div class="table-wrap" role="region" tabindex="0" aria-label="Tabel (se derulează pe orizontală)"><table>
+<thead>
+<tr>
+<th>Comandă</th>
+<th>Ce vezi</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code><span class="nw">show</span> <span class="nw">ip</span> <span class="nw">dhcp</span> <span class="nw">binding</span></code></td>
+<td class="tw">adresele date, MAC-ul sau client ID-ul, expirarea lease-ului</td>
+</tr>
+<tr>
+<td><code><span class="nw">show</span> <span class="nw">ip</span> <span class="nw">dhcp</span> <span class="nw">pool</span></code></td>
+<td class="tw">fiecare pool: câte adrese are, câte sunt date, următoarea adresă</td>
+</tr>
+<tr>
+<td><code><span class="nw">show</span> <span class="nw">ip</span> <span class="nw">dhcp</span> <span class="nw">conflict</span></code></td>
+<td class="tw">adresele pe care serverul le-a găsit ocupate (prin ping sau gratuitous ARP)</td>
+</tr>
+<tr>
+<td><code><span class="nw">show</span> <span class="nw">ip</span> <span class="nw">dhcp</span> <span class="nw">server</span> <span class="nw">statistics</span></code></td>
+<td class="tw">contoare pentru fiecare tip de mesaj (Discover, Request, Ack etc.)</td>
+</tr>
+<tr>
+<td><code><span class="nw">show</span> <span class="nw">running-config</span> <span class="nw">|</span> <span class="nw">section</span> <span class="nw">dhcp</span></code></td>
+<td>excluderile și pool-urile configurate</td>
+</tr>
+</tbody></table></div></div>
+<p>Exemple de ieșire după ce trei PC-uri din LAN 10 și unul din LAN 20 au primit adrese:</p>
+<pre><code class="language-text">R1# show ip dhcp binding
+Bindings from all pools not associated with VRF:
+IP address      Client-ID/              Lease expiration        Type       State      Interface
+                Hardware address/
+                User name
+192.168.10.21   0100.5056.a1b2.c3       Nov 11 2026 09:14 AM    Automatic  Active     GigabitEthernet0/0/0
+192.168.10.22   0100.5056.a1b2.d7       Nov 11 2026 09:15 AM    Automatic  Active     GigabitEthernet0/0/0
+192.168.10.24   0100.1a2b.3c4d.5e       Nov 11 2026 09:21 AM    Automatic  Active     GigabitEthernet0/0/0
+192.168.20.11   0100.5056.a1c8.02       Nov 10 2026 09:30 AM    Automatic  Active     Unknown
+</code></pre>
+<p>Client ID-ul unui client Ethernet e <code>01</code> (tipul hardware) urmat de adresa MAC. Clientul din LAN 20 are interfața „Unknown” pentru că a venit prin relay, nu direct. Lease-ul lui expiră mai devreme: pool-ul <code>LAN20</code> are lease-ul implicit de o zi.</p>
+<pre><code class="language-text">R1# show ip dhcp pool LAN10
+
+Pool LAN10 :
+ Utilization mark (high/low)    : 100 / 0
+ Subnet size (first/next)       : 0 / 0
+ Total addresses                : 254
+ Leased addresses               : 3
+ Excluded addresses             : 20
+ Pending event                  : none
+ 1 subnet is currently in the pool :
+ Current index        IP address range                    Leased/Excluded/Total
+ 192.168.10.25        192.168.10.1     - 192.168.10.254    3     / 20    / 254
+</code></pre>
+<p>„Current index” e următoarea adresă pe care o va încerca serverul. Al treilea PC a primit .24, nu .23, pentru că .23 e în conflict, cum vezi mai jos.</p>
+<pre><code class="language-text">R1# show ip dhcp conflict
+IP address        Detection method   Detection time          VRF
+192.168.10.23     Ping               Nov 09 2026 09:21 AM
+</code></pre>
+<p>O adresă în conflict e scoasă din pool până o eliberezi. Găsești dispozitivul cu adresă setată manual, îl repari, apoi ștergi conflictul cu <code>clear ip dhcp conflict 192.168.10.23</code> (sau <code>clear ip dhcp conflict *</code> pentru toate). Asemănător, <code>clear ip dhcp binding *</code> șterge toate închirierile, util în laborator.</p>
+<h3 id="debug-ip-dhcp-server-events-cu-grija">debug ip dhcp server events, cu grijă</h3>
+<pre><code class="language-text">R1# debug ip dhcp server events
+R1# undebug all
+</code></pre>
+<p><code>debug</code> îți arată în timp real ce face serverul: ce cerere a venit, ce adresă a oferit, ce lease a confirmat. E foarte bun în laborator. Pe un router de producție însă, <code>debug</code> consumă procesor și poate genera mii de mesaje pe un server cu mulți clienți. Folosește-l doar când știi de ce, pe o perioadă scurtă, și oprește-l imediat cu <code>undebug all</code> (sau <code>no debug all</code>). Dacă ești conectat prin SSH, mesajele apar doar după <code>terminal monitor</code>. Pentru și mai multe detalii există <code>debug ip dhcp server packet</code>.</p>
+<p>Pe partea de client, pe un PC cu Windows: <code>ipconfig /all</code> arată adresa, gateway-ul, DNS-ul și serverul DHCP, iar <code>ipconfig /release</code> urmat de <code>ipconfig /renew</code> repetă tot procesul DORA.</p>
+<h2 id="depanare-de-la-169-254-la-cauza">Depanare: de la 169.254 la cauză</h2>
+<p>Când un client Windows (și multe alte sisteme) nu primește niciun răspuns DHCP, își dă singur o adresă din <strong>169.254.0.0/16</strong>, numită APIPA sau adresă link-local IPv4. Cu ea poate vorbi doar cu vecinii de pe aceeași legătură, fără gateway. Dacă vezi 169.254.x.x, știi un lucru sigur: <strong>niciun Offer n-a ajuns la client</strong>. Treaba ta e să afli unde s-a oprit.</p>
+<p>Un mod ordonat de lucru, de la client spre server:</p>
+<ol>
+<li><strong>Clientul:</strong> cablul e conectat? <code>ipconfig /all</code> arată 169.254? Încearcă <code>ipconfig /renew</code>.</li>
+<li><strong>Switch-ul:</strong> portul e în VLAN-ul corect (<code>show vlan brief</code>)? Trunk-ul duce acel VLAN (<code>show interfaces trunk</code>)?</li>
+<li><strong>Gateway-ul clientului:</strong> are <code>ip helper-address</code> pe interfața sau SVI-ul VLAN-ului? Adresa din helper e corectă?</li>
+<li><strong>Drumul:</strong> de pe gateway, <code>ping</code> la server merge? Serverul are rută înapoi spre rețeaua clientului?</li>
+<li><strong>Serverul:</strong> există un pool cu <code>network</code> care conține adresa din giaddr? Mai are adrese libere? Ce spun <code>show ip dhcp server statistics</code> și, cu grijă, <code>debug ip dhcp server events</code>?</li>
+</ol>
+<div class="table-scroll"><p class="table-hint" aria-hidden="true">glisează<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></p><div class="table-wrap" role="region" tabindex="0" aria-label="Tabel (se derulează pe orizontală)"><table>
+<thead>
+<tr>
+<th>Simptom</th>
+<th>Cauza probabilă</th>
+<th>Cum verifici și repari</th>
+</tr>
+</thead>
+<tbody><tr>
+<td class="tw">Toți clienții dintr-un VLAN au 169.254.x.x</td>
+<td><code><span class="nw">ip</span> <span class="nw">helper-address</span></code> lipsă pe SVI sau subinterfață</td>
+<td><code><span class="nw">show</span> <span class="nw">running-config</span> <span class="nw">interface</span> <span class="nw">vlan</span> <span class="nw">20</span></code> → adaugi helper-ul</td>
+</tr>
+<tr>
+<td class="tw">Clienții din LAN-ul de după relay au 169.254, cei locali merg</td>
+<td class="tw">serverul n-are rută spre rețeaua clientului</td>
+<td><code><span class="nw">show</span> <span class="nw">ip</span> <span class="nw">route</span></code> pe server → rută statică sau OSPF</td>
+</tr>
+<tr>
+<td>Un singur PC are 169.254</td>
+<td>port în VLAN greșit sau oprit, cablu</td>
+<td><code><span class="nw">show</span> <span class="nw">vlan</span> <span class="nw">brief</span></code>, <code><span class="nw">show</span> <span class="nw">interfaces</span> <span class="nw">status</span></code></td>
+</tr>
+<tr>
+<td class="tw">Clienții noi nu mai primesc adrese, cei vechi merg</td>
+<td>pool epuizat</td>
+<td class="tw"><code><span class="nw">show</span> <span class="nw">ip</span> <span class="nw">dhcp</span> <span class="nw">pool</span></code> (leased = total) → pool mai mare, lease mai scurt</td>
+</tr>
+<tr>
+<td class="tw">Clienții primesc adresă, dar nu ies din rețea</td>
+<td><code>default-router</code> greșit sau lipsă în pool</td>
+<td><code><span class="nw">ipconfig</span> <span class="nw">/all</span></code> pe PC, <code><span class="nw">show</span> <span class="nw">running-config</span> <span class="nw">|</span> <span class="nw">section</span> <span class="nw">dhcp</span></code></td>
+</tr>
+<tr>
+<td>Clienții merg pe IP, dar nu pe nume</td>
+<td><code>dns-server</code> greșit sau lipsă</td>
+<td><code><span class="nw">ipconfig</span> <span class="nw">/all</span></code>, <code>nslookup</code></td>
+</tr>
+<tr>
+<td>Unii clienți primesc gateway-uri ciudate</td>
+<td>un server DHCP neautorizat în rețea</td>
+<td><code><span class="nw">ipconfig</span> <span class="nw">/all</span></code> (vezi „DHCP Server”) → DHCP snooping</td>
+</tr>
+<tr>
+<td class="tw">Mesaje despre conflicte, adrese care „dispar”</td>
+<td class="tw">dispozitive cu adrese statice în interiorul pool-ului</td>
+<td><code><span class="nw">show</span> <span class="nw">ip</span> <span class="nw">dhcp</span> <span class="nw">conflict</span></code> → <code><span class="nw">ip</span> <span class="nw">dhcp</span> <span class="nw">excluded-address</span></code></td>
+</tr>
+<tr>
+<td class="tw">Nimic nu merge după ce s-a pornit DHCP snooping</td>
+<td class="tw">uplink-ul spre server nu e trusted sau problema cu opțiunea 82</td>
+<td><code><span class="nw">show</span> <span class="nw">ip</span> <span class="nw">dhcp</span> <span class="nw">snooping</span></code> → <code><span class="nw">ip</span> <span class="nw">dhcp</span> <span class="nw">snooping</span> <span class="nw">trust</span></code> pe uplink</td>
+</tr>
+<tr>
+<td>Routerul nu răspunde deloc, nici local</td>
+<td class="tw"><code><span class="nw">no</span> <span class="nw">service</span> <span class="nw">dhcp</span></code> în configurație sau ACL care blochează UDP 67</td>
+<td><code><span class="nw">show</span> <span class="nw">running-config</span> <span class="nw">|</span> <span class="nw">include</span> <span class="nw">dhcp</span></code>, <code><span class="nw">show</span> <span class="nw">access-lists</span></code></td>
+</tr>
+</tbody></table></div></div>
+<h2 id="dhcp-snooping-pe-scurt">DHCP snooping, pe scurt</h2>
+<p>DHCP nu are autentificare. Oricine conectează un router de casă sau pornește un server DHCP pe un laptop poate răspunde la Discover-uri mai repede decât serverul real. Atacurile tipice:</p>
+<ul>
+<li><strong>DHCP spoofing:</strong> un server fals dă clienților un gateway sau un DNS controlat de atacator, care vede apoi traficul (man-in-the-middle).</li>
+<li><strong>DHCP starvation:</strong> atacatorul trimite mii de Discover-uri cu adrese MAC inventate și golește pool-ul, iar clienții reali nu mai primesc adrese. Des e primul pas înainte de spoofing.</li>
+</ul>
+<p><strong>DHCP snooping</strong> e funcția de switch care rezolvă asta. Porturile devin de două feluri:</p>
+<ul>
+<li><strong>trusted:</strong> porturile spre serverul DHCP legitim și uplink-urile spre restul rețelei. Aici sunt permise toate mesajele DHCP.</li>
+<li><strong>untrusted:</strong> toate celelalte (implicit, după activare). Aici mesajele de server (Offer, Ack, Nak) sunt aruncate. Clienții pot trimite Discover și Request, dar nu pot juca rol de server.</li>
+</ul>
+<pre><code class="language-text">S1(config)# ip dhcp snooping
+S1(config)# ip dhcp snooping vlan 10,20
+S1(config)# interface GigabitEthernet0/1
+S1(config-if)# description Uplink spre serverul DHCP
+S1(config-if)# ip dhcp snooping trust
+S1(config-if)# exit
+S1(config)# interface range FastEthernet0/1 - 24
+S1(config-if-range)# ip dhcp snooping limit rate 10
+</code></pre>
+<ul>
+<li>Snooping-ul trebuie pornit <strong>global și pe VLAN-uri</strong>; doar <code>ip dhcp snooping</code> nu ajunge.</li>
+<li><code>limit rate 10</code> permite cel mult 10 pachete DHCP pe secundă pe port; peste limită portul intră în err-disabled. E o apărare împotriva starvation, alături de port security.</li>
+<li>Switch-ul își construiește o <strong>tabelă de binding-uri</strong> (MAC, IP, VLAN, port), pe care o folosesc apoi Dynamic ARP Inspection și IP Source Guard. O vezi cu <code>show ip dhcp snooping binding</code>.</li>
+</ul>
+<p>O capcană de laborator: cu snooping pornit, switch-ul Catalyst adaugă implicit în cereri <strong>opțiunea 82</strong>. Un server DHCP Cisco IOS care primește o asemenea cerere fără giaddr o aruncă, iar clienții rămân fără adresă. În laborator, soluția obișnuită e <code>no ip dhcp snooping information option</code> pe switch.</p>
+<h2 id="ipv6-alta-poveste">IPv6: altă poveste</h2>
+<p>DHCPv4 nu dă adrese IPv6. În IPv6, routerul trimite periodic mesaje <strong>Router Advertisement</strong> (RA), iar două flag-uri din ele îi spun clientului ce să facă:</p>
+<div class="table-scroll"><p class="table-hint" aria-hidden="true">glisează<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></p><div class="table-wrap" role="region" tabindex="0" aria-label="Tabel (se derulează pe orizontală)"><table>
+<thead>
+<tr>
+<th>Metodă</th>
+<th>Flag-uri în RA</th>
+<th>De unde vine adresa</th>
+<th>De unde vin DNS și restul</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>SLAAC</td>
+<td>M = 0, O = 0</td>
+<td class="tw">clientul și-o construiește din prefixul din RA</td>
+<td>din RA (opțiunea RDNSS, dacă e trimisă)</td>
+</tr>
+<tr>
+<td>DHCPv6 stateless</td>
+<td>M = 0, O = 1</td>
+<td>prin SLAAC</td>
+<td>de la serverul DHCPv6</td>
+</tr>
+<tr>
+<td>DHCPv6 stateful</td>
+<td>M = 1</td>
+<td>de la serverul DHCPv6</td>
+<td>de la serverul DHCPv6</td>
+</tr>
+</tbody></table></div></div>
+<p>Diferențe importante față de DHCPv4:</p>
+<ul>
+<li><strong>Gateway-ul implicit vine întotdeauna din RA</strong> (adresa link-local a routerului), nu din DHCPv6.</li>
+<li>DHCPv6 folosește UDP <strong>546</strong> (client) și <strong>547</strong> (server). Nu există broadcast în IPv6, așa că clientul trimite la adresa multicast <code>ff02::1:2</code>.</li>
+<li>Pe Cisco, flag-urile se pun pe interfață cu <code>ipv6 nd other-config-flag</code> (O) și <code>ipv6 nd managed-config-flag</code> (M). Relay-ul se face cu <code>ipv6 dhcp relay destination</code> în loc de <code>ip helper-address</code>.</li>
+</ul>
+<p>Detaliile despre SLAAC, EUI-64 și tipurile de adrese sunt în <a href="../adrese-ipv6/">ghidul despre adresele IPv6</a>, iar adresele le poți verifica rapid cu <a href="../../tools/ipv6/">instrumentul IPv6</a>.</p>
+<h2 id="exercitii">Exerciții</h2>
+<ol>
+<li>Pe R1 ai pool-ul <code>LAN10</code> cu <code>network 192.168.10.0 255.255.255.0</code>, dar ai uitat <code>ip dhcp excluded-address</code>. Gateway-ul este 192.168.10.1, iar imprimanta are adresa statică 192.168.10.5. Ce se poate întâmpla și ce comandă lipsește?</li>
+<li>Un client primește lease-ul la 08:00, cu durata de 8 ore. La ce oră încearcă prima reînnoire și cui o trimite? Când trece la broadcast?</li>
+<li>Clienții din VLAN 30 (192.168.30.0/24, gateway SVI 192.168.30.1 pe switch-ul D1) trebuie să primească adrese de la serverul 10.10.10.5. Ce comandă scrii și pe ce interfață?</li>
+<li>Configurează un pool <code>OASPETI</code> pentru 172.16.50.0/24: gateway 172.16.50.1, DNS 172.16.50.2, lease de 4 ore, primele 10 adrese excluse.</li>
+<li>După ce ai pornit DHCP snooping pe switch-ul de acces, toți clienții primesc 169.254.x.x. Serverul e un router conectat pe G0/1. Care sunt cele două cauze probabile?</li>
+<li>Interfața G0/0/2 a unui router are <code>ip address dhcp</code>, iar tu adaugi <code>ip route 0.0.0.0 0.0.0.0 198.51.100.1</code>. Ce rută implicită va folosi routerul și de ce?</li>
+</ol>
+<details class="reveal-answer">
+<summary><strong>Răspunsuri</strong></summary><p><strong>1.</strong> Adresele statice rămân în pool. Ping-ul dinaintea ofertei le prinde de obicei și le trece în <code>show ip dhcp conflict</code>, dar dacă imprimanta e oprită în acel moment, 192.168.10.5 poate ajunge la un PC, iar conflictul real apare când imprimanta pornește. Lipsește <code>ip dhcp excluded-address 192.168.10.1 192.168.10.20</code> (sau un interval care să acopere adresele statice), în configurația globală.</p>
+<p><strong>2.</strong> T1 = 50% din 8 ore = 4 ore, deci la <strong>12:00</strong> clientul trimite un Request unicast serverului care i-a dat adresa. T2 = 87,5% din 8 ore = 7 ore, deci la <strong>15:00</strong>, dacă n-a primit răspuns, trimite Request prin broadcast, către orice server.</p>
+<p><strong>3.</strong> Pe SVI-ul VLAN-ului 30, interfața pe care ajung broadcast-urile clienților:</p>
+<pre><code class="language-text">D1(config)# interface vlan 30
+D1(config-if)# ip helper-address 10.10.10.5
+</code></pre>
+<p>Serverul trebuie să aibă un pool pentru 192.168.30.0/24 și o rută înapoi spre această rețea.</p>
+<p><strong>4.</strong></p>
+<pre><code class="language-text">R1(config)# ip dhcp excluded-address 172.16.50.1 172.16.50.10
+R1(config)# ip dhcp pool OASPETI
+R1(dhcp-config)# network 172.16.50.0 255.255.255.0
+R1(dhcp-config)# default-router 172.16.50.1
+R1(dhcp-config)# dns-server 172.16.50.2
+R1(dhcp-config)# lease 0 4
+</code></pre>
+<p><strong>5.</strong> Prima: portul G0/1 spre server nu e <code>ip dhcp snooping trust</code>, deci switch-ul aruncă Offer-urile. A doua: switch-ul adaugă opțiunea 82, iar serverul Cisco IOS aruncă cererile cu opțiunea 82 și fără giaddr. Repari cu <code>ip dhcp snooping trust</code> pe G0/1 și, dacă e nevoie, <code>no ip dhcp snooping information option</code>.</p>
+<p><strong>6.</strong> Ruta configurată de tine, prin 198.51.100.1. Ruta statică are distanța administrativă 1, iar ruta implicită învățată prin DHCP are 254. Câștigă distanța mai mică.</p>
+</details><h2 id="cum-inveti-dhcp-cel-mai-repede">Cum înveți DHCP cel mai repede</h2>
+<ul>
+<li><strong>Construiește topologia din ghid</strong> în Packet Tracer: întâi serverul local, apoi relay-ul, apoi strică intenționat ceva (șterge helper-ul, ruta, excluderile) și găsește problema doar cu <code>show</code>.</li>
+<li><strong>Desenează DORA pe hârtie</strong>, cu IP-uri sursă și destinație, porturi și broadcast/unicast. Dacă poți face tabelul din memorie, ai acoperit majoritatea întrebărilor.</li>
+<li><strong>Leagă DHCP de straturi:</strong> e un protocol de aplicație peste UDP, care ajută stratul 3. Vezi <a href="../model-osi-vs-tcp-ip/">modelul OSI vs TCP/IP</a>.</li>
+<li><strong>Exersează comenzile de bază</strong> din <a href="../comenzi-cisco-ios/">fișa cu comenzile Cisco IOS</a> și calculul intervalelor din <a href="../subnetting-pas-cu-pas/">ghidul de subnetting</a>.</li>
+</ul>
+<div class="cta-box cta-box--article"><svg class="mascot" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><g class="m-breathe"><path d="M22 14l-5-9M42 14l5-9" stroke="#8a919c" stroke-width="3.4" stroke-linecap="round" fill="none"/><circle class="m-led m-led-l" cx="17" cy="5" r="3.6"/><circle class="m-led m-led-r" cx="47" cy="5" r="3.6"/><path class="m-body" d="M28 12q4-6 8 0"/><rect class="m-body" x="8" y="12" width="48" height="42" rx="18"/><rect class="m-belly" x="8" y="40" width="48" height="14" rx="7"/><path d="M19 31q4-5 8 0" stroke="#1a1d24" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M37 31q4-5 8 0" stroke="#1a1d24" stroke-width="3" fill="none" stroke-linecap="round"/><path class="m-led" d="M29 37l3 3.5 3-3.5z"/><circle cx="15" cy="38" r="3" fill="#ff8fb1" opacity=".7"/><circle cx="49" cy="38" r="3" fill="#ff8fb1" opacity=".7"/><circle class="m-ok" cx="18" cy="47" r="2"/><circle class="m-led" cx="24" cy="47" r="2"/><rect x="31" y="45" width="6" height="4" rx="1" fill="#0d1a3a" opacity=".55"/><rect x="39" y="45" width="6" height="4" rx="1" fill="#0d1a3a" opacity=".55"/><rect x="47" y="45" width="5" height="4" rx="1" fill="#0d1a3a" opacity=".55"/><path class="m-leg" d="M20 54v4M44 54v4" stroke-width="3.4" stroke-linecap="round" fill="none"/></g></svg><div><h3>Exersează DHCP în aplicația Routerel</h3><p>Routerel are peste 1.900 de întrebări pentru CCNA 1 · ITN, CCNA 2 · IEN și CCNA 3 · CEN, inclusiv DHCPv4, SLAAC, DHCPv6 și securitatea la nivelul 2, cu explicație imediat după răspuns. Greșelile revin singure prin repetiție spațiată până le stăpânești, iar simularea de examen cu timp îți arată unde stai. Abonații noi au 7 zile gratuite, cu acces la tot.</p></div><a class="btn" href="../../" data-play data-soon-href="../../">Descoperă aplicația<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div><h2 id="intrebari-frecvente">Întrebări frecvente</h2>
+<div class="faq faq--article"><details><summary>Ce este DHCP?<span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p>Protocolul prin care un dispozitiv primește automat de la un server adresa IPv4, masca, gateway-ul implicit, serverele DNS și alte setări, pentru o perioadă limitată numită lease.</p></div></details><details><summary>Ce porturi folosește DHCP?<span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p>DHCPv4 folosește UDP: serverul ascultă pe portul <strong>67</strong>, clientul pe portul <strong>68</strong>. DHCPv6 are alte porturi: 547 pentru server și 546 pentru client.</p></div></details><details><summary>Ce înseamnă DORA?<span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p>Cele patru mesaje prin care un client obține o adresă: <strong>Discover</strong> (clientul caută servere), <strong>Offer</strong> (serverul propune o adresă), <strong>Request</strong> (clientul cere adresa aleasă) și <strong>Acknowledgment</strong> (serverul confirmă).</p></div></details><details><summary>De ce am nevoie de ip helper-address?<span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p>Discover-ul e broadcast, iar routerele nu trimit broadcast-urile mai departe. Dacă serverul DHCP e în altă subrețea sau în alt VLAN, <code>ip helper-address</code> pe interfața dinspre clienți transformă broadcast-ul într-un unicast trimis spre server.</p></div></details><details><summary>De ce primește PC-ul o adresă 169.254.x.x?<span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p>Adresa 169.254.x.x (APIPA) apare când clientul nu primește niciun răspuns de la un server DHCP. Cauzele obișnuite: helper lipsă, VLAN greșit, pool epuizat, rută lipsă spre rețeaua clientului sau DHCP snooping care blochează răspunsurile.</p></div></details><details><summary>Cât durează implicit un lease pe un router Cisco?<span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p><strong>O zi.</strong> Îl schimbi în pool cu <code>lease</code>, de exemplu <code>lease 7</code> pentru șapte zile sau <code>lease 0 8</code> pentru opt ore.</p></div></details><details><summary>Ce face DHCP snooping?<span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p>Lasă mesajele de server DHCP (Offer, Ack) să intre doar pe porturile marcate trusted. Un server neautorizat, conectat pe un port de utilizator, nu mai poate da adrese și gateway-uri false. Pentru locul DHCP-ului în examen, vezi <a href="../ce-este-ccna/">ghidul despre CCNA</a>.</p></div></details></div>
+<hr>
+<p><em>Routerel este o aplicație independentă și nu este afiliată, sponsorizată sau aprobată de Cisco Systems, Inc. Cisco, CCNA, Cisco IOS, Catalyst, Packet Tracer și Networking Academy sunt mărci ale Cisco Systems, Inc. Celelalte nume de produse aparțin proprietarilor lor.</em></p>
+      
+      <section class="related" aria-labelledby="rel-title">
+        <h2 id="rel-title">Citește și</h2>
+        <div class="grid grid--2"><a class="card post-card lift" href="../../ghiduri/ospf/"><span class="tagline">Ghid · 16 min</span><h3>OSPF explicat: configurare și depanare OSPFv2 (2026)</h3><p>OSPF single-area pe înțeles: router ID, vecini și stări, DR/BDR, cost, configurare cu network și ip ospf, comenzi show, depanare și exerciții rezolvate.</p></a><a class="card post-card lift" href="../../ghiduri/comenzi-cisco-ios/"><span class="tagline">Ghid · 13 min</span><h3>Comenzile Cisco IOS de bază (fișă pentru CCNA)</h3><p>Fișa comenzilor Cisco IOS de bază pentru CCNA: modurile CLI, configurarea inițială, parole și SSH, interfețe, salvarea configurației, comenzi show și depanare.</p></a></div>
+      </section>
+    </article>
+  </div>
+</main>
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="about">
+        <a class="brand" href="../../"><img src="../../assets/icon-96.webp" alt="" width="36" height="36" loading="lazy"><span>Routerel</span></a>
+        <p>Exersezi CCNA pe telefon: întrebări cu explicații, repetiția greșelilor și simulări de examen. În română și engleză.</p>
+      </div>
+      <div><h2>Aplicația</h2><ul><li><a href="../../#functii">Funcții</a></li><li><a href="../../#preturi">Prețuri</a></li><li><a href="../../#cum-functioneaza">Cum funcționează</a></li><li><a href="../../#faq">Întrebări frecvente</a></li></ul></div>
+      <div><h2>Resurse</h2><ul><li><a href="../../ghiduri/">Ghiduri CCNA</a></li><li><a href="../../articole/">Articole CCNA</a></li><li><a href="../../tools/">Tools gratuite</a></li><li><a href="../../en/" hreflang="en" lang="en" data-set-lang="en">English</a></li></ul></div>
+      <div><h2>Legal și contact</h2><ul><li><a href="../../privacy">Confidențialitate</a></li><li><a href="../../terms">Termeni de utilizare</a></li><li><a href="../../delete-account">Ștergerea contului</a></li></ul><ul><li><a href="mailto:contact@routerel.app">contact@routerel.app</a></li></ul></div>
+    </div>
+    <div class="disclaimer">
+      <p>Routerel este o aplicație independentă și nu este afiliată, sponsorizată sau aprobată de Cisco Systems, Inc. Cisco, CCNA și Cisco Networking Academy sunt mărci ale Cisco Systems, Inc.</p>
+      <p>© 2026 Routerel</p>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

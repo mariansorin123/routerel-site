@@ -1,0 +1,649 @@
+<!doctype html>
+<!-- Pagină generată. Nu o edita de mână: vezi tools/site/ (npm run build:guides / npm run sync:tools / npm run build:legal). -->
+<html lang="ro" class="play-soon" data-utm-medium="guide" data-utm-campaign="spanning-tree-stp">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Spanning Tree (STP și RSTP): root bridge, porturi, comenzi</title>
+  <meta name="description" content="Spanning Tree explicat pentru CCNA: alegerea root bridge, costuri, root port și designated port, RSTP, Rapid PVST+, PortFast, BPDU Guard, comenzi și exerciții.">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <link rel="canonical" href="https://routerel.app/ghiduri/spanning-tree-stp/">
+  <link rel="alternate" hreflang="ro" href="https://routerel.app/ghiduri/spanning-tree-stp/">
+  <link rel="alternate" hreflang="en" href="https://routerel.app/en/guides/spanning-tree-protocol/">
+  <link rel="alternate" hreflang="x-default" href="https://routerel.app/en/guides/spanning-tree-protocol/">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#12151b" media="(prefers-color-scheme: dark)">
+  <meta name="color-scheme" content="light dark">
+  <link rel="icon" href="../../assets/favicon-32.png" type="image/png" sizes="32x32">
+  <link rel="icon" href="../../assets/icon-192.png" type="image/png" sizes="192x192">
+  <link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
+  <link rel="manifest" href="../../site.webmanifest">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Routerel">
+  <meta property="og:locale" content="ro_RO">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta property="og:title" content="Spanning Tree (STP și RSTP): root bridge, porturi, comenzi">
+  <meta property="og:description" content="Spanning Tree explicat pentru CCNA: alegerea root bridge, costuri, root port și designated port, RSTP, Rapid PVST+, PortFast, BPDU Guard, comenzi și exerciții.">
+  <meta property="og:url" content="https://routerel.app/ghiduri/spanning-tree-stp/">
+  <meta property="og:image" content="https://routerel.app/assets/og-ro.png">
+  <meta property="og:image:width" content="1024">
+  <meta property="og:image:height" content="500">
+  <meta property="og:image:alt" content="Routerel: mascota puiul de router și numele aplicației">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Spanning Tree (STP și RSTP): root bridge, porturi, comenzi">
+  <meta name="twitter:description" content="Spanning Tree explicat pentru CCNA: alegerea root bridge, costuri, root port și designated port, RSTP, Rapid PVST+, PortFast, BPDU Guard, comenzi și exerciții.">
+  <meta name="twitter:image" content="https://routerel.app/assets/og-ro.png">
+  <meta property="article:published_time" content="2026-11-09">
+  <meta property="article:modified_time" content="2026-11-09">
+  <meta name="routerel:updated" content="2026-11-09">
+  <link rel="preload" href="../../assets/fonts/nunito-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../../assets/fonts/nunito-latin-ext.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../../assets/fonts/roboto-mono-500-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="../../style.css">
+  <script>(function(d){d.classList.add("js");try{var t=localStorage.getItem("routerel-theme");if(t==="light"||t==="dark")d.setAttribute("data-theme",t)}catch(e){}setTimeout(function(){if(!window.__rtl)d.classList.remove("js")},4000)})(document.documentElement)</script>
+  <script src="../../assets/site.js" defer></script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Article","@id":"https://routerel.app/ghiduri/spanning-tree-stp/#article","headline":"Spanning Tree (STP și RSTP): root bridge, porturi, comenzi","description":"Spanning Tree explicat pentru CCNA: alegerea root bridge, costuri, root port și designated port, RSTP, Rapid PVST+, PortFast, BPDU Guard, comenzi și exerciții.","inLanguage":"ro","datePublished":"2026-11-09","dateModified":"2026-11-09","keywords":"spanning tree, STP, ce este spanning tree, RSTP, root bridge, root port și designated port, Rapid PVST+, configurare spanning tree Cisco, BPDU Guard PortFast","author":{"@type":"Organization","name":"Routerel","url":"https://routerel.app/"},"publisher":{"@type":"Organization","name":"Routerel","logo":{"@type":"ImageObject","url":"https://routerel.app/assets/icon-512.png"}},"image":"https://routerel.app/assets/og-ro.png","mainEntityOfPage":"https://routerel.app/ghiduri/spanning-tree-stp/","isPartOf":{"@id":"https://routerel.app/#website"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Acasă","item":"https://routerel.app/"},{"@type":"ListItem","position":2,"name":"Ghiduri","item":"https://routerel.app/ghiduri/"},{"@type":"ListItem","position":3,"name":"Spanning Tree (STP și RSTP): root bridge, porturi, comenzi","item":"https://routerel.app/ghiduri/spanning-tree-stp/"}]},{"@type":"FAQPage","@id":"https://routerel.app/ghiduri/spanning-tree-stp/#faq","inLanguage":"ro","mainEntity":[{"@type":"Question","name":"Ce face Spanning Tree Protocol?","acceptedAnswer":{"@type":"Answer","text":"STP împiedică buclele de nivel 2 într-o rețea cu legături redundante între switch-uri. Alege un switch central (root bridge), calculează cel mai bun drum spre el pentru fiecare switch și pune în blocare porturile care ar închide o buclă. Dacă o legătură activă cade, deblochează un port de rezervă."}},{"@type":"Question","name":"Cum se alege root bridge-ul?","acceptedAnswer":{"@type":"Answer","text":"Câștigă switch-ul cu cel mai mic bridge ID. Bridge ID-ul se compară întâi după prioritate (implicit 32768 plus numărul VLAN-ului), iar la prioritate egală după adresa MAC: cea mai mică adresă MAC câștigă."}},{"@type":"Question","name":"Care e diferența dintre STP și RSTP?","acceptedAnswer":{"@type":"Answer","text":"RSTP (802.1w) face același arbore ca STP (802.1D), dar converge în câteva secunde în loc de 30–50 de secunde. Are doar trei stări (discarding, learning, forwarding), roluri noi pentru porturile de rezervă (alternate și backup) și trece porturile spre PC-uri direct în forwarding."}},{"@type":"Question","name":"Ce diferență e între PVST+ și Rapid PVST+?","acceptedAnswer":{"@type":"Answer","text":"Ambele sunt variante Cisco care rulează câte o instanță separată de spanning tree pentru fiecare VLAN. PVST+ folosește algoritmul clasic 802.1D, iar Rapid PVST+ folosește RSTP, deci converge mult mai repede. Le alegi cu spanning-tree mode pvst sau spanning-tree mode rapid-pvst."}},{"@type":"Question","name":"De ce prioritatea se schimbă doar în multipli de 4096?","acceptedAnswer":{"@type":"Answer","text":"Câmpul de prioritate are 16 biți, dar ultimii 12 sunt ocupați de extended system ID, adică de numărul VLAN-ului. Pentru prioritate rămân doar primii 4 biți, iar valorile lor sunt multipli de 4096, de la 0 la 61440."}},{"@type":"Question","name":"Ce face BPDU Guard?","acceptedAnswer":{"@type":"Answer","text":"BPDU Guard oprește portul (îl pune în starea err-disabled) dacă primește un BPDU. Se folosește pe porturile cu PortFast, unde ar trebui să fie doar PC-uri, ca un switch conectat greșit să nu poată schimba topologia sau crea o buclă."}}]}]}</script>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs><linearGradient id="rtl-play" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5b8cff"/><stop offset=".55" stop-color="#2f6bff"/><stop offset="1" stop-color="#ffb020"/></linearGradient></defs></svg>
+<a class="skip-link" href="#main">Sari la conținut</a>
+<header class="site-header">
+  <div class="container header-row">
+    <a class="brand" href="../../" aria-label="Routerel, acasă"><img src="../../assets/icon-96.webp" alt="" width="36" height="36"><span>Routerel</span></a>
+    <nav class="main-nav" aria-label="Principal"><ul><li><a href="../../#functii">Funcții</a></li><li><a href="../../#preturi">Prețuri</a></li><li><a href="../../ghiduri/" aria-current="page">Ghiduri</a></li><li><a href="../../articole/">Articole</a></li><li><a href="../../tools/">Tools</a></li><li><a href="../../#faq">FAQ</a></li></ul></nav>
+    <div class="header-actions">
+      <div class="lang-switch" role="group" aria-label="Limba"><span aria-current="true" lang="ro">RO</span><a href="../../en/guides/spanning-tree-protocol/" hreflang="en" lang="en" title="English">EN</a></div>
+      <button class="icon-btn theme-toggle" type="button" data-theme-toggle aria-label="Schimbă tema"><span class="i-moon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9z"/></svg></span><span class="i-sun"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg></span></button>
+      <a class="btn btn--sm header-cta" data-play data-soon-href="../../#preturi" href="../../#preturi"><span data-when="live">Încearcă gratuit</span><span data-when="soon">Vezi prețurile</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      <button class="icon-btn menu-btn" type="button" data-menu-btn aria-expanded="false" aria-controls="mobile-nav" aria-label="Meniu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+    </div>
+  </div>
+  <nav class="mobile-nav" id="mobile-nav" aria-label="Principal" hidden>
+    <div class="container"><ul><li><a href="../../#functii">Funcții</a></li><li><a href="../../#preturi">Prețuri</a></li><li><a href="../../ghiduri/" aria-current="page">Ghiduri</a></li><li><a href="../../articole/">Articole</a></li><li><a href="../../tools/">Tools</a></li><li><a href="../../#faq">FAQ</a></li></ul></div>
+  </nav>
+</header>
+<main id="main">
+  <div class="container section section--tight">
+    <article class="prose">
+      <nav class="crumbs" aria-label="Firimituri"><ol><li><a href="../../">Acasă</a></li><li><a href="../../ghiduri/">Ghiduri</a></li><li><span aria-current="page">Spanning Tree (STP și RSTP): root bridge, porturi, comenzi</span></li></ol></nav>
+      <p class="eyebrow">Ghid CCNA</p>
+      <h1>Spanning Tree explicat: STP, RSTP și Rapid PVST+</h1>
+      <div class="article-meta">
+        <span class="avatar"><svg class="mascot" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><g class="m-breathe"><path d="M22 14l-5-9M42 14l5-9" stroke="#8a919c" stroke-width="3.4" stroke-linecap="round" fill="none"/><circle class="m-led m-led-l" cx="17" cy="5" r="3.6"/><circle class="m-led m-led-r" cx="47" cy="5" r="3.6"/><path class="m-body" d="M28 12q4-6 8 0"/><rect class="m-body" x="8" y="12" width="48" height="42" rx="18"/><rect class="m-belly" x="8" y="40" width="48" height="14" rx="7"/><circle cx="23" cy="31" r="5.4" fill="#fff"/><circle class="m-pupil" cx="24" cy="31.5" r="3" fill="#1a1d24"/><circle cx="41" cy="31" r="5.4" fill="#fff"/><circle class="m-pupil" cx="42" cy="31.5" r="3" fill="#1a1d24"/><path class="m-led" d="M29 37l3 3.5 3-3.5z"/><circle class="m-ok" cx="18" cy="47" r="2"/><circle class="m-led" cx="24" cy="47" r="2"/><rect x="31" y="45" width="6" height="4" rx="1" fill="#0d1a3a" opacity=".55"/><rect x="39" y="45" width="6" height="4" rx="1" fill="#0d1a3a" opacity=".55"/><rect x="47" y="45" width="5" height="4" rx="1" fill="#0d1a3a" opacity=".55"/><path class="m-leg" d="M20 54v4M44 54v4" stroke-width="3.4" stroke-linecap="round" fill="none"/></g></svg></span>
+        <span>Echipa Routerel</span><span aria-hidden="true">·</span>
+        <span>Actualizat: <time datetime="2026-11-09">9 noiembrie 2026</time></span><span aria-hidden="true">·</span>
+        <span>14 min de citit</span>
+      </div>
+      <p class="lead">Două switch-uri legate prin două cabluri par o idee bună: dacă un cablu cade, rămâne celălalt. Fără Spanning Tree, aceeași rețea cade în câteva secunde, sufocată de propriile broadcast-uri.</p>
+<p>În ghidul ăsta afli de ce apar buclele, cum se aleg root bridge-ul și rolurile porturilor, ce aduc RSTP și Rapid PVST+, ce fac PortFast și BPDU Guard și cum configurezi și verifici totul în Cisco IOS. Apoi rezolvăm împreună o topologie cu patru switch-uri, iar la final ai exerciții cu răspunsuri.</p>
+<p>În cursurile CCNA v8 de la Networking Academy, Spanning Tree e în <strong>CCNA 2 · IEN</strong>, modulul 6. Dacă VLAN-urile și trunk-urile nu-ți sunt încă clare, citește întâi <a href="../vlan-si-trunk/">ghidul despre VLAN-uri și trunk-uri</a>, pentru că Rapid PVST+ calculează câte un arbore pentru fiecare VLAN.</p>
+      <nav class="toc toc--fold" aria-labelledby="toc-title"><h2 id="toc-title">Cuprins</h2><button type="button" class="toc-toggle" data-toc-toggle aria-expanded="false" aria-controls="toc-list"><span class="toc-toggle-t">Cuprins</span> <span class="toc-toggle-n">13 secțiuni</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6"/></svg></button><ol id="toc-list"><li><a href="#de-ce-apar-buclele-de-nivel-2">De ce apar buclele de nivel 2</a></li><li><a href="#bridge-id-si-alegerea-root-bridge-ului">Bridge ID și alegerea root bridge-ului</a></li><li><a href="#costul-porturilor-si-root-path-cost">Costul porturilor și root path cost</a></li><li><a href="#root-port-designated-port-si-porturile-blocate">Root port, designated port și porturile blocate</a><ol><li><a href="#1-root-port-unul-pe-fiecare-switch-non-root">1. Root port: unul pe fiecare switch non-root</a></li><li><a href="#2-designated-port-unul-pe-fiecare-segment">2. Designated port: unul pe fiecare segment</a></li><li><a href="#3-restul-blocate">3. Restul: blocate</a></li></ol></li><li><a href="#starile-porturilor-802-1d-fata-de-rstp">Stările porturilor: 802.1D față de RSTP</a></li><li><a href="#pvst-si-rapid-pvst">PVST+ și Rapid PVST+</a></li><li><a href="#portfast-bpdu-guard-root-guard-si-loop-guard">PortFast, BPDU Guard, Root Guard și Loop Guard</a></li><li><a href="#configurarea">Configurarea</a><ol><li><a href="#modul-si-root-bridge-ul">Modul și root bridge-ul</a></li><li><a href="#costul-si-prioritatea-unui-port">Costul și prioritatea unui port</a></li><li><a href="#protectiile-de-margine">Protecțiile de margine</a></li></ol></li><li><a href="#verificarea">Verificarea</a></li><li><a href="#exemplu-rezolvat-patru-switch-uri">Exemplu rezolvat: patru switch-uri</a><ol><li><a href="#pasul-1-root-bridge-ul">Pasul 1: root bridge-ul</a></li><li><a href="#pasul-2-root-port-urile">Pasul 2: root port-urile</a></li><li><a href="#pasul-3-designated-port-urile">Pasul 3: designated port-urile</a></li><li><a href="#pasul-4-verificarea-rezultatului">Pasul 4: verificarea rezultatului</a></li></ol></li><li><a href="#exercitii">Exerciții</a></li><li><a href="#cum-il-inveti-cel-mai-repede">Cum îl înveți cel mai repede</a></li><li><a href="#intrebari-frecvente">Întrebări frecvente</a></li></ol></nav>
+<h2 id="de-ce-apar-buclele-de-nivel-2">De ce apar buclele de nivel 2</h2>
+<p>Un pachet IP are câmpul TTL: fiecare router îl scade cu 1, iar la 0 pachetul e aruncat. Un frame Ethernet <strong>nu are nimic asemănător</strong>. Dacă intră într-o buclă de switch-uri, poate circula la nesfârșit.</p>
+<p>Ia trei switch-uri legate în triunghi, fără STP. Un PC trimite o cerere ARP (broadcast):</p>
+<ol>
+<li>SW1 primește broadcast-ul și îl trimite pe toate celelalte porturi, deci spre SW2 și spre SW3.</li>
+<li>SW2 îl trimite mai departe spre SW3, iar SW3 îl trimite spre SW2.</li>
+<li>Fiecare copie se întoarce la SW1, care o trimite din nou peste tot.</li>
+</ol>
+<p>Rezultatul are trei fețe:</p>
+<ul>
+<li><strong>Broadcast storm (furtună de broadcast-uri):</strong> copiile se înmulțesc, legăturile ajung la 100%, CPU-ul switch-urilor urcă, iar PC-urile primesc atâtea broadcast-uri încât nu mai fac nimic util.</li>
+<li><strong>Tabela MAC instabilă:</strong> SW1 vede aceeași adresă MAC sursă venind o dată pe portul dinspre PC, apoi pe portul dinspre SW2, apoi pe cel dinspre SW3. Rescrie tabela de zeci de ori pe secundă și trimite frame-urile unicast în direcția greșită.</li>
+<li><strong>Frame-uri duplicate:</strong> un frame unicast către o adresă încă necunoscută e inundat pe toate porturile, iar destinația îl primește de mai multe ori.</li>
+</ul>
+<p>Nu poți renunța la redundanță, pentru că un singur cablu înseamnă un singur punct de cădere. Soluția e <strong>Spanning Tree Protocol</strong> (IEEE 802.1D): păstrează cablurile, dar blochează logic exact atâtea porturi cât să rămână un arbore fără bucle. Când o legătură activă cade, deblochează una de rezervă.</p>
+<h2 id="bridge-id-si-alegerea-root-bridge-ului">Bridge ID și alegerea root bridge-ului</h2>
+<p>Switch-urile își trimit mesaje numite <strong>BPDU</strong> (Bridge Protocol Data Unit). Din ele află cine e root bridge-ul, cât de departe e și cine trimite.</p>
+<p>Primul pas e alegerea <strong>root bridge-ului</strong>, switch-ul de la care pornește arborele. Câștigă switch-ul cu cel mai mic <strong>bridge ID (BID)</strong>. BID-ul are 8 octeți:</p>
+<div class="table-scroll"><p class="table-hint" aria-hidden="true">glisează<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></p><div class="table-wrap" role="region" tabindex="0" aria-label="Tabel (se derulează pe orizontală)"><table>
+<thead>
+<tr>
+<th>Parte</th>
+<th>Mărime</th>
+<th>Ce conține</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Prioritate</td>
+<td>4 biți</td>
+<td class="tw">valoare configurabilă, în multipli de 4096 (0–61440); implicit 32768</td>
+</tr>
+<tr>
+<td>Extended system ID</td>
+<td>12 biți</td>
+<td>numărul VLAN-ului</td>
+</tr>
+<tr>
+<td>Adresa MAC</td>
+<td>48 de biți</td>
+<td>adresa MAC a switch-ului</td>
+</tr>
+</tbody></table></div></div>
+<p>Primele două părți formează împreună un câmp de 16 biți pe care IOS îl afișează ca un singur număr. De aceea, în VLAN 10, un switch cu setările implicite are prioritatea afișată <strong>32778</strong> (32768 + 10), iar în VLAN 1 are <strong>32769</strong>.</p>
+<p>De ce doar multipli de 4096? Pentru că din cei 16 biți ai câmpului, ultimii 12 sunt ocupați de VLAN. Pentru prioritate rămân primii 4 biți, cu valorile 4096, 8192, 16384 și 32768. Dacă vrei să vezi cum se descompune 32778 în biți, încearcă-l în <a href="../../tools/convertor-binar/">convertorul binar</a>.</p>
+<p>Cum se compară două BID-uri:</p>
+<ol>
+<li><strong>prioritatea</strong> (cu tot cu VLAN-ul): cea mai mică câștigă;</li>
+<li>la egalitate, <strong>adresa MAC</strong>: cea mai mică câștigă.</li>
+</ol>
+<p>La pornire, fiecare switch se declară root și trimite BPDU-uri cu propriul BID. Când primește un BPDU cu un root ID mai bun (mai mic), renunță și începe să anunțe root-ul acela. După câteva secunde toate switch-urile sunt de acord.</p>
+<p>Capcana: dacă lași totul pe implicit, root devine switch-ul cu cea mai mică adresă MAC. Adesea ăsta e <strong>cel mai vechi</strong> switch din rețea, poate un switch de acces uitat într-un dulap. De aceea root bridge-ul se alege mereu manual, prin prioritate.</p>
+<h2 id="costul-porturilor-si-root-path-cost">Costul porturilor și root path cost</h2>
+<p>Fiecare port are un <strong>cost</strong>, invers proporțional cu viteza. La CCNA folosești metoda scurtă (<em>short</em>, din 802.1D-1998), implicită pe multe switch-uri Catalyst, inclusiv seria 2960:</p>
+<div class="table-scroll"><p class="table-hint" aria-hidden="true">glisează<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></p><div class="table-wrap" role="region" tabindex="0" aria-label="Tabel (se derulează pe orizontală)"><table>
+<thead>
+<tr>
+<th>Viteză</th>
+<th>Cost (short)</th>
+<th>Cost (long)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>10 Mbps</td>
+<td>100</td>
+<td>2.000.000</td>
+</tr>
+<tr>
+<td>100 Mbps</td>
+<td>19</td>
+<td>200.000</td>
+</tr>
+<tr>
+<td>1 Gbps</td>
+<td>4</td>
+<td>20.000</td>
+</tr>
+<tr>
+<td>10 Gbps</td>
+<td>2</td>
+<td>2.000</td>
+</tr>
+</tbody></table></div></div>
+<p>Metoda lungă (<em>long</em>, 802.1t) există pentru legăturile foarte rapide, unde valorile scurte nu mai fac diferența. O alegi cu <code>spanning-tree pathcost method long</code>, pe toate switch-urile, ca valorile să fie comparabile.</p>
+<p><strong>Root path cost</strong> e costul total al drumului până la root. Root bridge-ul anunță costul 0. Fiecare switch care primește BPDU-ul adaugă costul <strong>portului pe care l-a primit</strong> și anunță noua sumă mai departe. Contează deci costul porturilor orientate spre root (cele pe care sosesc BPDU-urile), nu al porturilor pe care BPDU-ul pleacă mai departe.</p>
+<p>Exemplu: root-ul e legat de SW2 printr-o legătură Gigabit, iar SW2 de SW4 printr-una de 100 Mbps. SW2 are root path cost 4, iar SW4 are 4 + 19 = <strong>23</strong>.</p>
+<h2 id="root-port-designated-port-si-porturile-blocate">Root port, designated port și porturile blocate</h2>
+<p>După alegerea root-ului, fiecare port primește un rol. Ordinea în care le stabilești e mereu aceeași.</p>
+<h3 id="1-root-port-unul-pe-fiecare-switch-non-root">1. Root port: unul pe fiecare switch non-root</h3>
+<p>Fiecare switch în afară de root alege <strong>un singur root port</strong>: portul cu cel mai bun drum spre root. Criteriile, în ordine:</p>
+<ol>
+<li>cel mai mic <strong>root path cost</strong>;</li>
+<li>cel mai mic <strong>BID al vecinului</strong> care a trimis BPDU-ul;</li>
+<li>cel mai mic <strong>port priority al vecinului</strong> (implicit 128);</li>
+<li>cel mai mic <strong>număr de port al vecinului</strong>.</li>
+</ol>
+<p>Ultimele două criterii se uită la portul <strong>vecinului</strong>, nu la portul local. Contează doar când două switch-uri sunt legate prin mai multe cabluri. Exercițiul 3 de la final arată de ce detaliul ăsta schimbă răspunsul.</p>
+<p>Root bridge-ul nu are root port: el e destinația.</p>
+<h3 id="2-designated-port-unul-pe-fiecare-segment">2. Designated port: unul pe fiecare segment</h3>
+<p>Pe fiecare legătură (segment) există <strong>un singur designated port</strong>: portul switch-ului care oferă segmentului cel mai bun drum spre root. Criteriile:</p>
+<ol>
+<li>cel mai mic <strong>root path cost</strong> al switch-ului;</li>
+<li>cel mai mic <strong>BID</strong>;</li>
+<li>cel mai mic <strong>port ID</strong> (prioritate, apoi număr).</li>
+</ol>
+<p>Toate porturile root bridge-ului sunt designated, pentru că root path cost-ul lui e 0. Porturile spre PC-uri sunt și ele designated.</p>
+<h3 id="3-restul-blocate">3. Restul: blocate</h3>
+<p>Orice port care nu e nici root port, nici designated port e <strong>blocat</strong>. Nu trimite și nu primește date, dar ascultă BPDU-urile în continuare, ca să poată prelua traficul dacă se schimbă ceva.</p>
+<p>O verificare rapidă: pe o legătură între două switch-uri, un capăt e mereu designated. Celălalt e root port sau blocat. Nu poți avea ambele capete blocate pe aceeași legătură.</p>
+<h2 id="starile-porturilor-802-1d-fata-de-rstp">Stările porturilor: 802.1D față de RSTP</h2>
+<p>STP-ul clasic (802.1D) trece un port prin cinci stări:</p>
+<div class="table-scroll"><p class="table-hint" aria-hidden="true">glisează<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></p><div class="table-wrap" role="region" tabindex="0" aria-label="Tabel (se derulează pe orizontală)"><table>
+<thead>
+<tr>
+<th>Stare 802.1D</th>
+<th>Trimite date?</th>
+<th>Învață MAC-uri?</th>
+<th>Durată tipică</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Blocking</td>
+<td>nu</td>
+<td>nu</td>
+<td>până la 20 s (max age)</td>
+</tr>
+<tr>
+<td>Listening</td>
+<td>nu</td>
+<td>nu</td>
+<td>15 s (forward delay)</td>
+</tr>
+<tr>
+<td>Learning</td>
+<td>nu</td>
+<td>da</td>
+<td>15 s (forward delay)</td>
+</tr>
+<tr>
+<td>Forwarding</td>
+<td>da</td>
+<td>da</td>
+<td>starea normală</td>
+</tr>
+<tr>
+<td>Disabled</td>
+<td>nu</td>
+<td>nu</td>
+<td>port oprit administrativ</td>
+</tr>
+</tbody></table></div></div>
+<p>Timerele implicite sunt <strong>hello 2 s</strong>, <strong>max age 20 s</strong> și <strong>forward delay 15 s</strong>. Când un switch pierde root port-ul indirect (pică o legătură mai departe în rețea), portul de rezervă așteaptă max age, apoi trece prin listening și learning: 20 + 15 + 15 = <strong>50 de secunde</strong> fără trafic. Când doar conectezi un cablu, durează 30 de secunde (listening + learning).</p>
+<p><strong>RSTP</strong> (Rapid Spanning Tree, 802.1w, inclus apoi în 802.1D-2004) păstrează aceeași logică de alegere, dar reduce timpul la câteva secunde. Are doar trei stări:</p>
+<div class="table-scroll"><p class="table-hint" aria-hidden="true">glisează<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></p><div class="table-wrap" role="region" tabindex="0" aria-label="Tabel (se derulează pe orizontală)"><table>
+<thead>
+<tr>
+<th>Stare RSTP</th>
+<th>Corespunde în 802.1D cu</th>
+<th>Trimite date?</th>
+<th>Învață MAC-uri?</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Discarding</td>
+<td>disabled, blocking, listening</td>
+<td>nu</td>
+<td>nu</td>
+</tr>
+<tr>
+<td>Learning</td>
+<td>learning</td>
+<td>nu</td>
+<td>da</td>
+</tr>
+<tr>
+<td>Forwarding</td>
+<td>forwarding</td>
+<td>da</td>
+<td>da</td>
+</tr>
+</tbody></table></div></div>
+<p>Și separă clar <strong>rolurile</strong> porturilor de stări:</p>
+<div class="table-scroll"><p class="table-hint" aria-hidden="true">glisează<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></p><div class="table-wrap" role="region" tabindex="0" aria-label="Tabel (se derulează pe orizontală)"><table>
+<thead>
+<tr>
+<th>Rol RSTP</th>
+<th>Ce înseamnă</th>
+<th>Stare</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Root</td>
+<td>cel mai bun drum spre root</td>
+<td>forwarding</td>
+</tr>
+<tr>
+<td>Designated</td>
+<td>cel mai bun port pentru un segment</td>
+<td>forwarding</td>
+</tr>
+<tr>
+<td>Alternate</td>
+<td class="tw">drum de rezervă spre root, prin <strong>alt switch</strong>; preia imediat dacă root port-ul cade</td>
+<td>discarding</td>
+</tr>
+<tr>
+<td>Backup</td>
+<td class="tw">port de rezervă spre un segment pe care <strong>același switch</strong> are deja un designated port (apare doar pe medii partajate, de exemplu cu un hub)</td>
+<td>discarding</td>
+</tr>
+<tr>
+<td>Disabled</td>
+<td>port oprit</td>
+<td>discarding</td>
+</tr>
+</tbody></table></div></div>
+<p>De unde vine viteza RSTP:</p>
+<ul>
+<li><strong>portul alternate</strong> e calculat dinainte, deci când root port-ul cade, devine root port aproape instant;</li>
+<li>vecinii negociază direct (mecanismul <em>proposal/agreement</em>) pe legăturile <strong>point-to-point</strong>, adică full-duplex, în loc să aștepte timerele;</li>
+<li>fiecare switch trimite propriile BPDU-uri la 2 secunde, iar un vecin e considerat pierdut după 3 hello-uri ratate (6 s), nu după 20 s;</li>
+<li>porturile <strong>edge</strong> (spre PC-uri, configurate cu PortFast) trec direct în forwarding.</li>
+</ul>
+<h2 id="pvst-si-rapid-pvst">PVST+ și Rapid PVST+</h2>
+<p>Standardul inițial avea <strong>un singur arbore</strong> pentru toată rețeaua, indiferent de VLAN-uri. Cisco a făcut variante care rulează câte o instanță separată pentru fiecare VLAN:</p>
+<div class="table-scroll"><p class="table-hint" aria-hidden="true">glisează<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></p><div class="table-wrap" role="region" tabindex="0" aria-label="Tabel (se derulează pe orizontală)"><table>
+<thead>
+<tr>
+<th>Mod</th>
+<th>Algoritm</th>
+<th>Instanțe</th>
+<th>Comandă</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>PVST+</td>
+<td>802.1D</td>
+<td>una pe VLAN</td>
+<td><code><span class="nw">spanning-tree</span> <span class="nw">mode</span> <span class="nw">pvst</span></code></td>
+</tr>
+<tr>
+<td>Rapid PVST+</td>
+<td>RSTP (802.1w)</td>
+<td>una pe VLAN</td>
+<td><code><span class="nw">spanning-tree</span> <span class="nw">mode</span> <span class="nw">rapid-pvst</span></code></td>
+</tr>
+<tr>
+<td>MST</td>
+<td>802.1s</td>
+<td>grupe de VLAN-uri</td>
+<td><code><span class="nw">spanning-tree</span> <span class="nw">mode</span> <span class="nw">mst</span></code></td>
+</tr>
+</tbody></table></div></div>
+<p>Pe un 2960 modul implicit e <strong>PVST+</strong>; unele modele mai noi pornesc direct cu Rapid PVST+. Verifici cu <code>show spanning-tree summary</code>. Pentru CCNA, modul care contează e <strong>Rapid PVST+</strong>.</p>
+<p>Avantajul unei instanțe pe VLAN e <strong>împărțirea traficului</strong>. Dacă ai două switch-uri de distribuție, D1 și D2, poți face D1 root pentru VLAN 10 și D2 root pentru VLAN 20. Legătura blocată pentru VLAN 10 transportă trafic în VLAN 20 și invers, deci ambele cabluri lucrează.</p>
+<h2 id="portfast-bpdu-guard-root-guard-si-loop-guard">PortFast, BPDU Guard, Root Guard și Loop Guard</h2>
+<p>Astea sunt protecții pentru marginea rețelei. Pe scurt:</p>
+<p><strong>PortFast</strong> trece un port de acces direct în forwarding, fără așteptare. E pentru porturile spre PC-uri, imprimante sau servere, ca un PC să nu aștepte 30 de secunde până poate cere o adresă prin DHCP. În RSTP, un port PortFast e un <strong>edge port</strong>. Nu-l pune pe porturi spre alte switch-uri: IOS te avertizează exact despre asta când îl activezi.</p>
+<p><strong>BPDU Guard</strong> oprește portul dacă primește un BPDU. Portul trece în starea <strong>err-disabled</strong> și nu mai lasă nimic să treacă. Pe un port de utilizator nu are ce căuta un BPDU, deci dacă apare unul, cineva a conectat un switch. Ce vezi în log:</p>
+<pre><code class="language-text">%SPANTREE-2-BLOCK_BPDUGUARD: Received BPDU on port FastEthernet0/5 with BPDU Guard enabled. Disabling port.
+%PM-4-ERR_DISABLE: bpduguard error detected on Fa0/5, putting Fa0/5 in err-disable state
+</code></pre>
+<p>Îl repornești manual cu <code>shutdown</code> și apoi <code>no shutdown</code> pe interfață, după ce scoți switch-ul străin, sau automat cu <code>errdisable recovery cause bpduguard</code>.</p>
+<p><strong>Root Guard</strong> se pune pe porturile designated prin care <strong>nu</strong> ar trebui să apară niciodată un root mai bun (de exemplu porturile de distribuție spre switch-urile de acces). Dacă pe un asemenea port vine un BPDU superior, portul trece în starea <strong>root-inconsistent</strong> (blocat). Spre deosebire de BPDU Guard, își revine singur când BPDU-urile superioare încetează.</p>
+<p><strong>Loop Guard</strong> se pune pe root port-uri și porturile alternate. Dacă un asemenea port nu mai primește BPDU-uri (de exemplu, o fibră care merge doar într-un sens), nu-l lasă să devină designated și să deschidă o buclă; îl ține în starea <strong>loop-inconsistent</strong>.</p>
+<h2 id="configurarea">Configurarea</h2>
+<h3 id="modul-si-root-bridge-ul">Modul și root bridge-ul</h3>
+<pre><code class="language-text">D1(config)# spanning-tree mode rapid-pvst
+D1(config)# spanning-tree vlan 10 root primary
+D1(config)# spanning-tree vlan 20 root secondary
+</code></pre>
+<p><code>root primary</code> e un macro, nu o setare permanentă. În momentul în care scrii comanda, switch-ul se uită la root-ul actual și își pune prioritatea <strong>24576</strong>, dacă e suficient ca să câștige. Dacă root-ul actual are deja o prioritate mai mică, își pune o prioritate cu 4096 sub a lui. În running-config rămâne doar rezultatul, de exemplu <code>spanning-tree vlan 10 priority 24576</code>. Dacă mai târziu cineva coboară prioritatea altui switch, macro-ul nu se recalculează.</p>
+<p><code>root secondary</code> pune prioritatea <strong>28672</strong>: mai mică decât implicitul 32768, deci switch-ul devine root dacă primarul cade.</p>
+<p>Varianta explicită, pe care o preferă mulți administratori pentru că e previzibilă:</p>
+<pre><code class="language-text">D1(config)# spanning-tree vlan 10 priority 4096
+D2(config)# spanning-tree vlan 10 priority 8192
+</code></pre>
+<p>O valoare care nu e multiplu de 4096 e refuzată, iar IOS îți afișează lista valorilor acceptate.</p>
+<p>Pentru împărțirea traficului, inversezi rolurile pe al doilea switch:</p>
+<pre><code class="language-text">D2(config)# spanning-tree vlan 20 root primary
+D2(config)# spanning-tree vlan 10 root secondary
+</code></pre>
+<h3 id="costul-si-prioritatea-unui-port">Costul și prioritatea unui port</h3>
+<p>Dacă vrei să influențezi ce port devine root port, schimbi costul (pe switch-ul local) sau prioritatea portului (contează pentru vecin):</p>
+<pre><code class="language-text">SW4(config)# interface FastEthernet0/2
+SW4(config-if)# spanning-tree vlan 10 cost 10
+SW4(config-if)# exit
+D1(config)# interface GigabitEthernet0/1
+D1(config-if)# spanning-tree vlan 10 port-priority 64
+</code></pre>
+<p>Prioritatea portului merge de la 0 la 240, în pași de 16, implicit 128.</p>
+<h3 id="protectiile-de-margine">Protecțiile de margine</h3>
+<pre><code class="language-text">SW4(config)# interface range FastEthernet0/3 - 24
+SW4(config-if-range)# switchport mode access
+SW4(config-if-range)# spanning-tree portfast
+SW4(config-if-range)# spanning-tree bpduguard enable
+SW4(config-if-range)# exit
+D1(config)# interface GigabitEthernet0/2
+D1(config-if)# spanning-tree guard root
+</code></pre>
+<p>Variantele globale:</p>
+<pre><code class="language-text">SW4(config)# spanning-tree portfast default
+SW4(config)# spanning-tree portfast bpduguard default
+</code></pre>
+<p>Prima activează PortFast pe toate porturile access. A doua activează BPDU Guard pe toate porturile care au PortFast. Pe versiunile mai noi de IOS și IOS XE comenzile apar cu cuvântul <code>edge</code> (<code>spanning-tree portfast edge</code>, <code>spanning-tree portfast edge default</code>, <code>spanning-tree portfast edge bpduguard default</code>), dar fac același lucru.</p>
+<h2 id="verificarea">Verificarea</h2>
+<div class="table-scroll"><p class="table-hint" aria-hidden="true">glisează<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></p><div class="table-wrap" role="region" tabindex="0" aria-label="Tabel (se derulează pe orizontală)"><table>
+<thead>
+<tr>
+<th>Comandă</th>
+<th>Ce vezi</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code><span class="nw">show</span> <span class="nw">spanning-tree</span></code></td>
+<td class="tw">toate VLAN-urile: root-ul, BID-ul local, rolul, starea și costul fiecărui port</td>
+</tr>
+<tr>
+<td><code><span class="nw">show</span> <span class="nw">spanning-tree</span> <span class="nw">vlan</span> <span class="nw">10</span></code></td>
+<td>același lucru, doar pentru VLAN 10</td>
+</tr>
+<tr>
+<td><code><span class="nw">show</span> <span class="nw">spanning-tree</span> <span class="nw">summary</span></code></td>
+<td class="tw">modul (pvst / rapid-pvst), VLAN-urile în care switch-ul e root, PortFast și BPDU Guard globale</td>
+</tr>
+<tr>
+<td><code><span class="nw">show</span> <span class="nw">spanning-tree</span> <span class="nw">interface</span> <span class="nw">Fa0/1</span> <span class="nw">detail</span></code></td>
+<td class="tw">detaliile unui port: BPDU-uri trimise și primite, PortFast, BPDU Guard</td>
+</tr>
+<tr>
+<td><code><span class="nw">show</span> <span class="nw">spanning-tree</span> <span class="nw">inconsistentports</span></code></td>
+<td class="tw">porturile blocate de Root Guard sau Loop Guard</td>
+</tr>
+<tr>
+<td><code><span class="nw">show</span> <span class="nw">interfaces</span> <span class="nw">status</span> <span class="nw">err-disabled</span></code></td>
+<td class="tw">porturile oprite, de exemplu de BPDU Guard</td>
+</tr>
+</tbody></table></div></div>
+<p>Coloanele din <code>show spanning-tree</code> le citești așa: <strong>Role</strong> poate fi <code>Root</code>, <code>Desg</code>, <code>Altn</code> sau <code>Back</code>; <strong>Sts</strong> poate fi <code>FWD</code>, <code>BLK</code>, <code>LRN</code> sau <code>LIS</code>. În Rapid PVST+, IOS afișează tot <code>BLK</code> pentru porturile în discarding. <strong>Type</strong> arată <code>P2p</code> (full-duplex), <code>Shr</code> (half-duplex, partajat) și <code>Edge</code> pentru porturile cu PortFast.</p>
+<h2 id="exemplu-rezolvat-patru-switch-uri">Exemplu rezolvat: patru switch-uri</h2>
+<p>Ai patru switch-uri 2960 în VLAN 10, cu Rapid PVST+. Pe SW1 s-a configurat <code>spanning-tree vlan 10 root primary</code>; celelalte au prioritatea implicită.</p>
+<pre><code class="language-text">             SW1
+            /   \
+          1G     1G
+          /       \
+       SW2 --1G-- SW3
+          \       /
+         100M   100M
+            \   /
+             SW4
+</code></pre>
+<div class="table-scroll"><p class="table-hint" aria-hidden="true">glisează<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></p><div class="table-wrap" role="region" tabindex="0" aria-label="Tabel (se derulează pe orizontală)"><table>
+<thead>
+<tr>
+<th>Legătură</th>
+<th>Un capăt</th>
+<th>Celălalt capăt</th>
+<th>Viteză (cost)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>SW1 – SW2</td>
+<td>SW1 Gi0/1</td>
+<td>SW2 Gi0/1</td>
+<td>1 Gbps (4)</td>
+</tr>
+<tr>
+<td>SW1 – SW3</td>
+<td>SW1 Gi0/2</td>
+<td>SW3 Gi0/1</td>
+<td>1 Gbps (4)</td>
+</tr>
+<tr>
+<td>SW2 – SW3</td>
+<td>SW2 Gi0/2</td>
+<td>SW3 Gi0/2</td>
+<td>1 Gbps (4)</td>
+</tr>
+<tr>
+<td>SW2 – SW4</td>
+<td>SW2 Fa0/24</td>
+<td>SW4 Fa0/1</td>
+<td>100 Mbps (19)</td>
+</tr>
+<tr>
+<td>SW3 – SW4</td>
+<td>SW3 Fa0/24</td>
+<td>SW4 Fa0/2</td>
+<td>100 Mbps (19)</td>
+</tr>
+</tbody></table></div></div>
+<div class="table-scroll"><p class="table-hint" aria-hidden="true">glisează<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></p><div class="table-wrap" role="region" tabindex="0" aria-label="Tabel (se derulează pe orizontală)"><table>
+<thead>
+<tr>
+<th>Switch</th>
+<th>Prioritate afișată</th>
+<th>Adresă MAC</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>SW1</td>
+<td>24586</td>
+<td>0050.0f00.9000</td>
+</tr>
+<tr>
+<td>SW2</td>
+<td>32778</td>
+<td>0050.0f00.2000</td>
+</tr>
+<tr>
+<td>SW3</td>
+<td>32778</td>
+<td>0050.0f00.3000</td>
+</tr>
+<tr>
+<td>SW4</td>
+<td>32778</td>
+<td>0050.0f00.1000</td>
+</tr>
+</tbody></table></div></div>
+<p>Încearcă singur înainte să citești soluția.</p>
+<h3 id="pasul-1-root-bridge-ul">Pasul 1: root bridge-ul</h3>
+<p>SW1 are prioritatea 24586, mai mică decât 32778, deci e <strong>root</strong>. Observă că SW4 are cea mai mică adresă MAC, dar asta nu contează: MAC-ul decide doar la prioritate egală. Toate porturile lui SW1 (Gi0/1 și Gi0/2) sunt <strong>designated</strong>.</p>
+<h3 id="pasul-2-root-port-urile">Pasul 2: root port-urile</h3>
+<p><strong>SW2.</strong> Direct prin Gi0/1: cost 4. Prin SW3: 4 + 4 = 8. Prin SW4, apoi SW3: 4 + 19 + 19 = 42. Root port: <strong>Gi0/1</strong> (cost 4).</p>
+<p><strong>SW3.</strong> Direct prin Gi0/1: cost 4. Root port: <strong>Gi0/1</strong>.</p>
+<p><strong>SW4.</strong> Prin Fa0/1 (spre SW2): 4 + 19 = 23. Prin Fa0/2 (spre SW3): 4 + 19 = 23. <strong>Egalitate.</strong> Următorul criteriu e BID-ul vecinului: SW2 (32778, 0050.0f00.2000) față de SW3 (32778, 0050.0f00.3000). Prioritățile sunt egale, deci decide MAC-ul, iar SW2 are MAC-ul mai mic. Root port: <strong>Fa0/1</strong>.</p>
+<h3 id="pasul-3-designated-port-urile">Pasul 3: designated port-urile</h3>
+<div class="table-scroll"><p class="table-hint" aria-hidden="true">glisează<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></p><div class="table-wrap" role="region" tabindex="0" aria-label="Tabel (se derulează pe orizontală)"><table>
+<thead>
+<tr>
+<th>Legătură</th>
+<th>Root path cost</th>
+<th>Designated port</th>
+<th>Celălalt capăt</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>SW1 – SW2</td>
+<td>0 față de 4</td>
+<td>SW1 Gi0/1</td>
+<td>SW2 Gi0/1: root port</td>
+</tr>
+<tr>
+<td>SW1 – SW3</td>
+<td>0 față de 4</td>
+<td>SW1 Gi0/2</td>
+<td>SW3 Gi0/1: root port</td>
+</tr>
+<tr>
+<td>SW2 – SW3</td>
+<td class="tw">4 față de 4: egal, câștigă BID-ul mai mic (SW2)</td>
+<td>SW2 Gi0/2</td>
+<td>SW3 Gi0/2: <strong>blocat (alternate)</strong></td>
+</tr>
+<tr>
+<td>SW2 – SW4</td>
+<td>4 față de 23</td>
+<td>SW2 Fa0/24</td>
+<td>SW4 Fa0/1: root port</td>
+</tr>
+<tr>
+<td>SW3 – SW4</td>
+<td>4 față de 23</td>
+<td>SW3 Fa0/24</td>
+<td>SW4 Fa0/2: <strong>blocat (alternate)</strong></td>
+</tr>
+</tbody></table></div></div>
+<h3 id="pasul-4-verificarea-rezultatului">Pasul 4: verificarea rezultatului</h3>
+<p>Blocate: <strong>SW3 Gi0/2</strong> și <strong>SW4 Fa0/2</strong>. Verificare: patru switch-uri au nevoie de exact trei legături active ca să formeze un arbore. Din cinci legături, două sunt blocate la un capăt, deci rămân trei. Se potrivește.</p>
+<p>Pe SW4, ieșirea arată așa (Fa0/10 e un PC, cu PortFast):</p>
+<pre><code class="language-text">SW4# show spanning-tree vlan 10
+
+VLAN0010
+  Spanning tree enabled protocol rstp
+  Root ID    Priority    24586
+             Address     0050.0f00.9000
+             Cost        23
+             Port        1 (FastEthernet0/1)
+             Hello Time   2 sec  Max Age 20 sec  Forward Delay 15 sec
+
+  Bridge ID  Priority    32778  (priority 32768 sys-id-ext 10)
+             Address     0050.0f00.1000
+             Hello Time   2 sec  Max Age 20 sec  Forward Delay 15 sec
+             Aging Time  300 sec
+
+Interface           Role Sts Cost      Prio.Nbr Type
+------------------- ---- --- --------- -------- --------------------------------
+Fa0/1               Root FWD 19        128.1    P2p
+Fa0/2               Altn BLK 19        128.2    P2p
+Fa0/10              Desg FWD 19        128.10   P2p Edge
+</code></pre>
+<p>Și pe root:</p>
+<pre><code class="language-text">SW1# show spanning-tree vlan 10
+
+VLAN0010
+  Spanning tree enabled protocol rstp
+  Root ID    Priority    24586
+             Address     0050.0f00.9000
+             This bridge is the root
+             Hello Time   2 sec  Max Age 20 sec  Forward Delay 15 sec
+
+  Bridge ID  Priority    24586  (priority 24576 sys-id-ext 10)
+             Address     0050.0f00.9000
+             Hello Time   2 sec  Max Age 20 sec  Forward Delay 15 sec
+             Aging Time  300 sec
+
+Interface           Role Sts Cost      Prio.Nbr Type
+------------------- ---- --- --------- -------- --------------------------------
+Gi0/1               Desg FWD 4         128.25   P2p
+Gi0/2               Desg FWD 4         128.26   P2p
+</code></pre>
+<p>Pe un 2960 cu 24 de porturi FastEthernet, Gi0/1 și Gi0/2 au numerele de port 25 și 26, de unde vin valorile <code>128.25</code> și <code>128.26</code>.</p>
+<h2 id="exercitii">Exerciții</h2>
+<ol>
+<li>Un switch are configurat <code>spanning-tree vlan 30 priority 28672</code>. Ce prioritate afișează <code>show spanning-tree vlan 30</code>?</li>
+<li>Trei switch-uri, același VLAN: SWA (24577, 00a0.c911.0005), SWB (24577, 00a0.c911.0002), SWC (4097, 00a0.c911.0009). Care e root bridge-ul? Ce VLAN e?</li>
+<li>SWX e legat direct de root prin două cabluri Gigabit, încrucișate: Gi0/1 al lui SWX e conectat la Gi0/2 al root-ului, iar Gi0/2 al lui SWX la Gi0/1 al root-ului. Toate prioritățile de port sunt 128. Care port al lui SWX devine root port?</li>
+<li>În exemplul rezolvat, legătura SW1 – SW2 cade. Care sunt noile root port-uri pentru SW2 și SW4 și ce port rămâne blocat?</li>
+<li>Vrei ca D1 să fie root pentru VLAN 10 și rezervă pentru VLAN 20, iar D2 invers. Scrie comenzile.</li>
+</ol>
+<details class="reveal-answer">
+<summary><strong>Răspunsuri</strong></summary><p><strong>1.</strong> 28672 + 30 = <strong>28702</strong>.</p>
+<p><strong>2.</strong> <strong>SWC</strong>. Prioritatea se compară prima, iar 4097 e mai mic decât 24577. MAC-ul nu mai contează. Prioritățile sunt 4096 + 1 și 24576 + 1, deci e <strong>VLAN 1</strong>.</p>
+<p><strong>3.</strong> <strong>Gi0/2.</strong> Costul e egal (4 pe ambele), BID-ul vecinului e același (e același switch), prioritățile de port ale vecinului sunt egale. Decide numărul portului <strong>vecinului</strong>: Gi0/2 al lui SWX primește BPDU-uri de pe Gi0/1 al root-ului, care are numărul mai mic. Numărul portului local nu contează.</p>
+<p><strong>4.</strong> SW2: prin Gi0/2 (spre SW3) costul e 4 + 4 = 8, prin Fa0/24 (spre SW4) ar fi mult mai mare, deci root port <strong>Gi0/2</strong>. SW4: prin Fa0/2 (spre SW3) are 4 + 19 = 23, prin Fa0/1 (spre SW2) are 8 + 19 = 27, deci root port <strong>Fa0/2</strong>. Pe legătura SW2 – SW4, SW2 are costul 8, SW4 are 23, deci SW2 Fa0/24 e designated, iar <strong>SW4 Fa0/1 devine alternate (blocat)</strong>. SW3 Gi0/2 devine designated (cost 4 față de 8). Rămân active trei legături: SW1 – SW3, SW3 – SW2 și SW3 – SW4.</p>
+<p><strong>5.</strong></p>
+<pre><code class="language-text">D1(config)# spanning-tree vlan 10 root primary
+D1(config)# spanning-tree vlan 20 root secondary
+D2(config)# spanning-tree vlan 20 root primary
+D2(config)# spanning-tree vlan 10 root secondary
+</code></pre>
+<p>Sau explicit, cu <code>spanning-tree vlan 10 priority 24576</code> pe D1 și <code>spanning-tree vlan 10 priority 28672</code> pe D2 (și invers pentru VLAN 20).</p>
+</details><h2 id="cum-il-inveti-cel-mai-repede">Cum îl înveți cel mai repede</h2>
+<ul>
+<li><strong>Desenează topologia și rezolvă-o pe hârtie</strong>, în ordinea fixă: root bridge, root port-uri, designated port-uri, restul blocate. Abia apoi verifici în simulator cu <code>show spanning-tree</code>.</li>
+<li><strong>Ține minte cele patru costuri scurte:</strong> 100, 19, 4, 2. Pentru locul STP în examen, vezi <a href="../ce-este-ccna/">ghidul despre CCNA</a>.</li>
+<li><strong>Leagă STP de VLAN-uri:</strong> în Rapid PVST+ fiecare VLAN are arborele lui. Recapitulează trunk-urile în <a href="../vlan-si-trunk/">ghidul despre VLAN-uri</a> și comenzile de bază în <a href="../comenzi-cisco-ios/">fișa cu comenzile Cisco IOS</a>.</li>
+</ul>
+<div class="cta-box cta-box--article"><svg class="mascot" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><g class="m-breathe"><path d="M22 14l-5-9M42 14l5-9" stroke="#8a919c" stroke-width="3.4" stroke-linecap="round" fill="none"/><circle class="m-led m-led-l" cx="17" cy="5" r="3.6"/><circle class="m-led m-led-r" cx="47" cy="5" r="3.6"/><path class="m-body" d="M28 12q4-6 8 0"/><rect class="m-body" x="8" y="12" width="48" height="42" rx="18"/><rect class="m-belly" x="8" y="40" width="48" height="14" rx="7"/><path d="M19 31q4-5 8 0" stroke="#1a1d24" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M37 31q4-5 8 0" stroke="#1a1d24" stroke-width="3" fill="none" stroke-linecap="round"/><path class="m-led" d="M29 37l3 3.5 3-3.5z"/><circle cx="15" cy="38" r="3" fill="#ff8fb1" opacity=".7"/><circle cx="49" cy="38" r="3" fill="#ff8fb1" opacity=".7"/><circle class="m-ok" cx="18" cy="47" r="2"/><circle class="m-led" cx="24" cy="47" r="2"/><rect x="31" y="45" width="6" height="4" rx="1" fill="#0d1a3a" opacity=".55"/><rect x="39" y="45" width="6" height="4" rx="1" fill="#0d1a3a" opacity=".55"/><rect x="47" y="45" width="5" height="4" rx="1" fill="#0d1a3a" opacity=".55"/><path class="m-leg" d="M20 54v4M44 54v4" stroke-width="3.4" stroke-linecap="round" fill="none"/></g></svg><div><h3>Exersează Spanning Tree în aplicația Routerel</h3><p>Routerel are peste 1.900 de întrebări pentru CCNA 1 · ITN, CCNA 2 · IEN și CCNA 3 · CEN, cu scheme de rețea și ieșiri <code>show</code> pe care le poți mări și cu explicație imediat după răspuns. Greșelile revin singure prin repetiție spațiată până le stăpânești, iar simularea de examen cu timp îți arată unde stai. Abonații noi au 7 zile gratuite, cu acces la tot.</p></div><a class="btn" href="../../" data-play data-soon-href="../../">Descoperă aplicația<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div><h2 id="intrebari-frecvente">Întrebări frecvente</h2>
+<div class="faq faq--article"><details><summary>Ce face Spanning Tree Protocol?<span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p>Împiedică buclele de nivel 2 într-o rețea cu legături redundante între switch-uri. Alege un switch central (root bridge), calculează cel mai bun drum spre el pentru fiecare switch și blochează porturile care ar închide o buclă. Dacă o legătură activă cade, deblochează un port de rezervă.</p></div></details><details><summary>Cum se alege root bridge-ul?<span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p>Câștigă switch-ul cu cel mai mic bridge ID. Se compară întâi prioritatea (implicit 32768 plus numărul VLAN-ului), iar la prioritate egală adresa MAC: cea mai mică câștigă.</p></div></details><details><summary>Care e diferența dintre STP și RSTP?<span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p>RSTP (802.1w) face același arbore ca STP (802.1D), dar converge în câteva secunde în loc de 30–50 de secunde. Are doar trei stări (discarding, learning, forwarding), roluri noi pentru porturile de rezervă (alternate și backup) și trece porturile spre PC-uri direct în forwarding.</p></div></details><details><summary>Ce diferență e între PVST+ și Rapid PVST+?<span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p>Ambele sunt variante Cisco cu câte o instanță de spanning tree pentru fiecare VLAN. PVST+ folosește algoritmul clasic 802.1D, iar Rapid PVST+ folosește RSTP, deci converge mult mai repede. Le alegi cu <code>spanning-tree mode pvst</code> sau <code>spanning-tree mode rapid-pvst</code>.</p></div></details><details><summary>De ce prioritatea se schimbă doar în multipli de 4096?<span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p>Câmpul de prioritate are 16 biți, dar ultimii 12 sunt ocupați de extended system ID, adică de numărul VLAN-ului. Pentru prioritate rămân primii 4 biți, ale căror valori sunt multipli de 4096, de la 0 la 61440.</p></div></details><details><summary>Ce face BPDU Guard?<span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p>Oprește portul (îl pune în err-disabled) dacă primește un BPDU. Se folosește pe porturile cu PortFast, unde ar trebui să fie doar PC-uri, ca un switch conectat greșit să nu poată schimba topologia sau crea o buclă.</p></div></details></div>
+<hr>
+<p><em>Routerel este o aplicație independentă și nu este afiliată, sponsorizată sau aprobată de Cisco Systems, Inc. Cisco, CCNA, Cisco IOS, Catalyst și Networking Academy sunt mărci înregistrate ale Cisco Systems, Inc.</em></p>
+      
+      <section class="related" aria-labelledby="rel-title">
+        <h2 id="rel-title">Citește și</h2>
+        <div class="grid grid--2"><a class="card post-card lift" href="../../ghiduri/nat-si-pat/"><span class="tagline">Ghid · 15 min</span><h3>NAT și PAT explicate: static, dinamic, overload (2026)</h3><p>NAT și PAT pe înțeles: adrese private, inside local și global, NAT static, dinamic și overload, configurare Cisco IOS, verificare, port forwarding și exerciții.</p></a><a class="card post-card lift" href="../../ghiduri/acl-uri-cisco/"><span class="tagline">Ghid · 16 min</span><h3>ACL-uri Cisco: standard, extinse și wildcard (ghid 2026)</h3><p>ACL-uri Cisco explicate: standard și extinse, numerotate și cu nume, masca wildcard, deny implicit, unde le aplici, comenzi IOS, verificare și exerciții.</p></a></div>
+      </section>
+    </article>
+  </div>
+</main>
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="about">
+        <a class="brand" href="../../"><img src="../../assets/icon-96.webp" alt="" width="36" height="36" loading="lazy"><span>Routerel</span></a>
+        <p>Exersezi CCNA pe telefon: întrebări cu explicații, repetiția greșelilor și simulări de examen. În română și engleză.</p>
+      </div>
+      <div><h2>Aplicația</h2><ul><li><a href="../../#functii">Funcții</a></li><li><a href="../../#preturi">Prețuri</a></li><li><a href="../../#cum-functioneaza">Cum funcționează</a></li><li><a href="../../#faq">Întrebări frecvente</a></li></ul></div>
+      <div><h2>Resurse</h2><ul><li><a href="../../ghiduri/">Ghiduri CCNA</a></li><li><a href="../../articole/">Articole CCNA</a></li><li><a href="../../tools/">Tools gratuite</a></li><li><a href="../../en/" hreflang="en" lang="en" data-set-lang="en">English</a></li></ul></div>
+      <div><h2>Legal și contact</h2><ul><li><a href="../../privacy">Confidențialitate</a></li><li><a href="../../terms">Termeni de utilizare</a></li><li><a href="../../delete-account">Ștergerea contului</a></li></ul><ul><li><a href="mailto:contact@routerel.app">contact@routerel.app</a></li></ul></div>
+    </div>
+    <div class="disclaimer">
+      <p>Routerel este o aplicație independentă și nu este afiliată, sponsorizată sau aprobată de Cisco Systems, Inc. Cisco, CCNA și Cisco Networking Academy sunt mărci ale Cisco Systems, Inc.</p>
+      <p>© 2026 Routerel</p>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

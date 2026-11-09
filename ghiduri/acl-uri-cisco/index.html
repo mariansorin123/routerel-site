@@ -1,0 +1,546 @@
+<!doctype html>
+<!-- Pagină generată. Nu o edita de mână: vezi tools/site/ (npm run build:guides / npm run sync:tools / npm run build:legal). -->
+<html lang="ro" class="play-soon" data-utm-medium="guide" data-utm-campaign="acl-uri-cisco">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>ACL-uri Cisco: standard, extinse și wildcard (ghid 2026)</title>
+  <meta name="description" content="ACL-uri Cisco explicate: standard și extinse, numerotate și cu nume, masca wildcard, deny implicit, unde le aplici, comenzi IOS, verificare și exerciții.">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <link rel="canonical" href="https://routerel.app/ghiduri/acl-uri-cisco/">
+  <link rel="alternate" hreflang="ro" href="https://routerel.app/ghiduri/acl-uri-cisco/">
+  <link rel="alternate" hreflang="en" href="https://routerel.app/en/guides/cisco-acls/">
+  <link rel="alternate" hreflang="x-default" href="https://routerel.app/en/guides/cisco-acls/">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#12151b" media="(prefers-color-scheme: dark)">
+  <meta name="color-scheme" content="light dark">
+  <link rel="icon" href="../../assets/favicon-32.png" type="image/png" sizes="32x32">
+  <link rel="icon" href="../../assets/icon-192.png" type="image/png" sizes="192x192">
+  <link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
+  <link rel="manifest" href="../../site.webmanifest">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Routerel">
+  <meta property="og:locale" content="ro_RO">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta property="og:title" content="ACL-uri Cisco: standard, extinse și wildcard (ghid 2026)">
+  <meta property="og:description" content="ACL-uri Cisco explicate: standard și extinse, numerotate și cu nume, masca wildcard, deny implicit, unde le aplici, comenzi IOS, verificare și exerciții.">
+  <meta property="og:url" content="https://routerel.app/ghiduri/acl-uri-cisco/">
+  <meta property="og:image" content="https://routerel.app/assets/og-ro.png">
+  <meta property="og:image:width" content="1024">
+  <meta property="og:image:height" content="500">
+  <meta property="og:image:alt" content="Routerel: mascota puiul de router și numele aplicației">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="ACL-uri Cisco: standard, extinse și wildcard (ghid 2026)">
+  <meta name="twitter:description" content="ACL-uri Cisco explicate: standard și extinse, numerotate și cu nume, masca wildcard, deny implicit, unde le aplici, comenzi IOS, verificare și exerciții.">
+  <meta name="twitter:image" content="https://routerel.app/assets/og-ro.png">
+  <meta property="article:published_time" content="2026-11-09">
+  <meta property="article:modified_time" content="2026-11-09">
+  <meta name="routerel:updated" content="2026-11-09">
+  <link rel="preload" href="../../assets/fonts/nunito-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../../assets/fonts/nunito-latin-ext.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../../assets/fonts/roboto-mono-500-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="../../style.css">
+  <script>(function(d){d.classList.add("js");try{var t=localStorage.getItem("routerel-theme");if(t==="light"||t==="dark")d.setAttribute("data-theme",t)}catch(e){}setTimeout(function(){if(!window.__rtl)d.classList.remove("js")},4000)})(document.documentElement)</script>
+  <script src="../../assets/site.js" defer></script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Article","@id":"https://routerel.app/ghiduri/acl-uri-cisco/#article","headline":"ACL-uri Cisco: standard, extinse și wildcard (ghid 2026)","description":"ACL-uri Cisco explicate: standard și extinse, numerotate și cu nume, masca wildcard, deny implicit, unde le aplici, comenzi IOS, verificare și exerciții.","inLanguage":"ro","datePublished":"2026-11-09","dateModified":"2026-11-09","keywords":"ACL Cisco, access list Cisco, ACL standard și extins, masca wildcard, configurare ACL, ip access-group, access-class vty, ACL CCNA","author":{"@type":"Organization","name":"Routerel","url":"https://routerel.app/"},"publisher":{"@type":"Organization","name":"Routerel","logo":{"@type":"ImageObject","url":"https://routerel.app/assets/icon-512.png"}},"image":"https://routerel.app/assets/og-ro.png","mainEntityOfPage":"https://routerel.app/ghiduri/acl-uri-cisco/","isPartOf":{"@id":"https://routerel.app/#website"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Acasă","item":"https://routerel.app/"},{"@type":"ListItem","position":2,"name":"Ghiduri","item":"https://routerel.app/ghiduri/"},{"@type":"ListItem","position":3,"name":"ACL-uri Cisco: standard, extinse și wildcard (ghid 2026)","item":"https://routerel.app/ghiduri/acl-uri-cisco/"}]},{"@type":"FAQPage","@id":"https://routerel.app/ghiduri/acl-uri-cisco/#faq","inLanguage":"ro","mainEntity":[{"@type":"Question","name":"Ce este un ACL?","acceptedAnswer":{"@type":"Answer","text":"Un ACL (Access Control List) este o listă ordonată de reguli permit și deny pe care routerul o compară cu fiecare pachet. Prima regulă care se potrivește decide soarta pachetului, iar dacă nu se potrivește niciuna, pachetul e aruncat de regula deny implicită de la final."}},{"@type":"Question","name":"Care e diferența dintre un ACL standard și unul extins?","acceptedAnswer":{"@type":"Answer","text":"ACL-ul standard verifică doar adresa IP sursă. ACL-ul extins poate verifica protocolul, adresa sursă, adresa destinație și porturile TCP sau UDP, deci poate bloca un singur serviciu spre un singur server."}},{"@type":"Question","name":"Unde se aplică un ACL standard și unde unul extins?","acceptedAnswer":{"@type":"Answer","text":"Regula clasică: ACL-ul standard cât mai aproape de destinație, pentru că știe doar sursa și ar putea bloca prea mult dacă e pus lângă sursă. ACL-ul extins cât mai aproape de sursă, ca traficul nedorit să fie oprit înainte să consume legăturile din rețea."}},{"@type":"Question","name":"Cum calculez masca wildcard?","acceptedAnswer":{"@type":"Answer","text":"Scazi fiecare octet al măștii de subrețea din 255. Pentru 255.255.255.0 obții 0.0.0.255, pentru 255.255.255.192 obții 0.0.0.63, iar pentru 255.255.240.0 obții 0.0.15.255. Un bit 0 în wildcard înseamnă că bitul trebuie să se potrivească, un bit 1 înseamnă că nu contează."}},{"@type":"Question","name":"Ce este deny implicit?","acceptedAnswer":{"@type":"Answer","text":"La finalul oricărui ACL există o regulă invizibilă care respinge tot: deny any la ACL-urile standard și deny ip any any la cele extinse. Dacă un ACL conține doar reguli deny, blochează practic tot traficul de pe interfața pe care îl aplici."}},{"@type":"Question","name":"Câte ACL-uri pot pune pe o interfață?","acceptedAnswer":{"@type":"Answer","text":"Unul singur pe interfață, pe direcție și pe protocol. Adică cel mult un ACL IPv4 la intrare și unul IPv4 la ieșire (plus, separat, câte unul pentru IPv6). Dacă aplici al doilea ACL IPv4 în aceeași direcție, îl înlocuiește pe primul."}},{"@type":"Question","name":"Cum restricționez accesul SSH la un router cu un ACL?","acceptedAnswer":{"@type":"Answer","text":"Creezi un ACL standard care permite doar adresele de administrare, apoi îl aplici pe liniile VTY cu access-class NUME in. Pe interfețe se folosește ip access-group, iar pe liniile VTY access-class."}}]}]}</script>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs><linearGradient id="rtl-play" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5b8cff"/><stop offset=".55" stop-color="#2f6bff"/><stop offset="1" stop-color="#ffb020"/></linearGradient></defs></svg>
+<a class="skip-link" href="#main">Sari la conținut</a>
+<header class="site-header">
+  <div class="container header-row">
+    <a class="brand" href="../../" aria-label="Routerel, acasă"><img src="../../assets/icon-96.webp" alt="" width="36" height="36"><span>Routerel</span></a>
+    <nav class="main-nav" aria-label="Principal"><ul><li><a href="../../#functii">Funcții</a></li><li><a href="../../#preturi">Prețuri</a></li><li><a href="../../ghiduri/" aria-current="page">Ghiduri</a></li><li><a href="../../articole/">Articole</a></li><li><a href="../../tools/">Tools</a></li><li><a href="../../#faq">FAQ</a></li></ul></nav>
+    <div class="header-actions">
+      <div class="lang-switch" role="group" aria-label="Limba"><span aria-current="true" lang="ro">RO</span><a href="../../en/guides/cisco-acls/" hreflang="en" lang="en" title="English">EN</a></div>
+      <button class="icon-btn theme-toggle" type="button" data-theme-toggle aria-label="Schimbă tema"><span class="i-moon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9z"/></svg></span><span class="i-sun"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg></span></button>
+      <a class="btn btn--sm header-cta" data-play data-soon-href="../../#preturi" href="../../#preturi"><span data-when="live">Încearcă gratuit</span><span data-when="soon">Vezi prețurile</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      <button class="icon-btn menu-btn" type="button" data-menu-btn aria-expanded="false" aria-controls="mobile-nav" aria-label="Meniu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+    </div>
+  </div>
+  <nav class="mobile-nav" id="mobile-nav" aria-label="Principal" hidden>
+    <div class="container"><ul><li><a href="../../#functii">Funcții</a></li><li><a href="../../#preturi">Prețuri</a></li><li><a href="../../ghiduri/" aria-current="page">Ghiduri</a></li><li><a href="../../articole/">Articole</a></li><li><a href="../../tools/">Tools</a></li><li><a href="../../#faq">FAQ</a></li></ul></div>
+  </nav>
+</header>
+<main id="main">
+  <div class="container section section--tight">
+    <article class="prose">
+      <nav class="crumbs" aria-label="Firimituri"><ol><li><a href="../../">Acasă</a></li><li><a href="../../ghiduri/">Ghiduri</a></li><li><span aria-current="page">ACL-uri Cisco: standard, extinse și wildcard (ghid 2026)</span></li></ol></nav>
+      <p class="eyebrow">Ghid CCNA</p>
+      <h1>ACL-uri Cisco explicate: standard, extinse, wildcard și configurare</h1>
+      <div class="article-meta">
+        <span class="avatar"><svg class="mascot" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><g class="m-breathe"><path d="M22 14l-5-9M42 14l5-9" stroke="#8a919c" stroke-width="3.4" stroke-linecap="round" fill="none"/><circle class="m-led m-led-l" cx="17" cy="5" r="3.6"/><circle class="m-led m-led-r" cx="47" cy="5" r="3.6"/><path class="m-body" d="M28 12q4-6 8 0"/><rect class="m-body" x="8" y="12" width="48" height="42" rx="18"/><rect class="m-belly" x="8" y="40" width="48" height="14" rx="7"/><circle cx="23" cy="31" r="5.4" fill="#fff"/><circle class="m-pupil" cx="24" cy="31.5" r="3" fill="#1a1d24"/><circle cx="41" cy="31" r="5.4" fill="#fff"/><circle class="m-pupil" cx="42" cy="31.5" r="3" fill="#1a1d24"/><path class="m-led" d="M29 37l3 3.5 3-3.5z"/><circle class="m-ok" cx="18" cy="47" r="2"/><circle class="m-led" cx="24" cy="47" r="2"/><rect x="31" y="45" width="6" height="4" rx="1" fill="#0d1a3a" opacity=".55"/><rect x="39" y="45" width="6" height="4" rx="1" fill="#0d1a3a" opacity=".55"/><rect x="47" y="45" width="5" height="4" rx="1" fill="#0d1a3a" opacity=".55"/><path class="m-leg" d="M20 54v4M44 54v4" stroke-width="3.4" stroke-linecap="round" fill="none"/></g></svg></span>
+        <span>Echipa Routerel</span><span aria-hidden="true">·</span>
+        <span>Actualizat: <time datetime="2026-11-09">9 noiembrie 2026</time></span><span aria-hidden="true">·</span>
+        <span>16 min de citit</span>
+      </div>
+      <p class="lead">ACL-urile par simple: o listă de reguli „permite” și „respinge”. În practică, cele mai multe greșeli vin din trei locuri: masca wildcard, ordinea regulilor și direcția în care aplici lista. Le iei pe rând aici, cu o singură topologie de la început până la sfârșit.</p>
+<p>În ghid găsești ce filtrează un ACL, tipurile (standard, extins, numerotat, cu nume), wildcard-urile cu o metodă rapidă, regula deny implicită, unde și în ce direcție aplici lista, configurarea completă în Cisco IOS, editarea cu numere de secvență, restricționarea accesului SSH și verificarea cu contoarele de potriviri. La final ai greșelile frecvente și exerciții cu răspunsuri.</p>
+<p>În cursurile CCNA v8 de la Networking Academy, ACL-urile pentru IPv4 sunt în <strong>CCNA 3 · CEN</strong>. La examenul 200-301 apar în partea de securitate, atât ca teorie, cât și ca întrebări de configurare și depanare.</p>
+      <nav class="toc toc--fold" aria-labelledby="toc-title"><h2 id="toc-title">Cuprins</h2><button type="button" class="toc-toggle" data-toc-toggle aria-expanded="false" aria-controls="toc-list"><span class="toc-toggle-t">Cuprins</span> <span class="toc-toggle-n">15 secțiuni</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6"/></svg></button><ol id="toc-list"><li><a href="#topologia-folosita-in-ghid">Topologia folosită în ghid</a></li><li><a href="#ce-filtreaza-un-acl">Ce filtrează un ACL</a></li><li><a href="#tipurile-de-acl">Tipurile de ACL</a><ol><li><a href="#standard-vs-extins">Standard vs. extins</a></li><li><a href="#numerotat-vs-cu-nume">Numerotat vs. cu nume</a></li></ol></li><li><a href="#masca-wildcard">Masca wildcard</a><ol><li><a href="#metoda-rapida-255-minus-masca">Metoda rapidă: 255 minus masca</a></li><li><a href="#cuvintele-cheie-host-si-any">Cuvintele cheie host și any</a></li><li><a href="#un-wildcard-care-nu-e-o-subretea">Un wildcard care nu e „o subrețea”</a></li></ol></li><li><a href="#cum-citeste-routerul-un-acl">Cum citește routerul un ACL</a><ol><li><a href="#de-sus-in-jos-prima-potrivire-castiga">De sus în jos, prima potrivire câștigă</a></li><li><a href="#deny-implicit">Deny implicit</a></li></ol></li><li><a href="#unde-si-in-ce-directie-aplici-un-acl">Unde și în ce direcție aplici un ACL</a><ol><li><a href="#inbound-sau-outbound">Inbound sau outbound</a></li><li><a href="#un-acl-pe-interfata-pe-directie-pe-protocol">Un ACL pe interfață, pe direcție, pe protocol</a></li><li><a href="#standard-aproape-de-destinatie-extins-aproape-de-sursa">Standard aproape de destinație, extins aproape de sursă</a></li></ol></li><li><a href="#configurare-acl-standard-numerotat">Configurare: ACL standard numerotat</a></li><li><a href="#configurare-acl-standard-cu-nume-si-accesul-la-vty">Configurare: ACL standard cu nume și accesul la VTY</a></li><li><a href="#configurare-acl-extins-cu-nume-cu-porturi-tcp-si-udp">Configurare: ACL extins cu nume, cu porturi TCP și UDP</a><ol><li><a href="#cuvantul-cheie-established">Cuvântul cheie established</a></li></ol></li><li><a href="#editarea-acl-urilor-cu-nume-numere-de-secventa">Editarea ACL-urilor cu nume (numere de secvență)</a></li><li><a href="#verificarea-si-contoarele-de-potriviri">Verificarea și contoarele de potriviri</a><ol><li><a href="#show-access-lists">show access-lists</a></li><li><a href="#show-ip-interface">show ip interface</a></li></ol></li><li><a href="#greseli-frecvente">Greșeli frecvente</a></li><li><a href="#exercitii">Exerciții</a></li><li><a href="#cum-le-inveti-cel-mai-repede">Cum le înveți cel mai repede</a></li><li><a href="#intrebari-frecvente">Întrebări frecvente</a></li></ol></nav>
+<h2 id="topologia-folosita-in-ghid">Topologia folosită în ghid</h2>
+<p>Toate exemplele folosesc rețeaua de mai jos. Merită s-o desenezi o dată pe hârtie, ca să urmărești ușor unde pui fiecare ACL.</p>
+<pre><code class="language-text"> Vânzări 192.168.10.0/24                         Servere 172.16.50.0/24
+ (PC-uri .10 – .200)                              web  172.16.50.10
+        |                                         DNS  172.16.50.53
+   G0/0/0 .1                                      fișiere 172.16.50.20
+        |                                                 |
+       R1 S0/1/0 ---- 10.1.1.0/30 ---- S0/1/0 R2 G0/0/0 .1
+        |   .1                            .2
+   G0/0/1 .1
+        |
+ Contabilitate 192.168.20.0/24
+ (stații de administrare .16 – .31)
+</code></pre>
+<ul>
+<li><strong>R1</strong> are două LAN-uri: Vânzări (<code>G0/0/0</code>) și Contabilitate (<code>G0/0/1</code>). În Contabilitate, adresele <code>.16</code>–<code>.31</code> (adică <code>192.168.20.16/28</code>) sunt stațiile echipei IT.</li>
+<li><strong>R2</strong> are rețeaua de servere pe <code>G0/0/0</code>.</li>
+<li>R1 și R2 sunt legate printr-o legătură serială <code>/30</code>. Rutarea e deja configurată, toate rețelele se văd între ele.</li>
+</ul>
+<h2 id="ce-filtreaza-un-acl">Ce filtrează un ACL</h2>
+<p>Un <strong>ACL</strong> (Access Control List) e o listă ordonată de reguli. Fiecare regulă (ACE, <em>access control entry</em>) spune <strong>permit</strong> sau <strong>deny</strong> pentru pachetele care se potrivesc cu ea. Routerul compară fiecare pachet cu lista și ia o decizie: îl trimite mai departe sau îl aruncă.</p>
+<p>Un ACL poate verifica, în funcție de tip:</p>
+<ul>
+<li>adresa IP <strong>sursă</strong>;</li>
+<li>adresa IP <strong>destinație</strong>;</li>
+<li><strong>protocolul</strong> din antetul IP (TCP, UDP, ICMP, OSPF, GRE și altele);</li>
+<li><strong>porturile</strong> TCP sau UDP sursă și destinație;</li>
+<li>câteva detalii în plus, cum ar fi tipul mesajului ICMP sau dacă o conexiune TCP e deja stabilită.</li>
+</ul>
+<p>Un ACL <strong>nu</strong> se uită la adresele MAC (pentru asta există alte mecanisme) și nu înțelege aplicațiile mai sus de port. Pentru el, „web” înseamnă TCP 80 sau 443, nu un site anume.</p>
+<p>ACL-urile nu servesc doar la filtrare. Aceeași sintaxă se folosește ca să <strong>selectezi trafic</strong> pentru alte funcții: ce adrese traduce NAT-ul (vezi <a href="../nat-si-pat/">ghidul despre NAT și PAT</a>), ce trafic intră într-un tunel VPN sau ce rețele trec printr-un filtru de rutare. În ghidul ăsta ne ocupăm de filtrare.</p>
+<h2 id="tipurile-de-acl">Tipurile de ACL</h2>
+<h3 id="standard-vs-extins">Standard vs. extins</h3>
+<div class="table-scroll"><p class="table-hint" aria-hidden="true">glisează<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></p><div class="table-wrap" role="region" tabindex="0" aria-label="Tabel (se derulează pe orizontală)"><table>
+<thead>
+<tr>
+<th></th>
+<th>ACL standard</th>
+<th>ACL extins</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Ce verifică</td>
+<td>doar adresa IP sursă</td>
+<td>protocolul, sursa, destinația, porturile</td>
+</tr>
+<tr>
+<td>Precizie</td>
+<td>grosieră („tot de la rețeaua X”)</td>
+<td class="tw">fină („doar HTTPS de la X spre serverul Y”)</td>
+</tr>
+<tr>
+<td>Unde îl pui de obicei</td>
+<td>aproape de destinație</td>
+<td>aproape de sursă</td>
+</tr>
+<tr>
+<td>Exemplu de regulă</td>
+<td><code><span class="nw">permit</span> <span class="nw">192.168.10.0</span> <span class="nw">0.0.0.255</span></code></td>
+<td><code><span class="nw">permit</span> <span class="nw">tcp</span> <span class="nw">192.168.10.0</span> <span class="nw">0.0.0.255</span> <span class="nw">host</span> <span class="nw">172.16.50.10</span> <span class="nw">eq</span> <span class="nw">443</span></code></td>
+</tr>
+</tbody></table></div></div>
+<h3 id="numerotat-vs-cu-nume">Numerotat vs. cu nume</h3>
+<p>Un ACL <strong>numerotat</strong> se identifică printr-un număr. Intervalul numărului spune și tipul:</p>
+<div class="table-scroll"><p class="table-hint" aria-hidden="true">glisează<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></p><div class="table-wrap" role="region" tabindex="0" aria-label="Tabel (se derulează pe orizontală)"><table>
+<thead>
+<tr>
+<th>Interval</th>
+<th>Tip</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1–99 și 1300–1999</td>
+<td>standard</td>
+</tr>
+<tr>
+<td>100–199 și 2000–2699</td>
+<td>extins</td>
+</tr>
+</tbody></table></div></div>
+<p>Un ACL <strong>cu nume</strong> primește un nume ales de tine, de exemplu <code>VANZARI-IN</code>, și tipul îl declari explicit (<code>standard</code> sau <code>extended</code>). Numele e mult mai ușor de înțeles după șase luni, iar editarea e mai comodă. În configurații noi, folosește nume.</p>
+<p>Pe IOS-urile moderne, diferența dintre cele două e mai mult de formă: și un ACL numerotat poate fi editat cu numere de secvență, intrând în el cu <code>ip access-list standard 10</code>.</p>
+<h2 id="masca-wildcard">Masca wildcard</h2>
+<p>ACL-urile nu folosesc masca de subrețea, ci <strong>masca wildcard</strong>. Regula pe biți:</p>
+<ul>
+<li>bit <strong>0</strong> în wildcard = bitul din adresă <strong>trebuie să se potrivească</strong>;</li>
+<li>bit <strong>1</strong> în wildcard = bitul <strong>nu contează</strong>.</li>
+</ul>
+<p>Practic, wildcard-ul e inversul măștii: unde masca are <code>1</code>, wildcard-ul are <code>0</code>, și invers.</p>
+<h3 id="metoda-rapida-255-minus-masca">Metoda rapidă: 255 minus masca</h3>
+<p>Pentru o subrețea obișnuită, scazi fiecare octet al măștii din 255:</p>
+<pre><code class="language-text">Masca      255.255.255.192
+           255-255 . 255-255 . 255-255 . 255-192
+Wildcard     0     .   0     .   0     .   63      → 0.0.0.63
+</code></pre>
+<p>Atenție la capcana din <a href="../subnetting-pas-cu-pas/">ghidul de subnetting</a>: blocul (numărul magic) se calculează cu <strong>256</strong> minus mască, wildcard-ul cu <strong>255</strong> minus mască. Legătura dintre ele: wildcard-ul din octetul interesant e mereu <strong>blocul minus 1</strong>. La /26 blocul e 64, deci wildcard-ul e 63.</p>
+<div class="table-scroll"><p class="table-hint" aria-hidden="true">glisează<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></p><div class="table-wrap" role="region" tabindex="0" aria-label="Tabel (se derulează pe orizontală)"><table>
+<thead>
+<tr>
+<th>Rețea</th>
+<th>Mască</th>
+<th>Wildcard</th>
+<th>Ce prinde</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>192.168.10.0/24</td>
+<td>255.255.255.0</td>
+<td>0.0.0.255</td>
+<td>.0 – .255</td>
+</tr>
+<tr>
+<td>192.168.20.16/28</td>
+<td>255.255.255.240</td>
+<td>0.0.0.15</td>
+<td>.16 – .31</td>
+</tr>
+<tr>
+<td>10.1.1.0/30</td>
+<td>255.255.255.252</td>
+<td>0.0.0.3</td>
+<td>.0 – .3</td>
+</tr>
+<tr>
+<td>172.16.32.0/20</td>
+<td>255.255.240.0</td>
+<td>0.0.15.255</td>
+<td>172.16.32.0 – 172.16.47.255</td>
+</tr>
+<tr>
+<td>10.0.0.0/8</td>
+<td>255.0.0.0</td>
+<td>0.255.255.255</td>
+<td>tot ce începe cu 10.</td>
+</tr>
+</tbody></table></div></div>
+<p>Dacă vrei să verifici un calcul, <a href="../../tools/calculator-subnetting/">calculatorul de subnetting</a> afișează masca wildcard pentru orice adresă și prefix. Pentru a vedea biții unul câte unul, folosește <a href="../../tools/convertor-binar/">convertorul binar</a>.</p>
+<h3 id="cuvintele-cheie-host-si-any">Cuvintele cheie host și any</h3>
+<p>Două wildcard-uri apar atât de des încât au prescurtări:</p>
+<div class="table-scroll"><p class="table-hint" aria-hidden="true">glisează<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></p><div class="table-wrap" role="region" tabindex="0" aria-label="Tabel (se derulează pe orizontală)"><table>
+<thead>
+<tr>
+<th>Scrii</th>
+<th>Echivalent</th>
+<th>Înseamnă</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code><span class="nw">host</span> <span class="nw">172.16.50.10</span></code></td>
+<td><code><span class="nw">172.16.50.10</span> <span class="nw">0.0.0.0</span></code></td>
+<td>exact acea adresă</td>
+</tr>
+<tr>
+<td><code>any</code></td>
+<td><code><span class="nw">0.0.0.0</span> <span class="nw">255.255.255.255</span></code></td>
+<td>orice adresă</td>
+</tr>
+</tbody></table></div></div>
+<p>La ACL-urile standard, dacă scrii o adresă fără wildcard (<code>permit 192.168.10.50</code>), IOS presupune <code>0.0.0.0</code>, adică un singur host. La cele extinse, sursa și destinația trebuie scrise mereu complet: adresă și wildcard, <code>host</code> sau <code>any</code>.</p>
+<h3 id="un-wildcard-care-nu-e-o-subretea">Un wildcard care nu e „o subrețea”</h3>
+<p>Wildcard-ul nu trebuie să fie neapărat inversul unei măști reale. <code>192.168.10.1 0.0.0.254</code> cere ca ultimul bit să fie 1 și ignoră restul ultimului octet, deci prinde toate adresele <strong>impare</strong> din <code>192.168.10.0/24</code>. La examen apare rar, dar e un bun test că ai înțeles regula pe biți.</p>
+<h2 id="cum-citeste-routerul-un-acl">Cum citește routerul un ACL</h2>
+<h3 id="de-sus-in-jos-prima-potrivire-castiga">De sus în jos, prima potrivire câștigă</h3>
+<p>Routerul compară pachetul cu regulile <strong>în ordine</strong>, de sus în jos. La <strong>prima</strong> regulă care se potrivește aplică acțiunea ei (permit sau deny) și <strong>se oprește</strong>. Regulile de mai jos nu mai contează pentru acel pachet.</p>
+<p>Din asta decurg două reguli de scriere:</p>
+<ol>
+<li><strong>Regulile specifice sus, cele generale jos.</strong> Dacă pui <code>deny 192.168.10.0 0.0.0.255</code> înaintea lui <code>permit host 192.168.10.50</code>, host-ul <code>.50</code> nu ajunge niciodată la regula lui.</li>
+<li><strong>Ordinea contează la fel de mult ca și conținutul.</strong> Aceleași reguli, în altă ordine, pot face exact opusul.</li>
+</ol>
+<h3 id="deny-implicit">Deny implicit</h3>
+<p>La finalul fiecărui ACL există o regulă pe care nu o vezi în configurație:</p>
+<ul>
+<li>la ACL-ul standard: <code>deny any</code>;</li>
+<li>la ACL-ul extins: <code>deny ip any any</code>.</li>
+</ul>
+<p>Consecința: un ACL trebuie să aibă <strong>cel puțin o regulă permit</strong>, altfel blochează tot. Dacă vrei să oprești doar o rețea și să lași restul, ai nevoie de un <code>permit any</code> (sau <code>permit ip any any</code>) la final.</p>
+<p>Unii administratori scriu explicit <code>deny any log</code> la final. Efectul e același, dar regula vizibilă are contor de potriviri și poate trimite mesaje în log, deci vezi ce se blochează.</p>
+<div class="callout callout--info"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg><div><p><strong>Bine de știut:</strong> dacă aplici pe o interfață un ACL care nu există (de exemplu ai greșit numele), IOS lasă tot traficul să treacă. Nu primești nicio eroare, doar o protecție care nu funcționează. Verifică mereu cu <code>show ip interface</code>.</p></div></div>
+<h2 id="unde-si-in-ce-directie-aplici-un-acl">Unde și în ce direcție aplici un ACL</h2>
+<h3 id="inbound-sau-outbound">Inbound sau outbound</h3>
+<p>Direcția se privește <strong>din perspectiva routerului</strong>, pe interfața aleasă:</p>
+<ul>
+<li><strong>in (inbound)</strong>: pachetul e verificat când <strong>intră</strong> pe interfață, <strong>înainte</strong> de rutare. Dacă e respins, routerul nici nu mai caută ruta.</li>
+<li><strong>out (outbound)</strong>: pachetul e verificat când <strong>iese</strong> pe interfață, <strong>după</strong> ce routerul a decis pe unde îl trimite.</li>
+</ul>
+<p>Un ACL outbound <strong>nu</strong> filtrează pachetele generate chiar de router (de exemplu un ping pornit din CLI-ul lui). Un ACL inbound, în schimb, filtrează și traficul destinat routerului însuși, inclusiv protocoale de rutare sau cereri DHCP, detaliu care strică multe laboratoare.</p>
+<h3 id="un-acl-pe-interfata-pe-directie-pe-protocol">Un ACL pe interfață, pe direcție, pe protocol</h3>
+<p>Pe o interfață poți avea cel mult <strong>un ACL IPv4 inbound și unul IPv4 outbound</strong> (plus, separat, câte unul pentru IPv6). Dacă aplici un al doilea ACL IPv4 în aceeași direcție, îl înlocuiește pe primul, fără avertisment.</p>
+<h3 id="standard-aproape-de-destinatie-extins-aproape-de-sursa">Standard aproape de destinație, extins aproape de sursă</h3>
+<p><strong>ACL-ul standard</strong> știe doar sursa. Dacă vrei să oprești Vânzările doar spre servere și pui ACL-ul standard pe R1, la intrarea din Vânzări, blochezi Vânzările spre <strong>tot</strong>: servere, Contabilitate, internet. De aceea îl pui <strong>lângă destinație</strong>, pe ultima interfață înainte de rețeaua protejată.</p>
+<p><strong>ACL-ul extins</strong> știe și destinația, deci poate fi precis chiar dacă e pus lângă sursă. Îl pui <strong>lângă sursă</strong> ca traficul nedorit să fie aruncat cât mai devreme, fără să mai traverseze legătura serială.</p>
+<div class="table-scroll"><p class="table-hint" aria-hidden="true">glisează<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></p><div class="table-wrap" role="region" tabindex="0" aria-label="Tabel (se derulează pe orizontală)"><table>
+<thead>
+<tr>
+<th>Scop în topologia noastră</th>
+<th>Tip</th>
+<th>Router și interfață</th>
+<th>Direcție</th>
+</tr>
+</thead>
+<tbody><tr>
+<td class="tw">Vânzările nu ajung la servere (cu o excepție)</td>
+<td>standard</td>
+<td>R2, <code>G0/0/0</code> (spre servere)</td>
+<td>out</td>
+</tr>
+<tr>
+<td class="tw">Vânzările ajung la servere doar pe web și DNS</td>
+<td>extins</td>
+<td>R1, <code>G0/0/0</code> (dinspre Vânzări)</td>
+<td>in</td>
+</tr>
+<tr>
+<td>SSH pe R1 doar din rețeaua IT</td>
+<td>standard</td>
+<td>R1, liniile VTY</td>
+<td>in (<code>access-class</code>)</td>
+</tr>
+</tbody></table></div></div>
+<h2 id="configurare-acl-standard-numerotat">Configurare: ACL standard numerotat</h2>
+<p><strong>Cerința:</strong> rețeaua Vânzări (<code>192.168.10.0/24</code>) nu are voie în rețeaua de servere, cu o excepție: stația șefului de vânzări, <code>192.168.10.50</code>. Restul traficului spre servere (de la Contabilitate, de exemplu) trece.</p>
+<p>ACL standard, deci îl pui lângă destinație: pe R2, la ieșirea spre servere.</p>
+<pre><code class="language-text">R2(config)# access-list 10 remark Vanzari fara acces la servere, exceptie seful
+R2(config)# access-list 10 permit host 192.168.10.50
+R2(config)# access-list 10 deny 192.168.10.0 0.0.0.255
+R2(config)# access-list 10 permit any
+R2(config)# interface GigabitEthernet0/0/0
+R2(config-if)# ip access-group 10 out
+</code></pre>
+<p>Ce face fiecare linie:</p>
+<ul>
+<li><code>remark</code> e doar un comentariu. Nu filtrează nimic, dar îl vei aprecia peste câteva luni. Evită diacriticele în comentariile din IOS.</li>
+<li><code>permit host 192.168.10.50</code> e <strong>prima</strong>, pentru că e cea mai specifică. Dacă ar fi a doua, ar fi prinsă de <code>deny</code>-ul pentru toată rețeaua.</li>
+<li><code>deny 192.168.10.0 0.0.0.255</code> respinge restul Vânzărilor.</li>
+<li><code>permit any</code> lasă tot restul. Fără ea, deny implicit ar bloca și Contabilitatea, și orice alt trafic spre servere.</li>
+</ul>
+<h2 id="configurare-acl-standard-cu-nume-si-accesul-la-vty">Configurare: ACL standard cu nume și accesul la VTY</h2>
+<p><strong>Cerința:</strong> pe R1 se poate intra prin SSH doar de pe stațiile IT, <code>192.168.20.16/28</code>.</p>
+<p>Aici nu aplici ACL-ul pe o interfață, ci pe <strong>liniile VTY</strong> (sesiunile Telnet și SSH), cu <code>access-class</code>. Astfel protejezi routerul indiferent pe ce interfață sosește conexiunea.</p>
+<pre><code class="language-text">R1(config)# ip access-list standard ADMIN-SSH
+R1(config-std-nacl)# remark Doar statiile IT pot administra routerul
+R1(config-std-nacl)# permit 192.168.20.16 0.0.0.15
+R1(config-std-nacl)# deny any log
+R1(config-std-nacl)# exit
+R1(config)# line vty 0 4
+R1(config-line)# access-class ADMIN-SSH in
+R1(config-line)# transport input ssh
+</code></pre>
+<p>De reținut:</p>
+<ul>
+<li>pe interfețe folosești <code>ip access-group</code>, pe liniile VTY folosești <code>access-class</code>;</li>
+<li>aplică <code>access-class</code> pe <strong>toate</strong> liniile VTY ale echipamentului (verifică în <code>show running-config</code> dacă are și <code>line vty 5 15</code>), altfel o conexiune poate ajunge pe o linie neprotejată;</li>
+<li><code>deny any log</code> e opțional, dar îți arată în log încercările respinse;</li>
+<li>pentru partea de SSH (nume de domeniu, chei RSA, utilizatori locali), vezi <a href="../comenzi-cisco-ios/">fișa cu comenzile Cisco IOS</a>.</li>
+</ul>
+<h2 id="configurare-acl-extins-cu-nume-cu-porturi-tcp-si-udp">Configurare: ACL extins cu nume, cu porturi TCP și UDP</h2>
+<p><strong>Cerința:</strong> Vânzările pot folosi de pe servere doar site-ul intern (<code>172.16.50.10</code>, HTTP și HTTPS) și DNS-ul (<code>172.16.50.53</code>). Mai au voie să dea ping în rețeaua de servere, pentru depanare. Orice alt trafic din Vânzări spre servere e blocat, iar traficul Vânzărilor spre alte destinații (Contabilitate, internet) trece.</p>
+<p>ACL extins, deci lângă sursă: pe R1, la intrarea din Vânzări. E un scenariu separat de cel cu ACL-ul 10: dacă l-ai lăsa și pe acela pe R2, ar bloca în continuare traficul Vânzărilor spre servere (în afară de stația șefului), inclusiv web-ul permis aici.</p>
+<p>Sintaxa unei reguli extinse:</p>
+<pre><code class="language-text">permit|deny  protocol  sursă wildcard [port]  destinație wildcard [port]  [opțiuni]
+</code></pre>
+<p>Configurarea:</p>
+<pre><code class="language-text">R1(config)# ip access-list extended VANZARI-IN
+R1(config-ext-nacl)# remark Vanzari spre servere: doar web, DNS si ping
+R1(config-ext-nacl)# permit tcp 192.168.10.0 0.0.0.255 host 172.16.50.10 eq 80
+R1(config-ext-nacl)# permit tcp 192.168.10.0 0.0.0.255 host 172.16.50.10 eq 443
+R1(config-ext-nacl)# permit udp 192.168.10.0 0.0.0.255 host 172.16.50.53 eq 53
+R1(config-ext-nacl)# permit icmp 192.168.10.0 0.0.0.255 172.16.50.0 0.0.0.255 echo
+R1(config-ext-nacl)# deny ip 192.168.10.0 0.0.0.255 172.16.50.0 0.0.0.255
+R1(config-ext-nacl)# permit ip 192.168.10.0 0.0.0.255 any
+R1(config-ext-nacl)# exit
+R1(config)# interface GigabitEthernet0/0/0
+R1(config-if)# ip access-group VANZARI-IN in
+</code></pre>
+<p>Câteva observații:</p>
+<ul>
+<li><strong>Portul stă după adresa la care se referă.</strong> <code>host 172.16.50.10 eq 443</code> înseamnă „destinația e 172.16.50.10, portul destinație 443”. Clientul folosește un port sursă aleator, deci nu filtrezi după el.</li>
+<li><strong>DNS</strong> folosește în principal UDP 53. Pentru transferuri de zonă și răspunsuri mari folosește și TCP 53; dacă ai nevoie de ele, adaugi o regulă TCP.</li>
+<li><strong><code>echo</code></strong> permite doar cererile de ping. Răspunsurile (<code>echo-reply</code>) se întorc prin <code>G0/0/0</code> spre Vânzări, adică <strong>outbound</strong>, unde nu e niciun ACL, deci trec.</li>
+<li><strong>Ultima regulă</strong> permite doar sursele din <code>192.168.10.0/24</code>. Un pachet cu o sursă falsificată (alt IP decât cele din LAN) e respins de deny implicit. Un mic bonus de securitate.</li>
+<li>Pe lângă <code>eq</code>, poți folosi <code>neq</code>, <code>lt</code>, <code>gt</code> și <code>range</code> (de exemplu <code>range 20 21</code>). IOS acceptă și nume pentru porturile cunoscute: <code>www</code> (80), <code>domain</code> (53), <code>telnet</code> (23), <code>smtp</code> (25), <code>ftp</code> (21).</li>
+</ul>
+<div class="callout callout--info"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg><div><p><strong>Bine de știut:</strong> ACL-ul inbound de pe <code>G0/0/0</code> filtrează și traficul destinat lui R1. Dacă R1 ar fi și server DHCP pentru Vânzări, cererile DHCP (sursa <code>0.0.0.0</code>, destinația <code>255.255.255.255</code>) n-ar mai trece de ultima regulă. Soluția: o regulă <code>permit udp any any eq bootps</code> pusă înaintea celorlalte.</p></div></div>
+<h3 id="cuvantul-cheie-established">Cuvântul cheie established</h3>
+<p>La TCP poți adăuga <code>established</code>, care se potrivește doar cu segmentele care au bitul ACK sau RST setat, adică nu cu începutul unei conexiuni noi. E un fel de „lasă să intre doar răspunsurile la conexiunile pornite din interior”. E o metodă veche și simplă, fără stare; firewall-urile moderne fac același lucru mult mai bine, dar la CCNA trebuie să știi ce face cuvântul.</p>
+<h2 id="editarea-acl-urilor-cu-nume-numere-de-secventa">Editarea ACL-urilor cu nume (numere de secvență)</h2>
+<p>Fiecare regulă dintr-un ACL are un <strong>număr de secvență</strong>. Implicit, IOS le numerotează din 10 în 10, ca să-ți lase loc între ele.</p>
+<p><strong>Cerința nouă:</strong> Vânzările au nevoie și de serverul de fișiere, <code>172.16.50.20</code>, pe TCP 445. Regula trebuie să stea <strong>înainte</strong> de <code>deny</code>-ul cu numărul 50, altfel n-ar fi atinsă niciodată.</p>
+<pre><code class="language-text">R1(config)# ip access-list extended VANZARI-IN
+R1(config-ext-nacl)# 45 permit tcp 192.168.10.0 0.0.0.255 host 172.16.50.20 eq 445
+R1(config-ext-nacl)# end
+</code></pre>
+<p>Ca să ștergi o singură regulă, folosești numărul ei. Să zicem că nu mai vrei ping:</p>
+<pre><code class="language-text">R1(config)# ip access-list extended VANZARI-IN
+R1(config-ext-nacl)# no 40
+R1(config-ext-nacl)# end
+</code></pre>
+<p>Dacă ai inserat multe reguli și numerele s-au înghesuit, le poți renumerota:</p>
+<pre><code class="language-text">R1(config)# ip access-list resequence VANZARI-IN 10 10
+</code></pre>
+<p>Prima valoare e numărul de start, a doua e pasul.</p>
+<div class="callout callout--info"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg><div><p><strong>Bine de știut:</strong> la ACL-urile numerotate, <code>no access-list 10 deny 192.168.10.0 0.0.0.255</code> dat din configurarea globală <strong>șterge tot ACL-ul 10</strong>, nu doar regula aceea. Ca să ștergi o singură regulă dintr-un ACL numerotat, intră în el cu <code>ip access-list standard 10</code> și folosește <code>no &lt;număr de secvență&gt;</code>.</p></div></div>
+<h2 id="verificarea-si-contoarele-de-potriviri">Verificarea și contoarele de potriviri</h2>
+<h3 id="show-access-lists">show access-lists</h3>
+<p>Comanda afișează toate ACL-urile, cu numerele de secvență și, între paranteze, câte pachete s-au potrivit cu fiecare regulă. Pe R1, după ce Vânzările au lucrat o vreme (înainte de editarea de mai sus):</p>
+<pre><code class="language-text">R1# show access-lists
+Standard IP access list ADMIN-SSH
+    10 permit 192.168.20.16, wildcard bits 0.0.0.15 (6 matches)
+    20 deny   any log (2 matches)
+Extended IP access list VANZARI-IN
+    10 permit tcp 192.168.10.0 0.0.0.255 host 172.16.50.10 eq www (1842 matches)
+    20 permit tcp 192.168.10.0 0.0.0.255 host 172.16.50.10 eq 443 (5127 matches)
+    30 permit udp 192.168.10.0 0.0.0.255 host 172.16.50.53 eq domain (633 matches)
+    40 permit icmp 192.168.10.0 0.0.0.255 172.16.50.0 0.0.0.255 echo (12 matches)
+    50 deny ip 192.168.10.0 0.0.0.255 172.16.50.0 0.0.0.255 (41 matches)
+    60 permit ip 192.168.10.0 0.0.0.255 any (9310 matches)
+</code></pre>
+<p>Ce citești de aici:</p>
+<ul>
+<li>IOS afișează porturile cunoscute cu numele lor: <code>80</code> devine <code>www</code>, <code>53</code> devine <code>domain</code>.</li>
+<li>Cele <strong>41 de potriviri pe linia 50</strong> sunt încercări blocate. Dacă un utilizator din Vânzări se plânge că „nu merge serverul de fișiere”, aici vezi că traficul ajunge la router și e respins intenționat.</li>
+<li>O regulă cu <strong>0 potriviri</strong> după o zi de trafic e suspectă: fie e inutilă, fie o regulă de deasupra o „acoperă” și pachetele nu ajung niciodată la ea.</li>
+<li>Deny-ul implicit nu apare în listă, deci nu are contor. De aceea unii pun un <code>deny</code> explicit la final.</li>
+</ul>
+<p>Ca să pornești o numărătoare curată înainte de un test:</p>
+<pre><code class="language-text">R1# clear access-list counters VANZARI-IN
+</code></pre>
+<p>Pentru un singur ACL: <code>show access-lists VANZARI-IN</code>. Există și <code>show ip access-lists</code>, care afișează doar ACL-urile IPv4.</p>
+<h3 id="show-ip-interface">show ip interface</h3>
+<p><code>show access-lists</code> îți spune ce conține lista, dar nu și <strong>unde</strong> e aplicată. Pentru asta:</p>
+<pre><code class="language-text">R1# show ip interface GigabitEthernet0/0/0 | include access list
+  Outgoing access list is not set
+  Inbound  access list is VANZARI-IN
+</code></pre>
+<p>Dacă aici scrie <code>not set</code> deși ai configurat ACL-ul, ai uitat <code>ip access-group</code> sau l-ai pus pe altă interfață. Pentru liniile VTY, verifici cu <code>show running-config | section line vty</code>.</p>
+<h2 id="greseli-frecvente">Greșeli frecvente</h2>
+<div class="table-scroll"><p class="table-hint" aria-hidden="true">glisează<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></p><div class="table-wrap" role="region" tabindex="0" aria-label="Tabel (se derulează pe orizontală)"><table>
+<thead>
+<tr>
+<th>Simptom</th>
+<th>Cauza probabilă</th>
+<th>Cum verifici și repari</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>ACL-ul nu are niciun efect</td>
+<td class="tw">nu e aplicat, e aplicat pe altă interfață sau numele diferă</td>
+<td><code><span class="nw">show</span> <span class="nw">ip</span> <span class="nw">interface</span></code> → <code><span class="nw">ip</span> <span class="nw">access-group</span> <span class="nw">NUME</span> <span class="nw">in/out</span></code> pe interfața corectă</td>
+</tr>
+<tr>
+<td>Blochează exact traficul greșit</td>
+<td>direcția e inversată (<code>in</code> în loc de <code>out</code>)</td>
+<td class="tw">gândește-te dinspre router: pachetul intră sau iese pe interfața aceea?</td>
+</tr>
+<tr>
+<td>Un host permis e totuși blocat</td>
+<td>un <code>deny</code> mai general e deasupra regulii lui</td>
+<td class="tw"><code><span class="nw">show</span> <span class="nw">access-lists</span></code> → regula lui are 0 potriviri; mută-o mai sus cu un număr de secvență mic</td>
+</tr>
+<tr>
+<td>După aplicare nu mai merge nimic</td>
+<td>ACL-ul are doar reguli <code>deny</code></td>
+<td>adaugă <code><span class="nw">permit</span> <span class="nw">any</span></code> sau <code><span class="nw">permit</span> <span class="nw">ip</span> <span class="nw">any</span> <span class="nw">any</span></code> la final</td>
+</tr>
+<tr>
+<td>ACL standard blochează prea mult</td>
+<td>e pus lângă sursă</td>
+<td>mută-l lângă destinație</td>
+</tr>
+<tr>
+<td>Regula prinde alte adrese decât trebuie</td>
+<td class="tw">ai scris masca în loc de wildcard (<code>255.255.255.0</code> în loc de <code>0.0.0.255</code>)</td>
+<td>recalculează: 255 minus mască</td>
+</tr>
+<tr>
+<td class="tw">Regula pentru web nu se potrivește niciodată</td>
+<td class="tw">portul e pus după sursă, nu după destinație</td>
+<td><code><span class="nw">permit</span> <span class="nw">tcp</span> <span class="nw">SURSĂ</span> <span class="nw">WILDCARD</span> <span class="nw">host</span> <span class="nw">SERVER</span> <span class="nw">eq</span> <span class="nw">443</span></code></td>
+</tr>
+<tr>
+<td>OSPF sau DHCP cad după un ACL inbound</td>
+<td class="tw">deny implicit prinde traficul destinat routerului</td>
+<td class="tw">permite explicit protocolul (de exemplu <code><span class="nw">permit</span> <span class="nw">ospf</span> <span class="nw">any</span> <span class="nw">any</span></code>)</td>
+</tr>
+<tr>
+<td>Ai șters din greșeală tot ACL-ul</td>
+<td><code><span class="nw">no</span> <span class="nw">access-list</span> <span class="nw">N</span> <span class="nw">...</span></code> în configurarea globală</td>
+<td class="tw">editează regulile prin <code><span class="nw">ip</span> <span class="nw">access-list</span></code> și numere de secvență</td>
+</tr>
+</tbody></table></div></div>
+<p>Un exemplu concret pentru greșeala cu wildcard-ul: <code>access-list 20 permit 192.168.10.0 255.255.255.0</code> nu permite rețeaua <code>192.168.10.0/24</code>. Wildcard-ul <code>255.255.255.0</code> ignoră primii trei octeți și cere ca ultimul să fie 0, deci prinde adrese ca <code>10.4.7.0</code> sau <code>172.16.50.0</code> și aproape nimic util.</p>
+<h2 id="exercitii">Exerciții</h2>
+<ol>
+<li>Care e wildcard-ul pentru <code>172.16.32.0/20</code>? Ce interval de adrese prinde?</li>
+<li>Pe o interfață aplici un ACL care conține doar <code>access-list 5 deny 10.0.0.0 0.255.255.255</code>. Ce trafic mai trece?</li>
+<li>Scrie un ACL extins cu nume, <code>FARA-TELNET</code>, care blochează Telnet din Contabilitate (<code>192.168.20.0/24</code>) spre orice destinație și permite restul traficului. Pe ce router, interfață și direcție îl aplici?</li>
+<li>Un coleg a scris:<pre><code class="language-text">ip access-list standard TEST
+ permit any
+ deny host 192.168.10.99
+</code></pre>
+Este blocat <code>192.168.10.99</code>? De ce?</li>
+<li>Folosind <code>VANZARI-IN</code> în forma inițială (liniile 10–60, înainte de editare), ce se întâmplă cu un pachet de la <code>192.168.10.70</code> spre <code>172.16.50.20</code>, TCP 445? Dar cu unul de la <code>192.168.10.70</code> spre <code>192.168.20.40</code>, TCP 445?</li>
+<li>Vrei ca doar rețeaua <code>10.1.1.0/30</code> (legătura dintre routere) să poată deschide SSH pe R2. Scrie configurația.</li>
+</ol>
+<details class="reveal-answer">
+<summary><strong>Răspunsuri</strong></summary><p><strong>1.</strong> Masca e <code>255.255.240.0</code>, deci wildcard-ul e <code>0.0.15.255</code>. Prinde <code>172.16.32.0</code> – <code>172.16.47.255</code> (blocul de 16 în al treilea octet, 32 + 15 = 47).</p>
+<p><strong>2.</strong> <strong>Nimic.</strong> Regula respinge rețeaua 10.0.0.0/8, iar deny implicit respinge tot restul. Lipsește un <code>permit any</code> la final.</p>
+<p><strong>3.</strong></p>
+<pre><code class="language-text">R1(config)# ip access-list extended FARA-TELNET
+R1(config-ext-nacl)# deny tcp 192.168.20.0 0.0.0.255 any eq 23
+R1(config-ext-nacl)# permit ip any any
+R1(config-ext-nacl)# exit
+R1(config)# interface GigabitEthernet0/0/1
+R1(config-if)# ip access-group FARA-TELNET in
+</code></pre>
+<p>ACL extins, deci lângă sursă: R1, <code>G0/0/1</code> (interfața spre Contabilitate), <strong>in</strong>. Poți scrie și <code>eq telnet</code> în loc de <code>eq 23</code>. Observă că regula blochează și Telnet spre R1 însuși, dacă vine din Contabilitate.</p>
+<p><strong>4.</strong> <strong>Nu.</strong> Prima regulă, <code>permit any</code>, se potrivește cu orice pachet, deci căutarea se oprește acolo. Regula <code>deny</code> nu e atinsă niciodată. Ordinea corectă: întâi <code>deny host 192.168.10.99</code>, apoi <code>permit any</code>.</p>
+<p><strong>5.</strong> Primul pachet: nu se potrivește cu liniile 10–40 (alt server, alt port), se potrivește cu <strong>linia 50</strong> (<code>deny ip</code> Vânzări spre <code>172.16.50.0/24</code>) și e <strong>aruncat</strong>. Al doilea: destinația nu e în rețeaua de servere, deci trece de linia 50 și se potrivește cu <strong>linia 60</strong>: e <strong>permis</strong>.</p>
+<p><strong>6.</strong></p>
+<pre><code class="language-text">R2(config)# ip access-list standard SSH-DIN-R1
+R2(config-std-nacl)# permit 10.1.1.0 0.0.0.3
+R2(config-std-nacl)# exit
+R2(config)# line vty 0 4
+R2(config-line)# access-class SSH-DIN-R1 in
+R2(config-line)# transport input ssh
+</code></pre>
+<p>Deny implicit respinge restul. Aplică pe toate liniile VTY pe care le are R2.</p>
+</details><h2 id="cum-le-inveti-cel-mai-repede">Cum le înveți cel mai repede</h2>
+<ul>
+<li><strong>Desenează întâi, configurează apoi.</strong> Pentru fiecare cerință, marchează pe schemă routerul, interfața și direcția. Jumătate din greșeli dispar aici.</li>
+<li><strong>Citește fiecare ACL de sus în jos cu un pachet imaginar în minte</strong>, ca la exercițiul 5. E exact ce fac întrebările de examen.</li>
+<li><strong>Exersează wildcard-urile până devin reflex</strong>, la fel ca subnetting-ul. Cu blocul minus 1 rezolvi aproape tot.</li>
+<li><strong>Folosește contoarele.</strong> În laborator, generează trafic (ping, o pagină web) și urmărește care linie crește. Așa înțelegi ordinea mai bine decât din orice tabel.</li>
+<li><strong>Leagă ACL-urile de VLAN-uri.</strong> Într-o rețea cu mai multe VLAN-uri, ACL-urile se pun de obicei pe interfețele de gateway; vezi <a href="../vlan-si-trunk/">ghidul de VLAN-uri și trunk-uri</a>.</li>
+</ul>
+<div class="cta-box cta-box--article"><svg class="mascot" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><g class="m-breathe"><path d="M22 14l-5-9M42 14l5-9" stroke="#8a919c" stroke-width="3.4" stroke-linecap="round" fill="none"/><circle class="m-led m-led-l" cx="17" cy="5" r="3.6"/><circle class="m-led m-led-r" cx="47" cy="5" r="3.6"/><path class="m-body" d="M28 12q4-6 8 0"/><rect class="m-body" x="8" y="12" width="48" height="42" rx="18"/><rect class="m-belly" x="8" y="40" width="48" height="14" rx="7"/><path d="M19 31q4-5 8 0" stroke="#1a1d24" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M37 31q4-5 8 0" stroke="#1a1d24" stroke-width="3" fill="none" stroke-linecap="round"/><path class="m-led" d="M29 37l3 3.5 3-3.5z"/><circle cx="15" cy="38" r="3" fill="#ff8fb1" opacity=".7"/><circle cx="49" cy="38" r="3" fill="#ff8fb1" opacity=".7"/><circle class="m-ok" cx="18" cy="47" r="2"/><circle class="m-led" cx="24" cy="47" r="2"/><rect x="31" y="45" width="6" height="4" rx="1" fill="#0d1a3a" opacity=".55"/><rect x="39" y="45" width="6" height="4" rx="1" fill="#0d1a3a" opacity=".55"/><rect x="47" y="45" width="5" height="4" rx="1" fill="#0d1a3a" opacity=".55"/><path class="m-leg" d="M20 54v4M44 54v4" stroke-width="3.4" stroke-linecap="round" fill="none"/></g></svg><div><h3>Exersează ACL-urile în aplicația Routerel</h3><p>Routerel are peste 1.900 de întrebări pentru CCNA 1 · ITN, CCNA 2 · IEN și CCNA 3 · CEN, cu scheme de rețea și configurații pe care le poți mări și cu explicație imediat după răspuns. Greșelile revin singure prin repetiție spațiată până le stăpânești, iar simularea de examen cu timp îți arată unde stai. Abonații noi au 7 zile gratuite, cu acces la tot.</p></div><a class="btn" href="../../" data-play data-soon-href="../../">Descoperă aplicația<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div><h2 id="intrebari-frecvente">Întrebări frecvente</h2>
+<div class="faq faq--article"><details><summary>Ce este un ACL?<span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p>O listă ordonată de reguli permit și deny pe care routerul o compară cu fiecare pachet. Prima regulă care se potrivește decide soarta pachetului, iar dacă nu se potrivește niciuna, pachetul e aruncat de regula deny implicită de la final.</p></div></details><details><summary>Care e diferența dintre un ACL standard și unul extins?<span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p>ACL-ul standard verifică doar adresa IP sursă. ACL-ul extins poate verifica protocolul, adresa sursă, adresa destinație și porturile TCP sau UDP, deci poate bloca un singur serviciu spre un singur server.</p></div></details><details><summary>Unde se aplică un ACL standard și unde unul extins?<span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p>Standard cât mai aproape de destinație, pentru că știe doar sursa și ar bloca prea mult lângă sursă. Extins cât mai aproape de sursă, ca traficul nedorit să fie oprit înainte să consume legăturile din rețea.</p></div></details><details><summary>Cum calculez masca wildcard?<span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p>Scazi fiecare octet al măștii din 255: <code>255.255.255.0</code> devine <code>0.0.0.255</code>, <code>255.255.255.192</code> devine <code>0.0.0.63</code>, <code>255.255.240.0</code> devine <code>0.0.15.255</code>. Un bit 0 în wildcard înseamnă „trebuie să se potrivească”, un bit 1 înseamnă „nu contează”.</p></div></details><details><summary>Ce este deny implicit?<span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p>O regulă invizibilă la finalul oricărui ACL care respinge tot: <code>deny any</code> la ACL-urile standard și <code>deny ip any any</code> la cele extinse. Un ACL care conține doar reguli deny blochează practic tot traficul de pe interfața pe care îl aplici.</p></div></details><details><summary>Câte ACL-uri pot pune pe o interfață?<span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p>Unul pe interfață, pe direcție și pe protocol: cel mult un ACL IPv4 la intrare și unul IPv4 la ieșire, plus separat câte unul pentru IPv6. Un al doilea ACL IPv4 în aceeași direcție îl înlocuiește pe primul.</p></div></details><details><summary>Cum restricționez accesul SSH la un router cu un ACL?<span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p>Creezi un ACL standard care permite doar adresele de administrare și îl aplici pe liniile VTY cu <code>access-class NUME in</code>. Pe interfețe se folosește <code>ip access-group</code>, pe liniile VTY <code>access-class</code>. Pentru locul ACL-urilor în examen, vezi <a href="../ce-este-ccna/">ghidul despre CCNA</a>.</p></div></details></div>
+<hr>
+<p><em>Routerel este o aplicație independentă și nu este afiliată, sponsorizată sau aprobată de Cisco Systems, Inc. Cisco, CCNA, Cisco IOS și Networking Academy sunt mărci ale Cisco Systems, Inc.</em></p>
+      
+      <section class="related" aria-labelledby="rel-title">
+        <h2 id="rel-title">Citește și</h2>
+        <div class="grid grid--2"><a class="card post-card lift" href="../../ghiduri/dhcp-cisco/"><span class="tagline">Ghid · 16 min</span><h3>Configurare DHCP pe Cisco: server, relay, depanare (2026)</h3><p>DHCPv4 pe Cisco explicat: procesul DORA, porturile UDP 67/68, lease, routerul ca server și client, ip helper-address, DHCP snooping, depanare și exerciții.</p></a><a class="card post-card lift" href="../../ghiduri/nat-si-pat/"><span class="tagline">Ghid · 15 min</span><h3>NAT și PAT explicate: static, dinamic, overload (2026)</h3><p>NAT și PAT pe înțeles: adrese private, inside local și global, NAT static, dinamic și overload, configurare Cisco IOS, verificare, port forwarding și exerciții.</p></a></div>
+      </section>
+    </article>
+  </div>
+</main>
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="about">
+        <a class="brand" href="../../"><img src="../../assets/icon-96.webp" alt="" width="36" height="36" loading="lazy"><span>Routerel</span></a>
+        <p>Exersezi CCNA pe telefon: întrebări cu explicații, repetiția greșelilor și simulări de examen. În română și engleză.</p>
+      </div>
+      <div><h2>Aplicația</h2><ul><li><a href="../../#functii">Funcții</a></li><li><a href="../../#preturi">Prețuri</a></li><li><a href="../../#cum-functioneaza">Cum funcționează</a></li><li><a href="../../#faq">Întrebări frecvente</a></li></ul></div>
+      <div><h2>Resurse</h2><ul><li><a href="../../ghiduri/">Ghiduri CCNA</a></li><li><a href="../../articole/">Articole CCNA</a></li><li><a href="../../tools/">Tools gratuite</a></li><li><a href="../../en/" hreflang="en" lang="en" data-set-lang="en">English</a></li></ul></div>
+      <div><h2>Legal și contact</h2><ul><li><a href="../../privacy">Confidențialitate</a></li><li><a href="../../terms">Termeni de utilizare</a></li><li><a href="../../delete-account">Ștergerea contului</a></li></ul><ul><li><a href="mailto:contact@routerel.app">contact@routerel.app</a></li></ul></div>
+    </div>
+    <div class="disclaimer">
+      <p>Routerel este o aplicație independentă și nu este afiliată, sponsorizată sau aprobată de Cisco Systems, Inc. Cisco, CCNA și Cisco Networking Academy sunt mărci ale Cisco Systems, Inc.</p>
+      <p>© 2026 Routerel</p>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

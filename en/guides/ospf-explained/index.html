@@ -1,0 +1,698 @@
+<!doctype html>
+<!-- Pagină generată. Nu o edita de mână: vezi tools/site/ (npm run build:guides / npm run sync:tools / npm run build:legal). -->
+<html lang="en" class="play-soon" data-utm-medium="guide" data-utm-campaign="ospf-explained">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>OSPF Explained: Single-Area OSPFv2 Configuration (2026)</title>
+  <meta name="description" content="Single-area OSPF explained: router ID, neighbor states, DR/BDR election, cost, network and ip ospf configuration, show commands, troubleshooting and exercises.">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <link rel="canonical" href="https://routerel.app/en/guides/ospf-explained/">
+  <link rel="alternate" hreflang="ro" href="https://routerel.app/ghiduri/ospf/">
+  <link rel="alternate" hreflang="en" href="https://routerel.app/en/guides/ospf-explained/">
+  <link rel="alternate" hreflang="x-default" href="https://routerel.app/en/guides/ospf-explained/">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#12151b" media="(prefers-color-scheme: dark)">
+  <meta name="color-scheme" content="light dark">
+  <link rel="icon" href="../../../assets/favicon-32.png" type="image/png" sizes="32x32">
+  <link rel="icon" href="../../../assets/icon-192.png" type="image/png" sizes="192x192">
+  <link rel="apple-touch-icon" href="../../../assets/apple-touch-icon.png">
+  <link rel="manifest" href="../../../site.webmanifest">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Routerel">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="ro_RO">
+  <meta property="og:title" content="OSPF Explained: Single-Area OSPFv2 Configuration (2026)">
+  <meta property="og:description" content="Single-area OSPF explained: router ID, neighbor states, DR/BDR election, cost, network and ip ospf configuration, show commands, troubleshooting and exercises.">
+  <meta property="og:url" content="https://routerel.app/en/guides/ospf-explained/">
+  <meta property="og:image" content="https://routerel.app/assets/og-en.png">
+  <meta property="og:image:width" content="1024">
+  <meta property="og:image:height" content="500">
+  <meta property="og:image:alt" content="Routerel: the router chick mascot and the app name">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="OSPF Explained: Single-Area OSPFv2 Configuration (2026)">
+  <meta name="twitter:description" content="Single-area OSPF explained: router ID, neighbor states, DR/BDR election, cost, network and ip ospf configuration, show commands, troubleshooting and exercises.">
+  <meta name="twitter:image" content="https://routerel.app/assets/og-en.png">
+  <meta property="article:published_time" content="2026-11-09">
+  <meta property="article:modified_time" content="2026-11-09">
+  <meta name="routerel:updated" content="2026-11-09">
+  <link rel="preload" href="../../../assets/fonts/nunito-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../../../assets/fonts/nunito-latin-ext.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../../../assets/fonts/roboto-mono-500-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="../../../style.css">
+  <script>(function(d){d.classList.add("js");try{var t=localStorage.getItem("routerel-theme");if(t==="light"||t==="dark")d.setAttribute("data-theme",t)}catch(e){}setTimeout(function(){if(!window.__rtl)d.classList.remove("js")},4000)})(document.documentElement)</script>
+  <script src="../../../assets/site.js" defer></script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Article","@id":"https://routerel.app/en/guides/ospf-explained/#article","headline":"OSPF Explained: Single-Area OSPFv2 Configuration (2026)","description":"Single-area OSPF explained: router ID, neighbor states, DR/BDR election, cost, network and ip ospf configuration, show commands, troubleshooting and exercises.","inLanguage":"en","datePublished":"2026-11-09","dateModified":"2026-11-09","keywords":"OSPF, what is OSPF, OSPF configuration Cisco, single area OSPF, OSPF DR BDR election, OSPF router ID, OSPF cost calculation, show ip ospf neighbor","author":{"@type":"Organization","name":"Routerel","url":"https://routerel.app/"},"publisher":{"@type":"Organization","name":"Routerel","logo":{"@type":"ImageObject","url":"https://routerel.app/assets/icon-512.png"}},"image":"https://routerel.app/assets/og-en.png","mainEntityOfPage":"https://routerel.app/en/guides/ospf-explained/","isPartOf":{"@id":"https://routerel.app/#website"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://routerel.app/en/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://routerel.app/en/guides/"},{"@type":"ListItem","position":3,"name":"OSPF Explained: Single-Area OSPFv2 Configuration (2026)","item":"https://routerel.app/en/guides/ospf-explained/"}]},{"@type":"FAQPage","@id":"https://routerel.app/en/guides/ospf-explained/#faq","inLanguage":"en","mainEntity":[{"@type":"Question","name":"What is OSPF?","acceptedAnswer":{"@type":"Answer","text":"OSPF (Open Shortest Path First) is a link-state dynamic routing protocol. Every router learns the topology of the whole area, stores it in a database (the LSDB) and computes the shortest path to each network on its own using the SPF (Dijkstra) algorithm. It's an open standard, so it works between vendors."}},{"@type":"Question","name":"How does OSPF choose its router ID?","acceptedAnswer":{"@type":"Answer","text":"In this order: the value set with the router-id command; if there isn't one, the highest IPv4 address on an up loopback interface; if there's no loopback, the highest IPv4 address on an up physical interface. A new router ID only takes effect after clear ip ospf process or a reload."}},{"@type":"Question","name":"How are the DR and BDR elected?","acceptedAnswer":{"@type":"Answer","text":"On each multi-access segment (Ethernet, for example), the router with the highest OSPF interface priority wins (default 1, range 0 to 255). On a tie, the highest router ID wins. Priority 0 takes a router out of the election. The election is not preemptive: a better router that shows up later doesn't replace the current DR."}},{"@type":"Question","name":"What is the administrative distance of OSPF?","acceptedAnswer":{"@type":"Answer","text":"110. That's higher than static routes (1) and internal EIGRP (90), so for the same network a router prefers a static or EIGRP route over an OSPF one."}},{"@type":"Question","name":"Why are some OSPF neighbors stuck in 2WAY?","acceptedAnswer":{"@type":"Answer","text":"They usually aren't stuck. On a multi-access segment, routers that are neither DR nor BDR (DROTHERs) stop at the 2-Way state with each other. That's normal: they only go FULL with the DR and the BDR."}},{"@type":"Question","name":"Why change the OSPF reference bandwidth?","acceptedAnswer":{"@type":"Answer","text":"OSPF cost is the reference bandwidth divided by the interface bandwidth. The default reference is 100 Mbps, so FastEthernet, GigabitEthernet and 10 GigabitEthernet all end up with cost 1 and OSPF can't tell them apart. auto-cost reference-bandwidth raises the value; set it the same on every router."}}]}]}</script>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs><linearGradient id="rtl-play" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5b8cff"/><stop offset=".55" stop-color="#2f6bff"/><stop offset="1" stop-color="#ffb020"/></linearGradient></defs></svg>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="container header-row">
+    <a class="brand" href="../../../en/" aria-label="Routerel home"><img src="../../../assets/icon-96.webp" alt="" width="36" height="36"><span>Routerel</span></a>
+    <nav class="main-nav" aria-label="Main"><ul><li><a href="../../../en/#features">Features</a></li><li><a href="../../../en/#pricing">Pricing</a></li><li><a href="../../../en/guides/" aria-current="page">Guides</a></li><li><a href="../../../en/articles/">Articles</a></li><li><a href="../../../en/tools/">Tools</a></li><li><a href="../../../en/#faq">FAQ</a></li></ul></nav>
+    <div class="header-actions">
+      <div class="lang-switch" role="group" aria-label="Language"><a href="../../../ghiduri/ospf/" hreflang="ro" lang="ro" title="Română">RO</a><span aria-current="true" lang="en">EN</span></div>
+      <button class="icon-btn theme-toggle" type="button" data-theme-toggle aria-label="Switch theme"><span class="i-moon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9z"/></svg></span><span class="i-sun"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg></span></button>
+      <a class="btn btn--sm header-cta" data-play data-soon-href="../../../en/#pricing" href="../../../en/#pricing"><span data-when="live">Try free</span><span data-when="soon">See pricing</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      <button class="icon-btn menu-btn" type="button" data-menu-btn aria-expanded="false" aria-controls="mobile-nav" aria-label="Menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+    </div>
+  </div>
+  <nav class="mobile-nav" id="mobile-nav" aria-label="Main" hidden>
+    <div class="container"><ul><li><a href="../../../en/#features">Features</a></li><li><a href="../../../en/#pricing">Pricing</a></li><li><a href="../../../en/guides/" aria-current="page">Guides</a></li><li><a href="../../../en/articles/">Articles</a></li><li><a href="../../../en/tools/">Tools</a></li><li><a href="../../../en/#faq">FAQ</a></li></ul></div>
+  </nav>
+</header>
+<main id="main">
+  <div class="container section section--tight">
+    <article class="prose">
+      <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="../../../en/">Home</a></li><li><a href="../../../en/guides/">Guides</a></li><li><span aria-current="page">OSPF Explained: Single-Area OSPFv2 Configuration (2026)</span></li></ol></nav>
+      <p class="eyebrow">CCNA guide</p>
+      <h1>OSPF Explained: Single-Area OSPFv2 Configuration and Troubleshooting</h1>
+      <div class="article-meta">
+        <span class="avatar"><svg class="mascot" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><g class="m-breathe"><path d="M22 14l-5-9M42 14l5-9" stroke="#8a919c" stroke-width="3.4" stroke-linecap="round" fill="none"/><circle class="m-led m-led-l" cx="17" cy="5" r="3.6"/><circle class="m-led m-led-r" cx="47" cy="5" r="3.6"/><path class="m-body" d="M28 12q4-6 8 0"/><rect class="m-body" x="8" y="12" width="48" height="42" rx="18"/><rect class="m-belly" x="8" y="40" width="48" height="14" rx="7"/><circle cx="23" cy="31" r="5.4" fill="#fff"/><circle class="m-pupil" cx="24" cy="31.5" r="3" fill="#1a1d24"/><circle cx="41" cy="31" r="5.4" fill="#fff"/><circle class="m-pupil" cx="42" cy="31.5" r="3" fill="#1a1d24"/><path class="m-led" d="M29 37l3 3.5 3-3.5z"/><circle class="m-ok" cx="18" cy="47" r="2"/><circle class="m-led" cx="24" cy="47" r="2"/><rect x="31" y="45" width="6" height="4" rx="1" fill="#0d1a3a" opacity=".55"/><rect x="39" y="45" width="6" height="4" rx="1" fill="#0d1a3a" opacity=".55"/><rect x="47" y="45" width="5" height="4" rx="1" fill="#0d1a3a" opacity=".55"/><path class="m-leg" d="M20 54v4M44 54v4" stroke-width="3.4" stroke-linecap="round" fill="none"/></g></svg></span>
+        <span>The Routerel team</span><span aria-hidden="true">·</span>
+        <span>Updated: <time datetime="2026-11-09">November 9, 2026</time></span><span aria-hidden="true">·</span>
+        <span>16 min read</span>
+      </div>
+      <p class="lead">OSPF is the dynamic routing protocol you&#39;ll configure most often for the CCNA. The idea is simple: routers tell each other what links they have, each builds a map of the network and picks the shortest path on its own. The details (router ID, neighbor states, DR/BDR, cost, network types) are what break labs and show up on the exam.</p>
+<p>Here you build a four-router OSPF network from scratch: neighbors, the DR/BDR election, cost, two ways to configure OSPF, passive interfaces, the default route, the <code>show</code> commands and the usual faults. Exercises with answers are at the end.</p>
+<p>In the Networking Academy CCNA v8 courses, OSPF is in <strong>CCNA 3 · CEN</strong>, modules 3 (OSPF Fundamentals) and 4 (OSPF Tuning).</p>
+      <nav class="toc toc--fold" aria-labelledby="toc-title"><h2 id="toc-title">Contents</h2><button type="button" class="toc-toggle" data-toc-toggle aria-expanded="false" aria-controls="toc-list"><span class="toc-toggle-t">Contents</span> <span class="toc-toggle-n">14 sections</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6"/></svg></button><ol id="toc-list"><li><a href="#ospf-in-a-nutshell">OSPF in a nutshell</a><ol><li><a href="#the-five-ospf-packet-types">The five OSPF packet types</a></li></ol></li><li><a href="#the-lab-topology">The lab topology</a></li><li><a href="#router-id">Router ID</a></li><li><a href="#neighbors-and-adjacency-states">Neighbors and adjacency states</a></li><li><a href="#dr-and-bdr-on-multi-access-networks">DR and BDR on multi-access networks</a><ol><li><a href="#election-rules">Election rules</a></li><li><a href="#applied-to-our-topology">Applied to our topology</a></li></ol></li><li><a href="#network-types-broadcast-and-point-to-point">Network types: broadcast and point-to-point</a></li><li><a href="#cost-and-reference-bandwidth">Cost and reference bandwidth</a></li><li><a href="#configuring-ospf">Configuring OSPF</a><ol><li><a href="#option-1-the-network-command-with-a-wildcard-on-r1">Option 1: the network command with a wildcard (on R1)</a></li><li><a href="#option-2-ip-ospf-on-the-interface-on-r2">Option 2: ip ospf on the interface (on R2)</a></li><li><a href="#passive-interfaces">Passive interfaces</a></li><li><a href="#propagating-a-default-route-on-r3">Propagating a default route (on R3)</a></li></ol></li><li><a href="#verification">Verification</a><ol><li><a href="#show-ip-ospf-neighbor">show ip ospf neighbor</a></li><li><a href="#show-ip-route-ospf">show ip route ospf</a></li><li><a href="#show-ip-protocols">show ip protocols</a></li><li><a href="#show-ip-ospf-interface">show ip ospf interface</a></li></ol></li><li><a href="#troubleshooting-common-ospf-problems">Troubleshooting common OSPF problems</a></li><li><a href="#a-note-on-ospfv3">A note on OSPFv3</a></li><li><a href="#exercises">Exercises</a></li><li><a href="#the-fastest-way-to-learn-ospf">The fastest way to learn OSPF</a></li><li><a href="#frequently-asked-questions">Frequently asked questions</a></li></ol></nav>
+<h2 id="ospf-in-a-nutshell">OSPF in a nutshell</h2>
+<p><strong>OSPF</strong> (Open Shortest Path First) is a <strong>link-state</strong> routing protocol and an open standard. The IPv4 version is <strong>OSPFv2</strong>; IPv6 uses OSPFv3.</p>
+<p>What it does, in three steps:</p>
+<ol>
+<li>Each router discovers <strong>neighbors</strong> on its interfaces using <strong>Hello</strong> packets.</li>
+<li>Neighbors exchange descriptions of their links, called <strong>LSAs</strong> (Link-State Advertisements). Every router in the same area ends up with an identical database, the <strong>LSDB</strong>.</li>
+<li>Each router runs the <strong>SPF</strong> (Dijkstra) algorithm over the LSDB and installs the cheapest path to every network in its routing table.</li>
+</ol>
+<p>Numbers worth memorizing:</p>
+<div class="table-scroll"><p class="table-hint" aria-hidden="true">swipe<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></p><div class="table-wrap" role="region" tabindex="0" aria-label="Table (scrolls sideways)"><table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Administrative distance</td>
+<td>110</td>
+</tr>
+<tr>
+<td>Metric</td>
+<td class="tw">cost (the sum of the outgoing interface costs along the path)</td>
+</tr>
+<tr>
+<td>Transport</td>
+<td class="tw">directly over IP, protocol 89 (not TCP, not UDP)</td>
+</tr>
+<tr>
+<td>Multicast address for all OSPF routers</td>
+<td>224.0.0.5</td>
+</tr>
+<tr>
+<td>Multicast address for the DR and BDR</td>
+<td>224.0.0.6</td>
+</tr>
+<tr>
+<td>Routing table code</td>
+<td><code>O</code> (and <code>O*E2</code> for a received default route)</td>
+</tr>
+</tbody></table></div></div>
+<p><strong>Areas.</strong> OSPF can split a network into areas to keep the LSDB small. For the CCNA you work with <strong>single-area</strong> OSPF: every interface is in <strong>area 0</strong>, the backbone. That&#39;s the setup throughout this guide.</p>
+<h3 id="the-five-ospf-packet-types">The five OSPF packet types</h3>
+<div class="table-scroll"><p class="table-hint" aria-hidden="true">swipe<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></p><div class="table-wrap" role="region" tabindex="0" aria-label="Table (scrolls sideways)"><table>
+<thead>
+<tr>
+<th>Packet</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Hello</td>
+<td>discovers neighbors and keeps them alive</td>
+</tr>
+<tr>
+<td>DBD (Database Description)</td>
+<td class="tw">a summary of the LSDB, sent during synchronization</td>
+</tr>
+<tr>
+<td>LSR (Link-State Request)</td>
+<td class="tw">&quot;send me this LSA, I don&#39;t have it&quot;</td>
+</tr>
+<tr>
+<td>LSU (Link-State Update)</td>
+<td class="tw">carries the requested LSAs or a new change</td>
+</tr>
+<tr>
+<td>LSAck</td>
+<td>acknowledges an LSU</td>
+</tr>
+</tbody></table></div></div>
+<h2 id="the-lab-topology">The lab topology</h2>
+<p>Every example uses the same network. R1, R2 and R3 connect through one switch, so they share an Ethernet segment (a <strong>multi-access</strong> network). R3 has a direct link to R4 and an uplink to the internet provider.</p>
+<pre><code class="language-text">     LAN 192.168.10.0/24                 LAN 192.168.20.0/24
+            |                                    |
+        Gi0/0/1 .1                           Gi0/0/1 .1
+            R1                                   R2
+        Gi0/0/0 .1                           Gi0/0/0 .2
+            |                                    |
+   =========+============= SW1 ==================+=====  10.0.0.0/24
+                            |
+                        Gi0/0/0 .3
+                            R3 Gi0/0/2 .2 ------ ISP .1   (203.0.113.0/30)
+                        Gi0/0/1 .1
+                            |
+                     10.0.34.0/30
+                            |
+                        Gi0/0/0 .2
+                            R4
+                        Gi0/0/1 .1
+                            |
+                  LAN 192.168.40.0/24
+</code></pre>
+<div class="table-scroll"><p class="table-hint" aria-hidden="true">swipe<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></p><div class="table-wrap" role="region" tabindex="0" aria-label="Table (scrolls sideways)"><table>
+<thead>
+<tr>
+<th>Router</th>
+<th>Router ID</th>
+<th>Role</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>R1</td>
+<td>1.1.1.1</td>
+<td>LAN 192.168.10.0/24, shared segment</td>
+</tr>
+<tr>
+<td>R2</td>
+<td>2.2.2.2</td>
+<td>LAN 192.168.20.0/24, shared segment</td>
+</tr>
+<tr>
+<td>R3</td>
+<td>3.3.3.3</td>
+<td class="tw">shared segment, link to R4, uplink to the ISP</td>
+</tr>
+<tr>
+<td>R4</td>
+<td>4.4.4.4</td>
+<td>link to R3, LAN 192.168.40.0/24</td>
+</tr>
+</tbody></table></div></div>
+<h2 id="router-id">Router ID</h2>
+<p>Every OSPF router has a <strong>router ID</strong> (RID): a 32-bit number written like an IPv4 address. It doesn&#39;t have to be a real address on the router, but it must be <strong>unique within the area</strong>. It identifies the router in the neighbor table and in LSAs, and it breaks ties in the DR election.</p>
+<p>A router picks its RID in this order:</p>
+<ol>
+<li>the value set with <code>router-id</code> (the recommended approach);</li>
+<li>otherwise, the highest IPv4 address on an up <strong>loopback</strong> interface;</li>
+<li>otherwise, the highest IPv4 address on an up <strong>physical</strong> interface.</li>
+</ol>
+<p>The interface in steps 2 and 3 doesn&#39;t need to be running OSPF. It only has to be up.</p>
+<p>The trap: if you change the RID on a router that&#39;s already running OSPF, the new value <strong>doesn&#39;t take effect right away</strong>. IOS tells you so and waits for you to restart the process:</p>
+<pre><code class="language-text">R1(config)# router ospf 1
+R1(config-router)# router-id 1.1.1.1
+% OSPF: Reload or use &quot;clear ip ospf process&quot; command, for this to take effect
+R1(config-router)# end
+R1# clear ip ospf process
+Reset ALL OSPF processes? [no]: yes
+</code></pre>
+<p><code>clear ip ospf process</code> drops every adjacency on the router for a few seconds, so in production save it for a maintenance window.</p>
+<h2 id="neighbors-and-adjacency-states">Neighbors and adjacency states</h2>
+<p>Routers send <strong>Hellos</strong> to 224.0.0.5, by default <strong>every 10 seconds</strong> on Ethernet. If a router hears nothing from a neighbor for <strong>40 seconds</strong> (the dead interval), it declares the neighbor down.</p>
+<p>For two routers to become neighbors, several fields in their Hellos must <strong>match</strong>:</p>
+<div class="table-scroll"><p class="table-hint" aria-hidden="true">swipe<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></p><div class="table-wrap" role="region" tabindex="0" aria-label="Table (scrolls sideways)"><table>
+<thead>
+<tr>
+<th>Must match</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Area ID</td>
+<td>both interfaces in the same area</td>
+</tr>
+<tr>
+<td>Hello and dead intervals</td>
+<td class="tw">10 and 40 seconds by default on Ethernet and serial links</td>
+</tr>
+<tr>
+<td>Subnet and mask</td>
+<td class="tw">checked on broadcast networks, ignored on point-to-point</td>
+</tr>
+<tr>
+<td>Authentication</td>
+<td>if configured (outside the CCNA scope)</td>
+</tr>
+<tr>
+<td>Area type (stub flag)</td>
+<td>doesn&#39;t affect you in a single area</td>
+</tr>
+</tbody></table></div></div>
+<p>On top of that, the <strong>router IDs must be different</strong>, and the interface <strong>MTU</strong> must match (checked a bit later, in the DBD packets).</p>
+<p>Getting to a full adjacency takes seven states:</p>
+<div class="table-scroll"><p class="table-hint" aria-hidden="true">swipe<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></p><div class="table-wrap" role="region" tabindex="0" aria-label="Table (scrolls sideways)"><table>
+<thead>
+<tr>
+<th>State</th>
+<th>What&#39;s happening</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Down</td>
+<td>no Hello received from the neighbor</td>
+</tr>
+<tr>
+<td>Init</td>
+<td class="tw">I&#39;ve received a Hello from the neighbor, but it doesn&#39;t list me yet</td>
+</tr>
+<tr>
+<td>2-Way</td>
+<td class="tw">each router sees itself in the other&#39;s Hello; communication is two-way. The DR and BDR are elected here</td>
+</tr>
+<tr>
+<td>ExStart</td>
+<td class="tw">the neighbors decide who leads the exchange (master/slave; the higher RID wins)</td>
+</tr>
+<tr>
+<td>Exchange</td>
+<td class="tw">they send each other LSDB summaries in DBD packets</td>
+</tr>
+<tr>
+<td>Loading</td>
+<td class="tw">they request missing LSAs with LSRs and receive them in LSUs</td>
+</tr>
+<tr>
+<td>Full</td>
+<td class="tw">the LSDBs are identical; the adjacency is complete</td>
+</tr>
+</tbody></table></div></div>
+<p>The state you want is <strong>FULL</strong>. The one normal exception is <strong>2-Way</strong> between two DROTHER routers on the same multi-access segment (see the next section).</p>
+<h2 id="dr-and-bdr-on-multi-access-networks">DR and BDR on multi-access networks</h2>
+<p>If every router on a busy switch formed a full adjacency with every other one, you&#39;d have n(n−1)/2 adjacencies: 10 for five routers, each with its own synchronization traffic.</p>
+<p>OSPF avoids this with a <strong>DR</strong> (Designated Router) and a <strong>BDR</strong> (Backup DR) on each multi-access segment:</p>
+<ul>
+<li>every router goes FULL only with the DR and the BDR;</li>
+<li>the remaining routers, called <strong>DROTHERs</strong>, stay at 2-Way with each other;</li>
+<li>a DROTHER sends changes to <strong>224.0.0.6</strong> (DR and BDR), and the DR floods them to everyone at <strong>224.0.0.5</strong>;</li>
+<li>if the DR fails, the BDR takes over and a new BDR is elected.</li>
+</ul>
+<p>With five routers, that&#39;s 7 full adjacencies instead of 10, and the savings grow with every router you add.</p>
+<h3 id="election-rules">Election rules</h3>
+<ol>
+<li>The highest <strong>OSPF interface priority</strong> wins (0–255, default <strong>1</strong>).</li>
+<li>On a tie, the highest <strong>router ID</strong> wins.</li>
+<li>Priority <strong>0</strong> means the router can never become DR or BDR.</li>
+<li>The election is <strong>not preemptive</strong>. A higher-priority router that boots later doesn&#39;t take over from the current DR.</li>
+</ol>
+<p>The election happens <strong>per segment</strong>, not per router: the same router can be the DR on one interface and a DROTHER on another. When an interface comes up, the router waits for a period equal to the dead interval (the wait timer, 40 seconds) to find out whether a DR already exists.</p>
+<h3 id="applied-to-our-topology">Applied to our topology</h3>
+<p>With default priorities, every router on 10.0.0.0/24 has priority 1, so the RID decides: if they all start together, <strong>R3</strong> (3.3.3.3) becomes the DR and <strong>R2</strong> (2.2.2.2) the BDR.</p>
+<p>We want R1, the least loaded router, to be the DR. We raise its priority on the interface facing the segment:</p>
+<pre><code class="language-text">R1(config)# interface GigabitEthernet0/0/0
+R1(config-if)# ip ospf priority 200
+</code></pre>
+<p>Because the election isn&#39;t preemptive, nothing changes until you reset OSPF on the routers on that segment at about the same time (<code>clear ip ospf process</code>). After the reset, R1 becomes the DR (priority 200) and R3 becomes the BDR (same priority as R2, but a higher RID).</p>
+<p>A router that should never become DR or BDR gets <code>ip ospf priority 0</code> on its interface.</p>
+<h2 id="network-types-broadcast-and-point-to-point">Network types: broadcast and point-to-point</h2>
+<p>OSPF behaves differently depending on the interface&#39;s <strong>network type</strong>:</p>
+<div class="table-scroll"><p class="table-hint" aria-hidden="true">swipe<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></p><div class="table-wrap" role="region" tabindex="0" aria-label="Table (scrolls sideways)"><table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Where you see it</th>
+<th>DR/BDR</th>
+<th>Default Hello / Dead</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Broadcast</td>
+<td>Ethernet (default)</td>
+<td>yes</td>
+<td>10 / 40 s</td>
+</tr>
+<tr>
+<td>Point-to-point</td>
+<td class="tw">serial with HDLC or PPP (default), Ethernet when set manually</td>
+<td>no</td>
+<td>10 / 40 s</td>
+</tr>
+</tbody></table></div></div>
+<p>The R3–R4 link has only two routers, but as Ethernet it defaults to broadcast: a pointless DR/BDR election and a 40-second wait at startup. Make it point-to-point <strong>at both ends</strong>:</p>
+<pre><code class="language-text">R3(config)# interface GigabitEthernet0/0/1
+R3(config-if)# ip ospf network point-to-point
+
+R4(config)# interface GigabitEthernet0/0/0
+R4(config-if)# ip ospf network point-to-point
+</code></pre>
+<p>Point-to-point links have no DR or BDR, neighbors go on to FULL with no election and no wait timer, and the neighbor table shows the state as <code>FULL/  -</code>.</p>
+<p>Don&#39;t leave one end broadcast and the other point-to-point. The timers are the same (10/40), so the adjacency can still come up, but the two routers describe the link differently in the LSDB, and routes across it don&#39;t make it into the routing table.</p>
+<h2 id="cost-and-reference-bandwidth">Cost and reference bandwidth</h2>
+<p>The OSPF metric is <strong>cost</strong>. An interface&#39;s cost is:</p>
+<pre><code class="language-text">cost = reference bandwidth / interface bandwidth
+</code></pre>
+<p>The result is rounded down, and the minimum cost is 1. <strong>The default reference bandwidth is 100 Mbps.</strong> The cost of a path is the sum of the <strong>outgoing</strong> interface costs along the way, including the interface on the destination network.</p>
+<div class="table-scroll"><p class="table-hint" aria-hidden="true">swipe<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></p><div class="table-wrap" role="region" tabindex="0" aria-label="Table (scrolls sideways)"><table>
+<thead>
+<tr>
+<th>Interface</th>
+<th>Bandwidth</th>
+<th>Cost, default reference (100 Mbps)</th>
+<th>Cost, reference 10000 Mbps</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Serial T1</td>
+<td>1.544 Mbps</td>
+<td>64</td>
+<td>6476</td>
+</tr>
+<tr>
+<td>Ethernet</td>
+<td>10 Mbps</td>
+<td>10</td>
+<td>1000</td>
+</tr>
+<tr>
+<td>FastEthernet</td>
+<td>100 Mbps</td>
+<td>1</td>
+<td>100</td>
+</tr>
+<tr>
+<td>GigabitEthernet</td>
+<td>1 Gbps</td>
+<td>1</td>
+<td>10</td>
+</tr>
+<tr>
+<td>10 GigabitEthernet</td>
+<td>10 Gbps</td>
+<td>1</td>
+<td>1</td>
+</tr>
+</tbody></table></div></div>
+<p>The table shows the problem: with the default reference, a 100 Mbps link and a 10 Gbps link cost the same. On modern networks you raise the reference, <strong>on every router</strong> (the value is in Mbps):</p>
+<pre><code class="language-text">R1(config)# router ospf 1
+R1(config-router)# auto-cost reference-bandwidth 10000
+% OSPF: Reference bandwidth is changed.
+        Please ensure reference bandwidth is consistent across all routers.
+</code></pre>
+<p>A router with a different reference calculates costs on a different scale, and path selection stops making sense.</p>
+<p>Two other ways to influence cost, both per interface:</p>
+<ul>
+<li><code>ip ospf cost 50</code> sets the cost directly (it overrides the calculation);</li>
+<li><code>bandwidth 50000</code> (in kbps) changes the value used in the calculation. It doesn&#39;t change the interface&#39;s real speed, only the number routing protocols work with.</li>
+</ul>
+<p>An example from our topology, with the default reference (all interfaces are Gigabit, so cost 1 each): from R1 to 192.168.40.0/24 the packet leaves R1&#39;s Gi0/0/0 (1), R3&#39;s Gi0/0/1 (1) and R4&#39;s Gi0/0/1 (1). The total cost is <strong>3</strong>. With a 10000 reference, it would be 30.</p>
+<p>When several paths have the same cost, OSPF installs all of them and load-balances across them (up to 4 paths by default).</p>
+<h2 id="configuring-ospf">Configuring OSPF</h2>
+<p>Configuration has two parts: start the OSPF process, then tell it which interfaces to run on. For the second part you have two options.</p>
+<h3 id="option-1-the-network-command-with-a-wildcard-on-r1">Option 1: the <code>network</code> command with a wildcard (on R1)</h3>
+<pre><code class="language-text">R1(config)# router ospf 1
+R1(config-router)# router-id 1.1.1.1
+R1(config-router)# network 10.0.0.0 0.0.0.255 area 0
+R1(config-router)# network 192.168.10.0 0.0.0.255 area 0
+R1(config-router)# passive-interface GigabitEthernet0/0/1
+</code></pre>
+<p>Things to remember:</p>
+<ul>
+<li><strong>The <code>1</code> in <code>router ospf 1</code> is the process ID</strong>, and it only matters locally (1–65535). Neighbors can use different process IDs and still form an adjacency. What has to match is the <strong>area</strong>.</li>
+<li>The <code>network</code> command <strong>doesn&#39;t advertise</strong> a network directly. It means &quot;enable OSPF on any interface whose address falls in this range&quot;. The network that gets advertised is then the interface&#39;s own subnet, with its own mask.</li>
+<li>The second number is a <strong>wildcard mask</strong>, the inverse of the subnet mask: subtract each mask octet from 255. A /24 becomes <code>0.0.0.255</code>, a /30 becomes <code>0.0.0.3</code>, and a /20 becomes <code>0.0.15.255</code>.</li>
+</ul>
+<p>You can be even more precise and use the interface address with a <code>0.0.0.0</code> wildcard. That&#39;s how R4 is configured:</p>
+<pre><code class="language-text">R4(config)# router ospf 1
+R4(config-router)# router-id 4.4.4.4
+R4(config-router)# network 10.0.34.2 0.0.0.0 area 0
+R4(config-router)# network 192.168.40.1 0.0.0.0 area 0
+R4(config-router)# passive-interface GigabitEthernet0/0/1
+</code></pre>
+<p>A <code>0.0.0.0</code> wildcard matches a single address, so it enables OSPF on exactly the interface that owns it. If wildcards trip you up, check them with the <a href="../../tools/subnet-calculator/">subnet calculator</a> or the <a href="../../tools/binary-converter/">binary converter</a>.</p>
+<h3 id="option-2-ip-ospf-on-the-interface-on-r2">Option 2: <code>ip ospf</code> on the interface (on R2)</h3>
+<pre><code class="language-text">R2(config)# router ospf 1
+R2(config-router)# router-id 2.2.2.2
+R2(config-router)# passive-interface GigabitEthernet0/0/1
+R2(config-router)# exit
+R2(config)# interface GigabitEthernet0/0/0
+R2(config-if)# ip ospf 1 area 0
+R2(config-if)# exit
+R2(config)# interface GigabitEthernet0/0/1
+R2(config-if)# ip ospf 1 area 0
+</code></pre>
+<p>No wildcards to work out here: the interface you type the command on joins OSPF in the given area. It&#39;s harder to get wrong and easier to read in <code>show running-config</code>. If an interface is matched by both a <code>network</code> statement and <code>ip ospf ... area</code>, the interface configuration wins.</p>
+<h3 id="passive-interfaces">Passive interfaces</h3>
+<p>A LAN full of PCs has no other router on it, so Hellos are pointless there. Worse, a rogue device on that LAN could become a neighbor and inject bogus routes.</p>
+<p><code>passive-interface</code> handles both: it <strong>stops Hellos</strong> on the interface (so no neighbor can form there), but <strong>the interface&#39;s network is still advertised</strong>. On R1, 192.168.10.0/24 still reaches the other routers even though Gi0/0/1 is passive.</p>
+<p>On a router with many LANs it&#39;s easier the other way round: everything passive, then re-enable only the interfaces facing other routers.</p>
+<pre><code class="language-text">R3(config)# router ospf 1
+R3(config-router)# passive-interface default
+R3(config-router)# no passive-interface GigabitEthernet0/0/0
+R3(config-router)# no passive-interface GigabitEthernet0/0/1
+</code></pre>
+<p>Careful: put <code>passive-interface</code> on an interface that faces a neighboring router and that adjacency goes down.</p>
+<h3 id="propagating-a-default-route-on-r3">Propagating a default route (on R3)</h3>
+<p>R3 is the only router with a way out to the internet. Give it a static default route toward the ISP and tell OSPF to advertise it:</p>
+<pre><code class="language-text">R3(config)# ip route 0.0.0.0 0.0.0.0 203.0.113.1
+R3(config)# router ospf 1
+R3(config-router)# router-id 3.3.3.3
+R3(config-router)# network 10.0.0.0 0.0.0.255 area 0
+R3(config-router)# network 10.0.34.0 0.0.0.3 area 0
+R3(config-router)# default-information originate
+</code></pre>
+<p>What you need to know:</p>
+<ul>
+<li><code>default-information originate</code> advertises the default route <strong>only if R3 has one in its routing table</strong>. With <code>default-information originate always</code> it advertises it regardless, but then the other routers may send traffic to an R3 that has nowhere to forward it.</li>
+<li>The 203.0.113.0/30 network is <strong>not</strong> added to OSPF. You don&#39;t want to send Hellos toward the provider.</li>
+<li>On the other routers the route shows up as <code>O*E2 0.0.0.0/0 [110/1]</code>: E2 means an external type 2 route, whose metric of 1 doesn&#39;t grow along the path. R3 becomes an <strong>ASBR</strong> (a router at the boundary with a network outside OSPF).</li>
+</ul>
+<h2 id="verification">Verification</h2>
+<div class="table-scroll"><p class="table-hint" aria-hidden="true">swipe<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></p><div class="table-wrap" role="region" tabindex="0" aria-label="Table (scrolls sideways)"><table>
+<thead>
+<tr>
+<th>Command</th>
+<th>What it tells you</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code><span class="nw">show</span> <span class="nw">ip</span> <span class="nw">ospf</span> <span class="nw">neighbor</span></code></td>
+<td class="tw">neighbors, priority, state (FULL, 2WAY...), role (DR, BDR, DROTHER), interface</td>
+</tr>
+<tr>
+<td><code><span class="nw">show</span> <span class="nw">ip</span> <span class="nw">route</span> <span class="nw">ospf</span></code></td>
+<td class="tw">only the routes learned through OSPF, with cost and next hop</td>
+</tr>
+<tr>
+<td><code><span class="nw">show</span> <span class="nw">ip</span> <span class="nw">protocols</span></code></td>
+<td class="tw">process ID, router ID, <code>network</code> statements, passive interfaces, route sources, distance 110</td>
+</tr>
+<tr>
+<td><code><span class="nw">show</span> <span class="nw">ip</span> <span class="nw">ospf</span> <span class="nw">interface</span> <span class="nw">Gi0/0/0</span></code></td>
+<td class="tw">area, network type, cost, state (DR, BDR...), priority, timers, neighbors</td>
+</tr>
+<tr>
+<td><code><span class="nw">show</span> <span class="nw">ip</span> <span class="nw">ospf</span> <span class="nw">interface</span> <span class="nw">brief</span></code></td>
+<td class="tw">one line per OSPF interface: area, cost, state, neighbor count</td>
+</tr>
+<tr>
+<td><code><span class="nw">show</span> <span class="nw">ip</span> <span class="nw">ospf</span> <span class="nw">database</span></code></td>
+<td>the LSAs in the LSDB</td>
+</tr>
+</tbody></table></div></div>
+<h3 id="show-ip-ospf-neighbor"><code>show ip ospf neighbor</code></h3>
+<p>On R1, after it has become the DR:</p>
+<pre><code class="language-text">R1# show ip ospf neighbor
+
+Neighbor ID     Pri   State           Dead Time   Address         Interface
+2.2.2.2           1   FULL/DROTHER    00:00:34    10.0.0.2        GigabitEthernet0/0/0
+3.3.3.3           1   FULL/BDR        00:00:38    10.0.0.3        GigabitEthernet0/0/0
+</code></pre>
+<p>On R3, which has neighbors on both the shared segment and the point-to-point link:</p>
+<pre><code class="language-text">R3# show ip ospf neighbor
+
+Neighbor ID     Pri   State           Dead Time   Address         Interface
+4.4.4.4           0   FULL/  -        00:00:36    10.0.34.2       GigabitEthernet0/0/1
+1.1.1.1         200   FULL/DR         00:00:31    10.0.0.1        GigabitEthernet0/0/0
+2.2.2.2           1   FULL/DROTHER    00:00:39    10.0.0.2        GigabitEthernet0/0/0
+</code></pre>
+<p>The role in the State column belongs to the <strong>neighbor</strong>, not to the router you&#39;re typing on. Dead Time counts down from 40 and resets to 40 with every Hello received.</p>
+<h3 id="show-ip-route-ospf"><code>show ip route ospf</code></h3>
+<p>On R1 (with the code legend at the top trimmed):</p>
+<pre><code class="language-text">R1# show ip route ospf
+
+Gateway of last resort is 10.0.0.3 to network 0.0.0.0
+
+O*E2  0.0.0.0/0 [110/1] via 10.0.0.3, 00:12:40, GigabitEthernet0/0/0
+      10.0.0.0/8 is variably subnetted, 3 subnets, 3 masks
+O        10.0.34.0/30 [110/2] via 10.0.0.3, 00:12:40, GigabitEthernet0/0/0
+O     192.168.20.0/24 [110/2] via 10.0.0.2, 00:12:40, GigabitEthernet0/0/0
+O     192.168.40.0/24 [110/3] via 10.0.0.3, 00:12:40, GigabitEthernet0/0/0
+</code></pre>
+<p>In <code>[110/3]</code>, 110 is the administrative distance and 3 is the cost we worked out earlier. Notice that the next hop to 192.168.20.0/24 is R2 itself (10.0.0.2), even though R1 is the DR: the DR only helps synchronize the LSDB, and user traffic doesn&#39;t pass through it.</p>
+<h3 id="show-ip-protocols"><code>show ip protocols</code></h3>
+<pre><code class="language-text">R1# show ip protocols
+*** IP Routing is NSF aware ***
+
+Routing Protocol is &quot;ospf 1&quot;
+  Outgoing update filter list for all interfaces is not set
+  Incoming update filter list for all interfaces is not set
+  Router ID 1.1.1.1
+  Number of areas in this router is 1. 1 normal 0 stub 0 nssa
+  Maximum path: 4
+  Routing for Networks:
+    10.0.0.0 0.0.0.255 area 0
+    192.168.10.0 0.0.0.255 area 0
+  Passive Interface(s):
+    GigabitEthernet0/0/1
+  Routing Information Sources:
+    Gateway         Distance      Last Update
+    2.2.2.2              110      00:12:41
+    3.3.3.3              110      00:12:41
+    4.4.4.4              110      00:12:41
+  Distance: (default is 110)
+</code></pre>
+<p>On R2, where you used <code>ip ospf 1 area 0</code>, the list under &quot;Routing for Networks&quot; is empty, and the interfaces appear in a separate section, &quot;Routing on Interfaces Configured Explicitly (Area 0)&quot;.</p>
+<h3 id="show-ip-ospf-interface"><code>show ip ospf interface</code></h3>
+<pre><code class="language-text">R1# show ip ospf interface GigabitEthernet0/0/0
+GigabitEthernet0/0/0 is up, line protocol is up
+  Internet Address 10.0.0.1/24, Area 0, Attached via Network Statement
+  Process ID 1, Router ID 1.1.1.1, Network Type BROADCAST, Cost: 1
+  Transmit Delay is 1 sec, State DR, Priority 200
+  Designated Router (ID) 1.1.1.1, Interface address 10.0.0.1
+  Backup Designated router (ID) 3.3.3.3, Interface address 10.0.0.3
+  Timer intervals configured, Hello 10, Dead 40, Wait 40, Retransmit 5
+    Hello due in 00:00:06
+  Neighbor Count is 2, Adjacent neighbor count is 2
+    Adjacent with neighbor 2.2.2.2
+    Adjacent with neighbor 3.3.3.3  (Backup Designated Router)
+</code></pre>
+<p>(The real output has a few more lines.) This is the most useful troubleshooting command: area, network type, cost, timers and the DR, all in one place.</p>
+<h2 id="troubleshooting-common-ospf-problems">Troubleshooting common OSPF problems</h2>
+<p>Work bottom-up: the interfaces are up/up and the neighbor answers a <code>ping</code>; OSPF runs on the right interface and in the right area (<code>show ip ospf interface</code>); the neighbor shows up as FULL (<code>show ip ospf neighbor</code>); the routes reach the table (<code>show ip route ospf</code>).</p>
+<div class="table-scroll"><p class="table-hint" aria-hidden="true">swipe<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></p><div class="table-wrap" role="region" tabindex="0" aria-label="Table (scrolls sideways)"><table>
+<thead>
+<tr>
+<th>Symptom</th>
+<th>Likely cause</th>
+<th>How to check and fix</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Neighbor never appears</td>
+<td>different areas at the two ends</td>
+<td><code><span class="nw">show</span> <span class="nw">ip</span> <span class="nw">ospf</span> <span class="nw">interface</span></code> on both → same area in <code>network</code> or <code><span class="nw">ip</span> <span class="nw">ospf</span> <span class="nw">...</span> <span class="nw">area</span></code></td>
+</tr>
+<tr>
+<td>Neighbor never appears</td>
+<td>mismatched hello or dead interval</td>
+<td class="tw"><code><span class="nw">show</span> <span class="nw">ip</span> <span class="nw">ospf</span> <span class="nw">interface</span></code> (Timer intervals line) → same values, or <code><span class="nw">no</span> <span class="nw">ip</span> <span class="nw">ospf</span> <span class="nw">hello-interval</span></code> and <code><span class="nw">no</span> <span class="nw">ip</span> <span class="nw">ospf</span> <span class="nw">dead-interval</span></code></td>
+</tr>
+<tr>
+<td>Neighbor never appears</td>
+<td class="tw">addresses in different subnets, or a different mask on a broadcast segment</td>
+<td><code><span class="nw">show</span> <span class="nw">ip</span> <span class="nw">interface</span> <span class="nw">brief</span></code>, <code><span class="nw">show</span> <span class="nw">running-config</span> <span class="nw">interface</span></code> → fix the address or mask</td>
+</tr>
+<tr>
+<td>Neighbor never appears</td>
+<td>the interface is passive</td>
+<td><code><span class="nw">show</span> <span class="nw">ip</span> <span class="nw">protocols</span></code> (Passive Interface(s)) → <code><span class="nw">no</span> <span class="nw">passive-interface</span></code></td>
+</tr>
+<tr>
+<td>Neighbor never appears</td>
+<td class="tw">the <code>network</code> statement doesn&#39;t match the interface (wrong wildcard)</td>
+<td><code><span class="nw">show</span> <span class="nw">ip</span> <span class="nw">ospf</span> <span class="nw">interface</span> <span class="nw">brief</span></code> (interface missing) → fix the <code>network</code> statement</td>
+</tr>
+<tr>
+<td>Neighbors stuck in EXSTART or EXCHANGE</td>
+<td>MTU mismatch between the two interfaces</td>
+<td><code><span class="nw">show</span> <span class="nw">interfaces</span></code> (MTU) → same <code><span class="nw">ip</span> <span class="nw">mtu</span></code> at both ends</td>
+</tr>
+<tr>
+<td class="tw">No adjacency, duplicate router ID messages (<code>%OSPF-4-DUP_RTRID_NBR</code>)</td>
+<td>two neighbors with the same router ID</td>
+<td><code><span class="nw">show</span> <span class="nw">ip</span> <span class="nw">ospf</span></code> or <code><span class="nw">show</span> <span class="nw">ip</span> <span class="nw">protocols</span></code> → unique <code>router-id</code>, then <code><span class="nw">clear</span> <span class="nw">ip</span> <span class="nw">ospf</span> <span class="nw">process</span></code></td>
+</tr>
+<tr>
+<td class="tw">Every neighbor on a segment in 2WAY, no DR</td>
+<td>all routers have priority 0</td>
+<td class="tw"><code><span class="nw">show</span> <span class="nw">ip</span> <span class="nw">ospf</span> <span class="nw">interface</span></code> → at least one router with priority above 0</td>
+</tr>
+<tr>
+<td class="tw">Neighbors are FULL, but routes across the link are missing</td>
+<td class="tw">one end broadcast, the other point-to-point</td>
+<td><code><span class="nw">show</span> <span class="nw">ip</span> <span class="nw">ospf</span> <span class="nw">interface</span></code> (Network Type) → same type at both ends</td>
+</tr>
+<tr>
+<td class="tw">Default route doesn&#39;t reach the other routers</td>
+<td class="tw">missing static route on the edge router, or missing <code><span class="nw">default-information</span> <span class="nw">originate</span></code></td>
+<td><code><span class="nw">show</span> <span class="nw">ip</span> <span class="nw">route</span></code> on R3 → <code><span class="nw">ip</span> <span class="nw">route</span> <span class="nw">0.0.0.0</span> <span class="nw">0.0.0.0</span> <span class="nw">...</span></code> and <code><span class="nw">default-information</span> <span class="nw">originate</span></code></td>
+</tr>
+</tbody></table></div></div>
+<p>If you can&#39;t change the MTU at one end, <code>ip ospf mtu-ignore</code> on the interface skips the check; it&#39;s a workaround, and the clean fix is matching MTUs. A duplicate RID between routers that aren&#39;t direct neighbors shows up differently: routes that keep appearing and disappearing.</p>
+<h2 id="a-note-on-ospfv3">A note on OSPFv3</h2>
+<p>IPv6 uses <strong>OSPFv3</strong>, with the same logic (neighbors, DR/BDR, cost, area 0), configured per interface with no <code>network</code> statements:</p>
+<pre><code class="language-text">R1(config)# ipv6 unicast-routing
+R1(config)# ipv6 router ospf 1
+R1(config-rtr)# router-id 1.1.1.1
+R1(config-rtr)# exit
+R1(config)# interface GigabitEthernet0/0/0
+R1(config-if)# ipv6 ospf 1 area 0
+</code></pre>
+<p>The RID is still 32 bits; on a router with no IPv4 address at all you must set it manually, or the process won&#39;t start. Neighbors talk over link-local addresses (see the <a href="../ipv6-addresses-explained/">IPv6 addresses guide</a>). OSPFv3 is named explicitly in the next version of the exam, covered in our article on <a href="../../articles/ccna-v2-2027-changes/">CCNA v2.0 in 2027</a>.</p>
+<h2 id="exercises">Exercises</h2>
+<ol>
+<li>Which <code>network</code> command puts every interface in 172.16.32.0/20 into area 0?</li>
+<li>Four routers share a switch and boot at the same time. RA: priority 1, RID 4.4.4.4. RB: priority 10, RID 1.1.1.1. RC: priority 1, RID 9.9.9.9. RD: priority 0, RID 99.99.99.99. Which router is the DR, which is the BDR, and what state are RA and RD in with each other?</li>
+<li>Every router has <code>auto-cost reference-bandwidth 1000</code>. A packet leaves R1 on a FastEthernet interface, then leaves R2 on a GigabitEthernet interface, and the destination network is attached to R3, also on a GigabitEthernet interface. What cost does R1&#39;s routing table show for the route?</li>
+<li>On R2, <code>show ip ospf neighbor</code> shows nothing. On R1, <code>show ip ospf interface</code> shows &quot;Hello 10, Dead 40&quot;; on R2 it shows &quot;Hello 5, Dead 20&quot;. What happened, and how do you fix it on R2?</li>
+<li>A router has no <code>router-id</code>. It has Loopback0 at 10.255.255.1 and Gi0/0/0 at 192.168.50.1, both up. Which RID does it choose? What happens if you then add <code>router-id 7.7.7.7</code>?</li>
+</ol>
+<details class="reveal-answer">
+<summary><strong>Answers</strong></summary><p><strong>1.</strong> A /20 mask is 255.255.240.0, so the wildcard is 0.0.15.255:</p>
+<pre><code class="language-text">R1(config-router)# network 172.16.32.0 0.0.15.255 area 0
+</code></pre>
+<p><strong>2.</strong> <strong>RB</strong> is the DR because it has the highest priority (10). That leaves RA and RC for BDR, both at priority 1, so the higher RID wins: <strong>RC</strong> (9.9.9.9). RD has priority 0, so it&#39;s out of the election despite having the highest RID. RA and RD are both DROTHERs, so they stay in <strong>2WAY</strong> with each other.</p>
+<p><strong>3.</strong> With a 1000 Mbps reference: FastEthernet = 1000/100 = 10, GigabitEthernet = 1000/1000 = 1. The cost is 10 + 1 + 1 = <strong>12</strong>. You add up the outgoing interfaces along the path, including R3&#39;s interface on the destination network.</p>
+<p><strong>4.</strong> Someone changed R2&#39;s hello interval to 5 seconds, and the dead interval adjusted itself to 20. The timers must match, so R1 and R2 ignore each other&#39;s Hellos. On R2&#39;s interface:</p>
+<pre><code class="language-text">R2(config-if)# no ip ospf hello-interval
+R2(config-if)# no ip ospf dead-interval
+</code></pre>
+<p><strong>5.</strong> It picks <strong>10.255.255.1</strong>, the loopback address. Loopbacks beat physical interfaces even when their address is lower. After <code>router-id 7.7.7.7</code>, IOS prints a message saying the change takes effect after a reload or <code>clear ip ospf process</code>. Until then, the RID stays 10.255.255.1.</p>
+</details><h2 id="the-fastest-way-to-learn-ospf">The fastest way to learn OSPF</h2>
+<ul>
+<li><strong>Build the topology from this guide</strong> in a simulator and watch the states with <code>show ip ospf neighbor</code> as you bring interfaces up.</li>
+<li><strong>Break one thing at a time on purpose</strong> (area, hello, MTU, passive interface) and fix it using only <code>show</code> commands.</li>
+<li><strong>Practice on paper</strong> DR/BDR elections and cost calculations until you can answer in seconds.</li>
+<li>For the basic router commands, see the <a href="../cisco-ios-basic-commands/">Cisco IOS commands cheat sheet</a>; for where OSPF fits in the exam, see our <a href="../what-is-ccna/">guide to CCNA</a>.</li>
+</ul>
+<div class="cta-box cta-box--article"><svg class="mascot" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><g class="m-breathe"><path d="M22 14l-5-9M42 14l5-9" stroke="#8a919c" stroke-width="3.4" stroke-linecap="round" fill="none"/><circle class="m-led m-led-l" cx="17" cy="5" r="3.6"/><circle class="m-led m-led-r" cx="47" cy="5" r="3.6"/><path class="m-body" d="M28 12q4-6 8 0"/><rect class="m-body" x="8" y="12" width="48" height="42" rx="18"/><rect class="m-belly" x="8" y="40" width="48" height="14" rx="7"/><path d="M19 31q4-5 8 0" stroke="#1a1d24" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M37 31q4-5 8 0" stroke="#1a1d24" stroke-width="3" fill="none" stroke-linecap="round"/><path class="m-led" d="M29 37l3 3.5 3-3.5z"/><circle cx="15" cy="38" r="3" fill="#ff8fb1" opacity=".7"/><circle cx="49" cy="38" r="3" fill="#ff8fb1" opacity=".7"/><circle class="m-ok" cx="18" cy="47" r="2"/><circle class="m-led" cx="24" cy="47" r="2"/><rect x="31" y="45" width="6" height="4" rx="1" fill="#0d1a3a" opacity=".55"/><rect x="39" y="45" width="6" height="4" rx="1" fill="#0d1a3a" opacity=".55"/><rect x="47" y="45" width="5" height="4" rx="1" fill="#0d1a3a" opacity=".55"/><path class="m-leg" d="M20 54v4M44 54v4" stroke-width="3.4" stroke-linecap="round" fill="none"/></g></svg><div><h3>Practice OSPF in the Routerel app</h3><p>Routerel has over 1,900 questions for CCNA 1 · ITN, CCNA 2 · IEN and CCNA 3 · CEN, including full modules on OSPF, with zoomable network diagrams and command outputs, and an explanation right after every answer. Your mistakes come back automatically through spaced repetition until you&#39;ve mastered them, and the timed exam simulation shows you where you stand. New subscribers get a 7-day free trial with full access.</p></div><a class="btn" href="../../" data-play data-soon-href="../../">Discover the app<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div><h2 id="frequently-asked-questions">Frequently asked questions</h2>
+<div class="faq faq--article"><details><summary>What is OSPF?<span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p>A link-state dynamic routing protocol. Every router learns the topology of the whole area, stores it in a database (the LSDB) and computes the shortest path to each network on its own with the SPF (Dijkstra) algorithm. It&#39;s an open standard, so it works between vendors.</p></div></details><details><summary>How does OSPF choose its router ID?<span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p>In this order: the value set with <code>router-id</code>; if there isn&#39;t one, the highest IPv4 address on an up loopback interface; if there&#39;s no loopback, the highest IPv4 address on an up physical interface. A new RID only takes effect after <code>clear ip ospf process</code> or a reload.</p></div></details><details><summary>How are the DR and BDR elected?<span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p>On each multi-access segment, the highest OSPF interface priority wins (default 1, range 0 to 255), and on a tie the highest RID wins. Priority 0 takes a router out of the election. The election isn&#39;t preemptive: a better router that shows up later doesn&#39;t replace the current DR.</p></div></details><details><summary>What is the administrative distance of OSPF?<span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p><strong>110.</strong> That&#39;s higher than static routes (1) and internal EIGRP (90), so for the same network a router prefers a static or EIGRP route over an OSPF one.</p></div></details><details><summary>Why are some OSPF neighbors stuck in 2WAY?<span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p>They usually aren&#39;t stuck. On a multi-access segment, routers that are neither DR nor BDR (DROTHERs) stop at 2-Way with each other. That&#39;s normal: they only go FULL with the DR and the BDR.</p></div></details><details><summary>Why change the OSPF reference bandwidth?<span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p>Cost is the reference bandwidth divided by the interface bandwidth. The default reference is 100 Mbps, so FastEthernet, GigabitEthernet and 10 GigabitEthernet all get cost 1 and OSPF can&#39;t tell them apart. <code>auto-cost reference-bandwidth</code> raises the value; set it the same on every router.</p></div></details></div>
+<hr>
+<p><em>Routerel is an independent app and is not affiliated with, sponsored by or endorsed by Cisco Systems, Inc. Cisco, CCNA, Cisco IOS and Networking Academy are trademarks of Cisco Systems, Inc.</em></p>
+      
+      <section class="related" aria-labelledby="rel-title">
+        <h2 id="rel-title">Read next</h2>
+        <div class="grid grid--2"><a class="card post-card lift" href="../../../en/guides/cisco-ios-basic-commands/"><span class="tagline">Guide · 13 min</span><h3>Basic Cisco IOS Commands: CCNA Cheat Sheet</h3><p>Basic Cisco IOS commands cheat sheet for CCNA: CLI modes, initial setup, passwords and SSH, interfaces, saving the config, show commands and troubleshooting.</p></a><a class="card post-card lift" href="../../../en/guides/dhcp-on-cisco/"><span class="tagline">Guide · 16 min</span><h3>DHCP on Cisco: Server, Relay and Troubleshooting (2026)</h3><p>DHCPv4 on Cisco explained: the DORA process, UDP 67/68, leases, router as server and client, ip helper-address, DHCP snooping, troubleshooting and exercises.</p></a></div>
+      </section>
+    </article>
+  </div>
+</main>
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="about">
+        <a class="brand" href="../../../en/"><img src="../../../assets/icon-96.webp" alt="" width="36" height="36" loading="lazy"><span>Routerel</span></a>
+        <p>CCNA practice on your phone: questions with explanations, spaced repetition and exam simulations. In English and Romanian.</p>
+      </div>
+      <div><h2>The app</h2><ul><li><a href="../../../en/#features">Features</a></li><li><a href="../../../en/#pricing">Pricing</a></li><li><a href="../../../en/#how-it-works">How it works</a></li><li><a href="../../../en/#faq">FAQ</a></li></ul></div>
+      <div><h2>Resources</h2><ul><li><a href="../../../en/guides/">CCNA guides</a></li><li><a href="../../../en/articles/">CCNA articles</a></li><li><a href="../../../en/tools/">Free tools</a></li><li><a href="../../../" hreflang="ro" lang="ro" data-set-lang="ro">Română</a></li></ul></div>
+      <div><h2>Legal & contact</h2><ul><li><a href="../../../en/privacy">Privacy policy</a></li><li><a href="../../../en/terms">Terms of use</a></li><li><a href="../../../en/delete-account">Delete your account</a></li></ul><ul><li><a href="mailto:contact@routerel.app">contact@routerel.app</a></li></ul></div>
+    </div>
+    <div class="disclaimer">
+      <p>Routerel is an independent app, not affiliated with, sponsored or endorsed by Cisco Systems, Inc. Cisco, CCNA and Cisco Networking Academy are trademarks of Cisco Systems, Inc.</p>
+      <p>© 2026 Routerel</p>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

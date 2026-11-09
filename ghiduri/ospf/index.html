@@ -1,0 +1,698 @@
+<!doctype html>
+<!-- Pagină generată. Nu o edita de mână: vezi tools/site/ (npm run build:guides / npm run sync:tools / npm run build:legal). -->
+<html lang="ro" class="play-soon" data-utm-medium="guide" data-utm-campaign="ospf">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>OSPF explicat: configurare și depanare OSPFv2 (2026)</title>
+  <meta name="description" content="OSPF single-area pe înțeles: router ID, vecini și stări, DR/BDR, cost, configurare cu network și ip ospf, comenzi show, depanare și exerciții rezolvate.">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <link rel="canonical" href="https://routerel.app/ghiduri/ospf/">
+  <link rel="alternate" hreflang="ro" href="https://routerel.app/ghiduri/ospf/">
+  <link rel="alternate" hreflang="en" href="https://routerel.app/en/guides/ospf-explained/">
+  <link rel="alternate" hreflang="x-default" href="https://routerel.app/en/guides/ospf-explained/">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#12151b" media="(prefers-color-scheme: dark)">
+  <meta name="color-scheme" content="light dark">
+  <link rel="icon" href="../../assets/favicon-32.png" type="image/png" sizes="32x32">
+  <link rel="icon" href="../../assets/icon-192.png" type="image/png" sizes="192x192">
+  <link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
+  <link rel="manifest" href="../../site.webmanifest">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Routerel">
+  <meta property="og:locale" content="ro_RO">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta property="og:title" content="OSPF explicat: configurare și depanare OSPFv2 (2026)">
+  <meta property="og:description" content="OSPF single-area pe înțeles: router ID, vecini și stări, DR/BDR, cost, configurare cu network și ip ospf, comenzi show, depanare și exerciții rezolvate.">
+  <meta property="og:url" content="https://routerel.app/ghiduri/ospf/">
+  <meta property="og:image" content="https://routerel.app/assets/og-ro.png">
+  <meta property="og:image:width" content="1024">
+  <meta property="og:image:height" content="500">
+  <meta property="og:image:alt" content="Routerel: mascota puiul de router și numele aplicației">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="OSPF explicat: configurare și depanare OSPFv2 (2026)">
+  <meta name="twitter:description" content="OSPF single-area pe înțeles: router ID, vecini și stări, DR/BDR, cost, configurare cu network și ip ospf, comenzi show, depanare și exerciții rezolvate.">
+  <meta name="twitter:image" content="https://routerel.app/assets/og-ro.png">
+  <meta property="article:published_time" content="2026-11-09">
+  <meta property="article:modified_time" content="2026-11-09">
+  <meta name="routerel:updated" content="2026-11-09">
+  <link rel="preload" href="../../assets/fonts/nunito-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../../assets/fonts/nunito-latin-ext.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../../assets/fonts/roboto-mono-500-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="../../style.css">
+  <script>(function(d){d.classList.add("js");try{var t=localStorage.getItem("routerel-theme");if(t==="light"||t==="dark")d.setAttribute("data-theme",t)}catch(e){}setTimeout(function(){if(!window.__rtl)d.classList.remove("js")},4000)})(document.documentElement)</script>
+  <script src="../../assets/site.js" defer></script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Article","@id":"https://routerel.app/ghiduri/ospf/#article","headline":"OSPF explicat: configurare și depanare OSPFv2 (2026)","description":"OSPF single-area pe înțeles: router ID, vecini și stări, DR/BDR, cost, configurare cu network și ip ospf, comenzi show, depanare și exerciții rezolvate.","inLanguage":"ro","datePublished":"2026-11-09","dateModified":"2026-11-09","keywords":"OSPF, ce este OSPF, configurare OSPF Cisco, OSPF single area, DR BDR OSPF, router ID OSPF, cost OSPF, show ip ospf neighbor","author":{"@type":"Organization","name":"Routerel","url":"https://routerel.app/"},"publisher":{"@type":"Organization","name":"Routerel","logo":{"@type":"ImageObject","url":"https://routerel.app/assets/icon-512.png"}},"image":"https://routerel.app/assets/og-ro.png","mainEntityOfPage":"https://routerel.app/ghiduri/ospf/","isPartOf":{"@id":"https://routerel.app/#website"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Acasă","item":"https://routerel.app/"},{"@type":"ListItem","position":2,"name":"Ghiduri","item":"https://routerel.app/ghiduri/"},{"@type":"ListItem","position":3,"name":"OSPF explicat: configurare și depanare OSPFv2 (2026)","item":"https://routerel.app/ghiduri/ospf/"}]},{"@type":"FAQPage","@id":"https://routerel.app/ghiduri/ospf/#faq","inLanguage":"ro","mainEntity":[{"@type":"Question","name":"Ce este OSPF?","acceptedAnswer":{"@type":"Answer","text":"OSPF (Open Shortest Path First) este un protocol de rutare dinamică de tip link-state. Fiecare router află topologia întregii zone, o păstrează într-o bază de date (LSDB) și calculează singur cel mai scurt drum spre fiecare rețea cu algoritmul SPF (Dijkstra). Este standard deschis, deci merge între echipamente de la producători diferiți."}},{"@type":"Question","name":"Cum își alege OSPF router ID-ul?","acceptedAnswer":{"@type":"Answer","text":"În ordinea asta: valoarea dată cu comanda router-id; dacă lipsește, cea mai mare adresă IPv4 de pe o interfață loopback activă; dacă nu există loopback, cea mai mare adresă IPv4 de pe o interfață fizică activă. Un router ID nou se aplică abia după clear ip ospf process sau după repornire."}},{"@type":"Question","name":"Cum se aleg DR și BDR?","acceptedAnswer":{"@type":"Answer","text":"Pe fiecare segment multi-access (de exemplu Ethernet), câștigă routerul cu prioritatea OSPF cea mai mare (implicit 1, între 0 și 255). La egalitate câștigă router ID-ul cel mai mare. Prioritatea 0 scoate routerul din alegere. Alegerea nu e preemptivă: un router mai bun care apare mai târziu nu ia locul DR-ului existent."}},{"@type":"Question","name":"Care este distanța administrativă a OSPF?","acceptedAnswer":{"@type":"Answer","text":"110. Este mai mare decât la rutele statice (1) și la EIGRP intern (90), deci, pentru aceeași rețea, routerul preferă ruta statică sau pe cea EIGRP."}},{"@type":"Question","name":"De ce rămân unii vecini OSPF în starea 2WAY?","acceptedAnswer":{"@type":"Answer","text":"Pe un segment multi-access, routerele care nu sunt nici DR, nici BDR (DROTHER) se opresc între ele în starea 2-Way. E normal: ele formează adiacență completă (FULL) doar cu DR-ul și cu BDR-ul."}},{"@type":"Question","name":"De ce se schimbă reference bandwidth?","acceptedAnswer":{"@type":"Answer","text":"Costul OSPF este reference bandwidth împărțit la lățimea de bandă a interfeței. Implicit, reference bandwidth e 100 Mbps, deci FastEthernet, GigabitEthernet și 10 GigabitEthernet au toate costul 1 și OSPF nu le mai poate deosebi. Cu auto-cost reference-bandwidth mărești valoarea, pe toate routerele la fel."}}]}]}</script>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs><linearGradient id="rtl-play" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5b8cff"/><stop offset=".55" stop-color="#2f6bff"/><stop offset="1" stop-color="#ffb020"/></linearGradient></defs></svg>
+<a class="skip-link" href="#main">Sari la conținut</a>
+<header class="site-header">
+  <div class="container header-row">
+    <a class="brand" href="../../" aria-label="Routerel, acasă"><img src="../../assets/icon-96.webp" alt="" width="36" height="36"><span>Routerel</span></a>
+    <nav class="main-nav" aria-label="Principal"><ul><li><a href="../../#functii">Funcții</a></li><li><a href="../../#preturi">Prețuri</a></li><li><a href="../../ghiduri/" aria-current="page">Ghiduri</a></li><li><a href="../../articole/">Articole</a></li><li><a href="../../tools/">Tools</a></li><li><a href="../../#faq">FAQ</a></li></ul></nav>
+    <div class="header-actions">
+      <div class="lang-switch" role="group" aria-label="Limba"><span aria-current="true" lang="ro">RO</span><a href="../../en/guides/ospf-explained/" hreflang="en" lang="en" title="English">EN</a></div>
+      <button class="icon-btn theme-toggle" type="button" data-theme-toggle aria-label="Schimbă tema"><span class="i-moon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9z"/></svg></span><span class="i-sun"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg></span></button>
+      <a class="btn btn--sm header-cta" data-play data-soon-href="../../#preturi" href="../../#preturi"><span data-when="live">Încearcă gratuit</span><span data-when="soon">Vezi prețurile</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      <button class="icon-btn menu-btn" type="button" data-menu-btn aria-expanded="false" aria-controls="mobile-nav" aria-label="Meniu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+    </div>
+  </div>
+  <nav class="mobile-nav" id="mobile-nav" aria-label="Principal" hidden>
+    <div class="container"><ul><li><a href="../../#functii">Funcții</a></li><li><a href="../../#preturi">Prețuri</a></li><li><a href="../../ghiduri/" aria-current="page">Ghiduri</a></li><li><a href="../../articole/">Articole</a></li><li><a href="../../tools/">Tools</a></li><li><a href="../../#faq">FAQ</a></li></ul></div>
+  </nav>
+</header>
+<main id="main">
+  <div class="container section section--tight">
+    <article class="prose">
+      <nav class="crumbs" aria-label="Firimituri"><ol><li><a href="../../">Acasă</a></li><li><a href="../../ghiduri/">Ghiduri</a></li><li><span aria-current="page">OSPF explicat: configurare și depanare OSPFv2 (2026)</span></li></ol></nav>
+      <p class="eyebrow">Ghid CCNA</p>
+      <h1>OSPF explicat: configurare și depanare OSPFv2 single-area</h1>
+      <div class="article-meta">
+        <span class="avatar"><svg class="mascot" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><g class="m-breathe"><path d="M22 14l-5-9M42 14l5-9" stroke="#8a919c" stroke-width="3.4" stroke-linecap="round" fill="none"/><circle class="m-led m-led-l" cx="17" cy="5" r="3.6"/><circle class="m-led m-led-r" cx="47" cy="5" r="3.6"/><path class="m-body" d="M28 12q4-6 8 0"/><rect class="m-body" x="8" y="12" width="48" height="42" rx="18"/><rect class="m-belly" x="8" y="40" width="48" height="14" rx="7"/><circle cx="23" cy="31" r="5.4" fill="#fff"/><circle class="m-pupil" cx="24" cy="31.5" r="3" fill="#1a1d24"/><circle cx="41" cy="31" r="5.4" fill="#fff"/><circle class="m-pupil" cx="42" cy="31.5" r="3" fill="#1a1d24"/><path class="m-led" d="M29 37l3 3.5 3-3.5z"/><circle class="m-ok" cx="18" cy="47" r="2"/><circle class="m-led" cx="24" cy="47" r="2"/><rect x="31" y="45" width="6" height="4" rx="1" fill="#0d1a3a" opacity=".55"/><rect x="39" y="45" width="6" height="4" rx="1" fill="#0d1a3a" opacity=".55"/><rect x="47" y="45" width="5" height="4" rx="1" fill="#0d1a3a" opacity=".55"/><path class="m-leg" d="M20 54v4M44 54v4" stroke-width="3.4" stroke-linecap="round" fill="none"/></g></svg></span>
+        <span>Echipa Routerel</span><span aria-hidden="true">·</span>
+        <span>Actualizat: <time datetime="2026-11-09">9 noiembrie 2026</time></span><span aria-hidden="true">·</span>
+        <span>16 min de citit</span>
+      </div>
+      <p class="lead">OSPF e protocolul de rutare dinamică pe care îl configurezi cel mai des la CCNA. Ideea e simplă: routerele își spun ce legături au, fiecare desenează harta rețelei și alege singur drumul cel mai scurt. Detaliile (router ID, stări, DR/BDR, cost, tipuri de rețea) sunt cele care strică laboratoarele și apar la examen.</p>
+<p>Aici construiești de la zero o rețea OSPF cu patru routere: vecinătăți, alegerea DR/BDR, cost, două moduri de configurare, interfețe pasive, ruta implicită, comenzile <code>show</code> și problemele frecvente. La final ai exerciții cu răspunsuri.</p>
+<p>În cursurile CCNA v8 de la Networking Academy, OSPF e în <strong>CCNA 3 · CEN</strong>, în modulele 3 (OSPF: bazele) și 4 (OSPF: optimizare).</p>
+      <nav class="toc toc--fold" aria-labelledby="toc-title"><h2 id="toc-title">Cuprins</h2><button type="button" class="toc-toggle" data-toc-toggle aria-expanded="false" aria-controls="toc-list"><span class="toc-toggle-t">Cuprins</span> <span class="toc-toggle-n">14 secțiuni</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6"/></svg></button><ol id="toc-list"><li><a href="#ce-este-ospf-pe-scurt">Ce este OSPF, pe scurt</a><ol><li><a href="#cele-cinci-tipuri-de-pachete-ospf">Cele cinci tipuri de pachete OSPF</a></li></ol></li><li><a href="#topologia-din-ghid">Topologia din ghid</a></li><li><a href="#router-id">Router ID</a></li><li><a href="#vecinii-si-starile-adiacentei">Vecinii și stările adiacenței</a></li><li><a href="#dr-si-bdr-pe-retelele-multi-access">DR și BDR pe rețelele multi-access</a><ol><li><a href="#regulile-alegerii">Regulile alegerii</a></li><li><a href="#aplicat-pe-topologia-noastra">Aplicat pe topologia noastră</a></li></ol></li><li><a href="#tipuri-de-retea-broadcast-si-point-to-point">Tipuri de rețea: broadcast și point-to-point</a></li><li><a href="#costul-si-reference-bandwidth">Costul și reference bandwidth</a></li><li><a href="#configurarea-ospf">Configurarea OSPF</a><ol><li><a href="#varianta-1-comanda-network-cu-wildcard-pe-r1">Varianta 1: comanda network cu wildcard (pe R1)</a></li><li><a href="#varianta-2-ip-ospf-direct-pe-interfata-pe-r2">Varianta 2: ip ospf direct pe interfață (pe R2)</a></li><li><a href="#interfete-pasive">Interfețe pasive</a></li><li><a href="#propagarea-rutei-implicite-pe-r3">Propagarea rutei implicite (pe R3)</a></li></ol></li><li><a href="#verificarea">Verificarea</a><ol><li><a href="#show-ip-ospf-neighbor">show ip ospf neighbor</a></li><li><a href="#show-ip-route-ospf">show ip route ospf</a></li><li><a href="#show-ip-protocols">show ip protocols</a></li><li><a href="#show-ip-ospf-interface">show ip ospf interface</a></li></ol></li><li><a href="#depanare-probleme-frecvente">Depanare: probleme frecvente</a></li><li><a href="#o-nota-despre-ospfv3">O notă despre OSPFv3</a></li><li><a href="#exercitii">Exerciții</a></li><li><a href="#cum-il-inveti-cel-mai-repede">Cum îl înveți cel mai repede</a></li><li><a href="#intrebari-frecvente">Întrebări frecvente</a></li></ol></nav>
+<h2 id="ce-este-ospf-pe-scurt">Ce este OSPF, pe scurt</h2>
+<p><strong>OSPF</strong> (Open Shortest Path First) e un protocol de rutare <strong>link-state</strong>, standard deschis. Versiunea pentru IPv4 se numește <strong>OSPFv2</strong>; pentru IPv6 există OSPFv3.</p>
+<p>Ce face, în trei pași:</p>
+<ol>
+<li>Fiecare router descoperă <strong>vecinii</strong> de pe interfețele lui, cu pachete <strong>Hello</strong>.</li>
+<li>Vecinii își trimit descrieri ale legăturilor, numite <strong>LSA</strong> (Link-State Advertisement). Toate routerele din aceeași zonă ajung cu aceeași bază de date, <strong>LSDB</strong>.</li>
+<li>Fiecare router rulează algoritmul <strong>SPF</strong> (Dijkstra) pe LSDB și pune în tabela de rutare cel mai ieftin drum spre fiecare rețea.</li>
+</ol>
+<p>Câteva cifre de reținut:</p>
+<div class="table-scroll"><p class="table-hint" aria-hidden="true">glisează<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></p><div class="table-wrap" role="region" tabindex="0" aria-label="Tabel (se derulează pe orizontală)"><table>
+<thead>
+<tr>
+<th>Ce</th>
+<th>Valoare</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Distanța administrativă</td>
+<td>110</td>
+</tr>
+<tr>
+<td>Metrica</td>
+<td class="tw">costul (suma costurilor interfețelor de ieșire de pe drum)</td>
+</tr>
+<tr>
+<td>Transport</td>
+<td class="tw">direct peste IP, protocolul 89 (nu TCP, nu UDP)</td>
+</tr>
+<tr>
+<td class="tw">Adresa multicast pentru toate routerele OSPF</td>
+<td>224.0.0.5</td>
+</tr>
+<tr>
+<td>Adresa multicast pentru DR și BDR</td>
+<td>224.0.0.6</td>
+</tr>
+<tr>
+<td>Codul în tabela de rutare</td>
+<td><code>O</code> (și <code>O*E2</code> pentru ruta implicită primită)</td>
+</tr>
+</tbody></table></div></div>
+<p><strong>Zonele (areas).</strong> OSPF poate împărți rețeaua în zone, ca LSDB-ul să rămână mic. La CCNA lucrezi cu <strong>single-area</strong>: toate interfețele sunt în <strong>area 0</strong>, zona principală (backbone). Asta e și situația din ghid.</p>
+<h3 id="cele-cinci-tipuri-de-pachete-ospf">Cele cinci tipuri de pachete OSPF</h3>
+<div class="table-scroll"><p class="table-hint" aria-hidden="true">glisează<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></p><div class="table-wrap" role="region" tabindex="0" aria-label="Tabel (se derulează pe orizontală)"><table>
+<thead>
+<tr>
+<th>Pachet</th>
+<th>La ce folosește</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Hello</td>
+<td>descoperă vecinii și îi ține „în viață”</td>
+</tr>
+<tr>
+<td>DBD (Database Description)</td>
+<td class="tw">rezumatul LSDB-ului, trimis la sincronizare</td>
+</tr>
+<tr>
+<td>LSR (Link-State Request)</td>
+<td>„trimite-mi LSA-ul ăsta, nu îl am”</td>
+</tr>
+<tr>
+<td>LSU (Link-State Update)</td>
+<td class="tw">conține LSA-urile cerute sau o schimbare nouă</td>
+</tr>
+<tr>
+<td>LSAck</td>
+<td>confirmă primirea unui LSU</td>
+</tr>
+</tbody></table></div></div>
+<h2 id="topologia-din-ghid">Topologia din ghid</h2>
+<p>Toate exemplele folosesc aceeași rețea. R1, R2 și R3 sunt legate prin același switch (un segment Ethernet comun, deci <strong>multi-access</strong>). R3 are o legătură directă spre R4 și o ieșire spre furnizorul de internet.</p>
+<pre><code class="language-text">     LAN 192.168.10.0/24                 LAN 192.168.20.0/24
+            |                                    |
+        Gi0/0/1 .1                           Gi0/0/1 .1
+            R1                                   R2
+        Gi0/0/0 .1                           Gi0/0/0 .2
+            |                                    |
+   =========+============= SW1 ==================+=====  10.0.0.0/24
+                            |
+                        Gi0/0/0 .3
+                            R3 Gi0/0/2 .2 ------ ISP .1   (203.0.113.0/30)
+                        Gi0/0/1 .1
+                            |
+                     10.0.34.0/30
+                            |
+                        Gi0/0/0 .2
+                            R4
+                        Gi0/0/1 .1
+                            |
+                  LAN 192.168.40.0/24
+</code></pre>
+<div class="table-scroll"><p class="table-hint" aria-hidden="true">glisează<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></p><div class="table-wrap" role="region" tabindex="0" aria-label="Tabel (se derulează pe orizontală)"><table>
+<thead>
+<tr>
+<th>Router</th>
+<th>Router ID</th>
+<th>Rol în topologie</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>R1</td>
+<td>1.1.1.1</td>
+<td>LAN 192.168.10.0/24, segmentul comun</td>
+</tr>
+<tr>
+<td>R2</td>
+<td>2.2.2.2</td>
+<td>LAN 192.168.20.0/24, segmentul comun</td>
+</tr>
+<tr>
+<td>R3</td>
+<td>3.3.3.3</td>
+<td class="tw">segmentul comun, legătura spre R4, ieșirea spre ISP</td>
+</tr>
+<tr>
+<td>R4</td>
+<td>4.4.4.4</td>
+<td>legătura spre R3, LAN 192.168.40.0/24</td>
+</tr>
+</tbody></table></div></div>
+<h2 id="router-id">Router ID</h2>
+<p>Fiecare router OSPF are un <strong>router ID</strong> (RID): un număr de 32 de biți scris ca o adresă IPv4. Nu trebuie să fie o adresă reală de pe router, dar trebuie să fie <strong>unic în zonă</strong>. Îl vezi în tabela de vecini și în LSA-uri, iar la egalitate decide alegerea DR.</p>
+<p>Routerul își alege RID-ul în ordinea asta:</p>
+<ol>
+<li>valoarea configurată cu <code>router-id</code> (varianta recomandată);</li>
+<li>dacă lipsește, cea mai mare adresă IPv4 de pe o interfață <strong>loopback</strong> activă;</li>
+<li>dacă nu există loopback, cea mai mare adresă IPv4 de pe o interfață <strong>fizică</strong> activă.</li>
+</ol>
+<p>Interfața de la pașii 2 și 3 nu trebuie să ruleze OSPF; ajunge să fie up.</p>
+<p>Capcana: dacă schimbi RID-ul pe un router care rulează deja OSPF, noua valoare <strong>nu se aplică imediat</strong>. IOS te anunță și așteaptă să repornești procesul:</p>
+<pre><code class="language-text">R1(config)# router ospf 1
+R1(config-router)# router-id 1.1.1.1
+% OSPF: Reload or use &quot;clear ip ospf process&quot; command, for this to take effect
+R1(config-router)# end
+R1# clear ip ospf process
+Reset ALL OSPF processes? [no]: yes
+</code></pre>
+<p><code>clear ip ospf process</code> rupe pentru câteva secunde toate vecinătățile routerului, deci în producție îl folosești într-o fereastră de mentenanță.</p>
+<h2 id="vecinii-si-starile-adiacentei">Vecinii și stările adiacenței</h2>
+<p>Routerele trimit <strong>Hello</strong> la 224.0.0.5, implicit <strong>la 10 secunde</strong> pe Ethernet. Dacă nu aud nimic de la un vecin timp de <strong>40 de secunde</strong> (dead interval), îl declară căzut.</p>
+<p>Ca două routere să devină vecini, câteva câmpuri din Hello trebuie să <strong>coincidă</strong>:</p>
+<div class="table-scroll"><p class="table-hint" aria-hidden="true">glisează<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></p><div class="table-wrap" role="region" tabindex="0" aria-label="Tabel (se derulează pe orizontală)"><table>
+<thead>
+<tr>
+<th>Trebuie să fie la fel</th>
+<th>Observații</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Area ID</td>
+<td>ambele interfețe în aceeași zonă</td>
+</tr>
+<tr>
+<td>Hello interval și dead interval</td>
+<td class="tw">implicit 10 și 40 s pe Ethernet și pe legături seriale</td>
+</tr>
+<tr>
+<td>Subrețeaua și masca</td>
+<td class="tw">verificată pe rețele broadcast, ignorată pe point-to-point</td>
+</tr>
+<tr>
+<td>Autentificarea</td>
+<td class="tw">dacă e configurată (nu intră în materia CCNA)</td>
+</tr>
+<tr>
+<td>Tipul zonei (flag-ul stub)</td>
+<td>la single-area nu te afectează</td>
+</tr>
+</tbody></table></div></div>
+<p>În plus, <strong>router ID-urile trebuie să fie diferite</strong>, iar <strong>MTU-ul</strong> interfețelor trebuie să fie la fel (se verifică puțin mai târziu, în pachetele DBD).</p>
+<p>Drumul până la adiacența completă trece prin șapte stări:</p>
+<div class="table-scroll"><p class="table-hint" aria-hidden="true">glisează<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></p><div class="table-wrap" role="region" tabindex="0" aria-label="Tabel (se derulează pe orizontală)"><table>
+<thead>
+<tr>
+<th>Stare</th>
+<th>Ce se întâmplă</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Down</td>
+<td>nu s-a primit niciun Hello de la vecin</td>
+</tr>
+<tr>
+<td>Init</td>
+<td class="tw">am primit Hello de la vecin, dar el încă nu mă are în lista lui</td>
+</tr>
+<tr>
+<td>2-Way</td>
+<td class="tw">fiecare se vede în Hello-ul celuilalt; comunicarea e bidirecțională. Aici se aleg DR și BDR</td>
+</tr>
+<tr>
+<td>ExStart</td>
+<td class="tw">vecinii stabilesc cine începe schimbul (master/slave, câștigă RID-ul mai mare)</td>
+</tr>
+<tr>
+<td>Exchange</td>
+<td class="tw">își trimit rezumatul LSDB-ului în pachete DBD</td>
+</tr>
+<tr>
+<td>Loading</td>
+<td class="tw">cer cu LSR ce le lipsește și primesc cu LSU</td>
+</tr>
+<tr>
+<td>Full</td>
+<td class="tw">LSDB-urile sunt identice; adiacența e completă</td>
+</tr>
+</tbody></table></div></div>
+<p>Starea dorită e <strong>FULL</strong>. Singura excepție normală e <strong>2-Way</strong> între două routere DROTHER de pe același segment multi-access (vezi secțiunea următoare).</p>
+<h2 id="dr-si-bdr-pe-retelele-multi-access">DR și BDR pe rețelele multi-access</h2>
+<p>Dacă pe un switch cu multe routere fiecare ar forma adiacență completă cu fiecare, ai avea n(n−1)/2 adiacențe: 10 pentru 5 routere, fiecare cu propriul trafic de sincronizare.</p>
+<p>OSPF rezolvă asta cu un <strong>DR</strong> (Designated Router) și un <strong>BDR</strong> (Backup DR) pe fiecare segment multi-access:</p>
+<ul>
+<li>toate routerele formează FULL doar cu DR-ul și cu BDR-ul;</li>
+<li>routerele rămase, numite <strong>DROTHER</strong>, stau în 2-Way între ele;</li>
+<li>un DROTHER trimite schimbările la <strong>224.0.0.6</strong> (DR și BDR), iar DR-ul le retrimite tuturor la <strong>224.0.0.5</strong>;</li>
+<li>dacă DR-ul cade, BDR-ul devine DR și se alege un BDR nou.</li>
+</ul>
+<p>Cu 5 routere ai 7 adiacențe complete în loc de 10, iar diferența crește cu fiecare router adăugat.</p>
+<h3 id="regulile-alegerii">Regulile alegerii</h3>
+<ol>
+<li>Câștigă <strong>prioritatea OSPF</strong> cea mai mare de pe interfață (0–255, implicit <strong>1</strong>).</li>
+<li>La egalitate, câștigă <strong>router ID-ul</strong> cel mai mare.</li>
+<li>Prioritatea <strong>0</strong> înseamnă că routerul nu poate fi niciodată DR sau BDR.</li>
+<li>Alegerea <strong>nu e preemptivă</strong>. Un router cu prioritate mai mare care pornește mai târziu nu ia locul DR-ului existent.</li>
+</ol>
+<p>Alegerea se face <strong>pe segment</strong>, nu pe router: același router poate fi DR pe o interfață și DROTHER pe alta. Când interfața pornește, routerul așteaptă un timp egal cu dead interval-ul (wait timer, 40 s) ca să afle dacă există deja un DR.</p>
+<h3 id="aplicat-pe-topologia-noastra">Aplicat pe topologia noastră</h3>
+<p>Cu prioritățile implicite, pe 10.0.0.0/24 toate routerele au prioritatea 1, deci decide RID-ul: dacă pornesc împreună, <strong>R3</strong> (3.3.3.3) devine DR, iar <strong>R2</strong> (2.2.2.2) BDR.</p>
+<p>Vrem ca R1, cel mai puțin încărcat, să fie DR. Îi creștem prioritatea pe interfața spre segment:</p>
+<pre><code class="language-text">R1(config)# interface GigabitEthernet0/0/0
+R1(config-if)# ip ospf priority 200
+</code></pre>
+<p>Pentru că alegerea nu e preemptivă, nu se întâmplă nimic până nu resetezi procesul OSPF pe routerele de pe segment, cam în același timp (<code>clear ip ospf process</code>). După reset, R1 devine DR (prioritate 200), iar R3 devine BDR (prioritate 1 ca R2, dar RID mai mare).</p>
+<p>Un router care nu trebuie să ajungă niciodată DR sau BDR primește <code>ip ospf priority 0</code> pe interfață.</p>
+<h2 id="tipuri-de-retea-broadcast-si-point-to-point">Tipuri de rețea: broadcast și point-to-point</h2>
+<p>OSPF se comportă diferit în funcție de <strong>tipul de rețea</strong> al interfeței:</p>
+<div class="table-scroll"><p class="table-hint" aria-hidden="true">glisează<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></p><div class="table-wrap" role="region" tabindex="0" aria-label="Tabel (se derulează pe orizontală)"><table>
+<thead>
+<tr>
+<th>Tip</th>
+<th>Unde îl întâlnești</th>
+<th>DR/BDR</th>
+<th>Hello / Dead implicit</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Broadcast</td>
+<td>Ethernet (implicit)</td>
+<td>da</td>
+<td>10 / 40 s</td>
+</tr>
+<tr>
+<td>Point-to-point</td>
+<td class="tw">serial cu HDLC sau PPP (implicit), Ethernet setat manual</td>
+<td>nu</td>
+<td>10 / 40 s</td>
+</tr>
+</tbody></table></div></div>
+<p>Legătura R3–R4 are doar două routere, dar fiind Ethernet e implicit broadcast: alegere DR/BDR inutilă și 40 de secunde de așteptare la pornire. O declari point-to-point <strong>la ambele capete</strong>:</p>
+<pre><code class="language-text">R3(config)# interface GigabitEthernet0/0/1
+R3(config-if)# ip ospf network point-to-point
+
+R4(config)# interface GigabitEthernet0/0/0
+R4(config-if)# ip ospf network point-to-point
+</code></pre>
+<p>Pe point-to-point nu există DR sau BDR, vecinii merg spre FULL fără alegere și fără wait timer, iar în tabela de vecini starea apare ca <code>FULL/  -</code>.</p>
+<p>Nu lăsa un capăt broadcast și celălalt point-to-point. Timerele sunt aceleași (10/40), deci vecinătatea se poate forma, dar cele două routere descriu legătura diferit în LSDB, iar rutele prin ea lipsesc din tabelă.</p>
+<h2 id="costul-si-reference-bandwidth">Costul și reference bandwidth</h2>
+<p>Metrica OSPF e <strong>costul</strong>. Costul unei interfețe se calculează așa:</p>
+<pre><code class="language-text">cost = reference bandwidth / lățimea de bandă a interfeței
+</code></pre>
+<p>Rezultatul se rotunjește în jos, iar costul minim e 1. <strong>Reference bandwidth implicit e 100 Mbps.</strong> Costul unui drum e suma costurilor interfețelor <strong>de ieșire</strong> de pe drum, până la rețeaua destinație inclusiv.</p>
+<div class="table-scroll"><p class="table-hint" aria-hidden="true">glisează<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></p><div class="table-wrap" role="region" tabindex="0" aria-label="Tabel (se derulează pe orizontală)"><table>
+<thead>
+<tr>
+<th>Interfață</th>
+<th>Lățime de bandă</th>
+<th>Cost cu referința implicită (100 Mbps)</th>
+<th>Cost cu referința 10000 Mbps</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Serial T1</td>
+<td>1,544 Mbps</td>
+<td>64</td>
+<td>6476</td>
+</tr>
+<tr>
+<td>Ethernet</td>
+<td>10 Mbps</td>
+<td>10</td>
+<td>1000</td>
+</tr>
+<tr>
+<td>FastEthernet</td>
+<td>100 Mbps</td>
+<td>1</td>
+<td>100</td>
+</tr>
+<tr>
+<td>GigabitEthernet</td>
+<td>1 Gbps</td>
+<td>1</td>
+<td>10</td>
+</tr>
+<tr>
+<td>10 GigabitEthernet</td>
+<td>10 Gbps</td>
+<td>1</td>
+<td>1</td>
+</tr>
+</tbody></table></div></div>
+<p>Problema se vede în tabel: cu referința implicită, o legătură de 100 Mbps și una de 10 Gbps costă la fel. De aceea, în rețelele moderne mărești referința, <strong>pe toate routerele</strong> (valoarea e în Mbps):</p>
+<pre><code class="language-text">R1(config)# router ospf 1
+R1(config-router)# auto-cost reference-bandwidth 10000
+% OSPF: Reference bandwidth is changed.
+        Please ensure reference bandwidth is consistent across all routers.
+</code></pre>
+<p>Un router cu altă referință calculează costurile pe altă scară, iar drumurile alese devin greu de explicat.</p>
+<p>Alte două moduri de a influența costul, pe interfață:</p>
+<ul>
+<li><code>ip ospf cost 50</code> fixează direct costul (are prioritate față de calcul);</li>
+<li><code>bandwidth 50000</code> (în kbps) schimbă valoarea folosită în calcul. Nu schimbă viteza reală a interfeței, doar cifra pe care o folosesc protocoalele de rutare.</li>
+</ul>
+<p>Exemplu în topologia noastră, cu referința implicită (toate interfețele sunt Gigabit, deci cost 1): de pe R1 spre 192.168.40.0/24 ieși pe Gi0/0/0 a lui R1 (1), Gi0/0/1 a lui R3 (1) și Gi0/0/1 a lui R4 (1). Costul total e <strong>3</strong>. Cu referința 10000, ar fi 30.</p>
+<p>Dacă există mai multe drumuri cu același cost, OSPF le pune pe toate în tabelă și împarte traficul între ele (implicit până la 4 drumuri).</p>
+<h2 id="configurarea-ospf">Configurarea OSPF</h2>
+<p>Configurarea are două părți: pornești procesul OSPF și îi spui pe ce interfețe să lucreze. Pentru partea a doua ai două variante.</p>
+<h3 id="varianta-1-comanda-network-cu-wildcard-pe-r1">Varianta 1: comanda <code>network</code> cu wildcard (pe R1)</h3>
+<pre><code class="language-text">R1(config)# router ospf 1
+R1(config-router)# router-id 1.1.1.1
+R1(config-router)# network 10.0.0.0 0.0.0.255 area 0
+R1(config-router)# network 192.168.10.0 0.0.0.255 area 0
+R1(config-router)# passive-interface GigabitEthernet0/0/1
+</code></pre>
+<p>De reținut:</p>
+<ul>
+<li><strong><code>1</code> din <code>router ospf 1</code> e ID-ul procesului</strong>, cu semnificație doar locală (1–65535). Vecinii pot avea alt număr de proces și tot devin vecini. Ce trebuie să coincidă e <strong>zona</strong>.</li>
+<li>Comanda <code>network</code> <strong>nu anunță</strong> o rețea direct. Ea spune: „pornește OSPF pe orice interfață a cărei adresă se potrivește cu acest interval”. Rețeaua anunțată e apoi cea a interfeței, cu masca ei.</li>
+<li>Al doilea număr e o <strong>wildcard mask</strong>, inversul măștii: scazi fiecare octet al măștii din 255. Pentru /24 e <code>0.0.0.255</code>, pentru /30 e <code>0.0.0.3</code>, pentru /20 e <code>0.0.15.255</code>.</li>
+</ul>
+<p>Poți fi și mai precis, cu adresa interfeței și wildcard <code>0.0.0.0</code>. Așa e configurat R4:</p>
+<pre><code class="language-text">R4(config)# router ospf 1
+R4(config-router)# router-id 4.4.4.4
+R4(config-router)# network 10.0.34.2 0.0.0.0 area 0
+R4(config-router)# network 192.168.40.1 0.0.0.0 area 0
+R4(config-router)# passive-interface GigabitEthernet0/0/1
+</code></pre>
+<p>Wildcard-ul <code>0.0.0.0</code> se potrivește cu o singură adresă, deci pornește OSPF exact pe interfața care o are. Dacă te încurci la wildcard-uri, verifică-le cu <a href="../../tools/calculator-subnetting/">calculatorul de subnetting</a> sau cu <a href="../../tools/convertor-binar/">convertorul binar</a>.</p>
+<h3 id="varianta-2-ip-ospf-direct-pe-interfata-pe-r2">Varianta 2: <code>ip ospf</code> direct pe interfață (pe R2)</h3>
+<pre><code class="language-text">R2(config)# router ospf 1
+R2(config-router)# router-id 2.2.2.2
+R2(config-router)# passive-interface GigabitEthernet0/0/1
+R2(config-router)# exit
+R2(config)# interface GigabitEthernet0/0/0
+R2(config-if)# ip ospf 1 area 0
+R2(config-if)# exit
+R2(config)# interface GigabitEthernet0/0/1
+R2(config-if)# ip ospf 1 area 0
+</code></pre>
+<p>Aici nu ai wildcard-uri de calculat: interfața pe care scrii comanda intră în OSPF, în zona dată. E mai greu de greșit și se citește mai ușor în <code>show running-config</code>. Dacă o interfață e prinsă și de o comandă <code>network</code>, și de <code>ip ospf ... area</code>, câștigă configurația de pe interfață.</p>
+<h3 id="interfete-pasive">Interfețe pasive</h3>
+<p>Spre un LAN cu PC-uri nu există alt router, deci Hello-urile n-au rost acolo. Mai rău, un dispozitiv străin din LAN ar putea deveni vecin și ar putea injecta rute false.</p>
+<p><code>passive-interface</code> rezolvă asta: <strong>oprește Hello-urile</strong> pe interfață (deci nu se formează vecini acolo), dar <strong>rețeaua interfeței e anunțată în continuare</strong>. Pe R1, 192.168.10.0/24 ajunge la ceilalți, deși Gi0/0/1 e pasivă.</p>
+<p>Pe un router cu multe LAN-uri e mai comod invers: totul pasiv, apoi activezi doar interfețele spre alte routere.</p>
+<pre><code class="language-text">R3(config)# router ospf 1
+R3(config-router)# passive-interface default
+R3(config-router)# no passive-interface GigabitEthernet0/0/0
+R3(config-router)# no passive-interface GigabitEthernet0/0/1
+</code></pre>
+<p>Atenție: dacă pui <code>passive-interface</code> pe o interfață spre un router vecin, vecinătatea cade.</p>
+<h3 id="propagarea-rutei-implicite-pe-r3">Propagarea rutei implicite (pe R3)</h3>
+<p>R3 e singurul router cu ieșire spre internet. Îi dai o rută statică implicită spre ISP și îi spui să o anunțe în OSPF:</p>
+<pre><code class="language-text">R3(config)# ip route 0.0.0.0 0.0.0.0 203.0.113.1
+R3(config)# router ospf 1
+R3(config-router)# router-id 3.3.3.3
+R3(config-router)# network 10.0.0.0 0.0.0.255 area 0
+R3(config-router)# network 10.0.34.0 0.0.0.3 area 0
+R3(config-router)# default-information originate
+</code></pre>
+<p>Ce trebuie să știi:</p>
+<ul>
+<li><code>default-information originate</code> anunță ruta implicită <strong>doar dacă R3 o are în tabela de rutare</strong>. Cu <code>default-information originate always</code> o anunță oricum, dar atunci ceilalți pot trimite trafic spre un R3 care nu are pe unde să-l scoată.</li>
+<li>Rețeaua 203.0.113.0/30 <strong>nu</strong> e pusă în OSPF. Nu vrei să trimiți Hello spre furnizor.</li>
+<li>Pe celelalte routere ruta apare ca <code>O*E2 0.0.0.0/0 [110/1]</code>: E2 înseamnă rută externă de tip 2, cu metrica 1 care nu crește pe drum. R3 devine <strong>ASBR</strong> (router de graniță spre o rețea din afara OSPF).</li>
+</ul>
+<h2 id="verificarea">Verificarea</h2>
+<div class="table-scroll"><p class="table-hint" aria-hidden="true">glisează<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></p><div class="table-wrap" role="region" tabindex="0" aria-label="Tabel (se derulează pe orizontală)"><table>
+<thead>
+<tr>
+<th>Comandă</th>
+<th>Ce afli</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code><span class="nw">show</span> <span class="nw">ip</span> <span class="nw">ospf</span> <span class="nw">neighbor</span></code></td>
+<td class="tw">vecinii, prioritatea, starea (FULL, 2WAY...), rolul (DR, BDR, DROTHER), interfața</td>
+</tr>
+<tr>
+<td><code><span class="nw">show</span> <span class="nw">ip</span> <span class="nw">route</span> <span class="nw">ospf</span></code></td>
+<td class="tw">doar rutele învățate prin OSPF, cu costul și next hop-ul</td>
+</tr>
+<tr>
+<td><code><span class="nw">show</span> <span class="nw">ip</span> <span class="nw">protocols</span></code></td>
+<td class="tw">ID-ul procesului, router ID-ul, rețelele din comenzile <code>network</code>, interfețele pasive, sursele de rute, distanța 110</td>
+</tr>
+<tr>
+<td><code><span class="nw">show</span> <span class="nw">ip</span> <span class="nw">ospf</span> <span class="nw">interface</span> <span class="nw">Gi0/0/0</span></code></td>
+<td class="tw">zona, tipul de rețea, costul, starea (DR, BDR...), prioritatea, timerele, vecinii</td>
+</tr>
+<tr>
+<td><code><span class="nw">show</span> <span class="nw">ip</span> <span class="nw">ospf</span> <span class="nw">interface</span> <span class="nw">brief</span></code></td>
+<td class="tw">toate interfețele OSPF pe câte un rând: zona, costul, starea, numărul de vecini</td>
+</tr>
+<tr>
+<td><code><span class="nw">show</span> <span class="nw">ip</span> <span class="nw">ospf</span> <span class="nw">database</span></code></td>
+<td>LSA-urile din LSDB</td>
+</tr>
+</tbody></table></div></div>
+<h3 id="show-ip-ospf-neighbor"><code>show ip ospf neighbor</code></h3>
+<p>Pe R1, după ce a devenit DR:</p>
+<pre><code class="language-text">R1# show ip ospf neighbor
+
+Neighbor ID     Pri   State           Dead Time   Address         Interface
+2.2.2.2           1   FULL/DROTHER    00:00:34    10.0.0.2        GigabitEthernet0/0/0
+3.3.3.3           1   FULL/BDR        00:00:38    10.0.0.3        GigabitEthernet0/0/0
+</code></pre>
+<p>Pe R3, care are vecini și pe segmentul comun, și pe legătura point-to-point:</p>
+<pre><code class="language-text">R3# show ip ospf neighbor
+
+Neighbor ID     Pri   State           Dead Time   Address         Interface
+4.4.4.4           0   FULL/  -        00:00:36    10.0.34.2       GigabitEthernet0/0/1
+1.1.1.1         200   FULL/DR         00:00:31    10.0.0.1        GigabitEthernet0/0/0
+2.2.2.2           1   FULL/DROTHER    00:00:39    10.0.0.2        GigabitEthernet0/0/0
+</code></pre>
+<p>Rolul din coloana State e al <strong>vecinului</strong>, nu al routerului pe care rulezi comanda. Dead Time scade de la 40 și revine la 40 la fiecare Hello primit.</p>
+<h3 id="show-ip-route-ospf"><code>show ip route ospf</code></h3>
+<p>Pe R1 (am scos legenda de coduri de la început):</p>
+<pre><code class="language-text">R1# show ip route ospf
+
+Gateway of last resort is 10.0.0.3 to network 0.0.0.0
+
+O*E2  0.0.0.0/0 [110/1] via 10.0.0.3, 00:12:40, GigabitEthernet0/0/0
+      10.0.0.0/8 is variably subnetted, 3 subnets, 3 masks
+O        10.0.34.0/30 [110/2] via 10.0.0.3, 00:12:40, GigabitEthernet0/0/0
+O     192.168.20.0/24 [110/2] via 10.0.0.2, 00:12:40, GigabitEthernet0/0/0
+O     192.168.40.0/24 [110/3] via 10.0.0.3, 00:12:40, GigabitEthernet0/0/0
+</code></pre>
+<p>În <code>[110/3]</code>, 110 e distanța administrativă și 3 e costul calculat mai sus. Observă că spre 192.168.20.0/24 next hop-ul e direct R2 (10.0.0.2), chiar dacă DR-ul e R1: DR-ul ajută doar la sincronizarea LSDB-ului, traficul nu trece prin el.</p>
+<h3 id="show-ip-protocols"><code>show ip protocols</code></h3>
+<pre><code class="language-text">R1# show ip protocols
+*** IP Routing is NSF aware ***
+
+Routing Protocol is &quot;ospf 1&quot;
+  Outgoing update filter list for all interfaces is not set
+  Incoming update filter list for all interfaces is not set
+  Router ID 1.1.1.1
+  Number of areas in this router is 1. 1 normal 0 stub 0 nssa
+  Maximum path: 4
+  Routing for Networks:
+    10.0.0.0 0.0.0.255 area 0
+    192.168.10.0 0.0.0.255 area 0
+  Passive Interface(s):
+    GigabitEthernet0/0/1
+  Routing Information Sources:
+    Gateway         Distance      Last Update
+    2.2.2.2              110      00:12:41
+    3.3.3.3              110      00:12:41
+    4.4.4.4              110      00:12:41
+  Distance: (default is 110)
+</code></pre>
+<p>Pe R2, unde ai folosit <code>ip ospf 1 area 0</code>, lista de sub „Routing for Networks” e goală, iar interfețele apar într-o secțiune separată, „Routing on Interfaces Configured Explicitly (Area 0)”.</p>
+<h3 id="show-ip-ospf-interface"><code>show ip ospf interface</code></h3>
+<pre><code class="language-text">R1# show ip ospf interface GigabitEthernet0/0/0
+GigabitEthernet0/0/0 is up, line protocol is up
+  Internet Address 10.0.0.1/24, Area 0, Attached via Network Statement
+  Process ID 1, Router ID 1.1.1.1, Network Type BROADCAST, Cost: 1
+  Transmit Delay is 1 sec, State DR, Priority 200
+  Designated Router (ID) 1.1.1.1, Interface address 10.0.0.1
+  Backup Designated router (ID) 3.3.3.3, Interface address 10.0.0.3
+  Timer intervals configured, Hello 10, Dead 40, Wait 40, Retransmit 5
+    Hello due in 00:00:06
+  Neighbor Count is 2, Adjacent neighbor count is 2
+    Adjacent with neighbor 2.2.2.2
+    Adjacent with neighbor 3.3.3.3  (Backup Designated Router)
+</code></pre>
+<p>(Ieșirea reală are câteva rânduri în plus.) E cea mai utilă comandă la depanare: zona, tipul de rețea, costul, timerele și DR-ul, toate într-un loc.</p>
+<h2 id="depanare-probleme-frecvente">Depanare: probleme frecvente</h2>
+<p>Verifică de jos în sus: interfețele sunt up/up și vecinul răspunde la <code>ping</code>; OSPF rulează pe interfața și în zona corectă (<code>show ip ospf interface</code>); vecinul apare și e FULL (<code>show ip ospf neighbor</code>); rutele ajung în tabelă (<code>show ip route ospf</code>).</p>
+<div class="table-scroll"><p class="table-hint" aria-hidden="true">glisează<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></p><div class="table-wrap" role="region" tabindex="0" aria-label="Tabel (se derulează pe orizontală)"><table>
+<thead>
+<tr>
+<th>Simptom</th>
+<th>Cauza probabilă</th>
+<th>Cum verifici și repari</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Vecinul nu apare deloc</td>
+<td>zone diferite pe cele două capete</td>
+<td><code><span class="nw">show</span> <span class="nw">ip</span> <span class="nw">ospf</span> <span class="nw">interface</span></code> pe ambele → aceeași zonă în <code>network</code> sau <code><span class="nw">ip</span> <span class="nw">ospf</span> <span class="nw">...</span> <span class="nw">area</span></code></td>
+</tr>
+<tr>
+<td>Vecinul nu apare deloc</td>
+<td>hello sau dead interval diferit</td>
+<td class="tw"><code><span class="nw">show</span> <span class="nw">ip</span> <span class="nw">ospf</span> <span class="nw">interface</span></code> (rândul Timer intervals) → aceleași valori sau <code><span class="nw">no</span> <span class="nw">ip</span> <span class="nw">ospf</span> <span class="nw">hello-interval</span></code> și <code><span class="nw">no</span> <span class="nw">ip</span> <span class="nw">ospf</span> <span class="nw">dead-interval</span></code></td>
+</tr>
+<tr>
+<td>Vecinul nu apare deloc</td>
+<td class="tw">adrese din subrețele diferite sau mască diferită pe un segment broadcast</td>
+<td><code><span class="nw">show</span> <span class="nw">ip</span> <span class="nw">interface</span> <span class="nw">brief</span></code>, <code><span class="nw">show</span> <span class="nw">running-config</span> <span class="nw">interface</span></code> → corectezi adresa sau masca</td>
+</tr>
+<tr>
+<td>Vecinul nu apare deloc</td>
+<td>interfața e pasivă</td>
+<td><code><span class="nw">show</span> <span class="nw">ip</span> <span class="nw">protocols</span></code> (Passive Interface(s)) → <code><span class="nw">no</span> <span class="nw">passive-interface</span></code></td>
+</tr>
+<tr>
+<td>Vecinul nu apare deloc</td>
+<td class="tw">comanda <code>network</code> nu prinde interfața (wildcard greșit)</td>
+<td><code><span class="nw">show</span> <span class="nw">ip</span> <span class="nw">ospf</span> <span class="nw">interface</span> <span class="nw">brief</span></code> (interfața lipsește) → corectezi <code>network</code></td>
+</tr>
+<tr>
+<td>Vecini blocați în EXSTART sau EXCHANGE</td>
+<td>MTU diferit pe cele două interfețe</td>
+<td><code><span class="nw">show</span> <span class="nw">interfaces</span></code> (MTU) → același <code><span class="nw">ip</span> <span class="nw">mtu</span></code> pe ambele capete</td>
+</tr>
+<tr>
+<td class="tw">Nu se formează adiacența, mesaje despre router ID duplicat (<code>%OSPF-4-DUP_RTRID_NBR</code>)</td>
+<td>doi vecini cu același router ID</td>
+<td><code><span class="nw">show</span> <span class="nw">ip</span> <span class="nw">ospf</span></code> sau <code><span class="nw">show</span> <span class="nw">ip</span> <span class="nw">protocols</span></code> → <code>router-id</code> unic, apoi <code><span class="nw">clear</span> <span class="nw">ip</span> <span class="nw">ospf</span> <span class="nw">process</span></code></td>
+</tr>
+<tr>
+<td class="tw">Toți vecinii de pe un segment în 2WAY, niciun DR</td>
+<td>toate routerele au prioritatea 0</td>
+<td class="tw"><code><span class="nw">show</span> <span class="nw">ip</span> <span class="nw">ospf</span> <span class="nw">interface</span></code> → cel puțin un router cu prioritate mai mare de 0</td>
+</tr>
+<tr>
+<td class="tw">Vecinii sunt FULL, dar rutele prin legătură lipsesc</td>
+<td class="tw">un capăt broadcast, celălalt point-to-point</td>
+<td class="tw"><code><span class="nw">show</span> <span class="nw">ip</span> <span class="nw">ospf</span> <span class="nw">interface</span></code> (Network Type) → același tip la ambele capete</td>
+</tr>
+<tr>
+<td class="tw">Ruta implicită nu apare pe celelalte routere</td>
+<td class="tw">lipsește ruta statică pe routerul de margine sau <code><span class="nw">default-information</span> <span class="nw">originate</span></code></td>
+<td><code><span class="nw">show</span> <span class="nw">ip</span> <span class="nw">route</span></code> pe R3 → <code><span class="nw">ip</span> <span class="nw">route</span> <span class="nw">0.0.0.0</span> <span class="nw">0.0.0.0</span> <span class="nw">...</span></code> și <code><span class="nw">default-information</span> <span class="nw">originate</span></code></td>
+</tr>
+</tbody></table></div></div>
+<p>Dacă MTU-ul unui capăt nu poate fi schimbat, <code>ip ospf mtu-ignore</code> pe interfață sare peste verificare; e un ocoliș, soluția curată e MTU egal. Un RID duplicat între routere care nu sunt vecini direcți se vede altfel: rute care apar și dispar.</p>
+<h2 id="o-nota-despre-ospfv3">O notă despre OSPFv3</h2>
+<p>Pentru IPv6 există <strong>OSPFv3</strong>, cu aceeași logică (vecini, DR/BDR, cost, area 0), configurat pe interfață, fără <code>network</code>:</p>
+<pre><code class="language-text">R1(config)# ipv6 unicast-routing
+R1(config)# ipv6 router ospf 1
+R1(config-rtr)# router-id 1.1.1.1
+R1(config-rtr)# exit
+R1(config)# interface GigabitEthernet0/0/0
+R1(config-if)# ipv6 ospf 1 area 0
+</code></pre>
+<p>RID-ul rămâne pe 32 de biți; pe un router fără nicio adresă IPv4 îl configurezi manual, altfel procesul nu pornește. Vecinii comunică prin adresele link-local (vezi <a href="../adrese-ipv6/">ghidul IPv6</a>). OSPFv3 apare explicit în noua versiune a examenului, detaliată în articolul despre <a href="../../articole/ccna-v2-2027/">CCNA v2.0 din 2027</a>.</p>
+<h2 id="exercitii">Exerciții</h2>
+<ol>
+<li>Ce comandă <code>network</code> pune în area 0 toate interfețele din rețeaua 172.16.32.0/20?</li>
+<li>Patru routere sunt pe același switch și pornesc în același timp. RA: prioritate 1, RID 4.4.4.4. RB: prioritate 10, RID 1.1.1.1. RC: prioritate 1, RID 9.9.9.9. RD: prioritate 0, RID 99.99.99.99. Cine e DR, cine e BDR și în ce stare sunt RA și RD unul față de celălalt?</li>
+<li>Toate routerele au <code>auto-cost reference-bandwidth 1000</code>. Un pachet pleacă de pe R1 pe o interfață FastEthernet, apoi de pe R2 pe o interfață GigabitEthernet, iar rețeaua destinație e conectată la R3 tot pe o interfață GigabitEthernet. Ce cost are ruta în tabela lui R1?</li>
+<li>Pe R2, <code>show ip ospf neighbor</code> nu afișează nimic. Pe R1, <code>show ip ospf interface</code> arată „Hello 10, Dead 40”, iar pe R2 „Hello 5, Dead 20”. Ce s-a întâmplat și cum repari pe R2?</li>
+<li>Un router nu are <code>router-id</code>. Are Loopback0 cu 10.255.255.1 și Gi0/0/0 cu 192.168.50.1, ambele up. Ce RID alege? Ce se întâmplă dacă adaugi apoi <code>router-id 7.7.7.7</code>?</li>
+</ol>
+<details class="reveal-answer">
+<summary><strong>Răspunsuri</strong></summary><p><strong>1.</strong> Masca /20 este 255.255.240.0, deci wildcard-ul e 0.0.15.255:</p>
+<pre><code class="language-text">R1(config-router)# network 172.16.32.0 0.0.15.255 area 0
+</code></pre>
+<p><strong>2.</strong> <strong>RB</strong> e DR, pentru că are prioritatea cea mai mare (10). Pentru BDR rămân RA și RC, ambele cu prioritatea 1, iar la egalitate câștigă RID-ul mai mare: <strong>RC</strong> (9.9.9.9). RD are prioritatea 0, deci nu participă, deși are cel mai mare RID. RA și RD sunt amândoi DROTHER, deci între ei rămân în <strong>2WAY</strong>.</p>
+<p><strong>3.</strong> Cu referința 1000 Mbps: FastEthernet = 1000/100 = 10, GigabitEthernet = 1000/1000 = 1. Costul e 10 + 1 + 1 = <strong>12</strong>. Se adună interfețele de ieșire de pe drum, inclusiv cea a lui R3 spre rețeaua destinație.</p>
+<p><strong>4.</strong> Cineva a schimbat hello interval-ul pe R2 la 5 secunde; dead interval-ul s-a ajustat automat la 20. Timerele trebuie să coincidă, deci R1 și R2 ignoră Hello-urile unul altuia. Pe interfața lui R2:</p>
+<pre><code class="language-text">R2(config-if)# no ip ospf hello-interval
+R2(config-if)# no ip ospf dead-interval
+</code></pre>
+<p><strong>5.</strong> Alege <strong>10.255.255.1</strong>, adresa de pe loopback. Loopback-ul are prioritate față de interfețele fizice, chiar dacă adresa lui e mai mică. După <code>router-id 7.7.7.7</code>, IOS afișează un mesaj că valoarea se aplică după reload sau <code>clear ip ospf process</code>. Până atunci, RID-ul rămâne 10.255.255.1.</p>
+</details><h2 id="cum-il-inveti-cel-mai-repede">Cum îl înveți cel mai repede</h2>
+<ul>
+<li><strong>Construiește topologia din ghid</strong> într-un simulator și urmărește stările cu <code>show ip ospf neighbor</code> în timp ce pornești interfețele.</li>
+<li><strong>Strică intenționat câte un lucru</strong> (zonă, hello, MTU, interfață pasivă) și repară doar cu comenzi <code>show</code>.</li>
+<li><strong>Exersează pe hârtie</strong> alegerea DR/BDR și calculul costului, până răspunzi în câteva secunde.</li>
+<li>Pentru comenzile de bază ale routerului, vezi <a href="../comenzi-cisco-ios/">fișa cu comenzile Cisco IOS</a>; pentru locul OSPF în examen, <a href="../ce-este-ccna/">ghidul despre CCNA</a>.</li>
+</ul>
+<div class="cta-box cta-box--article"><svg class="mascot" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><g class="m-breathe"><path d="M22 14l-5-9M42 14l5-9" stroke="#8a919c" stroke-width="3.4" stroke-linecap="round" fill="none"/><circle class="m-led m-led-l" cx="17" cy="5" r="3.6"/><circle class="m-led m-led-r" cx="47" cy="5" r="3.6"/><path class="m-body" d="M28 12q4-6 8 0"/><rect class="m-body" x="8" y="12" width="48" height="42" rx="18"/><rect class="m-belly" x="8" y="40" width="48" height="14" rx="7"/><path d="M19 31q4-5 8 0" stroke="#1a1d24" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M37 31q4-5 8 0" stroke="#1a1d24" stroke-width="3" fill="none" stroke-linecap="round"/><path class="m-led" d="M29 37l3 3.5 3-3.5z"/><circle cx="15" cy="38" r="3" fill="#ff8fb1" opacity=".7"/><circle cx="49" cy="38" r="3" fill="#ff8fb1" opacity=".7"/><circle class="m-ok" cx="18" cy="47" r="2"/><circle class="m-led" cx="24" cy="47" r="2"/><rect x="31" y="45" width="6" height="4" rx="1" fill="#0d1a3a" opacity=".55"/><rect x="39" y="45" width="6" height="4" rx="1" fill="#0d1a3a" opacity=".55"/><rect x="47" y="45" width="5" height="4" rx="1" fill="#0d1a3a" opacity=".55"/><path class="m-leg" d="M20 54v4M44 54v4" stroke-width="3.4" stroke-linecap="round" fill="none"/></g></svg><div><h3>Exersează OSPF în aplicația Routerel</h3><p>Routerel are peste 1.900 de întrebări pentru CCNA 1 · ITN, CCNA 2 · IEN și CCNA 3 · CEN, inclusiv module întregi despre OSPF, cu scheme de rețea și ieșiri de comenzi pe care le poți mări și cu explicație imediat după răspuns. Greșelile revin singure prin repetiție spațiată până le stăpânești, iar simularea de examen cu timp îți arată unde stai. Abonații noi au 7 zile gratuite, cu acces la tot.</p></div><a class="btn" href="../../" data-play data-soon-href="../../">Descoperă aplicația<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div><h2 id="intrebari-frecvente">Întrebări frecvente</h2>
+<div class="faq faq--article"><details><summary>Ce este OSPF?<span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p>Un protocol de rutare dinamică de tip link-state. Fiecare router află topologia întregii zone, o păstrează într-o bază de date (LSDB) și calculează singur cel mai scurt drum spre fiecare rețea cu algoritmul SPF (Dijkstra). E standard deschis, deci merge între echipamente de la producători diferiți.</p></div></details><details><summary>Cum își alege OSPF router ID-ul?<span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p>În ordinea asta: valoarea dată cu <code>router-id</code>; dacă lipsește, cea mai mare adresă IPv4 de pe o interfață loopback activă; dacă nu există loopback, cea mai mare adresă IPv4 de pe o interfață fizică activă. Un RID nou se aplică abia după <code>clear ip ospf process</code> sau după repornire.</p></div></details><details><summary>Cum se aleg DR și BDR?<span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p>Pe fiecare segment multi-access câștigă prioritatea OSPF cea mai mare (implicit 1, între 0 și 255), iar la egalitate RID-ul cel mai mare. Prioritatea 0 scoate routerul din alegere. Alegerea nu e preemptivă: un router mai bun care apare mai târziu nu ia locul DR-ului existent.</p></div></details><details><summary>Care este distanța administrativă a OSPF?<span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p><strong>110.</strong> E mai mare decât la rutele statice (1) și la EIGRP intern (90), deci, pentru aceeași rețea, routerul preferă ruta statică sau pe cea EIGRP.</p></div></details><details><summary>De ce rămân unii vecini OSPF în starea 2WAY?<span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p>Pe un segment multi-access, routerele care nu sunt nici DR, nici BDR (DROTHER) se opresc între ele în 2-Way. E normal: formează FULL doar cu DR-ul și cu BDR-ul.</p></div></details><details><summary>De ce se schimbă reference bandwidth?<span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p>Costul e reference bandwidth împărțit la lățimea de bandă a interfeței. Implicit, referința e 100 Mbps, deci FastEthernet, GigabitEthernet și 10 GigabitEthernet au toate costul 1 și OSPF nu le mai deosebește. Cu <code>auto-cost reference-bandwidth</code> mărești valoarea, la fel pe toate routerele.</p></div></details></div>
+<hr>
+<p><em>Routerel este o aplicație independentă și nu este afiliată, sponsorizată sau aprobată de Cisco Systems, Inc. Cisco, CCNA, Cisco IOS și Networking Academy sunt mărci ale Cisco Systems, Inc.</em></p>
+      
+      <section class="related" aria-labelledby="rel-title">
+        <h2 id="rel-title">Citește și</h2>
+        <div class="grid grid--2"><a class="card post-card lift" href="../../ghiduri/comenzi-cisco-ios/"><span class="tagline">Ghid · 13 min</span><h3>Comenzile Cisco IOS de bază (fișă pentru CCNA)</h3><p>Fișa comenzilor Cisco IOS de bază pentru CCNA: modurile CLI, configurarea inițială, parole și SSH, interfețe, salvarea configurației, comenzi show și depanare.</p></a><a class="card post-card lift" href="../../ghiduri/dhcp-cisco/"><span class="tagline">Ghid · 16 min</span><h3>Configurare DHCP pe Cisco: server, relay, depanare (2026)</h3><p>DHCPv4 pe Cisco explicat: procesul DORA, porturile UDP 67/68, lease, routerul ca server și client, ip helper-address, DHCP snooping, depanare și exerciții.</p></a></div>
+      </section>
+    </article>
+  </div>
+</main>
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="about">
+        <a class="brand" href="../../"><img src="../../assets/icon-96.webp" alt="" width="36" height="36" loading="lazy"><span>Routerel</span></a>
+        <p>Exersezi CCNA pe telefon: întrebări cu explicații, repetiția greșelilor și simulări de examen. În română și engleză.</p>
+      </div>
+      <div><h2>Aplicația</h2><ul><li><a href="../../#functii">Funcții</a></li><li><a href="../../#preturi">Prețuri</a></li><li><a href="../../#cum-functioneaza">Cum funcționează</a></li><li><a href="../../#faq">Întrebări frecvente</a></li></ul></div>
+      <div><h2>Resurse</h2><ul><li><a href="../../ghiduri/">Ghiduri CCNA</a></li><li><a href="../../articole/">Articole CCNA</a></li><li><a href="../../tools/">Tools gratuite</a></li><li><a href="../../en/" hreflang="en" lang="en" data-set-lang="en">English</a></li></ul></div>
+      <div><h2>Legal și contact</h2><ul><li><a href="../../privacy">Confidențialitate</a></li><li><a href="../../terms">Termeni de utilizare</a></li><li><a href="../../delete-account">Ștergerea contului</a></li></ul><ul><li><a href="mailto:contact@routerel.app">contact@routerel.app</a></li></ul></div>
+    </div>
+    <div class="disclaimer">
+      <p>Routerel este o aplicație independentă și nu este afiliată, sponsorizată sau aprobată de Cisco Systems, Inc. Cisco, CCNA și Cisco Networking Academy sunt mărci ale Cisco Systems, Inc.</p>
+      <p>© 2026 Routerel</p>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

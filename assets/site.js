@@ -8,6 +8,8 @@
 //    Gol ("")  → butoanele arată „În curând pe Google Play” (fără link).
 //    Când aplicația e publică, pune linkul de mai jos între ghilimele și urcă site-ul:
 //    "https://play.google.com/store/apps/details?id=ro.routerel.app"
+//    Fiecare pagină adaugă singură de unde vine instalarea (referrer cu utm_source=routerel.app, utm_medium, utm_campaign),
+//    din data-utm-medium / data-utm-campaign de pe <html>; în Play Console se vede la sursele de achiziție.
 var PLAY_URL = "";
 
 // 2) Prețurile abonamentelor, în lei (cu punct zecimal, ca în exemplu). Apar pe paginile în română.
@@ -37,15 +39,24 @@ var PRICES_USD = {
   doc.classList.add("js");
 
   /* ---------- Google Play: „În curând” sau link ---------- */
+  // Linkul din Play cu referrer-ul paginii (ex. utm_medium=guide, utm_campaign=<slug>), ca să se vadă ce pagină aduce instalări.
+  // Fără data-utm-* pe <html> (sau dacă PLAY_URL are deja un referrer) rămâne PLAY_URL, neschimbat.
+  function playHref() {
+    var medium = doc.getAttribute("data-utm-medium"), campaign = doc.getAttribute("data-utm-campaign");
+    if (!medium || !campaign || /[?&]referrer=/.test(PLAY_URL)) return PLAY_URL;
+    var ref = "utm_source=routerel.app&utm_medium=" + medium + "&utm_campaign=" + campaign;
+    return PLAY_URL + (PLAY_URL.indexOf("?") < 0 ? "?" : "&") + "referrer=" + encodeURIComponent(ref);
+  }
   function setupPlay() {
     var live = typeof PLAY_URL === "string" && /^https:\/\/play\.google\.com\//.test(PLAY_URL);
+    var href = live ? playHref() : "";
     doc.classList.toggle("play-live", live);
     doc.classList.toggle("play-soon", !live);
     var els = document.querySelectorAll("[data-play]");
     for (var i = 0; i < els.length; i++) {
       var el = els[i];
       if (live) {
-        el.setAttribute("href", PLAY_URL);
+        el.setAttribute("href", href);
         el.setAttribute("rel", "noopener");
         el.removeAttribute("aria-disabled");
         el.removeAttribute("role");

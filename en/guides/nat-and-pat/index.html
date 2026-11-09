@@ -1,0 +1,499 @@
+<!doctype html>
+<!-- Pagină generată. Nu o edita de mână: vezi tools/site/ (npm run build:guides / npm run sync:tools / npm run build:legal). -->
+<html lang="en" class="play-soon" data-utm-medium="guide" data-utm-campaign="nat-and-pat">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>NAT and PAT Explained: Static, Dynamic, Overload (2026)</title>
+  <meta name="description" content="NAT and PAT for CCNA: private ranges, inside local vs inside global, static, dynamic and overload, Cisco IOS config, verification, port forwarding, exercises.">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <link rel="canonical" href="https://routerel.app/en/guides/nat-and-pat/">
+  <link rel="alternate" hreflang="ro" href="https://routerel.app/ghiduri/nat-si-pat/">
+  <link rel="alternate" hreflang="en" href="https://routerel.app/en/guides/nat-and-pat/">
+  <link rel="alternate" hreflang="x-default" href="https://routerel.app/en/guides/nat-and-pat/">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#12151b" media="(prefers-color-scheme: dark)">
+  <meta name="color-scheme" content="light dark">
+  <link rel="icon" href="../../../assets/favicon-32.png" type="image/png" sizes="32x32">
+  <link rel="icon" href="../../../assets/icon-192.png" type="image/png" sizes="192x192">
+  <link rel="apple-touch-icon" href="../../../assets/apple-touch-icon.png">
+  <link rel="manifest" href="../../../site.webmanifest">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Routerel">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="ro_RO">
+  <meta property="og:title" content="NAT and PAT Explained: Static, Dynamic, Overload (2026)">
+  <meta property="og:description" content="NAT and PAT for CCNA: private ranges, inside local vs inside global, static, dynamic and overload, Cisco IOS config, verification, port forwarding, exercises.">
+  <meta property="og:url" content="https://routerel.app/en/guides/nat-and-pat/">
+  <meta property="og:image" content="https://routerel.app/assets/og-en.png">
+  <meta property="og:image:width" content="1024">
+  <meta property="og:image:height" content="500">
+  <meta property="og:image:alt" content="Routerel: the router chick mascot and the app name">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="NAT and PAT Explained: Static, Dynamic, Overload (2026)">
+  <meta name="twitter:description" content="NAT and PAT for CCNA: private ranges, inside local vs inside global, static, dynamic and overload, Cisco IOS config, verification, port forwarding, exercises.">
+  <meta name="twitter:image" content="https://routerel.app/assets/og-en.png">
+  <meta property="article:published_time" content="2026-11-09">
+  <meta property="article:modified_time" content="2026-11-09">
+  <meta name="routerel:updated" content="2026-11-09">
+  <link rel="preload" href="../../../assets/fonts/nunito-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../../../assets/fonts/nunito-latin-ext.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../../../assets/fonts/roboto-mono-500-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="../../../style.css">
+  <script>(function(d){d.classList.add("js");try{var t=localStorage.getItem("routerel-theme");if(t==="light"||t==="dark")d.setAttribute("data-theme",t)}catch(e){}setTimeout(function(){if(!window.__rtl)d.classList.remove("js")},4000)})(document.documentElement)</script>
+  <script src="../../../assets/site.js" defer></script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Article","@id":"https://routerel.app/en/guides/nat-and-pat/#article","headline":"NAT and PAT Explained: Static, Dynamic, Overload (2026)","description":"NAT and PAT for CCNA: private ranges, inside local vs inside global, static, dynamic and overload, Cisco IOS config, verification, port forwarding, exercises.","inLanguage":"en","datePublished":"2026-11-09","dateModified":"2026-11-09","keywords":"NAT, what is NAT, PAT NAT overload, Cisco NAT configuration, inside local vs inside global, static vs dynamic NAT, Cisco port forwarding, show ip nat translations","author":{"@type":"Organization","name":"Routerel","url":"https://routerel.app/"},"publisher":{"@type":"Organization","name":"Routerel","logo":{"@type":"ImageObject","url":"https://routerel.app/assets/icon-512.png"}},"image":"https://routerel.app/assets/og-en.png","mainEntityOfPage":"https://routerel.app/en/guides/nat-and-pat/","isPartOf":{"@id":"https://routerel.app/#website"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://routerel.app/en/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://routerel.app/en/guides/"},{"@type":"ListItem","position":3,"name":"NAT and PAT Explained: Static, Dynamic, Overload (2026)","item":"https://routerel.app/en/guides/nat-and-pat/"}]},{"@type":"FAQPage","@id":"https://routerel.app/en/guides/nat-and-pat/#faq","inLanguage":"en","mainEntity":[{"@type":"Question","name":"What is NAT?","acceptedAnswer":{"@type":"Answer","text":"NAT (Network Address Translation) is a router function that rewrites the source or destination IP address of a packet as it crosses between the inside and outside networks. Most often, private LAN addresses are translated into a public address so devices can reach the Internet."}},{"@type":"Question","name":"What is the difference between NAT and PAT?","acceptedAnswer":{"@type":"Answer","text":"Plain NAT (static or dynamic) maps one inside address to one public address. PAT, also called NAT overload, translates the port as well, so many inside devices can share the same public address at the same time. The router tells them apart by port number."}},{"@type":"Question","name":"What do inside local and inside global mean?","acceptedAnswer":{"@type":"Answer","text":"Inside local is the address of a device on your network as seen from the inside, usually a private address. Inside global is the address of that same device as the outside world sees it, which is the public address it was translated to."}},{"@type":"Question","name":"What does the overload keyword do?","acceptedAnswer":{"@type":"Answer","text":"It turns on PAT: the router translates ports as well as addresses. Without overload, dynamic NAT hands out a whole public address per inside device, and once the pool runs out, the next devices can't get out."}},{"@type":"Question","name":"Why is show ip nat translations empty?","acceptedAnswer":{"@type":"Answer","text":"The usual causes are ip nat inside and ip nat outside applied to the wrong interfaces, an ACL that doesn't match the inside addresses, a missing route to the Internet, or simply no traffic yet. Dynamic translations only appear after an inside device sends its first packet."}},{"@type":"Question","name":"Do I need NAT with IPv6?","acceptedAnswer":{"@type":"Answer","text":"Normally, no. IPv6 has enough addresses for every device to get a globally unique address, so there's no need to hide a whole network behind one address. Protection comes from a stateful firewall, not from address translation. NAT64 exists, but it's a transition technique between IPv6 and IPv4."}}]}]}</script>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs><linearGradient id="rtl-play" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5b8cff"/><stop offset=".55" stop-color="#2f6bff"/><stop offset="1" stop-color="#ffb020"/></linearGradient></defs></svg>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="container header-row">
+    <a class="brand" href="../../../en/" aria-label="Routerel home"><img src="../../../assets/icon-96.webp" alt="" width="36" height="36"><span>Routerel</span></a>
+    <nav class="main-nav" aria-label="Main"><ul><li><a href="../../../en/#features">Features</a></li><li><a href="../../../en/#pricing">Pricing</a></li><li><a href="../../../en/guides/" aria-current="page">Guides</a></li><li><a href="../../../en/articles/">Articles</a></li><li><a href="../../../en/tools/">Tools</a></li><li><a href="../../../en/#faq">FAQ</a></li></ul></nav>
+    <div class="header-actions">
+      <div class="lang-switch" role="group" aria-label="Language"><a href="../../../ghiduri/nat-si-pat/" hreflang="ro" lang="ro" title="Română">RO</a><span aria-current="true" lang="en">EN</span></div>
+      <button class="icon-btn theme-toggle" type="button" data-theme-toggle aria-label="Switch theme"><span class="i-moon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9z"/></svg></span><span class="i-sun"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg></span></button>
+      <a class="btn btn--sm header-cta" data-play data-soon-href="../../../en/#pricing" href="../../../en/#pricing"><span data-when="live">Try free</span><span data-when="soon">See pricing</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      <button class="icon-btn menu-btn" type="button" data-menu-btn aria-expanded="false" aria-controls="mobile-nav" aria-label="Menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+    </div>
+  </div>
+  <nav class="mobile-nav" id="mobile-nav" aria-label="Main" hidden>
+    <div class="container"><ul><li><a href="../../../en/#features">Features</a></li><li><a href="../../../en/#pricing">Pricing</a></li><li><a href="../../../en/guides/" aria-current="page">Guides</a></li><li><a href="../../../en/articles/">Articles</a></li><li><a href="../../../en/tools/">Tools</a></li><li><a href="../../../en/#faq">FAQ</a></li></ul></div>
+  </nav>
+</header>
+<main id="main">
+  <div class="container section section--tight">
+    <article class="prose">
+      <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="../../../en/">Home</a></li><li><a href="../../../en/guides/">Guides</a></li><li><span aria-current="page">NAT and PAT Explained: Static, Dynamic, Overload (2026)</span></li></ol></nav>
+      <p class="eyebrow">CCNA guide</p>
+      <h1>NAT and PAT Explained: Static, Dynamic and Overload (2026)</h1>
+      <div class="article-meta">
+        <span class="avatar"><svg class="mascot" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><g class="m-breathe"><path d="M22 14l-5-9M42 14l5-9" stroke="#8a919c" stroke-width="3.4" stroke-linecap="round" fill="none"/><circle class="m-led m-led-l" cx="17" cy="5" r="3.6"/><circle class="m-led m-led-r" cx="47" cy="5" r="3.6"/><path class="m-body" d="M28 12q4-6 8 0"/><rect class="m-body" x="8" y="12" width="48" height="42" rx="18"/><rect class="m-belly" x="8" y="40" width="48" height="14" rx="7"/><circle cx="23" cy="31" r="5.4" fill="#fff"/><circle class="m-pupil" cx="24" cy="31.5" r="3" fill="#1a1d24"/><circle cx="41" cy="31" r="5.4" fill="#fff"/><circle class="m-pupil" cx="42" cy="31.5" r="3" fill="#1a1d24"/><path class="m-led" d="M29 37l3 3.5 3-3.5z"/><circle class="m-ok" cx="18" cy="47" r="2"/><circle class="m-led" cx="24" cy="47" r="2"/><rect x="31" y="45" width="6" height="4" rx="1" fill="#0d1a3a" opacity=".55"/><rect x="39" y="45" width="6" height="4" rx="1" fill="#0d1a3a" opacity=".55"/><rect x="47" y="45" width="5" height="4" rx="1" fill="#0d1a3a" opacity=".55"/><path class="m-leg" d="M20 54v4M44 54v4" stroke-width="3.4" stroke-linecap="round" fill="none"/></g></svg></span>
+        <span>The Routerel team</span><span aria-hidden="true">·</span>
+        <span>Updated: <time datetime="2026-11-09">November 9, 2026</time></span><span aria-hidden="true">·</span>
+        <span>15 min read</span>
+      </div>
+      <p class="lead">Nearly every network you&#39;ll configure uses NAT. The idea is simple, but the four address terms (inside local, inside global, outside local, outside global) and the order of the commands trip up a lot of students, and that&#39;s exactly where exam questions land.</p>
+<p>This guide covers why NAT exists, what each term means, how static NAT, dynamic NAT and PAT work, how to configure them step by step in Cisco IOS, how to see what the router is actually doing, and how to publish an internal server with port forwarding. At the end there&#39;s a troubleshooting table and exercises with answers.</p>
+<p>In the Networking Academy CCNA v8 courses, NAT is in <strong>CCNA 3 · CEN</strong>, module 8 (NAT for IPv4).</p>
+      <nav class="toc toc--fold" aria-labelledby="toc-title"><h2 id="toc-title">Contents</h2><button type="button" class="toc-toggle" data-toc-toggle aria-expanded="false" aria-controls="toc-list"><span class="toc-toggle-t">Contents</span> <span class="toc-toggle-n">12 sections</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6"/></svg></button><ol id="toc-list"><li><a href="#why-nat-exists">Why NAT exists</a></li><li><a href="#the-lab-topology">The lab topology</a></li><li><a href="#the-four-terms-inside-outside-local-global">The four terms: inside/outside, local/global</a><ol><li><a href="#walkthrough-pc1-opens-a-page-on-web">Walkthrough: PC1 opens a page on WEB</a></li></ol></li><li><a href="#the-three-kinds-of-nat">The three kinds of NAT</a><ol><li><a href="#static-nat">Static NAT</a></li><li><a href="#dynamic-nat">Dynamic NAT</a></li><li><a href="#pat-nat-overload">PAT (NAT overload)</a></li></ol></li><li><a href="#configuration-step-by-step">Configuration step by step</a><ol><li><a href="#static-nat-an-inside-server-gets-a-fixed-public-address">Static NAT: an inside server gets a fixed public address</a></li><li><a href="#dynamic-nat-with-a-pool">Dynamic NAT with a pool</a></li><li><a href="#pat-with-a-pool">PAT with a pool</a></li><li><a href="#pat-on-the-interface-address-the-one-you-ll-see-most">PAT on the interface address (the one you&#39;ll see most)</a></li><li><a href="#r1-s-full-configuration">R1&#39;s full configuration</a></li></ol></li><li><a href="#verification">Verification</a><ol><li><a href="#show-ip-nat-translations">show ip nat translations</a></li><li><a href="#show-ip-nat-statistics">show ip nat statistics</a></li><li><a href="#clear-ip-nat-translation">clear ip nat translation</a></li><li><a href="#debug-ip-nat-handle-with-care">debug ip nat (handle with care)</a></li></ol></li><li><a href="#port-forwarding-with-static-pat">Port forwarding with static PAT</a></li><li><a href="#common-mistakes">Common mistakes</a></li><li><a href="#nat-and-ipv6">NAT and IPv6</a></li><li><a href="#exercises">Exercises</a></li><li><a href="#the-fastest-way-to-learn-nat">The fastest way to learn NAT</a></li><li><a href="#frequently-asked-questions">Frequently asked questions</a></li></ol></nav>
+<h2 id="why-nat-exists">Why NAT exists</h2>
+<p>An IPv4 address is 32 bits long, which gives about 4.3 billion addresses in total. That isn&#39;t enough for today&#39;s Internet. IANA handed out its last large free blocks in 2011, and RIPE NCC, the European registry, made its final /22 allocation in November 2019.</p>
+<p>The emergency fix that became standard practice has two parts:</p>
+<ol>
+<li><strong>Private addresses (RFC 1918).</strong> Three ranges set aside for internal networks. Anyone can use them, as many times as they like, because they&#39;re never routed on the Internet.</li>
+<li><strong>NAT.</strong> At the network edge, the router swaps the private address for a public one. Replies come back to the public address, and the router hands them to the right device.</li>
+</ol>
+<div class="table-scroll"><p class="table-hint" aria-hidden="true">swipe<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></p><div class="table-wrap" role="region" tabindex="0" aria-label="Table (scrolls sideways)"><table>
+<thead>
+<tr>
+<th>Private range</th>
+<th>Prefix</th>
+<th>Addresses</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>10.0.0.0 – 10.255.255.255</td>
+<td>10.0.0.0/8</td>
+<td>16,777,216</td>
+</tr>
+<tr>
+<td>172.16.0.0 – 172.31.255.255</td>
+<td>172.16.0.0/12</td>
+<td>1,048,576</td>
+</tr>
+<tr>
+<td>192.168.0.0 – 192.168.255.255</td>
+<td>192.168.0.0/16</td>
+<td>65,536</td>
+</tr>
+</tbody></table></div></div>
+<p>A classic exam trap: <code>172.32.5.1</code> is <strong>not</strong> private. The /12 range stops at <code>172.31.255.255</code>. If you&#39;re unsure where a range ends, check it with the <a href="../../tools/subnet-calculator/">subnet calculator</a>.</p>
+<p>There&#39;s also <code>100.64.0.0/10</code> (RFC 6598), which ISPs use for <strong>CGNAT</strong>, meaning NAT done on their side, before your router. If your home router gets a WAN address from that range, your traffic is going through two layers of NAT.</p>
+<p>NAT has downsides too, and they show up in theory questions:</p>
+<ul>
+<li><strong>it breaks end-to-end connectivity:</strong> an outside device can&#39;t open a connection to an inside one unless you add a static rule;</li>
+<li><strong>it makes troubleshooting and tracing harder:</strong> in an external server&#39;s logs, the whole company shows up as one address;</li>
+<li><strong>some protocols struggle:</strong> those that carry IP addresses inside their payload need help from the router, and IPsec needs NAT-T (UDP 4500) to get ESP through NAT; IPsec with AH, which protects the IP header itself, doesn&#39;t work through NAT at all;</li>
+<li><strong>it adds a little delay,</strong> because the router rewrites every packet and recalculates checksums.</li>
+</ul>
+<h2 id="the-lab-topology">The lab topology</h2>
+<p>Every example uses the same small network. The public addresses come from the ranges reserved for documentation (<code>192.0.2.0/24</code>, <code>198.51.100.0/24</code>, <code>203.0.113.0/24</code>), so they don&#39;t belong to anyone real.</p>
+<pre><code class="language-text"> PC1 192.168.10.11 ─┐
+ PC2 192.168.10.12 ─┤  LAN 192.168.10.0/24            link 198.51.100.0/30
+ SRV 192.168.10.50 ─┴─ Switch ── G0/0/1 [ R1 ] G0/0/0 ──────────────── [ ISP ] ── Internet
+                          .1 (inside)       .2 (outside)            .1        └─ WEB 192.0.2.80
+</code></pre>
+<ul>
+<li>R1 has <code>198.51.100.2/30</code> facing the ISP and a default route: <code>ip route 0.0.0.0 0.0.0.0 198.51.100.1</code>.</li>
+<li>The ISP has also assigned the public block <code>203.0.113.0/29</code> to the company and routes it to R1. Those addresses aren&#39;t configured on any interface; R1 only uses them in translations.</li>
+<li>WEB is some server out on the Internet.</li>
+</ul>
+<h2 id="the-four-terms-inside-outside-local-global">The four terms: inside/outside, local/global</h2>
+<p>Each term has two halves, and each half answers a different question:</p>
+<ul>
+<li><strong>inside / outside</strong> = <strong>whose</strong> device it is: on your network (inside) or beyond it (outside);</li>
+<li><strong>local / global</strong> = <strong>where you&#39;re looking from</strong>: from inside your network (local) or from the outside (global).</li>
+</ul>
+<div class="table-scroll"><p class="table-hint" aria-hidden="true">swipe<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></p><div class="table-wrap" role="region" tabindex="0" aria-label="Table (scrolls sideways)"><table>
+<thead>
+<tr>
+<th>Term</th>
+<th>What it is</th>
+<th>In our example</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Inside local</td>
+<td class="tw">an inside host&#39;s address, seen from the inside</td>
+<td><code>192.168.10.11</code> (PC1)</td>
+</tr>
+<tr>
+<td>Inside global</td>
+<td class="tw">the same inside host&#39;s address, seen from the outside</td>
+<td><code>203.0.113.1</code></td>
+</tr>
+<tr>
+<td>Outside local</td>
+<td class="tw">an outside host&#39;s address, seen from the inside</td>
+<td><code>192.0.2.80</code> (WEB)</td>
+</tr>
+<tr>
+<td>Outside global</td>
+<td class="tw">the outside host&#39;s real address, seen from the outside</td>
+<td><code>192.0.2.80</code> (WEB)</td>
+</tr>
+</tbody></table></div></div>
+<h3 id="walkthrough-pc1-opens-a-page-on-web">Walkthrough: PC1 opens a page on WEB</h3>
+<ol>
+<li>PC1 sends a packet with source <code>192.168.10.11</code> and destination <code>192.0.2.80</code>. To PC1, both addresses are &quot;local&quot;: that&#39;s how it sees them.</li>
+<li>The packet enters R1 on G0/0/1 (inside) and leaves on G0/0/0 (outside). R1 replaces the source with <code>203.0.113.1</code> and records the mapping in its NAT table.</li>
+<li>On the Internet, the packet travels with source <code>203.0.113.1</code> (inside global) and destination <code>192.0.2.80</code> (outside global).</li>
+<li>WEB replies to <code>203.0.113.1</code>. The ISP routes that block to R1.</li>
+<li>R1 finds the mapping, rewrites the destination back to <code>192.168.10.11</code> and forwards the packet to PC1.</li>
+</ol>
+<p>Why are outside local and outside global the same? Because R1 only translates inside addresses. They&#39;d differ only if you also translated outside addresses (with <code>ip nat outside source</code>), for example when two companies using the same private ranges connect to each other. In almost every CCNA scenario they&#39;re equal.</p>
+<p>A memory hook: <strong>&quot;global&quot; is always the address that travels on the Internet</strong>, and &quot;local&quot; is the one you see on the LAN.</p>
+<h2 id="the-three-kinds-of-nat">The three kinds of NAT</h2>
+<div class="table-scroll"><p class="table-hint" aria-hidden="true">swipe<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></p><div class="table-wrap" role="region" tabindex="0" aria-label="Table (scrolls sideways)"><table>
+<thead>
+<tr>
+<th>Type</th>
+<th>How it maps addresses</th>
+<th>When you use it</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Static NAT</td>
+<td class="tw">one inside address ↔ one fixed public address, permanently</td>
+<td class="tw">servers that must be reachable from the Internet</td>
+</tr>
+<tr>
+<td>Dynamic NAT</td>
+<td class="tw">inside addresses ↔ free addresses from a pool, one to one, while in use</td>
+<td class="tw">rarely today; when you have plenty of public addresses</td>
+</tr>
+<tr>
+<td>PAT (NAT overload)</td>
+<td class="tw">many inside addresses ↔ one public address (or a few), told apart by port</td>
+<td>almost everywhere: homes, offices</td>
+</tr>
+</tbody></table></div></div>
+<h3 id="static-nat">Static NAT</h3>
+<p>You write the mapping by hand and it sits in the table permanently, even when no traffic flows. It works in both directions: anyone on the Internet can open a connection to <code>203.0.113.5</code>, and R1 passes it to the server. That&#39;s why it&#39;s used for public-facing servers (web, mail, VPN).</p>
+<h3 id="dynamic-nat">Dynamic NAT</h3>
+<p>You define a <strong>pool</strong> of public addresses and an <strong>ACL</strong> that says which inside addresses are allowed to be translated. The first host to send traffic gets the first free address in the pool. The mapping expires after a period with no traffic (24 hours by default for simple translations without ports) and the address goes back into the pool.</p>
+<p>The catch: the pool has a fixed size. With 4 public addresses, only 4 inside hosts can be out at once. The fifth gets no translation, and its packets are dropped until an address frees up.</p>
+<h3 id="pat-nat-overload">PAT (NAT overload)</h3>
+<p>PAT translates <strong>the source address and the source port</strong>. Each connection gets a unique &quot;public address : port&quot; pair, so thousands of connections can share a single public address. When a reply comes back, R1 looks at the destination port and knows exactly whose it is.</p>
+<p>Ports are 16 bits, so in theory one public address can carry tens of thousands of simultaneous connections per protocol (TCP, UDP). Cisco IOS tries to keep the original source port; if another connection is already using it, the router picks a different free port.</p>
+<p>ICMP (for example <code>ping</code>) has no ports, so the router uses the ICMP query identifier instead.</p>
+<h2 id="configuration-step-by-step">Configuration step by step</h2>
+<p>Whatever the type, the steps are the same:</p>
+<ol>
+<li>mark the LAN-facing interface with <code>ip nat inside</code>;</li>
+<li>mark the ISP-facing interface with <code>ip nat outside</code>;</li>
+<li>define <strong>what</strong> to translate (an address for static, an ACL for dynamic and PAT);</li>
+<li>define <strong>what to translate it into</strong> (an address, a pool or the interface address);</li>
+<li>tie it together with an <code>ip nat inside source ...</code> command.</li>
+</ol>
+<p>Steps 1 and 2 are always the same:</p>
+<pre><code class="language-text">R1(config)# interface GigabitEthernet0/0/1
+R1(config-if)# ip nat inside
+R1(config-if)# exit
+R1(config)# interface GigabitEthernet0/0/0
+R1(config-if)# ip nat outside
+R1(config-if)# exit
+</code></pre>
+<p>If you have several inside networks (say, subinterfaces for several <a href="../vlans-and-trunks/">VLANs</a>), each one needs <code>ip nat inside</code>. Forget one subinterface and a whole VLAN loses Internet access.</p>
+<h3 id="static-nat-an-inside-server-gets-a-fixed-public-address">Static NAT: an inside server gets a fixed public address</h3>
+<pre><code class="language-text">R1(config)# ip nat inside source static 192.168.10.50 203.0.113.5
+</code></pre>
+<p>Order matters: inside address first (inside local), then the public one (inside global). From now on, anyone reaching <code>203.0.113.5</code> from the Internet lands on SRV.</p>
+<h3 id="dynamic-nat-with-a-pool">Dynamic NAT with a pool</h3>
+<pre><code class="language-text">R1(config)# access-list 1 permit 192.168.10.0 0.0.0.255
+R1(config)# ip nat pool PUBLIC 203.0.113.1 203.0.113.4 netmask 255.255.255.248
+R1(config)# ip nat inside source list 1 pool PUBLIC
+</code></pre>
+<ul>
+<li><strong>The ACL</strong> is a standard ACL that <strong>permits</strong> the inside addresses to translate. It takes a wildcard mask, not a subnet mask: <code>0.0.0.255</code> for a /24. For an awkward prefix like /22, subtract the mask from <code>255.255.255.255</code> (the <a href="../subnetting-step-by-step/">subnetting guide</a> has the details).</li>
+<li><strong>The pool</strong> has a name, a first and last address, and the block&#39;s mask (or <code>prefix-length 29</code> instead of <code>netmask</code>). I left <code>.5</code> out of the pool because the static NAT already uses it. A pool that overlaps a static translation causes conflicts.</li>
+<li>The ACL doesn&#39;t filter anything here. A <code>deny</code> just means &quot;don&#39;t translate&quot;, not &quot;block&quot;.</li>
+</ul>
+<h3 id="pat-with-a-pool">PAT with a pool</h3>
+<p>Add one word to the command above:</p>
+<pre><code class="language-text">R1(config)# ip nat inside source list 1 pool PUBLIC overload
+</code></pre>
+<p>The router uses the pool addresses and shares each one, by port, across many connections.</p>
+<h3 id="pat-on-the-interface-address-the-one-you-ll-see-most">PAT on the interface address (the one you&#39;ll see most)</h3>
+<p>When the ISP gives you a single public address, the one on your WAN interface, you don&#39;t need a pool at all:</p>
+<pre><code class="language-text">R1(config)# access-list 1 permit 192.168.10.0 0.0.0.255
+R1(config)# ip nat inside source list 1 interface GigabitEthernet0/0/0 overload
+</code></pre>
+<p>Every device on the LAN goes out as <code>198.51.100.2</code>. That&#39;s exactly what your home router does. A nice side effect: if the WAN interface gets its address by DHCP and the address changes, PAT follows it automatically.</p>
+<h3 id="r1-s-full-configuration">R1&#39;s full configuration</h3>
+<p>This is the version used in the rest of the guide: one server published with static NAT, everything else through PAT on the interface.</p>
+<pre><code class="language-text">R1(config)# interface GigabitEthernet0/0/1
+R1(config-if)# ip address 192.168.10.1 255.255.255.0
+R1(config-if)# ip nat inside
+R1(config-if)# no shutdown
+R1(config-if)# exit
+R1(config)# interface GigabitEthernet0/0/0
+R1(config-if)# ip address 198.51.100.2 255.255.255.252
+R1(config-if)# ip nat outside
+R1(config-if)# no shutdown
+R1(config-if)# exit
+R1(config)# ip route 0.0.0.0 0.0.0.0 198.51.100.1
+R1(config)# access-list 1 permit 192.168.10.0 0.0.0.255
+R1(config)# ip nat inside source list 1 interface GigabitEthernet0/0/0 overload
+R1(config)# ip nat inside source static 192.168.10.50 203.0.113.5
+</code></pre>
+<p>When a packet could match both a static and a dynamic translation, the static one wins. So SRV always goes out as <code>203.0.113.5</code>, even though its address also matches the ACL.</p>
+<h2 id="verification">Verification</h2>
+<div class="table-scroll"><p class="table-hint" aria-hidden="true">swipe<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></p><div class="table-wrap" role="region" tabindex="0" aria-label="Table (scrolls sideways)"><table>
+<thead>
+<tr>
+<th>Command</th>
+<th>What it shows</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code><span class="nw">show</span> <span class="nw">ip</span> <span class="nw">nat</span> <span class="nw">translations</span></code></td>
+<td class="tw">the NAT table: every active translation with all four addresses</td>
+</tr>
+<tr>
+<td><code><span class="nw">show</span> <span class="nw">ip</span> <span class="nw">nat</span> <span class="nw">translations</span> <span class="nw">verbose</span></code></td>
+<td class="tw">the same table, plus each entry&#39;s age and time left before it expires</td>
+</tr>
+<tr>
+<td><code><span class="nw">show</span> <span class="nw">ip</span> <span class="nw">nat</span> <span class="nw">statistics</span></code></td>
+<td class="tw">inside/outside interfaces, active translation count, hits/misses, pools</td>
+</tr>
+<tr>
+<td><code><span class="nw">clear</span> <span class="nw">ip</span> <span class="nw">nat</span> <span class="nw">translation</span> <span class="nw">*</span></code></td>
+<td class="tw">removes all <strong>dynamic</strong> translations (static ones stay)</td>
+</tr>
+<tr>
+<td><code><span class="nw">debug</span> <span class="nw">ip</span> <span class="nw">nat</span></code></td>
+<td class="tw">prints every translated packet in real time</td>
+</tr>
+</tbody></table></div></div>
+<h3 id="show-ip-nat-translations">show ip nat translations</h3>
+<p>After PC1 and PC2 both open the page on WEB, and PC2 also runs a <code>ping</code>:</p>
+<pre><code class="language-text">R1# show ip nat translations
+Pro Inside global         Inside local          Outside local         Outside global
+--- 203.0.113.5           192.168.10.50         ---                   ---
+tcp 198.51.100.2:51544    192.168.10.11:51544   192.0.2.80:443        192.0.2.80:443
+tcp 198.51.100.2:1024     192.168.10.12:51544   192.0.2.80:443        192.0.2.80:443
+icmp 198.51.100.2:7       192.168.10.12:7       192.0.2.80:7          192.0.2.80:7
+</code></pre>
+<p>Reading it line by line:</p>
+<ul>
+<li><strong>The first line</strong> is the static translation. It has no protocol and no outside addresses, because it isn&#39;t tied to any particular connection.</li>
+<li><strong>PC1</strong> went out with its original port, 51544.</li>
+<li><strong>PC2</strong> happened to pick the same source port. <code>198.51.100.2:51544</code> was already taken, so R1 gave it port 1024. That&#39;s how the router keeps the replies apart.</li>
+<li><strong>The icmp line</strong> shows the ICMP query ID (7) where a port would be.</li>
+</ul>
+<h3 id="show-ip-nat-statistics">show ip nat statistics</h3>
+<pre><code class="language-text">R1# show ip nat statistics
+Total active translations: 4 (1 static, 3 dynamic; 3 extended)
+Peak translations: 6, occurred 00:12:40 ago
+Outside interfaces:
+  GigabitEthernet0/0/0
+Inside interfaces:
+  GigabitEthernet0/0/1
+Hits: 1288  Misses: 0
+CEF Translated packets: 1284, CEF Punted packets: 4
+Expired translations: 5
+Dynamic mappings:
+-- Inside Source
+[Id: 1] access-list 1 interface GigabitEthernet0/0/0 refcount 3
+</code></pre>
+<p>What to look at when troubleshooting:</p>
+<ul>
+<li><strong>are the inside and outside interfaces the right ones?</strong> This is where a swapped configuration jumps out at you;</li>
+<li><strong>&quot;extended&quot;</strong> means translations with ports, i.e. PAT;</li>
+<li><strong>&quot;refcount&quot;</strong> is how many active translations are using that rule;</li>
+<li>with a pool, you&#39;ll also see a line like <code>total addresses 4, allocated 4 (100%), misses 12</code>: the pool is full and 12 attempts didn&#39;t get an address.</li>
+</ul>
+<p>The layout varies slightly between IOS versions.</p>
+<h3 id="clear-ip-nat-translation">clear ip nat translation</h3>
+<pre><code class="language-text">R1# clear ip nat translation *
+</code></pre>
+<p>This flushes the dynamic translations; active connections drop and rebuild on the next packet. Use it before changing the NAT configuration: IOS may refuse to change or remove a pool that&#39;s still in use.</p>
+<h3 id="debug-ip-nat-handle-with-care">debug ip nat (handle with care)</h3>
+<pre><code class="language-text">R1# debug ip nat
+IP NAT debugging is on
+NAT: s=192.168.10.11-&gt;198.51.100.2, d=192.0.2.80 [40211]
+NAT*: s=192.0.2.80, d=198.51.100.2-&gt;192.168.10.11 [0]
+</code></pre>
+<p><code>s</code> is the source, <code>d</code> the destination, and the arrow shows which address was rewritten. The asterisk in <code>NAT*</code> means the packet was translated in the fast path (CEF). The number in brackets is the IP packet&#39;s identification field.</p>
+<p>A warning: on a production router, <code>debug ip nat</code> prints a line for every translated packet and can load the CPU until your session freezes. In production, limit it with an ACL (<code>debug ip nat 10</code>, where ACL 10 permits only the host you&#39;re chasing) and turn it off as soon as you&#39;re done with <code>undebug all</code>. Over SSH you also need <code>terminal monitor</code> to see the messages.</p>
+<h2 id="port-forwarding-with-static-pat">Port forwarding with static PAT</h2>
+<p>A different scenario: a smaller company has a single public address (<code>198.51.100.2</code>, the interface address), no <code>203.0.113.0/29</code> block, and wants its internal web server reachable from the Internet. A regular static NAT would bind the whole public address to the server, leaving nothing for the rest of the LAN. The answer is <strong>static PAT</strong>: you map just one port.</p>
+<pre><code class="language-text">R1(config)# ip nat inside source static tcp 192.168.10.50 443 interface GigabitEthernet0/0/0 443
+</code></pre>
+<p>Or with the address written out:</p>
+<pre><code class="language-text">R1(config)# ip nat inside source static tcp 192.168.10.50 443 198.51.100.2 443
+</code></pre>
+<p>Now a connection from the Internet to <code>198.51.100.2:443</code> reaches <code>192.168.10.50:443</code>, and PAT for the rest of the LAN keeps working.</p>
+<p>The ports don&#39;t have to match. For an internal SSH server you want to expose on an unusual public port:</p>
+<pre><code class="language-text">R1(config)# ip nat inside source static tcp 192.168.10.60 22 198.51.100.2 2222
+</code></pre>
+<p>Connections to <code>198.51.100.2:2222</code> reach port 22 on <code>192.168.10.60</code>. In the NAT table, these rules show up as permanent <code>tcp</code> entries with no outside addresses.</p>
+<p>Two practical points:</p>
+<ul>
+<li>the inside server needs R1 as its default gateway, or its replies won&#39;t come back the same way;</li>
+<li>port forwarding exposes the service to the whole Internet. Only forward what genuinely has to be public, and protect it (ACLs, a firewall, strong authentication).</li>
+</ul>
+<h2 id="common-mistakes">Common mistakes</h2>
+<div class="table-scroll"><p class="table-hint" aria-hidden="true">swipe<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></p><div class="table-wrap" role="region" tabindex="0" aria-label="Table (scrolls sideways)"><table>
+<thead>
+<tr>
+<th>Symptom</th>
+<th>Likely cause</th>
+<th>How to check and fix</th>
+</tr>
+</thead>
+<tbody><tr>
+<td class="tw">NAT table is empty, nothing reaches the Internet</td>
+<td><code><span class="nw">ip</span> <span class="nw">nat</span> <span class="nw">inside</span></code> and <code><span class="nw">ip</span> <span class="nw">nat</span> <span class="nw">outside</span></code> swapped</td>
+<td class="tw"><code><span class="nw">show</span> <span class="nw">ip</span> <span class="nw">nat</span> <span class="nw">statistics</span></code> (interface list), then fix each interface</td>
+</tr>
+<tr>
+<td>Some hosts get out, others don&#39;t</td>
+<td class="tw">the ACL doesn&#39;t cover every inside network, or the wildcard is wrong</td>
+<td class="tw"><code><span class="nw">show</span> <span class="nw">access-lists</span></code> (match counters), fix the wildcard or add a line</td>
+</tr>
+<tr>
+<td>The ACL never matches</td>
+<td class="tw">a subnet mask was typed instead of a wildcard (<code>255.255.255.0</code> instead of <code>0.0.0.255</code>)</td>
+<td><code><span class="nw">show</span> <span class="nw">running-config</span> <span class="nw">|</span> <span class="nw">include</span> <span class="nw">access-list</span></code></td>
+</tr>
+<tr>
+<td class="tw">The first few PCs work, the rest don&#39;t</td>
+<td>dynamic NAT without <code>overload</code>, pool exhausted</td>
+<td><code><span class="nw">show</span> <span class="nw">ip</span> <span class="nw">nat</span> <span class="nw">statistics</span></code> (pool 100% allocated, misses) → add <code>overload</code></td>
+</tr>
+<tr>
+<td>A whole VLAN has no Internet</td>
+<td>its subinterface is missing <code><span class="nw">ip</span> <span class="nw">nat</span> <span class="nw">inside</span></code></td>
+<td><code><span class="nw">show</span> <span class="nw">running-config</span> <span class="nw">interface</span> <span class="nw">G0/0/1.20</span></code></td>
+</tr>
+<tr>
+<td class="tw">Translations appear but replies never arrive</td>
+<td class="tw">the ISP isn&#39;t routing the pool addresses to you, or the default route is missing</td>
+<td class="tw"><code><span class="nw">show</span> <span class="nw">ip</span> <span class="nw">route</span></code>, confirm the assigned block with the ISP</td>
+</tr>
+<tr>
+<td class="tw">A published server doesn&#39;t answer from outside</td>
+<td class="tw">wrong protocol or port in the static PAT, or no gateway on the server</td>
+<td><code><span class="nw">show</span> <span class="nw">ip</span> <span class="nw">nat</span> <span class="nw">translations</span></code>, the server&#39;s settings</td>
+</tr>
+<tr>
+<td>You can&#39;t change the pool</td>
+<td>it&#39;s in use by active translations</td>
+<td><code><span class="nw">clear</span> <span class="nw">ip</span> <span class="nw">nat</span> <span class="nw">translation</span> <span class="nw">*</span></code>, then change it</td>
+</tr>
+</tbody></table></div></div>
+<p>Two rules prevent most of these: <strong>inside faces the LAN, outside faces the ISP</strong>, and <strong>the NAT ACL permits the inside addresses, with a wildcard mask</strong>.</p>
+<p>One detail that matters once you start writing filtering ACLs: for a packet going from inside to outside, the router routes first and translates second; for a packet coming in from outside, it translates first and routes second. Inbound ACLs are checked before either step, so an inbound ACL on the outside interface sees the public (inside global) addresses, not the private ones.</p>
+<h2 id="nat-and-ipv6">NAT and IPv6</h2>
+<p>IPv6 addresses are 128 bits, enough for every device to have a globally unique address (GUA). The main reason for NAT, running out of addresses, goes away. A typical IPv6 network gets a /64 prefix on each segment, and devices talk to each other directly, end to end.</p>
+<p>&quot;But doesn&#39;t NAT protect me?&quot; Not in the way that counts. The protection comes from a <strong>stateful firewall</strong> that only lets in replies to connections started from the inside. Routers and firewalls do that just as well without rewriting addresses.</p>
+<p>What you&#39;ll still come across in IPv6:</p>
+<ul>
+<li><strong>NAT64:</strong> lets an IPv6-only client reach an IPv4-only server. It&#39;s a transition tool, not a replacement for IPv4 NAT;</li>
+<li><strong>NPTv6</strong> (RFC 6296): translates one IPv6 prefix into another, without ports. It&#39;s rarely used.</li>
+</ul>
+<p>To learn IPv6 addressing from scratch, see the <a href="../ipv6-addresses-explained/">IPv6 addresses guide</a> and the <a href="../../tools/ipv6/">IPv6 tool</a>, which shortens and expands addresses.</p>
+<h2 id="exercises">Exercises</h2>
+<ol>
+<li>The NAT table shows <code>tcp 203.0.113.3:1027  10.1.1.20:50112  192.0.2.10:80  192.0.2.10:80</code>. Which is the inside local, inside global and outside global address? What type of NAT is this?</li>
+<li>You have dynamic NAT with a pool of 3 public addresses, no <code>overload</code>, and 20 PCs. What happens when a fourth PC tries to open a web page while the first three are still active?</li>
+<li>The inside networks are <code>172.16.0.0/24</code>, <code>172.16.1.0/24</code>, <code>172.16.2.0/24</code> and <code>172.16.3.0/24</code>. Write the ACL (a single line) and the PAT command for interface <code>GigabitEthernet0/0/0</code>.</li>
+<li>After configuring NAT, <code>show ip nat statistics</code> shows &quot;Outside interfaces: GigabitEthernet0/0/1&quot; and &quot;Inside interfaces: GigabitEthernet0/0/0&quot;, and G0/0/0 connects to the ISP. What&#39;s wrong and how do you fix it?</li>
+<li>You have one public address, on G0/0/0, and an internal HTTPS server at <code>192.168.10.70</code>. Write the command that publishes it on port 443 without breaking PAT for the rest of the LAN.</li>
+</ol>
+<details class="reveal-answer">
+<summary><strong>Answers</strong></summary><p><strong>1.</strong> Inside local: <code>10.1.1.20</code>. Inside global: <code>203.0.113.3</code>. Outside global (and outside local): <code>192.0.2.10</code>. The public port (1027) differs from the inside port (50112), so the router translated the port too: this is <strong>PAT</strong>.</p>
+<p><strong>2.</strong> The fourth PC <strong>gets no translation</strong>, and its packets are dropped. Dynamic NAT without <code>overload</code> gives each host a whole address. It will only work once one of the translations expires or is cleared. The fix: <code>overload</code>.</p>
+<p><strong>3.</strong> Together the four networks make up <code>172.16.0.0/22</code>, and the wildcard for a /22 is <code>0.0.3.255</code>:</p>
+<pre><code class="language-text">R1(config)# access-list 1 permit 172.16.0.0 0.0.3.255
+R1(config)# ip nat inside source list 1 interface GigabitEthernet0/0/0 overload
+</code></pre>
+<p>Plus <code>ip nat inside</code> on the LAN-facing interface (or interfaces) and <code>ip nat outside</code> on G0/0/0.</p>
+<p><strong>4.</strong> The roles are reversed. The fix:</p>
+<pre><code class="language-text">R1(config)# interface GigabitEthernet0/0/0
+R1(config-if)# no ip nat inside
+R1(config-if)# ip nat outside
+R1(config-if)# exit
+R1(config)# interface GigabitEthernet0/0/1
+R1(config-if)# no ip nat outside
+R1(config-if)# ip nat inside
+</code></pre>
+<p>Then <code>clear ip nat translation *</code> to get rid of any bad translations.</p>
+<p><strong>5.</strong></p>
+<pre><code class="language-text">R1(config)# ip nat inside source static tcp 192.168.10.70 443 interface GigabitEthernet0/0/0 443
+</code></pre>
+<p>This is static PAT: it binds only TCP port 443, so every other port is still free for the LAN&#39;s dynamic PAT.</p>
+</details><h2 id="the-fastest-way-to-learn-nat">The fastest way to learn NAT</h2>
+<ul>
+<li><strong>Build this topology</strong> in a simulator and try every variant, including dynamic NAT with a tiny pool so you can watch it run out.</li>
+<li><strong>After each variant, read <code>show ip nat translations</code></strong> and say out loud which address is inside local and which is inside global.</li>
+<li><strong>Break it on purpose:</strong> swap inside and outside, type a subnet mask instead of a wildcard, drop <code>overload</code>. Then find the fault using only <code>show</code> commands.</li>
+<li><strong>Practise wildcard masks</strong> with the <a href="../../tools/binary-converter/">binary converter</a> and the subnet calculator; you&#39;ll need them again for <a href="../cisco-acls/">ACLs</a>.</li>
+<li><strong>Brush up on the basics</strong> with the <a href="../cisco-ios-basic-commands/">Cisco IOS commands cheat sheet</a>.</li>
+</ul>
+<div class="cta-box cta-box--article"><svg class="mascot" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><g class="m-breathe"><path d="M22 14l-5-9M42 14l5-9" stroke="#8a919c" stroke-width="3.4" stroke-linecap="round" fill="none"/><circle class="m-led m-led-l" cx="17" cy="5" r="3.6"/><circle class="m-led m-led-r" cx="47" cy="5" r="3.6"/><path class="m-body" d="M28 12q4-6 8 0"/><rect class="m-body" x="8" y="12" width="48" height="42" rx="18"/><rect class="m-belly" x="8" y="40" width="48" height="14" rx="7"/><path d="M19 31q4-5 8 0" stroke="#1a1d24" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M37 31q4-5 8 0" stroke="#1a1d24" stroke-width="3" fill="none" stroke-linecap="round"/><path class="m-led" d="M29 37l3 3.5 3-3.5z"/><circle cx="15" cy="38" r="3" fill="#ff8fb1" opacity=".7"/><circle cx="49" cy="38" r="3" fill="#ff8fb1" opacity=".7"/><circle class="m-ok" cx="18" cy="47" r="2"/><circle class="m-led" cx="24" cy="47" r="2"/><rect x="31" y="45" width="6" height="4" rx="1" fill="#0d1a3a" opacity=".55"/><rect x="39" y="45" width="6" height="4" rx="1" fill="#0d1a3a" opacity=".55"/><rect x="47" y="45" width="5" height="4" rx="1" fill="#0d1a3a" opacity=".55"/><path class="m-leg" d="M20 54v4M44 54v4" stroke-width="3.4" stroke-linecap="round" fill="none"/></g></svg><div><h3>Practice NAT and PAT in the Routerel app</h3><p>Routerel has over 1,900 questions for CCNA 1 · ITN, CCNA 2 · IEN and CCNA 3 · CEN, including questions with zoomable NAT tables and configurations, each with an explanation right after you answer. Your mistakes come back automatically through spaced repetition until you&#39;ve mastered them, and the timed exam simulation shows you where you stand. New subscribers get a 7-day free trial with full access.</p></div><a class="btn" href="../../" data-play data-soon-href="../../">Discover the app<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div><h2 id="frequently-asked-questions">Frequently asked questions</h2>
+<div class="faq faq--article"><details><summary>What is NAT?<span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p>A router function that rewrites the source or destination IP address of a packet as it crosses between the inside and outside networks. Most often, private LAN addresses are translated into a public address so devices can reach the Internet.</p></div></details><details><summary>What is the difference between NAT and PAT?<span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p>Plain NAT (static or dynamic) maps one inside address to one public address. PAT, also called NAT overload, translates the port as well, so many inside devices can share the same public address at the same time. The router tells them apart by port number.</p></div></details><details><summary>What do inside local and inside global mean?<span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p>Inside local is the address of a device on your network as seen from the inside, usually a private address. Inside global is the address of that same device as the outside world sees it, which is the public address it was translated to.</p></div></details><details><summary>What does the overload keyword do?<span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p>It turns on PAT: the router translates ports as well as addresses. Without <code>overload</code>, dynamic NAT hands out a whole public address per inside device, and once the pool runs out, the next devices can&#39;t get out.</p></div></details><details><summary>Why is show ip nat translations empty?<span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p>The usual causes: <code>ip nat inside</code> and <code>ip nat outside</code> on the wrong interfaces, an ACL that doesn&#39;t match the inside addresses, a missing route to the Internet, or simply no traffic yet. Dynamic translations only appear after an inside device sends its first packet.</p></div></details><details><summary>Do I need NAT with IPv6?<span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p>Normally, no. IPv6 has enough addresses for every device to get a globally unique address, so there&#39;s no need to hide a whole network behind one address. Protection comes from a stateful firewall, not from address translation. NAT64 exists, but it&#39;s a transition technique between IPv6 and IPv4. For where NAT fits in the exam, see our <a href="../what-is-ccna/">guide to CCNA</a>.</p></div></details></div>
+<hr>
+<p><em>Routerel is an independent app and is not affiliated with, sponsored by or endorsed by Cisco Systems, Inc. Cisco, CCNA, Cisco IOS and Networking Academy are trademarks of Cisco Systems, Inc.</em></p>
+      
+      <section class="related" aria-labelledby="rel-title">
+        <h2 id="rel-title">Read next</h2>
+        <div class="grid grid--2"><a class="card post-card lift" href="../../../en/guides/ospf-explained/"><span class="tagline">Guide · 16 min</span><h3>OSPF Explained: Single-Area OSPFv2 Configuration (2026)</h3><p>Single-area OSPF explained: router ID, neighbor states, DR/BDR election, cost, network and ip ospf configuration, show commands, troubleshooting and exercises.</p></a><a class="card post-card lift" href="../../../en/guides/spanning-tree-protocol/"><span class="tagline">Guide · 14 min</span><h3>Spanning Tree Protocol Explained: STP, RSTP, Root Bridge</h3><p>Spanning Tree for CCNA: root bridge election, port costs, root and designated ports, RSTP roles, Rapid PVST+, PortFast, BPDU Guard, IOS commands and exercises.</p></a></div>
+      </section>
+    </article>
+  </div>
+</main>
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="about">
+        <a class="brand" href="../../../en/"><img src="../../../assets/icon-96.webp" alt="" width="36" height="36" loading="lazy"><span>Routerel</span></a>
+        <p>CCNA practice on your phone: questions with explanations, spaced repetition and exam simulations. In English and Romanian.</p>
+      </div>
+      <div><h2>The app</h2><ul><li><a href="../../../en/#features">Features</a></li><li><a href="../../../en/#pricing">Pricing</a></li><li><a href="../../../en/#how-it-works">How it works</a></li><li><a href="../../../en/#faq">FAQ</a></li></ul></div>
+      <div><h2>Resources</h2><ul><li><a href="../../../en/guides/">CCNA guides</a></li><li><a href="../../../en/articles/">CCNA articles</a></li><li><a href="../../../en/tools/">Free tools</a></li><li><a href="../../../" hreflang="ro" lang="ro" data-set-lang="ro">Română</a></li></ul></div>
+      <div><h2>Legal & contact</h2><ul><li><a href="../../../en/privacy">Privacy policy</a></li><li><a href="../../../en/terms">Terms of use</a></li><li><a href="../../../en/delete-account">Delete your account</a></li></ul><ul><li><a href="mailto:contact@routerel.app">contact@routerel.app</a></li></ul></div>
+    </div>
+    <div class="disclaimer">
+      <p>Routerel is an independent app, not affiliated with, sponsored or endorsed by Cisco Systems, Inc. Cisco, CCNA and Cisco Networking Academy are trademarks of Cisco Systems, Inc.</p>
+      <p>© 2026 Routerel</p>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

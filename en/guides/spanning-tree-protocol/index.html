@@ -1,0 +1,649 @@
+<!doctype html>
+<!-- Pagină generată. Nu o edita de mână: vezi tools/site/ (npm run build:guides / npm run sync:tools / npm run build:legal). -->
+<html lang="en" class="play-soon" data-utm-medium="guide" data-utm-campaign="spanning-tree-protocol">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Spanning Tree Protocol Explained: STP, RSTP, Root Bridge</title>
+  <meta name="description" content="Spanning Tree for CCNA: root bridge election, port costs, root and designated ports, RSTP roles, Rapid PVST+, PortFast, BPDU Guard, IOS commands and exercises.">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <link rel="canonical" href="https://routerel.app/en/guides/spanning-tree-protocol/">
+  <link rel="alternate" hreflang="ro" href="https://routerel.app/ghiduri/spanning-tree-stp/">
+  <link rel="alternate" hreflang="en" href="https://routerel.app/en/guides/spanning-tree-protocol/">
+  <link rel="alternate" hreflang="x-default" href="https://routerel.app/en/guides/spanning-tree-protocol/">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#12151b" media="(prefers-color-scheme: dark)">
+  <meta name="color-scheme" content="light dark">
+  <link rel="icon" href="../../../assets/favicon-32.png" type="image/png" sizes="32x32">
+  <link rel="icon" href="../../../assets/icon-192.png" type="image/png" sizes="192x192">
+  <link rel="apple-touch-icon" href="../../../assets/apple-touch-icon.png">
+  <link rel="manifest" href="../../../site.webmanifest">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Routerel">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="ro_RO">
+  <meta property="og:title" content="Spanning Tree Protocol Explained: STP, RSTP, Root Bridge">
+  <meta property="og:description" content="Spanning Tree for CCNA: root bridge election, port costs, root and designated ports, RSTP roles, Rapid PVST+, PortFast, BPDU Guard, IOS commands and exercises.">
+  <meta property="og:url" content="https://routerel.app/en/guides/spanning-tree-protocol/">
+  <meta property="og:image" content="https://routerel.app/assets/og-en.png">
+  <meta property="og:image:width" content="1024">
+  <meta property="og:image:height" content="500">
+  <meta property="og:image:alt" content="Routerel: the router chick mascot and the app name">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Spanning Tree Protocol Explained: STP, RSTP, Root Bridge">
+  <meta name="twitter:description" content="Spanning Tree for CCNA: root bridge election, port costs, root and designated ports, RSTP roles, Rapid PVST+, PortFast, BPDU Guard, IOS commands and exercises.">
+  <meta name="twitter:image" content="https://routerel.app/assets/og-en.png">
+  <meta property="article:published_time" content="2026-11-09">
+  <meta property="article:modified_time" content="2026-11-09">
+  <meta name="routerel:updated" content="2026-11-09">
+  <link rel="preload" href="../../../assets/fonts/nunito-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../../../assets/fonts/nunito-latin-ext.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../../../assets/fonts/roboto-mono-500-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="../../../style.css">
+  <script>(function(d){d.classList.add("js");try{var t=localStorage.getItem("routerel-theme");if(t==="light"||t==="dark")d.setAttribute("data-theme",t)}catch(e){}setTimeout(function(){if(!window.__rtl)d.classList.remove("js")},4000)})(document.documentElement)</script>
+  <script src="../../../assets/site.js" defer></script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Article","@id":"https://routerel.app/en/guides/spanning-tree-protocol/#article","headline":"Spanning Tree Protocol Explained: STP, RSTP, Root Bridge","description":"Spanning Tree for CCNA: root bridge election, port costs, root and designated ports, RSTP roles, Rapid PVST+, PortFast, BPDU Guard, IOS commands and exercises.","inLanguage":"en","datePublished":"2026-11-09","dateModified":"2026-11-09","keywords":"spanning tree protocol, STP, how does spanning tree work, RSTP, root bridge election, root port vs designated port, Rapid PVST+, spanning tree configuration Cisco, BPDU Guard PortFast","author":{"@type":"Organization","name":"Routerel","url":"https://routerel.app/"},"publisher":{"@type":"Organization","name":"Routerel","logo":{"@type":"ImageObject","url":"https://routerel.app/assets/icon-512.png"}},"image":"https://routerel.app/assets/og-en.png","mainEntityOfPage":"https://routerel.app/en/guides/spanning-tree-protocol/","isPartOf":{"@id":"https://routerel.app/#website"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://routerel.app/en/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://routerel.app/en/guides/"},{"@type":"ListItem","position":3,"name":"Spanning Tree Protocol Explained: STP, RSTP, Root Bridge","item":"https://routerel.app/en/guides/spanning-tree-protocol/"}]},{"@type":"FAQPage","@id":"https://routerel.app/en/guides/spanning-tree-protocol/#faq","inLanguage":"en","mainEntity":[{"@type":"Question","name":"What does Spanning Tree Protocol do?","acceptedAnswer":{"@type":"Answer","text":"STP prevents Layer 2 loops in a network with redundant links between switches. It elects a central switch (the root bridge), works out each switch's best path to it and blocks the ports that would close a loop. If an active link fails, it unblocks a backup port."}},{"@type":"Question","name":"How is the root bridge elected?","acceptedAnswer":{"@type":"Answer","text":"The switch with the lowest bridge ID wins. Bridge IDs are compared on priority first (32768 plus the VLAN number by default), and if the priorities are equal, on MAC address: the lowest MAC address wins."}},{"@type":"Question","name":"What is the difference between STP and RSTP?","acceptedAnswer":{"@type":"Answer","text":"RSTP (802.1w) builds the same tree as STP (802.1D) but converges in a few seconds instead of 30 to 50 seconds. It has only three port states (discarding, learning, forwarding), new roles for backup ports (alternate and backup) and moves host-facing ports straight to forwarding."}},{"@type":"Question","name":"What is the difference between PVST+ and Rapid PVST+?","acceptedAnswer":{"@type":"Answer","text":"Both are Cisco variants that run a separate spanning tree instance for each VLAN. PVST+ uses the classic 802.1D algorithm, while Rapid PVST+ uses RSTP and therefore converges much faster. You select them with spanning-tree mode pvst or spanning-tree mode rapid-pvst."}},{"@type":"Question","name":"Why can bridge priority only be set in multiples of 4096?","acceptedAnswer":{"@type":"Answer","text":"The priority field is 16 bits long, but the last 12 bits hold the extended system ID, which is the VLAN number. Only the top 4 bits are left for the priority itself, and their values are multiples of 4096, from 0 to 61440."}},{"@type":"Question","name":"What does BPDU Guard do?","acceptedAnswer":{"@type":"Answer","text":"BPDU Guard shuts a port down (puts it into the err-disabled state) as soon as it receives a BPDU. It is used on PortFast ports, where only end devices should be connected, so that a wrongly connected switch can't change the topology or create a loop."}}]}]}</script>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs><linearGradient id="rtl-play" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5b8cff"/><stop offset=".55" stop-color="#2f6bff"/><stop offset="1" stop-color="#ffb020"/></linearGradient></defs></svg>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="container header-row">
+    <a class="brand" href="../../../en/" aria-label="Routerel home"><img src="../../../assets/icon-96.webp" alt="" width="36" height="36"><span>Routerel</span></a>
+    <nav class="main-nav" aria-label="Main"><ul><li><a href="../../../en/#features">Features</a></li><li><a href="../../../en/#pricing">Pricing</a></li><li><a href="../../../en/guides/" aria-current="page">Guides</a></li><li><a href="../../../en/articles/">Articles</a></li><li><a href="../../../en/tools/">Tools</a></li><li><a href="../../../en/#faq">FAQ</a></li></ul></nav>
+    <div class="header-actions">
+      <div class="lang-switch" role="group" aria-label="Language"><a href="../../../ghiduri/spanning-tree-stp/" hreflang="ro" lang="ro" title="Română">RO</a><span aria-current="true" lang="en">EN</span></div>
+      <button class="icon-btn theme-toggle" type="button" data-theme-toggle aria-label="Switch theme"><span class="i-moon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9z"/></svg></span><span class="i-sun"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg></span></button>
+      <a class="btn btn--sm header-cta" data-play data-soon-href="../../../en/#pricing" href="../../../en/#pricing"><span data-when="live">Try free</span><span data-when="soon">See pricing</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      <button class="icon-btn menu-btn" type="button" data-menu-btn aria-expanded="false" aria-controls="mobile-nav" aria-label="Menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+    </div>
+  </div>
+  <nav class="mobile-nav" id="mobile-nav" aria-label="Main" hidden>
+    <div class="container"><ul><li><a href="../../../en/#features">Features</a></li><li><a href="../../../en/#pricing">Pricing</a></li><li><a href="../../../en/guides/" aria-current="page">Guides</a></li><li><a href="../../../en/articles/">Articles</a></li><li><a href="../../../en/tools/">Tools</a></li><li><a href="../../../en/#faq">FAQ</a></li></ul></div>
+  </nav>
+</header>
+<main id="main">
+  <div class="container section section--tight">
+    <article class="prose">
+      <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="../../../en/">Home</a></li><li><a href="../../../en/guides/">Guides</a></li><li><span aria-current="page">Spanning Tree Protocol Explained: STP, RSTP, Root Bridge</span></li></ol></nav>
+      <p class="eyebrow">CCNA guide</p>
+      <h1>Spanning Tree Protocol Explained: STP, RSTP and Rapid PVST+</h1>
+      <div class="article-meta">
+        <span class="avatar"><svg class="mascot" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><g class="m-breathe"><path d="M22 14l-5-9M42 14l5-9" stroke="#8a919c" stroke-width="3.4" stroke-linecap="round" fill="none"/><circle class="m-led m-led-l" cx="17" cy="5" r="3.6"/><circle class="m-led m-led-r" cx="47" cy="5" r="3.6"/><path class="m-body" d="M28 12q4-6 8 0"/><rect class="m-body" x="8" y="12" width="48" height="42" rx="18"/><rect class="m-belly" x="8" y="40" width="48" height="14" rx="7"/><circle cx="23" cy="31" r="5.4" fill="#fff"/><circle class="m-pupil" cx="24" cy="31.5" r="3" fill="#1a1d24"/><circle cx="41" cy="31" r="5.4" fill="#fff"/><circle class="m-pupil" cx="42" cy="31.5" r="3" fill="#1a1d24"/><path class="m-led" d="M29 37l3 3.5 3-3.5z"/><circle class="m-ok" cx="18" cy="47" r="2"/><circle class="m-led" cx="24" cy="47" r="2"/><rect x="31" y="45" width="6" height="4" rx="1" fill="#0d1a3a" opacity=".55"/><rect x="39" y="45" width="6" height="4" rx="1" fill="#0d1a3a" opacity=".55"/><rect x="47" y="45" width="5" height="4" rx="1" fill="#0d1a3a" opacity=".55"/><path class="m-leg" d="M20 54v4M44 54v4" stroke-width="3.4" stroke-linecap="round" fill="none"/></g></svg></span>
+        <span>The Routerel team</span><span aria-hidden="true">·</span>
+        <span>Updated: <time datetime="2026-11-09">November 9, 2026</time></span><span aria-hidden="true">·</span>
+        <span>14 min read</span>
+      </div>
+      <p class="lead">Connect two switches with two cables and you&#39;d expect a more reliable network. Without Spanning Tree, you get the opposite: within seconds the switches are drowning in copies of their own broadcasts.</p>
+<p>This guide covers why Layer 2 loops happen, how the root bridge and port roles are chosen, what RSTP and Rapid PVST+ add, what PortFast and BPDU Guard are for, and how to configure and verify it all in Cisco IOS. Then we solve a four-switch topology step by step, and you finish with exercises and answers.</p>
+<p>In the Networking Academy CCNA v8 courses, Spanning Tree is in <strong>CCNA 2 · IEN</strong>, module 6. Rapid PVST+ builds a separate tree per VLAN, so if VLANs and trunks still feel shaky, read the <a href="../vlans-and-trunks/">VLANs and trunks guide</a> first.</p>
+      <nav class="toc toc--fold" aria-labelledby="toc-title"><h2 id="toc-title">Contents</h2><button type="button" class="toc-toggle" data-toc-toggle aria-expanded="false" aria-controls="toc-list"><span class="toc-toggle-t">Contents</span> <span class="toc-toggle-n">13 sections</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6"/></svg></button><ol id="toc-list"><li><a href="#why-layer-2-loops-are-so-dangerous">Why Layer 2 loops are so dangerous</a></li><li><a href="#the-bridge-id-and-the-root-bridge-election">The bridge ID and the root bridge election</a></li><li><a href="#port-cost-and-root-path-cost">Port cost and root path cost</a></li><li><a href="#root-ports-designated-ports-and-blocked-ports">Root ports, designated ports and blocked ports</a><ol><li><a href="#1-root-port-one-per-non-root-switch">1. Root port: one per non-root switch</a></li><li><a href="#2-designated-port-one-per-segment">2. Designated port: one per segment</a></li><li><a href="#3-everything-else-blocked">3. Everything else: blocked</a></li></ol></li><li><a href="#port-states-802-1d-vs-rstp">Port states: 802.1D vs RSTP</a></li><li><a href="#pvst-and-rapid-pvst">PVST+ and Rapid PVST+</a></li><li><a href="#portfast-bpdu-guard-root-guard-and-loop-guard">PortFast, BPDU Guard, Root Guard and Loop Guard</a></li><li><a href="#configuration">Configuration</a><ol><li><a href="#mode-and-root-bridge">Mode and root bridge</a></li><li><a href="#port-cost-and-port-priority">Port cost and port priority</a></li><li><a href="#edge-protection">Edge protection</a></li></ol></li><li><a href="#verification">Verification</a></li><li><a href="#worked-example-four-switches">Worked example: four switches</a><ol><li><a href="#step-1-the-root-bridge">Step 1: the root bridge</a></li><li><a href="#step-2-root-ports">Step 2: root ports</a></li><li><a href="#step-3-designated-ports">Step 3: designated ports</a></li><li><a href="#step-4-check-the-answer">Step 4: check the answer</a></li></ol></li><li><a href="#exercises">Exercises</a></li><li><a href="#the-fastest-way-to-learn-this">The fastest way to learn this</a></li><li><a href="#frequently-asked-questions">Frequently asked questions</a></li></ol></nav>
+<h2 id="why-layer-2-loops-are-so-dangerous">Why Layer 2 loops are so dangerous</h2>
+<p>An IP packet carries a TTL field. Every router decrements it, and when it hits zero the packet is dropped. An Ethernet frame has <strong>no such field</strong>. Once a frame is caught in a loop of switches, nothing ever removes it.</p>
+<p>Picture three switches cabled in a triangle, with no STP. A PC sends an ARP request, which is a broadcast:</p>
+<ol>
+<li>SW1 floods it out every other port, so a copy goes to SW2 and another to SW3.</li>
+<li>SW2 forwards its copy to SW3, and SW3 forwards its copy to SW2.</li>
+<li>Both copies come back to SW1, which floods them again.</li>
+</ol>
+<p>Three problems show up at once:</p>
+<ul>
+<li><strong>Broadcast storm.</strong> The copies multiply, links saturate, switch CPUs spike, and hosts spend all their time processing broadcasts.</li>
+<li><strong>MAC address table instability.</strong> SW1 sees the same source MAC arriving on the PC&#39;s port, then on the port toward SW2, then on the port toward SW3. It rewrites the entry many times a second and sends unicast traffic the wrong way.</li>
+<li><strong>Duplicate frames.</strong> A unicast frame to a destination the switches haven&#39;t learned yet gets flooded, and the destination receives several copies.</li>
+</ul>
+<p>Removing the redundant links isn&#39;t an option, because a single cable is a single point of failure. <strong>Spanning Tree Protocol</strong> (IEEE 802.1D) keeps the cables but logically blocks just enough ports to leave a loop-free tree. When an active link fails, it brings a blocked one back into service.</p>
+<h2 id="the-bridge-id-and-the-root-bridge-election">The bridge ID and the root bridge election</h2>
+<p>Switches running STP exchange <strong>BPDUs</strong> (Bridge Protocol Data Units). From them, each switch learns who the root is, how far away it is and who is sending.</p>
+<p>Step one is electing the <strong>root bridge</strong>, the switch the whole tree hangs from. The switch with the lowest <strong>bridge ID (BID)</strong> wins. The BID is 8 bytes long:</p>
+<div class="table-scroll"><p class="table-hint" aria-hidden="true">swipe<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></p><div class="table-wrap" role="region" tabindex="0" aria-label="Table (scrolls sideways)"><table>
+<thead>
+<tr>
+<th>Part</th>
+<th>Size</th>
+<th>Contents</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Priority</td>
+<td>4 bits</td>
+<td class="tw">configurable, in multiples of 4096 (0–61440); 32768 by default</td>
+</tr>
+<tr>
+<td>Extended system ID</td>
+<td>12 bits</td>
+<td>the VLAN number</td>
+</tr>
+<tr>
+<td>MAC address</td>
+<td>48 bits</td>
+<td>the switch&#39;s MAC address</td>
+</tr>
+</tbody></table></div></div>
+<p>IOS shows the first two parts together as one 16-bit number. That&#39;s why a switch with default settings shows a priority of <strong>32778</strong> in VLAN 10 (32768 + 10) and <strong>32769</strong> in VLAN 1.</p>
+<p>Why multiples of 4096? Because the VLAN number takes up the lower 12 bits of that 16-bit field. Only the top 4 bits are left for the priority, and those bits are worth 4096, 8192, 16384 and 32768. Drop 32778 into the <a href="../../tools/binary-converter/">binary converter</a> and you&#39;ll see the split.</p>
+<p>Two BIDs are compared like this:</p>
+<ol>
+<li><strong>priority</strong> (including the VLAN number): lower wins;</li>
+<li>if that&#39;s a tie, <strong>MAC address</strong>: lower wins.</li>
+</ol>
+<p>At startup, every switch assumes it is the root and sends BPDUs with its own BID as the root ID. As soon as it hears a BPDU with a better (lower) root ID, it stops claiming and starts relaying that root instead. A few seconds later everyone agrees.</p>
+<p>The catch: leave everything at defaults and the root becomes whichever switch has the lowest MAC address. That&#39;s often the <strong>oldest</strong> switch in the building, possibly an access switch in a wiring closet. So you always choose the root yourself, using priority.</p>
+<h2 id="port-cost-and-root-path-cost">Port cost and root path cost</h2>
+<p>Every port has a <strong>cost</strong> that goes down as speed goes up. For CCNA you work with the short method (from 802.1D-1998), the default on many Catalyst switches, including the 2960 series:</p>
+<div class="table-scroll"><p class="table-hint" aria-hidden="true">swipe<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></p><div class="table-wrap" role="region" tabindex="0" aria-label="Table (scrolls sideways)"><table>
+<thead>
+<tr>
+<th>Speed</th>
+<th>Short cost</th>
+<th>Long cost</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>10 Mbps</td>
+<td>100</td>
+<td>2,000,000</td>
+</tr>
+<tr>
+<td>100 Mbps</td>
+<td>19</td>
+<td>200,000</td>
+</tr>
+<tr>
+<td>1 Gbps</td>
+<td>4</td>
+<td>20,000</td>
+</tr>
+<tr>
+<td>10 Gbps</td>
+<td>2</td>
+<td>2,000</td>
+</tr>
+</tbody></table></div></div>
+<p>The long method (802.1t) exists because the short values run out of room at higher speeds. You enable it with <code>spanning-tree pathcost method long</code>, on every switch, so the numbers stay comparable.</p>
+<p><strong>Root path cost</strong> is the total cost of the path to the root. The root advertises a cost of 0. Each switch that receives a BPDU adds the cost of <strong>the port it received it on</strong>, then advertises the new total downstream. What counts is the cost of the ports facing the root (where the BPDUs arrive), not the ports the BPDU is sent out of.</p>
+<p>Example: the root connects to SW2 over Gigabit, and SW2 connects to SW4 over Fast Ethernet. SW2&#39;s root path cost is 4, and SW4&#39;s is 4 + 19 = <strong>23</strong>.</p>
+<h2 id="root-ports-designated-ports-and-blocked-ports">Root ports, designated ports and blocked ports</h2>
+<p>Once the root is known, every port gets a role. Work them out in the same order every time.</p>
+<h3 id="1-root-port-one-per-non-root-switch">1. Root port: one per non-root switch</h3>
+<p>Every switch except the root picks <strong>exactly one root port</strong>: the port with the best path to the root. The tie-breakers, in order:</p>
+<ol>
+<li>lowest <strong>root path cost</strong>;</li>
+<li>lowest <strong>sender bridge ID</strong> (the neighbor that sent the BPDU);</li>
+<li>lowest <strong>sender port priority</strong> (128 by default);</li>
+<li>lowest <strong>sender port number</strong>.</li>
+</ol>
+<p>Note that the last two look at the <strong>neighbor&#39;s</strong> port, not your own. They only matter when two switches are connected by more than one cable. Exercise 3 shows how this trips people up.</p>
+<p>The root bridge has no root port. It <em>is</em> the destination.</p>
+<h3 id="2-designated-port-one-per-segment">2. Designated port: one per segment</h3>
+<p>Every link (segment) gets <strong>exactly one designated port</strong>: the port on the switch that offers that segment the best path to the root. The tie-breakers:</p>
+<ol>
+<li>lowest <strong>root path cost</strong> of the switch;</li>
+<li>lowest <strong>bridge ID</strong>;</li>
+<li>lowest <strong>port ID</strong> (priority, then number).</li>
+</ol>
+<p>All of the root bridge&#39;s ports are designated, since its root path cost is 0. Ports facing end devices are designated too.</p>
+<h3 id="3-everything-else-blocked">3. Everything else: blocked</h3>
+<p>Any port that is neither a root port nor a designated port is <strong>blocked</strong>. It doesn&#39;t forward or receive user frames, but it keeps listening to BPDUs so it can take over if the topology changes.</p>
+<p>A quick sanity check: on any link between two switches, one end is always designated. The other end is either a root port or blocked. Both ends blocked on the same link can&#39;t happen.</p>
+<h2 id="port-states-802-1d-vs-rstp">Port states: 802.1D vs RSTP</h2>
+<p>Classic STP (802.1D) moves a port through five states:</p>
+<div class="table-scroll"><p class="table-hint" aria-hidden="true">swipe<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></p><div class="table-wrap" role="region" tabindex="0" aria-label="Table (scrolls sideways)"><table>
+<thead>
+<tr>
+<th>802.1D state</th>
+<th>Forwards frames?</th>
+<th>Learns MACs?</th>
+<th>Typical time</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Blocking</td>
+<td>no</td>
+<td>no</td>
+<td>up to 20 s (max age)</td>
+</tr>
+<tr>
+<td>Listening</td>
+<td>no</td>
+<td>no</td>
+<td>15 s (forward delay)</td>
+</tr>
+<tr>
+<td>Learning</td>
+<td>no</td>
+<td>yes</td>
+<td>15 s (forward delay)</td>
+</tr>
+<tr>
+<td>Forwarding</td>
+<td>yes</td>
+<td>yes</td>
+<td>normal operation</td>
+</tr>
+<tr>
+<td>Disabled</td>
+<td>no</td>
+<td>no</td>
+<td>administratively down</td>
+</tr>
+</tbody></table></div></div>
+<p>The default timers are <strong>hello 2 s</strong>, <strong>max age 20 s</strong> and <strong>forward delay 15 s</strong>. If a switch loses its root port because of an indirect failure (a link further away goes down), the backup port waits out max age, then goes through listening and learning: 20 + 15 + 15 = <strong>50 seconds</strong> with no traffic. Plugging in a new link takes 30 seconds (listening plus learning).</p>
+<p><strong>RSTP</strong> (Rapid Spanning Tree, 802.1w, later folded into 802.1D-2004) keeps the same election rules but cuts convergence to a few seconds. It has just three states:</p>
+<div class="table-scroll"><p class="table-hint" aria-hidden="true">swipe<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></p><div class="table-wrap" role="region" tabindex="0" aria-label="Table (scrolls sideways)"><table>
+<thead>
+<tr>
+<th>RSTP state</th>
+<th>802.1D equivalent</th>
+<th>Forwards frames?</th>
+<th>Learns MACs?</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Discarding</td>
+<td>disabled, blocking, listening</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td>Learning</td>
+<td>learning</td>
+<td>no</td>
+<td>yes</td>
+</tr>
+<tr>
+<td>Forwarding</td>
+<td>forwarding</td>
+<td>yes</td>
+<td>yes</td>
+</tr>
+</tbody></table></div></div>
+<p>It also separates port <strong>roles</strong> from port states:</p>
+<div class="table-scroll"><p class="table-hint" aria-hidden="true">swipe<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></p><div class="table-wrap" role="region" tabindex="0" aria-label="Table (scrolls sideways)"><table>
+<thead>
+<tr>
+<th>RSTP role</th>
+<th>Meaning</th>
+<th>State</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Root</td>
+<td>best path to the root</td>
+<td>forwarding</td>
+</tr>
+<tr>
+<td>Designated</td>
+<td>best port for a segment</td>
+<td>forwarding</td>
+</tr>
+<tr>
+<td>Alternate</td>
+<td class="tw">backup path to the root through <strong>another switch</strong>; takes over immediately if the root port fails</td>
+<td>discarding</td>
+</tr>
+<tr>
+<td>Backup</td>
+<td class="tw">backup port to a segment where <strong>the same switch</strong> already has a designated port (only on shared media, such as a hub)</td>
+<td>discarding</td>
+</tr>
+<tr>
+<td>Disabled</td>
+<td>port is down</td>
+<td>discarding</td>
+</tr>
+</tbody></table></div></div>
+<p>Where the speed comes from:</p>
+<ul>
+<li>the <strong>alternate port</strong> is calculated in advance, so when the root port fails it becomes the new root port almost immediately;</li>
+<li>neighbors on <strong>point-to-point</strong> (full-duplex) links negotiate directly with a proposal/agreement handshake instead of waiting for timers;</li>
+<li>every switch sends its own BPDUs every 2 seconds, and a neighbor is declared lost after 3 missed hellos (6 s) rather than 20 s;</li>
+<li><strong>edge ports</strong> (host ports configured with PortFast) go straight to forwarding.</li>
+</ul>
+<h2 id="pvst-and-rapid-pvst">PVST+ and Rapid PVST+</h2>
+<p>The original standard built <strong>one tree</strong> for the whole network, no matter how many VLANs you had. Cisco&#39;s variants run a separate instance per VLAN:</p>
+<div class="table-scroll"><p class="table-hint" aria-hidden="true">swipe<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></p><div class="table-wrap" role="region" tabindex="0" aria-label="Table (scrolls sideways)"><table>
+<thead>
+<tr>
+<th>Mode</th>
+<th>Algorithm</th>
+<th>Instances</th>
+<th>Command</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>PVST+</td>
+<td>802.1D</td>
+<td>one per VLAN</td>
+<td><code><span class="nw">spanning-tree</span> <span class="nw">mode</span> <span class="nw">pvst</span></code></td>
+</tr>
+<tr>
+<td>Rapid PVST+</td>
+<td>RSTP (802.1w)</td>
+<td>one per VLAN</td>
+<td><code><span class="nw">spanning-tree</span> <span class="nw">mode</span> <span class="nw">rapid-pvst</span></code></td>
+</tr>
+<tr>
+<td>MST</td>
+<td>802.1s</td>
+<td>groups of VLANs</td>
+<td><code><span class="nw">spanning-tree</span> <span class="nw">mode</span> <span class="nw">mst</span></code></td>
+</tr>
+</tbody></table></div></div>
+<p>On a 2960 the default is <strong>PVST+</strong>; some newer models ship with Rapid PVST+ already on. Check with <code>show spanning-tree summary</code>. For CCNA, the mode that matters is <strong>Rapid PVST+</strong>.</p>
+<p>The big win of per-VLAN instances is <strong>load sharing</strong>. With two distribution switches, D1 and D2, you make D1 the root for VLAN 10 and D2 the root for VLAN 20. The link that&#39;s blocked for VLAN 10 carries VLAN 20 traffic and vice versa, so both uplinks do useful work.</p>
+<h2 id="portfast-bpdu-guard-root-guard-and-loop-guard">PortFast, BPDU Guard, Root Guard and Loop Guard</h2>
+<p>These features protect the edge of the switched network. In short:</p>
+<p><strong>PortFast</strong> puts an access port straight into forwarding, skipping the wait. Use it on ports facing PCs, printers and servers, so a host doesn&#39;t sit for 30 seconds before it can get a DHCP lease. In RSTP terms, a PortFast port is an <strong>edge port</strong>. Don&#39;t enable it on ports toward other switches; IOS prints a warning saying exactly that when you turn it on.</p>
+<p><strong>BPDU Guard</strong> shuts the port down if a BPDU arrives. The port goes <strong>err-disabled</strong> and passes nothing. A user port should never see a BPDU, so if one shows up, someone has plugged in a switch. The log looks like this:</p>
+<pre><code class="language-text">%SPANTREE-2-BLOCK_BPDUGUARD: Received BPDU on port FastEthernet0/5 with BPDU Guard enabled. Disabling port.
+%PM-4-ERR_DISABLE: bpduguard error detected on Fa0/5, putting Fa0/5 in err-disable state
+</code></pre>
+<p>After removing the rogue switch, you bring the port back with <code>shutdown</code> followed by <code>no shutdown</code>, or automatically with <code>errdisable recovery cause bpduguard</code>.</p>
+<p><strong>Root Guard</strong> goes on designated ports where a better root should never appear, typically distribution ports facing access switches. If a superior BPDU arrives on such a port, the port is placed in the <strong>root-inconsistent</strong> state (blocked). Unlike BPDU Guard, it recovers on its own once the superior BPDUs stop.</p>
+<p><strong>Loop Guard</strong> goes on root and alternate ports. If such a port stops receiving BPDUs (a fiber that only works in one direction, for example), Loop Guard keeps it from turning designated and opening a loop, holding it in the <strong>loop-inconsistent</strong> state instead.</p>
+<h2 id="configuration">Configuration</h2>
+<h3 id="mode-and-root-bridge">Mode and root bridge</h3>
+<pre><code class="language-text">D1(config)# spanning-tree mode rapid-pvst
+D1(config)# spanning-tree vlan 10 root primary
+D1(config)# spanning-tree vlan 20 root secondary
+</code></pre>
+<p><code>root primary</code> is a macro, not a permanent setting. When you enter it, the switch looks at the current root and sets its own priority to <strong>24576</strong> if that&#39;s enough to win. If the current root already has a lower priority, it sets a priority 4096 below that. Only the result is saved in the running config, for example <code>spanning-tree vlan 10 priority 24576</code>. If someone later lowers another switch&#39;s priority, the macro doesn&#39;t re-run.</p>
+<p><code>root secondary</code> sets the priority to <strong>28672</strong>: lower than the default 32768, so this switch takes over as root if the primary fails.</p>
+<p>Many admins prefer setting the value explicitly, because it&#39;s predictable:</p>
+<pre><code class="language-text">D1(config)# spanning-tree vlan 10 priority 4096
+D2(config)# spanning-tree vlan 10 priority 8192
+</code></pre>
+<p>A value that isn&#39;t a multiple of 4096 is rejected, and IOS lists the accepted values.</p>
+<p>For load sharing, swap the roles on the second switch:</p>
+<pre><code class="language-text">D2(config)# spanning-tree vlan 20 root primary
+D2(config)# spanning-tree vlan 10 root secondary
+</code></pre>
+<h3 id="port-cost-and-port-priority">Port cost and port priority</h3>
+<p>To influence which port becomes the root port, change the cost (on the local switch) or the port priority (which the neighbor uses as a tie-breaker):</p>
+<pre><code class="language-text">SW4(config)# interface FastEthernet0/2
+SW4(config-if)# spanning-tree vlan 10 cost 10
+SW4(config-if)# exit
+D1(config)# interface GigabitEthernet0/1
+D1(config-if)# spanning-tree vlan 10 port-priority 64
+</code></pre>
+<p>Port priority ranges from 0 to 240 in steps of 16, with 128 as the default.</p>
+<h3 id="edge-protection">Edge protection</h3>
+<pre><code class="language-text">SW4(config)# interface range FastEthernet0/3 - 24
+SW4(config-if-range)# switchport mode access
+SW4(config-if-range)# spanning-tree portfast
+SW4(config-if-range)# spanning-tree bpduguard enable
+SW4(config-if-range)# exit
+D1(config)# interface GigabitEthernet0/2
+D1(config-if)# spanning-tree guard root
+</code></pre>
+<p>The global versions:</p>
+<pre><code class="language-text">SW4(config)# spanning-tree portfast default
+SW4(config)# spanning-tree portfast bpduguard default
+</code></pre>
+<p>The first enables PortFast on every access port. The second enables BPDU Guard on every PortFast port. On newer IOS and IOS XE releases these commands include the keyword <code>edge</code> (<code>spanning-tree portfast edge</code>, <code>spanning-tree portfast edge default</code>, <code>spanning-tree portfast edge bpduguard default</code>), but they do the same job.</p>
+<h2 id="verification">Verification</h2>
+<div class="table-scroll"><p class="table-hint" aria-hidden="true">swipe<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></p><div class="table-wrap" role="region" tabindex="0" aria-label="Table (scrolls sideways)"><table>
+<thead>
+<tr>
+<th>Command</th>
+<th>What it shows</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code><span class="nw">show</span> <span class="nw">spanning-tree</span></code></td>
+<td class="tw">every VLAN: the root, the local BID, and each port&#39;s role, state and cost</td>
+</tr>
+<tr>
+<td><code><span class="nw">show</span> <span class="nw">spanning-tree</span> <span class="nw">vlan</span> <span class="nw">10</span></code></td>
+<td>the same, for VLAN 10 only</td>
+</tr>
+<tr>
+<td><code><span class="nw">show</span> <span class="nw">spanning-tree</span> <span class="nw">summary</span></code></td>
+<td class="tw">the mode (pvst or rapid-pvst), the VLANs this switch is root for, global PortFast and BPDU Guard settings</td>
+</tr>
+<tr>
+<td><code><span class="nw">show</span> <span class="nw">spanning-tree</span> <span class="nw">interface</span> <span class="nw">Fa0/1</span> <span class="nw">detail</span></code></td>
+<td class="tw">per-port details: BPDUs sent and received, PortFast, BPDU Guard</td>
+</tr>
+<tr>
+<td><code><span class="nw">show</span> <span class="nw">spanning-tree</span> <span class="nw">inconsistentports</span></code></td>
+<td class="tw">ports blocked by Root Guard or Loop Guard</td>
+</tr>
+<tr>
+<td><code><span class="nw">show</span> <span class="nw">interfaces</span> <span class="nw">status</span> <span class="nw">err-disabled</span></code></td>
+<td class="tw">ports shut down, for example by BPDU Guard</td>
+</tr>
+</tbody></table></div></div>
+<p>Reading the port table in <code>show spanning-tree</code>: <strong>Role</strong> is <code>Root</code>, <code>Desg</code>, <code>Altn</code> or <code>Back</code>; <strong>Sts</strong> is <code>FWD</code>, <code>BLK</code>, <code>LRN</code> or <code>LIS</code>. Under Rapid PVST+, IOS still shows discarding ports as <code>BLK</code>. <strong>Type</strong> shows <code>P2p</code> (full duplex), <code>Shr</code> (half duplex, shared) and <code>Edge</code> for PortFast ports.</p>
+<h2 id="worked-example-four-switches">Worked example: four switches</h2>
+<p>Four 2960 switches carry VLAN 10 and run Rapid PVST+. SW1 has <code>spanning-tree vlan 10 root primary</code> configured; the others are at default priority.</p>
+<pre><code class="language-text">             SW1
+            /   \
+          1G     1G
+          /       \
+       SW2 --1G-- SW3
+          \       /
+         100M   100M
+            \   /
+             SW4
+</code></pre>
+<div class="table-scroll"><p class="table-hint" aria-hidden="true">swipe<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></p><div class="table-wrap" role="region" tabindex="0" aria-label="Table (scrolls sideways)"><table>
+<thead>
+<tr>
+<th>Link</th>
+<th>One end</th>
+<th>Other end</th>
+<th>Speed (cost)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>SW1 – SW2</td>
+<td>SW1 Gi0/1</td>
+<td>SW2 Gi0/1</td>
+<td>1 Gbps (4)</td>
+</tr>
+<tr>
+<td>SW1 – SW3</td>
+<td>SW1 Gi0/2</td>
+<td>SW3 Gi0/1</td>
+<td>1 Gbps (4)</td>
+</tr>
+<tr>
+<td>SW2 – SW3</td>
+<td>SW2 Gi0/2</td>
+<td>SW3 Gi0/2</td>
+<td>1 Gbps (4)</td>
+</tr>
+<tr>
+<td>SW2 – SW4</td>
+<td>SW2 Fa0/24</td>
+<td>SW4 Fa0/1</td>
+<td>100 Mbps (19)</td>
+</tr>
+<tr>
+<td>SW3 – SW4</td>
+<td>SW3 Fa0/24</td>
+<td>SW4 Fa0/2</td>
+<td>100 Mbps (19)</td>
+</tr>
+</tbody></table></div></div>
+<div class="table-scroll"><p class="table-hint" aria-hidden="true">swipe<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></p><div class="table-wrap" role="region" tabindex="0" aria-label="Table (scrolls sideways)"><table>
+<thead>
+<tr>
+<th>Switch</th>
+<th>Priority shown</th>
+<th>MAC address</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>SW1</td>
+<td>24586</td>
+<td>0050.0f00.9000</td>
+</tr>
+<tr>
+<td>SW2</td>
+<td>32778</td>
+<td>0050.0f00.2000</td>
+</tr>
+<tr>
+<td>SW3</td>
+<td>32778</td>
+<td>0050.0f00.3000</td>
+</tr>
+<tr>
+<td>SW4</td>
+<td>32778</td>
+<td>0050.0f00.1000</td>
+</tr>
+</tbody></table></div></div>
+<p>Try it yourself before reading on.</p>
+<h3 id="step-1-the-root-bridge">Step 1: the root bridge</h3>
+<p>SW1&#39;s priority of 24586 beats 32778, so SW1 is the <strong>root</strong>. SW4 has the lowest MAC address, but that&#39;s irrelevant: MAC only breaks ties between equal priorities. Both of SW1&#39;s ports (Gi0/1 and Gi0/2) are <strong>designated</strong>.</p>
+<h3 id="step-2-root-ports">Step 2: root ports</h3>
+<p><strong>SW2.</strong> Directly via Gi0/1: cost 4. Via SW3: 4 + 4 = 8. Via SW4 and then SW3: 4 + 19 + 19 = 42. Root port: <strong>Gi0/1</strong> (cost 4).</p>
+<p><strong>SW3.</strong> Directly via Gi0/1: cost 4. Root port: <strong>Gi0/1</strong>.</p>
+<p><strong>SW4.</strong> Via Fa0/1 (toward SW2): 4 + 19 = 23. Via Fa0/2 (toward SW3): 4 + 19 = 23. <strong>A tie.</strong> Next comes the sender&#39;s BID: SW2 (32778, 0050.0f00.2000) versus SW3 (32778, 0050.0f00.3000). Priorities are equal, so the MAC decides, and SW2&#39;s is lower. Root port: <strong>Fa0/1</strong>.</p>
+<h3 id="step-3-designated-ports">Step 3: designated ports</h3>
+<div class="table-scroll"><p class="table-hint" aria-hidden="true">swipe<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></p><div class="table-wrap" role="region" tabindex="0" aria-label="Table (scrolls sideways)"><table>
+<thead>
+<tr>
+<th>Link</th>
+<th>Root path cost</th>
+<th>Designated port</th>
+<th>Other end</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>SW1 – SW2</td>
+<td>0 vs 4</td>
+<td>SW1 Gi0/1</td>
+<td>SW2 Gi0/1: root port</td>
+</tr>
+<tr>
+<td>SW1 – SW3</td>
+<td>0 vs 4</td>
+<td>SW1 Gi0/2</td>
+<td>SW3 Gi0/1: root port</td>
+</tr>
+<tr>
+<td>SW2 – SW3</td>
+<td>4 vs 4: tie, lower BID wins (SW2)</td>
+<td>SW2 Gi0/2</td>
+<td>SW3 Gi0/2: <strong>blocked (alternate)</strong></td>
+</tr>
+<tr>
+<td>SW2 – SW4</td>
+<td>4 vs 23</td>
+<td>SW2 Fa0/24</td>
+<td>SW4 Fa0/1: root port</td>
+</tr>
+<tr>
+<td>SW3 – SW4</td>
+<td>4 vs 23</td>
+<td>SW3 Fa0/24</td>
+<td>SW4 Fa0/2: <strong>blocked (alternate)</strong></td>
+</tr>
+</tbody></table></div></div>
+<h3 id="step-4-check-the-answer">Step 4: check the answer</h3>
+<p>Blocked ports: <strong>SW3 Gi0/2</strong> and <strong>SW4 Fa0/2</strong>. Sanity check: a tree of four switches needs exactly three active links. Five links minus two blocked leaves three. It adds up.</p>
+<p>This is what SW4 shows (Fa0/10 is a PC with PortFast):</p>
+<pre><code class="language-text">SW4# show spanning-tree vlan 10
+
+VLAN0010
+  Spanning tree enabled protocol rstp
+  Root ID    Priority    24586
+             Address     0050.0f00.9000
+             Cost        23
+             Port        1 (FastEthernet0/1)
+             Hello Time   2 sec  Max Age 20 sec  Forward Delay 15 sec
+
+  Bridge ID  Priority    32778  (priority 32768 sys-id-ext 10)
+             Address     0050.0f00.1000
+             Hello Time   2 sec  Max Age 20 sec  Forward Delay 15 sec
+             Aging Time  300 sec
+
+Interface           Role Sts Cost      Prio.Nbr Type
+------------------- ---- --- --------- -------- --------------------------------
+Fa0/1               Root FWD 19        128.1    P2p
+Fa0/2               Altn BLK 19        128.2    P2p
+Fa0/10              Desg FWD 19        128.10   P2p Edge
+</code></pre>
+<p>And the root:</p>
+<pre><code class="language-text">SW1# show spanning-tree vlan 10
+
+VLAN0010
+  Spanning tree enabled protocol rstp
+  Root ID    Priority    24586
+             Address     0050.0f00.9000
+             This bridge is the root
+             Hello Time   2 sec  Max Age 20 sec  Forward Delay 15 sec
+
+  Bridge ID  Priority    24586  (priority 24576 sys-id-ext 10)
+             Address     0050.0f00.9000
+             Hello Time   2 sec  Max Age 20 sec  Forward Delay 15 sec
+             Aging Time  300 sec
+
+Interface           Role Sts Cost      Prio.Nbr Type
+------------------- ---- --- --------- -------- --------------------------------
+Gi0/1               Desg FWD 4         128.25   P2p
+Gi0/2               Desg FWD 4         128.26   P2p
+</code></pre>
+<p>On a 24-port 2960, Gi0/1 and Gi0/2 are port numbers 25 and 26, which is where <code>128.25</code> and <code>128.26</code> come from.</p>
+<h2 id="exercises">Exercises</h2>
+<ol>
+<li>A switch has <code>spanning-tree vlan 30 priority 28672</code> configured. What priority does <code>show spanning-tree vlan 30</code> display?</li>
+<li>Three switches, same VLAN: SWA (24577, 00a0.c911.0005), SWB (24577, 00a0.c911.0002), SWC (4097, 00a0.c911.0009). Which one is the root? Which VLAN is this?</li>
+<li>SWX connects directly to the root with two crossed Gigabit cables: SWX Gi0/1 goes to the root&#39;s Gi0/2, and SWX Gi0/2 goes to the root&#39;s Gi0/1. All port priorities are 128. Which SWX port becomes the root port?</li>
+<li>In the worked example, the SW1 – SW2 link fails. What are the new root ports on SW2 and SW4, and which port ends up blocked?</li>
+<li>You want D1 to be root for VLAN 10 and backup root for VLAN 20, and D2 the other way round. Write the commands.</li>
+</ol>
+<details class="reveal-answer">
+<summary><strong>Answers</strong></summary><p><strong>1.</strong> 28672 + 30 = <strong>28702</strong>.</p>
+<p><strong>2.</strong> <strong>SWC.</strong> Priority is compared first, and 4097 is lower than 24577, so the MAC addresses never come into play. The priorities are 4096 + 1 and 24576 + 1, so this is <strong>VLAN 1</strong>.</p>
+<p><strong>3.</strong> <strong>Gi0/2.</strong> Cost is equal (4 on both), the sender BID is the same (it&#39;s the same switch), and the sender port priorities are equal. The deciding factor is the <strong>sender&#39;s</strong> port number: SWX Gi0/2 receives BPDUs from the root&#39;s Gi0/1, which has the lower number. The local port number doesn&#39;t matter.</p>
+<p><strong>4.</strong> SW2: via Gi0/2 (toward SW3) the cost is 4 + 4 = 8, while via Fa0/24 (toward SW4) it would be much higher, so the root port is <strong>Gi0/2</strong>. SW4: via Fa0/2 (toward SW3) it&#39;s 4 + 19 = 23, via Fa0/1 (toward SW2) it&#39;s 8 + 19 = 27, so the root port is <strong>Fa0/2</strong>. On the SW2 – SW4 link, SW2 has cost 8 and SW4 has 23, so SW2 Fa0/24 is designated and <strong>SW4 Fa0/1 becomes alternate (blocked)</strong>. SW3 Gi0/2 becomes designated (4 vs 8). Three links stay active: SW1 – SW3, SW3 – SW2 and SW3 – SW4.</p>
+<p><strong>5.</strong></p>
+<pre><code class="language-text">D1(config)# spanning-tree vlan 10 root primary
+D1(config)# spanning-tree vlan 20 root secondary
+D2(config)# spanning-tree vlan 20 root primary
+D2(config)# spanning-tree vlan 10 root secondary
+</code></pre>
+<p>Or explicitly, with <code>spanning-tree vlan 10 priority 24576</code> on D1 and <code>spanning-tree vlan 10 priority 28672</code> on D2 (and the reverse for VLAN 20).</p>
+</details><h2 id="the-fastest-way-to-learn-this">The fastest way to learn this</h2>
+<ul>
+<li><strong>Solve topologies on paper first</strong>, always in the same order: root bridge, root ports, designated ports, everything else blocked. Only then confirm in a simulator with <code>show spanning-tree</code>.</li>
+<li><strong>Memorize the four short costs:</strong> 100, 19, 4, 2. For where STP fits in the exam, see our <a href="../what-is-ccna/">guide to CCNA</a>.</li>
+<li><strong>Connect STP to VLANs:</strong> with Rapid PVST+, every VLAN has its own tree. Review trunking in the <a href="../vlans-and-trunks/">VLANs and trunks guide</a> and the basics in the <a href="../cisco-ios-basic-commands/">Cisco IOS commands cheat sheet</a>.</li>
+</ul>
+<div class="cta-box cta-box--article"><svg class="mascot" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><g class="m-breathe"><path d="M22 14l-5-9M42 14l5-9" stroke="#8a919c" stroke-width="3.4" stroke-linecap="round" fill="none"/><circle class="m-led m-led-l" cx="17" cy="5" r="3.6"/><circle class="m-led m-led-r" cx="47" cy="5" r="3.6"/><path class="m-body" d="M28 12q4-6 8 0"/><rect class="m-body" x="8" y="12" width="48" height="42" rx="18"/><rect class="m-belly" x="8" y="40" width="48" height="14" rx="7"/><path d="M19 31q4-5 8 0" stroke="#1a1d24" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M37 31q4-5 8 0" stroke="#1a1d24" stroke-width="3" fill="none" stroke-linecap="round"/><path class="m-led" d="M29 37l3 3.5 3-3.5z"/><circle cx="15" cy="38" r="3" fill="#ff8fb1" opacity=".7"/><circle cx="49" cy="38" r="3" fill="#ff8fb1" opacity=".7"/><circle class="m-ok" cx="18" cy="47" r="2"/><circle class="m-led" cx="24" cy="47" r="2"/><rect x="31" y="45" width="6" height="4" rx="1" fill="#0d1a3a" opacity=".55"/><rect x="39" y="45" width="6" height="4" rx="1" fill="#0d1a3a" opacity=".55"/><rect x="47" y="45" width="5" height="4" rx="1" fill="#0d1a3a" opacity=".55"/><path class="m-leg" d="M20 54v4M44 54v4" stroke-width="3.4" stroke-linecap="round" fill="none"/></g></svg><div><h3>Practice Spanning Tree in the Routerel app</h3><p>Routerel has over 1,900 questions for CCNA 1 · ITN, CCNA 2 · IEN and CCNA 3 · CEN, with zoomable network diagrams and <code>show</code> outputs, and an explanation right after every answer. Your mistakes come back automatically through spaced repetition until you&#39;ve mastered them, and the timed exam simulation shows you where you stand. New subscribers get a 7-day free trial with full access.</p></div><a class="btn" href="../../" data-play data-soon-href="../../">Discover the app<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div><h2 id="frequently-asked-questions">Frequently asked questions</h2>
+<div class="faq faq--article"><details><summary>What does Spanning Tree Protocol do?<span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p>It prevents Layer 2 loops in a network with redundant links between switches. STP elects a central switch (the root bridge), works out each switch&#39;s best path to it and blocks the ports that would close a loop. If an active link fails, it unblocks a backup port.</p></div></details><details><summary>How is the root bridge elected?<span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p>The switch with the lowest bridge ID wins. Priority is compared first (32768 plus the VLAN number by default); if priorities are equal, the lowest MAC address wins.</p></div></details><details><summary>What is the difference between STP and RSTP?<span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p>RSTP (802.1w) builds the same tree as STP (802.1D) but converges in a few seconds instead of 30 to 50 seconds. It has only three port states (discarding, learning, forwarding), new roles for backup ports (alternate and backup) and moves host-facing ports straight to forwarding.</p></div></details><details><summary>What is the difference between PVST+ and Rapid PVST+?<span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p>Both are Cisco variants with one spanning tree instance per VLAN. PVST+ uses the classic 802.1D algorithm, while Rapid PVST+ uses RSTP and converges much faster. You select them with <code>spanning-tree mode pvst</code> or <code>spanning-tree mode rapid-pvst</code>.</p></div></details><details><summary>Why can bridge priority only be set in multiples of 4096?<span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p>The priority field is 16 bits, but the last 12 bits hold the extended system ID, which is the VLAN number. Only the top 4 bits are left for the priority, and their values are multiples of 4096, from 0 to 61440.</p></div></details><details><summary>What does BPDU Guard do?<span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p>It shuts the port down (err-disabled) as soon as a BPDU arrives. It&#39;s used on PortFast ports, where only end devices belong, so a wrongly connected switch can&#39;t change the topology or create a loop.</p></div></details></div>
+<hr>
+<p><em>Routerel is an independent app and is not affiliated with, sponsored by or endorsed by Cisco Systems, Inc. Cisco, CCNA, Cisco IOS, Catalyst and Networking Academy are trademarks of Cisco Systems, Inc.</em></p>
+      
+      <section class="related" aria-labelledby="rel-title">
+        <h2 id="rel-title">Read next</h2>
+        <div class="grid grid--2"><a class="card post-card lift" href="../../../en/guides/nat-and-pat/"><span class="tagline">Guide · 15 min</span><h3>NAT and PAT Explained: Static, Dynamic, Overload (2026)</h3><p>NAT and PAT for CCNA: private ranges, inside local vs inside global, static, dynamic and overload, Cisco IOS config, verification, port forwarding, exercises.</p></a><a class="card post-card lift" href="../../../en/guides/ospf-explained/"><span class="tagline">Guide · 16 min</span><h3>OSPF Explained: Single-Area OSPFv2 Configuration (2026)</h3><p>Single-area OSPF explained: router ID, neighbor states, DR/BDR election, cost, network and ip ospf configuration, show commands, troubleshooting and exercises.</p></a></div>
+      </section>
+    </article>
+  </div>
+</main>
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="about">
+        <a class="brand" href="../../../en/"><img src="../../../assets/icon-96.webp" alt="" width="36" height="36" loading="lazy"><span>Routerel</span></a>
+        <p>CCNA practice on your phone: questions with explanations, spaced repetition and exam simulations. In English and Romanian.</p>
+      </div>
+      <div><h2>The app</h2><ul><li><a href="../../../en/#features">Features</a></li><li><a href="../../../en/#pricing">Pricing</a></li><li><a href="../../../en/#how-it-works">How it works</a></li><li><a href="../../../en/#faq">FAQ</a></li></ul></div>
+      <div><h2>Resources</h2><ul><li><a href="../../../en/guides/">CCNA guides</a></li><li><a href="../../../en/articles/">CCNA articles</a></li><li><a href="../../../en/tools/">Free tools</a></li><li><a href="../../../" hreflang="ro" lang="ro" data-set-lang="ro">Română</a></li></ul></div>
+      <div><h2>Legal & contact</h2><ul><li><a href="../../../en/privacy">Privacy policy</a></li><li><a href="../../../en/terms">Terms of use</a></li><li><a href="../../../en/delete-account">Delete your account</a></li></ul><ul><li><a href="mailto:contact@routerel.app">contact@routerel.app</a></li></ul></div>
+    </div>
+    <div class="disclaimer">
+      <p>Routerel is an independent app, not affiliated with, sponsored or endorsed by Cisco Systems, Inc. Cisco, CCNA and Cisco Networking Academy are trademarks of Cisco Systems, Inc.</p>
+      <p>© 2026 Routerel</p>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

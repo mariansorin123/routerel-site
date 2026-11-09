@@ -1,0 +1,541 @@
+<!doctype html>
+<!-- Pagină generată. Nu o edita de mână: vezi tools/site/ (npm run build:guides / npm run sync:tools / npm run build:legal). -->
+<html lang="en" class="play-soon" data-utm-medium="guide" data-utm-campaign="dhcp-on-cisco">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>DHCP on Cisco: Server, Relay and Troubleshooting (2026)</title>
+  <meta name="description" content="DHCPv4 on Cisco explained: the DORA process, UDP 67/68, leases, router as server and client, ip helper-address, DHCP snooping, troubleshooting and exercises.">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <link rel="canonical" href="https://routerel.app/en/guides/dhcp-on-cisco/">
+  <link rel="alternate" hreflang="ro" href="https://routerel.app/ghiduri/dhcp-cisco/">
+  <link rel="alternate" hreflang="en" href="https://routerel.app/en/guides/dhcp-on-cisco/">
+  <link rel="alternate" hreflang="x-default" href="https://routerel.app/en/guides/dhcp-on-cisco/">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#12151b" media="(prefers-color-scheme: dark)">
+  <meta name="color-scheme" content="light dark">
+  <link rel="icon" href="../../../assets/favicon-32.png" type="image/png" sizes="32x32">
+  <link rel="icon" href="../../../assets/icon-192.png" type="image/png" sizes="192x192">
+  <link rel="apple-touch-icon" href="../../../assets/apple-touch-icon.png">
+  <link rel="manifest" href="../../../site.webmanifest">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Routerel">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="ro_RO">
+  <meta property="og:title" content="DHCP on Cisco: Server, Relay and Troubleshooting (2026)">
+  <meta property="og:description" content="DHCPv4 on Cisco explained: the DORA process, UDP 67/68, leases, router as server and client, ip helper-address, DHCP snooping, troubleshooting and exercises.">
+  <meta property="og:url" content="https://routerel.app/en/guides/dhcp-on-cisco/">
+  <meta property="og:image" content="https://routerel.app/assets/og-en.png">
+  <meta property="og:image:width" content="1024">
+  <meta property="og:image:height" content="500">
+  <meta property="og:image:alt" content="Routerel: the router chick mascot and the app name">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="DHCP on Cisco: Server, Relay and Troubleshooting (2026)">
+  <meta name="twitter:description" content="DHCPv4 on Cisco explained: the DORA process, UDP 67/68, leases, router as server and client, ip helper-address, DHCP snooping, troubleshooting and exercises.">
+  <meta name="twitter:image" content="https://routerel.app/assets/og-en.png">
+  <meta property="article:published_time" content="2026-11-09">
+  <meta property="article:modified_time" content="2026-11-09">
+  <meta name="routerel:updated" content="2026-11-09">
+  <link rel="preload" href="../../../assets/fonts/nunito-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../../../assets/fonts/nunito-latin-ext.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../../../assets/fonts/roboto-mono-500-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="../../../style.css">
+  <script>(function(d){d.classList.add("js");try{var t=localStorage.getItem("routerel-theme");if(t==="light"||t==="dark")d.setAttribute("data-theme",t)}catch(e){}setTimeout(function(){if(!window.__rtl)d.classList.remove("js")},4000)})(document.documentElement)</script>
+  <script src="../../../assets/site.js" defer></script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Article","@id":"https://routerel.app/en/guides/dhcp-on-cisco/#article","headline":"DHCP on Cisco: Server, Relay and Troubleshooting (2026)","description":"DHCPv4 on Cisco explained: the DORA process, UDP 67/68, leases, router as server and client, ip helper-address, DHCP snooping, troubleshooting and exercises.","inLanguage":"en","datePublished":"2026-11-09","dateModified":"2026-11-09","keywords":"Cisco DHCP configuration, configure DHCP on Cisco router, what is DHCP, DHCP DORA process, ip helper-address, DHCP relay agent, ip dhcp excluded-address, DHCP snooping, 169.254 address","author":{"@type":"Organization","name":"Routerel","url":"https://routerel.app/"},"publisher":{"@type":"Organization","name":"Routerel","logo":{"@type":"ImageObject","url":"https://routerel.app/assets/icon-512.png"}},"image":"https://routerel.app/assets/og-en.png","mainEntityOfPage":"https://routerel.app/en/guides/dhcp-on-cisco/","isPartOf":{"@id":"https://routerel.app/#website"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://routerel.app/en/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://routerel.app/en/guides/"},{"@type":"ListItem","position":3,"name":"DHCP on Cisco: Server, Relay and Troubleshooting (2026)","item":"https://routerel.app/en/guides/dhcp-on-cisco/"}]},{"@type":"FAQPage","@id":"https://routerel.app/en/guides/dhcp-on-cisco/#faq","inLanguage":"en","mainEntity":[{"@type":"Question","name":"What is DHCP?","acceptedAnswer":{"@type":"Answer","text":"DHCP (Dynamic Host Configuration Protocol) lets a device automatically get its IPv4 address, subnet mask, default gateway, DNS servers and other settings from a server, for a limited time called a lease."}},{"@type":"Question","name":"Which ports does DHCP use?","acceptedAnswer":{"@type":"Answer","text":"DHCPv4 runs over UDP. The server listens on port 67 and the client on port 68. DHCPv6 uses different ports: 547 for the server and 546 for the client."}},{"@type":"Question","name":"What does DORA stand for?","acceptedAnswer":{"@type":"Answer","text":"DORA names the four messages a client uses to get an address: Discover (the client looks for servers), Offer (a server proposes an address), Request (the client asks for the address it chose) and Acknowledgment (the server confirms)."}},{"@type":"Question","name":"Why do I need ip helper-address?","acceptedAnswer":{"@type":"Answer","text":"DHCP Discover messages are broadcasts, and routers don't forward broadcasts. When the DHCP server is in another subnet or VLAN, ip helper-address on the router interface facing the clients turns the broadcast into a unicast sent to the server."}},{"@type":"Question","name":"Why does my PC get a 169.254.x.x address?","acceptedAnswer":{"@type":"Answer","text":"A 169.254.x.x address (APIPA, IPv4 link-local) means the client got no answer from any DHCP server. Common causes are a missing helper address, a wrong VLAN, an exhausted pool, a missing route back to the client subnet, or DHCP snooping dropping the replies."}},{"@type":"Question","name":"What is the default lease time on a Cisco router?","acceptedAnswer":{"@type":"Answer","text":"The Cisco IOS DHCP server uses a one-day lease by default. You change it inside the pool with the lease command, for example lease 7 for seven days or lease 0 8 for eight hours."}},{"@type":"Question","name":"What does DHCP snooping do?","acceptedAnswer":{"@type":"Answer","text":"DHCP snooping is a switch feature that only accepts DHCP server messages (Offer, Ack) on ports marked as trusted. A rogue DHCP server plugged into a user port can no longer hand out fake addresses and gateways."}}]}]}</script>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs><linearGradient id="rtl-play" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5b8cff"/><stop offset=".55" stop-color="#2f6bff"/><stop offset="1" stop-color="#ffb020"/></linearGradient></defs></svg>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="container header-row">
+    <a class="brand" href="../../../en/" aria-label="Routerel home"><img src="../../../assets/icon-96.webp" alt="" width="36" height="36"><span>Routerel</span></a>
+    <nav class="main-nav" aria-label="Main"><ul><li><a href="../../../en/#features">Features</a></li><li><a href="../../../en/#pricing">Pricing</a></li><li><a href="../../../en/guides/" aria-current="page">Guides</a></li><li><a href="../../../en/articles/">Articles</a></li><li><a href="../../../en/tools/">Tools</a></li><li><a href="../../../en/#faq">FAQ</a></li></ul></nav>
+    <div class="header-actions">
+      <div class="lang-switch" role="group" aria-label="Language"><a href="../../../ghiduri/dhcp-cisco/" hreflang="ro" lang="ro" title="Română">RO</a><span aria-current="true" lang="en">EN</span></div>
+      <button class="icon-btn theme-toggle" type="button" data-theme-toggle aria-label="Switch theme"><span class="i-moon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9z"/></svg></span><span class="i-sun"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg></span></button>
+      <a class="btn btn--sm header-cta" data-play data-soon-href="../../../en/#pricing" href="../../../en/#pricing"><span data-when="live">Try free</span><span data-when="soon">See pricing</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      <button class="icon-btn menu-btn" type="button" data-menu-btn aria-expanded="false" aria-controls="mobile-nav" aria-label="Menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+    </div>
+  </div>
+  <nav class="mobile-nav" id="mobile-nav" aria-label="Main" hidden>
+    <div class="container"><ul><li><a href="../../../en/#features">Features</a></li><li><a href="../../../en/#pricing">Pricing</a></li><li><a href="../../../en/guides/" aria-current="page">Guides</a></li><li><a href="../../../en/articles/">Articles</a></li><li><a href="../../../en/tools/">Tools</a></li><li><a href="../../../en/#faq">FAQ</a></li></ul></div>
+  </nav>
+</header>
+<main id="main">
+  <div class="container section section--tight">
+    <article class="prose">
+      <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="../../../en/">Home</a></li><li><a href="../../../en/guides/">Guides</a></li><li><span aria-current="page">DHCP on Cisco: Server, Relay and Troubleshooting (2026)</span></li></ol></nav>
+      <p class="eyebrow">CCNA guide</p>
+      <h1>DHCP on Cisco: Server, Relay and Troubleshooting</h1>
+      <div class="article-meta">
+        <span class="avatar"><svg class="mascot" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><g class="m-breathe"><path d="M22 14l-5-9M42 14l5-9" stroke="#8a919c" stroke-width="3.4" stroke-linecap="round" fill="none"/><circle class="m-led m-led-l" cx="17" cy="5" r="3.6"/><circle class="m-led m-led-r" cx="47" cy="5" r="3.6"/><path class="m-body" d="M28 12q4-6 8 0"/><rect class="m-body" x="8" y="12" width="48" height="42" rx="18"/><rect class="m-belly" x="8" y="40" width="48" height="14" rx="7"/><circle cx="23" cy="31" r="5.4" fill="#fff"/><circle class="m-pupil" cx="24" cy="31.5" r="3" fill="#1a1d24"/><circle cx="41" cy="31" r="5.4" fill="#fff"/><circle class="m-pupil" cx="42" cy="31.5" r="3" fill="#1a1d24"/><path class="m-led" d="M29 37l3 3.5 3-3.5z"/><circle class="m-ok" cx="18" cy="47" r="2"/><circle class="m-led" cx="24" cy="47" r="2"/><rect x="31" y="45" width="6" height="4" rx="1" fill="#0d1a3a" opacity=".55"/><rect x="39" y="45" width="6" height="4" rx="1" fill="#0d1a3a" opacity=".55"/><rect x="47" y="45" width="5" height="4" rx="1" fill="#0d1a3a" opacity=".55"/><path class="m-leg" d="M20 54v4M44 54v4" stroke-width="3.4" stroke-linecap="round" fill="none"/></g></svg></span>
+        <span>The Routerel team</span><span aria-hidden="true">·</span>
+        <span>Updated: <time datetime="2026-11-09">November 9, 2026</time></span><span aria-hidden="true">·</span>
+        <span>16 min read</span>
+      </div>
+      <p class="lead">Without DHCP, every laptop, phone and printer on a network would need its address typed in by hand. With DHCP, a device plugs in, asks for an address, and a moment later it has everything it needs to reach the internet.</p>
+<p>This guide covers what a client actually gets from DHCP, how the DORA exchange works at the broadcast/unicast level, how leases are renewed, and how to configure a Cisco router as a DHCP server, a relay agent and a client. You&#39;ll also see the <code>show</code> commands that matter, a method for tracking down 169.254.x.x addresses, and what DHCP snooping is for. Exercises with answers are at the end.</p>
+<p>In the Networking Academy CCNA v8 courses, DHCPv4 is module 8 of <strong>CCNA 2 · IEN</strong>, SLAAC and DHCPv6 are module 9, and DHCP snooping shows up in module 11 (access and Layer 2 security).</p>
+      <nav class="toc toc--fold" aria-labelledby="toc-title"><h2 id="toc-title">Contents</h2><button type="button" class="toc-toggle" data-toc-toggle aria-expanded="false" aria-controls="toc-list"><span class="toc-toggle-t">Contents</span> <span class="toc-toggle-n">14 sections</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6"/></svg></button><ol id="toc-list"><li><a href="#what-dhcp-gives-a-client">What DHCP gives a client</a></li><li><a href="#the-dora-process-step-by-step">The DORA process, step by step</a></li><li><a href="#leases-and-renewal-t1-and-t2">Leases and renewal (T1 and T2)</a></li><li><a href="#the-topology-used-in-this-guide">The topology used in this guide</a></li><li><a href="#configuring-the-router-as-a-dhcp-server">Configuring the router as a DHCP server</a><ol><li><a href="#step-1-exclude-the-static-addresses">Step 1: exclude the static addresses</a></li><li><a href="#step-2-build-the-pool">Step 2: build the pool</a></li><li><a href="#a-pool-for-the-subnet-behind-the-relay">A pool for the subnet behind the relay</a></li></ol></li><li><a href="#dhcp-relay-with-ip-helper-address">DHCP relay with ip helper-address</a><ol><li><a href="#relaying-across-vlans">Relaying across VLANs</a></li><li><a href="#what-else-ip-helper-address-forwards">What else ip helper-address forwards</a></li></ol></li><li><a href="#the-router-as-a-dhcp-client">The router as a DHCP client</a></li><li><a href="#verifying-the-server">Verifying the server</a><ol><li><a href="#debug-ip-dhcp-server-events-carefully">debug ip dhcp server events, carefully</a></li></ol></li><li><a href="#troubleshooting-from-169-254-to-the-root-cause">Troubleshooting: from 169.254 to the root cause</a></li><li><a href="#dhcp-snooping-in-brief">DHCP snooping in brief</a></li><li><a href="#ipv6-works-differently">IPv6 works differently</a></li><li><a href="#exercises">Exercises</a></li><li><a href="#how-to-learn-dhcp-fastest">How to learn DHCP fastest</a></li><li><a href="#frequently-asked-questions">Frequently asked questions</a></li></ol></nav>
+<h2 id="what-dhcp-gives-a-client">What DHCP gives a client</h2>
+<p>DHCP (Dynamic Host Configuration Protocol) is an application-layer protocol that runs over <strong>UDP</strong>: the server listens on port <strong>67</strong> and the client on port <strong>68</strong>. It grew out of the older BOOTP protocol, which is why ACLs show port 67 as <code>bootps</code> and port 68 as <code>bootpc</code>.</p>
+<p>A DHCP server typically hands the client:</p>
+<div class="table-scroll"><p class="table-hint" aria-hidden="true">swipe<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></p><div class="table-wrap" role="region" tabindex="0" aria-label="Table (scrolls sideways)"><table>
+<thead>
+<tr>
+<th>What the client gets</th>
+<th>DHCP option</th>
+<th>Cisco pool command</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>IPv4 address and mask</td>
+<td><code>yiaddr</code> field + option 1</td>
+<td><code>network</code></td>
+</tr>
+<tr>
+<td>Default gateway</td>
+<td>option 3</td>
+<td><code>default-router</code></td>
+</tr>
+<tr>
+<td>DNS servers</td>
+<td>option 6</td>
+<td><code>dns-server</code></td>
+</tr>
+<tr>
+<td>Domain name</td>
+<td>option 15</td>
+<td><code>domain-name</code></td>
+</tr>
+<tr>
+<td>Lease time</td>
+<td>option 51</td>
+<td><code>lease</code></td>
+</tr>
+</tbody></table></div></div>
+<p>The key word is <strong>lease</strong>. The client doesn&#39;t own the address; it borrows it for a period and has to renew it. That way, addresses used by devices that leave the network flow back into the pool on their own.</p>
+<p>A Cisco router makes a perfectly good DHCP server for a branch office or a small site. In larger networks the server is usually Windows Server, a Linux box or a dedicated IP address management system, and the routers and Layer 3 switches only relay. The exam expects you to know both roles.</p>
+<h2 id="the-dora-process-step-by-step">The DORA process, step by step</h2>
+<p>The client starts with no IP address. All it knows is its own MAC address. That&#39;s the interesting part: it has to talk to a server it doesn&#39;t know, without an address of its own.</p>
+<div class="table-scroll"><p class="table-hint" aria-hidden="true">swipe<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></p><div class="table-wrap" role="region" tabindex="0" aria-label="Table (scrolls sideways)"><table>
+<thead>
+<tr>
+<th>Step</th>
+<th>Message</th>
+<th>Source IP → destination IP</th>
+<th>Ports</th>
+<th>Delivery</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td><strong>Discover</strong> (client looks for servers)</td>
+<td>0.0.0.0 → 255.255.255.255</td>
+<td>68 → 67</td>
+<td class="tw">broadcast (destination MAC ff:ff:ff:ff:ff:ff)</td>
+</tr>
+<tr>
+<td>2</td>
+<td><strong>Offer</strong> (server proposes an address)</td>
+<td>server → offered address</td>
+<td>67 → 68</td>
+<td>Layer 2 unicast to the client&#39;s MAC</td>
+</tr>
+<tr>
+<td>3</td>
+<td class="tw"><strong>Request</strong> (client asks for the chosen address)</td>
+<td>0.0.0.0 → 255.255.255.255</td>
+<td>68 → 67</td>
+<td>broadcast</td>
+</tr>
+<tr>
+<td>4</td>
+<td><strong>Acknowledgment</strong> (server confirms)</td>
+<td>server → offered address</td>
+<td>67 → 68</td>
+<td>Layer 2 unicast to the client&#39;s MAC</td>
+</tr>
+</tbody></table></div></div>
+<p>Details that come up a lot in exam questions:</p>
+<ul>
+<li><strong>Why is the Request still a broadcast?</strong> Several servers may answer the same Discover. The client picks one offer (usually the first) and announces its choice to all of them at once: the Request carries the chosen server&#39;s identifier (option 54). The other servers see that their offer lost and keep their addresses.</li>
+<li><strong>Offer and Ack aren&#39;t always unicast.</strong> If the client set the broadcast flag in its Discover (some operating systems can&#39;t accept unicast before they have an address), the server broadcasts its replies. For the CCNA, remember the basic version: Discover and Request are broadcast, Offer and Ack go to the client&#39;s MAC.</li>
+<li><strong>Before offering an address</strong>, the Cisco IOS server pings it twice by default. If anything answers, the address is flagged as a <strong>conflict</strong> and not offered.</li>
+<li><strong>After the Ack</strong>, the client may also check with ARP that nobody else uses the address. If it does find a duplicate, it sends a <strong>DHCPDECLINE</strong> and starts over.</li>
+</ul>
+<p>Other messages worth knowing: <strong>DHCPNAK</strong> (the server rejects a request, for example when the client asks for an address from a subnet it has moved away from), <strong>DHCPRELEASE</strong> (the client gives the address back, as with <code>ipconfig /release</code>) and <strong>DHCPINFORM</strong> (the client already has an address and only wants the other settings).</p>
+<h2 id="leases-and-renewal-t1-and-t2">Leases and renewal (T1 and T2)</h2>
+<p>Every address comes with a lease time, and the client doesn&#39;t wait for it to run out:</p>
+<ul>
+<li><strong>T1, at 50% of the lease:</strong> the client sends a unicast Request straight to the server that gave it the address. If that server answers with an Ack, the lease starts over and the client keeps its address.</li>
+<li><strong>T2, at 87.5% of the lease:</strong> if the original server stayed silent, the client broadcasts a Request to any server that can help (rebinding).</li>
+<li><strong>At expiry:</strong> with no answer at all, the client drops the address and starts again with a Discover.</li>
+</ul>
+<p>With the Cisco default of one day (24 hours), T1 comes after 12 hours and T2 after 21 hours.</p>
+<p>On the Cisco IOS server you set the lease inside the pool with <code>lease days [hours [minutes]]</code> or <code>lease infinite</code>. <code>lease 7</code> is seven days; <code>lease 0 8</code> is eight hours. A short lease recycles addresses quickly on a guest network; a long one cuts renewal traffic in an office where the same machines show up every day.</p>
+<h2 id="the-topology-used-in-this-guide">The topology used in this guide</h2>
+<pre><code class="language-text">   LAN 10 hosts                                          LAN 20 hosts
+   192.168.10.0/24                                       192.168.20.0/24
+   internal DNS 192.168.10.10                                  |
+         |                                                     |
+       [S1]                                                  [S2]
+         | G0/0/0 .1                                           | G0/0/0 .1
+        [R1] G0/0/1 .1 -------- 10.1.1.0/30 -------- .2 G0/0/1 [R2]
+         | G0/0/2
+         | (DHCP client, address from the ISP)
+       [ISP]
+</code></pre>
+<ul>
+<li><strong>R1</strong> is the DHCP server for both LANs.</li>
+<li><strong>R2</strong> has no server of its own; it relays LAN 20 requests to R1.</li>
+<li><strong>R1</strong> also gets the address on its ISP-facing interface through DHCP.</li>
+</ul>
+<p>To double-check the address ranges below, use the <a href="../../tools/subnet-calculator/">subnet calculator</a>.</p>
+<h2 id="configuring-the-router-as-a-dhcp-server">Configuring the router as a DHCP server</h2>
+<h3 id="step-1-exclude-the-static-addresses">Step 1: exclude the static addresses</h3>
+<p>Gateways, servers, printers and anything else with a fixed address must stay out of the pool. Exclusions are configured in <strong>global configuration mode</strong>, not inside the pool:</p>
+<pre><code class="language-text">R1(config)# ip dhcp excluded-address 192.168.10.1 192.168.10.20
+R1(config)# ip dhcp excluded-address 192.168.20.1 192.168.20.10
+</code></pre>
+<p>The syntax is <code>ip dhcp excluded-address low-address [high-address]</code>. With a single address you exclude just that one. Add the exclusions <strong>before</strong> you create the pool; otherwise the router may hand a PC an address you had reserved for a server or a printer.</p>
+<h3 id="step-2-build-the-pool">Step 2: build the pool</h3>
+<pre><code class="language-text">R1(config)# ip dhcp pool LAN10
+R1(dhcp-config)# network 192.168.10.0 255.255.255.0
+R1(dhcp-config)# default-router 192.168.10.1
+R1(dhcp-config)# dns-server 192.168.10.10
+R1(dhcp-config)# domain-name example.com
+R1(dhcp-config)# lease 2
+R1(dhcp-config)# exit
+</code></pre>
+<p>What each line does:</p>
+<ul>
+<li><code>ip dhcp pool LAN10</code> creates the pool and enters <code>dhcp-config</code> mode. You pick the name.</li>
+<li><code>network</code> sets the subnet the addresses come from. Prefix notation works too: <code>network 192.168.10.0 /24</code>.</li>
+<li><code>default-router</code> is the gateway the clients will use. You can list up to 8 addresses, in order of preference.</li>
+<li><code>dns-server</code> also takes up to 8 addresses.</li>
+<li><code>domain-name</code> is the DNS suffix appended to short names (<code>srv1</code> becomes <code>srv1.example.com</code>).</li>
+<li><code>lease 2</code> means two days. Leave it out and the lease is one day.</li>
+</ul>
+<p>How does the router pick the right pool? For a directly connected client, it matches the address of the interface the Discover arrived on: a Discover on G0/0/0 (192.168.10.1) matches pool <code>LAN10</code>. If no pool&#39;s network matches the interface, the router simply doesn&#39;t answer.</p>
+<h3 id="a-pool-for-the-subnet-behind-the-relay">A pool for the subnet behind the relay</h3>
+<p>R1 also serves LAN 20, even though it isn&#39;t directly connected to it:</p>
+<pre><code class="language-text">R1(config)# ip dhcp pool LAN20
+R1(dhcp-config)# network 192.168.20.0 255.255.255.0
+R1(dhcp-config)# default-router 192.168.20.1
+R1(dhcp-config)# dns-server 192.168.10.10
+R1(dhcp-config)# domain-name example.com
+R1(dhcp-config)# exit
+R1(config)# ip route 192.168.20.0 255.255.255.0 10.1.1.2
+</code></pre>
+<p>The last line is the one people forget. R1 sends its replies to the relay&#39;s address in LAN 20 (192.168.20.1), so it needs a route to 192.168.20.0/24. In a real network that route might come from OSPF; what matters is that it exists.</p>
+<p>The DHCP service is on by default in IOS. If someone typed <code>no service dhcp</code>, the router stops acting as both server and relay. Turn it back on with <code>service dhcp</code>.</p>
+<h2 id="dhcp-relay-with-ip-helper-address">DHCP relay with ip helper-address</h2>
+<p>Routers <strong>don&#39;t forward broadcasts</strong>. A Discover from a PC in LAN 20 stops at R2 and never reaches R1. Without some help, you&#39;d need a DHCP server in every subnet and every VLAN.</p>
+<p>The fix is a <strong>DHCP relay agent</strong>: on the router interface <strong>facing the clients</strong>, you point to the server.</p>
+<pre><code class="language-text">R2(config)# interface GigabitEthernet0/0/0
+R2(config-if)# ip address 192.168.20.1 255.255.255.0
+R2(config-if)# ip helper-address 10.1.1.1
+R2(config-if)# no shutdown
+</code></pre>
+<p>What happens to a Discover from LAN 20:</p>
+<ol>
+<li>The PC broadcasts a Discover. R2 receives it on G0/0/0.</li>
+<li>R2 fills in the <strong>giaddr</strong> (gateway IP address) field with the address of the interface the request came in on: 192.168.20.1.</li>
+<li>R2 sends the message as a <strong>unicast</strong> to 10.1.1.1 on UDP port 67.</li>
+<li>R1 sees <code>giaddr = 192.168.20.1</code> and picks pool <code>LAN20</code>, the one whose network contains that address.</li>
+<li>R1 replies by unicast to 192.168.20.1 (hence the route to LAN 20).</li>
+<li>R2 hands the reply to the client in LAN 20 on UDP port 68.</li>
+</ol>
+<p>The classic mistake is putting the helper on the interface that faces the server (G0/0/1 on R2). The command belongs where the <strong>clients&#39; broadcasts arrive</strong>.</p>
+<h3 id="relaying-across-vlans">Relaying across VLANs</h3>
+<p>Each VLAN is a separate subnet with its own broadcast domain. If the DHCP server sits in a server VLAN, you add <code>ip helper-address</code> to <strong>every</strong> gateway interface: each subinterface with router-on-a-stick, or each SVI on a Layer 3 switch.</p>
+<pre><code class="language-text">D1(config)# interface vlan 30
+D1(config-if)# ip address 192.168.30.1 255.255.255.0
+D1(config-if)# ip helper-address 192.168.99.50
+D1(config-if)# exit
+D1(config)# interface vlan 40
+D1(config-if)# ip address 192.168.40.1 255.255.255.0
+D1(config-if)# ip helper-address 192.168.99.50
+</code></pre>
+<p>If VLANs and trunks are still fuzzy, read the <a href="../vlans-and-trunks/">VLANs and trunks guide</a> first.</p>
+<h3 id="what-else-ip-helper-address-forwards">What else ip helper-address forwards</h3>
+<p>The command isn&#39;t only for DHCP. By default the router also forwards UDP broadcasts for a handful of other services to the helper address, such as DNS (53), TFTP (69), TACACS (49), Time (37) and NetBIOS (137, 138). You can change the list with <code>ip forward-protocol udp port</code> or <code>no ip forward-protocol udp port</code>.</p>
+<h2 id="the-router-as-a-dhcp-client">The router as a DHCP client</h2>
+<p>Plenty of small-business internet connections get their address from the provider through DHCP. On the router, the ISP-facing interface becomes a client:</p>
+<pre><code class="language-text">R1(config)# interface GigabitEthernet0/0/2
+R1(config-if)# ip address dhcp
+R1(config-if)# no shutdown
+</code></pre>
+<p>To verify:</p>
+<pre><code class="language-text">R1# show ip interface brief | include 0/0/2
+GigabitEthernet0/0/2   203.0.113.45    YES DHCP   up                    up
+
+R1# show ip route static | include 0.0.0.0
+S*    0.0.0.0/0 [254/0] via 203.0.113.1
+</code></pre>
+<p>The Method column says <code>DHCP</code>. If the provider&#39;s server also sends a gateway (option 3), IOS installs a static default route on its own, with an <strong>administrative distance of 254</strong>. The high value is deliberate: any default route you configure yourself wins. For lease details (server, time left), use <code>show dhcp lease</code>.</p>
+<h2 id="verifying-the-server">Verifying the server</h2>
+<div class="table-scroll"><p class="table-hint" aria-hidden="true">swipe<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></p><div class="table-wrap" role="region" tabindex="0" aria-label="Table (scrolls sideways)"><table>
+<thead>
+<tr>
+<th>Command</th>
+<th>What it shows</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code><span class="nw">show</span> <span class="nw">ip</span> <span class="nw">dhcp</span> <span class="nw">binding</span></code></td>
+<td class="tw">addresses handed out, the client MAC or client ID, lease expiry</td>
+</tr>
+<tr>
+<td><code><span class="nw">show</span> <span class="nw">ip</span> <span class="nw">dhcp</span> <span class="nw">pool</span></code></td>
+<td class="tw">each pool: size, addresses leased, the next address to try</td>
+</tr>
+<tr>
+<td><code><span class="nw">show</span> <span class="nw">ip</span> <span class="nw">dhcp</span> <span class="nw">conflict</span></code></td>
+<td class="tw">addresses the server found in use (by ping or gratuitous ARP)</td>
+</tr>
+<tr>
+<td><code><span class="nw">show</span> <span class="nw">ip</span> <span class="nw">dhcp</span> <span class="nw">server</span> <span class="nw">statistics</span></code></td>
+<td class="tw">counters for each message type (Discover, Request, Ack and so on)</td>
+</tr>
+<tr>
+<td><code><span class="nw">show</span> <span class="nw">running-config</span> <span class="nw">|</span> <span class="nw">section</span> <span class="nw">dhcp</span></code></td>
+<td>the configured exclusions and pools</td>
+</tr>
+</tbody></table></div></div>
+<p>Sample output after three PCs in LAN 10 and one in LAN 20 got their addresses:</p>
+<pre><code class="language-text">R1# show ip dhcp binding
+Bindings from all pools not associated with VRF:
+IP address      Client-ID/              Lease expiration        Type       State      Interface
+                Hardware address/
+                User name
+192.168.10.21   0100.5056.a1b2.c3       Nov 11 2026 09:14 AM    Automatic  Active     GigabitEthernet0/0/0
+192.168.10.22   0100.5056.a1b2.d7       Nov 11 2026 09:15 AM    Automatic  Active     GigabitEthernet0/0/0
+192.168.10.24   0100.1a2b.3c4d.5e       Nov 11 2026 09:21 AM    Automatic  Active     GigabitEthernet0/0/0
+192.168.20.11   0100.5056.a1c8.02       Nov 10 2026 09:30 AM    Automatic  Active     Unknown
+</code></pre>
+<p>For an Ethernet client, the client ID is <code>01</code> (the hardware type) followed by the MAC address. The LAN 20 client shows &quot;Unknown&quot; as its interface because it came in through the relay. Its lease also ends sooner, since pool <code>LAN20</code> keeps the default one-day lease.</p>
+<pre><code class="language-text">R1# show ip dhcp pool LAN10
+
+Pool LAN10 :
+ Utilization mark (high/low)    : 100 / 0
+ Subnet size (first/next)       : 0 / 0
+ Total addresses                : 254
+ Leased addresses               : 3
+ Excluded addresses             : 20
+ Pending event                  : none
+ 1 subnet is currently in the pool :
+ Current index        IP address range                    Leased/Excluded/Total
+ 192.168.10.25        192.168.10.1     - 192.168.10.254    3     / 20    / 254
+</code></pre>
+<p>&quot;Current index&quot; is the next address the server will try. The third PC got .24, not .23, because .23 is in conflict, as the next output shows.</p>
+<pre><code class="language-text">R1# show ip dhcp conflict
+IP address        Detection method   Detection time          VRF
+192.168.10.23     Ping               Nov 09 2026 09:21 AM
+</code></pre>
+<p>A conflicting address stays out of the pool until you release it. Find the device with the hand-typed address, fix it, then clear the entry with <code>clear ip dhcp conflict 192.168.10.23</code> (or <code>clear ip dhcp conflict *</code> for all of them). Similarly, <code>clear ip dhcp binding *</code> wipes every lease, which is handy in a lab.</p>
+<h3 id="debug-ip-dhcp-server-events-carefully">debug ip dhcp server events, carefully</h3>
+<pre><code class="language-text">R1# debug ip dhcp server events
+R1# undebug all
+</code></pre>
+<p><code>debug</code> shows you live what the server is doing: which request arrived, which address it offered, which lease it confirmed. In a lab it&#39;s great. On a production router, though, <code>debug</code> costs CPU and can flood you with thousands of lines on a busy server. Use it only when you know why, keep it short, and stop it with <code>undebug all</code> (or <code>no debug all</code>). Over SSH you&#39;ll only see the messages after <code>terminal monitor</code>. For even more detail there&#39;s <code>debug ip dhcp server packet</code>.</p>
+<p>On the client side, on a Windows PC, <code>ipconfig /all</code> shows the address, gateway, DNS servers and DHCP server, and <code>ipconfig /release</code> followed by <code>ipconfig /renew</code> runs DORA again.</p>
+<h2 id="troubleshooting-from-169-254-to-the-root-cause">Troubleshooting: from 169.254 to the root cause</h2>
+<p>When a Windows client (and many other systems) gets no DHCP answer at all, it assigns itself an address from <strong>169.254.0.0/16</strong>, known as APIPA or an IPv4 link-local address. It can only talk to neighbors on the same link, with no gateway. If you see 169.254.x.x, one thing is certain: <strong>no Offer reached the client</strong>. Your job is to find where it stopped.</p>
+<p>Work from the client toward the server:</p>
+<ol>
+<li><strong>Client:</strong> is the cable plugged in? Does <code>ipconfig /all</code> show 169.254? Try <code>ipconfig /renew</code>.</li>
+<li><strong>Switch:</strong> is the port in the right VLAN (<code>show vlan brief</code>)? Does the trunk carry that VLAN (<code>show interfaces trunk</code>)?</li>
+<li><strong>Client&#39;s gateway:</strong> does the VLAN&#39;s interface or SVI have <code>ip helper-address</code>? Is the address in it correct?</li>
+<li><strong>Path:</strong> can the gateway ping the server? Does the server have a route back to the client&#39;s subnet?</li>
+<li><strong>Server:</strong> is there a pool whose <code>network</code> contains the giaddr? Are there free addresses left? What do <code>show ip dhcp server statistics</code> and, carefully, <code>debug ip dhcp server events</code> say?</li>
+</ol>
+<div class="table-scroll"><p class="table-hint" aria-hidden="true">swipe<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></p><div class="table-wrap" role="region" tabindex="0" aria-label="Table (scrolls sideways)"><table>
+<thead>
+<tr>
+<th>Symptom</th>
+<th>Likely cause</th>
+<th>How to check and fix</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Every client in one VLAN has 169.254.x.x</td>
+<td>missing <code><span class="nw">ip</span> <span class="nw">helper-address</span></code> on the SVI or subinterface</td>
+<td><code><span class="nw">show</span> <span class="nw">running-config</span> <span class="nw">interface</span> <span class="nw">vlan</span> <span class="nw">20</span></code> → add the helper</td>
+</tr>
+<tr>
+<td class="tw">Clients behind the relay get 169.254, local ones work</td>
+<td class="tw">the server has no route to the client subnet</td>
+<td><code><span class="nw">show</span> <span class="nw">ip</span> <span class="nw">route</span></code> on the server → static route or OSPF</td>
+</tr>
+<tr>
+<td>A single PC has 169.254</td>
+<td>port in the wrong VLAN, port down, cable</td>
+<td><code><span class="nw">show</span> <span class="nw">vlan</span> <span class="nw">brief</span></code>, <code><span class="nw">show</span> <span class="nw">interfaces</span> <span class="nw">status</span></code></td>
+</tr>
+<tr>
+<td class="tw">New clients get nothing, existing ones work</td>
+<td>pool exhausted</td>
+<td class="tw"><code><span class="nw">show</span> <span class="nw">ip</span> <span class="nw">dhcp</span> <span class="nw">pool</span></code> (leased = total) → bigger pool, shorter lease</td>
+</tr>
+<tr>
+<td class="tw">Clients get an address but can&#39;t leave the subnet</td>
+<td>wrong or missing <code>default-router</code></td>
+<td><code><span class="nw">ipconfig</span> <span class="nw">/all</span></code> on the PC, <code><span class="nw">show</span> <span class="nw">running-config</span> <span class="nw">|</span> <span class="nw">section</span> <span class="nw">dhcp</span></code></td>
+</tr>
+<tr>
+<td>Clients work by IP but not by name</td>
+<td>wrong or missing <code>dns-server</code></td>
+<td><code><span class="nw">ipconfig</span> <span class="nw">/all</span></code>, <code>nslookup</code></td>
+</tr>
+<tr>
+<td>Some clients get odd gateways</td>
+<td>a rogue DHCP server on the network</td>
+<td class="tw"><code><span class="nw">ipconfig</span> <span class="nw">/all</span></code> (check &quot;DHCP Server&quot;) → DHCP snooping</td>
+</tr>
+<tr>
+<td class="tw">Conflict messages, addresses that &quot;disappear&quot;</td>
+<td class="tw">statically addressed devices inside the pool range</td>
+<td><code><span class="nw">show</span> <span class="nw">ip</span> <span class="nw">dhcp</span> <span class="nw">conflict</span></code> → <code><span class="nw">ip</span> <span class="nw">dhcp</span> <span class="nw">excluded-address</span></code></td>
+</tr>
+<tr>
+<td class="tw">Everything broke after DHCP snooping was enabled</td>
+<td class="tw">uplink to the server not trusted, or the option 82 issue</td>
+<td><code><span class="nw">show</span> <span class="nw">ip</span> <span class="nw">dhcp</span> <span class="nw">snooping</span></code> → <code><span class="nw">ip</span> <span class="nw">dhcp</span> <span class="nw">snooping</span> <span class="nw">trust</span></code> on the uplink</td>
+</tr>
+<tr>
+<td class="tw">The router doesn&#39;t answer at all, even locally</td>
+<td><code><span class="nw">no</span> <span class="nw">service</span> <span class="nw">dhcp</span></code> in the config, or an ACL blocking UDP 67</td>
+<td><code><span class="nw">show</span> <span class="nw">running-config</span> <span class="nw">|</span> <span class="nw">include</span> <span class="nw">dhcp</span></code>, <code><span class="nw">show</span> <span class="nw">access-lists</span></code></td>
+</tr>
+</tbody></table></div></div>
+<h2 id="dhcp-snooping-in-brief">DHCP snooping in brief</h2>
+<p>DHCP has no authentication. Anyone who plugs in a home router or starts a DHCP server on a laptop can answer Discovers faster than the real server. The typical attacks:</p>
+<ul>
+<li><strong>DHCP spoofing:</strong> a fake server gives clients a gateway or DNS server controlled by the attacker, who can then see their traffic (man-in-the-middle).</li>
+<li><strong>DHCP starvation:</strong> the attacker sends thousands of Discovers with made-up MAC addresses and drains the pool, so real clients get nothing. It&#39;s often the first step before spoofing.</li>
+</ul>
+<p><strong>DHCP snooping</strong> is the switch feature that deals with this. Ports become one of two kinds:</p>
+<ul>
+<li><strong>trusted:</strong> ports toward the legitimate DHCP server and the uplinks to the rest of the network. All DHCP messages are allowed.</li>
+<li><strong>untrusted:</strong> every other port (the default once snooping is on). Server messages (Offer, Ack, Nak) arriving here are dropped. Clients can still send Discovers and Requests, but they can&#39;t act as a server.</li>
+</ul>
+<pre><code class="language-text">S1(config)# ip dhcp snooping
+S1(config)# ip dhcp snooping vlan 10,20
+S1(config)# interface GigabitEthernet0/1
+S1(config-if)# description Uplink toward the DHCP server
+S1(config-if)# ip dhcp snooping trust
+S1(config-if)# exit
+S1(config)# interface range FastEthernet0/1 - 24
+S1(config-if-range)# ip dhcp snooping limit rate 10
+</code></pre>
+<ul>
+<li>Snooping must be enabled <strong>globally and per VLAN</strong>; <code>ip dhcp snooping</code> on its own does nothing useful.</li>
+<li><code>limit rate 10</code> allows at most 10 DHCP packets per second on the port; above that the port goes err-disabled. Together with port security, it&#39;s a defense against starvation.</li>
+<li>The switch builds a <strong>binding table</strong> (MAC, IP, VLAN, port) that Dynamic ARP Inspection and IP Source Guard rely on. You can see it with <code>show ip dhcp snooping binding</code>.</li>
+</ul>
+<p>One lab trap: with snooping on, a Catalyst switch inserts <strong>option 82</strong> into client requests by default. A Cisco IOS DHCP server that receives such a request with no giaddr drops it, and the clients end up with nothing. In a lab, the usual fix is <code>no ip dhcp snooping information option</code> on the switch.</p>
+<h2 id="ipv6-works-differently">IPv6 works differently</h2>
+<p>DHCPv4 doesn&#39;t hand out IPv6 addresses. In IPv6, routers send periodic <strong>Router Advertisements</strong> (RAs), and two flags in them tell the client what to do:</p>
+<div class="table-scroll"><p class="table-hint" aria-hidden="true">swipe<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></p><div class="table-wrap" role="region" tabindex="0" aria-label="Table (scrolls sideways)"><table>
+<thead>
+<tr>
+<th>Method</th>
+<th>RA flags</th>
+<th>Where the address comes from</th>
+<th>Where DNS and other settings come from</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>SLAAC</td>
+<td>M = 0, O = 0</td>
+<td>the client builds it from the RA prefix</td>
+<td>the RA (RDNSS option, if sent)</td>
+</tr>
+<tr>
+<td>Stateless DHCPv6</td>
+<td>M = 0, O = 1</td>
+<td>SLAAC</td>
+<td>the DHCPv6 server</td>
+</tr>
+<tr>
+<td>Stateful DHCPv6</td>
+<td>M = 1</td>
+<td>the DHCPv6 server</td>
+<td>the DHCPv6 server</td>
+</tr>
+</tbody></table></div></div>
+<p>What&#39;s different from DHCPv4:</p>
+<ul>
+<li><strong>The default gateway always comes from the RA</strong> (the router&#39;s link-local address), never from DHCPv6.</li>
+<li>DHCPv6 uses UDP <strong>546</strong> (client) and <strong>547</strong> (server). IPv6 has no broadcast, so the client sends to the multicast address <code>ff02::1:2</code>.</li>
+<li>On Cisco, the flags are set per interface with <code>ipv6 nd other-config-flag</code> (O) and <code>ipv6 nd managed-config-flag</code> (M). Relaying uses <code>ipv6 dhcp relay destination</code> instead of <code>ip helper-address</code>.</li>
+</ul>
+<p>SLAAC, EUI-64 and the IPv6 address types are covered in the <a href="../ipv6-addresses-explained/">IPv6 addresses guide</a>, and you can check addresses quickly with the <a href="../../tools/ipv6/">IPv6 tool</a>.</p>
+<h2 id="exercises">Exercises</h2>
+<ol>
+<li>R1 has pool <code>LAN10</code> with <code>network 192.168.10.0 255.255.255.0</code>, but you forgot <code>ip dhcp excluded-address</code>. The gateway is 192.168.10.1 and a printer uses the static address 192.168.10.5. What can go wrong, and which command is missing?</li>
+<li>A client gets an 8-hour lease at 08:00. When does it first try to renew, and who does it ask? When does it switch to broadcast?</li>
+<li>Clients in VLAN 30 (192.168.30.0/24, SVI gateway 192.168.30.1 on switch D1) must get addresses from the server at 10.10.10.5. Which command do you need, and on which interface?</li>
+<li>Configure a pool called <code>GUESTS</code> for 172.16.50.0/24: gateway 172.16.50.1, DNS 172.16.50.2, a 4-hour lease, with the first 10 addresses excluded.</li>
+<li>Right after you enable DHCP snooping on an access switch, every client gets 169.254.x.x. The server is a router connected to G0/1. What are the two likely causes?</li>
+<li>A router&#39;s G0/0/2 has <code>ip address dhcp</code>, and you add <code>ip route 0.0.0.0 0.0.0.0 198.51.100.1</code>. Which default route will the router use, and why?</li>
+</ol>
+<details class="reveal-answer">
+<summary><strong>Answers</strong></summary><p><strong>1.</strong> The static addresses stay in the pool. The ping before each offer usually catches them and logs them in <code>show ip dhcp conflict</code>, but if the printer happens to be off at that moment, 192.168.10.5 can go to a PC, and the real conflict appears when the printer powers back on. The missing piece is <code>ip dhcp excluded-address 192.168.10.1 192.168.10.20</code> (or any range that covers the static addresses), in global configuration mode.</p>
+<p><strong>2.</strong> T1 = 50% of 8 hours = 4 hours, so at <strong>12:00</strong> the client sends a unicast Request to the server that gave it the address. T2 = 87.5% of 8 hours = 7 hours, so at <strong>15:00</strong>, if it still has no answer, it broadcasts a Request to any server.</p>
+<p><strong>3.</strong> On the VLAN 30 SVI, where the clients&#39; broadcasts arrive:</p>
+<pre><code class="language-text">D1(config)# interface vlan 30
+D1(config-if)# ip helper-address 10.10.10.5
+</code></pre>
+<p>The server also needs a pool for 192.168.30.0/24 and a route back to that subnet.</p>
+<p><strong>4.</strong></p>
+<pre><code class="language-text">R1(config)# ip dhcp excluded-address 172.16.50.1 172.16.50.10
+R1(config)# ip dhcp pool GUESTS
+R1(dhcp-config)# network 172.16.50.0 255.255.255.0
+R1(dhcp-config)# default-router 172.16.50.1
+R1(dhcp-config)# dns-server 172.16.50.2
+R1(dhcp-config)# lease 0 4
+</code></pre>
+<p><strong>5.</strong> First, G0/1 toward the server isn&#39;t set to <code>ip dhcp snooping trust</code>, so the switch drops the Offers. Second, the switch inserts option 82 and the Cisco IOS server drops requests that carry option 82 with no giaddr. Fix it with <code>ip dhcp snooping trust</code> on G0/1 and, if needed, <code>no ip dhcp snooping information option</code>.</p>
+<p><strong>6.</strong> Your configured route via 198.51.100.1. A static route has an administrative distance of 1, while the DHCP-learned default route has 254. The lower distance wins.</p>
+</details><h2 id="how-to-learn-dhcp-fastest">How to learn DHCP fastest</h2>
+<ul>
+<li><strong>Build the topology from this guide</strong> in Packet Tracer: local server first, then the relay, then break something on purpose (remove the helper, the route, the exclusions) and find the fault using only <code>show</code> commands.</li>
+<li><strong>Draw DORA on paper</strong> with source and destination IPs, ports, and broadcast vs unicast. If you can rebuild that table from memory, you&#39;ve covered most of the exam questions.</li>
+<li><strong>Place DHCP in the layer models:</strong> it&#39;s an application protocol over UDP that serves Layer 3. See <a href="../osi-vs-tcp-ip/">OSI vs TCP/IP</a>.</li>
+<li><strong>Drill the basic commands</strong> from the <a href="../cisco-ios-basic-commands/">Cisco IOS commands cheat sheet</a> and the range math from the <a href="../subnetting-step-by-step/">subnetting guide</a>.</li>
+</ul>
+<div class="cta-box cta-box--article"><svg class="mascot" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><g class="m-breathe"><path d="M22 14l-5-9M42 14l5-9" stroke="#8a919c" stroke-width="3.4" stroke-linecap="round" fill="none"/><circle class="m-led m-led-l" cx="17" cy="5" r="3.6"/><circle class="m-led m-led-r" cx="47" cy="5" r="3.6"/><path class="m-body" d="M28 12q4-6 8 0"/><rect class="m-body" x="8" y="12" width="48" height="42" rx="18"/><rect class="m-belly" x="8" y="40" width="48" height="14" rx="7"/><path d="M19 31q4-5 8 0" stroke="#1a1d24" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M37 31q4-5 8 0" stroke="#1a1d24" stroke-width="3" fill="none" stroke-linecap="round"/><path class="m-led" d="M29 37l3 3.5 3-3.5z"/><circle cx="15" cy="38" r="3" fill="#ff8fb1" opacity=".7"/><circle cx="49" cy="38" r="3" fill="#ff8fb1" opacity=".7"/><circle class="m-ok" cx="18" cy="47" r="2"/><circle class="m-led" cx="24" cy="47" r="2"/><rect x="31" y="45" width="6" height="4" rx="1" fill="#0d1a3a" opacity=".55"/><rect x="39" y="45" width="6" height="4" rx="1" fill="#0d1a3a" opacity=".55"/><rect x="47" y="45" width="5" height="4" rx="1" fill="#0d1a3a" opacity=".55"/><path class="m-leg" d="M20 54v4M44 54v4" stroke-width="3.4" stroke-linecap="round" fill="none"/></g></svg><div><h3>Practice DHCP in the Routerel app</h3><p>Routerel has over 1,900 questions for CCNA 1 · ITN, CCNA 2 · IEN and CCNA 3 · CEN, including DHCPv4, SLAAC, DHCPv6 and Layer 2 security, with an explanation right after every answer. Your mistakes come back automatically through spaced repetition until you&#39;ve mastered them, and the timed exam simulation shows you where you stand. New subscribers get a 7-day free trial with full access.</p></div><a class="btn" href="../../" data-play data-soon-href="../../">Discover the app<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div><h2 id="frequently-asked-questions">Frequently asked questions</h2>
+<div class="faq faq--article"><details><summary>What is DHCP?<span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p>The protocol that lets a device automatically get its IPv4 address, subnet mask, default gateway, DNS servers and other settings from a server, for a limited time called a lease.</p></div></details><details><summary>Which ports does DHCP use?<span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p>DHCPv4 runs over UDP: the server listens on port <strong>67</strong> and the client on port <strong>68</strong>. DHCPv6 uses different ports: 547 for the server and 546 for the client.</p></div></details><details><summary>What does DORA stand for?<span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p>The four messages a client uses to get an address: <strong>Discover</strong> (the client looks for servers), <strong>Offer</strong> (a server proposes an address), <strong>Request</strong> (the client asks for the address it chose) and <strong>Acknowledgment</strong> (the server confirms).</p></div></details><details><summary>Why do I need ip helper-address?<span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p>Discovers are broadcasts, and routers don&#39;t forward broadcasts. When the DHCP server is in another subnet or VLAN, <code>ip helper-address</code> on the interface facing the clients turns the broadcast into a unicast sent to the server.</p></div></details><details><summary>Why does my PC get a 169.254.x.x address?<span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p>A 169.254.x.x address (APIPA) means the client got no answer from any DHCP server. Common causes: a missing helper, a wrong VLAN, an exhausted pool, a missing route back to the client subnet, or DHCP snooping dropping the replies.</p></div></details><details><summary>What is the default lease time on a Cisco router?<span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p><strong>One day.</strong> You change it in the pool with <code>lease</code>, for example <code>lease 7</code> for seven days or <code>lease 0 8</code> for eight hours.</p></div></details><details><summary>What does DHCP snooping do?<span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p>It only accepts DHCP server messages (Offer, Ack) on ports marked as trusted, so a rogue server plugged into a user port can no longer hand out fake addresses and gateways. For where DHCP fits in the exam, see our <a href="../what-is-ccna/">guide to CCNA</a>.</p></div></details></div>
+<hr>
+<p><em>Routerel is an independent app and is not affiliated with, sponsored by or endorsed by Cisco Systems, Inc. Cisco, CCNA, Cisco IOS, Catalyst, Packet Tracer and Networking Academy are trademarks of Cisco Systems, Inc. Other product names belong to their respective owners.</em></p>
+      
+      <section class="related" aria-labelledby="rel-title">
+        <h2 id="rel-title">Read next</h2>
+        <div class="grid grid--2"><a class="card post-card lift" href="../../../en/guides/ospf-explained/"><span class="tagline">Guide · 16 min</span><h3>OSPF Explained: Single-Area OSPFv2 Configuration (2026)</h3><p>Single-area OSPF explained: router ID, neighbor states, DR/BDR election, cost, network and ip ospf configuration, show commands, troubleshooting and exercises.</p></a><a class="card post-card lift" href="../../../en/guides/cisco-ios-basic-commands/"><span class="tagline">Guide · 13 min</span><h3>Basic Cisco IOS Commands: CCNA Cheat Sheet</h3><p>Basic Cisco IOS commands cheat sheet for CCNA: CLI modes, initial setup, passwords and SSH, interfaces, saving the config, show commands and troubleshooting.</p></a></div>
+      </section>
+    </article>
+  </div>
+</main>
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="about">
+        <a class="brand" href="../../../en/"><img src="../../../assets/icon-96.webp" alt="" width="36" height="36" loading="lazy"><span>Routerel</span></a>
+        <p>CCNA practice on your phone: questions with explanations, spaced repetition and exam simulations. In English and Romanian.</p>
+      </div>
+      <div><h2>The app</h2><ul><li><a href="../../../en/#features">Features</a></li><li><a href="../../../en/#pricing">Pricing</a></li><li><a href="../../../en/#how-it-works">How it works</a></li><li><a href="../../../en/#faq">FAQ</a></li></ul></div>
+      <div><h2>Resources</h2><ul><li><a href="../../../en/guides/">CCNA guides</a></li><li><a href="../../../en/articles/">CCNA articles</a></li><li><a href="../../../en/tools/">Free tools</a></li><li><a href="../../../" hreflang="ro" lang="ro" data-set-lang="ro">Română</a></li></ul></div>
+      <div><h2>Legal & contact</h2><ul><li><a href="../../../en/privacy">Privacy policy</a></li><li><a href="../../../en/terms">Terms of use</a></li><li><a href="../../../en/delete-account">Delete your account</a></li></ul><ul><li><a href="mailto:contact@routerel.app">contact@routerel.app</a></li></ul></div>
+    </div>
+    <div class="disclaimer">
+      <p>Routerel is an independent app, not affiliated with, sponsored or endorsed by Cisco Systems, Inc. Cisco, CCNA and Cisco Networking Academy are trademarks of Cisco Systems, Inc.</p>
+      <p>© 2026 Routerel</p>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

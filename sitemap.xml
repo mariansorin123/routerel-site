@@ -15,11 +15,95 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://routerel.app/en/"/>
   </url>
   <url>
+    <loc>https://routerel.app/articole/</loc>
+    <lastmod>2026-11-09</lastmod>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://routerel.app/articole/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://routerel.app/en/articles/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://routerel.app/en/articles/"/>
+  </url>
+  <url>
+    <loc>https://routerel.app/articole/ccna-v2-2027/</loc>
+    <lastmod>2026-11-09</lastmod>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://routerel.app/articole/ccna-v2-2027/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://routerel.app/en/articles/ccna-v2-2027-changes/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://routerel.app/en/articles/ccna-v2-2027-changes/"/>
+  </url>
+  <url>
+    <loc>https://routerel.app/articole/ccna-vs-network-plus/</loc>
+    <lastmod>2026-11-09</lastmod>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://routerel.app/articole/ccna-vs-network-plus/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://routerel.app/en/articles/ccna-vs-network-plus/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://routerel.app/en/articles/ccna-vs-network-plus/"/>
+  </url>
+  <url>
+    <loc>https://routerel.app/articole/joburi-cu-ccna/</loc>
+    <lastmod>2026-11-09</lastmod>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://routerel.app/articole/joburi-cu-ccna/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://routerel.app/en/articles/ccna-jobs/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://routerel.app/en/articles/ccna-jobs/"/>
+  </url>
+  <url>
+    <loc>https://routerel.app/articole/packet-tracer-vs-gns3-vs-eve-ng/</loc>
+    <lastmod>2026-11-09</lastmod>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://routerel.app/articole/packet-tracer-vs-gns3-vs-eve-ng/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://routerel.app/en/articles/packet-tracer-vs-gns3-vs-eve-ng/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://routerel.app/en/articles/packet-tracer-vs-gns3-vs-eve-ng/"/>
+  </url>
+  <url>
+    <loc>https://routerel.app/articole/resurse-ccna-2026/</loc>
+    <lastmod>2026-11-09</lastmod>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://routerel.app/articole/resurse-ccna-2026/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://routerel.app/en/articles/best-ccna-resources-2026/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://routerel.app/en/articles/best-ccna-resources-2026/"/>
+  </url>
+  <url>
     <loc>https://routerel.app/delete-account</loc>
     <lastmod>2026-11-05</lastmod>
     <xhtml:link rel="alternate" hreflang="ro" href="https://routerel.app/delete-account"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://routerel.app/en/delete-account"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://routerel.app/en/delete-account"/>
+  </url>
+  <url>
+    <loc>https://routerel.app/en/articles/</loc>
+    <lastmod>2026-11-09</lastmod>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://routerel.app/articole/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://routerel.app/en/articles/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://routerel.app/en/articles/"/>
+  </url>
+  <url>
+    <loc>https://routerel.app/en/articles/best-ccna-resources-2026/</loc>
+    <lastmod>2026-11-09</lastmod>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://routerel.app/articole/resurse-ccna-2026/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://routerel.app/en/articles/best-ccna-resources-2026/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://routerel.app/en/articles/best-ccna-resources-2026/"/>
+  </url>
+  <url>
+    <loc>https://routerel.app/en/articles/ccna-jobs/</loc>
+    <lastmod>2026-11-09</lastmod>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://routerel.app/articole/joburi-cu-ccna/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://routerel.app/en/articles/ccna-jobs/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://routerel.app/en/articles/ccna-jobs/"/>
+  </url>
+  <url>
+    <loc>https://routerel.app/en/articles/ccna-v2-2027-changes/</loc>
+    <lastmod>2026-11-09</lastmod>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://routerel.app/articole/ccna-v2-2027/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://routerel.app/en/articles/ccna-v2-2027-changes/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://routerel.app/en/articles/ccna-v2-2027-changes/"/>
+  </url>
+  <url>
+    <loc>https://routerel.app/en/articles/ccna-vs-network-plus/</loc>
+    <lastmod>2026-11-09</lastmod>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://routerel.app/articole/ccna-vs-network-plus/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://routerel.app/en/articles/ccna-vs-network-plus/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://routerel.app/en/articles/ccna-vs-network-plus/"/>
+  </url>
+  <url>
+    <loc>https://routerel.app/en/articles/packet-tracer-vs-gns3-vs-eve-ng/</loc>
+    <lastmod>2026-11-09</lastmod>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://routerel.app/articole/packet-tracer-vs-gns3-vs-eve-ng/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://routerel.app/en/articles/packet-tracer-vs-gns3-vs-eve-ng/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://routerel.app/en/articles/packet-tracer-vs-gns3-vs-eve-ng/"/>
   </url>
   <url>
     <loc>https://routerel.app/en/delete-account</loc>
@@ -36,11 +120,25 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://routerel.app/en/guides/"/>
   </url>
   <url>
+    <loc>https://routerel.app/en/guides/cisco-acls/</loc>
+    <lastmod>2026-11-09</lastmod>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://routerel.app/ghiduri/acl-uri-cisco/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://routerel.app/en/guides/cisco-acls/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://routerel.app/en/guides/cisco-acls/"/>
+  </url>
+  <url>
     <loc>https://routerel.app/en/guides/cisco-ios-basic-commands/</loc>
     <lastmod>2026-11-05</lastmod>
     <xhtml:link rel="alternate" hreflang="ro" href="https://routerel.app/ghiduri/comenzi-cisco-ios/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://routerel.app/en/guides/cisco-ios-basic-commands/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://routerel.app/en/guides/cisco-ios-basic-commands/"/>
+  </url>
+  <url>
+    <loc>https://routerel.app/en/guides/dhcp-on-cisco/</loc>
+    <lastmod>2026-11-09</lastmod>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://routerel.app/ghiduri/dhcp-cisco/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://routerel.app/en/guides/dhcp-on-cisco/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://routerel.app/en/guides/dhcp-on-cisco/"/>
   </url>
   <url>
     <loc>https://routerel.app/en/guides/ipv6-addresses-explained/</loc>
@@ -50,11 +148,32 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://routerel.app/en/guides/ipv6-addresses-explained/"/>
   </url>
   <url>
+    <loc>https://routerel.app/en/guides/nat-and-pat/</loc>
+    <lastmod>2026-11-09</lastmod>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://routerel.app/ghiduri/nat-si-pat/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://routerel.app/en/guides/nat-and-pat/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://routerel.app/en/guides/nat-and-pat/"/>
+  </url>
+  <url>
     <loc>https://routerel.app/en/guides/osi-vs-tcp-ip/</loc>
     <lastmod>2026-11-05</lastmod>
     <xhtml:link rel="alternate" hreflang="ro" href="https://routerel.app/ghiduri/model-osi-vs-tcp-ip/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://routerel.app/en/guides/osi-vs-tcp-ip/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://routerel.app/en/guides/osi-vs-tcp-ip/"/>
+  </url>
+  <url>
+    <loc>https://routerel.app/en/guides/ospf-explained/</loc>
+    <lastmod>2026-11-09</lastmod>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://routerel.app/ghiduri/ospf/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://routerel.app/en/guides/ospf-explained/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://routerel.app/en/guides/ospf-explained/"/>
+  </url>
+  <url>
+    <loc>https://routerel.app/en/guides/spanning-tree-protocol/</loc>
+    <lastmod>2026-11-09</lastmod>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://routerel.app/ghiduri/spanning-tree-stp/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://routerel.app/en/guides/spanning-tree-protocol/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://routerel.app/en/guides/spanning-tree-protocol/"/>
   </url>
   <url>
     <loc>https://routerel.app/en/guides/subnetting-step-by-step/</loc>
@@ -127,6 +246,13 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://routerel.app/en/guides/"/>
   </url>
   <url>
+    <loc>https://routerel.app/ghiduri/acl-uri-cisco/</loc>
+    <lastmod>2026-11-09</lastmod>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://routerel.app/ghiduri/acl-uri-cisco/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://routerel.app/en/guides/cisco-acls/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://routerel.app/en/guides/cisco-acls/"/>
+  </url>
+  <url>
     <loc>https://routerel.app/ghiduri/adrese-ipv6/</loc>
     <lastmod>2026-11-05</lastmod>
     <xhtml:link rel="alternate" hreflang="ro" href="https://routerel.app/ghiduri/adrese-ipv6/"/>
@@ -148,11 +274,39 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://routerel.app/en/guides/cisco-ios-basic-commands/"/>
   </url>
   <url>
+    <loc>https://routerel.app/ghiduri/dhcp-cisco/</loc>
+    <lastmod>2026-11-09</lastmod>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://routerel.app/ghiduri/dhcp-cisco/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://routerel.app/en/guides/dhcp-on-cisco/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://routerel.app/en/guides/dhcp-on-cisco/"/>
+  </url>
+  <url>
     <loc>https://routerel.app/ghiduri/model-osi-vs-tcp-ip/</loc>
     <lastmod>2026-11-05</lastmod>
     <xhtml:link rel="alternate" hreflang="ro" href="https://routerel.app/ghiduri/model-osi-vs-tcp-ip/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://routerel.app/en/guides/osi-vs-tcp-ip/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://routerel.app/en/guides/osi-vs-tcp-ip/"/>
+  </url>
+  <url>
+    <loc>https://routerel.app/ghiduri/nat-si-pat/</loc>
+    <lastmod>2026-11-09</lastmod>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://routerel.app/ghiduri/nat-si-pat/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://routerel.app/en/guides/nat-and-pat/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://routerel.app/en/guides/nat-and-pat/"/>
+  </url>
+  <url>
+    <loc>https://routerel.app/ghiduri/ospf/</loc>
+    <lastmod>2026-11-09</lastmod>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://routerel.app/ghiduri/ospf/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://routerel.app/en/guides/ospf-explained/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://routerel.app/en/guides/ospf-explained/"/>
+  </url>
+  <url>
+    <loc>https://routerel.app/ghiduri/spanning-tree-stp/</loc>
+    <lastmod>2026-11-09</lastmod>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://routerel.app/ghiduri/spanning-tree-stp/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://routerel.app/en/guides/spanning-tree-protocol/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://routerel.app/en/guides/spanning-tree-protocol/"/>
   </url>
   <url>
     <loc>https://routerel.app/ghiduri/subnetting-pas-cu-pas/</loc>

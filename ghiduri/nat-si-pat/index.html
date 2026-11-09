@@ -1,0 +1,499 @@
+<!doctype html>
+<!-- Pagină generată. Nu o edita de mână: vezi tools/site/ (npm run build:guides / npm run sync:tools / npm run build:legal). -->
+<html lang="ro" class="play-soon" data-utm-medium="guide" data-utm-campaign="nat-si-pat">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>NAT și PAT explicate: static, dinamic, overload (2026)</title>
+  <meta name="description" content="NAT și PAT pe înțeles: adrese private, inside local și global, NAT static, dinamic și overload, configurare Cisco IOS, verificare, port forwarding și exerciții.">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <link rel="canonical" href="https://routerel.app/ghiduri/nat-si-pat/">
+  <link rel="alternate" hreflang="ro" href="https://routerel.app/ghiduri/nat-si-pat/">
+  <link rel="alternate" hreflang="en" href="https://routerel.app/en/guides/nat-and-pat/">
+  <link rel="alternate" hreflang="x-default" href="https://routerel.app/en/guides/nat-and-pat/">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#12151b" media="(prefers-color-scheme: dark)">
+  <meta name="color-scheme" content="light dark">
+  <link rel="icon" href="../../assets/favicon-32.png" type="image/png" sizes="32x32">
+  <link rel="icon" href="../../assets/icon-192.png" type="image/png" sizes="192x192">
+  <link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
+  <link rel="manifest" href="../../site.webmanifest">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Routerel">
+  <meta property="og:locale" content="ro_RO">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta property="og:title" content="NAT și PAT explicate: static, dinamic, overload (2026)">
+  <meta property="og:description" content="NAT și PAT pe înțeles: adrese private, inside local și global, NAT static, dinamic și overload, configurare Cisco IOS, verificare, port forwarding și exerciții.">
+  <meta property="og:url" content="https://routerel.app/ghiduri/nat-si-pat/">
+  <meta property="og:image" content="https://routerel.app/assets/og-ro.png">
+  <meta property="og:image:width" content="1024">
+  <meta property="og:image:height" content="500">
+  <meta property="og:image:alt" content="Routerel: mascota puiul de router și numele aplicației">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="NAT și PAT explicate: static, dinamic, overload (2026)">
+  <meta name="twitter:description" content="NAT și PAT pe înțeles: adrese private, inside local și global, NAT static, dinamic și overload, configurare Cisco IOS, verificare, port forwarding și exerciții.">
+  <meta name="twitter:image" content="https://routerel.app/assets/og-ro.png">
+  <meta property="article:published_time" content="2026-11-09">
+  <meta property="article:modified_time" content="2026-11-09">
+  <meta name="routerel:updated" content="2026-11-09">
+  <link rel="preload" href="../../assets/fonts/nunito-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../../assets/fonts/nunito-latin-ext.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../../assets/fonts/roboto-mono-500-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="../../style.css">
+  <script>(function(d){d.classList.add("js");try{var t=localStorage.getItem("routerel-theme");if(t==="light"||t==="dark")d.setAttribute("data-theme",t)}catch(e){}setTimeout(function(){if(!window.__rtl)d.classList.remove("js")},4000)})(document.documentElement)</script>
+  <script src="../../assets/site.js" defer></script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Article","@id":"https://routerel.app/ghiduri/nat-si-pat/#article","headline":"NAT și PAT explicate: static, dinamic, overload (2026)","description":"NAT și PAT pe înțeles: adrese private, inside local și global, NAT static, dinamic și overload, configurare Cisco IOS, verificare, port forwarding și exerciții.","inLanguage":"ro","datePublished":"2026-11-09","dateModified":"2026-11-09","keywords":"NAT, ce este NAT, PAT NAT overload, configurare NAT Cisco, inside local inside global, NAT static și dinamic, port forwarding Cisco, show ip nat translations","author":{"@type":"Organization","name":"Routerel","url":"https://routerel.app/"},"publisher":{"@type":"Organization","name":"Routerel","logo":{"@type":"ImageObject","url":"https://routerel.app/assets/icon-512.png"}},"image":"https://routerel.app/assets/og-ro.png","mainEntityOfPage":"https://routerel.app/ghiduri/nat-si-pat/","isPartOf":{"@id":"https://routerel.app/#website"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Acasă","item":"https://routerel.app/"},{"@type":"ListItem","position":2,"name":"Ghiduri","item":"https://routerel.app/ghiduri/"},{"@type":"ListItem","position":3,"name":"NAT și PAT explicate: static, dinamic, overload (2026)","item":"https://routerel.app/ghiduri/nat-si-pat/"}]},{"@type":"FAQPage","@id":"https://routerel.app/ghiduri/nat-si-pat/#faq","inLanguage":"ro","mainEntity":[{"@type":"Question","name":"Ce este NAT?","acceptedAnswer":{"@type":"Answer","text":"NAT (Network Address Translation) este funcția prin care un router înlocuiește adresa IP sursă sau destinație dintr-un pachet atunci când acesta trece dintre rețeaua internă și cea externă. Cel mai des, adresele private din LAN sunt traduse într-o adresă publică, ca dispozitivele să poată ieși pe Internet."}},{"@type":"Question","name":"Care e diferența dintre NAT și PAT?","acceptedAnswer":{"@type":"Answer","text":"NAT-ul simplu (static sau dinamic) leagă o adresă internă de o adresă publică, unu la unu. PAT, numit și NAT overload, traduce și portul, așa că multe dispozitive interne pot folosi aceeași adresă publică în același timp. Routerul le deosebește după numărul de port."}},{"@type":"Question","name":"Ce înseamnă inside local și inside global?","acceptedAnswer":{"@type":"Answer","text":"Inside local este adresa unui dispozitiv din rețeaua internă așa cum o vezi din interior, de obicei o adresă privată. Inside global este adresa aceluiași dispozitiv așa cum o vede lumea de afară, adică adresa publică în care a fost tradus."}},{"@type":"Question","name":"Ce face cuvântul overload în comanda NAT?","acceptedAnswer":{"@type":"Answer","text":"Activează PAT: routerul traduce și porturile, nu doar adresele. Fără overload, NAT-ul dinamic dă câte o adresă publică întreagă fiecărui dispozitiv intern, iar când pool-ul se termină, dispozitivele următoare nu mai pot ieși."}},{"@type":"Question","name":"De ce nu apare nimic în show ip nat translations?","acceptedAnswer":{"@type":"Answer","text":"Cele mai frecvente cauze sunt: ip nat inside și ip nat outside puse invers pe interfețe, ACL-ul care nu se potrivește cu adresele interne, lipsa unei rute spre Internet sau faptul că încă nu a trecut niciun trafic. Traducerile dinamice apar doar după ce un dispozitiv intern trimite primul pachet."}},{"@type":"Question","name":"Mai e nevoie de NAT cu IPv6?","acceptedAnswer":{"@type":"Answer","text":"În mod normal, nu. IPv6 are destule adrese ca fiecare dispozitiv să primească o adresă globală unică, deci nu mai trebuie să ascunzi o rețea întreagă în spatele unei singure adrese. Protecția se face cu un firewall, nu cu traducerea adreselor. NAT64 există, dar e o tehnică de tranziție între IPv6 și IPv4."}}]}]}</script>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs><linearGradient id="rtl-play" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5b8cff"/><stop offset=".55" stop-color="#2f6bff"/><stop offset="1" stop-color="#ffb020"/></linearGradient></defs></svg>
+<a class="skip-link" href="#main">Sari la conținut</a>
+<header class="site-header">
+  <div class="container header-row">
+    <a class="brand" href="../../" aria-label="Routerel, acasă"><img src="../../assets/icon-96.webp" alt="" width="36" height="36"><span>Routerel</span></a>
+    <nav class="main-nav" aria-label="Principal"><ul><li><a href="../../#functii">Funcții</a></li><li><a href="../../#preturi">Prețuri</a></li><li><a href="../../ghiduri/" aria-current="page">Ghiduri</a></li><li><a href="../../articole/">Articole</a></li><li><a href="../../tools/">Tools</a></li><li><a href="../../#faq">FAQ</a></li></ul></nav>
+    <div class="header-actions">
+      <div class="lang-switch" role="group" aria-label="Limba"><span aria-current="true" lang="ro">RO</span><a href="../../en/guides/nat-and-pat/" hreflang="en" lang="en" title="English">EN</a></div>
+      <button class="icon-btn theme-toggle" type="button" data-theme-toggle aria-label="Schimbă tema"><span class="i-moon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9z"/></svg></span><span class="i-sun"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg></span></button>
+      <a class="btn btn--sm header-cta" data-play data-soon-href="../../#preturi" href="../../#preturi"><span data-when="live">Încearcă gratuit</span><span data-when="soon">Vezi prețurile</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      <button class="icon-btn menu-btn" type="button" data-menu-btn aria-expanded="false" aria-controls="mobile-nav" aria-label="Meniu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+    </div>
+  </div>
+  <nav class="mobile-nav" id="mobile-nav" aria-label="Principal" hidden>
+    <div class="container"><ul><li><a href="../../#functii">Funcții</a></li><li><a href="../../#preturi">Prețuri</a></li><li><a href="../../ghiduri/" aria-current="page">Ghiduri</a></li><li><a href="../../articole/">Articole</a></li><li><a href="../../tools/">Tools</a></li><li><a href="../../#faq">FAQ</a></li></ul></div>
+  </nav>
+</header>
+<main id="main">
+  <div class="container section section--tight">
+    <article class="prose">
+      <nav class="crumbs" aria-label="Firimituri"><ol><li><a href="../../">Acasă</a></li><li><a href="../../ghiduri/">Ghiduri</a></li><li><span aria-current="page">NAT și PAT explicate: static, dinamic, overload (2026)</span></li></ol></nav>
+      <p class="eyebrow">Ghid CCNA</p>
+      <h1>NAT și PAT explicate: static, dinamic și overload (2026)</h1>
+      <div class="article-meta">
+        <span class="avatar"><svg class="mascot" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><g class="m-breathe"><path d="M22 14l-5-9M42 14l5-9" stroke="#8a919c" stroke-width="3.4" stroke-linecap="round" fill="none"/><circle class="m-led m-led-l" cx="17" cy="5" r="3.6"/><circle class="m-led m-led-r" cx="47" cy="5" r="3.6"/><path class="m-body" d="M28 12q4-6 8 0"/><rect class="m-body" x="8" y="12" width="48" height="42" rx="18"/><rect class="m-belly" x="8" y="40" width="48" height="14" rx="7"/><circle cx="23" cy="31" r="5.4" fill="#fff"/><circle class="m-pupil" cx="24" cy="31.5" r="3" fill="#1a1d24"/><circle cx="41" cy="31" r="5.4" fill="#fff"/><circle class="m-pupil" cx="42" cy="31.5" r="3" fill="#1a1d24"/><path class="m-led" d="M29 37l3 3.5 3-3.5z"/><circle class="m-ok" cx="18" cy="47" r="2"/><circle class="m-led" cx="24" cy="47" r="2"/><rect x="31" y="45" width="6" height="4" rx="1" fill="#0d1a3a" opacity=".55"/><rect x="39" y="45" width="6" height="4" rx="1" fill="#0d1a3a" opacity=".55"/><rect x="47" y="45" width="5" height="4" rx="1" fill="#0d1a3a" opacity=".55"/><path class="m-leg" d="M20 54v4M44 54v4" stroke-width="3.4" stroke-linecap="round" fill="none"/></g></svg></span>
+        <span>Echipa Routerel</span><span aria-hidden="true">·</span>
+        <span>Actualizat: <time datetime="2026-11-09">9 noiembrie 2026</time></span><span aria-hidden="true">·</span>
+        <span>15 min de citit</span>
+      </div>
+      <p class="lead">Aproape orice rețea pe care o vei configura folosește NAT: acasă, la birou, în laborator. Conceptul e simplu, dar cei patru termeni (inside local, inside global, outside local, outside global) și ordinea comenzilor încurcă mulți studenți, iar la examen apar exact acolo.</p>
+<p>În ghidul ăsta afli de ce există NAT, ce înseamnă fiecare termen, cum funcționează NAT-ul static, cel dinamic și PAT, cum le configurezi pas cu pas în Cisco IOS, cum verifici ce face routerul și cum publici un server intern cu port forwarding. La final ai un tabel cu greșeli frecvente și exerciții cu răspunsuri.</p>
+<p>În cursurile CCNA v8 de la Networking Academy, subiectul e în <strong>CCNA 3 · CEN</strong>, modulul 8 (NAT pentru IPv4).</p>
+      <nav class="toc toc--fold" aria-labelledby="toc-title"><h2 id="toc-title">Cuprins</h2><button type="button" class="toc-toggle" data-toc-toggle aria-expanded="false" aria-controls="toc-list"><span class="toc-toggle-t">Cuprins</span> <span class="toc-toggle-n">12 secțiuni</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6"/></svg></button><ol id="toc-list"><li><a href="#de-ce-exista-nat">De ce există NAT</a></li><li><a href="#topologia-folosita-in-ghid">Topologia folosită în ghid</a></li><li><a href="#cei-patru-termeni-inside-outside-local-global">Cei patru termeni: inside/outside, local/global</a><ol><li><a href="#exemplu-pc1-deschide-o-pagina-pe-web">Exemplu: PC1 deschide o pagină pe WEB</a></li></ol></li><li><a href="#cele-trei-tipuri-de-nat">Cele trei tipuri de NAT</a><ol><li><a href="#nat-static">NAT static</a></li><li><a href="#nat-dinamic">NAT dinamic</a></li><li><a href="#pat-nat-overload">PAT (NAT overload)</a></li></ol></li><li><a href="#configurarea-pas-cu-pas">Configurarea pas cu pas</a><ol><li><a href="#nat-static-serverul-intern-primeste-o-adresa-publica-fixa">NAT static: serverul intern primește o adresă publică fixă</a></li><li><a href="#nat-dinamic-cu-pool">NAT dinamic cu pool</a></li><li><a href="#pat-cu-pool">PAT cu pool</a></li><li><a href="#pat-pe-adresa-interfetei-varianta-cea-mai-des-intalnita">PAT pe adresa interfeței (varianta cea mai des întâlnită)</a></li><li><a href="#configuratia-completa-de-pe-r1">Configurația completă de pe R1</a></li></ol></li><li><a href="#verificarea">Verificarea</a><ol><li><a href="#show-ip-nat-translations">show ip nat translations</a></li><li><a href="#show-ip-nat-statistics">show ip nat statistics</a></li><li><a href="#clear-ip-nat-translation">clear ip nat translation</a></li><li><a href="#debug-ip-nat-cu-grija">debug ip nat (cu grijă)</a></li></ol></li><li><a href="#port-forwarding-cu-pat-static">Port forwarding cu PAT static</a></li><li><a href="#greseli-frecvente">Greșeli frecvente</a></li><li><a href="#nat-si-ipv6">NAT și IPv6</a></li><li><a href="#exercitii">Exerciții</a></li><li><a href="#cum-inveti-nat-cel-mai-repede">Cum înveți NAT cel mai repede</a></li><li><a href="#intrebari-frecvente">Întrebări frecvente</a></li></ol></nav>
+<h2 id="de-ce-exista-nat">De ce există NAT</h2>
+<p>O adresă IPv4 are 32 de biți, deci în total sunt cam 4,3 miliarde de adrese. Pentru Internetul de azi nu ajung. IANA a dat ultimele blocuri mari libere în 2011, iar registrul european, RIPE NCC, a rămas fără blocuri /22 de alocat în noiembrie 2019.</p>
+<p>Soluția de avarie, care a ajuns standard, are două părți:</p>
+<ol>
+<li><strong>Adresele private (RFC 1918).</strong> Trei intervale rezervate pentru rețele interne. Oricine le poate folosi, oricât de des, pentru că nu sunt rutate pe Internet.</li>
+<li><strong>NAT.</strong> La ieșirea din rețea, routerul înlocuiește adresa privată cu una publică. Răspunsurile vin la adresa publică, iar routerul le trimite înapoi dispozitivului corect.</li>
+</ol>
+<div class="table-scroll"><p class="table-hint" aria-hidden="true">glisează<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></p><div class="table-wrap" role="region" tabindex="0" aria-label="Tabel (se derulează pe orizontală)"><table>
+<thead>
+<tr>
+<th>Interval privat</th>
+<th>Prefix</th>
+<th>Câte adrese</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>10.0.0.0 – 10.255.255.255</td>
+<td>10.0.0.0/8</td>
+<td>16.777.216</td>
+</tr>
+<tr>
+<td>172.16.0.0 – 172.31.255.255</td>
+<td>172.16.0.0/12</td>
+<td>1.048.576</td>
+</tr>
+<tr>
+<td>192.168.0.0 – 192.168.255.255</td>
+<td>192.168.0.0/16</td>
+<td>65.536</td>
+</tr>
+</tbody></table></div></div>
+<p>Capcana de examen: <code>172.32.5.1</code> <strong>nu</strong> e privată. Intervalul /12 se oprește la <code>172.31.255.255</code>. Dacă nu ești sigur de limite, verifică-le cu <a href="../../tools/calculator-subnetting/">calculatorul de subnetting</a>.</p>
+<p>Mai există și <code>100.64.0.0/10</code> (RFC 6598), folosit de operatori pentru <strong>CGNAT</strong>, adică NAT făcut la ei, înaintea routerului tău. Dacă routerul de acasă primește pe WAN o adresă din acest interval, ieși pe Internet prin două niveluri de NAT.</p>
+<p>NAT are și dezavantaje, bine de știut pentru întrebările de teorie:</p>
+<ul>
+<li><strong>strică legătura capăt la capăt:</strong> un dispozitiv din afară nu poate iniția o conexiune spre unul intern fără o regulă statică;</li>
+<li><strong>complică depanarea și urmărirea:</strong> în log-urile unui server extern, toată firma apare ca o singură adresă;</li>
+<li><strong>unele protocoale suferă:</strong> cele care pun adrese IP în interiorul datelor au nevoie de ajutor din partea routerului, iar IPsec are nevoie de NAT-T (UDP 4500) ca ESP să treacă prin NAT; IPsec cu AH, care protejează chiar antetul IP, nu funcționează deloc prin NAT;</li>
+<li><strong>adaugă puțină întârziere,</strong> pentru că routerul rescrie fiecare pachet și recalculează checksum-urile.</li>
+</ul>
+<h2 id="topologia-folosita-in-ghid">Topologia folosită în ghid</h2>
+<p>Toate exemplele pornesc de la aceeași rețea mică. Adresele publice sunt din intervalele rezervate pentru documentație (<code>192.0.2.0/24</code>, <code>198.51.100.0/24</code>, <code>203.0.113.0/24</code>), ca să nu semene cu adresele cuiva real.</p>
+<pre><code class="language-text"> PC1 192.168.10.11 ─┐
+ PC2 192.168.10.12 ─┤  LAN 192.168.10.0/24         legătura 198.51.100.0/30
+ SRV 192.168.10.50 ─┴─ Switch ── G0/0/1 [ R1 ] G0/0/0 ──────────────── [ ISP ] ── Internet
+                          .1 (inside)       .2 (outside)            .1        └─ WEB 192.0.2.80
+</code></pre>
+<ul>
+<li>R1 are adresa <code>198.51.100.2/30</code> spre ISP și o rută implicită: <code>ip route 0.0.0.0 0.0.0.0 198.51.100.1</code>.</li>
+<li>ISP-ul i-a alocat firmei și blocul public <code>203.0.113.0/29</code> și îl rutează spre R1. Adresele din bloc nu stau pe nicio interfață; R1 le folosește doar în traduceri.</li>
+<li>WEB este un server oarecare de pe Internet.</li>
+</ul>
+<h2 id="cei-patru-termeni-inside-outside-local-global">Cei patru termeni: inside/outside, local/global</h2>
+<p>Termenii au două părți, și fiecare răspunde la altă întrebare:</p>
+<ul>
+<li><strong>inside / outside</strong> = <strong>al cui</strong> e dispozitivul: din rețeaua ta (inside) sau din afara ei (outside);</li>
+<li><strong>local / global</strong> = <strong>de unde privești</strong> adresa: din interiorul rețelei (local) sau din exterior (global).</li>
+</ul>
+<div class="table-scroll"><p class="table-hint" aria-hidden="true">glisează<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></p><div class="table-wrap" role="region" tabindex="0" aria-label="Tabel (se derulează pe orizontală)"><table>
+<thead>
+<tr>
+<th>Termen</th>
+<th>Ce reprezintă</th>
+<th>În exemplul nostru</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Inside local</td>
+<td class="tw">adresa unui host intern, văzută din interior</td>
+<td><code>192.168.10.11</code> (PC1)</td>
+</tr>
+<tr>
+<td>Inside global</td>
+<td class="tw">adresa aceluiași host intern, văzută din exterior</td>
+<td><code>203.0.113.1</code></td>
+</tr>
+<tr>
+<td>Outside local</td>
+<td class="tw">adresa unui host extern, văzută din interior</td>
+<td><code>192.0.2.80</code> (WEB)</td>
+</tr>
+<tr>
+<td>Outside global</td>
+<td class="tw">adresa reală a host-ului extern, văzută din exterior</td>
+<td><code>192.0.2.80</code> (WEB)</td>
+</tr>
+</tbody></table></div></div>
+<h3 id="exemplu-pc1-deschide-o-pagina-pe-web">Exemplu: PC1 deschide o pagină pe WEB</h3>
+<ol>
+<li>PC1 trimite un pachet: sursă <code>192.168.10.11</code>, destinație <code>192.0.2.80</code>. Pentru PC1, ambele adrese sunt „locale”: așa le vede el.</li>
+<li>Pachetul intră în R1 pe G0/0/1 (inside) și iese pe G0/0/0 (outside). R1 înlocuiește sursa cu <code>203.0.113.1</code> și notează asocierea în tabela NAT.</li>
+<li>Pe Internet, pachetul circulă cu sursă <code>203.0.113.1</code> (inside global) și destinație <code>192.0.2.80</code> (outside global).</li>
+<li>WEB răspunde către <code>203.0.113.1</code>. ISP-ul rutează blocul spre R1.</li>
+<li>R1 găsește asocierea în tabelă, pune înapoi destinația <code>192.168.10.11</code> și trimite pachetul spre PC1.</li>
+</ol>
+<p>De ce outside local și outside global sunt identice? Pentru că R1 traduce doar adresele interne. Ar fi diferite doar dacă ai traduce și adresele externe (cu <code>ip nat outside source</code>), de exemplu când două firme care folosesc aceleași adrese private se leagă între ele. La CCNA, în aproape toate scenariile, cele două sunt egale.</p>
+<p>Un truc de memorare: <strong>„global” e mereu adresa care circulă pe Internet</strong>, iar „local” e adresa pe care o vezi în LAN.</p>
+<h2 id="cele-trei-tipuri-de-nat">Cele trei tipuri de NAT</h2>
+<div class="table-scroll"><p class="table-hint" aria-hidden="true">glisează<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></p><div class="table-wrap" role="region" tabindex="0" aria-label="Tabel (se derulează pe orizontală)"><table>
+<thead>
+<tr>
+<th>Tip</th>
+<th>Cum leagă adresele</th>
+<th>Când îl folosești</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>NAT static</td>
+<td class="tw">o adresă internă ↔ o adresă publică fixă, permanent</td>
+<td class="tw">servere care trebuie să fie accesibile din Internet</td>
+</tr>
+<tr>
+<td>NAT dinamic</td>
+<td class="tw">adrese interne ↔ adrese libere dintr-un pool, unu la unu, cât timp sunt folosite</td>
+<td>rar azi; când ai multe adrese publice</td>
+</tr>
+<tr>
+<td>PAT (NAT overload)</td>
+<td class="tw">multe adrese interne ↔ o adresă publică (sau câteva), deosebite după port</td>
+<td>aproape peste tot: acasă, la birou</td>
+</tr>
+</tbody></table></div></div>
+<h3 id="nat-static">NAT static</h3>
+<p>Asocierea e scrisă manual și există permanent în tabelă, chiar dacă nu trece trafic. Funcționează în ambele sensuri: oricine de pe Internet poate deschide o conexiune spre <code>203.0.113.5</code>, iar R1 o trimite la server. De aceea se folosește pentru servere publice (web, e-mail, VPN).</p>
+<h3 id="nat-dinamic">NAT dinamic</h3>
+<p>Definești un <strong>pool</strong> de adrese publice și un <strong>ACL</strong> care spune ce adrese interne au voie să fie traduse. Primul host care trimite trafic primește prima adresă liberă din pool. Asocierea expiră după o perioadă fără trafic (implicit 24 de ore pentru traducerile simple, fără porturi), iar adresa revine în pool.</p>
+<p>Limita: pool-ul are un număr fix de adrese. Cu 4 adrese publice, doar 4 host-uri interne pot ieși în același timp. Al cincilea nu primește traducere, iar pachetele lui sunt aruncate până se eliberează o adresă.</p>
+<h3 id="pat-nat-overload">PAT (NAT overload)</h3>
+<p>PAT traduce <strong>adresa și portul sursă</strong>. Fiecare conexiune primește o combinație unică „adresă publică : port”, așa că mii de conexiuni pot împărți o singură adresă publică. Când vine răspunsul, R1 se uită la portul destinație și știe exact cui îi aparține.</p>
+<p>Portul are 16 biți, deci teoretic o adresă publică poate susține câteva zeci de mii de conexiuni simultane pentru fiecare protocol (TCP, UDP). Cisco IOS încearcă să păstreze portul sursă original; dacă e deja ocupat de altă conexiune, alege alt port liber.</p>
+<p>Pentru ICMP (de exemplu <code>ping</code>), care nu are porturi, routerul folosește identificatorul mesajului ICMP în locul portului.</p>
+<h2 id="configurarea-pas-cu-pas">Configurarea pas cu pas</h2>
+<p>Indiferent de tip, pașii sunt aceiași:</p>
+<ol>
+<li>marchezi interfața spre LAN cu <code>ip nat inside</code>;</li>
+<li>marchezi interfața spre ISP cu <code>ip nat outside</code>;</li>
+<li>definești <strong>ce</strong> traduci (o adresă pentru static, un ACL pentru dinamic și PAT);</li>
+<li>definești <strong>în ce</strong> traduci (o adresă, un pool sau adresa interfeței);</li>
+<li>legi totul cu o comandă <code>ip nat inside source ...</code>.</li>
+</ol>
+<p>Pașii 1 și 2 sunt comuni:</p>
+<pre><code class="language-text">R1(config)# interface GigabitEthernet0/0/1
+R1(config-if)# ip nat inside
+R1(config-if)# exit
+R1(config)# interface GigabitEthernet0/0/0
+R1(config-if)# ip nat outside
+R1(config-if)# exit
+</code></pre>
+<p>Dacă ai mai multe rețele interne (de exemplu subinterfețe pentru mai multe <a href="../vlan-si-trunk/">VLAN-uri</a>), fiecare are nevoie de <code>ip nat inside</code>. O subinterfață uitată înseamnă un VLAN întreg fără Internet.</p>
+<h3 id="nat-static-serverul-intern-primeste-o-adresa-publica-fixa">NAT static: serverul intern primește o adresă publică fixă</h3>
+<pre><code class="language-text">R1(config)# ip nat inside source static 192.168.10.50 203.0.113.5
+</code></pre>
+<p>Ordinea contează: întâi adresa internă (inside local), apoi cea publică (inside global). Din acest moment, cine accesează <code>203.0.113.5</code> de pe Internet ajunge la SRV.</p>
+<h3 id="nat-dinamic-cu-pool">NAT dinamic cu pool</h3>
+<pre><code class="language-text">R1(config)# access-list 1 permit 192.168.10.0 0.0.0.255
+R1(config)# ip nat pool PUBLIC 203.0.113.1 203.0.113.4 netmask 255.255.255.248
+R1(config)# ip nat inside source list 1 pool PUBLIC
+</code></pre>
+<ul>
+<li><strong>ACL-ul</strong> e un ACL standard care <strong>permite</strong> adresele interne de tradus. Folosește o mască wildcard, nu o mască de subrețea: pentru un /24, <code>0.0.0.255</code>. Dacă îți trebuie wildcard-ul pentru un prefix mai ciudat, de exemplu /22, îl obții scăzând masca din <code>255.255.255.255</code> (detalii în <a href="../subnetting-pas-cu-pas/">ghidul de subnetting</a>).</li>
+<li><strong>Pool-ul</strong> are un nume, prima și ultima adresă și masca blocului (sau <code>prefix-length 29</code> în loc de <code>netmask</code>). Am lăsat <code>.5</code> în afara pool-ului, pentru că e folosită deja de NAT-ul static. Un pool care se suprapune cu o traducere statică produce conflicte.</li>
+<li>ACL-ul nu filtrează trafic aici. Un <code>deny</code> doar înseamnă „nu traduce”, nu „blochează”.</li>
+</ul>
+<h3 id="pat-cu-pool">PAT cu pool</h3>
+<p>Adaugi un singur cuvânt la comanda de mai sus:</p>
+<pre><code class="language-text">R1(config)# ip nat inside source list 1 pool PUBLIC overload
+</code></pre>
+<p>Routerul folosește adresele din pool și pe fiecare o împarte, prin porturi, între mai multe conexiuni.</p>
+<h3 id="pat-pe-adresa-interfetei-varianta-cea-mai-des-intalnita">PAT pe adresa interfeței (varianta cea mai des întâlnită)</h3>
+<p>Când ISP-ul îți dă o singură adresă publică, cea de pe interfața WAN, nu mai ai nevoie de pool:</p>
+<pre><code class="language-text">R1(config)# access-list 1 permit 192.168.10.0 0.0.0.255
+R1(config)# ip nat inside source list 1 interface GigabitEthernet0/0/0 overload
+</code></pre>
+<p>Toate dispozitivele din LAN ies cu adresa <code>198.51.100.2</code>. E exact ce face routerul de acasă. Avantaj în plus: dacă interfața WAN își ia adresa prin DHCP și aceasta se schimbă, PAT-ul folosește automat noua adresă.</p>
+<h3 id="configuratia-completa-de-pe-r1">Configurația completă de pe R1</h3>
+<p>Aceasta e varianta pe care o folosim mai departe: server publicat static și restul LAN-ului prin PAT pe interfață.</p>
+<pre><code class="language-text">R1(config)# interface GigabitEthernet0/0/1
+R1(config-if)# ip address 192.168.10.1 255.255.255.0
+R1(config-if)# ip nat inside
+R1(config-if)# no shutdown
+R1(config-if)# exit
+R1(config)# interface GigabitEthernet0/0/0
+R1(config-if)# ip address 198.51.100.2 255.255.255.252
+R1(config-if)# ip nat outside
+R1(config-if)# no shutdown
+R1(config-if)# exit
+R1(config)# ip route 0.0.0.0 0.0.0.0 198.51.100.1
+R1(config)# access-list 1 permit 192.168.10.0 0.0.0.255
+R1(config)# ip nat inside source list 1 interface GigabitEthernet0/0/0 overload
+R1(config)# ip nat inside source static 192.168.10.50 203.0.113.5
+</code></pre>
+<p>Când un pachet are atât o traducere statică, cât și una dinamică posibilă, cea statică are prioritate. Așa că SRV iese mereu ca <code>203.0.113.5</code>, deși adresa lui se potrivește și cu ACL-ul.</p>
+<h2 id="verificarea">Verificarea</h2>
+<div class="table-scroll"><p class="table-hint" aria-hidden="true">glisează<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></p><div class="table-wrap" role="region" tabindex="0" aria-label="Tabel (se derulează pe orizontală)"><table>
+<thead>
+<tr>
+<th>Comandă</th>
+<th>Ce vezi</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code><span class="nw">show</span> <span class="nw">ip</span> <span class="nw">nat</span> <span class="nw">translations</span></code></td>
+<td class="tw">tabela NAT: fiecare traducere activă, cu cele patru adrese</td>
+</tr>
+<tr>
+<td><code><span class="nw">show</span> <span class="nw">ip</span> <span class="nw">nat</span> <span class="nw">translations</span> <span class="nw">verbose</span></code></td>
+<td class="tw">aceeași tabelă, plus vârsta și timpul rămas până la expirare</td>
+</tr>
+<tr>
+<td><code><span class="nw">show</span> <span class="nw">ip</span> <span class="nw">nat</span> <span class="nw">statistics</span></code></td>
+<td class="tw">interfețele inside/outside, câte traduceri sunt active, hits/misses, pool-urile</td>
+</tr>
+<tr>
+<td><code><span class="nw">clear</span> <span class="nw">ip</span> <span class="nw">nat</span> <span class="nw">translation</span> <span class="nw">*</span></code></td>
+<td class="tw">șterge toate traducerile <strong>dinamice</strong> (cele statice rămân)</td>
+</tr>
+<tr>
+<td><code><span class="nw">debug</span> <span class="nw">ip</span> <span class="nw">nat</span></code></td>
+<td class="tw">afișează în timp real fiecare pachet tradus</td>
+</tr>
+</tbody></table></div></div>
+<h3 id="show-ip-nat-translations">show ip nat translations</h3>
+<p>După ce PC1 și PC2 deschid pagina de pe WEB, iar PC2 dă și un <code>ping</code>:</p>
+<pre><code class="language-text">R1# show ip nat translations
+Pro Inside global         Inside local          Outside local         Outside global
+--- 203.0.113.5           192.168.10.50         ---                   ---
+tcp 198.51.100.2:51544    192.168.10.11:51544   192.0.2.80:443        192.0.2.80:443
+tcp 198.51.100.2:1024     192.168.10.12:51544   192.0.2.80:443        192.0.2.80:443
+icmp 198.51.100.2:7       192.168.10.12:7       192.0.2.80:7          192.0.2.80:7
+</code></pre>
+<p>Cum se citește:</p>
+<ul>
+<li><strong>Prima linie</strong> e traducerea statică. Nu are protocol și nici adrese externe, pentru că nu depinde de nicio conexiune anume.</li>
+<li><strong>PC1</strong> a ieșit cu portul lui original, 51544.</li>
+<li><strong>PC2</strong> a folosit întâmplător același port sursă. Combinația <code>198.51.100.2:51544</code> era deja ocupată, așa că R1 i-a dat portul 1024. Așa deosebește răspunsurile.</li>
+<li><strong>Linia icmp</strong> are ID-ul mesajului ICMP (7) în locul portului.</li>
+</ul>
+<h3 id="show-ip-nat-statistics">show ip nat statistics</h3>
+<pre><code class="language-text">R1# show ip nat statistics
+Total active translations: 4 (1 static, 3 dynamic; 3 extended)
+Peak translations: 6, occurred 00:12:40 ago
+Outside interfaces:
+  GigabitEthernet0/0/0
+Inside interfaces:
+  GigabitEthernet0/0/1
+Hits: 1288  Misses: 0
+CEF Translated packets: 1284, CEF Punted packets: 4
+Expired translations: 5
+Dynamic mappings:
+-- Inside Source
+[Id: 1] access-list 1 interface GigabitEthernet0/0/0 refcount 3
+</code></pre>
+<p>Ce te interesează când depanezi:</p>
+<ul>
+<li><strong>interfețele inside și outside</strong> sunt cele corecte? Aici prinzi imediat inversarea lor;</li>
+<li><strong>„extended”</strong> = traduceri cu porturi, adică PAT;</li>
+<li><strong>„refcount”</strong> = câte traduceri active folosesc regula respectivă;</li>
+<li>la un pool apare și o linie de forma <code>total addresses 4, allocated 4 (100%), misses 12</code>: pool plin și 12 încercări care n-au primit adresă.</li>
+</ul>
+<p>Formatul exact diferă puțin între versiunile de IOS.</p>
+<h3 id="clear-ip-nat-translation">clear ip nat translation</h3>
+<pre><code class="language-text">R1# clear ip nat translation *
+</code></pre>
+<p>Șterge traducerile dinamice; conexiunile active se întrerup și se refac la următorul pachet. E util după ce schimbi configurația NAT: IOS poate refuza să modifice sau să șteargă un pool care e încă folosit și afișează un mesaj că pool-ul e în uz. Golești tabela, apoi faci modificarea.</p>
+<h3 id="debug-ip-nat-cu-grija">debug ip nat (cu grijă)</h3>
+<pre><code class="language-text">R1# debug ip nat
+IP NAT debugging is on
+NAT: s=192.168.10.11-&gt;198.51.100.2, d=192.0.2.80 [40211]
+NAT*: s=192.0.2.80, d=198.51.100.2-&gt;192.168.10.11 [0]
+</code></pre>
+<p><code>s</code> e sursa, <code>d</code> destinația, iar săgeata arată ce adresă a fost înlocuită. Asteriscul de la <code>NAT*</code> înseamnă că pachetul a fost tradus pe calea rapidă (CEF). Numărul dintre paranteze e identificatorul pachetului IP.</p>
+<p>Atenție: pe un router de producție, <code>debug ip nat</code> scrie o linie pentru fiecare pachet tradus și poate încărca procesorul până la blocarea sesiunii. În laborator e foarte util; în producție, limitează-l la un ACL (<code>debug ip nat 10</code>, unde ACL 10 permite doar host-ul pe care îl urmărești) și oprește-l imediat cu <code>undebug all</code>. Dacă ești conectat prin SSH, ai nevoie de <code>terminal monitor</code> ca să vezi mesajele.</p>
+<h2 id="port-forwarding-cu-pat-static">Port forwarding cu PAT static</h2>
+<p>Alt scenariu: o firmă mai mică are o singură adresă publică (<code>198.51.100.2</code>, a interfeței), fără blocul <code>203.0.113.0/29</code>, și vrea ca serverul web intern să fie accesibil din Internet. NAT-ul static obișnuit ar lega toată adresa publică de server, iar restul LAN-ului n-ar mai avea cu ce să iasă. Soluția e un <strong>PAT static</strong>: legi doar un port.</p>
+<pre><code class="language-text">R1(config)# ip nat inside source static tcp 192.168.10.50 443 interface GigabitEthernet0/0/0 443
+</code></pre>
+<p>Sau, cu adresa scrisă explicit:</p>
+<pre><code class="language-text">R1(config)# ip nat inside source static tcp 192.168.10.50 443 198.51.100.2 443
+</code></pre>
+<p>Acum, o conexiune de pe Internet spre <code>198.51.100.2:443</code> ajunge la <code>192.168.10.50:443</code>, iar PAT-ul pentru restul LAN-ului funcționează în continuare.</p>
+<p>Porturile nu trebuie să fie identice. Pentru un server SSH intern pe care vrei să-l expui pe un port public neobișnuit:</p>
+<pre><code class="language-text">R1(config)# ip nat inside source static tcp 192.168.10.60 22 198.51.100.2 2222
+</code></pre>
+<p>Conexiunea spre <code>198.51.100.2:2222</code> ajunge la portul 22 al host-ului <code>192.168.10.60</code>. În tabela NAT, aceste reguli apar ca linii permanente cu protocolul <code>tcp</code> și fără adrese externe.</p>
+<p>Două observații practice:</p>
+<ul>
+<li>serverul intern trebuie să aibă gateway-ul setat spre R1, altfel răspunsurile lui nu se întorc pe același drum;</li>
+<li>port forwarding-ul expune serviciul pe Internet. Pune-l doar pentru ce trebuie neapărat să fie public și protejează-l (ACL, firewall, autentificare puternică).</li>
+</ul>
+<h2 id="greseli-frecvente">Greșeli frecvente</h2>
+<div class="table-scroll"><p class="table-hint" aria-hidden="true">glisează<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></p><div class="table-wrap" role="region" tabindex="0" aria-label="Tabel (se derulează pe orizontală)"><table>
+<thead>
+<tr>
+<th>Simptom</th>
+<th>Cauza probabilă</th>
+<th>Cum verifici și repari</th>
+</tr>
+</thead>
+<tbody><tr>
+<td class="tw">Tabela NAT e goală, nimic nu iese pe Internet</td>
+<td><code><span class="nw">ip</span> <span class="nw">nat</span> <span class="nw">inside</span></code> și <code><span class="nw">ip</span> <span class="nw">nat</span> <span class="nw">outside</span></code> puse invers</td>
+<td class="tw"><code><span class="nw">show</span> <span class="nw">ip</span> <span class="nw">nat</span> <span class="nw">statistics</span></code> (lista de interfețe), apoi corectezi pe fiecare interfață</td>
+</tr>
+<tr>
+<td>Unele host-uri ies, altele nu</td>
+<td class="tw">ACL-ul nu acoperă toate rețelele interne sau are wildcard greșit</td>
+<td class="tw"><code><span class="nw">show</span> <span class="nw">access-lists</span></code> (contoarele de potriviri), corectezi wildcard-ul sau adaugi o linie</td>
+</tr>
+<tr>
+<td>ACL-ul nu se potrivește deloc</td>
+<td class="tw">s-a scris masca de subrețea în loc de wildcard (<code>255.255.255.0</code> în loc de <code>0.0.0.255</code>)</td>
+<td><code><span class="nw">show</span> <span class="nw">running-config</span> <span class="nw">|</span> <span class="nw">include</span> <span class="nw">access-list</span></code></td>
+</tr>
+<tr>
+<td>Primele câteva PC-uri merg, restul nu</td>
+<td>NAT dinamic fără <code>overload</code>, pool epuizat</td>
+<td><code><span class="nw">show</span> <span class="nw">ip</span> <span class="nw">nat</span> <span class="nw">statistics</span></code> (pool 100% alocat, misses) → adaugi <code>overload</code></td>
+</tr>
+<tr>
+<td>Un VLAN întreg nu are Internet</td>
+<td>subinterfața lui nu are <code><span class="nw">ip</span> <span class="nw">nat</span> <span class="nw">inside</span></code></td>
+<td><code><span class="nw">show</span> <span class="nw">running-config</span> <span class="nw">interface</span> <span class="nw">G0/0/1.20</span></code></td>
+</tr>
+<tr>
+<td class="tw">Traducerile apar, dar răspunsurile nu vin</td>
+<td class="tw">ISP-ul nu rutează adresele din pool spre router sau lipsește ruta implicită</td>
+<td><code><span class="nw">show</span> <span class="nw">ip</span> <span class="nw">route</span></code>, verifici cu ISP-ul blocul alocat</td>
+</tr>
+<tr>
+<td>Serverul publicat nu răspunde din afară</td>
+<td class="tw">protocol sau port greșit în PAT-ul static, gateway lipsă pe server</td>
+<td><code><span class="nw">show</span> <span class="nw">ip</span> <span class="nw">nat</span> <span class="nw">translations</span></code>, configurația serverului</td>
+</tr>
+<tr>
+<td>Nu poți modifica pool-ul</td>
+<td>pool-ul e folosit de traduceri active</td>
+<td><code><span class="nw">clear</span> <span class="nw">ip</span> <span class="nw">nat</span> <span class="nw">translation</span> <span class="nw">*</span></code>, apoi modifici</td>
+</tr>
+</tbody></table></div></div>
+<p>Două reguli te scapă de majoritatea problemelor: <strong>inside e spre LAN, outside e spre ISP</strong>, și <strong>ACL-ul de NAT permite adresele interne, cu wildcard</strong>.</p>
+<p>Un detaliu util pentru ACL-urile de filtrare: pe un pachet care merge din inside spre outside, routerul face întâi rutarea și apoi traducerea; pe unul care vine din outside, face întâi traducerea și apoi rutarea. ACL-urile de intrare se verifică înaintea ambilor pași, deci un ACL de intrare pe interfața outside vede adresele publice (inside global), nu pe cele private.</p>
+<h2 id="nat-si-ipv6">NAT și IPv6</h2>
+<p>IPv6 are 128 de biți, adică destule adrese ca fiecare dispozitiv să primească o adresă globală unică (GUA). Motivul principal pentru NAT, lipsa adreselor, dispare. În IPv6, o rețea obișnuită primește un prefix /64 pe fiecare segment, iar dispozitivele comunică direct, capăt la capăt.</p>
+<p>„Dar NAT-ul nu mă protejează?” Nu în sensul care contează. Protecția vine de la <strong>firewall-ul stateful</strong>, care lasă să intre doar răspunsurile la conexiunile inițiate din interior. Routerele și firewall-urile fac asta la fel de bine și fără traducere de adrese.</p>
+<p>Ce mai există totuși în lumea IPv6:</p>
+<ul>
+<li><strong>NAT64:</strong> permite unui client doar-IPv6 să ajungă la un server doar-IPv4. E o tehnică de tranziție, nu un înlocuitor pentru NAT-ul din IPv4;</li>
+<li><strong>NPTv6</strong> (RFC 6296): traduce un prefix IPv6 în alt prefix, fără porturi. Se folosește rar.</li>
+</ul>
+<p>Pentru adresarea IPv6 de la zero, vezi <a href="../adrese-ipv6/">ghidul despre adresele IPv6</a> și <a href="../../tools/ipv6/">tool-ul IPv6</a>, care prescurtează și extinde adrese.</p>
+<h2 id="exercitii">Exerciții</h2>
+<ol>
+<li>În tabela NAT apare linia <code>tcp 203.0.113.3:1027  10.1.1.20:50112  192.0.2.10:80  192.0.2.10:80</code>. Care e inside local, inside global și outside global? Ce tip de NAT e folosit?</li>
+<li>Ai NAT dinamic cu un pool de 3 adrese publice, fără <code>overload</code>, și 20 de PC-uri. Ce se întâmplă când al patrulea PC încearcă să deschidă o pagină web, cât timp primele trei sunt active?</li>
+<li>Rețelele interne sunt <code>172.16.0.0/24</code>, <code>172.16.1.0/24</code>, <code>172.16.2.0/24</code> și <code>172.16.3.0/24</code>. Scrie ACL-ul (o singură linie) și comanda de PAT pe interfața <code>GigabitEthernet0/0/0</code>.</li>
+<li>După configurare, <code>show ip nat statistics</code> arată „Outside interfaces: GigabitEthernet0/0/1” și „Inside interfaces: GigabitEthernet0/0/0”, iar G0/0/0 e legată la ISP. Ce e greșit și cum repari?</li>
+<li>Ai o singură adresă publică, pe G0/0/0, și un server HTTPS intern la <code>192.168.10.70</code>. Scrie comanda care îl publică pe portul 443, fără să strici PAT-ul pentru restul LAN-ului.</li>
+</ol>
+<details class="reveal-answer">
+<summary><strong>Răspunsuri</strong></summary><p><strong>1.</strong> Inside local: <code>10.1.1.20</code>. Inside global: <code>203.0.113.3</code>. Outside global (și outside local): <code>192.0.2.10</code>. Portul public (1027) diferă de cel intern (50112), deci routerul a tradus și portul: e <strong>PAT</strong>.</p>
+<p><strong>2.</strong> Al patrulea PC <strong>nu primește traducere</strong>, iar pachetele lui sunt aruncate. NAT-ul dinamic fără <code>overload</code> dă câte o adresă întreagă fiecărui host. Va merge doar după ce una dintre traduceri expiră sau e ștearsă. Soluția: <code>overload</code>.</p>
+<p><strong>3.</strong> Cele patru rețele formează împreună <code>172.16.0.0/22</code>, iar wildcard-ul pentru /22 e <code>0.0.3.255</code>:</p>
+<pre><code class="language-text">R1(config)# access-list 1 permit 172.16.0.0 0.0.3.255
+R1(config)# ip nat inside source list 1 interface GigabitEthernet0/0/0 overload
+</code></pre>
+<p>Plus <code>ip nat inside</code> pe interfața (sau interfețele) spre LAN și <code>ip nat outside</code> pe G0/0/0.</p>
+<p><strong>4.</strong> Rolurile sunt inversate. Corect:</p>
+<pre><code class="language-text">R1(config)# interface GigabitEthernet0/0/0
+R1(config-if)# no ip nat inside
+R1(config-if)# ip nat outside
+R1(config-if)# exit
+R1(config)# interface GigabitEthernet0/0/1
+R1(config-if)# no ip nat outside
+R1(config-if)# ip nat inside
+</code></pre>
+<p>Apoi <code>clear ip nat translation *</code>, ca să dispară eventualele traduceri greșite.</p>
+<p><strong>5.</strong></p>
+<pre><code class="language-text">R1(config)# ip nat inside source static tcp 192.168.10.70 443 interface GigabitEthernet0/0/0 443
+</code></pre>
+<p>E un PAT static: leagă doar portul TCP 443, deci restul porturilor rămân disponibile pentru PAT-ul dinamic al LAN-ului.</p>
+</details><h2 id="cum-inveti-nat-cel-mai-repede">Cum înveți NAT cel mai repede</h2>
+<ul>
+<li><strong>Construiește topologia din ghid</strong> într-un simulator și treci prin toate variantele: static, dinamic fără overload (cu un pool mic, ca să-l vezi epuizat), PAT cu pool, PAT pe interfață.</li>
+<li><strong>După fiecare variantă, citește <code>show ip nat translations</code></strong> și spune cu voce tare care e inside local și care e inside global.</li>
+<li><strong>Strică intenționat:</strong> inversează inside și outside, scrie o mască în loc de wildcard, scoate <code>overload</code>. Găsește apoi problema doar cu comenzi <code>show</code>.</li>
+<li><strong>Exersează wildcard-urile</strong> cu <a href="../../tools/convertor-binar/">convertorul binar</a> și calculatorul de subnetting; le vei folosi din nou la <a href="../acl-uri-cisco/">ACL-uri</a>.</li>
+<li><strong>Recapitulează comenzile de bază</strong> din <a href="../comenzi-cisco-ios/">fișa cu comenzile Cisco IOS</a>.</li>
+</ul>
+<div class="cta-box cta-box--article"><svg class="mascot" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><g class="m-breathe"><path d="M22 14l-5-9M42 14l5-9" stroke="#8a919c" stroke-width="3.4" stroke-linecap="round" fill="none"/><circle class="m-led m-led-l" cx="17" cy="5" r="3.6"/><circle class="m-led m-led-r" cx="47" cy="5" r="3.6"/><path class="m-body" d="M28 12q4-6 8 0"/><rect class="m-body" x="8" y="12" width="48" height="42" rx="18"/><rect class="m-belly" x="8" y="40" width="48" height="14" rx="7"/><path d="M19 31q4-5 8 0" stroke="#1a1d24" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M37 31q4-5 8 0" stroke="#1a1d24" stroke-width="3" fill="none" stroke-linecap="round"/><path class="m-led" d="M29 37l3 3.5 3-3.5z"/><circle cx="15" cy="38" r="3" fill="#ff8fb1" opacity=".7"/><circle cx="49" cy="38" r="3" fill="#ff8fb1" opacity=".7"/><circle class="m-ok" cx="18" cy="47" r="2"/><circle class="m-led" cx="24" cy="47" r="2"/><rect x="31" y="45" width="6" height="4" rx="1" fill="#0d1a3a" opacity=".55"/><rect x="39" y="45" width="6" height="4" rx="1" fill="#0d1a3a" opacity=".55"/><rect x="47" y="45" width="5" height="4" rx="1" fill="#0d1a3a" opacity=".55"/><path class="m-leg" d="M20 54v4M44 54v4" stroke-width="3.4" stroke-linecap="round" fill="none"/></g></svg><div><h3>Exersează NAT și PAT în aplicația Routerel</h3><p>Routerel are peste 1.900 de întrebări pentru CCNA 1 · ITN, CCNA 2 · IEN și CCNA 3 · CEN, inclusiv întrebări cu tabele NAT și configurații pe care le poți mări, fiecare cu explicație imediat după răspuns. Greșelile revin singure prin repetiție spațiată până le stăpânești, iar simularea de examen cu timp îți arată unde stai. Abonații noi au 7 zile gratuite, cu acces la tot.</p></div><a class="btn" href="../../" data-play data-soon-href="../../">Descoperă aplicația<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div><h2 id="intrebari-frecvente">Întrebări frecvente</h2>
+<div class="faq faq--article"><details><summary>Ce este NAT?<span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p>Funcția prin care un router înlocuiește adresa IP sursă sau destinație dintr-un pachet atunci când acesta trece dintre rețeaua internă și cea externă. Cel mai des, adresele private din LAN sunt traduse într-o adresă publică, ca dispozitivele să poată ieși pe Internet.</p></div></details><details><summary>Care e diferența dintre NAT și PAT?<span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p>NAT-ul simplu (static sau dinamic) leagă o adresă internă de o adresă publică, unu la unu. PAT, numit și NAT overload, traduce și portul, așa că multe dispozitive interne pot folosi aceeași adresă publică în același timp. Routerul le deosebește după numărul de port.</p></div></details><details><summary>Ce înseamnă inside local și inside global?<span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p>Inside local e adresa unui dispozitiv intern așa cum o vezi din interior, de obicei o adresă privată. Inside global e adresa aceluiași dispozitiv așa cum o vede lumea de afară, adică adresa publică în care a fost tradus.</p></div></details><details><summary>Ce face cuvântul overload în comanda NAT?<span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p>Activează PAT: routerul traduce și porturile, nu doar adresele. Fără <code>overload</code>, NAT-ul dinamic dă câte o adresă publică întreagă fiecărui dispozitiv intern, iar când pool-ul se termină, dispozitivele următoare nu mai pot ieși.</p></div></details><details><summary>De ce nu apare nimic în show ip nat translations?<span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p>Cele mai frecvente cauze: <code>ip nat inside</code> și <code>ip nat outside</code> puse invers, ACL-ul care nu se potrivește cu adresele interne, lipsa unei rute spre Internet sau faptul că încă n-a trecut trafic. Traducerile dinamice apar doar după ce un dispozitiv intern trimite primul pachet.</p></div></details><details><summary>Mai e nevoie de NAT cu IPv6?<span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p>În mod normal, nu. IPv6 are destule adrese ca fiecare dispozitiv să primească o adresă globală unică, deci nu mai trebuie să ascunzi o rețea întreagă în spatele unei singure adrese. Protecția o face un firewall, nu traducerea adreselor. NAT64 există, dar e o tehnică de tranziție între IPv6 și IPv4. Pentru locul NAT-ului în examen, vezi <a href="../ce-este-ccna/">ghidul despre CCNA</a>.</p></div></details></div>
+<hr>
+<p><em>Routerel este o aplicație independentă și nu este afiliată, sponsorizată sau aprobată de Cisco Systems, Inc. Cisco, CCNA, Cisco IOS și Networking Academy sunt mărci ale Cisco Systems, Inc.</em></p>
+      
+      <section class="related" aria-labelledby="rel-title">
+        <h2 id="rel-title">Citește și</h2>
+        <div class="grid grid--2"><a class="card post-card lift" href="../../ghiduri/ospf/"><span class="tagline">Ghid · 16 min</span><h3>OSPF explicat: configurare și depanare OSPFv2 (2026)</h3><p>OSPF single-area pe înțeles: router ID, vecini și stări, DR/BDR, cost, configurare cu network și ip ospf, comenzi show, depanare și exerciții rezolvate.</p></a><a class="card post-card lift" href="../../ghiduri/spanning-tree-stp/"><span class="tagline">Ghid · 14 min</span><h3>Spanning Tree (STP și RSTP): root bridge, porturi, comenzi</h3><p>Spanning Tree explicat pentru CCNA: alegerea root bridge, costuri, root port și designated port, RSTP, Rapid PVST+, PortFast, BPDU Guard, comenzi și exerciții.</p></a></div>
+      </section>
+    </article>
+  </div>
+</main>
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="about">
+        <a class="brand" href="../../"><img src="../../assets/icon-96.webp" alt="" width="36" height="36" loading="lazy"><span>Routerel</span></a>
+        <p>Exersezi CCNA pe telefon: întrebări cu explicații, repetiția greșelilor și simulări de examen. În română și engleză.</p>
+      </div>
+      <div><h2>Aplicația</h2><ul><li><a href="../../#functii">Funcții</a></li><li><a href="../../#preturi">Prețuri</a></li><li><a href="../../#cum-functioneaza">Cum funcționează</a></li><li><a href="../../#faq">Întrebări frecvente</a></li></ul></div>
+      <div><h2>Resurse</h2><ul><li><a href="../../ghiduri/">Ghiduri CCNA</a></li><li><a href="../../articole/">Articole CCNA</a></li><li><a href="../../tools/">Tools gratuite</a></li><li><a href="../../en/" hreflang="en" lang="en" data-set-lang="en">English</a></li></ul></div>
+      <div><h2>Legal și contact</h2><ul><li><a href="../../privacy">Confidențialitate</a></li><li><a href="../../terms">Termeni de utilizare</a></li><li><a href="../../delete-account">Ștergerea contului</a></li></ul><ul><li><a href="mailto:contact@routerel.app">contact@routerel.app</a></li></ul></div>
+    </div>
+    <div class="disclaimer">
+      <p>Routerel este o aplicație independentă și nu este afiliată, sponsorizată sau aprobată de Cisco Systems, Inc. Cisco, CCNA și Cisco Networking Academy sunt mărci ale Cisco Systems, Inc.</p>
+      <p>© 2026 Routerel</p>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,546 @@
+<!doctype html>
+<!-- Pagină generată. Nu o edita de mână: vezi tools/site/ (npm run build:guides / npm run sync:tools / npm run build:legal). -->
+<html lang="en" class="play-soon" data-utm-medium="guide" data-utm-campaign="cisco-acls">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Cisco ACLs Explained: Standard, Extended, Wildcards (2026)</title>
+  <meta name="description" content="Cisco ACLs explained: standard vs extended, numbered vs named, wildcard masks, implicit deny, placement, IOS configuration, verification and exercises.">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <link rel="canonical" href="https://routerel.app/en/guides/cisco-acls/">
+  <link rel="alternate" hreflang="ro" href="https://routerel.app/ghiduri/acl-uri-cisco/">
+  <link rel="alternate" hreflang="en" href="https://routerel.app/en/guides/cisco-acls/">
+  <link rel="alternate" hreflang="x-default" href="https://routerel.app/en/guides/cisco-acls/">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#12151b" media="(prefers-color-scheme: dark)">
+  <meta name="color-scheme" content="light dark">
+  <link rel="icon" href="../../../assets/favicon-32.png" type="image/png" sizes="32x32">
+  <link rel="icon" href="../../../assets/icon-192.png" type="image/png" sizes="192x192">
+  <link rel="apple-touch-icon" href="../../../assets/apple-touch-icon.png">
+  <link rel="manifest" href="../../../site.webmanifest">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Routerel">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="ro_RO">
+  <meta property="og:title" content="Cisco ACLs Explained: Standard, Extended, Wildcards (2026)">
+  <meta property="og:description" content="Cisco ACLs explained: standard vs extended, numbered vs named, wildcard masks, implicit deny, placement, IOS configuration, verification and exercises.">
+  <meta property="og:url" content="https://routerel.app/en/guides/cisco-acls/">
+  <meta property="og:image" content="https://routerel.app/assets/og-en.png">
+  <meta property="og:image:width" content="1024">
+  <meta property="og:image:height" content="500">
+  <meta property="og:image:alt" content="Routerel: the router chick mascot and the app name">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Cisco ACLs Explained: Standard, Extended, Wildcards (2026)">
+  <meta name="twitter:description" content="Cisco ACLs explained: standard vs extended, numbered vs named, wildcard masks, implicit deny, placement, IOS configuration, verification and exercises.">
+  <meta name="twitter:image" content="https://routerel.app/assets/og-en.png">
+  <meta property="article:published_time" content="2026-11-09">
+  <meta property="article:modified_time" content="2026-11-09">
+  <meta name="routerel:updated" content="2026-11-09">
+  <link rel="preload" href="../../../assets/fonts/nunito-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../../../assets/fonts/nunito-latin-ext.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../../../assets/fonts/roboto-mono-500-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="../../../style.css">
+  <script>(function(d){d.classList.add("js");try{var t=localStorage.getItem("routerel-theme");if(t==="light"||t==="dark")d.setAttribute("data-theme",t)}catch(e){}setTimeout(function(){if(!window.__rtl)d.classList.remove("js")},4000)})(document.documentElement)</script>
+  <script src="../../../assets/site.js" defer></script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Article","@id":"https://routerel.app/en/guides/cisco-acls/#article","headline":"Cisco ACLs Explained: Standard, Extended, Wildcards (2026)","description":"Cisco ACLs explained: standard vs extended, numbered vs named, wildcard masks, implicit deny, placement, IOS configuration, verification and exercises.","inLanguage":"en","datePublished":"2026-11-09","dateModified":"2026-11-09","keywords":"Cisco ACL, Cisco access list, standard vs extended ACL, wildcard mask, ACL configuration, ip access-group, access-class vty, CCNA ACL","author":{"@type":"Organization","name":"Routerel","url":"https://routerel.app/"},"publisher":{"@type":"Organization","name":"Routerel","logo":{"@type":"ImageObject","url":"https://routerel.app/assets/icon-512.png"}},"image":"https://routerel.app/assets/og-en.png","mainEntityOfPage":"https://routerel.app/en/guides/cisco-acls/","isPartOf":{"@id":"https://routerel.app/#website"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://routerel.app/en/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://routerel.app/en/guides/"},{"@type":"ListItem","position":3,"name":"Cisco ACLs Explained: Standard, Extended, Wildcards (2026)","item":"https://routerel.app/en/guides/cisco-acls/"}]},{"@type":"FAQPage","@id":"https://routerel.app/en/guides/cisco-acls/#faq","inLanguage":"en","mainEntity":[{"@type":"Question","name":"What is an ACL?","acceptedAnswer":{"@type":"Answer","text":"An ACL (access control list) is an ordered list of permit and deny rules that a router compares against each packet. The first rule that matches decides what happens to the packet, and if nothing matches, the implicit deny at the end drops it."}},{"@type":"Question","name":"What is the difference between a standard and an extended ACL?","acceptedAnswer":{"@type":"Answer","text":"A standard ACL checks only the source IP address. An extended ACL can check the protocol, the source and destination addresses and the TCP or UDP ports, so it can block a single service to a single server."}},{"@type":"Question","name":"Where do you place standard and extended ACLs?","acceptedAnswer":{"@type":"Answer","text":"The classic rule: put standard ACLs as close to the destination as possible, because they only know the source and would block too much near it. Put extended ACLs as close to the source as possible, so unwanted traffic is dropped before it uses up links in the network."}},{"@type":"Question","name":"How do I calculate a wildcard mask?","acceptedAnswer":{"@type":"Answer","text":"Subtract each octet of the subnet mask from 255. 255.255.255.0 becomes 0.0.0.255, 255.255.255.192 becomes 0.0.0.63 and 255.255.240.0 becomes 0.0.15.255. A 0 bit in the wildcard means the bit must match; a 1 bit means it doesn't matter."}},{"@type":"Question","name":"What is the implicit deny?","acceptedAnswer":{"@type":"Answer","text":"Every ACL ends with an invisible rule that drops everything: deny any in standard ACLs and deny ip any any in extended ACLs. An ACL that contains only deny statements effectively blocks all traffic on the interface where you apply it."}},{"@type":"Question","name":"How many ACLs can I apply to an interface?","acceptedAnswer":{"@type":"Answer","text":"One per interface, per direction, per protocol. That means at most one IPv4 ACL inbound and one IPv4 ACL outbound (plus, separately, one of each for IPv6). Applying a second IPv4 ACL in the same direction replaces the first."}},{"@type":"Question","name":"How do I restrict SSH access to a router with an ACL?","acceptedAnswer":{"@type":"Answer","text":"Create a standard ACL that permits only your management addresses, then apply it to the VTY lines with access-class NAME in. Interfaces use ip access-group; VTY lines use access-class."}}]}]}</script>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs><linearGradient id="rtl-play" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5b8cff"/><stop offset=".55" stop-color="#2f6bff"/><stop offset="1" stop-color="#ffb020"/></linearGradient></defs></svg>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="container header-row">
+    <a class="brand" href="../../../en/" aria-label="Routerel home"><img src="../../../assets/icon-96.webp" alt="" width="36" height="36"><span>Routerel</span></a>
+    <nav class="main-nav" aria-label="Main"><ul><li><a href="../../../en/#features">Features</a></li><li><a href="../../../en/#pricing">Pricing</a></li><li><a href="../../../en/guides/" aria-current="page">Guides</a></li><li><a href="../../../en/articles/">Articles</a></li><li><a href="../../../en/tools/">Tools</a></li><li><a href="../../../en/#faq">FAQ</a></li></ul></nav>
+    <div class="header-actions">
+      <div class="lang-switch" role="group" aria-label="Language"><a href="../../../ghiduri/acl-uri-cisco/" hreflang="ro" lang="ro" title="Română">RO</a><span aria-current="true" lang="en">EN</span></div>
+      <button class="icon-btn theme-toggle" type="button" data-theme-toggle aria-label="Switch theme"><span class="i-moon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9z"/></svg></span><span class="i-sun"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg></span></button>
+      <a class="btn btn--sm header-cta" data-play data-soon-href="../../../en/#pricing" href="../../../en/#pricing"><span data-when="live">Try free</span><span data-when="soon">See pricing</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      <button class="icon-btn menu-btn" type="button" data-menu-btn aria-expanded="false" aria-controls="mobile-nav" aria-label="Menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+    </div>
+  </div>
+  <nav class="mobile-nav" id="mobile-nav" aria-label="Main" hidden>
+    <div class="container"><ul><li><a href="../../../en/#features">Features</a></li><li><a href="../../../en/#pricing">Pricing</a></li><li><a href="../../../en/guides/" aria-current="page">Guides</a></li><li><a href="../../../en/articles/">Articles</a></li><li><a href="../../../en/tools/">Tools</a></li><li><a href="../../../en/#faq">FAQ</a></li></ul></div>
+  </nav>
+</header>
+<main id="main">
+  <div class="container section section--tight">
+    <article class="prose">
+      <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="../../../en/">Home</a></li><li><a href="../../../en/guides/">Guides</a></li><li><span aria-current="page">Cisco ACLs Explained: Standard, Extended, Wildcards (2026)</span></li></ol></nav>
+      <p class="eyebrow">CCNA guide</p>
+      <h1>Cisco ACLs Explained: Standard, Extended, Wildcard Masks and Configuration</h1>
+      <div class="article-meta">
+        <span class="avatar"><svg class="mascot" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><g class="m-breathe"><path d="M22 14l-5-9M42 14l5-9" stroke="#8a919c" stroke-width="3.4" stroke-linecap="round" fill="none"/><circle class="m-led m-led-l" cx="17" cy="5" r="3.6"/><circle class="m-led m-led-r" cx="47" cy="5" r="3.6"/><path class="m-body" d="M28 12q4-6 8 0"/><rect class="m-body" x="8" y="12" width="48" height="42" rx="18"/><rect class="m-belly" x="8" y="40" width="48" height="14" rx="7"/><circle cx="23" cy="31" r="5.4" fill="#fff"/><circle class="m-pupil" cx="24" cy="31.5" r="3" fill="#1a1d24"/><circle cx="41" cy="31" r="5.4" fill="#fff"/><circle class="m-pupil" cx="42" cy="31.5" r="3" fill="#1a1d24"/><path class="m-led" d="M29 37l3 3.5 3-3.5z"/><circle class="m-ok" cx="18" cy="47" r="2"/><circle class="m-led" cx="24" cy="47" r="2"/><rect x="31" y="45" width="6" height="4" rx="1" fill="#0d1a3a" opacity=".55"/><rect x="39" y="45" width="6" height="4" rx="1" fill="#0d1a3a" opacity=".55"/><rect x="47" y="45" width="5" height="4" rx="1" fill="#0d1a3a" opacity=".55"/><path class="m-leg" d="M20 54v4M44 54v4" stroke-width="3.4" stroke-linecap="round" fill="none"/></g></svg></span>
+        <span>The Routerel team</span><span aria-hidden="true">·</span>
+        <span>Updated: <time datetime="2026-11-09">November 9, 2026</time></span><span aria-hidden="true">·</span>
+        <span>16 min read</span>
+      </div>
+      <p class="lead">ACLs look simple: a list of permit and deny rules. In practice, most mistakes come from three places: the wildcard mask, the order of the rules, and the direction you apply the list in. This guide works through each of them using one topology from start to finish.</p>
+<p>You&#39;ll see what an ACL actually filters, the different types (standard, extended, numbered, named), wildcard masks with a quick method, the implicit deny, where and in which direction to apply a list, full Cisco IOS configuration, editing with sequence numbers, locking down SSH access and verifying everything with hit counters. It ends with the most common mistakes and practice questions with answers.</p>
+<p>In the Networking Academy CCNA v8 courses, IPv4 ACLs are covered in <strong>CCNA 3 · CEN</strong>. On the 200-301 exam they sit in the security topics, both as theory and as configuration and troubleshooting questions.</p>
+      <nav class="toc toc--fold" aria-labelledby="toc-title"><h2 id="toc-title">Contents</h2><button type="button" class="toc-toggle" data-toc-toggle aria-expanded="false" aria-controls="toc-list"><span class="toc-toggle-t">Contents</span> <span class="toc-toggle-n">15 sections</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6"/></svg></button><ol id="toc-list"><li><a href="#the-lab-topology">The lab topology</a></li><li><a href="#what-an-acl-filters">What an ACL filters</a></li><li><a href="#acl-types">ACL types</a><ol><li><a href="#standard-vs-extended">Standard vs. extended</a></li><li><a href="#numbered-vs-named">Numbered vs. named</a></li></ol></li><li><a href="#wildcard-masks">Wildcard masks</a><ol><li><a href="#the-quick-method-255-minus-the-mask">The quick method: 255 minus the mask</a></li><li><a href="#the-host-and-any-keywords">The host and any keywords</a></li><li><a href="#a-wildcard-that-isn-t-a-subnet">A wildcard that isn&#39;t a subnet</a></li></ol></li><li><a href="#how-the-router-reads-an-acl">How the router reads an ACL</a><ol><li><a href="#top-down-first-match-wins">Top down, first match wins</a></li><li><a href="#the-implicit-deny">The implicit deny</a></li></ol></li><li><a href="#where-and-in-which-direction-to-apply-an-acl">Where and in which direction to apply an ACL</a><ol><li><a href="#inbound-or-outbound">Inbound or outbound</a></li><li><a href="#one-acl-per-interface-per-direction-per-protocol">One ACL per interface, per direction, per protocol</a></li><li><a href="#standard-near-the-destination-extended-near-the-source">Standard near the destination, extended near the source</a></li></ol></li><li><a href="#configuring-a-numbered-standard-acl">Configuring a numbered standard ACL</a></li><li><a href="#configuring-a-named-standard-acl-for-vty-access">Configuring a named standard ACL for VTY access</a></li><li><a href="#configuring-a-named-extended-acl-with-tcp-and-udp-ports">Configuring a named extended ACL with TCP and UDP ports</a><ol><li><a href="#the-established-keyword">The established keyword</a></li></ol></li><li><a href="#editing-named-acls-with-sequence-numbers">Editing named ACLs with sequence numbers</a></li><li><a href="#verification-and-hit-counters">Verification and hit counters</a><ol><li><a href="#show-access-lists">show access-lists</a></li><li><a href="#show-ip-interface">show ip interface</a></li></ol></li><li><a href="#common-mistakes">Common mistakes</a></li><li><a href="#practice-questions">Practice questions</a></li><li><a href="#the-fastest-way-to-learn-this">The fastest way to learn this</a></li><li><a href="#frequently-asked-questions">Frequently asked questions</a></li></ol></nav>
+<h2 id="the-lab-topology">The lab topology</h2>
+<p>Every example uses the network below. It&#39;s worth sketching it once on paper so you can follow where each ACL goes.</p>
+<pre><code class="language-text"> Sales 192.168.10.0/24                           Servers 172.16.50.0/24
+ (PCs .10 – .200)                                 web   172.16.50.10
+        |                                         DNS   172.16.50.53
+   G0/0/0 .1                                      files 172.16.50.20
+        |                                                 |
+       R1 S0/1/0 ---- 10.1.1.0/30 ---- S0/1/0 R2 G0/0/0 .1
+        |   .1                            .2
+   G0/0/1 .1
+        |
+ Accounting 192.168.20.0/24
+ (IT admin stations .16 – .31)
+</code></pre>
+<ul>
+<li><strong>R1</strong> has two LANs: Sales (<code>G0/0/0</code>) and Accounting (<code>G0/0/1</code>). Inside Accounting, addresses <code>.16</code>–<code>.31</code> (<code>192.168.20.16/28</code>) belong to the IT team.</li>
+<li><strong>R2</strong> has the server network on <code>G0/0/0</code>.</li>
+<li>R1 and R2 are connected by a <code>/30</code> serial link. Routing is already in place, so every network can reach every other one.</li>
+</ul>
+<h2 id="what-an-acl-filters">What an ACL filters</h2>
+<p>An <strong>ACL</strong> (access control list) is an ordered list of rules. Each rule, called an ACE (<em>access control entry</em>), says <strong>permit</strong> or <strong>deny</strong> for packets that match it. The router compares each packet against the list and decides whether to forward it or drop it.</p>
+<p>Depending on its type, an ACL can match on:</p>
+<ul>
+<li>the <strong>source</strong> IP address;</li>
+<li>the <strong>destination</strong> IP address;</li>
+<li>the <strong>protocol</strong> in the IP header (TCP, UDP, ICMP, OSPF, GRE and others);</li>
+<li>the TCP or UDP <strong>source and destination ports</strong>;</li>
+<li>a few extra details, such as the ICMP message type or whether a TCP connection is already established.</li>
+</ul>
+<p>An ACL does <strong>not</strong> look at MAC addresses (other features handle that), and it knows nothing about applications beyond port numbers. To an ACL, &quot;web&quot; means TCP 80 or 443, not a particular website.</p>
+<p>Filtering isn&#39;t the only job ACLs do. The same syntax is used to <strong>identify traffic</strong> for other features: which addresses NAT translates (see the <a href="../nat-and-pat/">NAT and PAT guide</a>), which traffic goes into a VPN tunnel, which routes a route filter lets through. This guide focuses on filtering.</p>
+<h2 id="acl-types">ACL types</h2>
+<h3 id="standard-vs-extended">Standard vs. extended</h3>
+<div class="table-scroll"><p class="table-hint" aria-hidden="true">swipe<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></p><div class="table-wrap" role="region" tabindex="0" aria-label="Table (scrolls sideways)"><table>
+<thead>
+<tr>
+<th></th>
+<th>Standard ACL</th>
+<th>Extended ACL</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>What it checks</td>
+<td>source IP address only</td>
+<td>protocol, source, destination, ports</td>
+</tr>
+<tr>
+<td>Precision</td>
+<td class="tw">coarse (&quot;everything from network X&quot;)</td>
+<td class="tw">fine-grained (&quot;only HTTPS from X to server Y&quot;)</td>
+</tr>
+<tr>
+<td>Usual placement</td>
+<td>close to the destination</td>
+<td>close to the source</td>
+</tr>
+<tr>
+<td>Sample rule</td>
+<td><code><span class="nw">permit</span> <span class="nw">192.168.10.0</span> <span class="nw">0.0.0.255</span></code></td>
+<td><code><span class="nw">permit</span> <span class="nw">tcp</span> <span class="nw">192.168.10.0</span> <span class="nw">0.0.0.255</span> <span class="nw">host</span> <span class="nw">172.16.50.10</span> <span class="nw">eq</span> <span class="nw">443</span></code></td>
+</tr>
+</tbody></table></div></div>
+<h3 id="numbered-vs-named">Numbered vs. named</h3>
+<p>A <strong>numbered</strong> ACL is identified by a number, and the number range also tells IOS the type:</p>
+<div class="table-scroll"><p class="table-hint" aria-hidden="true">swipe<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></p><div class="table-wrap" role="region" tabindex="0" aria-label="Table (scrolls sideways)"><table>
+<thead>
+<tr>
+<th>Range</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1–99 and 1300–1999</td>
+<td>standard</td>
+</tr>
+<tr>
+<td>100–199 and 2000–2699</td>
+<td>extended</td>
+</tr>
+</tbody></table></div></div>
+<p>A <strong>named</strong> ACL gets a name you choose, such as <code>SALES-IN</code>, and you declare its type explicitly (<code>standard</code> or <code>extended</code>). A name is far easier to understand six months later, and editing is more convenient. Use names in new configurations.</p>
+<p>On modern IOS the difference is mostly cosmetic: you can edit a numbered ACL with sequence numbers too, by entering it with <code>ip access-list standard 10</code>.</p>
+<h2 id="wildcard-masks">Wildcard masks</h2>
+<p>ACLs don&#39;t use subnet masks. They use <strong>wildcard masks</strong>, and the rule works bit by bit:</p>
+<ul>
+<li>a <strong>0</strong> bit in the wildcard means the address bit <strong>must match</strong>;</li>
+<li>a <strong>1</strong> bit means the bit <strong>doesn&#39;t matter</strong>.</li>
+</ul>
+<p>In practice, a wildcard is the inverse of a subnet mask: wherever the mask has a <code>1</code>, the wildcard has a <code>0</code>, and the other way round.</p>
+<h3 id="the-quick-method-255-minus-the-mask">The quick method: 255 minus the mask</h3>
+<p>For a normal subnet, subtract each mask octet from 255:</p>
+<pre><code class="language-text">Mask       255.255.255.192
+           255-255 . 255-255 . 255-255 . 255-192
+Wildcard     0     .   0     .   0     .   63      → 0.0.0.63
+</code></pre>
+<p>Watch out for the trap mentioned in the <a href="../subnetting-step-by-step/">subnetting guide</a>: the block size (magic number) is <strong>256</strong> minus the mask, but the wildcard is <strong>255</strong> minus the mask. They&#39;re linked: in the interesting octet, the wildcard is always the <strong>block size minus 1</strong>. A /26 has a block size of 64, so its wildcard is 63.</p>
+<div class="table-scroll"><p class="table-hint" aria-hidden="true">swipe<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></p><div class="table-wrap" role="region" tabindex="0" aria-label="Table (scrolls sideways)"><table>
+<thead>
+<tr>
+<th>Network</th>
+<th>Mask</th>
+<th>Wildcard</th>
+<th>Matches</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>192.168.10.0/24</td>
+<td>255.255.255.0</td>
+<td>0.0.0.255</td>
+<td>.0 – .255</td>
+</tr>
+<tr>
+<td>192.168.20.16/28</td>
+<td>255.255.255.240</td>
+<td>0.0.0.15</td>
+<td>.16 – .31</td>
+</tr>
+<tr>
+<td>10.1.1.0/30</td>
+<td>255.255.255.252</td>
+<td>0.0.0.3</td>
+<td>.0 – .3</td>
+</tr>
+<tr>
+<td>172.16.32.0/20</td>
+<td>255.255.240.0</td>
+<td>0.0.15.255</td>
+<td>172.16.32.0 – 172.16.47.255</td>
+</tr>
+<tr>
+<td>10.0.0.0/8</td>
+<td>255.0.0.0</td>
+<td>0.255.255.255</td>
+<td>anything starting with 10.</td>
+</tr>
+</tbody></table></div></div>
+<p>To check your work, the <a href="../../tools/subnet-calculator/">subnet calculator</a> shows the wildcard mask for any address and prefix. To see the individual bits, use the <a href="../../tools/binary-converter/">binary converter</a>.</p>
+<h3 id="the-host-and-any-keywords">The host and any keywords</h3>
+<p>Two wildcards come up so often that they have shortcuts:</p>
+<div class="table-scroll"><p class="table-hint" aria-hidden="true">swipe<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></p><div class="table-wrap" role="region" tabindex="0" aria-label="Table (scrolls sideways)"><table>
+<thead>
+<tr>
+<th>You type</th>
+<th>Same as</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code><span class="nw">host</span> <span class="nw">172.16.50.10</span></code></td>
+<td><code><span class="nw">172.16.50.10</span> <span class="nw">0.0.0.0</span></code></td>
+<td>exactly that address</td>
+</tr>
+<tr>
+<td><code>any</code></td>
+<td><code><span class="nw">0.0.0.0</span> <span class="nw">255.255.255.255</span></code></td>
+<td>any address</td>
+</tr>
+</tbody></table></div></div>
+<p>In a standard ACL, if you type an address with no wildcard (<code>permit 192.168.10.50</code>), IOS assumes <code>0.0.0.0</code>, which means a single host. In an extended ACL, you always have to spell out both source and destination: address plus wildcard, <code>host</code>, or <code>any</code>.</p>
+<h3 id="a-wildcard-that-isn-t-a-subnet">A wildcard that isn&#39;t a subnet</h3>
+<p>A wildcard doesn&#39;t have to be the inverse of a real subnet mask. <code>192.168.10.1 0.0.0.254</code> requires the last bit to be 1 and ignores the rest of the last octet, so it matches every <strong>odd</strong> address in <code>192.168.10.0/24</code>. It rarely shows up on the exam, but it&#39;s a good test of whether you really understand the bit-level rule.</p>
+<h2 id="how-the-router-reads-an-acl">How the router reads an ACL</h2>
+<h3 id="top-down-first-match-wins">Top down, first match wins</h3>
+<p>The router compares the packet against the rules <strong>in order</strong>, top to bottom. At the <strong>first</strong> rule that matches, it applies that rule&#39;s action (permit or deny) and <strong>stops</strong>. Nothing further down the list matters for that packet.</p>
+<p>Two writing rules follow from this:</p>
+<ol>
+<li><strong>Specific rules at the top, general ones at the bottom.</strong> If <code>deny 192.168.10.0 0.0.0.255</code> comes before <code>permit host 192.168.10.50</code>, host <code>.50</code> never reaches its rule.</li>
+<li><strong>Order matters as much as content.</strong> The same rules in a different order can do the exact opposite.</li>
+</ol>
+<h3 id="the-implicit-deny">The implicit deny</h3>
+<p>Every ACL ends with a rule you never see in the configuration:</p>
+<ul>
+<li>standard ACL: <code>deny any</code>;</li>
+<li>extended ACL: <code>deny ip any any</code>.</li>
+</ul>
+<p>The consequence: an ACL needs <strong>at least one permit</strong>, or it blocks everything. If you only want to stop one network and let the rest through, you need <code>permit any</code> (or <code>permit ip any any</code>) at the end.</p>
+<p>Some admins write an explicit <code>deny any log</code> at the end. The effect is the same, but a visible rule has a hit counter and can send log messages, so you can see what&#39;s being blocked.</p>
+<div class="callout callout--info"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg><div><p><strong>Good to know:</strong> if you apply an ACL that doesn&#39;t exist to an interface (a typo in the name, for example), IOS lets all traffic through. There&#39;s no error, just protection that isn&#39;t working. Always check with <code>show ip interface</code>.</p></div></div>
+<h2 id="where-and-in-which-direction-to-apply-an-acl">Where and in which direction to apply an ACL</h2>
+<h3 id="inbound-or-outbound">Inbound or outbound</h3>
+<p>Direction is always seen <strong>from the router&#39;s point of view</strong>, on the interface you pick:</p>
+<ul>
+<li><strong>in (inbound)</strong>: the packet is checked as it <strong>enters</strong> the interface, <strong>before</strong> routing. If it&#39;s denied, the router never even looks up a route.</li>
+<li><strong>out (outbound)</strong>: the packet is checked as it <strong>leaves</strong> the interface, <strong>after</strong> the router has decided where to send it.</li>
+</ul>
+<p>An outbound ACL does <strong>not</strong> filter packets the router generates itself (a ping started from its own CLI, for example). An inbound ACL, on the other hand, also filters traffic addressed to the router, including routing protocols and DHCP requests, a detail that breaks a lot of labs.</p>
+<h3 id="one-acl-per-interface-per-direction-per-protocol">One ACL per interface, per direction, per protocol</h3>
+<p>An interface can have at most <strong>one IPv4 ACL inbound and one IPv4 ACL outbound</strong> (plus, separately, one of each for IPv6). Apply a second IPv4 ACL in the same direction and it silently replaces the first.</p>
+<h3 id="standard-near-the-destination-extended-near-the-source">Standard near the destination, extended near the source</h3>
+<p>A <strong>standard ACL</strong> only knows the source. Say you want to keep Sales away from the servers and you put a standard ACL on R1, inbound from Sales: you&#39;ve just cut Sales off from <strong>everything</strong>, including Accounting and the internet. That&#39;s why it goes <strong>near the destination</strong>, on the last interface before the protected network.</p>
+<p>An <strong>extended ACL</strong> also knows the destination, so it can be precise even when placed next to the source. You put it <strong>near the source</strong> so unwanted traffic is dropped as early as possible, without crossing the serial link first.</p>
+<div class="table-scroll"><p class="table-hint" aria-hidden="true">swipe<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></p><div class="table-wrap" role="region" tabindex="0" aria-label="Table (scrolls sideways)"><table>
+<thead>
+<tr>
+<th>Goal in our topology</th>
+<th>Type</th>
+<th>Router and interface</th>
+<th>Direction</th>
+</tr>
+</thead>
+<tbody><tr>
+<td class="tw">Sales can&#39;t reach the servers (one exception)</td>
+<td>standard</td>
+<td>R2, <code>G0/0/0</code> (toward servers)</td>
+<td>out</td>
+</tr>
+<tr>
+<td class="tw">Sales reaches the servers only for web and DNS</td>
+<td>extended</td>
+<td>R1, <code>G0/0/0</code> (from Sales)</td>
+<td>in</td>
+</tr>
+<tr>
+<td>SSH to R1 only from the IT subnet</td>
+<td>standard</td>
+<td>R1, VTY lines</td>
+<td>in (<code>access-class</code>)</td>
+</tr>
+</tbody></table></div></div>
+<h2 id="configuring-a-numbered-standard-acl">Configuring a numbered standard ACL</h2>
+<p><strong>Requirement:</strong> the Sales network (<code>192.168.10.0/24</code>) must not reach the server network, with one exception: the sales manager&#39;s PC, <code>192.168.10.50</code>. Everything else heading to the servers (from Accounting, for example) is allowed.</p>
+<p>It&#39;s a standard ACL, so it goes near the destination: on R2, outbound toward the servers.</p>
+<pre><code class="language-text">R2(config)# access-list 10 remark Sales blocked from servers, except manager PC
+R2(config)# access-list 10 permit host 192.168.10.50
+R2(config)# access-list 10 deny 192.168.10.0 0.0.0.255
+R2(config)# access-list 10 permit any
+R2(config)# interface GigabitEthernet0/0/0
+R2(config-if)# ip access-group 10 out
+</code></pre>
+<p>Line by line:</p>
+<ul>
+<li><code>remark</code> is just a comment. It filters nothing, but future you will be grateful for it.</li>
+<li><code>permit host 192.168.10.50</code> comes <strong>first</strong> because it&#39;s the most specific. Put it second and the network-wide <code>deny</code> would catch it.</li>
+<li><code>deny 192.168.10.0 0.0.0.255</code> blocks the rest of Sales.</li>
+<li><code>permit any</code> lets everything else through. Without it, the implicit deny would also block Accounting and any other traffic toward the servers.</li>
+</ul>
+<h2 id="configuring-a-named-standard-acl-for-vty-access">Configuring a named standard ACL for VTY access</h2>
+<p><strong>Requirement:</strong> SSH into R1 is allowed only from the IT stations, <code>192.168.20.16/28</code>.</p>
+<p>This time you don&#39;t apply the ACL to an interface but to the <strong>VTY lines</strong> (Telnet and SSH sessions), using <code>access-class</code>. That protects the router no matter which interface the connection arrives on.</p>
+<pre><code class="language-text">R1(config)# ip access-list standard ADMIN-SSH
+R1(config-std-nacl)# remark Only IT stations may manage this router
+R1(config-std-nacl)# permit 192.168.20.16 0.0.0.15
+R1(config-std-nacl)# deny any log
+R1(config-std-nacl)# exit
+R1(config)# line vty 0 4
+R1(config-line)# access-class ADMIN-SSH in
+R1(config-line)# transport input ssh
+</code></pre>
+<p>Keep in mind:</p>
+<ul>
+<li>interfaces use <code>ip access-group</code>; VTY lines use <code>access-class</code>;</li>
+<li>apply <code>access-class</code> to <strong>every</strong> VTY line on the device (check <code>show running-config</code> for a <code>line vty 5 15</code> block too), or a connection can land on an unprotected line;</li>
+<li><code>deny any log</code> is optional, but it records rejected attempts in the log;</li>
+<li>for the SSH setup itself (domain name, RSA keys, local users), see the <a href="../cisco-ios-basic-commands/">Cisco IOS commands cheat sheet</a>.</li>
+</ul>
+<h2 id="configuring-a-named-extended-acl-with-tcp-and-udp-ports">Configuring a named extended ACL with TCP and UDP ports</h2>
+<p><strong>Requirement:</strong> Sales may use only two things on the server network: the internal website (<code>172.16.50.10</code>, HTTP and HTTPS) and DNS (<code>172.16.50.53</code>). They may also ping the server network for troubleshooting. All other traffic from Sales to the servers is blocked, while Sales traffic to other destinations (Accounting, the internet) is allowed.</p>
+<p>It&#39;s an extended ACL, so it goes near the source: on R1, inbound from Sales. Treat this as a separate scenario from ACL 10: if that one were still applied on R2, it would keep blocking Sales traffic to the servers (except the manager&#39;s PC), including the web access allowed here.</p>
+<p>The syntax of an extended rule:</p>
+<pre><code class="language-text">permit|deny  protocol  source wildcard [port]  destination wildcard [port]  [options]
+</code></pre>
+<p>The configuration:</p>
+<pre><code class="language-text">R1(config)# ip access-list extended SALES-IN
+R1(config-ext-nacl)# remark Sales to servers: web, DNS and ping only
+R1(config-ext-nacl)# permit tcp 192.168.10.0 0.0.0.255 host 172.16.50.10 eq 80
+R1(config-ext-nacl)# permit tcp 192.168.10.0 0.0.0.255 host 172.16.50.10 eq 443
+R1(config-ext-nacl)# permit udp 192.168.10.0 0.0.0.255 host 172.16.50.53 eq 53
+R1(config-ext-nacl)# permit icmp 192.168.10.0 0.0.0.255 172.16.50.0 0.0.0.255 echo
+R1(config-ext-nacl)# deny ip 192.168.10.0 0.0.0.255 172.16.50.0 0.0.0.255
+R1(config-ext-nacl)# permit ip 192.168.10.0 0.0.0.255 any
+R1(config-ext-nacl)# exit
+R1(config)# interface GigabitEthernet0/0/0
+R1(config-if)# ip access-group SALES-IN in
+</code></pre>
+<p>A few notes:</p>
+<ul>
+<li><strong>The port goes right after the address it belongs to.</strong> <code>host 172.16.50.10 eq 443</code> means &quot;destination 172.16.50.10, destination port 443&quot;. The client uses a random source port, so you don&#39;t filter on that.</li>
+<li><strong>DNS</strong> mostly uses UDP 53. It also uses TCP 53 for zone transfers and large responses; add a TCP rule if you need those.</li>
+<li><strong><code>echo</code></strong> matches only ping requests. The replies (<code>echo-reply</code>) return toward Sales through <code>G0/0/0</code> <strong>outbound</strong>, where there&#39;s no ACL, so they get through.</li>
+<li><strong>The last rule</strong> only permits sources inside <code>192.168.10.0/24</code>. A packet with a spoofed source address gets dropped by the implicit deny, which is a small security bonus.</li>
+<li>Besides <code>eq</code>, you can use <code>neq</code>, <code>lt</code>, <code>gt</code> and <code>range</code> (for example <code>range 20 21</code>). IOS also accepts names for well-known ports: <code>www</code> (80), <code>domain</code> (53), <code>telnet</code> (23), <code>smtp</code> (25), <code>ftp</code> (21).</li>
+</ul>
+<div class="callout callout--info"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg><div><p><strong>Good to know:</strong> the inbound ACL on <code>G0/0/0</code> also filters traffic addressed to R1 itself. If R1 were the DHCP server for Sales, DHCP requests (source <code>0.0.0.0</code>, destination <code>255.255.255.255</code>) wouldn&#39;t match the last rule. The fix is a <code>permit udp any any eq bootps</code> rule placed above the others.</p></div></div>
+<h3 id="the-established-keyword">The established keyword</h3>
+<p>For TCP you can add <code>established</code>, which matches only segments with the ACK or RST bit set, meaning it never matches the opening segment of a new connection. Think of it as &quot;only let in replies to connections started from inside&quot;. It&#39;s an old, stateless technique, and modern firewalls do the job far better, but for CCNA you need to know what the keyword does.</p>
+<h2 id="editing-named-acls-with-sequence-numbers">Editing named ACLs with sequence numbers</h2>
+<p>Every rule in an ACL has a <strong>sequence number</strong>. By default IOS numbers them in steps of 10, which leaves room in between.</p>
+<p><strong>New requirement:</strong> Sales also needs the file server, <code>172.16.50.20</code>, on TCP 445. The rule has to sit <strong>before</strong> the <code>deny</code> at sequence 50, or it will never be reached.</p>
+<pre><code class="language-text">R1(config)# ip access-list extended SALES-IN
+R1(config-ext-nacl)# 45 permit tcp 192.168.10.0 0.0.0.255 host 172.16.50.20 eq 445
+R1(config-ext-nacl)# end
+</code></pre>
+<p>To delete a single rule, use its sequence number. Say you no longer want to allow ping:</p>
+<pre><code class="language-text">R1(config)# ip access-list extended SALES-IN
+R1(config-ext-nacl)# no 40
+R1(config-ext-nacl)# end
+</code></pre>
+<p>After many insertions the numbers can get crowded. Renumber them like this:</p>
+<pre><code class="language-text">R1(config)# ip access-list resequence SALES-IN 10 10
+</code></pre>
+<p>The first value is the starting number, the second is the increment.</p>
+<div class="callout callout--info"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg><div><p><strong>Good to know:</strong> for numbered ACLs, typing <code>no access-list 10 deny 192.168.10.0 0.0.0.255</code> in global configuration mode deletes <strong>all of ACL 10</strong>, not just that line. To remove one entry from a numbered ACL, enter it with <code>ip access-list standard 10</code> and use <code>no &lt;sequence number&gt;</code>.</p></div></div>
+<h2 id="verification-and-hit-counters">Verification and hit counters</h2>
+<h3 id="show-access-lists">show access-lists</h3>
+<p>This command lists every ACL with its sequence numbers and, in parentheses, how many packets have matched each rule. Here&#39;s R1 after Sales has been working for a while (before the edits above):</p>
+<pre><code class="language-text">R1# show access-lists
+Standard IP access list ADMIN-SSH
+    10 permit 192.168.20.16, wildcard bits 0.0.0.15 (6 matches)
+    20 deny   any log (2 matches)
+Extended IP access list SALES-IN
+    10 permit tcp 192.168.10.0 0.0.0.255 host 172.16.50.10 eq www (1842 matches)
+    20 permit tcp 192.168.10.0 0.0.0.255 host 172.16.50.10 eq 443 (5127 matches)
+    30 permit udp 192.168.10.0 0.0.0.255 host 172.16.50.53 eq domain (633 matches)
+    40 permit icmp 192.168.10.0 0.0.0.255 172.16.50.0 0.0.0.255 echo (12 matches)
+    50 deny ip 192.168.10.0 0.0.0.255 172.16.50.0 0.0.0.255 (41 matches)
+    60 permit ip 192.168.10.0 0.0.0.255 any (9310 matches)
+</code></pre>
+<p>How to read it:</p>
+<ul>
+<li>IOS shows well-known ports by name: <code>80</code> becomes <code>www</code>, <code>53</code> becomes <code>domain</code>.</li>
+<li>The <strong>41 matches on line 50</strong> are blocked attempts. If someone in Sales says &quot;the file server is down&quot;, this tells you the traffic is reaching the router and being dropped on purpose.</li>
+<li>A rule with <strong>0 matches</strong> after a full day of traffic is suspicious: either it&#39;s pointless, or a rule above it shadows it and packets never get that far.</li>
+<li>The implicit deny isn&#39;t listed, so it has no counter. That&#39;s one reason people add an explicit <code>deny</code> at the end.</li>
+</ul>
+<p>To start a clean count before a test:</p>
+<pre><code class="language-text">R1# clear access-list counters SALES-IN
+</code></pre>
+<p>For a single ACL, use <code>show access-lists SALES-IN</code>. There&#39;s also <code>show ip access-lists</code>, which shows only IPv4 ACLs.</p>
+<h3 id="show-ip-interface">show ip interface</h3>
+<p><code>show access-lists</code> tells you what&#39;s in a list, but not <strong>where</strong> it&#39;s applied. For that:</p>
+<pre><code class="language-text">R1# show ip interface GigabitEthernet0/0/0 | include access list
+  Outgoing access list is not set
+  Inbound  access list is SALES-IN
+</code></pre>
+<p>If this says <code>not set</code> even though you configured the ACL, you forgot <code>ip access-group</code> or applied it to a different interface. For VTY lines, check with <code>show running-config | section line vty</code>.</p>
+<h2 id="common-mistakes">Common mistakes</h2>
+<div class="table-scroll"><p class="table-hint" aria-hidden="true">swipe<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></p><div class="table-wrap" role="region" tabindex="0" aria-label="Table (scrolls sideways)"><table>
+<thead>
+<tr>
+<th>Symptom</th>
+<th>Likely cause</th>
+<th>How to check and fix</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>The ACL has no effect at all</td>
+<td class="tw">not applied, applied to the wrong interface, or the name doesn&#39;t match</td>
+<td><code><span class="nw">show</span> <span class="nw">ip</span> <span class="nw">interface</span></code> → <code><span class="nw">ip</span> <span class="nw">access-group</span> <span class="nw">NAME</span> <span class="nw">in/out</span></code> on the right interface</td>
+</tr>
+<tr>
+<td>It blocks exactly the wrong traffic</td>
+<td>the direction is reversed (<code>in</code> instead of <code>out</code>)</td>
+<td class="tw">think from the router&#39;s view: is the packet entering or leaving that interface?</td>
+</tr>
+<tr>
+<td>A permitted host is still blocked</td>
+<td>a broader <code>deny</code> sits above its rule</td>
+<td class="tw"><code><span class="nw">show</span> <span class="nw">access-lists</span></code> → its rule has 0 matches; move it up with a lower sequence number</td>
+</tr>
+<tr>
+<td>Nothing works after applying it</td>
+<td>the ACL contains only <code>deny</code> rules</td>
+<td>add <code><span class="nw">permit</span> <span class="nw">any</span></code> or <code><span class="nw">permit</span> <span class="nw">ip</span> <span class="nw">any</span> <span class="nw">any</span></code> at the end</td>
+</tr>
+<tr>
+<td>A standard ACL blocks too much</td>
+<td>it&#39;s placed near the source</td>
+<td>move it near the destination</td>
+</tr>
+<tr>
+<td>A rule matches the wrong addresses</td>
+<td class="tw">you typed the subnet mask instead of the wildcard (<code>255.255.255.0</code> vs <code>0.0.0.255</code>)</td>
+<td>recalculate: 255 minus the mask</td>
+</tr>
+<tr>
+<td>The web rule never matches</td>
+<td class="tw">the port is attached to the source, not the destination</td>
+<td><code><span class="nw">permit</span> <span class="nw">tcp</span> <span class="nw">SOURCE</span> <span class="nw">WILDCARD</span> <span class="nw">host</span> <span class="nw">SERVER</span> <span class="nw">eq</span> <span class="nw">443</span></code></td>
+</tr>
+<tr>
+<td>OSPF or DHCP breaks after an inbound ACL</td>
+<td class="tw">the implicit deny catches traffic addressed to the router</td>
+<td class="tw">explicitly permit the protocol (for example <code><span class="nw">permit</span> <span class="nw">ospf</span> <span class="nw">any</span> <span class="nw">any</span></code>)</td>
+</tr>
+<tr>
+<td>You accidentally deleted the whole ACL</td>
+<td><code><span class="nw">no</span> <span class="nw">access-list</span> <span class="nw">N</span> <span class="nw">...</span></code> in global config</td>
+<td class="tw">edit entries through <code><span class="nw">ip</span> <span class="nw">access-list</span></code> and sequence numbers</td>
+</tr>
+</tbody></table></div></div>
+<p>A concrete example of the wildcard mistake: <code>access-list 20 permit 192.168.10.0 255.255.255.0</code> does not permit <code>192.168.10.0/24</code>. The wildcard <code>255.255.255.0</code> ignores the first three octets and requires the last one to be 0, so it matches addresses like <code>10.4.7.0</code> or <code>172.16.50.0</code>, and almost nothing useful.</p>
+<h2 id="practice-questions">Practice questions</h2>
+<ol>
+<li>What&#39;s the wildcard for <code>172.16.32.0/20</code>, and which address range does it match?</li>
+<li>You apply an ACL to an interface that contains only <code>access-list 5 deny 10.0.0.0 0.255.255.255</code>. What traffic still gets through?</li>
+<li>Write a named extended ACL, <code>NO-TELNET</code>, that blocks Telnet from Accounting (<code>192.168.20.0/24</code>) to any destination and permits everything else. Which router, interface and direction do you apply it to?</li>
+<li>A colleague wrote:<pre><code class="language-text">ip access-list standard TEST
+ permit any
+ deny host 192.168.10.99
+</code></pre>
+Is <code>192.168.10.99</code> blocked? Why?</li>
+<li>Using <code>SALES-IN</code> in its original form (lines 10–60, before the edits), what happens to a packet from <code>192.168.10.70</code> to <code>172.16.50.20</code>, TCP 445? And to one from <code>192.168.10.70</code> to <code>192.168.20.40</code>, TCP 445?</li>
+<li>You want only the <code>10.1.1.0/30</code> network (the inter-router link) to be able to open SSH sessions to R2. Write the configuration.</li>
+</ol>
+<details class="reveal-answer">
+<summary><strong>Answers</strong></summary><p><strong>1.</strong> The mask is <code>255.255.240.0</code>, so the wildcard is <code>0.0.15.255</code>. It matches <code>172.16.32.0</code> – <code>172.16.47.255</code> (a block of 16 in the third octet, and 32 + 15 = 47).</p>
+<p><strong>2.</strong> <strong>Nothing.</strong> The rule denies 10.0.0.0/8, and the implicit deny drops everything else. It&#39;s missing a <code>permit any</code> at the end.</p>
+<p><strong>3.</strong></p>
+<pre><code class="language-text">R1(config)# ip access-list extended NO-TELNET
+R1(config-ext-nacl)# deny tcp 192.168.20.0 0.0.0.255 any eq 23
+R1(config-ext-nacl)# permit ip any any
+R1(config-ext-nacl)# exit
+R1(config)# interface GigabitEthernet0/0/1
+R1(config-if)# ip access-group NO-TELNET in
+</code></pre>
+<p>It&#39;s an extended ACL, so it goes near the source: R1, <code>G0/0/1</code> (the interface facing Accounting), <strong>in</strong>. You can write <code>eq telnet</code> instead of <code>eq 23</code>. Note that it also blocks Telnet to R1 itself from Accounting.</p>
+<p><strong>4.</strong> <strong>No.</strong> The first rule, <code>permit any</code>, matches every packet, so processing stops there and the <code>deny</code> is never reached. The correct order is <code>deny host 192.168.10.99</code> first, then <code>permit any</code>.</p>
+<p><strong>5.</strong> The first packet doesn&#39;t match lines 10–40 (different server, different port), matches <strong>line 50</strong> (<code>deny ip</code> from Sales to <code>172.16.50.0/24</code>) and is <strong>dropped</strong>. The second one isn&#39;t headed for the server network, so it slips past line 50 and matches <strong>line 60</strong>: <strong>permitted</strong>.</p>
+<p><strong>6.</strong></p>
+<pre><code class="language-text">R2(config)# ip access-list standard SSH-FROM-R1
+R2(config-std-nacl)# permit 10.1.1.0 0.0.0.3
+R2(config-std-nacl)# exit
+R2(config)# line vty 0 4
+R2(config-line)# access-class SSH-FROM-R1 in
+R2(config-line)# transport input ssh
+</code></pre>
+<p>The implicit deny takes care of everything else. Apply it to every VTY line R2 has.</p>
+</details><h2 id="the-fastest-way-to-learn-this">The fastest way to learn this</h2>
+<ul>
+<li><strong>Draw first, configure second.</strong> For every requirement, mark the router, interface and direction on the diagram. Half the mistakes disappear right there.</li>
+<li><strong>Walk an imaginary packet down every ACL</strong>, the way practice question 5 does. That&#39;s exactly what exam questions ask you to do.</li>
+<li><strong>Drill wildcards until they&#39;re automatic</strong>, the same way you drill subnetting. Block size minus 1 covers almost every case.</li>
+<li><strong>Use the counters.</strong> In a lab, generate traffic (a ping, a web page) and watch which line&#39;s counter goes up. You&#39;ll understand rule order better than from any table.</li>
+<li><strong>Connect ACLs to VLANs.</strong> In a network with several VLANs, ACLs usually sit on the gateway interfaces; see the <a href="../vlans-and-trunks/">VLANs and trunks guide</a>.</li>
+</ul>
+<div class="cta-box cta-box--article"><svg class="mascot" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><g class="m-breathe"><path d="M22 14l-5-9M42 14l5-9" stroke="#8a919c" stroke-width="3.4" stroke-linecap="round" fill="none"/><circle class="m-led m-led-l" cx="17" cy="5" r="3.6"/><circle class="m-led m-led-r" cx="47" cy="5" r="3.6"/><path class="m-body" d="M28 12q4-6 8 0"/><rect class="m-body" x="8" y="12" width="48" height="42" rx="18"/><rect class="m-belly" x="8" y="40" width="48" height="14" rx="7"/><path d="M19 31q4-5 8 0" stroke="#1a1d24" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M37 31q4-5 8 0" stroke="#1a1d24" stroke-width="3" fill="none" stroke-linecap="round"/><path class="m-led" d="M29 37l3 3.5 3-3.5z"/><circle cx="15" cy="38" r="3" fill="#ff8fb1" opacity=".7"/><circle cx="49" cy="38" r="3" fill="#ff8fb1" opacity=".7"/><circle class="m-ok" cx="18" cy="47" r="2"/><circle class="m-led" cx="24" cy="47" r="2"/><rect x="31" y="45" width="6" height="4" rx="1" fill="#0d1a3a" opacity=".55"/><rect x="39" y="45" width="6" height="4" rx="1" fill="#0d1a3a" opacity=".55"/><rect x="47" y="45" width="5" height="4" rx="1" fill="#0d1a3a" opacity=".55"/><path class="m-leg" d="M20 54v4M44 54v4" stroke-width="3.4" stroke-linecap="round" fill="none"/></g></svg><div><h3>Practice ACLs in the Routerel app</h3><p>Routerel has over 1,900 questions for CCNA 1 · ITN, CCNA 2 · IEN and CCNA 3 · CEN, with zoomable network diagrams and configurations, and an explanation right after every answer. Your mistakes come back automatically through spaced repetition until you&#39;ve mastered them, and the timed exam simulation shows you where you stand. New subscribers get a 7-day free trial with full access.</p></div><a class="btn" href="../../" data-play data-soon-href="../../">Discover the app<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div><h2 id="frequently-asked-questions">Frequently asked questions</h2>
+<div class="faq faq--article"><details><summary>What is an ACL?<span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p>An ordered list of permit and deny rules that a router compares against each packet. The first rule that matches decides what happens to the packet, and if nothing matches, the implicit deny at the end drops it.</p></div></details><details><summary>What is the difference between a standard and an extended ACL?<span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p>A standard ACL checks only the source IP address. An extended ACL can check the protocol, the source and destination addresses and the TCP or UDP ports, so it can block a single service to a single server.</p></div></details><details><summary>Where do you place standard and extended ACLs?<span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p>Standard ACLs as close to the destination as possible, because they only know the source and would block too much near it. Extended ACLs as close to the source as possible, so unwanted traffic is dropped before it uses up links in the network.</p></div></details><details><summary>How do I calculate a wildcard mask?<span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p>Subtract each octet of the mask from 255: <code>255.255.255.0</code> becomes <code>0.0.0.255</code>, <code>255.255.255.192</code> becomes <code>0.0.0.63</code>, <code>255.255.240.0</code> becomes <code>0.0.15.255</code>. A 0 bit means &quot;must match&quot;; a 1 bit means &quot;doesn&#39;t matter&quot;.</p></div></details><details><summary>What is the implicit deny?<span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p>An invisible rule at the end of every ACL that drops everything: <code>deny any</code> in standard ACLs and <code>deny ip any any</code> in extended ones. An ACL with only deny statements effectively blocks all traffic on the interface where you apply it.</p></div></details><details><summary>How many ACLs can I apply to an interface?<span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p>One per interface, per direction, per protocol: at most one IPv4 ACL inbound and one IPv4 ACL outbound, plus one of each for IPv6. A second IPv4 ACL in the same direction replaces the first.</p></div></details><details><summary>How do I restrict SSH access to a router with an ACL?<span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p>Create a standard ACL that permits only your management addresses and apply it to the VTY lines with <code>access-class NAME in</code>. Interfaces use <code>ip access-group</code>; VTY lines use <code>access-class</code>. For where ACLs fit in the exam, see our <a href="../what-is-ccna/">guide to CCNA</a>.</p></div></details></div>
+<hr>
+<p><em>Routerel is an independent app and is not affiliated with, sponsored by or endorsed by Cisco Systems, Inc. Cisco, CCNA, Cisco IOS and Networking Academy are trademarks of Cisco Systems, Inc.</em></p>
+      
+      <section class="related" aria-labelledby="rel-title">
+        <h2 id="rel-title">Read next</h2>
+        <div class="grid grid--2"><a class="card post-card lift" href="../../../en/guides/dhcp-on-cisco/"><span class="tagline">Guide · 16 min</span><h3>DHCP on Cisco: Server, Relay and Troubleshooting (2026)</h3><p>DHCPv4 on Cisco explained: the DORA process, UDP 67/68, leases, router as server and client, ip helper-address, DHCP snooping, troubleshooting and exercises.</p></a><a class="card post-card lift" href="../../../en/guides/nat-and-pat/"><span class="tagline">Guide · 15 min</span><h3>NAT and PAT Explained: Static, Dynamic, Overload (2026)</h3><p>NAT and PAT for CCNA: private ranges, inside local vs inside global, static, dynamic and overload, Cisco IOS config, verification, port forwarding, exercises.</p></a></div>
+      </section>
+    </article>
+  </div>
+</main>
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="about">
+        <a class="brand" href="../../../en/"><img src="../../../assets/icon-96.webp" alt="" width="36" height="36" loading="lazy"><span>Routerel</span></a>
+        <p>CCNA practice on your phone: questions with explanations, spaced repetition and exam simulations. In English and Romanian.</p>
+      </div>
+      <div><h2>The app</h2><ul><li><a href="../../../en/#features">Features</a></li><li><a href="../../../en/#pricing">Pricing</a></li><li><a href="../../../en/#how-it-works">How it works</a></li><li><a href="../../../en/#faq">FAQ</a></li></ul></div>
+      <div><h2>Resources</h2><ul><li><a href="../../../en/guides/">CCNA guides</a></li><li><a href="../../../en/articles/">CCNA articles</a></li><li><a href="../../../en/tools/">Free tools</a></li><li><a href="../../../" hreflang="ro" lang="ro" data-set-lang="ro">Română</a></li></ul></div>
+      <div><h2>Legal & contact</h2><ul><li><a href="../../../en/privacy">Privacy policy</a></li><li><a href="../../../en/terms">Terms of use</a></li><li><a href="../../../en/delete-account">Delete your account</a></li></ul><ul><li><a href="mailto:contact@routerel.app">contact@routerel.app</a></li></ul></div>
+    </div>
+    <div class="disclaimer">
+      <p>Routerel is an independent app, not affiliated with, sponsored or endorsed by Cisco Systems, Inc. Cisco, CCNA and Cisco Networking Academy are trademarks of Cisco Systems, Inc.</p>
+      <p>© 2026 Routerel</p>
+    </div>
+  </div>
+</footer>
+</body>
+</html>
