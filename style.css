@@ -440,7 +440,8 @@ html.play-soon [data-when="live"], html.play-live [data-when="soon"] { display: 
   scrollbar-width: thin; scrollbar-color: var(--line-strong) transparent;
 }
 @media (min-width: 640px) { .gallery { padding-inline: 24px; scroll-padding-inline: 24px; } }
-@media (min-width: 1180px) { .gallery { padding-inline: calc((100vw - 1180px) / 2 + 32px); scroll-padding-inline: calc((100vw - 1180px) / 2 + 32px); } }
+/* pe desktop rândul ține toată lățimea ecranului: prima captură pornește de la marginea paginii (ca .container), nu de sub titlu */
+@media (min-width: 1024px) { .gallery { padding-inline: 32px; scroll-padding-inline: 32px; justify-content: safe center; } }
 .gallery li { scroll-snap-align: start; }
 .gallery figure { margin: 0; }
 .gallery img { width: 100%; aspect-ratio: 9 / 16; border-radius: 22px; border: 2px solid var(--line); box-shadow: 0 4px 0 var(--line); background: var(--surface2); }
