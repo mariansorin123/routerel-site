@@ -90,6 +90,18 @@ var PRICES_USD = {
       el.textContent = "−" + pct + "%";
       if (pct <= 0) el.hidden = true;
     });
+    // Economia față de lunar, în bani (nu doar procent), și prețul anualului pe zi (rotunjit în sus: „sub X pe zi”).
+    var months = { quarterly: 3, yearly: 12 };
+    q("[data-saved]", function (el) {
+      var k = el.getAttribute("data-saved");
+      var s = Math.round((P.monthly * months[k] - P[k]) * 100) / 100;
+      if (s <= 0) { el.hidden = true; return; }
+      el.textContent = lang === "ro" ? "Economisești " + fmt(s) + " față de lunar" : "You save " + fmt(s) + " vs monthly";
+    });
+    q("[data-perday]", function (el) {
+      var d = Math.ceil(P[el.getAttribute("data-perday")] / 365 * 100 - 1e-6) / 100;
+      el.textContent = lang === "ro" ? "Sub " + fmt(d) + " pe zi" : "Under " + fmt(d) + " a day";
+    });
     q("[data-from-permonth]", function (el) { el.textContent = fmt(Math.min(per.monthly, per.quarterly, per.yearly)); });
   }
 
