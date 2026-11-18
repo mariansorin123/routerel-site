@@ -1389,3 +1389,91 @@ a.btn[aria-disabled="true"] > svg { display: none; }
 @media (max-width: 479px) {
   .topology-frame { padding: 12px 8px; border-radius: 16px; }
 }
+
+/* ---------- Simulatorul de rețea (pagina principală) ---------- */
+/* Insigna „În curând” / „Coming soon”: un singur fel de element, <span class="sim-soon">…</span>.
+   La lansare: șterge toate aceste elemente din site/index.html și site/en/index.html
+   (sau, pe moment, decomentează regula de mai jos). */
+/* .sim-soon { display: none !important; } */
+.sim-soon {
+  display: inline-block; vertical-align: 0.15em; margin-left: 8px; white-space: nowrap;
+  font-size: 0.7rem; line-height: 1.2; font-weight: 900; text-transform: uppercase; letter-spacing: 0.06em;
+  padding: 3px 8px; border-radius: 999px; background: var(--led-soft); color: var(--led-ink);
+  border: 1.5px solid color-mix(in srgb, var(--led) 55%, transparent);
+}
+.eyebrow .sim-soon { margin-left: 2px; vertical-align: baseline; }
+h2 .sim-soon, h3 .sim-soon { vertical-align: 0.2em; }
+.lead .sim-soon, .step p .sim-soon, .answer .sim-soon { margin-right: 2px; }
+summary .sim-soon { margin-right: auto; }
+.trust .tsub .sim-soon { margin-left: 6px; font-size: 0.62rem; padding: 2px 6px; }
+
+/* Banda întunecată, ca o consolă: aceleași culori în ambele teme */
+.sim-band {
+  --bg: #12151b; --bg-alt: #161a21; --surface: #1a1f27; --surface2: #222934;
+  --ink: #e3e7ee; --ink-strong: #f5f7fa; --muted: #a3acba; --line: #2c3440; --line-strong: #3b4452;
+  --brand: #5b8cff; --brand-dark: #3a66d6; --brand-soft: #1d2a48; --brand-ink: #8fb0ff; --on-brand: #0b1020;
+  --led: #ffbe3d; --led-ink: #ffbe3d; --led-soft: #3a2c10;
+  --ok: #3cc96b; --ok-soft: #163824; --ok-ink: #6fe39a; --tag-soft: #2a2148; --tag-ink: #c3adff;
+  color-scheme: dark; color: var(--ink);
+  background: radial-gradient(700px 420px at 85% 0%, rgba(91, 140, 255, 0.18), transparent 70%), #0f1420;
+}
+.sim-band .section-head > p:not(.eyebrow) { color: var(--ink); }
+.sim-tour { list-style: none; margin: 0; padding: 0; display: grid; gap: 16px; }
+.sim-step { display: flex; flex-direction: column; padding: 18px 18px 20px; }
+.sim-step .phone { position: relative; width: min(200px, 100%); margin: 0 auto 16px; padding: 6px; border-radius: 26px; }
+.sim-step .screen { border-radius: 20px; }
+.sim-k { margin: 0 0 4px !important; font-size: 0.78rem; font-weight: 900; letter-spacing: 0.07em; text-transform: uppercase; color: var(--led-ink) !important; }
+.sim-step h3 { font-size: 1.12rem; margin: 0 0 6px; }
+.sim-step p { font-size: 0.97rem; }
+@media (min-width: 720px) { .sim-tour { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (min-width: 1100px) { .sim-tour { grid-template-columns: repeat(4, minmax(0, 1fr)); } .sim-step .phone { width: min(190px, 100%); } }
+/* Pe telefon: cele patru carduri se derulează pe orizontală (se vede marginea următorului) */
+@media (max-width: 719px) {
+  .sim-tour { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 12px; margin-inline: -16px; padding: 4px 16px 10px; scroll-padding-inline: 16px; scrollbar-width: none; }
+  .sim-tour::-webkit-scrollbar { display: none; }
+  .sim-step { flex: 0 0 82%; scroll-snap-align: start; padding: 16px; }
+  .sim-step .phone { width: 168px; }
+  .sim-extra { margin-top: 16px; gap: 10px; }
+  .sim-fact { padding: 12px 14px; }
+  .sim-fact p { font-size: 0.93rem; }
+  .sim-topics { gap: 6px; }
+  .sim-topics li { font-size: 0.8rem; padding: 4px 8px; border-radius: 8px; }
+  .sim-cta { margin-top: 20px; }
+}
+
+.sim-extra { display: grid; gap: 14px; margin-top: 22px; }
+@media (min-width: 900px) { .sim-extra { grid-template-columns: 1fr 1fr; } .sim-topics-wrap { grid-column: 1 / -1; } }
+.sim-fact { display: grid; grid-template-columns: 40px 1fr; gap: 12px; align-items: start; background: var(--surface); border: 2px solid var(--line); border-radius: 18px; padding: 14px 16px; }
+.sim-fact .icon-tile { margin: 0; width: 40px; height: 40px; border-radius: 12px; }
+.sim-fact .icon-tile svg { width: 21px; height: 21px; }
+.sim-fact p { margin: 0; font-size: 0.97rem; }
+.sim-fact strong { color: var(--ink-strong); }
+.sim-topics-label { margin: 6px 0 10px; font-weight: 900; color: var(--ink-strong); }
+.sim-topics { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+.sim-topics li {
+  padding: 5px 11px; border-radius: 10px; background: var(--surface2); border: 1.5px solid var(--line-strong);
+  font-size: 0.88rem; font-weight: 800; line-height: 1.3; color: var(--ink-strong); white-space: nowrap;
+}
+.sim-cta { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 16px; margin-top: 28px; }
+.sim-cta p { flex: 1 1 100%; margin: 0; color: var(--muted); font-weight: 700; font-size: 0.95rem; }
+
+/* Prețuri: ce primești în abonament + ce ți-ar trebui altfel */
+.offer { display: grid; gap: 16px; margin: 0 auto clamp(28px, 4vw, 40px); max-width: 1000px; }
+@media (min-width: 900px) { .offer { grid-template-columns: 1.35fr 1fr; align-items: start; } }
+.offer-main, .offer-alt { background: var(--surface); border: 2px solid var(--line); border-radius: var(--radius-lg); box-shadow: 0 4px 0 var(--line); padding: clamp(18px, 2.4vw, 26px); }
+.offer-main { border-color: color-mix(in srgb, var(--brand) 45%, var(--line)); box-shadow: 0 4px 0 color-mix(in srgb, var(--brand) 45%, var(--line)); }
+.offer h3 { font-size: 1.15rem; margin: 0 0 14px; }
+.offer-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+.offer-list li { display: grid; grid-template-columns: 22px 1fr; gap: 12px; align-items: start; }
+.offer-list li > svg { width: 22px; height: 22px; color: var(--ok); margin-top: 1px; }
+.offer-list strong { display: block; color: var(--ink-strong); }
+.offer-list li > span { color: var(--muted); font-size: 0.95rem; line-height: 1.45; }
+.offer-list small { display: block; font-size: inherit; }
+@media (max-width: 719px) { .offer-list li:not(.offer-top) small { display: none; } .offer-list { gap: 9px; } .offer-alt .checklist { gap: 8px; } }
+.offer-list .offer-top { grid-template-columns: 44px 1fr; background: var(--ok-soft); border-radius: 16px; padding: 12px; margin-bottom: 2px; }
+.offer-list .offer-top .icon-tile { margin: 0; width: 44px; height: 44px; border-radius: 12px; background: var(--surface); }
+.offer-list .offer-top > span { color: var(--ink); }
+.offer-list .offer-top strong { font-size: 1.08rem; }
+.offer-alt p { margin: 14px 0 0; font-weight: 800; color: var(--ink-strong); }
+.offer-alt .checklist { gap: 10px; font-size: 0.97rem; }
+.offer-alt .checklist svg { width: 20px; height: 20px; }
