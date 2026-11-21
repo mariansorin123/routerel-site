@@ -10,7 +10,7 @@
 //    "https://play.google.com/store/apps/details?id=ro.routerel.app"
 //    Fiecare pagină adaugă singură de unde vine instalarea (referrer cu utm_source=routerel.app, utm_medium, utm_campaign),
 //    din data-utm-medium / data-utm-campaign de pe <html>; în Play Console se vede la sursele de achiziție.
-var PLAY_URL = "";
+var PLAY_URL = "https://play.google.com/store/apps/details?id=ro.routerel.app";
 
 // 2) Prețurile abonamentelor, în lei (cu punct zecimal, ca în exemplu). Apar pe paginile în română.
 //    Se schimbă aici și apar peste tot: prețul, „adică X lei/lună” și reducerea față de lunar.
