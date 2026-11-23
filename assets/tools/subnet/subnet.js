@@ -471,7 +471,7 @@ export function errorMessage(err, lang = "ro") {
     case "EMPTY":
       return ro ? "Scrie o adresă IP cu prefix, de exemplu 192.168.10.77/26." : "Enter an IP address with a prefix, e.g. 192.168.10.77/26.";
     case "INVALID_FORMAT":
-      return ro ? "Formatul nu e recunoscut. Exemple: 192.168.10.77/26 sau 192.168.10.77 255.255.255.192." : "Format not recognised. Examples: 192.168.10.77/26 or 192.168.10.77 255.255.255.192.";
+      return ro ? "Formatul nu e recunoscut. Exemple: 192.168.10.77/26 sau 192.168.10.77 255.255.255.192." : "Format not recognized. Examples: 192.168.10.77/26 or 192.168.10.77 255.255.255.192.";
     case "INVALID_IP":
       return ro ? `„${v}” nu este o adresă IPv4 validă: are nevoie de 4 numere între 0 și 255, separate prin puncte.` : `"${v}" is not a valid IPv4 address: it needs 4 numbers from 0 to 255, separated by dots.`;
     case "MISSING_MASK":

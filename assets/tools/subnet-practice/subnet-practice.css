@@ -1,0 +1,114 @@
+/* Generat de tools/site/sync-tools.mjs din web-tools/subnet-practice/demo.html. Nu-l edita aici. */
+/* ───── Componenta (clase spx-*) ───── */
+.spx { --radius: 14px; }
+.spx-controls { display: grid; grid-template-columns: minmax(0, 1fr); gap: 12px; }
+.spx-fieldset { border: 0; padding: 0; margin: 0; display: grid; gap: 8px; min-width: 0; }
+.spx-field { display: grid; gap: 8px; min-width: 0; align-content: start; }
+.spx-label { font-weight: 900; font-size: 0.8125rem; letter-spacing: .05em; text-transform: uppercase; color: var(--ink-strong); padding: 0; }
+/* nivelul: butoane radio arătate ca un comutator cu trei poziții */
+.spx-seg { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; }
+.spx-segbtn { position: relative; min-width: 0; }
+.spx-segbtn input { position: absolute; opacity: 0; inset: 0; width: 100%; height: 100%; margin: 0; cursor: pointer; }
+.spx-segbtn span {
+  display: flex; align-items: center; justify-content: center; min-height: 48px; padding: 8px 6px; border-radius: 12px; text-align: center;
+  border: 2px solid var(--line-strong); border-bottom-width: 4px; background: var(--surface); color: var(--ink);
+  font: 900 0.875rem/1.1 Nunito, sans-serif; letter-spacing: .03em;
+}
+.spx-segbtn input:checked + span { background: var(--brand-soft); border-color: var(--brand); color: var(--ink-strong); }
+.spx-segbtn input:focus-visible + span { outline: 3px solid var(--led); outline-offset: 2px; }
+.spx-select {
+  width: 100%; min-width: 0; min-height: 48px; padding: 10px 12px; border-radius: 12px; border: 2px solid var(--line-strong);
+  background: var(--surface2); color: var(--ink-strong); font: 700 1rem/1.3 Nunito, sans-serif; cursor: pointer;
+}
+.spx-select:focus { outline: 3px solid var(--brand); outline-offset: 1px; border-color: var(--brand); }
+.spx-note { margin: 8px 0 12px; color: var(--muted); font-size: 0.9375rem; }
+.spx-score { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 12px; }
+.spx-pill {
+  display: inline-flex; align-items: center; gap: 4px; min-height: 36px; padding: 4px 14px; border-radius: 999px;
+  background: var(--surface2); border: 2px solid var(--line); color: var(--muted); font-weight: 800; font-size: 0.9375rem;
+}
+.spx-pill strong { color: var(--ink-strong); font-weight: 900; }
+.spx-panel { background: var(--surface); border: 2px solid var(--line); border-radius: var(--radius); padding: 20px 16px; }
+.spx-kicker { margin: 0 0 6px; font-weight: 900; font-size: 0.8125rem; letter-spacing: .05em; text-transform: uppercase; color: var(--brand-ink, var(--brand)); }
+.spx-question { margin: 0 0 12px; font-weight: 800; font-size: 1.0625rem; line-height: 1.45; color: var(--ink-strong); }
+.spx-subject {
+  margin: 0 0 16px; padding: 10px 14px; border-radius: 4px 12px 12px 4px; background: var(--brand-soft); border-left: 6px solid var(--brand);
+  color: var(--ink-strong); font: 600 1.25rem/1.4 "Roboto Mono", ui-monospace, monospace;
+}
+.spx-nw { white-space: nowrap; }
+.spx-mono { font-family: "Roboto Mono", ui-monospace, monospace; font-weight: 500; }
+.spx-form { display: grid; grid-template-columns: minmax(0, 1fr); gap: 8px; }
+.spx-form > * { min-width: 0; }
+.spx-input {
+  width: 100%; min-width: 0; min-height: 48px; padding: 10px 12px; border-radius: 12px; border: 2px solid var(--line-strong);
+  background: var(--surface2); color: var(--ink-strong); font: 600 1.0625rem/1.3 "Roboto Mono", ui-monospace, monospace;
+}
+.spx-input:focus { outline: 3px solid var(--brand); outline-offset: 1px; border-color: var(--brand); }
+.spx-input[aria-invalid="true"] { border-color: var(--bad-ink); }
+.spx-input.spx-is-ok { border-color: var(--ok-ink); background: var(--ok-soft); }
+.spx-input.spx-is-bad { border-color: var(--bad-ink); background: var(--bad-soft); }
+/* textul de ajutor și mesajul de eroare stau pe același loc, cu înălțime rezervată: butoanele nu se mișcă */
+.spx-hint { margin: 0; min-height: 2.9em; color: var(--muted); font-size: 0.9375rem; line-height: 1.45; overflow-wrap: break-word; }
+.spx-hint-error { color: var(--bad-ink); font-weight: 800; }
+.spx-yesno { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; max-width: 420px; }
+.spx-choice {
+  min-height: 56px; padding: 8px 12px; border-radius: 12px; cursor: pointer; border: 2px solid var(--line-strong); border-bottom-width: 4px;
+  background: var(--surface); color: var(--ink-strong); font: 900 1.0625rem/1 Nunito, sans-serif; letter-spacing: .03em;
+}
+.spx-choice:disabled { cursor: default; }
+.spx-choice.spx-is-ok { background: var(--ok-soft); border-color: var(--ok-ink); color: var(--ok-ink); }
+.spx-choice.spx-is-bad { background: var(--bad-soft); border-color: var(--bad-ink); color: var(--bad-ink); }
+.spx-actions { display: flex; gap: 8px; }
+.spx-btn {
+  font: 900 0.9375rem/1.15 Nunito, sans-serif; letter-spacing: .05em; text-transform: uppercase; min-height: 48px; padding: 6px 20px; cursor: pointer;
+  border: 0; border-radius: 12px; background: var(--brand); color: var(--on-brand); box-shadow: 0 4px 0 var(--brand-dark);
+}
+.spx-btn:active { transform: translateY(2px); box-shadow: 0 2px 0 var(--brand-dark); }
+.spx-btn-ghost { background: var(--surface); color: var(--brand-ink, var(--brand)); border: 2px solid var(--line-strong); box-shadow: 0 3px 0 var(--line-strong); text-transform: none; letter-spacing: 0; }
+.spx-btn-ghost:active { box-shadow: 0 1px 0 var(--line-strong); }
+.spx-btn:focus-visible, .spx-choice:focus-visible, .spx-details summary:focus-visible { outline: 3px solid var(--led); outline-offset: 2px; }
+.spx-live { margin-top: 16px; }
+.spx-live:empty { display: none; }
+.spx-verdict { padding: 12px 14px; border-radius: 12px; border: 2px solid; display: grid; gap: 4px; }
+.spx-verdict-ok { background: var(--ok-soft); border-color: var(--ok-ink); color: var(--ok-ink); }
+.spx-verdict-bad { background: var(--bad-soft); border-color: var(--bad-ink); color: var(--bad-ink); }
+.spx-verdict-info { background: var(--brand-soft); border-color: var(--brand); color: var(--ink-strong); }
+.spx-verdict-title { margin: 0; font-weight: 900; font-size: 1.0625rem; }
+.spx-verdict-line { margin: 0; font-weight: 800; color: var(--ink-strong); overflow-wrap: break-word; }
+.spx-strong { font-weight: 600; }
+.spx-solution { margin-top: 16px; }
+.spx-solution:empty { display: none; }
+.spx-h { font-weight: 900; font-size: 0.8125rem; letter-spacing: .05em; text-transform: uppercase; color: var(--ink-strong); margin: 0 0 8px; }
+.spx-steps { margin: 0; padding-left: 1.4em; display: grid; gap: 10px; }
+.spx-steps li { overflow-wrap: break-word; }
+.spx-steps li::marker { color: var(--brand); font-weight: 900; }
+.spx-steps strong { color: var(--ink-strong); font-weight: 900; }
+.spx-step-answer { color: var(--ink-strong); }
+.spx-details summary {
+  display: flex; align-items: center; min-height: 44px; cursor: pointer; font-weight: 900; color: var(--brand-ink, var(--brand));
+  list-style: none; border-radius: 8px; gap: 8px;
+}
+.spx-details summary::-webkit-details-marker { display: none; }
+.spx-details summary::before {
+  content: ""; flex: 0 0 auto; width: 0; height: 0; border-style: solid; border-width: 6px 0 6px 9px;
+  border-color: transparent transparent transparent var(--brand); transition: transform .15s;
+}
+.spx-details[open] summary::before { transform: rotate(90deg); }
+.spx-details[open] summary { margin-bottom: 8px; }
+.spx-subject-text { font-family: Nunito, system-ui, sans-serif; font-weight: 900; }
+.spx [hidden] { display: none !important; }
+@media (min-width: 640px) {
+  .spx-controls { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: start; }
+  .spx-panel { padding: 24px; }
+  .spx-input { max-width: 420px; }
+}
+@media (max-width: 480px) {
+  .spx-panel { padding: 16px 12px; }
+  .spx-subject { font-size: 1.125rem; padding: 10px 12px; }
+  /* pe telefon butoanele umplu rândul: „Verifică” și „Arată soluția” la egal, „Exercițiul următor” pe tot rândul */
+  .spx-actions .spx-btn { flex: 1 1 0; min-width: 0; padding: 6px 10px; }
+}
+@media (max-width: 340px) {
+  /* la 320 px, „Arată soluția” / „Show solution” stă pe un rând */
+  .spx-actions .spx-btn { padding: 6px 6px; letter-spacing: 0; white-space: nowrap; font-size: 0.875rem; }
+}

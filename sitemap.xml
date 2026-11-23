@@ -198,7 +198,7 @@
   </url>
   <url>
     <loc>https://routerel.app/en/privacy</loc>
-    <lastmod>2026-11-10</lastmod>
+    <lastmod>2026-11-21</lastmod>
     <xhtml:link rel="alternate" hreflang="ro" href="https://routerel.app/privacy"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://routerel.app/en/privacy"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://routerel.app/en/privacy"/>
@@ -237,6 +237,20 @@
     <xhtml:link rel="alternate" hreflang="ro" href="https://routerel.app/tools/calculator-subnetting/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://routerel.app/en/tools/subnet-calculator/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://routerel.app/en/tools/subnet-calculator/"/>
+  </url>
+  <url>
+    <loc>https://routerel.app/en/tools/subnetting-practice/</loc>
+    <lastmod>2026-11-21</lastmod>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://routerel.app/tools/exersare-subnetting/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://routerel.app/en/tools/subnetting-practice/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://routerel.app/en/tools/subnetting-practice/"/>
+  </url>
+  <url>
+    <loc>https://routerel.app/en/tools/wildcard-mask-calculator/</loc>
+    <lastmod>2026-11-21</lastmod>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://routerel.app/tools/calculator-wildcard/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://routerel.app/en/tools/wildcard-mask-calculator/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://routerel.app/en/tools/wildcard-mask-calculator/"/>
   </url>
   <url>
     <loc>https://routerel.app/ghiduri/</loc>
@@ -324,7 +338,7 @@
   </url>
   <url>
     <loc>https://routerel.app/privacy</loc>
-    <lastmod>2026-11-10</lastmod>
+    <lastmod>2026-11-21</lastmod>
     <xhtml:link rel="alternate" hreflang="ro" href="https://routerel.app/privacy"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://routerel.app/en/privacy"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://routerel.app/en/privacy"/>
@@ -351,11 +365,25 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://routerel.app/en/tools/subnet-calculator/"/>
   </url>
   <url>
+    <loc>https://routerel.app/tools/calculator-wildcard/</loc>
+    <lastmod>2026-11-21</lastmod>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://routerel.app/tools/calculator-wildcard/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://routerel.app/en/tools/wildcard-mask-calculator/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://routerel.app/en/tools/wildcard-mask-calculator/"/>
+  </url>
+  <url>
     <loc>https://routerel.app/tools/convertor-binar/</loc>
     <lastmod>2026-11-05</lastmod>
     <xhtml:link rel="alternate" hreflang="ro" href="https://routerel.app/tools/convertor-binar/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://routerel.app/en/tools/binary-converter/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://routerel.app/en/tools/binary-converter/"/>
+  </url>
+  <url>
+    <loc>https://routerel.app/tools/exersare-subnetting/</loc>
+    <lastmod>2026-11-21</lastmod>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://routerel.app/tools/exersare-subnetting/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://routerel.app/en/tools/subnetting-practice/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://routerel.app/en/tools/subnetting-practice/"/>
   </url>
   <url>
     <loc>https://routerel.app/tools/ipv6/</loc>

@@ -1,0 +1,123 @@
+/* Generat de tools/site/sync-tools.mjs din web-tools/wildcard/demo.html. Nu-l edita aici. */
+/* ───── Componenta (clase wcc-*) ───── */
+.wcc { --radius: 14px; }
+.wcc-tabs { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 16px; }
+.wcc-tab {
+  font: 900 0.875rem/1 Nunito, sans-serif; letter-spacing: .03em; padding: 12px 16px; min-height: 44px; border-radius: 12px; cursor: pointer;
+  border: 2px solid var(--line-strong); border-bottom-width: 4px; background: var(--surface); color: var(--ink);
+  white-space: nowrap; /* eticheta filei stă pe un rând, și la 320 px */
+}
+@media (max-width: 340px) { .wcc-tab { padding: 12px 10px; letter-spacing: 0; } }
+.wcc-tab[aria-selected="true"] { background: var(--brand-soft); border-color: var(--brand); color: var(--ink-strong); }
+.wcc-panel { background: var(--surface); border: 2px solid var(--line); border-radius: var(--radius); padding: 20px 16px; }
+.wcc-panel:focus-visible, .wcc-scroll:focus-visible { outline: 3px solid var(--brand); outline-offset: 2px; }
+.wcc-form { display: grid; grid-template-columns: minmax(0, 1fr); gap: 8px; margin-bottom: 12px; }
+.wcc-form > * { min-width: 0; }
+.wcc-label { font-weight: 900; font-size: 0.8125rem; letter-spacing: .05em; text-transform: uppercase; color: var(--ink-strong); padding: 0; }
+.wcc-inputrow { display: flex; gap: 8px; flex-wrap: wrap; }
+.wcc-input {
+  flex: 1 1 220px; min-width: 0; min-height: 48px; padding: 10px 12px; border-radius: 12px; border: 2px solid var(--line-strong);
+  background: var(--surface2); color: var(--ink-strong); font: 700 1rem/1.3 Nunito, sans-serif;
+}
+.wcc-input.wcc-mono { font: 600 1rem/1.3 "Roboto Mono", ui-monospace, monospace; }
+.wcc-input:focus { outline: 3px solid var(--brand); outline-offset: 1px; border-color: var(--brand); }
+.wcc-input[aria-invalid="true"] { border-color: var(--bad-ink); }
+.wcc-btn {
+  font: 900 0.9375rem/1 Nunito, sans-serif; letter-spacing: .05em; text-transform: uppercase; min-height: 48px; padding: 0 20px; cursor: pointer;
+  border: 0; border-radius: 12px; background: var(--brand); color: var(--on-brand); box-shadow: 0 4px 0 var(--brand-dark); justify-self: start;
+}
+.wcc-btn:active { transform: translateY(2px); box-shadow: 0 2px 0 var(--brand-dark); }
+.wcc-btn:focus-visible, .wcc-chip:focus-visible, .wcc-tab:focus-visible, .wcc-copy:focus-visible { outline: 3px solid var(--led); outline-offset: 2px; }
+.wcc-hint { margin: 0; color: var(--muted); font-size: 0.9375rem; overflow-wrap: break-word; }
+.wcc-error { margin: 0; padding: 8px 12px; border-radius: 10px; background: var(--bad-soft); color: var(--bad-ink); font-weight: 800; overflow-wrap: break-word; }
+.wcc-examples { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-top: 4px; }
+.wcc-examples-label { color: var(--muted); font-size: 0.9375rem; margin-right: 2px; }
+.wcc-chip { font-size: 0.8125rem; padding: 6px 12px; min-height: 44px; min-width: 44px; border-radius: 999px; border: 2px solid var(--line-strong); background: var(--surface2); color: var(--ink-strong); cursor: pointer; }
+.wcc-mono { font-family: "Roboto Mono", ui-monospace, monospace; font-weight: 500; }
+.wcc-nw { white-space: nowrap; }
+.wcc-summary { margin: 4px 0 12px; font-weight: 800; color: var(--ink-strong); overflow-wrap: break-word; }
+.wcc-summary:empty { display: none; }
+.wcc-h { font-weight: 900; font-size: 0.8125rem; letter-spacing: .05em; text-transform: uppercase; color: var(--ink-strong); text-align: left; margin: 0 0 8px; }
+.wcc-block { margin-top: 24px; }
+.wcc-scroll { overflow-x: auto; border-radius: 10px; }
+.wcc-table { border-collapse: collapse; width: 100%; font-size: 0.9375rem; }
+.wcc-table th, .wcc-table td { padding: 8px 10px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+.wcc-table thead th { font-size: 0.75rem; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); font-weight: 900; white-space: nowrap; }
+.wcc-kv th { width: 42%; font-weight: 800; color: var(--muted); }
+.wcc-kv td { color: var(--ink-strong); font-weight: 800; overflow-wrap: break-word; }
+.wcc-kv td.wcc-mono { font-weight: 600; }
+.wcc-list td.wcc-mono, .wcc-list th[scope="row"] { white-space: nowrap; }
+.wcc-octets td.wcc-mono { white-space: nowrap; }
+.wcc-octets th[scope="row"] { font-weight: 900; color: var(--ink-strong); }
+.wcc-calc { width: auto; margin-bottom: 12px; }
+.wcc-calc th { font-weight: 800; color: var(--muted); white-space: nowrap; padding-left: 0; }
+.wcc-calc td { white-space: nowrap; color: var(--ink-strong); }
+.wcc-calc strong { color: var(--brand); font-weight: 600; }
+.wcc-bin { width: auto; }
+.wcc-bin th { font-weight: 800; color: var(--muted); white-space: nowrap; }
+.wcc-bits { white-space: nowrap; font-size: 0.9375rem; letter-spacing: .02em; }
+.wcc-chk { color: var(--brand); font-weight: 600; }
+.wcc-dc { color: var(--led-ink); font-weight: 600; background: var(--led-soft); border-radius: 3px; }
+.wcc-legend { display: flex; flex-wrap: wrap; gap: 6px 16px; align-items: center; font-size: 0.875rem; color: var(--muted); margin: 8px 0 0; }
+.wcc-swatch { display: inline-block; width: 12px; height: 12px; border-radius: 3px; margin-right: 6px; vertical-align: -1px; }
+.wcc-swatch-chk { background: var(--brand); }
+.wcc-swatch-dc { background: var(--led); }
+.wcc-steps { margin: 0; padding-left: 1.4em; display: grid; gap: 10px; overflow-wrap: break-word; }
+.wcc-steps li::marker { color: var(--brand); font-weight: 900; }
+.wcc-steps strong { color: var(--ink-strong); font-weight: 900; }
+.wcc-note, .wcc-warn { margin: 0 0 12px; padding: 10px 12px; border-radius: 10px; overflow-wrap: break-word; color: var(--ink-strong); }
+.wcc-note { background: var(--brand-soft); border-left: 4px solid var(--brand); }
+.wcc-warn { background: var(--led-soft); border-left: 4px solid var(--led); }
+.wcc-sample { list-style: none; margin: 0 0 8px; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; }
+.wcc-sample li { padding: 4px 10px; border-radius: 8px; background: var(--surface2); border: 1px solid var(--line); color: var(--ink-strong); font-size: 0.9375rem; }
+.wcc-testbox { padding-top: 20px; border-top: 2px solid var(--line); }
+.wcc-verdict { display: inline-flex; gap: 8px; align-items: center; margin: 0 0 12px; padding: 8px 14px; border-radius: 999px; font-weight: 900; }
+.wcc-yes { background: var(--brand-soft); color: var(--ink-strong); border: 2px solid var(--brand); }
+.wcc-no { background: var(--bad-soft); color: var(--bad-ink); border: 2px solid var(--bad-ink); }
+.wcc-tests li.wcc-bad, .wcc-tests li.wcc-bad strong { color: var(--bad-ink); }
+.wcc-codes { display: grid; gap: 12px; }
+.wcc-code { border: 2px solid var(--line); border-radius: 12px; background: var(--surface2); min-width: 0; }
+.wcc-code-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 6px 6px 6px 12px; border-bottom: 1px solid var(--line); }
+.wcc-code-title { font-weight: 900; font-size: 0.8125rem; letter-spacing: .05em; text-transform: uppercase; color: var(--ink-strong); }
+.wcc-code-note { margin: 8px 12px 0; color: var(--muted); font-size: 0.875rem; }
+.wcc-copy {
+  font: 900 0.8125rem/1 Nunito, sans-serif; letter-spacing: .03em; min-height: 44px; min-width: 44px; padding: 0 14px; border-radius: 10px; cursor: pointer;
+  border: 2px solid var(--line-strong); background: var(--surface); color: var(--brand); box-shadow: 0 3px 0 var(--line-strong); white-space: nowrap;
+}
+.wcc-copy:active { transform: translateY(2px); box-shadow: 0 1px 0 var(--line-strong); }
+.wcc-pre { margin: 0; padding: 10px 12px 12px; font: 500 0.9375rem/1.5 "Roboto Mono", ui-monospace, monospace; color: var(--ink-strong); white-space: pre-wrap; overflow-wrap: normal; word-break: normal; }
+/* o linie lungă continuă indentată, ca să nu pară o comandă nouă */
+.wcc-line { display: block; padding-left: 2ch; text-indent: -2ch; }
+.wcc-notes { margin: 12px 0 0; padding-left: 1.2em; color: var(--muted); font-size: 0.9375rem; display: grid; gap: 6px; }
+.wcc-sr { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+@media (max-width: 350px) { .wcc-bin td.wcc-bits { font-size: 0.7188rem; } }
+/* sub ~380 px eticheta stă deasupra valorii, ca adresele să nu se rupă */
+@media (max-width: 380px) {
+  .wcc-kv th, .wcc-kv td { display: block; width: auto; padding: 0; border: 0; }
+  .wcc-kv th { font-size: 0.875rem; }
+  .wcc-kv tr { display: block; padding: 8px 0; border-bottom: 1px solid var(--line); }
+  .wcc-pre { font-size: 0.8125rem; }
+}.wcc [hidden] { display: none !important; }
+@media (max-width: 480px) {
+  .wcc-kv th { width: 46%; }
+  .wcc-panel { padding: 16px 12px; }
+  /* cele trei file pe un singur rând; textul trece pe două rânduri dacă e nevoie */
+  .wcc-tabs { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; }
+  .wcc-tab { padding: 8px 6px; font-size: 0.8125rem; line-height: 1.15; }
+  /* tabelul pe octeți rămâne tabel, dar mai strâns */
+  .wcc-octets th, .wcc-octets td { padding: 8px 6px; }
+  .wcc-octets thead th { white-space: normal; font-size: 0.6875rem; vertical-align: bottom; }
+  /* pe telefon eticheta stă deasupra biților */
+  .wcc-bin, .wcc-bin tbody, .wcc-bin tr, .wcc-bin th, .wcc-bin td { display: block; }
+  .wcc-bin tr { padding: 6px 0; border-bottom: 1px solid var(--line); }
+  .wcc-bin th, .wcc-bin td { padding: 0; border: 0; }
+  .wcc-bin th { font-size: 0.8125rem; }
+  .wcc-bits { font-size: 0.8125rem; letter-spacing: 0; }
+  /* tabelele cu liste devin carduri: fiecare celulă își arată eticheta coloanei */
+  .wcc-list thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  .wcc-list, .wcc-list tbody, .wcc-list tr, .wcc-list th[scope="row"], .wcc-list td { display: block; }
+  .wcc-list tr { padding: 8px 0; border-bottom: 1px solid var(--line); }
+  .wcc-list th[scope="row"], .wcc-list td { display: flex; justify-content: space-between; gap: 12px; padding: 3px 0; border: 0; white-space: normal; text-align: right; }
+  .wcc-list th[scope="row"] { font-weight: 900; color: var(--ink-strong); }
+  .wcc-list [data-label]::before { content: attr(data-label); font: 800 0.8125rem/1.6 Nunito, sans-serif; color: var(--muted); text-align: left; flex: 0 0 auto; }
+}

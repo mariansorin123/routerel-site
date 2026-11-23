@@ -286,7 +286,7 @@ export const ADDRESS_TYPES = [
     note: { ro: "Tip vechi de adresă privată, renunțat în 2004. În locul ei se folosesc adresele unique local (fc00::/7).", en: "An old kind of private address, deprecated in 2004. Unique local addresses (fc00::/7) replace it." } },
   { id: "unique-local", cidr: "fc00::/7", rfc: "RFC 4193", cast: "unicast",
     label: { ro: "Unicast local unic (ULA)", en: "Unique local (ULA)" },
-    note: { ro: "Echivalentul adreselor private IPv4: merge în interiorul organizației, nu pe Internet. În practică încep cu fd (fd00::/8).", en: "The IPv6 counterpart of private IPv4: works inside an organisation, not on the Internet. In practice they start with fd (fd00::/8)." } },
+    note: { ro: "Echivalentul adreselor private IPv4: merge în interiorul organizației, nu pe Internet. În practică încep cu fd (fd00::/8).", en: "The IPv6 counterpart of private IPv4: works inside an organization, not on the Internet. In practice they start with fd (fd00::/8)." } },
   { id: "multicast", cidr: "ff00::/8", rfc: "RFC 4291", cast: "multicast",
     label: { ro: "Multicast", en: "Multicast" },
     note: { ro: "Un pachet către un grup de dispozitive. IPv6 nu are broadcast; multicastul îi ține locul.", en: "One packet to a group of devices. IPv6 has no broadcast; multicast takes its place." } },
@@ -321,7 +321,7 @@ export const MULTICAST_SCOPES = {
   3: { id: "realm-local", ro: "realm-local", en: "realm-local" },
   4: { id: "admin-local", ro: "administrativ local", en: "admin-local" },
   5: { id: "site-local", ro: "site-ul (site-local)", en: "site-local" },
-  8: { id: "organization-local", ro: "organizația", en: "organisation-local" },
+  8: { id: "organization-local", ro: "organizația", en: "organization-local" },
   14: { id: "global", ro: "global (Internet)", en: "global" },
 };
 

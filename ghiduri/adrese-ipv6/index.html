@@ -67,62 +67,64 @@
     <article class="prose">
       <nav class="crumbs" aria-label="Firimituri"><ol><li><a href="../../">Acasă</a></li><li><a href="../../ghiduri/">Ghiduri</a></li><li><span aria-current="page">Adresele IPv6 explicate (format, prescurtare, tipuri)</span></li></ol></nav>
       <p class="eyebrow">Ghid CCNA</p>
-      <h1>Adresele IPv6 explicate (format, prescurtare, tipuri)</h1>
+      <h1>Adresele IPv6 explicate (format, prescurtare,&nbsp;tipuri)</h1>
       <div class="article-meta">
         <span class="avatar"><svg class="mascot" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><g class="m-breathe"><path d="M22 14l-5-9M42 14l5-9" stroke="#8a919c" stroke-width="3.4" stroke-linecap="round" fill="none"/><circle class="m-led m-led-l" cx="17" cy="5" r="3.6"/><circle class="m-led m-led-r" cx="47" cy="5" r="3.6"/><path class="m-body" d="M28 12q4-6 8 0"/><rect class="m-body" x="8" y="12" width="48" height="42" rx="18"/><rect class="m-belly" x="8" y="40" width="48" height="14" rx="7"/><circle cx="23" cy="31" r="5.4" fill="#fff"/><circle class="m-pupil" cx="24" cy="31.5" r="3" fill="#1a1d24"/><circle cx="41" cy="31" r="5.4" fill="#fff"/><circle class="m-pupil" cx="42" cy="31.5" r="3" fill="#1a1d24"/><path class="m-led" d="M29 37l3 3.5 3-3.5z"/><circle class="m-ok" cx="18" cy="47" r="2"/><circle class="m-led" cx="24" cy="47" r="2"/><rect x="31" y="45" width="6" height="4" rx="1" fill="#0d1a3a" opacity=".55"/><rect x="39" y="45" width="6" height="4" rx="1" fill="#0d1a3a" opacity=".55"/><rect x="47" y="45" width="5" height="4" rx="1" fill="#0d1a3a" opacity=".55"/><path class="m-leg" d="M20 54v4M44 54v4" stroke-width="3.4" stroke-linecap="round" fill="none"/></g></svg></span>
         <span>Echipa Routerel</span><span aria-hidden="true">·</span>
         <span>Actualizat: <time datetime="2026-11-05">5 noiembrie 2026</time></span><span aria-hidden="true">·</span>
         <span>13 min de citit</span>
       </div>
-      <p class="lead">Prima dată când vezi o adresă ca <code>2001:db8:acad:1::1</code> pare scrisă în cod secret. Vestea bună: IPv6 are reguli mai puține și mai logice decât pare. Odată ce înțelegi formatul și cele două reguli de prescurtare, restul e vocabular.</p>
-<p>În ghidul ăsta afli cum arată o adresă IPv6, cum o scurtezi și cum o scrii la loc întreagă, ce tipuri de adrese există și cum le recunoști după primele cifre, cum se calculează o adresă EUI-64, ce înseamnă SLAAC și DHCPv6 și cum configurezi IPv6 pe un router Cisco. La final ai exerciții cu răspunsuri.</p>
+      
+      <p class="lead">Prima dată când vezi o adresă ca <code class="nw">2001:db8:acad:1::1</code> pare scrisă în cod secret. Vestea bună: IPv6 are reguli mai puține și mai logice decât pare. Odată ce înțelegi formatul și cele două reguli de prescurtare, restul e vocabular.</p>
+<p>În ghidul ăsta afli cum arată o adresă IPv6, cum o scurtezi și cum o scrii la loc întreagă, ce tipuri de adrese există și cum le recunoști după primele cifre, cum se calculează o adresă <span class="nw">EUI-64</span>, ce înseamnă SLAAC și DHCPv6 și cum configurezi IPv6 pe un router Cisco. La final ai exerciții cu răspunsuri.</p>
 <p>În cursurile CCNA v8 de la Networking Academy, adresarea IPv6 se predă în <strong>CCNA 1 · ITN</strong> (modulul 11, adresare IPv6, plus modulul 8 pentru Neighbor Discovery), iar configurarea automată a adreselor (SLAAC și DHCPv6) se aprofundează în <strong>CCNA 2 · IEN</strong> (modulul 9).</p>
-      <nav class="toc toc--fold" aria-labelledby="toc-title"><h2 id="toc-title">Cuprins</h2><button type="button" class="toc-toggle" data-toc-toggle aria-expanded="false" aria-controls="toc-list"><span class="toc-toggle-t">Cuprins</span> <span class="toc-toggle-n">12 secțiuni</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6"/></svg></button><ol id="toc-list"><li><a href="#de-ce-avem-nevoie-de-ipv6">De ce avem nevoie de IPv6</a></li><li><a href="#cum-arata-o-adresa-ipv6">Cum arată o adresă IPv6</a></li><li><a href="#regulile-de-prescurtare">Regulile de prescurtare</a><ol><li><a href="#regula-1-omiti-zerourile-din-fata-in-fiecare-hextet">Regula 1: omiți zerourile din față în fiecare hextet</a></li><li><a href="#regula-2-inlocuiesti-o-singura-secventa-de-grupuri-zero-cu">Regula 2: înlocuiești o singură secvență de grupuri zero cu ::</a></li><li><a href="#exemple-rezolvate">Exemple rezolvate</a></li><li><a href="#cum-scrii-adresa-la-loc-intreaga">Cum scrii adresa la loc, întreagă</a></li><li><a href="#adrese-invalide-si-de-ce">Adrese invalide (și de ce)</a></li></ol></li><li><a href="#prefixul-partea-de-retea-si-partea-de-interfata">Prefixul: partea de rețea și partea de interfață</a></li><li><a href="#tipurile-de-adrese-ipv6">Tipurile de adrese IPv6</a><ol><li><a href="#global-unicast-gua">Global unicast (GUA)</a></li><li><a href="#link-local-lla">Link-local (LLA)</a></li><li><a href="#unique-local-ula">Unique local (ULA)</a></li><li><a href="#multicast">Multicast</a></li></ol></li><li><a href="#eui-64-adresa-construita-din-mac">EUI-64: adresa construită din MAC</a><ol><li><a href="#exemplul-1-mac-00-1a-2b-3c-4d-5e">Exemplul 1: MAC 00:1A:2B:3C:4D:5E</a></li><li><a href="#exemplul-2-mac-7a-3b-10-c4-22-9f">Exemplul 2: MAC 7A:3B:10:C4:22:9F</a></li></ol></li><li><a href="#cum-isi-primeste-un-dispozitiv-adresa-slaac-si-dhcpv6">Cum își primește un dispozitiv adresa: SLAAC și DHCPv6</a></li><li><a href="#ipv6-pe-un-router-cisco">IPv6 pe un router Cisco</a></li><li><a href="#greseli-frecvente">Greșeli frecvente</a></li><li><a href="#exercitii">Exerciții</a></li><li><a href="#cum-inveti-ipv6-fara-sa-l-uiti">Cum înveți IPv6 fără să-l uiți</a></li><li><a href="#intrebari-frecvente">Întrebări frecvente</a></li></ol></nav>
-<h2 id="de-ce-avem-nevoie-de-ipv6">De ce avem nevoie de IPv6</h2>
-<p>IPv4 are 32 de biți, adică aproape 4,3 miliarde de adrese. Pare mult, dar s-au terminat: aproape toate registrele regionale au rămas de mult fără blocuri libere, iar rețelele au supraviețuit cu NAT și adrese private. IPv6 rezolvă problema din rădăcină: are <strong>128 de biți</strong>, adică 2^128 adrese, un număr cu 39 de cifre (aproximativ 3,4 × 10^38).</p>
+      <nav class="toc toc--fold" aria-labelledby="toc-title"><h2 id="toc-title">Cuprins</h2><button type="button" class="toc-toggle" data-toc-toggle aria-expanded="false" aria-controls="toc-list"><span class="toc-toggle-t">Cuprins</span> <span class="toc-toggle-n">12 secțiuni</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6"/></svg></button><ol id="toc-list"><li><a href="#de-ce-avem-nevoie-de-ipv6">De ce avem nevoie de IPv6</a></li><li><a href="#cum-arata-o-adresa-ipv6">Cum arată o adresă IPv6</a></li><li><a href="#regulile-de-prescurtare">Regulile de prescurtare</a><ol><li><a href="#regula-1-omiti-zerourile-din-fata-in-fiecare-hextet">Regula 1: omiți zerourile din față în fiecare hextet</a></li><li><a href="#regula-2-inlocuiesti-o-singura-secventa-de-grupuri-zero-cu">Regula 2: înlocuiești o singură secvență de grupuri zero cu ::</a></li><li><a href="#exemple-rezolvate">Exemple rezolvate</a></li><li><a href="#cum-scrii-adresa-la-loc-intreaga">Cum scrii adresa la loc, întreagă</a></li><li><a href="#adrese-invalide-si-de-ce">Adrese invalide (și de ce)</a></li></ol></li><li><a href="#prefixul-partea-de-retea-si-partea-de-interfata">Prefixul: partea de rețea și partea de interfață</a></li><li><a href="#tipurile-de-adrese-ipv6">Tipurile de adrese IPv6</a><ol><li><a href="#global-unicast-gua">Global unicast (GUA)</a></li><li><a href="#link-local-lla"><span class="nw">Link-local</span> (LLA)</a></li><li><a href="#unique-local-ula">Unique local (ULA)</a></li><li><a href="#multicast">Multicast</a></li></ol></li><li><a href="#eui-64-adresa-construita-din-mac"><span class="nw">EUI-64</span>: adresa construită din MAC</a><ol><li><a href="#exemplul-1-mac-00-1a-2b-3c-4d-5e">Exemplul 1: MAC 00:1A:2B:3C:4D:5E</a></li><li><a href="#exemplul-2-mac-7a-3b-10-c4-22-9f">Exemplul 2: MAC 7A:3B:10:C4:22:9F</a></li></ol></li><li><a href="#cum-isi-primeste-un-dispozitiv-adresa-slaac-si-dhcpv6">Cum își primește un dispozitiv adresa: SLAAC și DHCPv6</a></li><li><a href="#ipv6-pe-un-router-cisco">IPv6 pe un router Cisco</a></li><li><a href="#greseli-frecvente">Greșeli frecvente</a></li><li><a href="#exercitii">Exerciții</a></li><li><a href="#cum-inveti-ipv6-fara-sa-l-uiti">Cum înveți IPv6 fără <span class="nw">să-l</span> uiți</a></li><li><a href="#intrebari-frecvente">Întrebări frecvente</a></li></ol></nav>
+<h2 id="de-ce-avem-nevoie-de-ipv6">De ce avem nevoie de&nbsp;IPv6</h2>
+<p>IPv4 are 32 de biți, adică aproape 4,3 miliarde de adrese. Pare mult, dar <span class="nw">s-au</span> terminat: aproape toate registrele regionale au rămas de mult fără blocuri libere, iar rețelele au supraviețuit cu NAT și adrese private. IPv6 rezolvă problema din rădăcină: are <strong>128 de biți</strong>, adică 2^128 adrese, un număr cu 39 de cifre (aproximativ 3,4 × 10^38).</p>
 <p>Pe lângă spațiu, IPv6 aduce câteva simplificări:</p>
 <ul>
-<li><strong>fără broadcast</strong>: ce făcea broadcast-ul face acum multicast-ul, mult mai țintit;</li>
+<li><strong>fără broadcast</strong>: ce făcea <span class="nw">broadcast-ul</span> face acum <span class="nw">multicast-ul</span>, mult mai țintit;</li>
 <li><strong>configurare automată</strong>: un dispozitiv își poate forma singur adresa (SLAAC);</li>
 <li><strong>fără ARP</strong>: rolul lui îl preia Neighbor Discovery (NDP), care folosește mesaje ICMPv6;</li>
 <li><strong>antet mai simplu</strong>, cu lungime fixă de 40 de octeți.</li>
 </ul>
-<h2 id="cum-arata-o-adresa-ipv6">Cum arată o adresă IPv6</h2>
+<h2 id="cum-arata-o-adresa-ipv6">Cum arată o adresă&nbsp;IPv6</h2>
 <p>Cei 128 de biți se scriu în <strong>hexazecimal</strong>, pentru că în binar ar fi imposibil de citit. O cifră hexazecimală (0–9, a–f) reprezintă exact 4 biți, așa că 128 de biți înseamnă 32 de cifre hex. Ele se grupează câte 4, în <strong>8 grupuri</strong> separate prin două puncte. Un grup are 16 biți și se numește <strong>hextet</strong>.</p>
 <pre><code class="language-text">2001:0db8:0000:0000:0000:0c1a:00f0:0005
  |    |    |    |    |    |    |    |
  1    2    3    4    5    6    7    8    ← 8 hextet-uri × 16 biți = 128 de biți
 </code></pre>
-<p>Literele pot fi mari sau mici, dar forma recomandată (RFC 5952) e cu litere mici. Dacă hexazecimalul îți e încă străin, reține doar atât: <code>a</code>=10, <code>b</code>=11, <code>c</code>=12, <code>d</code>=13, <code>e</code>=14, <code>f</code>=15, iar <code>f</code> înseamnă patru biți de 1 (<code>1111</code>).</p>
-<h2 id="regulile-de-prescurtare">Regulile de prescurtare</h2>
+<p>Literele pot fi mari sau mici, dar forma recomandată (RFC 5952) e cu litere mici. Dacă hexazecimalul îți e încă străin, reține doar atât: <code class="nw">a</code>=10, <code class="nw">b</code>=11, <code class="nw">c</code>=12, <code class="nw">d</code>=13, <code class="nw">e</code>=14, <code class="nw">f</code>=15, iar <code class="nw">f</code> înseamnă patru biți de 1 (<code class="nw">1111</code>).</p>
+<aside class="cta-inline" aria-label="Routerel în Google Play"><img src="../../assets/icon-96.webp" alt="" width="44" height="44" loading="lazy" decoding="async"><p><strong>Exersează IPv6 pe telefon.</strong> 80+ întrebări cu explicații și un laborator de depanare în simulatorul de&nbsp;rețea.</p><a class="cta-inline-link" data-play data-soon-href="../../" href="../../"><span data-when="live">Descarcă din Google&nbsp;Play</span><span data-when="soon">Routerel</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a><p class="cta-inline-ios">Deocamdată doar pe Android.</p></aside>
+<h2 id="regulile-de-prescurtare">Regulile de&nbsp;prescurtare</h2>
 <p>Adresa de mai sus e corectă, dar lungă. Există <strong>două reguli</strong> care o scurtează, și doar două.</p>
-<h3 id="regula-1-omiti-zerourile-din-fata-in-fiecare-hextet">Regula 1: omiți zerourile din față în fiecare hextet</h3>
-<p>În fiecare grup poți șterge zerourile <strong>din stânga</strong>. Un grup format numai din zerouri devine un singur <code>0</code>.</p>
+<h3 id="regula-1-omiti-zerourile-din-fata-in-fiecare-hextet">Regula 1: omiți zerourile din față în fiecare&nbsp;hextet</h3>
+<p>În fiecare grup poți șterge zerourile <strong>din stânga</strong>. Un grup format numai din zerouri devine un singur <code class="nw">0</code>.</p>
 <pre><code class="language-text">0db8 → db8      0042 → 42      0000 → 0      ff00 → ff00 (rămâne)
 </code></pre>
-<p>Atenție la capcana clasică: zerourile <strong>din dreapta</strong> nu se șterg niciodată. <code>db80</code> nu e același lucru cu <code>db8</code>. Dacă ai scrie <code>2001:db8::</code> în loc de <code>2001:db80::</code>, ai schimba adresa.</p>
-<h3 id="regula-2-inlocuiesti-o-singura-secventa-de-grupuri-zero-cu">Regula 2: înlocuiești o singură secvență de grupuri zero cu <code>::</code></h3>
-<p>O secvență continuă de unul sau mai multe grupuri formate doar din zerouri poate fi înlocuită cu <code>::</code>. Regula importantă: <strong><code>::</code> apare o singură dată</strong> într-o adresă. Când citește adresa, dispozitivul numără grupurile vizibile și completează cu zerouri până la 8. Dacă ar fi două <code>::</code>, n-ar ști cum să împartă zerourile între ele.</p>
+<p>Atenție la capcana clasică: zerourile <strong>din dreapta</strong> nu se șterg niciodată. <code class="nw">db80</code> nu e același lucru cu <code class="nw">db8</code>. Dacă ai scrie <code class="nw">2001:db8::</code> în loc de <code class="nw">2001:db80::</code>, ai schimba adresa.</p>
+<h3 id="regula-2-inlocuiesti-o-singura-secventa-de-grupuri-zero-cu">Regula 2: înlocuiești o singură secvență de grupuri zero cu <code class="nw">::</code></h3>
+<p>O secvență continuă de unul sau mai multe grupuri formate doar din zerouri poate fi înlocuită cu <code class="nw">::</code>. Regula importantă: <strong><code class="nw">::</code> apare o singură dată</strong> <span class="nw">într-o</span> adresă. Când citește adresa, dispozitivul numără grupurile vizibile și completează cu zerouri până la 8. Dacă ar fi două <code class="nw">::</code>, <span class="nw">n-ar</span> ști cum să împartă zerourile între ele.</p>
 <p>Pentru forma canonică (cea pe care o afișează și echipamentele moderne), RFC 5952 mai adaugă trei recomandări:</p>
 <ul>
 <li>dacă ai mai multe secvențe de zerouri, comprimi <strong>cea mai lungă</strong>;</li>
 <li>dacă sunt egale ca lungime, comprimi <strong>prima</strong> (din stânga);</li>
-<li>un singur grup de zerouri rămâne <code>0</code>, nu se înlocuiește cu <code>::</code>.</li>
+<li>un singur grup de zerouri rămâne <code class="nw">0</code>, nu se înlocuiește cu <code class="nw">::</code>.</li>
 </ul>
 <h3 id="exemple-rezolvate">Exemple rezolvate</h3>
 <p><strong>Exemplul 1.</strong> <code>2001:0db8:0000:0000:0000:0c1a:00f0:0005</code></p>
 <ol>
-<li>Zerourile din față: <code>2001:db8:0:0:0:c1a:f0:5</code></li>
-<li>Cele trei grupuri zero consecutive devin <code>::</code> → <strong><code>2001:db8::c1a:f0:5</code></strong></li>
+<li>Zerourile din față: <code class="nw">2001:db8:0:0:0:c1a:f0:5</code></li>
+<li>Cele trei grupuri zero consecutive devin <code class="nw">::</code> → <strong><code class="nw">2001:db8::c1a:f0:5</code></strong></li>
 </ol>
 <p><strong>Exemplul 2.</strong> <code>2001:0db8:0000:0001:0000:0000:0000:0001</code></p>
 <ol>
-<li>Zerourile din față: <code>2001:db8:0:1:0:0:0:1</code></li>
-<li>Ai două secvențe de zerouri: una de un grup (al 3-lea) și una de trei grupuri (5–7). O comprimi pe cea mai lungă → <strong><code>2001:db8:0:1::1</code></strong></li>
+<li>Zerourile din față: <code class="nw">2001:db8:0:1:0:0:0:1</code></li>
+<li>Ai două secvențe de zerouri: una de un grup (al <span class="nw">3-lea</span>) și una de trei grupuri (5–7). O comprimi pe cea mai lungă → <strong><code class="nw">2001:db8:0:1::1</code></strong></li>
 </ol>
 <p><strong>Exemplul 3 (egalitate).</strong> <code>2001:0db8:0000:0000:abcd:0000:0000:1234</code></p>
-<p>Două secvențe de câte două grupuri. Le-ai putea comprima pe oricare, iar ambele forme sunt valide, dar forma canonică o alege pe prima: <strong><code>2001:db8::abcd:0:0:1234</code></strong>.</p>
-<p><strong>Exemplul 4.</strong> <code>ff02:0000:0000:0000:0000:0000:0000:0001</code> → <strong><code>ff02::1</code></strong>, iar adresa formată numai din zerouri și un 1 la final devine <strong><code>::1</code></strong>. Adresa formată numai din zerouri devine <strong><code>::</code></strong>.</p>
+<p>Două secvențe de câte două grupuri. <span class="nw">Le-ai</span> putea comprima pe oricare, iar ambele forme sunt valide, dar forma canonică o alege pe prima: <strong><code class="nw">2001:db8::abcd:0:0:1234</code></strong>.</p>
+<p><strong>Exemplul 4.</strong> <code>ff02:0000:0000:0000:0000:0000:0000:0001</code> → <strong><code class="nw">ff02::1</code></strong>, iar adresa formată numai din zerouri și un 1 la final devine <strong><code class="nw">::1</code></strong>. Adresa formată numai din zerouri devine <strong><code class="nw">::</code></strong>.</p>
 <div class="table-scroll"><p class="table-hint" aria-hidden="true">glisează<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></p><div class="table-wrap" role="region" tabindex="0" aria-label="Tabel (se derulează pe orizontală)"><table>
 <thead>
 <tr>
@@ -151,17 +153,17 @@
 <td>::1</td>
 </tr>
 </tbody></table></div></div>
-<h3 id="cum-scrii-adresa-la-loc-intreaga">Cum scrii adresa la loc, întreagă</h3>
-<p>Procesul invers e o numărătoare. Ia <code>2001:db8:a::12</code>:</p>
+<h3 id="cum-scrii-adresa-la-loc-intreaga">Cum scrii adresa la loc,&nbsp;întreagă</h3>
+<p>Procesul invers e o numărătoare. Ia <code class="nw">2001:db8:a::12</code>:</p>
 <ol>
-<li>Numeri grupurile vizibile: <code>2001</code>, <code>db8</code>, <code>a</code>, <code>12</code> → 4 grupuri.</li>
-<li>Lipsesc 8 − 4 = <strong>4 grupuri</strong>, care stau în locul lui <code>::</code>.</li>
+<li>Numeri grupurile vizibile: <code class="nw">2001</code>, <code class="nw">db8</code>, <code class="nw">a</code>, <code class="nw">12</code> → 4 grupuri.</li>
+<li>Lipsesc 8 − 4 = <strong>4 grupuri</strong>, care stau în locul lui <code class="nw">::</code>.</li>
 <li>Completezi fiecare grup la 4 cifre, cu zerouri în față.</li>
 </ol>
 <pre><code class="language-text">2001:db8:a::12
 2001:0db8:000a:0000:0000:0000:0000:0012
 </code></pre>
-<h3 id="adrese-invalide-si-de-ce">Adrese invalide (și de ce)</h3>
+<h3 id="adrese-invalide-si-de-ce">Adrese invalide (și de&nbsp;ce)</h3>
 <div class="table-scroll"><p class="table-hint" aria-hidden="true">glisează<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></p><div class="table-wrap" role="region" tabindex="0" aria-label="Tabel (se derulează pe orizontală)"><table>
 <thead>
 <tr>
@@ -171,7 +173,7 @@
 </thead>
 <tbody><tr>
 <td>2001:db8::1::5</td>
-<td><code>::</code> apare de două ori</td>
+<td><code class="nw">::</code> apare de două ori</td>
 </tr>
 <tr>
 <td>2001:db8:0:0:0:0:0:0:1</td>
@@ -183,27 +185,27 @@
 </tr>
 <tr>
 <td>2001:db8:g::1</td>
-<td><code>g</code> nu e cifră hexazecimală</td>
+<td><code class="nw">g</code> nu e cifră hexazecimală</td>
 </tr>
 <tr>
 <td>2001:db8:acad:1:0:0:0</td>
-<td class="tw">doar 7 grupuri și niciun <code>::</code> care să completeze</td>
+<td class="tw">doar 7 grupuri și niciun <code class="nw">::</code> care să completeze</td>
 </tr>
 </tbody></table></div></div>
-<h2 id="prefixul-partea-de-retea-si-partea-de-interfata">Prefixul: partea de rețea și partea de interfață</h2>
-<p>Ca la IPv4, o adresă IPv6 are o parte de rețea și o parte de host, doar că în IPv6 nu se mai folosește masca zecimală, ci doar <strong>lungimea prefixului</strong>: <code>2001:db8:acad:1::1/64</code>.</p>
+<h2 id="prefixul-partea-de-retea-si-partea-de-interfata">Prefixul: partea de rețea și partea de&nbsp;interfață</h2>
+<p>Ca la IPv4, o adresă IPv6 are o parte de rețea și o parte de host, doar că în IPv6 nu se mai folosește masca zecimală, ci doar <strong>lungimea prefixului</strong>: <code class="nw">2001:db8:acad:1::1/64</code>.</p>
 <p>Pentru o subrețea obișnuită (un LAN), prefixul standard e <strong>/64</strong>:</p>
 <pre><code class="language-text">2001:0db8:acad:0001 : 0000:0000:0000:0001
 |---- prefix /64 ---| |- interface ID (64 de biți) -|
 </code></pre>
 <ul>
 <li><strong>Prefixul de rutare global</strong> îl primește organizația de la furnizor (de exemplu un /48).</li>
-<li><strong>ID-ul de subrețea</strong> sunt biții dintre prefixul primit și /64. De la /48 la /64 rămân 16 biți, adică <strong>65.536 de subrețele /64</strong>. De la un /56 rămân 8 biți, adică 256 de subrețele.</li>
-<li><strong>ID-ul de interfață (Interface ID)</strong> sunt ultimii 64 de biți, echivalentul părții de host.</li>
+<li><strong><span class="nw">ID-ul</span> de subrețea</strong> sunt biții dintre prefixul primit și /64. De la /48 la /64 rămân 16 biți, adică <strong>65.536 de subrețele /64</strong>. De la un /56 rămân 8 biți, adică 256 de subrețele.</li>
+<li><strong><span class="nw">ID-ul</span> de interfață (Interface ID)</strong> sunt ultimii 64 de biți, echivalentul părții de host.</li>
 </ul>
-<p>Subnetting-ul în IPv6 e mult mai relaxat decât în IPv4: de obicei nu mai calculezi câte host-uri încap (un /64 are 2^64 adrese), ci doar numeri subrețelele în hextet-ul al patrulea: <code>2001:db8:acad:1::/64</code>, <code>2001:db8:acad:2::/64</code> și așa mai departe, până la <code>2001:db8:acad:ffff::/64</code>. Pentru IPv4, unde fiecare bit contează, ai <a href="../subnetting-pas-cu-pas/">ghidul de subnetting pas cu pas</a>.</p>
-<p>Nu uita: în IPv6 <strong>nu mai scazi 2</strong>. Nu există adresă de broadcast, iar adresa formată doar din zerouri în partea de interfață (de exemplu <code>2001:db8:acad:1::</code>) este anycast-ul rezervat pentru routerele din subrețea (Subnet-Router anycast), deci nu o dai unui host.</p>
-<h2 id="tipurile-de-adrese-ipv6">Tipurile de adrese IPv6</h2>
+<p><span class="nw">Subnetting-ul</span> în IPv6 e mult mai relaxat decât în IPv4: de obicei nu mai calculezi câte <span class="nw">host-uri</span> încap (un /64 are 2^64 adrese), ci doar numeri subrețelele în <span class="nw">hextet-ul</span> al patrulea: <code class="nw">2001:db8:acad:1::/64</code>, <code class="nw">2001:db8:acad:2::/64</code> și așa mai departe, până la <code class="nw">2001:db8:acad:ffff::/64</code>. Pentru IPv4, unde fiecare bit contează, ai <a href="../subnetting-pas-cu-pas/">ghidul de subnetting pas cu pas</a>.</p>
+<p>Nu uita: în IPv6 <strong>nu mai scazi 2</strong>. Nu există adresă de broadcast, iar adresa formată doar din zerouri în partea de interfață (de exemplu <code class="nw">2001:db8:acad:1::</code>) este <span class="nw">anycast-ul</span> rezervat pentru routerele din subrețea (<span class="nw">Subnet-Router</span> anycast), deci nu o dai unui host.</p>
+<h2 id="tipurile-de-adrese-ipv6">Tipurile de adrese&nbsp;IPv6</h2>
 <p>IPv6 are trei mari categorii: <strong>unicast</strong> (un singur destinatar), <strong>multicast</strong> (un grup) și <strong>anycast</strong> (cel mai apropiat dintre mai mulți care au aceeași adresă). Broadcast nu există.</p>
 <div class="table-scroll"><p class="table-hint" aria-hidden="true">glisează<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></p><div class="table-wrap" role="region" tabindex="0" aria-label="Tabel (se derulează pe orizontală)"><table>
 <thead>
@@ -221,7 +223,7 @@
 <td>adresă publică, rutabilă pe Internet</td>
 </tr>
 <tr>
-<td>Link-local (LLA)</td>
+<td><span class="nw">Link-local</span> (LLA)</td>
 <td>fe80::/10</td>
 <td class="tw">începe cu fe80 până la febf (în practică fe80)</td>
 <td>comunicare doar pe legătura locală</td>
@@ -241,30 +243,30 @@
 <tr>
 <td>Loopback</td>
 <td>::1/128</td>
-<td>exact <code>::1</code></td>
+<td>exact <code class="nw">::1</code></td>
 <td>testarea propriei stive IP</td>
 </tr>
 <tr>
 <td>Nespecificată</td>
 <td>::/128</td>
-<td>exact <code>::</code></td>
+<td>exact <code class="nw">::</code></td>
 <td class="tw">„încă nu am adresă” (sursa unor mesaje la pornire)</td>
 </tr>
 </tbody></table></div></div>
-<h3 id="global-unicast-gua">Global unicast (GUA)</h3>
-<p>Adresele publice ale IPv6, echivalentul adreselor IPv4 publice. Tot ce începe cu cifra hex <strong>2</strong> sau <strong>3</strong> e GUA. Prefixul <code>2001:db8::/32</code> e rezervat pentru documentație și exemple, de aceea îl vezi în toate manualele (și în ghidul ăsta): nu va apărea niciodată pe Internet.</p>
-<h3 id="link-local-lla">Link-local (LLA)</h3>
-<p>Orice interfață pe care e activ IPv6 își face <strong>automat</strong> o adresă link-local, chiar dacă nu are GUA. Ea e valabilă doar pe segmentul local: routerele nu trimit mai departe packet-uri (pachete) cu sursa sau destinația link-local. LLA-urile sunt foarte folosite:</p>
+<h3 id="global-unicast-gua">Global unicast&nbsp;(GUA)</h3>
+<p>Adresele publice ale IPv6, echivalentul adreselor IPv4 publice. Tot ce începe cu cifra hex <strong>2</strong> sau <strong>3</strong> e GUA. Prefixul <code class="nw">2001:db8::/32</code> e rezervat pentru documentație și exemple, de aceea îl vezi în toate manualele (și în ghidul ăsta): nu va apărea niciodată pe Internet.</p>
+<h3 id="link-local-lla"><span class="nw">Link-local</span> (LLA)</h3>
+<p>Orice interfață pe care e activ IPv6 își face <strong>automat</strong> o adresă <span class="nw">link-local</span>, chiar dacă nu are GUA. Ea e valabilă doar pe segmentul local: routerele nu trimit mai departe <span class="nw">packet-uri</span> (pachete) cu sursa sau destinația <span class="nw">link-local</span>. <span class="nw">LLA-urile</span> sunt foarte folosite:</p>
 <ul>
-<li>vecinii OSPFv3 vorbesc între ei prin adresele link-local;</li>
-<li>routerul își anunță prezența în rețea de pe adresa sa link-local, iar host-urile o folosesc ca <strong>default gateway</strong>;</li>
+<li>vecinii OSPFv3 vorbesc între ei prin adresele <span class="nw">link-local</span>;</li>
+<li>routerul își anunță prezența în rețea de pe adresa sa <span class="nw">link-local</span>, iar <span class="nw">host-urile</span> o folosesc ca <strong>default gateway</strong>;</li>
 <li>Neighbor Discovery (echivalentul ARP) le folosește constant.</li>
 </ul>
-<p>Pentru că aceeași adresă link-local poate exista pe mai multe interfețe ale unui router, când dai <code>ping</code> către o LLA, routerul îți cere și interfața de ieșire.</p>
-<h3 id="unique-local-ula">Unique local (ULA)</h3>
-<p>Seamănă cu adresele private din IPv4 (10.0.0.0/8 și celelalte): sunt pentru uz intern și nu se rutează pe Internet. Blocul e <code>fc00::/7</code>, dar în practică se folosește doar jumătatea <code>fd00::/8</code>, cu un identificator generat aleatoriu, ca să nu se suprapună rețelele a două firme care fuzionează.</p>
+<p>Pentru că aceeași adresă <span class="nw">link-local</span> poate exista pe mai multe interfețe ale unui router, când dai <code class="nw">ping</code> către o LLA, routerul îți cere și interfața de ieșire.</p>
+<h3 id="unique-local-ula">Unique local&nbsp;(ULA)</h3>
+<p>Seamănă cu adresele private din IPv4 (10.0.0.0/8 și celelalte): sunt pentru uz intern și nu se rutează pe Internet. Blocul e <code class="nw">fc00::/7</code>, dar în practică se folosește doar jumătatea <code class="nw">fd00::/8</code>, cu un identificator generat aleatoriu, ca să nu se suprapună rețelele a două firme care fuzionează.</p>
 <h3 id="multicast">Multicast</h3>
-<p>Încep cu <code>ff</code>. Câteva pe care trebuie să le recunoști instant:</p>
+<p>Încep cu <code class="nw">ff</code>. Câteva pe care trebuie să le recunoști instant:</p>
 <div class="table-scroll"><p class="table-hint" aria-hidden="true">glisează<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></p><div class="table-wrap" role="region" tabindex="0" aria-label="Tabel (se derulează pe orizontală)"><table>
 <thead>
 <tr>
@@ -286,26 +288,26 @@
 </tr>
 <tr>
 <td>ff02::1:ffXX:XXXX</td>
-<td class="tw">solicited-node: se formează din ultimii 24 de biți ai unei adrese unicast</td>
+<td class="tw"><span class="nw">solicited-node</span>: se formează din ultimii 24 de biți ai unei adrese unicast</td>
 </tr>
 </tbody></table></div></div>
-<p>Adresa <strong>solicited-node</strong> e motivul pentru care IPv6 nu are nevoie de broadcast. Când un dispozitiv vrea să afle MAC-ul lui <code>2001:db8:acad:1::1</code>, nu întreabă toată rețeaua, ci trimite întrebarea la <code>ff02::1:ff00:1</code>, pe care o ascultă doar dispozitivele ale căror adrese se termină la fel.</p>
-<h2 id="eui-64-adresa-construita-din-mac">EUI-64: adresa construită din MAC</h2>
-<p>Un dispozitiv are nevoie de ultimii 64 de biți (ID-ul de interfață). O metodă clasică de a-i obține singur este <strong>EUI-64</strong>, care pornește de la adresa MAC de 48 de biți. Lipsesc 16 biți, iar rețeta e:</p>
+<p>Adresa <strong><span class="nw">solicited-node</span></strong> e motivul pentru care IPv6 nu are nevoie de broadcast. Când un dispozitiv vrea să afle <span class="nw">MAC-ul</span> lui <code class="nw">2001:db8:acad:1::1</code>, nu întreabă toată rețeaua, ci trimite întrebarea la <code class="nw">ff02::1:ff00:1</code>, pe care o ascultă doar dispozitivele ale căror adrese se termină la fel.</p>
+<h2 id="eui-64-adresa-construita-din-mac"><span class="nw">EUI-64</span>: adresa construită din&nbsp;MAC</h2>
+<p>Un dispozitiv are nevoie de ultimii 64 de biți (<span class="nw">ID-ul</span> de interfață). O metodă clasică de <span class="nw">a-i</span> obține singur este <strong><span class="nw">EUI-64</span></strong>, care pornește de la adresa MAC de 48 de biți. Lipsesc 16 biți, iar rețeta e:</p>
 <ol>
-<li>Împarți MAC-ul în două jumătăți de câte 24 de biți.</li>
-<li>Pui <code>FFFE</code> la mijloc (cei 16 biți care lipsesc).</li>
+<li>Împarți <span class="nw">MAC-ul</span> în două jumătăți de câte 24 de biți.</li>
+<li>Pui <code class="nw">FFFE</code> la mijloc (cei 16 biți care lipsesc).</li>
 <li>Inversezi <strong>al șaptelea bit</strong> din primul octet (bitul „universal/local”). Dacă e 0 devine 1, dacă e 1 devine 0. În practică, în primul octet adaugi sau scazi 2.</li>
 </ol>
-<h3 id="exemplul-1-mac-00-1a-2b-3c-4d-5e">Exemplul 1: MAC 00:1A:2B:3C:4D:5E</h3>
+<h3 id="exemplul-1-mac-00-1a-2b-3c-4d-5e">Exemplul 1: MAC&nbsp;00:1A:2B:3C:4D:5E</h3>
 <pre><code class="language-text">1. Împarți:          001A2B | 3C4D5E
 2. Inserezi FFFE:    001A2B FFFE 3C4D5E
 3. Primul octet:     00 = 00000000
    Bitul 7 inversat:      00000010 = 02
    Rezultat:         021A:2BFF:FE3C:4D5E
 </code></pre>
-<p>Cu prefixul <code>2001:db8:acad:1::/64</code>, adresa completă este <strong><code>2001:db8:acad:1:21a:2bff:fe3c:4d5e</code></strong>, iar adresa link-local formată la fel este <strong><code>fe80::21a:2bff:fe3c:4d5e</code></strong>. (Zeroul din față al lui <code>021a</code> dispare la prescurtare.)</p>
-<h3 id="exemplul-2-mac-7a-3b-10-c4-22-9f">Exemplul 2: MAC 7A:3B:10:C4:22:9F</h3>
+<p>Cu prefixul <code class="nw">2001:db8:acad:1::/64</code>, adresa completă este <strong><code>2001:db8:acad:1:21a:2bff:fe3c:4d5e</code></strong>, iar adresa <span class="nw">link-local</span> formată la fel este <strong><code class="nw">fe80::21a:2bff:fe3c:4d5e</code></strong>. (Zeroul din față al lui <code class="nw">021a</code> dispare la prescurtare.)</p>
+<h3 id="exemplul-2-mac-7a-3b-10-c4-22-9f">Exemplul 2: MAC&nbsp;7A:3B:10:C4:22:9F</h3>
 <pre><code class="language-text">1. Împarți:          7A3B10 | C4229F
 2. Inserezi FFFE:    7A3B10 FFFE C4229F
 3. Primul octet:     7A = 01111010
@@ -313,9 +315,9 @@
    Rezultat:         783B:10FF:FEC4:229F
 </code></pre>
 <p>Aici bitul era 1 și a devenit 0, deci primul octet a scăzut cu 2. Adresa completă cu același prefix: <strong><code>2001:db8:acad:1:783b:10ff:fec4:229f</code></strong>.</p>
-<p>Semnul după care recunoști o adresă EUI-64: <strong><code>ff:fe</code></strong> la mijlocul ID-ului de interfață (<code>xxff:fexx</code>). Routerele Cisco își formează implicit adresele link-local cu EUI-64. Sistemele de operare moderne (Windows, Android, iOS, macOS și multe distribuții Linux) preferă însă un ID de interfață <strong>generat aleatoriu</strong> (stabil într-o rețea, plus adrese temporare care se schimbă periodic), ca să nu poată fi urmărit un dispozitiv după MAC-ul lui de la o rețea la alta.</p>
-<h2 id="cum-isi-primeste-un-dispozitiv-adresa-slaac-si-dhcpv6">Cum își primește un dispozitiv adresa: SLAAC și DHCPv6</h2>
-<p>În IPv6, routerul trimite periodic (și la cerere) un mesaj <strong>Router Advertisement (RA)</strong>, de tip ICMPv6. Un dispozitiv care tocmai a pornit poate grăbi lucrurile trimițând un <strong>Router Solicitation (RS)</strong> către toate routerele (<code>ff02::2</code>). RA-ul conține prefixul rețelei, lungimea lui, adresa link-local a routerului (care devine gateway-ul implicit) și câteva steaguri care spun host-ului cum să-și obțină restul. Sunt trei variante:</p>
+<p>Semnul după care recunoști o adresă <span class="nw">EUI-64</span>: <strong><code class="nw">ff:fe</code></strong> la mijlocul <span class="nw">ID-ului</span> de interfață (<code class="nw">xxff:fexx</code>). Routerele Cisco își formează implicit adresele <span class="nw">link-local</span> cu <span class="nw">EUI-64</span>. Sistemele de operare moderne (Windows, Android, iOS, macOS și multe distribuții Linux) preferă însă un ID de interfață <strong>generat aleatoriu</strong> (stabil <span class="nw">într-o</span> rețea, plus adrese temporare care se schimbă periodic), ca să nu poată fi urmărit un dispozitiv după <span class="nw">MAC-ul</span> lui de la o rețea la alta.</p>
+<h2 id="cum-isi-primeste-un-dispozitiv-adresa-slaac-si-dhcpv6">Cum își primește un dispozitiv adresa: SLAAC și&nbsp;DHCPv6</h2>
+<p>În IPv6, routerul trimite periodic (și la cerere) un mesaj <strong>Router Advertisement (RA)</strong>, de tip ICMPv6. Un dispozitiv care tocmai a pornit poate grăbi lucrurile trimițând un <strong>Router Solicitation (RS)</strong> către toate routerele (<code class="nw">ff02::2</code>). <span class="nw">RA-ul</span> conține prefixul rețelei, lungimea lui, adresa <span class="nw">link-local</span> a routerului (care devine <span class="nw">gateway-ul</span> implicit) și câteva steaguri care spun <span class="nw">host-ului</span> cum <span class="nw">să-și</span> obțină restul. Sunt trei variante:</p>
 <div class="table-scroll"><p class="table-hint" aria-hidden="true">glisează<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></p><div class="table-wrap" role="region" tabindex="0" aria-label="Tabel (se derulează pe orizontală)"><table>
 <thead>
 <tr>
@@ -346,15 +348,15 @@
 </tbody></table></div></div>
 <p>Ce trebuie să reții:</p>
 <ul>
-<li><strong>SLAAC</strong> (Stateless Address Autoconfiguration): nimeni nu ține evidența adreselor. Host-ul ia prefixul și își adaugă singur ID-ul de interfață (EUI-64 sau aleatoriu).</li>
+<li><strong>SLAAC</strong> (Stateless Address Autoconfiguration): nimeni nu ține evidența adreselor. <span class="nw">Host-ul</span> ia prefixul și își adaugă singur <span class="nw">ID-ul</span> de interfață (<span class="nw">EUI-64</span> sau aleatoriu).</li>
 <li><strong>Stateless</strong> înseamnă că serverul DHCPv6 nu ține minte cine ce adresă are; dă doar informații suplimentare.</li>
 <li><strong>Stateful</strong> înseamnă că serverul DHCPv6 alocă adrese și ține evidența lor, ca DHCPv4.</li>
-<li><strong>DHCPv6 nu dă gateway-ul implicit.</strong> Gateway-ul vine mereu din RA. E o întrebare preferată la examen.</li>
-<li>Înainte să folosească o adresă nouă, host-ul verifică dacă nu o mai are altcineva: <strong>DAD</strong> (Duplicate Address Detection), un Neighbor Solicitation trimis către adresa solicited-node a propriei adrese.</li>
+<li><strong>DHCPv6 nu dă <span class="nw">gateway-ul</span> implicit.</strong> <span class="nw">Gateway-ul</span> vine mereu din RA. E o întrebare preferată la examen.</li>
+<li>Înainte să folosească o adresă nouă, <span class="nw">host-ul</span> verifică dacă nu o mai are altcineva: <strong>DAD</strong> (Duplicate Address Detection), un Neighbor Solicitation trimis către adresa <span class="nw">solicited-node</span> a propriei adrese.</li>
 </ul>
-<p>Pe un router Cisco, steagurile se schimbă pe interfață: <code>ipv6 nd other-config-flag</code> setează O = 1 (stateless), <code>ipv6 nd managed-config-flag</code> setează M = 1 (stateful), iar <code>ipv6 nd prefix default no-autoconfig</code> oprește SLAAC (A = 0).</p>
-<h2 id="ipv6-pe-un-router-cisco">IPv6 pe un router Cisco</h2>
-<p>Implicit, un router Cisco nu rutează IPv6 și nu trimite RA-uri. Le pornești cu o singură comandă globală, apoi adresezi interfețele:</p>
+<p>Pe un router Cisco, steagurile se schimbă pe interfață: <code class="nw">ipv6 nd <span class="nw">other-config-flag</span></code> setează O = 1 (stateless), <code>ipv6 nd <span class="nw">managed-config-flag</span></code> setează M = 1 (stateful), iar <code>ipv6 nd prefix default <span class="nw">no-autoconfig</span></code> oprește SLAAC (A = 0).</p>
+<h2 id="ipv6-pe-un-router-cisco">IPv6 pe un router&nbsp;Cisco</h2>
+<p>Implicit, un router Cisco nu rutează IPv6 și nu trimite <span class="nw">RA-uri</span>. Le pornești cu o singură comandă globală, apoi adresezi interfețele:</p>
 <pre><code class="language-text">R1(config)# ipv6 unicast-routing
 R1(config)# interface GigabitEthernet0/0/0
 R1(config-if)# ipv6 address 2001:db8:acad:1::1/64
@@ -366,10 +368,10 @@ R1(config-if)# ipv6 address 2001:db8:acad:2::/64 eui-64
 R1(config-if)# no shutdown
 </code></pre>
 <ul>
-<li><code>ipv6 unicast-routing</code> face routerul să ruteze IPv6 și să trimită Router Advertisements; fără ea, host-urile nu primesc prefixul prin SLAAC.</li>
-<li><code>ipv6 address fe80::1 link-local</code> înlocuiește adresa link-local generată cu EUI-64 cu una scurtă, ușor de recunoscut. Pe fiecare legătură e suficient să fie unică.</li>
-<li><code>eui-64</code> la final îi spune routerului să completeze singur ID-ul de interfață din MAC.</li>
-<li><code>ipv6 enable</code> activează IPv6 și creează doar adresa link-local, fără GUA.</li>
+<li><code class="nw">ipv6 <span class="nw">unicast-routing</span></code> face routerul să ruteze IPv6 și să trimită Router Advertisements; fără ea, <span class="nw">host-urile</span> nu primesc prefixul prin SLAAC.</li>
+<li><code>ipv6 address fe80::1 <span class="nw">link-local</span></code> înlocuiește adresa <span class="nw">link-local</span> generată cu <span class="nw">EUI-64</span> cu una scurtă, ușor de recunoscut. Pe fiecare legătură e suficient să fie unică.</li>
+<li><code class="nw"><span class="nw">eui-64</span></code> la final îi spune routerului să completeze singur <span class="nw">ID-ul</span> de interfață din MAC.</li>
+<li><code class="nw">ipv6 enable</code> activează IPv6 și creează doar adresa <span class="nw">link-local</span>, fără GUA.</li>
 </ul>
 <p>Verificarea:</p>
 <div class="table-scroll"><p class="table-hint" aria-hidden="true">glisează<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></p><div class="table-wrap" role="region" tabindex="0" aria-label="Tabel (se derulează pe orizontală)"><table>
@@ -380,72 +382,72 @@ R1(config-if)# no shutdown
 </tr>
 </thead>
 <tbody><tr>
-<td><code><span class="nw">show</span> <span class="nw">ipv6</span> <span class="nw">interface</span> <span class="nw">brief</span></code></td>
-<td class="tw">interfețele, starea lor, adresele link-local și globale</td>
+<td><code class="nw"><span class="nw">show</span> <span class="nw">ipv6</span> <span class="nw">interface</span> <span class="nw">brief</span></code></td>
+<td class="tw">interfețele, starea lor, adresele <span class="nw">link-local</span> și globale</td>
 </tr>
 <tr>
 <td><code><span class="nw">show</span> <span class="nw">ipv6</span> <span class="nw">interface</span> <span class="nw">g0/0/0</span></code></td>
-<td class="tw">detaliile interfeței, inclusiv grupurile multicast la care s-a înscris</td>
+<td class="tw">detaliile interfeței, inclusiv grupurile multicast la care <span class="nw">s-a</span> înscris</td>
 </tr>
 <tr>
-<td><code><span class="nw">show</span> <span class="nw">ipv6</span> <span class="nw">route</span></code></td>
+<td><code class="nw"><span class="nw">show</span> <span class="nw">ipv6</span> <span class="nw">route</span></code></td>
 <td class="tw">tabela de rutare IPv6 (C = rețea conectată, L = adresa locală /128)</td>
 </tr>
 <tr>
-<td><code><span class="nw">show</span> <span class="nw">ipv6</span> <span class="nw">neighbors</span></code></td>
+<td><code class="nw"><span class="nw">show</span> <span class="nw">ipv6</span> <span class="nw">neighbors</span></code></td>
 <td class="tw">vecinii aflați prin Neighbor Discovery (echivalentul tabelei ARP)</td>
 </tr>
 <tr>
-<td><code><span class="nw">ping</span> <span class="nw">2001:db8:acad:2::10</span></code></td>
+<td><code class="nw"><span class="nw">ping</span> <span class="nw">2001:db8:acad:2::10</span></code></td>
 <td class="tw">testul de conectivitate, la fel ca la IPv4</td>
 </tr>
 </tbody></table></div></div>
 <p>Comenzile de bază pentru configurarea unui router (hostname, parole, SSH, salvarea configurației) le găsești în <a href="../comenzi-cisco-ios/">fișa cu comenzile Cisco IOS</a>.</p>
-<div class="callout callout--info"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg><div><p><strong>Verifică-ți exercițiile:</strong> pe site găsești și un <a href="../../tools/ipv6/">tool IPv6</a> care prescurtează și extinde adrese și calculează EUI-64 pas cu pas. Fă întâi exercițiile pe hârtie, apoi verifică.</p></div></div>
+<div class="callout callout--info"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg><div><p><strong><span class="nw">Verifică-ți</span> exercițiile:</strong> pe site găsești și un <a href="../../tools/ipv6/">tool IPv6</a> care prescurtează și extinde adrese și calculează <span class="nw">EUI-64</span> pas cu pas. Fă întâi exercițiile pe hârtie, apoi verifică.</p></div></div>
 <h2 id="greseli-frecvente">Greșeli frecvente</h2>
 <ol>
-<li><strong>Folosești <code>::</code> de două ori.</strong> Adresa devine ambiguă, deci invalidă.</li>
-<li><strong>Ștergi zerourile din dreapta unui grup.</strong> <code>db80</code> nu poate deveni <code>db8</code>.</li>
+<li><strong>Folosești <code class="nw">::</code> de două ori.</strong> Adresa devine ambiguă, deci invalidă.</li>
+<li><strong>Ștergi zerourile din dreapta unui grup.</strong> <code class="nw">db80</code> nu poate deveni <code class="nw">db8</code>.</li>
 <li><strong>Uiți să numeri grupurile la extindere.</strong> Numără mereu grupurile vizibile și completează exact până la 8.</li>
-<li><strong>Inversezi alt bit la EUI-64.</strong> E al șaptelea bit din stânga al primului octet (valoarea 2), nu primul și nu ultimul.</li>
-<li><strong>Crezi că DHCPv6 dă gateway-ul.</strong> Nu; gateway-ul e adresa link-local a routerului, aflată din RA.</li>
-<li><strong>Cauți broadcast-ul.</strong> În IPv6 nu există; „toate nodurile” înseamnă multicast <code>ff02::1</code>.</li>
-<li><strong>Uiți <code>ipv6 unicast-routing</code>.</strong> Interfețele au adrese, dar routerul nu rutează IPv6 și host-urile nu primesc prefixul prin SLAAC.</li>
+<li><strong>Inversezi alt bit la <span class="nw">EUI-64</span>.</strong> E al șaptelea bit din stânga al primului octet (valoarea 2), nu primul și nu ultimul.</li>
+<li><strong>Crezi că DHCPv6 dă <span class="nw">gateway-ul</span>.</strong> Nu; <span class="nw">gateway-ul</span> e adresa <span class="nw">link-local</span> a routerului, aflată din RA.</li>
+<li><strong>Cauți <span class="nw">broadcast-ul</span>.</strong> În IPv6 nu există; „toate nodurile” înseamnă multicast <code class="nw">ff02::1</code>.</li>
+<li><strong>Uiți <code class="nw">ipv6 <span class="nw">unicast-routing</span></code>.</strong> Interfețele au adrese, dar routerul nu rutează IPv6 și <span class="nw">host-urile</span> nu primesc prefixul prin SLAAC.</li>
 </ol>
 <h2 id="exercitii">Exerciții</h2>
 <ol>
 <li>Prescurtează: <code>2001:0db8:0000:00a0:0000:0000:0000:0bad</code></li>
 <li>Prescurtează la forma canonică: <code>fd12:3400:0000:0000:0001:0000:0000:0000</code></li>
-<li>Scrie întreagă: <code>2001:db8:acad::f:1</code></li>
-<li>Care adrese sunt valide? a) <code>2001:db8::5::1</code> b) <code>fe80::a:b:c:d</code> c) <code>2001:db8:0:1:1:1:1:1</code></li>
-<li>Ce tip are fiecare adresă? a) <code>fe80::1</code> b) <code>fd00:ab::1</code> c) <code>ff02::2</code> d) <code>2001:db8:1::5</code> e) <code>::1</code></li>
-<li>Calculează adresa EUI-64 pentru MAC-ul <code>D2:1C:44:9A:7B:01</code> și prefixul <code>2001:db8:cafe:5::/64</code>.</li>
-<li>Câte subrețele /64 obții dintr-un /48? Dar dintr-un /56?</li>
+<li>Scrie întreagă: <code class="nw">2001:db8:acad::f:1</code></li>
+<li>Care adrese sunt valide? a) <code class="nw">2001:db8::5::1</code> b) <code class="nw">fe80::a:b:c:d</code> c) <code class="nw">2001:db8:0:1:1:1:1:1</code></li>
+<li>Ce tip are fiecare adresă? a) <code class="nw">fe80::1</code> b) <code class="nw">fd00:ab::1</code> c) <code class="nw">ff02::2</code> d) <code class="nw">2001:db8:1::5</code> e) <code class="nw">::1</code></li>
+<li>Calculează adresa <span class="nw">EUI-64</span> pentru <span class="nw">MAC-ul</span> <code class="nw">D2:1C:44:9A:7B:01</code> și prefixul <code class="nw">2001:db8:cafe:5::/64</code>.</li>
+<li>Câte subrețele /64 obții <span class="nw">dintr-un</span> /48? Dar <span class="nw">dintr-un</span> /56?</li>
 </ol>
 <details class="reveal-answer">
-<summary><strong>Răspunsuri</strong></summary><p><strong>1.</strong> Zerourile din față: <code>2001:db8:0:a0:0:0:0:bad</code>. Secvența cea mai lungă de zerouri e cea de trei grupuri de la final → <strong><code>2001:db8:0:a0::bad</code></strong>. (Atenție: <code>00a0</code> devine <code>a0</code>, nu <code>a</code>.)</p>
-<p><strong>2.</strong> Fără zerourile din față: <code>fd12:3400:0:0:1:0:0:0</code>. Ai o secvență de două grupuri și una de trei; o comprimi pe cea mai lungă → <strong><code>fd12:3400:0:0:1::</code></strong>. (<code>3400</code> rămâne așa: zerourile din dreapta nu se șterg.)</p>
-<p><strong>3.</strong> Grupuri vizibile: <code>2001</code>, <code>db8</code>, <code>acad</code>, <code>f</code>, <code>1</code> = 5. Lipsesc 3 → <strong><code>2001:0db8:acad:0000:0000:0000:000f:0001</code></strong>.</p>
-<p><strong>4.</strong> a) <strong>invalidă</strong>, <code>::</code> apare de două ori. b) <strong>validă</strong>. c) <strong>validă</strong>, toate cele 8 grupuri sunt scrise, iar singurul grup zero rămâne <code>0</code>.</p>
-<p><strong>5.</strong> a) link-local. b) unique local (ULA). c) multicast, toate routerele de pe legătură. d) global unicast (din blocul de documentație). e) loopback.</p>
-<p><strong>6.</strong> <code>D21C44 | 9A7B01</code> → <code>D21C44 FFFE 9A7B01</code>. Primul octet: <code>D2</code> = <code>11010010</code>; bitul 7 e 1 și devine 0 → <code>11010000</code> = <code>D0</code>. ID de interfață: <code>D01C:44FF:FE9A:7B01</code>. Adresa: <strong><code>2001:db8:cafe:5:d01c:44ff:fe9a:7b01</code></strong>.</p>
+<summary><strong>Răspunsuri</strong></summary><p><strong>1.</strong> Zerourile din față: <code class="nw">2001:db8:0:a0:0:0:0:bad</code>. Secvența cea mai lungă de zerouri e cea de trei grupuri de la final → <strong><code class="nw">2001:db8:0:a0::bad</code></strong>. (Atenție: <code class="nw">00a0</code> devine <code class="nw">a0</code>, nu <code class="nw">a</code>.)</p>
+<p><strong>2.</strong> Fără zerourile din față: <code class="nw">fd12:3400:0:0:1:0:0:0</code>. Ai o secvență de două grupuri și una de trei; o comprimi pe cea mai lungă → <strong><code class="nw">fd12:3400:0:0:1::</code></strong>. (<code class="nw">3400</code> rămâne așa: zerourile din dreapta nu se șterg.)</p>
+<p><strong>3.</strong> Grupuri vizibile: <code class="nw">2001</code>, <code class="nw">db8</code>, <code class="nw">acad</code>, <code class="nw">f</code>, <code class="nw">1</code> = 5. Lipsesc 3 → <strong><code>2001:0db8:acad:0000:0000:0000:000f:0001</code></strong>.</p>
+<p><strong>4.</strong> a) <strong>invalidă</strong>, <code class="nw">::</code> apare de două ori. b) <strong>validă</strong>. c) <strong>validă</strong>, toate cele 8 grupuri sunt scrise, iar singurul grup zero rămâne <code class="nw">0</code>.</p>
+<p><strong>5.</strong> a) <span class="nw">link-local</span>. b) unique local (ULA). c) multicast, toate routerele de pe legătură. d) global unicast (din blocul de documentație). e) loopback.</p>
+<p><strong>6.</strong> <code class="nw">D21C44 | 9A7B01</code> → <code class="nw">D21C44 FFFE 9A7B01</code>. Primul octet: <code class="nw">D2</code> = <code class="nw">11010010</code>; bitul 7 e 1 și devine 0 → <code class="nw">11010000</code> = <code class="nw">D0</code>. ID de interfață: <code class="nw">D01C:44FF:FE9A:7B01</code>. Adresa: <strong><code>2001:db8:cafe:5:d01c:44ff:fe9a:7b01</code></strong>.</p>
 <p><strong>7.</strong> De la /48 la /64 sunt 16 biți → 2^16 = <strong>65.536</strong> de subrețele. De la /56 la /64 sunt 8 biți → 2^8 = <strong>256</strong>.</p>
-</details><h2 id="cum-inveti-ipv6-fara-sa-l-uiti">Cum înveți IPv6 fără să-l uiți</h2>
+</details><h2 id="cum-inveti-ipv6-fara-sa-l-uiti">Cum înveți IPv6 fără <span class="nw">să-l</span>&nbsp;uiți</h2>
 <ul>
 <li><strong>Prescurtează și extinde câteva adrese pe zi</strong> până devine reflex. La examen nu ai timp să te gândești la reguli.</li>
-<li><strong>Învață tabelul cu tipuri ca pe niște prefixe de telefon:</strong> 2 sau 3 = global, fe80 = link-local, fd = ULA, ff = multicast.</li>
-<li><strong>Fă o dată EUI-64 complet pe hârtie, în binar.</strong> După aceea vei vedea „+2 / −2 la primul octet” fără să mai scrii biții.</li>
-<li><strong>Configurează dual-stack într-un laborator:</strong> IPv4 și IPv6 pe aceleași interfețe, apoi verifică cu <code>show ipv6 interface brief</code> și <code>ping</code>.</li>
+<li><strong>Învață tabelul cu tipuri ca pe niște prefixe de telefon:</strong> 2 sau 3 = global, fe80 = <span class="nw">link-local</span>, fd = ULA, ff = multicast.</li>
+<li><strong>Fă o dată <span class="nw">EUI-64</span> complet pe hârtie, în binar.</strong> După aceea vei vedea „+2 / −2 la primul octet” fără să mai scrii biții.</li>
+<li><strong>Configurează <span class="nw">dual-stack</span> <span class="nw">într-un</span> laborator:</strong> IPv4 și IPv6 pe aceleași interfețe, apoi verifică cu <code class="nw">show ipv6 interface brief</code> și <code class="nw">ping</code>.</li>
 <li><strong>Leagă IPv6 de modelele pe straturi:</strong> IPv6 e la nivelul 3, ICMPv6 la fel. Dacă straturile îți sunt neclare, vezi <a href="../model-osi-vs-tcp-ip/">modelul OSI vs TCP/IP</a>.</li>
 </ul>
-<div class="cta-box cta-box--article"><svg class="mascot" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><g class="m-breathe"><path d="M22 14l-5-9M42 14l5-9" stroke="#8a919c" stroke-width="3.4" stroke-linecap="round" fill="none"/><circle class="m-led m-led-l" cx="17" cy="5" r="3.6"/><circle class="m-led m-led-r" cx="47" cy="5" r="3.6"/><path class="m-body" d="M28 12q4-6 8 0"/><rect class="m-body" x="8" y="12" width="48" height="42" rx="18"/><rect class="m-belly" x="8" y="40" width="48" height="14" rx="7"/><path d="M19 31q4-5 8 0" stroke="#1a1d24" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M37 31q4-5 8 0" stroke="#1a1d24" stroke-width="3" fill="none" stroke-linecap="round"/><path class="m-led" d="M29 37l3 3.5 3-3.5z"/><circle cx="15" cy="38" r="3" fill="#ff8fb1" opacity=".7"/><circle cx="49" cy="38" r="3" fill="#ff8fb1" opacity=".7"/><circle class="m-ok" cx="18" cy="47" r="2"/><circle class="m-led" cx="24" cy="47" r="2"/><rect x="31" y="45" width="6" height="4" rx="1" fill="#0d1a3a" opacity=".55"/><rect x="39" y="45" width="6" height="4" rx="1" fill="#0d1a3a" opacity=".55"/><rect x="47" y="45" width="5" height="4" rx="1" fill="#0d1a3a" opacity=".55"/><path class="m-leg" d="M20 54v4M44 54v4" stroke-width="3.4" stroke-linecap="round" fill="none"/></g></svg><div><h3>Exersează IPv6 în aplicația Routerel</h3><p>Routerel are un antrenor de subnetting, conversii și IPv6 cu exerciții generate la nesfârșit, plus peste 1.900 de întrebări cu explicații pentru CCNA 1 · ITN, CCNA 2 · IEN și CCNA 3 · CEN. Greșelile revin singure prin repetiție spațiată până le stăpânești, iar simularea de examen cu timp îți arată unde stai. Și dacă te blochezi, scrii întrebarea în secțiunea Întreabă, de exemplu „ce e o adresă link-local”, și primești explicația pe loc. Abonații noi au 7 zile gratuite, cu acces la tot.</p></div><a class="btn" href="../../" data-play data-soon-href="../../">Descoperă aplicația<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div><h2 id="intrebari-frecvente">Întrebări frecvente</h2>
-<div class="faq faq--article"><details><summary>Câți biți are o adresă IPv6?<span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p><strong>128 de biți</strong>, scriși ca 8 grupuri de câte 4 cifre hexazecimale, separate prin două puncte. Fiecare grup (hextet) are 16 biți.</p></div></details><details><summary>Care sunt regulile de prescurtare a unei adrese IPv6?<span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p>Două: în fiecare grup omiți zerourile din față (<code>0db8</code> → <code>db8</code>), iar o singură secvență de grupuri formate doar din zerouri o înlocuiești cu <code>::</code>. Simbolul <code>::</code> apare o singură dată într-o adresă.</p></div></details><details><summary>Ce este o adresă link-local în IPv6?<span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p>O adresă din <code>fe80::/10</code> pe care orice interfață cu IPv6 activ o are automat. E valabilă doar pe legătura locală, routerele nu o trimit mai departe și e folosită, printre altele, ca default gateway anunțat de router.</p></div></details><details><summary>IPv6 are adresă de broadcast?<span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p>Nu. În locul broadcast-ului, IPv6 folosește multicast, de exemplu <code>ff02::1</code> pentru toate nodurile de pe legătură și <code>ff02::2</code> pentru toate routerele.</p></div></details><details><summary>Ce este EUI-64?<span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p>O metodă prin care un dispozitiv își construiește singur ID-ul de interfață (ultimii 64 de biți) din adresa MAC: împarte MAC-ul în două, pune <code>FFFE</code> la mijloc și inversează al șaptelea bit din primul octet.</p></div></details><details><summary>Care e diferența dintre SLAAC și DHCPv6?<span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p>La SLAAC dispozitivul își formează singur adresa din prefixul anunțat de router. La DHCPv6 stateless adresa vine tot prin SLAAC, dar alte informații (de exemplu DNS) vin de la un server DHCPv6. La DHCPv6 stateful chiar adresa e dată de server. Gateway-ul implicit vine mereu din anunțul routerului (RA). Pentru contextul examenului, vezi și <a href="../ce-este-ccna/">ghidul despre CCNA</a>.</p></div></details></div>
+<div class="cta-box cta-box--article cta-play has-qr"><svg class="mascot" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><g class="m-breathe"><path d="M22 14l-5-9M42 14l5-9" stroke="#8a919c" stroke-width="3.4" stroke-linecap="round" fill="none"/><circle class="m-led m-led-l" cx="17" cy="5" r="3.6"/><circle class="m-led m-led-r" cx="47" cy="5" r="3.6"/><path class="m-body" d="M28 12q4-6 8 0"/><rect class="m-body" x="8" y="12" width="48" height="42" rx="18"/><rect class="m-belly" x="8" y="40" width="48" height="14" rx="7"/><path d="M19 31q4-5 8 0" stroke="#1a1d24" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M37 31q4-5 8 0" stroke="#1a1d24" stroke-width="3" fill="none" stroke-linecap="round"/><path class="m-led" d="M29 37l3 3.5 3-3.5z"/><circle cx="15" cy="38" r="3" fill="#ff8fb1" opacity=".7"/><circle cx="49" cy="38" r="3" fill="#ff8fb1" opacity=".7"/><circle class="m-ok" cx="18" cy="47" r="2"/><circle class="m-led" cx="24" cy="47" r="2"/><rect x="31" y="45" width="6" height="4" rx="1" fill="#0d1a3a" opacity=".55"/><rect x="39" y="45" width="6" height="4" rx="1" fill="#0d1a3a" opacity=".55"/><rect x="47" y="45" width="5" height="4" rx="1" fill="#0d1a3a" opacity=".55"/><path class="m-leg" d="M20 54v4M44 54v4" stroke-width="3.4" stroke-linecap="round" fill="none"/></g></svg><div class="cta-main"><h3>Exersează IPv6 în aplicația&nbsp;Routerel</h3><p>80+ întrebări despre adresarea IPv6, SLAAC și DHCPv6, un antrenor IPv6 cu exerciții generate la nesfârșit și un laborator de depanare în simulatorul de rețea. <span class="nw">Te-ai</span> blocat? Întreabă în aplicație, de exemplu „ce e o adresă&nbsp;<span class="nw">link-local</span>”.</p><div class="cta-get"><div class="cta-android"><a class="play" data-play data-soon-href="../../" href="../../"><svg viewBox="0 0 26 28" aria-hidden="true" focusable="false"><path d="M3 2.6v22.8c0 1.2 1.3 1.9 2.3 1.3l19.4-11.4c1-.6 1-2 0-2.6L5.3 1.3C4.3.7 3 1.4 3 2.6z" fill="url(#rtl-play)"/><path d="M3 2.6v22.8c0 .5.2.9.5 1.1L15 14 3.5 1.5c-.3.2-.5.6-.5 1.1z" fill="#fff" opacity=".18"/></svg><span><small data-when="live">Descarcă din</small><small data-when="soon">În curând pe</small><strong>Google Play</strong></span></a><p class="cta-trial" data-when="live">7 zile gratuite pentru abonații&nbsp;noi</p></div><p class="cta-ios">Deocamdată doar pe Android. Ghidurile și <span class="nw">tool-urile</span> gratuite de pe site merg și pe iPhone.</p></div></div><figure class="cta-qr"><img src="../../assets/qr/guide-adrese-ipv6.svg" width="132" height="132" alt="Cod QR spre Routerel în Google Play" loading="lazy" decoding="async"><figcaption>Scanează cu<br>telefonul Android</figcaption></figure></div><h2 id="intrebari-frecvente">Întrebări frecvente</h2>
+<div class="faq faq--article"><details><summary><span class="q">Câți biți are o adresă IPv6?</span><span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p><strong>128 de biți</strong>, scriși ca 8 grupuri de câte 4 cifre hexazecimale, separate prin două puncte. Fiecare grup (hextet) are 16 biți.</p></div></details><details><summary><span class="q">Care sunt regulile de prescurtare a unei adrese IPv6?</span><span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p>Două: în fiecare grup omiți zerourile din față (<code class="nw">0db8</code> → <code class="nw">db8</code>), iar o singură secvență de grupuri formate doar din zerouri o înlocuiești cu <code class="nw">::</code>. Simbolul <code class="nw">::</code> apare o singură dată <span class="nw">într-o</span> adresă.</p></div></details><details><summary><span class="q">Ce este o adresă <span class="nw">link-local</span> în IPv6?</span><span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p>O adresă din <code class="nw">fe80::/10</code> pe care orice interfață cu IPv6 activ o are automat. E valabilă doar pe legătura locală, routerele nu o trimit mai departe și e folosită, printre altele, ca default gateway anunțat de router.</p></div></details><details><summary><span class="q">IPv6 are adresă de broadcast?</span><span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p>Nu. În locul <span class="nw">broadcast-ului</span>, IPv6 folosește multicast, de exemplu <code class="nw">ff02::1</code> pentru toate nodurile de pe legătură și <code class="nw">ff02::2</code> pentru toate routerele.</p></div></details><details><summary><span class="q">Ce este <span class="nw">EUI-64</span>?</span><span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p>O metodă prin care un dispozitiv își construiește singur <span class="nw">ID-ul</span> de interfață (ultimii 64 de biți) din adresa MAC: împarte <span class="nw">MAC-ul</span> în două, pune <code class="nw">FFFE</code> la mijloc și inversează al șaptelea bit din primul octet.</p></div></details><details><summary><span class="q">Care e diferența dintre SLAAC și DHCPv6?</span><span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p>La SLAAC dispozitivul își formează singur adresa din prefixul anunțat de router. La DHCPv6 stateless adresa vine tot prin SLAAC, dar alte informații (de exemplu DNS) vin de la un server DHCPv6. La DHCPv6 stateful chiar adresa e dată de server. <span class="nw">Gateway-ul</span> implicit vine mereu din anunțul routerului (RA). Pentru contextul examenului, vezi și <a href="../ce-este-ccna/">ghidul despre CCNA</a>.</p></div></details></div>
 <hr>
 <p><em>Routerel este o aplicație independentă și nu este afiliată, sponsorizată sau aprobată de Cisco Systems, Inc. Cisco, CCNA, Cisco IOS și Networking Academy sunt mărci înregistrate ale Cisco Systems, Inc.</em></p>
       
       <section class="related" aria-labelledby="rel-title">
         <h2 id="rel-title">Citește și</h2>
-        <div class="grid grid--2"><a class="card post-card lift" href="../../ghiduri/nat-si-pat/"><span class="tagline">Ghid · 15 min</span><h3>NAT și PAT explicate: static, dinamic, overload (2026)</h3><p>NAT și PAT pe înțeles: adrese private, inside local și global, NAT static, dinamic și overload, configurare Cisco IOS, verificare, port forwarding și exerciții.</p></a><a class="card post-card lift" href="../../ghiduri/subnetting-pas-cu-pas/"><span class="tagline">Ghid · 14 min</span><h3>Subnetting explicat pas cu pas (IPv4, CIDR, VLSM)</h3><p>Învață subnetting pas cu pas: masca de subrețea, CIDR, metoda numărului magic, exemple rezolvate /26, /20, /30, VLSM cu tabel și exerciții cu răspunsuri.</p></a></div>
+        <div class="grid grid--2"><a class="card post-card lift" href="../../ghiduri/subnetting-pas-cu-pas/"><span class="tagline">Ghid · 14 min</span><h3>Subnetting explicat pas cu pas (IPv4, CIDR,&nbsp;VLSM)</h3><p>Învață subnetting pas cu pas: masca de subrețea, CIDR, metoda numărului magic, exemple rezolvate /26, /20, /30, VLSM cu tabel și exerciții cu răspunsuri.</p></a><a class="card post-card lift" href="../../ghiduri/dhcp-cisco/"><span class="tagline">Ghid · 16 min</span><h3>Configurare DHCP pe Cisco: server, relay, depanare&nbsp;(2026)</h3><p>DHCPv4 pe Cisco explicat: procesul DORA, porturile UDP 67/68, lease, routerul ca server și client, ip <span class="nw">helper-address</span>, DHCP snooping, depanare și exerciții.</p></a></div>
       </section>
     </article>
   </div>

@@ -29,6 +29,11 @@ var PRICES_USD = {
   yearly: 84.99      // Yearly
 };
 
+// 4) Cloudflare Web Analytics (numărul de vizite, fără cookie-uri; vezi politica de confidențialitate, secțiunea despre site).
+//    Codul site-ului din Cloudflare → Web Analytics → routerel.app → Manage site (nu e secret: apare în orice pagină).
+//    Se pornește doar pe routerel.app, nu pe calculator (localhost), ca probele să nu fie numărate. Gol ("") → oprit.
+var CF_ANALYTICS_TOKEN = "770e57b2a5224f4d944b0b5b2de53a5f";
+
 /* ===================================================================== */
 
 (function () {
@@ -70,6 +75,15 @@ var PRICES_USD = {
         el.setAttribute("aria-disabled", "true");
       }
     }
+  }
+
+  /* ---------- iPhone / iPad: aplicația e deocamdată doar pe Android ---------- */
+  // html.is-ios ascunde butoanele Google Play din îndemnurile ghidurilor / tools și arată „Deocamdată doar pe Android”
+  // (.cta-ios, .cta-inline-ios în style.css). iPad-ul nou se prezintă ca Mac, dar are ecran tactil.
+  function setupPlatform() {
+    var ua = navigator.userAgent || "";
+    var ios = /iPhone|iPad|iPod/.test(ua) || (/Macintosh/.test(ua) && (navigator.maxTouchPoints || 0) > 1);
+    doc.classList.toggle("is-ios", ios);
   }
 
   /* ---------- Prețuri: lei pe paginile în română, dolari pe cele în engleză ---------- */
@@ -582,8 +596,19 @@ var PRICES_USD = {
     all();
   }
 
+  /* ---------- Cloudflare Web Analytics (doar pe routerel.app) ---------- */
+  function setupAnalytics() {
+    if (!CF_ANALYTICS_TOKEN || !/^(www\.)?routerel\.app$/.test(location.hostname)) return;
+    var s = document.createElement("script");
+    s.defer = true;
+    s.src = "https://static.cloudflareinsights.com/beacon.min.js";
+    s.setAttribute("data-cf-beacon", JSON.stringify({ token: CF_ANALYTICS_TOKEN }));
+    document.body.appendChild(s);
+  }
+
   function init() {
     window.__rtl = true; // semnal pentru scriptul mic din <head> (dacă lipsește, animațiile de apariție se opresc)
+    setupPlatform();
     setupPlay();
     setupLangChoice();
     setupPrices();
@@ -597,6 +622,7 @@ var PRICES_USD = {
     setupDemo();
     setupMobileUi();
     setupTables();
+    setupAnalytics();
   }
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init);
   else init();

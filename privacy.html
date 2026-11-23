@@ -34,7 +34,7 @@
   <meta name="twitter:description" content="Ce date colectează aplicația Routerel, de ce, cu cine le împarte și cum le ștergi.">
   <meta name="twitter:image" content="https://routerel.app/assets/og-ro.png">
   <script>if(location.hash==="#en")location.replace("en/privacy")</script>
-  <meta name="routerel:updated" content="2026-11-10">
+  <meta name="routerel:updated" content="2026-11-21">
   <link rel="preload" href="assets/fonts/nunito-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/nunito-latin-ext.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="style.css">
@@ -65,9 +65,9 @@
     <article class="prose legal">
       <nav class="legal-tabs" aria-label="Documente"><a href="privacy" aria-current="page">Confidențialitate</a><a href="terms">Termeni</a><a href="delete-account">Ștergerea contului</a></nav>
       <h1>Politica de confidențialitate</h1>
-      <p class="meta">Ultima actualizare: 18 noiembrie 2026</p>
+      <p class="meta">Ultima actualizare: 21 noiembrie 2026</p>
 
-      <p>Aplicația Routerel („aplicația”) este oferită de <strong>Sorin-Marian Macău (persoană fizică)</strong> („noi”), care este
+      <p>Aplicația Routerel („aplicația”) este oferită de <strong><span class="nowrap">Sorin-Marian</span> Macău (persoană fizică)</strong> („noi”), care este
         operatorul datelor tale personale. Contact: <strong><a href="mailto:contact@routerel.app">contact@routerel.app</a></strong>.</p>
 
       <h2>Ce date colectăm și de ce</h2>
@@ -95,7 +95,7 @@
       <p>Numărul total de încercări și de răspunsuri corecte pe fiecare întrebare (fără legătură cu persoana) îl folosim
         ca să arătăm „cât la sută au răspuns corect” și să găsim întrebările prea grele sau greșite.</p>
       <p>Întrebările la care asistentul din aplicație („Întreabă”) nu are un răspuns sigur pot fi trimise anonim: doar textul
-        întrebării, limba, felul ei, versiunea aplicației, răspunsurile arătate și, dacă ne spui, dacă răspunsul ți-a fost de folos
+        întrebării, limba, felul ei, versiunea aplicației, răspunsurile arătate și, dacă ne spui, dacă răspunsul <span class="nowrap">ți-a</span> fost de folos
         și ce răspuns ai ales, fără legătură cu contul sau cu telefonul tău. Le folosim ca să
         îmbunătățim răspunsurile (interesul legitim). Pentru că nu le putem lega de tine, nu scrie în ele date personale.</p>
 
@@ -107,19 +107,47 @@
         <li><strong>RevenueCat</strong> (SUA): gestionarea abonamentului; primește identificatorul tău de cont și
           informațiile de cumpărare de la Google Play. Transferul în afara UE se face pe baza clauzelor contractuale standard ale Comisiei Europene.</li>
         <li><strong>Resend</strong> (SUA): trimite pe emailul nostru problemele raportate din aplicație. Transferul în afara UE se face pe baza clauzelor contractuale standard.</li>
+        <li>Pentru site: <strong>Cloudflare</strong> (SUA), găzduirea și statisticile de vizite; detalii mai jos, în
+          secțiunea „<span class="nowrap">Site-ul</span> routerel.app”.</li>
       </ul>
       <p>Nu vindem și nu închiriem datele tale.</p>
 
       <h2>Cât timp le păstrăm</h2>
       <p>Cât timp ai cont. Când îți ștergi contul (din aplicație: Cont → Șterge contul, sau pe email), ștergem imediat
         contul și toate datele de mai sus, cu excepția totalurilor fără legătură cu tine și a unei amprente criptografice a
-        emailului (SHA-256) împreună cu numărul de răspunsuri gratuite folosite, ca proba gratuită să nu se poată relua cu
+        emailului <span class="nowrap">(SHA-256)</span> împreună cu numărul de răspunsuri gratuite folosite, ca proba gratuită să nu se poată relua cu
         același email (interes legitim: prevenirea abuzului). Evidențele de plată le păstrează
         Google Play și RevenueCat conform obligațiilor lor legale. La problemele raportate rămân doar mesajul și datele telefonului, fără email, nume și identificatorul contului. Detalii: <a href="delete-account">ștergerea contului</a>.</p>
 
+      <h2><span class="nowrap">Site-ul</span> routerel.app</h2>
+      <p>Politica se aplică și <span class="nowrap">site-ului</span> routerel.app. <span class="nowrap">Site-ul</span> este găzduit de <strong>Cloudflare, Inc.</strong> (SUA),
+        care participă la <span class="nowrap">EU-U.S.</span> Data Privacy Framework (cadrul <span class="nowrap">UE-SUA</span> pentru transferul datelor). Ca orice găzduire,
+        Cloudflare primește adresa ta IP și datele browserului la fiecare pagină cerută, ca să livreze paginile și să oprească
+        atacurile, și din adresa IP află țara. Pentru pagina de start (routerel.app și routerel.app/en/), Cloudflare ne păstrează
+        cel mult 7 zile un jurnal tehnic al cererilor, pe care îl folosim doar ca să reparăm erori.</p>
+      <p><strong>Limba și tema.</strong> La prima intrare pe pagina de start, <span class="nowrap">site-ul</span> alege limba după țara ta (româna pentru
+        România, engleza în rest), fără să salveze ceva. Când alegi limba, <span class="nowrap">site-ul</span> o ține minte un an, <span class="nowrap">într-un</span> cookie
+        („lang”). Dacă schimbi tema (luminoasă sau întunecată), alegerea se salvează în browser. Nu le folosim la altceva.</p>
+      <p><strong>Statistici de vizite (Cloudflare Web Analytics).</strong> Ca să știm câți oameni intră pe site și de unde vin,
+        folosim Cloudflare Web Analytics. La fiecare pagină deschisă, un mic script al Cloudflare trimite adresa paginii,
+        <span class="nowrap">site-ul</span> de pe care ai venit, tipul dispozitivului, browserul, sistemul de operare și timpii de încărcare; țara o
+        află Cloudflare din adresa IP, ca orice găzduire. Noi vedem doar totaluri, nu persoane. Statisticile nu folosesc
+        <span class="nowrap">cookie-uri</span> sau alte date salvate în browser, <span class="nowrap">nu-ți</span> fac un profil și nu urmăresc vizitatorii în timp sau de
+        pe un site pe altul. Cloudflare păstrează datele detaliate 7 zile, apoi doar un eșantion agregat; în contul nostru
+        Cloudflare vedem ultimele 6 luni. Temeiul: interesul legitim (să știm ce pagini sunt de folos).</p>
+      <p><strong>Clipuri YouTube.</strong> Unele ghiduri pot avea clipuri de pe canalul Routerel. Până nu apeși pe un clip,
+        pagina nu încarcă nimic de la YouTube. După ce apeși, clipul se încarcă de pe <span class="nowrap">youtube-nocookie.com</span> (modul de
+        confidențialitate îmbunătățită al YouTube): Google primește adresa ta IP și datele browserului și poate salva informații
+        în browser (<span class="nowrap">cookie-uri</span> sau tehnologii asemănătoare). Potrivit Google, vizionările în acest mod nu sunt folosite ca
+        <span class="nowrap">să-ți</span> personalizeze YouTube sau reclamele de pe alte <span class="nowrap">site-uri</span>. Furnizorul e Google (în&nbsp;UE, Google
+        Ireland Limited); se aplică <a class="nowrap" href="https://policies.google.com/privacy">Politica de confidențialitate Google</a> și
+        <a class="nowrap" href="https://www.youtube.com/t/terms">Termenii YouTube</a>.</p>
+      <p><strong>Butoanele Google Play.</strong> Linkul spre Google Play spune doar de pe ce pagină a <span class="nowrap">site-ului</span> vii (de
+        exemplu numele ghidului), ca să vedem în statisticile Google Play, ca totaluri, ce pagini aduc instalări. Nu conține nimic despre tine.</p>
+
       <h2>Drepturile tale</h2>
       <p>Ai dreptul să ceri acces la date, corectarea, ștergerea, restricționarea prelucrării, portabilitatea lor și să te
-        opui prelucrării bazate pe interes legitim. Scrie-ne la <a href="mailto:contact@routerel.app">contact@routerel.app</a>; răspundem în cel mult o lună.
+        opui prelucrării bazate pe interes legitim. <span class="nowrap">Scrie-ne</span> la <a href="mailto:contact@routerel.app">contact@routerel.app</a>; răspundem în cel mult o lună.
         Poți depune o plângere la Autoritatea Națională de Supraveghere a Prelucrării Datelor cu Caracter Personal
         (<a href="https://www.dataprotection.ro">dataprotection.ro</a>).</p>
 

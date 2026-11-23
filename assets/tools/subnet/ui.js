@@ -75,7 +75,7 @@ const T = {
     scrollTable: "Tabel (se poate derula pe orizontală)",
   },
   en: {
-    tabs: { analyze: "Analyse", split: "Equal subnets", vlsm: "VLSM" },
+    tabs: { analyze: "Analyze", split: "Equal subnets", vlsm: "VLSM" },
     tablist: "Calculator mode",
     ipLabel: "IP address and mask",
     ipHint: "For example 192.168.10.77/26 or 192.168.10.77 255.255.255.192",
@@ -143,7 +143,11 @@ const TABS = /** @type {const} */ (["analyze", "split", "vlsm"]);
 let instances = 0;
 
 /** @param {unknown} s */
-const esc = (s) => String(s).replace(/[&<>"']/g, (c) => /** @type {Record<string,string>} */ ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]);
+/** Escape simplu, pentru valorile câmpurilor (ce scrie omul rămâne exact cum l-a scris). @param {unknown} s */
+const escA = (s) => String(s).replace(/[&<>"']/g, (c) => /** @type {Record<string,string>} */ ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]);
+const esc = (s) => String(s).replace(/[&<>"']/g, (c) => /** @type {Record<string,string>} */ ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c])
+  // cuvintele cu cratimă („host-uri”, „Host-urile”) nu se rup la capăt de rând: cratimă nedespărțitoare (U+2011)
+  .replace(/\p{L}[\p{L}\p{N}]*(?:-\p{L}[\p{L}\p{N}]*)+/gu, (m) => m.replace(/-/g, "\u2011"));
 /** Ca esc, dar permite ruperea rândului doar după „.” și „/” (adresele nu se rup în mijlocul unui număr). @param {unknown} s */
 const brk = (s) => esc(s).replace(/([./])/g, "$1<wbr>");
 
@@ -186,7 +190,7 @@ export function mountSubnetCalculator(root, options = {}) {
         <label class="snc-label" for="${id("ip")}">${esc(L.ipLabel)}</label>
         <div class="snc-inputrow">
           <input class="snc-input snc-mono" id="${id("ip")}" name="ip" type="text" autocomplete="off" autocapitalize="off" spellcheck="false"
-            value="${esc(state.ip)}" aria-describedby="${id("ip-hint")} ${id("ip-err")}">
+            value="${escA(state.ip)}" aria-describedby="${id("ip-hint")} ${id("ip-err")}">
           <button class="snc-btn" type="submit">${esc(L.calc)}</button>
         </div>
         <p class="snc-hint" id="${id("ip-hint")}">${esc(L.ipHint)}</p>
@@ -202,7 +206,7 @@ export function mountSubnetCalculator(root, options = {}) {
       <form class="snc-form" data-form="split" novalidate>
         <label class="snc-label" for="${id("split-net")}">${esc(L.splitNet)}</label>
         <input class="snc-input snc-mono" id="${id("split-net")}" name="net" type="text" autocomplete="off" spellcheck="false"
-          value="${esc(state.splitNet)}" aria-describedby="${id("split-hint")} ${id("split-err")}">
+          value="${escA(state.splitNet)}" aria-describedby="${id("split-hint")} ${id("split-err")}">
         <p class="snc-hint" id="${id("split-hint")}">${esc(L.splitNetHint)}</p>
         <fieldset class="snc-fieldset">
           <legend class="snc-label">${esc(L.splitBy)}</legend>
@@ -211,7 +215,7 @@ export function mountSubnetCalculator(root, options = {}) {
         </fieldset>
         <label class="snc-label" for="${id("split-n")}" id="${id("split-n-label")}">${esc(state.splitMode === "subnets" ? L.countSubnets : L.countHosts)}</label>
         <div class="snc-inputrow">
-          <input class="snc-input snc-num" id="${id("split-n")}" name="n" type="number" min="1" step="1" inputmode="numeric" value="${esc(state.splitValue)}" aria-describedby="${id("split-err")}">
+          <input class="snc-input snc-num" id="${id("split-n")}" name="n" type="number" min="1" step="1" inputmode="numeric" value="${escA(state.splitValue)}" aria-describedby="${id("split-err")}">
           <button class="snc-btn" type="submit">${esc(L.splitBtn)}</button>
         </div>
         <p class="snc-error" id="${id("split-err")}" hidden></p>
@@ -223,7 +227,7 @@ export function mountSubnetCalculator(root, options = {}) {
       <form class="snc-form" data-form="vlsm" novalidate>
         <label class="snc-label" for="${id("vlsm-net")}">${esc(L.vlsmNet)}</label>
         <input class="snc-input snc-mono" id="${id("vlsm-net")}" name="net" type="text" autocomplete="off" spellcheck="false"
-          value="${esc(state.vlsmNet)}" aria-describedby="${id("vlsm-err")}">
+          value="${escA(state.vlsmNet)}" aria-describedby="${id("vlsm-err")}">
         <fieldset class="snc-fieldset">
           <legend class="snc-label">${esc(L.vlsmReqs)}</legend>
           <p class="snc-hint">${esc(L.vlsmNote)}</p>
@@ -248,8 +252,8 @@ export function mountSubnetCalculator(root, options = {}) {
     const list = rows();
     return list.map((r, i) => `
       <div class="snc-vlsm-row" data-row="${i}">
-        <input class="snc-input" type="text" name="name" value="${esc(r.name)}" placeholder="${esc(L.namePh)}" aria-label="${esc(L.vlsmName(i + 1))}" autocomplete="off">
-        <input class="snc-input snc-num" type="number" name="hosts" min="1" step="1" inputmode="numeric" value="${esc(r.hosts)}" placeholder="${esc(L.hostsPh)}" aria-label="${esc(L.vlsmHosts(i + 1))}">
+        <input class="snc-input" type="text" name="name" value="${escA(r.name)}" placeholder="${esc(L.namePh)}" aria-label="${esc(L.vlsmName(i + 1))}" autocomplete="off">
+        <input class="snc-input snc-num" type="number" name="hosts" min="1" step="1" inputmode="numeric" value="${escA(r.hosts)}" placeholder="${esc(L.hostsPh)}" aria-label="${esc(L.vlsmHosts(i + 1))}">
         <button type="button" class="snc-icon-btn" data-action="remove-row" data-index="${i}" aria-label="${esc(L.removeRow(i + 1))}" ${list.length === 1 ? "disabled" : ""}>×</button>
       </div>`).join("");
   }

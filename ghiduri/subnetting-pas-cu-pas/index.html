@@ -67,36 +67,37 @@
     <article class="prose">
       <nav class="crumbs" aria-label="Firimituri"><ol><li><a href="../../">Acasă</a></li><li><a href="../../ghiduri/">Ghiduri</a></li><li><span aria-current="page">Subnetting explicat pas cu pas (IPv4, CIDR, VLSM)</span></li></ol></nav>
       <p class="eyebrow">Ghid CCNA</p>
-      <h1>Subnetting explicat pas cu pas (IPv4, CIDR, VLSM)</h1>
+      <h1>Subnetting explicat pas cu pas (IPv4, CIDR,&nbsp;VLSM)</h1>
       <div class="article-meta">
         <span class="avatar"><svg class="mascot" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><g class="m-breathe"><path d="M22 14l-5-9M42 14l5-9" stroke="#8a919c" stroke-width="3.4" stroke-linecap="round" fill="none"/><circle class="m-led m-led-l" cx="17" cy="5" r="3.6"/><circle class="m-led m-led-r" cx="47" cy="5" r="3.6"/><path class="m-body" d="M28 12q4-6 8 0"/><rect class="m-body" x="8" y="12" width="48" height="42" rx="18"/><rect class="m-belly" x="8" y="40" width="48" height="14" rx="7"/><circle cx="23" cy="31" r="5.4" fill="#fff"/><circle class="m-pupil" cx="24" cy="31.5" r="3" fill="#1a1d24"/><circle cx="41" cy="31" r="5.4" fill="#fff"/><circle class="m-pupil" cx="42" cy="31.5" r="3" fill="#1a1d24"/><path class="m-led" d="M29 37l3 3.5 3-3.5z"/><circle class="m-ok" cx="18" cy="47" r="2"/><circle class="m-led" cx="24" cy="47" r="2"/><rect x="31" y="45" width="6" height="4" rx="1" fill="#0d1a3a" opacity=".55"/><rect x="39" y="45" width="6" height="4" rx="1" fill="#0d1a3a" opacity=".55"/><rect x="47" y="45" width="5" height="4" rx="1" fill="#0d1a3a" opacity=".55"/><path class="m-leg" d="M20 54v4M44 54v4" stroke-width="3.4" stroke-linecap="round" fill="none"/></g></svg></span>
         <span>Echipa Routerel</span><span aria-hidden="true">·</span>
         <span>Actualizat: <time datetime="2026-11-05">5 noiembrie 2026</time></span><span aria-hidden="true">·</span>
         <span>14 min de citit</span>
       </div>
-      <p class="lead">Subnetting-ul o sperie pe toată lumea la început, apoi devine un fel de joc de calcul mental. Nu e nevoie de matematică grea: îți trebuie puțin binar, o singură regulă (numărul magic) și exercițiu.</p>
-<p>În ghidul ăsta pornești de la zero și ajungi să rezolvi orice întrebare de subnetting de la CCNA: adresa de rețea, broadcast-ul, primul și ultimul host, câte host-uri încap, cum împarți o rețea în N subrețele și cum faci un plan VLSM. Toate exemplele sunt rezolvate complet, iar la final ai 5 exerciții cu răspunsuri.</p>
-      <nav class="toc toc--fold" aria-labelledby="toc-title"><h2 id="toc-title">Cuprins</h2><button type="button" class="toc-toggle" data-toc-toggle aria-expanded="false" aria-controls="toc-list"><span class="toc-toggle-t">Cuprins</span> <span class="toc-toggle-n">12 secțiuni</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6"/></svg></button><ol id="toc-list"><li><a href="#ce-este-subnetting-ul-si-de-ce-conteaza">Ce este subnetting-ul și de ce contează</a></li><li><a href="#recapitulare-de-binar-doar-cat-iti-trebuie">Recapitulare de binar (doar cât îți trebuie)</a></li><li><a href="#biti-de-retea-biti-de-host-si-masca-de-subretea">Biți de rețea, biți de host și masca de subrețea</a><ol><li><a href="#masca-in-format-zecimal-vs-prefix-notatia-cidr">Masca în format zecimal vs. prefix (notația CIDR)</a></li><li><a href="#formulele-de-baza">Formulele de bază</a></li></ol></li><li><a href="#metoda-numarului-magic-block-size">Metoda numărului magic (block size)</a></li><li><a href="#exemple-rezolvate-complet">Exemple rezolvate complet</a><ol><li><a href="#exemplul-1-192-168-10-77-26">Exemplul 1: 192.168.10.77/26</a></li><li><a href="#exemplul-2-10-20-45-200-20">Exemplul 2: 10.20.45.200/20</a></li><li><a href="#exemplul-3-10-1-1-9-30">Exemplul 3: 10.1.1.9/30</a></li><li><a href="#exemplul-4-adresa-de-clasa-b-172-18-77-10-22">Exemplul 4 (adresă de clasă B): 172.18.77.10/22</a></li></ol></li><li><a href="#cum-imparti-o-retea-in-subretele">Cum împarți o rețea în subrețele</a><ol><li><a href="#varianta-a-ai-nevoie-de-un-anumit-numar-de-subretele">Varianta A: ai nevoie de un anumit număr de subrețele</a></li><li><a href="#varianta-b-ai-nevoie-de-un-anumit-numar-de-host-uri-pe-subretea">Varianta B: ai nevoie de un anumit număr de host-uri pe subrețea</a></li></ol></li><li><a href="#vlsm-subretele-de-marimi-diferite-exemplu-complet">VLSM: subrețele de mărimi diferite (exemplu complet)</a></li><li><a href="#greseli-frecvente-si-cum-le-eviti">Greșeli frecvente (și cum le eviți)</a></li><li><a href="#tabel-rapid-24-30">Tabel rapid /24 – /30</a></li><li><a href="#exercitii-incearca-fara-calculator">Exerciții (încearcă fără calculator)</a></li><li><a href="#cum-ajungi-rapid-la-subnetting">Cum ajungi rapid la subnetting</a></li><li><a href="#intrebari-frecvente">Întrebări frecvente</a></li></ol></nav>
-<h2 id="ce-este-subnetting-ul-si-de-ce-conteaza">Ce este subnetting-ul și de ce contează</h2>
-<p>O adresă IPv4 are 32 de biți, scriși ca patru numere (octeți) între 0 și 255, de exemplu <code>192.168.10.77</code>. O parte din biți spune <strong>în ce rețea</strong> se află dispozitivul (partea de rețea), iar restul spune <strong>care dispozitiv</strong> este în acea rețea (partea de host).</p>
-<p><strong>Subnetting</strong> înseamnă să iei o rețea și s-o împarți în rețele mai mici, numite <strong>subrețele</strong> (subnets). De ce ai face asta?</p>
+      
+      <p class="lead"><span class="nw">Subnetting-ul</span> o sperie pe toată lumea la început, apoi devine un fel de joc de calcul mental. Nu e nevoie de matematică grea: îți trebuie puțin binar, o singură regulă (numărul magic) și exercițiu.</p>
+<p>În ghidul ăsta pornești de la zero și ajungi să rezolvi orice întrebare de subnetting de la CCNA: adresa de rețea, <span class="nw">broadcast-ul</span>, primul și ultimul host, câte <span class="nw">host-uri</span> încap, cum împarți o rețea în N subrețele și cum faci un plan VLSM. Toate exemplele sunt rezolvate complet, iar la final ai 5 exerciții cu răspunsuri.</p>
+      <nav class="toc toc--fold" aria-labelledby="toc-title"><h2 id="toc-title">Cuprins</h2><button type="button" class="toc-toggle" data-toc-toggle aria-expanded="false" aria-controls="toc-list"><span class="toc-toggle-t">Cuprins</span> <span class="toc-toggle-n">12 secțiuni</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6"/></svg></button><ol id="toc-list"><li><a href="#ce-este-subnetting-ul-si-de-ce-conteaza">Ce este <span class="nw">subnetting-ul</span> și de ce contează</a></li><li><a href="#recapitulare-de-binar-doar-cat-iti-trebuie">Recapitulare de binar (doar cât îți trebuie)</a></li><li><a href="#biti-de-retea-biti-de-host-si-masca-de-subretea">Biți de rețea, biți de host și masca de subrețea</a><ol><li><a href="#masca-in-format-zecimal-vs-prefix-notatia-cidr">Masca în format zecimal vs. prefix (notația CIDR)</a></li><li><a href="#formulele-de-baza">Formulele de bază</a></li></ol></li><li><a href="#metoda-numarului-magic-block-size">Metoda numărului magic (block size)</a></li><li><a href="#exemple-rezolvate-complet">Exemple rezolvate complet</a><ol><li><a href="#exemplul-1-192-168-10-77-26">Exemplul 1: 192.168.10.77/26</a></li><li><a href="#exemplul-2-10-20-45-200-20">Exemplul 2: 10.20.45.200/20</a></li><li><a href="#exemplul-3-10-1-1-9-30">Exemplul 3: 10.1.1.9/30</a></li><li><a href="#exemplul-4-adresa-de-clasa-b-172-18-77-10-22">Exemplul 4 (adresă de clasă B): 172.18.77.10/22</a></li></ol></li><li><a href="#cum-imparti-o-retea-in-subretele">Cum împarți o rețea în subrețele</a><ol><li><a href="#varianta-a-ai-nevoie-de-un-anumit-numar-de-subretele">Varianta A: ai nevoie de un anumit număr de subrețele</a></li><li><a href="#varianta-b-ai-nevoie-de-un-anumit-numar-de-host-uri-pe-subretea">Varianta B: ai nevoie de un anumit număr de <span class="nw">host-uri</span> pe subrețea</a></li></ol></li><li><a href="#vlsm-subretele-de-marimi-diferite-exemplu-complet">VLSM: subrețele de mărimi diferite (exemplu complet)</a></li><li><a href="#greseli-frecvente-si-cum-le-eviti">Greșeli frecvente (și cum le eviți)</a></li><li><a href="#tabel-rapid-24-30">Tabel rapid /24 – /30</a></li><li><a href="#exercitii-incearca-fara-calculator">Exerciții (încearcă fără calculator)</a></li><li><a href="#cum-ajungi-rapid-la-subnetting">Cum ajungi rapid la subnetting</a></li><li><a href="#intrebari-frecvente">Întrebări frecvente</a></li></ol></nav>
+<h2 id="ce-este-subnetting-ul-si-de-ce-conteaza">Ce este <span class="nw">subnetting-ul</span> și de ce&nbsp;contează</h2>
+<p>O adresă IPv4 are 32 de biți, scriși ca patru numere (octeți) între 0 și 255, de exemplu <code class="nw">192.168.10.77</code>. O parte din biți spune <strong>în ce rețea</strong> se află dispozitivul (partea de rețea), iar restul spune <strong>care dispozitiv</strong> este în acea rețea (partea de host).</p>
+<p><strong>Subnetting</strong> înseamnă să iei o rețea și <span class="nw">s-o</span> împarți în rețele mai mici, numite <strong>subrețele</strong> (subnets). De ce ai face asta?</p>
 <ul>
 <li><strong>Ordine:</strong> fiecare departament, etaj sau VLAN primește propria subrețea.</li>
-<li><strong>Mai puțin broadcast:</strong> un broadcast ajunge doar în subrețeaua (VLAN-ul) lui, nu în toată rețeaua.</li>
-<li><strong>Securitate:</strong> între subrețele traficul trece prin router sau firewall, unde poți pune reguli (ACL-uri).</li>
+<li><strong>Mai puțin broadcast:</strong> un broadcast ajunge doar în subrețeaua (<span class="nw">VLAN-ul</span>) lui, nu în toată rețeaua.</li>
+<li><strong>Securitate:</strong> între subrețele traficul trece prin router sau firewall, unde poți pune reguli (<span class="nw">ACL-uri</span>).</li>
 <li><strong>Adrese folosite cu cap:</strong> nu dai 254 de adrese unei legături între două routere care are nevoie de 2.</li>
 </ul>
-<h2 id="recapitulare-de-binar-doar-cat-iti-trebuie">Recapitulare de binar (doar cât îți trebuie)</h2>
+<h2 id="recapitulare-de-binar-doar-cat-iti-trebuie">Recapitulare de binar (doar cât îți&nbsp;trebuie)</h2>
 <p>Fiecare octet are 8 biți. Fiecare poziție are o valoare fixă:</p>
 <pre><code class="language-text">Poziția:   bit7  bit6  bit5  bit4  bit3  bit2  bit1  bit0
 Valoarea:   128    64    32    16     8     4     2     1
 </code></pre>
-<p>Un număr zecimal e suma pozițiilor care au <code>1</code>. De exemplu:</p>
+<p>Un număr zecimal e suma pozițiilor care au <code class="nw">1</code>. De exemplu:</p>
 <pre><code class="language-text">77  = 64 + 8 + 4 + 1          = 01001101
 192 = 128 + 64                = 11000000
 240 = 128 + 64 + 32 + 16      = 11110000
 </code></pre>
-<p>Pentru subnetting merită să știi pe de rost valorile pe care le poate avea un octet de mască. Sunt singurele valori posibile, pentru că biții de <code>1</code> se completează de la stânga la dreapta:</p>
+<p>Pentru subnetting merită să știi pe de rost valorile pe care le poate avea un octet de mască. Sunt singurele valori posibile, pentru că biții de <code class="nw">1</code> se completează de la stânga la dreapta:</p>
 <div class="table-scroll"><p class="table-hint" aria-hidden="true">glisează<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></p><div class="table-wrap" role="region" tabindex="0" aria-label="Tabel (se derulează pe orizontală)"><table>
 <thead>
 <tr>
@@ -147,44 +148,45 @@ Valoarea:   128    64    32    16     8     4     2     1
 </tr>
 </tbody></table></div></div>
 <p>Dacă recunoști instant șirul 128, 192, 224, 240, 248, 252, 254, 255, ai făcut deja jumătate din drum.</p>
-<h2 id="biti-de-retea-biti-de-host-si-masca-de-subretea">Biți de rețea, biți de host și masca de subrețea</h2>
-<p><strong>Masca de subrețea</strong> spune care biți din adresă sunt de rețea. Regula e simplă: biții de rețea sunt <code>1</code> în mască, biții de host sunt <code>0</code>. Biții de <code>1</code> sunt mereu consecutivi, în stânga.</p>
+<aside class="cta-inline" aria-label="Routerel în Google Play"><img src="../../assets/icon-96.webp" alt="" width="44" height="44" loading="lazy" decoding="async"><p><strong>Exersează <span class="nw">subnetting-ul</span> pe telefon.</strong> 40+ întrebări cu explicații și un antrenor de subnetting cu exerciții la&nbsp;nesfârșit.</p><a class="cta-inline-link" data-play data-soon-href="../../" href="../../"><span data-when="live">Descarcă din Google&nbsp;Play</span><span data-when="soon">Routerel</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a><p class="cta-inline-ios">Deocamdată doar pe Android.</p></aside>
+<h2 id="biti-de-retea-biti-de-host-si-masca-de-subretea">Biți de rețea, biți de host și masca de&nbsp;subrețea</h2>
+<p><strong>Masca de subrețea</strong> spune care biți din adresă sunt de rețea. Regula e simplă: biții de rețea sunt <code class="nw">1</code> în mască, biții de host sunt <code class="nw">0</code>. Biții de <code class="nw">1</code> sunt mereu consecutivi, în stânga.</p>
 <pre><code class="language-text">Adresa:  192.168.10.77    11000000.10101000.00001010.01|001101
 Masca:   255.255.255.192  11111111.11111111.11111111.11|000000
                           &lt;---- 26 biți de rețea -----&gt;|6 host
 </code></pre>
-<h3 id="masca-in-format-zecimal-vs-prefix-notatia-cidr">Masca în format zecimal vs. prefix (notația CIDR)</h3>
+<h3 id="masca-in-format-zecimal-vs-prefix-notatia-cidr">Masca în format zecimal vs. prefix (notația&nbsp;CIDR)</h3>
 <p>Aceeași mască se poate scrie în două feluri:</p>
 <ul>
-<li><strong>zecimal:</strong> <code>255.255.255.192</code></li>
-<li><strong>prefix (CIDR):</strong> <code>/26</code>, adică „primii 26 de biți sunt de rețea”</li>
+<li><strong>zecimal:</strong> <code class="nw">255.255.255.192</code></li>
+<li><strong>prefix (CIDR):</strong> <code class="nw">/26</code>, adică „primii 26 de biți sunt de rețea”</li>
 </ul>
-<p>Ca să treci de la prefix la mască: fiecare 8 biți fac un <code>255</code>, iar restul îl citești din tabelul de mai sus. <code>/26</code> = 8 + 8 + 8 + 2 → <code>255.255.255.192</code>. <code>/20</code> = 8 + 8 + 4 → <code>255.255.240.0</code>.</p>
-<p>Invers: numeri biții de <code>1</code>. <code>255.255.252.0</code> = 8 + 8 + 6 + 0 = <code>/22</code>.</p>
-<p><strong>CIDR</strong> (Classless Inter-Domain Routing) e și regula din spatele notației: prefixul poate avea orice lungime de la /0 la /32. Vechile clase (A = /8, B = /16, C = /24) mai apar ca vocabular („o adresă de clasă B”), dar rețelele moderne nu mai sunt legate de ele.</p>
-<h3 id="formulele-de-baza">Formulele de bază</h3>
-<p>Dacă ai <code>h</code> biți de host (h = 32 − prefix):</p>
+<p>Ca să treci de la prefix la mască: fiecare 8 biți fac un <code class="nw">255</code>, iar restul îl citești din tabelul de mai sus. <code class="nw">/26</code> = 8 + 8 + 8 + 2 → <code class="nw">255.255.255.192</code>. <code class="nw">/20</code> = 8 + 8 + 4 → <code class="nw">255.255.240.0</code>.</p>
+<p>Invers: numeri biții de <code class="nw">1</code>. <code class="nw">255.255.252.0</code> = 8 + 8 + 6 + 0 = <code class="nw">/22</code>.</p>
+<p><strong>CIDR</strong> (Classless <span class="nw">Inter-Domain</span> Routing) e și regula din spatele notației: prefixul poate avea orice lungime de la /0 la /32. Vechile clase (A = /8, B = /16, C = /24) mai apar ca vocabular („o adresă de clasă B”), dar rețelele moderne nu mai sunt legate de ele.</p>
+<h3 id="formulele-de-baza">Formulele de&nbsp;bază</h3>
+<p>Dacă ai <code class="nw">h</code> biți de host (h = 32 − prefix):</p>
 <ul>
 <li>numărul de adrese din subrețea = <strong>2^h</strong></li>
-<li>numărul de host-uri utilizabile = <strong>2^h − 2</strong> (scazi adresa de rețea și broadcast-ul)</li>
+<li>numărul de <span class="nw">host-uri</span> utilizabile = <strong>2^h − 2</strong> (scazi adresa de rețea și <span class="nw">broadcast-ul</span>)</li>
 </ul>
-<p>Dacă împrumuți <code>s</code> biți pentru subrețele dintr-o rețea mai mare:</p>
+<p>Dacă împrumuți <code class="nw">s</code> biți pentru subrețele <span class="nw">dintr-o</span> rețea mai mare:</p>
 <ul>
 <li>numărul de subrețele = <strong>2^s</strong></li>
 </ul>
-<h2 id="metoda-numarului-magic-block-size">Metoda numărului magic (block size)</h2>
+<h2 id="metoda-numarului-magic-block-size">Metoda numărului magic (block&nbsp;size)</h2>
 <p>Aici e trucul care te scapă de conversii binare la fiecare întrebare. Pașii:</p>
 <ol>
 <li><strong>Găsește octetul interesant:</strong> octetul în care masca nu e nici 255, nici 0 (acolo se termină partea de rețea). Dacă masca are doar 255 și 0 (/8, /16, /24), granița cade exact între octeți: octeții cu 255 se copiază din adresă, iar cei cu 0 devin 0 la adresa de rețea și 255 la broadcast (echivalent: bloc de 256 în primul octet cu 0). La /32 nu e nimic de calculat: e un singur host.</li>
 <li><strong>Calculează blocul (numărul magic):</strong> <code>256 − valoarea măștii în octetul interesant</code>.</li>
 <li><strong>Găsește începutul subrețelei:</strong> cel mai mare multiplu al blocului care este ≤ valoarea adresei în octetul interesant. Asta e <strong>adresa de rețea</strong> (octeții din stânga rămân la fel, cei din dreapta devin 0).</li>
-<li><strong>Broadcast-ul:</strong> începutul subrețelei următoare minus 1 (în octetul interesant), iar octeții din dreapta devin 255.</li>
+<li><strong><span class="nw">Broadcast-ul</span>:</strong> începutul subrețelei următoare minus 1 (în octetul interesant), iar octeții din dreapta devin 255.</li>
 <li><strong>Primul host</strong> = adresa de rețea + 1. <strong>Ultimul host</strong> = broadcast − 1.</li>
 </ol>
 <p>Subrețelele „merg din bloc în bloc”: dacă blocul e 64, subrețelele încep la 0, 64, 128, 192. Cam atât. Hai să vedem metoda la lucru.</p>
-<h2 id="exemple-rezolvate-complet">Exemple rezolvate complet</h2>
-<h3 id="exemplul-1-192-168-10-77-26">Exemplul 1: 192.168.10.77/26</h3>
-<p><strong>Pasul 1.</strong> <code>/26</code> → masca <code>255.255.255.192</code>. Octetul interesant e al patrulea (192).</p>
+<h2 id="exemple-rezolvate-complet">Exemple rezolvate&nbsp;complet</h2>
+<h3 id="exemplul-1-192-168-10-77-26">Exemplul 1:&nbsp;192.168.10.77/26</h3>
+<p><strong>Pasul 1.</strong> <code class="nw">/26</code> → masca <code class="nw">255.255.255.192</code>. Octetul interesant e al patrulea (192).</p>
 <p><strong>Pasul 2.</strong> Blocul = 256 − 192 = <strong>64</strong>. Subrețelele încep la .0, .64, .128, .192.</p>
 <p><strong>Pasul 3.</strong> 77 se află între 64 și 128, deci subrețeaua începe la 64.</p>
 <p>Verificarea în binar (operația AND între adresă și mască, doar în octetul interesant):</p>
@@ -192,7 +194,7 @@ Masca:   255.255.255.192  11111111.11111111.11111111.11|000000
 192  = 11000000
 AND  = 01000000 = 64
 </code></pre>
-<p><strong>Pasul 4–5.</strong> Subrețeaua următoare începe la 128, deci broadcast-ul e 127.</p>
+<p><strong>Pasul 4–5.</strong> Subrețeaua următoare începe la 128, deci <span class="nw">broadcast-ul</span> e 127.</p>
 <div class="table-scroll"><p class="table-hint" aria-hidden="true">glisează<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></p><div class="table-wrap" role="region" tabindex="0" aria-label="Tabel (se derulează pe orizontală)"><table>
 <thead>
 <tr>
@@ -217,13 +219,13 @@ AND  = 01000000 = 64
 <td>192.168.10.127</td>
 </tr>
 <tr>
-<td>Host-uri utilizabile</td>
+<td><span class="nw">Host-uri</span> utilizabile</td>
 <td>2^6 − 2 = 62</td>
 </tr>
 </tbody></table></div></div>
-<h3 id="exemplul-2-10-20-45-200-20">Exemplul 2: 10.20.45.200/20</h3>
-<p>Aici octetul interesant nu mai e ultimul, iar mulți se încurcă. Ia-o încet.</p>
-<p><strong>Pasul 1.</strong> <code>/20</code> = 8 + 8 + 4 → masca <code>255.255.240.0</code>. Octetul interesant e al <strong>treilea</strong> (240).</p>
+<h3 id="exemplul-2-10-20-45-200-20">Exemplul 2:&nbsp;10.20.45.200/20</h3>
+<p>Aici octetul interesant nu mai e ultimul, iar mulți se încurcă. <span class="nw">Ia-o</span> încet.</p>
+<p><strong>Pasul 1.</strong> <code class="nw">/20</code> = 8 + 8 + 4 → masca <code class="nw">255.255.240.0</code>. Octetul interesant e al <strong>treilea</strong> (240).</p>
 <p><strong>Pasul 2.</strong> Blocul = 256 − 240 = <strong>16</strong>. În al treilea octet, subrețelele încep la 0, 16, 32, 48, 64…</p>
 <p><strong>Pasul 3.</strong> Valoarea adresei în al treilea octet e 45. Cel mai mare multiplu de 16 care nu depășește 45 este <strong>32</strong>.</p>
 <pre><code class="language-text">45   = 00101101
@@ -231,7 +233,7 @@ AND  = 01000000 = 64
 AND  = 00100000 = 32
 </code></pre>
 <p>Octetul al patrulea e în partea de host, deci la adresa de rețea devine 0.</p>
-<p><strong>Pasul 4.</strong> Subrețeaua următoare începe la <code>10.20.48.0</code>, deci broadcast-ul e cu o adresă mai jos: <code>10.20.47.255</code>.</p>
+<p><strong>Pasul 4.</strong> Subrețeaua următoare începe la <code class="nw">10.20.48.0</code>, deci <span class="nw">broadcast-ul</span> e cu o adresă mai jos: <code class="nw">10.20.47.255</code>.</p>
 <div class="table-scroll"><p class="table-hint" aria-hidden="true">glisează<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></p><div class="table-wrap" role="region" tabindex="0" aria-label="Tabel (se derulează pe orizontală)"><table>
 <thead>
 <tr>
@@ -256,14 +258,14 @@ AND  = 00100000 = 32
 <td>10.20.47.255</td>
 </tr>
 <tr>
-<td>Host-uri utilizabile</td>
+<td><span class="nw">Host-uri</span> utilizabile</td>
 <td>2^12 − 2 = 4.094</td>
 </tr>
 </tbody></table></div></div>
-<p>Observă: când octetul interesant nu e ultimul, broadcast-ul are <strong>255</strong> în octeții din dreapta, iar ultimul host se termină în <strong>.254</strong>. Adrese ca <code>10.20.40.0</code> sau <code>10.20.40.255</code> sunt host-uri perfect valide în subrețeaua asta, deși „arată” a rețea sau a broadcast.</p>
-<h3 id="exemplul-3-10-1-1-9-30">Exemplul 3: 10.1.1.9/30</h3>
-<p><code>/30</code> e masca clasică pentru legături între două routere: exact 2 adrese utilizabile.</p>
-<p><strong>Pasul 1.</strong> <code>/30</code> → <code>255.255.255.252</code>. Octetul interesant: al patrulea.</p>
+<p>Observă: când octetul interesant nu e ultimul, <span class="nw">broadcast-ul</span> are <strong>255</strong> în octeții din dreapta, iar ultimul host se termină în <strong>.254</strong>. Adrese ca <code class="nw">10.20.40.0</code> sau <code class="nw">10.20.40.255</code> sunt <span class="nw">host-uri</span> perfect valide în subrețeaua asta, deși „arată” a rețea sau a broadcast.</p>
+<h3 id="exemplul-3-10-1-1-9-30">Exemplul 3:&nbsp;10.1.1.9/30</h3>
+<p><code class="nw">/30</code> e masca clasică pentru legături între două routere: exact 2 adrese utilizabile.</p>
+<p><strong>Pasul 1.</strong> <code class="nw">/30</code> → <code class="nw">255.255.255.252</code>. Octetul interesant: al patrulea.</p>
 <p><strong>Pasul 2.</strong> Blocul = 256 − 252 = <strong>4</strong>. Subrețelele: .0, .4, .8, .12…</p>
 <p><strong>Pasul 3.</strong> 9 e între 8 și 12 → subrețeaua începe la 8.</p>
 <div class="table-scroll"><p class="table-hint" aria-hidden="true">glisează<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></p><div class="table-wrap" role="region" tabindex="0" aria-label="Tabel (se derulează pe orizontală)"><table>
@@ -290,13 +292,13 @@ AND  = 00100000 = 32
 <td>10.1.1.11</td>
 </tr>
 <tr>
-<td>Host-uri utilizabile</td>
+<td><span class="nw">Host-uri</span> utilizabile</td>
 <td>2^2 − 2 = 2</td>
 </tr>
 </tbody></table></div></div>
-<h3 id="exemplul-4-adresa-de-clasa-b-172-18-77-10-22">Exemplul 4 (adresă de clasă B): 172.18.77.10/22</h3>
-<p><code>172.18.x.x</code> e în vechiul interval de clasă B, unde masca implicită era <code>/16</code>. Aici rețeaua a fost împărțită: s-au împrumutat 6 biți (de la /16 la /22).</p>
-<p><strong>Pasul 1.</strong> <code>/22</code> = 8 + 8 + 6 → <code>255.255.252.0</code>. Octetul interesant: al treilea (252).</p>
+<h3 id="exemplul-4-adresa-de-clasa-b-172-18-77-10-22">Exemplul 4 (adresă de clasă B):&nbsp;172.18.77.10/22</h3>
+<p><code class="nw">172.18.x.x</code> e în vechiul interval de clasă B, unde masca implicită era <code class="nw">/16</code>. Aici rețeaua a fost împărțită: <span class="nw">s-au</span> împrumutat 6 biți (de la /16 la /22).</p>
+<p><strong>Pasul 1.</strong> <code class="nw">/22</code> = 8 + 8 + 6 → <code class="nw">255.255.252.0</code>. Octetul interesant: al treilea (252).</p>
 <p><strong>Pasul 2.</strong> Blocul = 256 − 252 = <strong>4</strong>. În al treilea octet: 0, 4, 8… 72, 76, 80…</p>
 <p><strong>Pasul 3.</strong> 77 e între 76 și 80 → subrețeaua începe la 76.</p>
 <pre><code class="language-text">77   = 01001101
@@ -327,7 +329,7 @@ AND  = 01001100 = 76
 <td>172.18.79.255</td>
 </tr>
 <tr>
-<td>Host-uri utilizabile</td>
+<td><span class="nw">Host-uri</span> utilizabile</td>
 <td>2^10 − 2 = 1.022</td>
 </tr>
 <tr>
@@ -335,14 +337,14 @@ AND  = 01001100 = 76
 <td>2^6 = 64</td>
 </tr>
 </tbody></table></div></div>
-<h2 id="cum-imparti-o-retea-in-subretele">Cum împarți o rețea în subrețele</h2>
-<p>În practică (și la examen) primești de obicei o cerință: „îmi trebuie N subrețele” sau „fiecare subrețea trebuie să aibă cel puțin H host-uri”. Ambele se rezolvă cu puteri ale lui 2.</p>
-<h3 id="varianta-a-ai-nevoie-de-un-anumit-numar-de-subretele">Varianta A: ai nevoie de un anumit număr de subrețele</h3>
-<p><strong>Cerință:</strong> ai <code>192.168.1.0/24</code> și îți trebuie <strong>6 subrețele</strong>.</p>
+<h2 id="cum-imparti-o-retea-in-subretele">Cum împarți o rețea în&nbsp;subrețele</h2>
+<p>În practică (și la examen) primești de obicei o cerință: „îmi trebuie N subrețele” sau „fiecare subrețea trebuie să aibă cel puțin H <span class="nw">host-uri</span>”. Ambele se rezolvă cu puteri ale lui 2.</p>
+<h3 id="varianta-a-ai-nevoie-de-un-anumit-numar-de-subretele">Varianta A: ai nevoie de un anumit număr de&nbsp;subrețele</h3>
+<p><strong>Cerință:</strong> ai <code class="nw">192.168.1.0/24</code> și îți trebuie <strong>6 subrețele</strong>.</p>
 <ol>
-<li>Cel mai mic <code>s</code> cu 2^s ≥ 6 este <strong>s = 3</strong> (2^3 = 8 subrețele).</li>
-<li>Noul prefix: /24 + 3 = <strong>/27</strong> → masca <code>255.255.255.224</code>.</li>
-<li>Blocul: 256 − 224 = <strong>32</strong>. Fiecare subrețea are 2^5 − 2 = <strong>30</strong> de host-uri.</li>
+<li>Cel mai mic <code class="nw">s</code> cu 2^s ≥ 6 este <strong>s = 3</strong> (2^3 = 8 subrețele).</li>
+<li>Noul prefix: /24 + 3 = <strong>/27</strong> → masca <code class="nw">255.255.255.224</code>.</li>
+<li>Blocul: 256 − 224 = <strong>32</strong>. Fiecare subrețea are 2^5 − 2 = <strong>30</strong> de <span class="nw">host-uri</span>.</li>
 </ol>
 <div class="table-scroll"><p class="table-hint" aria-hidden="true">glisează<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></p><div class="table-wrap" role="region" tabindex="0" aria-label="Tabel (se derulează pe orizontală)"><table>
 <thead>
@@ -412,35 +414,35 @@ AND  = 01001100 = 76
 </tr>
 </tbody></table></div></div>
 <p>Folosești 6 și păstrezi 2 pentru mai târziu.</p>
-<h3 id="varianta-b-ai-nevoie-de-un-anumit-numar-de-host-uri-pe-subretea">Varianta B: ai nevoie de un anumit număr de host-uri pe subrețea</h3>
-<p><strong>Cerință:</strong> ai <code>172.16.0.0/16</code> și fiecare subrețea trebuie să aibă <strong>cel puțin 500 de host-uri</strong>.</p>
+<h3 id="varianta-b-ai-nevoie-de-un-anumit-numar-de-host-uri-pe-subretea">Varianta B: ai nevoie de un anumit număr de <span class="nw">host-uri</span> pe&nbsp;subrețea</h3>
+<p><strong>Cerință:</strong> ai <code class="nw">172.16.0.0/16</code> și fiecare subrețea trebuie să aibă <strong>cel puțin 500 de <span class="nw">host-uri</span></strong>.</p>
 <ol>
-<li>Cel mai mic <code>h</code> cu 2^h − 2 ≥ 500 este <strong>h = 9</strong> (2^9 − 2 = 510). Cu h = 8 ai doar 254, prea puțin.</li>
-<li>Prefixul: 32 − 9 = <strong>/23</strong> → masca <code>255.255.254.0</code>.</li>
-<li>Câte subrețele obții: de la /16 la /23 ai împrumutat 7 biți → 2^7 = <strong>128</strong> de subrețele, fiecare cu 510 host-uri.</li>
-<li>Blocul e 256 − 254 = <strong>2</strong> în al treilea octet: <code>172.16.0.0/23</code>, <code>172.16.2.0/23</code>, <code>172.16.4.0/23</code> și așa mai departe.</li>
+<li>Cel mai mic <code class="nw">h</code> cu 2^h − 2 ≥ 500 este <strong>h = 9</strong> (2^9 − 2 = 510). Cu h = 8 ai doar 254, prea puțin.</li>
+<li>Prefixul: 32 − 9 = <strong>/23</strong> → masca <code class="nw">255.255.254.0</code>.</li>
+<li>Câte subrețele obții: de la /16 la /23 ai împrumutat 7 biți → 2^7 = <strong>128</strong> de subrețele, fiecare cu 510 <span class="nw">host-uri</span>.</li>
+<li>Blocul e 256 − 254 = <strong>2</strong> în al treilea octet: <code class="nw">172.16.0.0/23</code>, <code class="nw">172.16.2.0/23</code>, <code class="nw">172.16.4.0/23</code> și așa mai departe.</li>
 </ol>
-<p>Regula de aur: <strong>mai mulți biți pentru subrețele = mai puține host-uri pe subrețea</strong>, și invers. Biții sunt aceiași 32; doar muți granița.</p>
-<h2 id="vlsm-subretele-de-marimi-diferite-exemplu-complet">VLSM: subrețele de mărimi diferite (exemplu complet)</h2>
+<p>Regula de aur: <strong>mai mulți biți pentru subrețele = mai puține <span class="nw">host-uri</span> pe subrețea</strong>, și invers. Biții sunt aceiași 32; doar muți granița.</p>
+<h2 id="vlsm-subretele-de-marimi-diferite-exemplu-complet">VLSM: subrețele de mărimi diferite (exemplu&nbsp;complet)</h2>
 <p>Cu o mască fixă pentru toate subrețelele risipești adrese: o legătură între două routere nu are nevoie de 30 de adrese. <strong>VLSM</strong> (Variable Length Subnet Masking) îți permite să dai fiecărei subrețele exact cât îi trebuie.</p>
-<p><strong>Cerința:</strong> ai <code>192.168.50.0/24</code> și trebuie să adresezi:</p>
+<p><strong>Cerința:</strong> ai <code class="nw">192.168.50.0/24</code> și trebuie să adresezi:</p>
 <ul>
-<li>LAN A: 100 de host-uri</li>
-<li>LAN B: 50 de host-uri</li>
-<li>LAN C: 25 de host-uri</li>
-<li>LAN D: 10 host-uri</li>
-<li>două legături WAN între routere (2 host-uri fiecare)</li>
+<li>LAN A: 100 de <span class="nw">host-uri</span></li>
+<li>LAN B: 50 de <span class="nw">host-uri</span></li>
+<li>LAN C: 25 de <span class="nw">host-uri</span></li>
+<li>LAN D: 10 <span class="nw">host-uri</span></li>
+<li>două legături WAN între routere (2 <span class="nw">host-uri</span> fiecare)</li>
 </ul>
 <p><strong>Regula VLSM: aloci întâi subrețeaua cea mai mare</strong>, apoi o iei în jos. Așa fiecare bloc începe pe o graniță corectă și nu rămân „găuri” inutilizabile.</p>
 <p>Pentru fiecare cerință alegi cel mai mic bloc care încape:</p>
 <ul>
-<li>100 de host-uri → 2^7 − 2 = 126 → <strong>/25</strong> (bloc 128)</li>
+<li>100 de <span class="nw">host-uri</span> → 2^7 − 2 = 126 → <strong>/25</strong> (bloc 128)</li>
 <li>50 → 2^6 − 2 = 62 → <strong>/26</strong> (bloc 64)</li>
 <li>25 → 2^5 − 2 = 30 → <strong>/27</strong> (bloc 32)</li>
 <li>10 → 2^4 − 2 = 14 → <strong>/28</strong> (bloc 16)</li>
 <li>2 → 2^2 − 2 = 2 → <strong>/30</strong> (bloc 4)</li>
 </ul>
-<p>Apoi le pui una după alta, fiecare începând unde s-a terminat cea dinainte:</p>
+<p>Apoi le pui una după alta, fiecare începând unde <span class="nw">s-a</span> terminat cea dinainte:</p>
 <div class="table-scroll"><p class="table-hint" aria-hidden="true">glisează<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></p><div class="table-wrap" role="region" tabindex="0" aria-label="Tabel (se derulează pe orizontală)"><table>
 <thead>
 <tr>
@@ -448,9 +450,9 @@ AND  = 01001100 = 76
 <th>Necesar</th>
 <th>Prefix</th>
 <th>Rețea</th>
-<th>Interval host-uri</th>
+<th>Interval <span class="nw">host-uri</span></th>
 <th>Broadcast</th>
-<th>Host-uri</th>
+<th><span class="nw">Host-uri</span></th>
 </tr>
 </thead>
 <tbody><tr>
@@ -508,20 +510,20 @@ AND  = 01001100 = 76
 <td>2</td>
 </tr>
 </tbody></table></div></div>
-<p>Rămâne liber blocul <code>192.168.50.248/29</code> (.248 – .255), bun pentru încă o legătură sau două mai târziu.</p>
-<p>Ce s-ar fi întâmplat dacă ai fi început cu legăturile WAN? Ai fi pus <code>/30</code>-urile la .0 și .4, iar LAN A (bloc de 128) n-ar mai fi putut începe la .8, ci abia la .128. Spațiul .8 – .127 ar fi rămas fragmentat și ar fi trebuit umplut cu grijă (aici încă încap B la .64, C la .32 și D la .16), dar într-un plan mai strâns un bloc mare poate să nu mai aibă unde să încapă. De aceea: <strong>de la mare la mic</strong>.</p>
-<h2 id="greseli-frecvente-si-cum-le-eviti">Greșeli frecvente (și cum le eviți)</h2>
+<p>Rămâne liber blocul <code class="nw">192.168.50.248/29</code> (.248 – .255), bun pentru încă o legătură sau două mai târziu.</p>
+<p>Ce <span class="nw">s-ar</span> fi întâmplat dacă ai fi început cu legăturile WAN? Ai fi pus <code class="nw">/30</code>-urile la .0 și .4, iar LAN A (bloc de 128) <span class="nw">n-ar</span> mai fi putut începe la .8, ci abia la .128. Spațiul .8 – .127 ar fi rămas fragmentat și ar fi trebuit umplut cu grijă (aici încă încap B la .64, C la .32 și D la .16), dar <span class="nw">într-un</span> plan mai strâns un bloc mare poate să nu mai aibă unde să încapă. De aceea: <strong>de la mare la mic</strong>.</p>
+<h2 id="greseli-frecvente-si-cum-le-eviti">Greșeli frecvente (și cum le&nbsp;eviți)</h2>
 <ol>
-<li><strong>Uiți să scazi 2.</strong> Un /27 are 32 de adrese, dar 30 de host-uri. La întrebările „câte host-uri”, aproape mereu e nevoie de −2.</li>
+<li><strong>Uiți să scazi 2.</strong> Un /27 are 32 de adrese, dar 30 de <span class="nw">host-uri</span>. La întrebările „câte <span class="nw">host-uri</span>”, aproape mereu e nevoie de −2.</li>
 <li><strong>Calculezi blocul în octetul greșit.</strong> La /20 blocul de 16 e în al <strong>treilea</strong> octet, nu în al patrulea. Găsește întâi octetul interesant.</li>
 <li><strong>Rotunjești în sus la adresa de rețea.</strong> Adresa de rețea e multiplul blocului <strong>mai mic sau egal</strong> cu valoarea ta, nu următorul.</li>
-<li><strong>Încurci .0 și .255 când octetul interesant nu e ultimul.</strong> La /20 ultimul host e <code>x.x.47.254</code> (nu .255), dar <code>x.x.40.255</code> e un host normal.</li>
-<li><strong>Alegi un bloc prea mic.</strong> 30 de host-uri încap într-un /27 (30), dar 31 nu: îți trebuie /26. Verifică mereu 2^h − 2 ≥ cerința.</li>
+<li><strong>Încurci .0 și .255 când octetul interesant nu e ultimul.</strong> La /20 ultimul host e <code class="nw">x.x.47.254</code> (nu .255), dar <code class="nw">x.x.40.255</code> e un host normal.</li>
+<li><strong>Alegi un bloc prea mic.</strong> 30 de <span class="nw">host-uri</span> încap <span class="nw">într-un</span> /27 (30), dar 31 nu: îți trebuie /26. Verifică mereu 2^h − 2 ≥ cerința.</li>
 <li><strong>La VLSM nu ordonezi descrescător.</strong> Rezultatul sunt suprapuneri sau adrese irosite.</li>
-<li><strong>Confunzi masca cu wildcard-ul.</strong> Wildcard-ul (folosit la ACL-uri și OSPF) e inversul măștii: pentru <code>255.255.255.192</code> e <code>0.0.0.63</code>. E alt subiect; se calculează octet cu octet: 255 − mască (atenție: nu 256 −, ca la bloc).</li>
+<li><strong>Confunzi masca cu <span class="nw">wildcard-ul</span>.</strong> <span class="nw">Wildcard-ul</span> (folosit la <span class="nw">ACL-uri</span> și OSPF) e inversul măștii: pentru <code class="nw">255.255.255.192</code> e <code class="nw">0.0.0.63</code>. E alt subiect; se calculează octet cu octet: 255 − mască (atenție: nu 256 −, ca la bloc).</li>
 </ol>
-<h2 id="tabel-rapid-24-30">Tabel rapid /24 – /30</h2>
-<p>Învață-l pe de rost; la examen îți economisește minute întregi.</p>
+<h2 id="tabel-rapid-24-30">Tabel rapid /24 –&nbsp;/30</h2>
+<p><span class="nw">Învață-l</span> pe de rost; la examen îți economisește minute întregi.</p>
 <div class="table-scroll"><p class="table-hint" aria-hidden="true">glisează<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></p><div class="table-wrap" role="region" tabindex="0" aria-label="Tabel (se derulează pe orizontală)"><table>
 <thead>
 <tr>
@@ -529,7 +531,7 @@ AND  = 01001100 = 76
 <th>Mască</th>
 <th>Bloc (ultimul octet)</th>
 <th>Adrese</th>
-<th>Host-uri utilizabile</th>
+<th><span class="nw">Host-uri</span> utilizabile</th>
 </tr>
 </thead>
 <tbody><tr>
@@ -584,22 +586,22 @@ AND  = 01001100 = 76
 </tbody></table></div></div>
 <p>Același șir se repetă în al treilea octet: /16–/23 au blocurile 256, 128, 64, 32, 16, 8, 4, 2, doar că acolo fiecare „pas” valorează 256 de adrese.</p>
 <p>Două cazuri speciale bune de știut: <strong>/31</strong> se poate folosi pe legături punct la punct (două adrese, fără rețea și broadcast, conform RFC 3021), iar <strong>/32</strong> desemnează un singur host (de exemplu o interfață loopback sau o rută statică spre un singur dispozitiv).</p>
-<div class="callout callout--info"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg><div><p><strong>Calculează și verifică pașii:</strong> pe site găsești un <a href="../../tools/calculator-subnetting/">calculator de subnetting gratuit</a> care îți arată nu doar rezultatul, ci și pașii (octetul interesant, blocul, AND-ul în binar). Folosește-l ca să-ți verifici exercițiile, nu ca să le sari.</p></div></div>
-<h2 id="exercitii-incearca-fara-calculator">Exerciții (încearcă fără calculator)</h2>
+<div class="callout callout--info"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg><div><p><strong>Calculează și verifică pașii:</strong> pe site găsești un <a href="../../tools/calculator-subnetting/">calculator de subnetting gratuit</a> care îți arată nu doar rezultatul, ci și pașii (octetul interesant, blocul, <span class="nw">AND-ul</span> în binar). <span class="nw">Folosește-l</span> ca <span class="nw">să-ți</span> verifici exercițiile, nu ca să le sari.</p></div></div>
+<h2 id="exercitii-incearca-fara-calculator">Exerciții (încearcă fără&nbsp;calculator)</h2>
 <ol>
-<li>Pentru <code>192.168.100.200/27</code>: care sunt adresa de rețea, broadcast-ul, primul și ultimul host?</li>
-<li>Pentru <code>172.16.99.5/21</code>: care sunt masca, adresa de rețea, broadcast-ul și numărul de host-uri?</li>
-<li>Ai nevoie de o subrețea cu cel puțin <strong>300</strong> de host-uri. Ce prefix și ce mască alegi?</li>
-<li>Sunt <code>10.10.10.62/26</code> și <code>10.10.10.66/26</code> în aceeași subrețea?</li>
-<li>Fă un plan VLSM din <code>192.168.20.0/24</code> pentru: un LAN cu 60 de host-uri, unul cu 28, unul cu 12 și o legătură între două routere.</li>
+<li>Pentru <code class="nw">192.168.100.200/27</code>: care sunt adresa de rețea, <span class="nw">broadcast-ul</span>, primul și ultimul host?</li>
+<li>Pentru <code class="nw">172.16.99.5/21</code>: care sunt masca, adresa de rețea, <span class="nw">broadcast-ul</span> și numărul de <span class="nw">host-uri</span>?</li>
+<li>Ai nevoie de o subrețea cu cel puțin <strong>300</strong> de <span class="nw">host-uri</span>. Ce prefix și ce mască alegi?</li>
+<li>Sunt <code class="nw">10.10.10.62/26</code> și <code class="nw">10.10.10.66/26</code> în aceeași subrețea?</li>
+<li>Fă un plan VLSM din <code class="nw">192.168.20.0/24</code> pentru: un LAN cu 60 de <span class="nw">host-uri</span>, unul cu 28, unul cu 12 și o legătură între două routere.</li>
 </ol>
 <details class="reveal-answer">
-<summary><strong>Răspunsuri</strong></summary><p><strong>1.</strong> <code>/27</code> → mască <code>255.255.255.224</code>, bloc 32. Subrețelele: 0, 32, 64… 160, 192, 224. 200 e între 192 și 224.
-Rețea <code>192.168.100.192</code>, primul host <code>.193</code>, ultimul host <code>.222</code>, broadcast <code>192.168.100.223</code> (30 de host-uri).</p>
-<p><strong>2.</strong> <code>/21</code> = 8 + 8 + 5 → mască <code>255.255.248.0</code>, bloc 8 în al treilea octet. 99 e între 96 și 104.
-Rețea <code>172.16.96.0</code>, broadcast <code>172.16.103.255</code>, host-uri de la <code>172.16.96.1</code> la <code>172.16.103.254</code>. Număr de host-uri: 2^11 − 2 = <strong>2.046</strong>.</p>
-<p><strong>3.</strong> 2^8 − 2 = 254 (prea puțin), 2^9 − 2 = 510 (ajunge). 9 biți de host → <strong>/23</strong>, mască <code>255.255.254.0</code>.</p>
-<p><strong>4.</strong> <strong>Nu.</strong> Bloc 64: <code>.62</code> e în subrețeaua <code>10.10.10.0/26</code> (.0 – .63), iar <code>.66</code> e în <code>10.10.10.64/26</code> (.64 – .127). Ca să comunice, au nevoie de un router.</p>
+<summary><strong>Răspunsuri</strong></summary><p><strong>1.</strong> <code class="nw">/27</code> → mască <code class="nw">255.255.255.224</code>, bloc 32. Subrețelele: 0, 32, 64… 160, 192, 224. 200 e între 192 și 224.
+Rețea <code class="nw">192.168.100.192</code>, primul host <code class="nw">.193</code>, ultimul host <code class="nw">.222</code>, broadcast <code class="nw">192.168.100.223</code> (30 de <span class="nw">host-uri</span>).</p>
+<p><strong>2.</strong> <code class="nw">/21</code> = 8 + 8 + 5 → mască <code class="nw">255.255.248.0</code>, bloc 8 în al treilea octet. 99 e între 96 și 104.
+Rețea <code class="nw">172.16.96.0</code>, broadcast <code class="nw">172.16.103.255</code>, <span class="nw">host-uri</span> de la <code class="nw">172.16.96.1</code> la <code class="nw">172.16.103.254</code>. Număr de <span class="nw">host-uri</span>: 2^11 − 2 = <strong>2.046</strong>.</p>
+<p><strong>3.</strong> 2^8 − 2 = 254 (prea puțin), 2^9 − 2 = 510 (ajunge). 9 biți de host → <strong>/23</strong>, mască <code class="nw">255.255.254.0</code>.</p>
+<p><strong>4.</strong> <strong>Nu.</strong> Bloc 64: <code class="nw">.62</code> e în subrețeaua <code class="nw">10.10.10.0/26</code> (.0 – .63), iar <code class="nw">.66</code> e în <code class="nw">10.10.10.64/26</code> (.64 – .127). Ca să comunice, au nevoie de un router.</p>
 <p><strong>5.</strong> De la mare la mic:</p>
 <div class="table-scroll"><p class="table-hint" aria-hidden="true">glisează<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></p><div class="table-wrap" role="region" tabindex="0" aria-label="Tabel (se derulează pe orizontală)"><table>
 <thead>
@@ -608,7 +610,7 @@ Rețea <code>172.16.96.0</code>, broadcast <code>172.16.103.255</code>, host-uri
 <th>Necesar</th>
 <th>Prefix</th>
 <th>Rețea</th>
-<th>Host-uri</th>
+<th><span class="nw">Host-uri</span></th>
 <th>Broadcast</th>
 </tr>
 </thead>
@@ -645,23 +647,23 @@ Rețea <code>172.16.96.0</code>, broadcast <code>172.16.103.255</code>, host-uri
 <td>.115</td>
 </tr>
 </tbody></table></div></div>
-<p>Restul, de la <code>192.168.20.116</code> în sus, rămâne liber.</p>
-</details><h2 id="cum-ajungi-rapid-la-subnetting">Cum ajungi rapid la subnetting</h2>
-<p>Teoria o înțelegi într-o seară; viteza vine doar din repetiție. Câteva sfaturi care chiar funcționează:</p>
+<p>Restul, de la <code class="nw">192.168.20.116</code> în sus, rămâne liber.</p>
+</details><h2 id="cum-ajungi-rapid-la-subnetting">Cum ajungi rapid la&nbsp;subnetting</h2>
+<p>Teoria o înțelegi <span class="nw">într-o</span> seară; viteza vine doar din repetiție. Câteva sfaturi care chiar funcționează:</p>
 <ul>
 <li><strong>10 minute pe zi bat 2 ore o dată pe săptămână.</strong> Fă 5–10 adrese zilnic, cu prefixe amestecate.</li>
 <li><strong>Scrie tabelul de mai sus din memorie</strong> la începutul fiecărei sesiuni de studiu, până nu mai e nevoie.</li>
-<li><strong>Cronometrează-te.</strong> Ținta: rețea + broadcast + interval de host-uri în sub un minut.</li>
+<li><strong><span class="nw">Cronometrează-te</span>.</strong> Ținta: rețea + broadcast + interval de <span class="nw">host-uri</span> în sub un minut.</li>
 <li><strong>Variază octetul interesant.</strong> Cei mai mulți exersează doar /24–/30 și se blochează la /19 sau /22.</li>
 </ul>
-<div class="cta-box cta-box--article"><svg class="mascot" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><g class="m-breathe"><path d="M22 14l-5-9M42 14l5-9" stroke="#8a919c" stroke-width="3.4" stroke-linecap="round" fill="none"/><circle class="m-led m-led-l" cx="17" cy="5" r="3.6"/><circle class="m-led m-led-r" cx="47" cy="5" r="3.6"/><path class="m-body" d="M28 12q4-6 8 0"/><rect class="m-body" x="8" y="12" width="48" height="42" rx="18"/><rect class="m-belly" x="8" y="40" width="48" height="14" rx="7"/><path d="M19 31q4-5 8 0" stroke="#1a1d24" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M37 31q4-5 8 0" stroke="#1a1d24" stroke-width="3" fill="none" stroke-linecap="round"/><path class="m-led" d="M29 37l3 3.5 3-3.5z"/><circle cx="15" cy="38" r="3" fill="#ff8fb1" opacity=".7"/><circle cx="49" cy="38" r="3" fill="#ff8fb1" opacity=".7"/><circle class="m-ok" cx="18" cy="47" r="2"/><circle class="m-led" cx="24" cy="47" r="2"/><rect x="31" y="45" width="6" height="4" rx="1" fill="#0d1a3a" opacity=".55"/><rect x="39" y="45" width="6" height="4" rx="1" fill="#0d1a3a" opacity=".55"/><rect x="47" y="45" width="5" height="4" rx="1" fill="#0d1a3a" opacity=".55"/><path class="m-leg" d="M20 54v4M44 54v4" stroke-width="3.4" stroke-linecap="round" fill="none"/></g></svg><div><h3>Exersează subnetting în aplicația Routerel</h3><p>Routerel are un antrenor de subnetting, conversii și IPv6 cu exerciții generate la nesfârșit, plus întrebări cu explicații pentru toate cele trei părți CCNA. Greșelile revin singure până le stăpânești. Și dacă te blochezi, scrii întrebarea în secțiunea Întreabă, de exemplu „câte host-uri are un /26”, și primești explicația pe loc. Abonații noi au 7 zile gratuite, cu acces la tot.</p></div><a class="btn" href="../../" data-play data-soon-href="../../">Descoperă aplicația<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div><h2 id="intrebari-frecvente">Întrebări frecvente</h2>
-<div class="faq faq--article"><details><summary>Ce este subnetting-ul?<span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p>Este împărțirea unei rețele IP în rețele mai mici, numite subrețele. Se face împrumutând biți din partea de host a adresei, adică mutând granița dintre rețea și host spre dreapta, prin mască.</p></div></details><details><summary>Cum calculez repede adresa de rețea pentru o adresă IP?<span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p>Găsești octetul în care se termină masca, calculezi blocul ca 256 minus valoarea măștii în acel octet, apoi cauți cel mai mare multiplu al blocului care nu depășește valoarea adresei în acel octet. Acela e începutul subrețelei.</p></div></details><details><summary>Câte host-uri încap într-o subrețea /26?<span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p>Un /26 lasă 6 biți pentru host-uri: 2^6 = 64 de adrese, minus adresa de rețea și broadcast-ul. Rămân <strong>62</strong> de adrese utilizabile.</p></div></details><details><summary>Care e diferența dintre CIDR și VLSM?<span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p>CIDR e notația și regula prin care prefixul poate avea orice lungime (de exemplu /20), fără clase fixe. VLSM înseamnă să folosești, în aceeași rețea, subrețele cu prefixe diferite, fiecare pe măsura numărului de host-uri de care are nevoie.</p></div></details><details><summary>De ce scădem 2 la numărul de host-uri?<span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p>Prima adresă identifică rețeaua, iar ultima e broadcast-ul; niciuna nu poate fi dată unui dispozitiv. Excepțiile sunt /31 (legături punct la punct) și /32 (un singur host).</p></div></details><details><summary>Cât de bine trebuie să știu subnetting pentru examenul CCNA?<span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p>Foarte bine și repede. Apare direct în întrebările de adresare și indirect în cele de rutare, ACL-uri sau depanare. Ținta realistă: rețeaua, broadcast-ul și intervalul de host-uri pentru orice adresă în mai puțin de un minut, fără calculator. Vezi și <a href="../ce-este-ccna/">ghidul despre examenul CCNA</a>.</p></div></details></div>
+<div class="cta-box cta-box--article cta-play has-qr"><svg class="mascot" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><g class="m-breathe"><path d="M22 14l-5-9M42 14l5-9" stroke="#8a919c" stroke-width="3.4" stroke-linecap="round" fill="none"/><circle class="m-led m-led-l" cx="17" cy="5" r="3.6"/><circle class="m-led m-led-r" cx="47" cy="5" r="3.6"/><path class="m-body" d="M28 12q4-6 8 0"/><rect class="m-body" x="8" y="12" width="48" height="42" rx="18"/><rect class="m-belly" x="8" y="40" width="48" height="14" rx="7"/><path d="M19 31q4-5 8 0" stroke="#1a1d24" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M37 31q4-5 8 0" stroke="#1a1d24" stroke-width="3" fill="none" stroke-linecap="round"/><path class="m-led" d="M29 37l3 3.5 3-3.5z"/><circle cx="15" cy="38" r="3" fill="#ff8fb1" opacity=".7"/><circle cx="49" cy="38" r="3" fill="#ff8fb1" opacity=".7"/><circle class="m-ok" cx="18" cy="47" r="2"/><circle class="m-led" cx="24" cy="47" r="2"/><rect x="31" y="45" width="6" height="4" rx="1" fill="#0d1a3a" opacity=".55"/><rect x="39" y="45" width="6" height="4" rx="1" fill="#0d1a3a" opacity=".55"/><rect x="47" y="45" width="5" height="4" rx="1" fill="#0d1a3a" opacity=".55"/><path class="m-leg" d="M20 54v4M44 54v4" stroke-width="3.4" stroke-linecap="round" fill="none"/></g></svg><div class="cta-main"><h3>Exersează <span class="nw">subnetting-ul</span> în aplicația&nbsp;Routerel</h3><p>Un antrenor de subnetting cu exerciții generate la nesfârșit și rezolvare, plus 40+ întrebări despre adresarea IPv4 și subnetting, fiecare explicată imediat după răspuns. <span class="nw">Te-ai</span> blocat? Întreabă în aplicație, de exemplu „câte <span class="nw">host-uri</span> are un&nbsp;/26”.</p><div class="cta-get"><div class="cta-android"><a class="play" data-play data-soon-href="../../" href="../../"><svg viewBox="0 0 26 28" aria-hidden="true" focusable="false"><path d="M3 2.6v22.8c0 1.2 1.3 1.9 2.3 1.3l19.4-11.4c1-.6 1-2 0-2.6L5.3 1.3C4.3.7 3 1.4 3 2.6z" fill="url(#rtl-play)"/><path d="M3 2.6v22.8c0 .5.2.9.5 1.1L15 14 3.5 1.5c-.3.2-.5.6-.5 1.1z" fill="#fff" opacity=".18"/></svg><span><small data-when="live">Descarcă din</small><small data-when="soon">În curând pe</small><strong>Google Play</strong></span></a><p class="cta-trial" data-when="live">7 zile gratuite pentru abonații&nbsp;noi</p></div><p class="cta-ios">Deocamdată doar pe Android. Ghidurile și <span class="nw">tool-urile</span> gratuite de pe site merg și pe iPhone.</p></div></div><figure class="cta-qr"><img src="../../assets/qr/guide-subnetting-pas-cu-pas.svg" width="132" height="132" alt="Cod QR spre Routerel în Google Play" loading="lazy" decoding="async"><figcaption>Scanează cu<br>telefonul Android</figcaption></figure></div><h2 id="intrebari-frecvente">Întrebări frecvente</h2>
+<div class="faq faq--article"><details><summary><span class="q">Ce este <span class="nw">subnetting-ul</span>?</span><span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p>Este împărțirea unei rețele IP în rețele mai mici, numite subrețele. Se face împrumutând biți din partea de host a adresei, adică mutând granița dintre rețea și host spre dreapta, prin mască.</p></div></details><details><summary><span class="q">Cum calculez repede adresa de rețea pentru o adresă IP?</span><span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p>Găsești octetul în care se termină masca, calculezi blocul ca 256 minus valoarea măștii în acel octet, apoi cauți cel mai mare multiplu al blocului care nu depășește valoarea adresei în acel octet. Acela e începutul subrețelei.</p></div></details><details><summary><span class="q">Câte <span class="nw">host-uri</span> încap <span class="nw">într-o</span> subrețea /26?</span><span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p>Un /26 lasă 6 biți pentru <span class="nw">host-uri</span>: 2^6 = 64 de adrese, minus adresa de rețea și <span class="nw">broadcast-ul</span>. Rămân <strong>62</strong> de adrese utilizabile.</p></div></details><details><summary><span class="q">Care e diferența dintre CIDR și VLSM?</span><span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p>CIDR e notația și regula prin care prefixul poate avea orice lungime (de exemplu /20), fără clase fixe. VLSM înseamnă să folosești, în aceeași rețea, subrețele cu prefixe diferite, fiecare pe măsura numărului de <span class="nw">host-uri</span> de care are nevoie.</p></div></details><details><summary><span class="q">De ce scădem 2 la numărul de <span class="nw">host-uri</span>?</span><span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p>Prima adresă identifică rețeaua, iar ultima e <span class="nw">broadcast-ul</span>; niciuna nu poate fi dată unui dispozitiv. Excepțiile sunt /31 (legături punct la punct) și /32 (un singur host).</p></div></details><details><summary><span class="q">Cât de bine trebuie să știu subnetting pentru examenul CCNA?</span><span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="answer"><p>Foarte bine și repede. Apare direct în întrebările de adresare și indirect în cele de rutare, <span class="nw">ACL-uri</span> sau depanare. Ținta realistă: rețeaua, <span class="nw">broadcast-ul</span> și intervalul de <span class="nw">host-uri</span> pentru orice adresă în mai puțin de un minut, fără calculator. Vezi și <a href="../ce-este-ccna/">ghidul despre examenul CCNA</a>.</p></div></details></div>
 <hr>
 <p><em>Routerel este o aplicație independentă și nu este afiliată, sponsorizată sau aprobată de Cisco Systems, Inc. Cisco și CCNA sunt mărci ale Cisco Systems, Inc.</em></p>
       
       <section class="related" aria-labelledby="rel-title">
         <h2 id="rel-title">Citește și</h2>
-        <div class="grid grid--2"><a class="card post-card lift" href="../../ghiduri/acl-uri-cisco/"><span class="tagline">Ghid · 16 min</span><h3>ACL-uri Cisco: standard, extinse și wildcard (ghid 2026)</h3><p>ACL-uri Cisco explicate: standard și extinse, numerotate și cu nume, masca wildcard, deny implicit, unde le aplici, comenzi IOS, verificare și exerciții.</p></a><a class="card post-card lift" href="../../ghiduri/dhcp-cisco/"><span class="tagline">Ghid · 16 min</span><h3>Configurare DHCP pe Cisco: server, relay, depanare (2026)</h3><p>DHCPv4 pe Cisco explicat: procesul DORA, porturile UDP 67/68, lease, routerul ca server și client, ip helper-address, DHCP snooping, depanare și exerciții.</p></a></div>
+        <div class="grid grid--2"><a class="card post-card lift" href="../../ghiduri/comenzi-cisco-ios/"><span class="tagline">Ghid · 13 min</span><h3>Comenzile Cisco IOS de bază (fișă pentru&nbsp;CCNA)</h3><p>Fișa comenzilor Cisco IOS de bază pentru CCNA: modurile CLI, configurarea inițială, parole și SSH, interfețe, salvarea configurației, comenzi show și depanare.</p></a><a class="card post-card lift" href="../../ghiduri/adrese-ipv6/"><span class="tagline">Ghid · 13 min</span><h3>Adresele IPv6 explicate (format, prescurtare,&nbsp;tipuri)</h3><p>Adresele IPv6 pe înțelesul tău: formatul pe 128 de biți, regulile de prescurtare, tipurile de adrese, <span class="nw">EUI-64</span> pas cu pas, SLAAC și DHCPv6, plus exerciții.</p></a></div>
       </section>
     </article>
   </div>
